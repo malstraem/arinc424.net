@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <Platforms>AnyCPU;x86;x64</Platforms>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+
+    <IsPackable>false</IsPackable>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+  </PropertyGroup>
+</Project>
