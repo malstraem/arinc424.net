@@ -20,7 +20,7 @@ public class ArincData424
 
     public required IReadOnlyCollection<NonDirectionalBeacon> NonDirectionalBeacons { get; init; }
 
-    public required IReadOnlyCollection<NavigationalAid> NavigationalAids { get; init; }
+    public required IReadOnlyCollection<VeryHighFrequencyAid> VeryHighFrequencyAids { get; init; }
 
     public required IReadOnlyCollection<MicrowaveLandingSystem> MicrowaveLandingSystems { get; init; }
 

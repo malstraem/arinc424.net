@@ -1,7 +1,6 @@
 using System.Reflection;
 
 using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Records;
 
 namespace Arinc.Spec424.Building;
 
@@ -39,9 +38,6 @@ internal record BuildInfo
 
         foreach (var property in properties)
         {
-            if (property.GetCustomAttribute<HiddenAttribute>() is not null)
-                continue;
-
             var validationAttribute = property.GetCustomAttribute<ValidationAttribute>();
 
             if ((targetType is not null && TryTargetFieldAttribute(property, targetType, out var fieldAttribute))
@@ -67,14 +63,7 @@ internal record BuildInfo
                     Regex = validationAttribute?.Regex,
                     Transform = property.GetCustomAttribute<TransformAttribute>()
                 });
-                //continue;
             }
-
-            /*var exception = targetType is null
-                ? new Exception($"No `{nameof(CharacterAttribute)}` or `{nameof(FieldAttribute)}` was found, length of the `{property}` property is unknown")
-                : new Exception($"No `{nameof(TargetCharacterAttribute)}` or `{nameof(TargetFieldAttribute)}` for '{targetType}' type was found, length of the `{property}` property is unknown");
-
-            throw exception;*/
         }
     }
 

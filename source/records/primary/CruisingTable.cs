@@ -16,13 +16,6 @@ public record CruisingTable : Record424
     [Field(7, 8)]
     public required string CruisingTableIdentifier { get; init; }
 
-    /*/// <summary>
-    /// <c>Sequence Number (SEQ NR)</c> character.
-    /// </summary>
-    /// <remarks>See paragraph 5.12.</remarks>
-    [Character(8)]
-    public required char SequenceNumber { get; init; }*/
-
     /// <summary>
     /// <c>Course FROM</c> field.
     /// </summary>

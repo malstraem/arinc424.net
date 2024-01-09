@@ -7,8 +7,8 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.4.1</remarks>
 [Record('E', 'A'), Continuation]
-[Obsolete("Нужно добавить обработку Terminal Waypoints")]
-public record Waypoint : Record424
+[Obsolete("TODO Terminal Waypoints")]
+public record Waypoint : Geo
 {
     /// <summary>
     /// <c>Region Code (REGN CODE)</c> field.
@@ -51,20 +51,6 @@ public record Waypoint : Record424
     /// <remarks>See paragraph 5.82</remarks>
     [Field(30, 31)]
     public required string Usage { get; init; }
-
-    /// <summary>
-    /// <c>Latitude (LATITUDE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.36</remarks>
-    [Field(33, 41)]
-    public required string Latitude { get; init; }
-
-    /// <summary>
-    /// <c>Longitude (LONGITUDE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.37</remarks>
-    [Field(42, 51)]
-    public required string Longitude { get; init; }
 
     /// <summary>
     /// <c>Magnetic Variation (MAG VAR, D MAG VAR)</c> field.

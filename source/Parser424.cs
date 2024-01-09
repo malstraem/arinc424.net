@@ -151,7 +151,7 @@ internal class Parser424
         var cruisingTables = Construct<CruisingTable>();
         var holdingPatterns = Construct<HoldingPattern>();
         var flightPlannings = Construct<FlightPlanning>();
-        var navigationalAids = Construct<NavigationalAid>();
+        var veryHighFrequencyAids = Construct<VeryHighFrequencyAid>();
         var airportApproaches = Construct<AirportApproach>();
         var nonDirectionalBeacons = Construct<NonDirectionalBeacon>();
         var microwaveLandingSystems = Construct<MicrowaveLandingSystem>();
@@ -176,8 +176,8 @@ internal class Parser424
             CruisingTables = cruisingTables,
             HoldingPatterns = holdingPatterns,
             FlightPlannings = flightPlannings,
-            NavigationalAids = navigationalAids,
             AirportApproaches = airportApproaches,
+            VeryHighFrequencyAids = veryHighFrequencyAids,
             NonDirectionalBeacons = nonDirectionalBeacons,
             MicrowaveLandingSystems = microwaveLandingSystems,
             StandardTerminalArrivals = standardTerminalArrivals,
