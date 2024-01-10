@@ -11,7 +11,7 @@ namespace Arinc.Spec424.Records;
 /// <remarks>See paragraph 4.1.18.1.</remarks>
 [Record('U', 'R'), Continuation(25), Sequenced(21, 24)]
 [DebuggerDisplay("Area - {AreaCode}, Name - {Name}")]
-public record RestrictiveAirspace : SequencedRecord424<BoundaryPoint>
+public class RestrictiveAirspace : SequencedRecord424<BoundaryPoint>
 {
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.

@@ -8,4 +8,4 @@ namespace Arinc.Spec424.Records;
 /// <remarks>See paragraph 4.1.9.1.</remarks>
 
 [Record('P', 'D', subsectionIndex: 13)]
-public record StandardInstrumentDeparture : Procedure { }
+public class StandardInstrumentDeparture : Procedure { }

@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.16.1.</remarks>
 [Record('T', 'C')]
-public record CruisingTable : Record424
+public class CruisingTable : Record424
 {
     /// <summary>
     /// <c>Cruise Table Identifier (CRSE TBL IDENT)</c> field.

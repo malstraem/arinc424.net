@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.5.1.</remarks>
 [Record('E', 'P'), Continuation(39)]
-public record HoldingPattern : Record424
+public class HoldingPattern : Record424
 {
     /// <summary>
     /// <c>Region Code (REGN CODE)</c> field.

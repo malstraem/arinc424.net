@@ -10,7 +10,7 @@ namespace Arinc.Spec424.Terms.Subsequences;
 /// Combination of boundary point properties used by <see cref="FlightInfoRegion"/>, <see cref="ControlledAirspace"/> and <see cref="RestrictiveAirspace"/>.
 /// </summary>
 [DebuggerDisplay("{BoundaryVia} - {Latitude}, {Longitude}")]
-public record BoundaryPoint : Geo
+public class BoundaryPoint : Geo
 {
     [Transform<BoundaryViaConverter>]
     [Character(31), Character<FlightInfoRegion>(33)]

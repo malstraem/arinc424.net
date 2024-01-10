@@ -11,7 +11,7 @@ namespace Arinc.Spec424.Records;
 /// <remarks>See paragraph 4.1.7.1.</remarks>
 [Record('P', 'A', subsectionIndex: 13), Continuation]
 [DebuggerDisplay("Identifier - {Identifier}, Name - {Name}")]
-public record Airport : Record424, IIdentifiable
+public class Airport : Record424, IIdentifiable
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT IDENT)</c> field.
@@ -178,4 +178,10 @@ public record Airport : Record424, IIdentifiable
 
     [Receive<Airport, StandardInstrumentDeparture>]
     public required IReadOnlyList<StandardInstrumentDeparture> Departures { get; set; }
+
+    [Receive<Airport, VeryHighFrequencyAid>]
+    public required IReadOnlyList<VeryHighFrequencyAid> VeryHighFrequencyAids { get; set; }
+
+    [Receive<Airport, NonDirectionalBeacon>]
+    public required IReadOnlyList<NonDirectionalBeacon> NonDirectionalBeacons { get; set; }
 }

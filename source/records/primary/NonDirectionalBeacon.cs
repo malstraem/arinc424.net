@@ -7,21 +7,21 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.3.1.</remarks>
 [Record('D', 'B'), Continuation]
-public record NonDirectionalBeacon : Record424
+public class NonDirectionalBeacon : Record424
 {
     /// <summary>
     /// <c>Airport Identifier (IDENT)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.6.</remarks>
-    [Field(7, 10)]
-    public required string AirportIdentifier { get; init; }
+    [Field(7, 10), Link<NonDirectionalBeacon, Airport>]
+    public required string? AirportIdentifier { get; init; }
 
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.14.</remarks>
     [Field(11, 12)]
-    public required string AirportIcaoCode { get; init; }
+    public required string? AirportIcaoCode { get; init; }
 
     /// <summary>
     /// <c>NDB Identifier (NDB IDENT)</c> field.
@@ -48,7 +48,7 @@ public record NonDirectionalBeacon : Record424
     /// <c>NAVAID Class (CLASS)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.35.</remarks>
-    [Field(28, 32)] // тоже не очень уверен
+    [Field(28, 32)]
     public required string Class { get; init; }
 
     /// <summary>

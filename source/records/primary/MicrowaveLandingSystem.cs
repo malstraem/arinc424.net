@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.22.1.</remarks>
 [Record('P', 'L', subsectionIndex: 13), Continuation]
-public record MicrowaveLandingSystem : Record424
+public class MicrowaveLandingSystem : Record424
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT IDENT)</c> field.

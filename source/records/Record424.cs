@@ -5,7 +5,7 @@ namespace Arinc.Spec424;
 /// <summary>
 /// Base ARINC-424 record having area/customer code, file record number and cycle date fields.
 /// </summary>
-public abstract record Record424
+public abstract class Record424
 {
     /// <summary>
     /// <c>Customer/Area Code (CUST/AREA)</c> field.

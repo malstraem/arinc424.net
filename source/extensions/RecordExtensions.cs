@@ -7,6 +7,7 @@ namespace Arinc.Spec424.Records;
 
 internal static class RecordExtensions
 {
+    [Obsolete("TODO rewrite")]
     internal static IReadOnlyCollection<TRecipient> Link<TRecipient, TLinked>(this IReadOnlyCollection<TRecipient> recipients, IEnumerable<TLinked> records)
         where TRecipient : Record424, IIdentifiable
         where TLinked : Record424
@@ -24,14 +25,13 @@ internal static class RecordExtensions
 
         foreach (var record in records)
         {
-            if (linkedRecords.TryGetValue((string)link.Property.GetValue(record), out var targetRecords))
-            {
+            object? value = link.Property.GetValue(record);
+
+            if (value is null)
+                continue;
+
+            if (linkedRecords.TryGetValue((string)value, out var targetRecords))
                 targetRecords.Add(record);
-            }
-            else
-            {
-                throw new InvalidOperationException();
-            }
         }
 
         foreach (var recipient in recipients)

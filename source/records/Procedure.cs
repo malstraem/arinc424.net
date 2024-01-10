@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.9.1.</remarks>
 [Continuation(39)]
-public abstract record Procedure : Record424
+public abstract class Procedure : Record424
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT)</c> field.

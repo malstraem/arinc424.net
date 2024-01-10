@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.33.1.</remarks>
 [Record('E', 'S'), Continuation]
-public record SpecialActivityArea : Record424
+public class SpecialActivityArea : Record424
 {
     /// <summary>
     /// <c>Activity Type</c> character.

@@ -8,4 +8,4 @@ namespace Arinc.Spec424.Records;
 /// <remarks>See paragraph 4.1.9.1.</remarks>
 
 [Record('P', 'E', subsectionIndex: 13)]
-public record StandardTerminalArrival : Procedure { }
+public class StandardTerminalArrival : Procedure { }

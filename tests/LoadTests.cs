@@ -2,7 +2,7 @@ namespace Arinc.Spec424.Tests;
 
 public class LoadTests
 {
-    private readonly string[] strings = File.ReadAllLines("data/world.txt");
+    private readonly string[] strings = File.ReadAllLines("data/russia.txt");
 
     [Fact]
     public void Load()
@@ -19,7 +19,6 @@ public class LoadTests
         Assert.NotEmpty(data.RestrictiveAirspaces);
         Assert.NotEmpty(data.Runways);
         Assert.NotEmpty(data.StandardInstrumentDepartures);
-        Assert.NotEmpty(data.StandardTerminalArrivals);
         Assert.NotEmpty(data.StandardTerminalArrivals);
         Assert.NotEmpty(data.Waypoints);
         Assert.NotEmpty(data.VeryHighFrequencyAids);

@@ -7,42 +7,42 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.2.1.</remarks>
 [Record('D'), Continuation]
-public record VeryHighFrequencyAid : Record424
+public class VeryHighFrequencyAid : Record424
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.6.</remarks>
-    [Field(7, 10)]
-    public required string AirportIcaoIdentifier { get; init; }
+    [Field(7, 10), Link<VeryHighFrequencyAid, Airport>]
+    public required string? AirportIcaoIdentifier { get; init; }
 
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.14.</remarks>
     [Field(11, 12)]
-    public required string AirportIcaoCode { get; init; }
+    public required string? AirportIcaoCode { get; init; }
 
     /// <summary>
     /// <c>VOR Identifier (VOR IDENT)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.33.</remarks>
     [Field(14, 17)]
-    public required string VorIdentifier { get; init; }
+    public required string Identifier { get; init; }
 
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.14.</remarks>
     [Field(20, 21)]
-    public required string VorIcaoCode { get; init; }
+    public required string IcaoCode { get; init; }
 
     /// <summary>
     /// <c>VOR Frequency (VOR FREQ)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.34.</remarks>
     [Field(23, 27)]
-    public required string VorFrequency { get; init; }
+    public required string Frequency { get; init; }
 
     /// <summary>
     /// <c>NAVAID Class (CLASS)</c> field.

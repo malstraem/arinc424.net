@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.27.1.</remarks>
 [Record('P', 'R', subsectionIndex: 13), Continuation(70)]
-public record FlightPlanning : Record424
+public class FlightPlanning : Record424
 {
     [Field(7, 10)]
     public required string AirportIdentifier { get; init; }

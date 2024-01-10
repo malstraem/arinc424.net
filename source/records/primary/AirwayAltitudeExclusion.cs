@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.21.1.</remarks>
 [Record('E', 'U'), Continuation(18)]
-public record AirwayAltitudeExclusion : Record424
+public class AirwayAltitudeExclusion : Record424
 {
     /// <summary>
     /// <c>Route Identifier (ROUTE IDENT)</c> field.

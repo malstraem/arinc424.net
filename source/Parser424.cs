@@ -1,10 +1,8 @@
-using System.Reflection;
-
-using Arinc.Spec424.Attributes;
 using Arinc.Spec424.Building;
 using Arinc.Spec424.Records;
-using Arinc.Spec424.Terms;
 using Arinc.Spec424.Terms.Subsequences;
+
+using Arinc424.Terms.Subsequences;
 
 namespace Arinc.Spec424;
 
@@ -100,45 +98,6 @@ internal class Parser424
         return records;
     }
 
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <typeparam name="TLinked"></typeparam>
-    /// <typeparam name="TRecipient"></typeparam>
-    /// <param name="records"></param>
-    /// <param name="recipients"></param>
-    /// <exception cref="InvalidOperationException"></exception>
-    /// <exception cref="Exception"></exception>
-    private void Link<TRecipient, TLinked>(IEnumerable<TRecipient> recipients, IEnumerable<TLinked> records) where TRecipient : Record424, IIdentifiable
-                                                                                                             where TLinked : Record424
-    {
-        var link = typeof(TLinked).GetProperties().SelectMany(property => property.GetCustomAttributes<LinkAttribute<TLinked, TRecipient>>()).FirstOrDefault();
-        var receive = typeof(TRecipient).GetProperties().SelectMany(property => property.GetCustomAttributes<ReceiveAttribute<TRecipient, TLinked>>()).FirstOrDefault();
-
-        if (link is null || receive is null)
-            throw new Exception("oops");
-
-        Dictionary<string, List<TLinked>> linkedRecords = [];
-
-        foreach (var recipient in recipients)
-            linkedRecords.Add(recipient.Identifier, []);
-
-        foreach (var record in records)
-        {
-            if (linkedRecords.TryGetValue((string)link.Property.GetValue(record), out var targetRecords))
-            {
-                targetRecords.Add(record);
-            }
-            else
-            {
-                throw new InvalidOperationException();
-            }
-        }
-
-        foreach (var recipient in recipients)
-            receive.Property.SetValue(recipient, linkedRecords[recipient.Identifier]);
-    }
-
     internal ArincData424 Parse(IEnumerable<string> strings)
     {
         ProcessStrings(strings);
@@ -146,7 +105,7 @@ internal class Parser424
         var runways = Construct<Runway>();
         var airports = Construct<Airport>();
 
-        var airways = Construct<Airway>();
+        var airways = Construct<Airway, AirwayPoint>();
         var waypoints = Construct<Waypoint>();
         var cruisingTables = Construct<CruisingTable>();
         var holdingPatterns = Construct<HoldingPattern>();
@@ -162,16 +121,11 @@ internal class Parser424
         var controlledAirspaces = Construct<ControlledAirspace, BoundaryPoint>();
         var restrictiveAirspaces = Construct<RestrictiveAirspace, BoundaryPoint>();
 
-        Link(airports, runways);
-        Link(airports, airportApproaches);
-        Link(airports, standardTerminalArrivals);
-        Link(airports, standardInstrumentDepartures);
-
         return new ArincData424
         {
             Runways = runways,
             Airways = airways,
-            Airports = airports,
+            Airports = airports.Link(runways).Link(airportApproaches).Link(standardTerminalArrivals).Link(standardInstrumentDepartures).Link(veryHighFrequencyAids).Link(nonDirectionalBeacons),
             Waypoints = waypoints,
             CruisingTables = cruisingTables,
             HoldingPatterns = holdingPatterns,

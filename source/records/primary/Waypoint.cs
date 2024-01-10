@@ -8,7 +8,7 @@ namespace Arinc.Spec424.Records;
 /// <remarks>See paragraph 4.1.4.1</remarks>
 [Record('E', 'A'), Continuation]
 [Obsolete("TODO Terminal Waypoints")]
-public record Waypoint : Geo
+public class Waypoint : Geo
 {
     /// <summary>
     /// <c>Region Code (REGN CODE)</c> field.

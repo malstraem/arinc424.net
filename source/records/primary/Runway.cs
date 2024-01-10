@@ -8,7 +8,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.10.1.</remarks>
 [Record('P', 'G', subsectionIndex: 13), Continuation]
-public record Runway : Record424, IIdentifiable
+public class Runway : Record424, IIdentifiable
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT IDENT)</c> field.
