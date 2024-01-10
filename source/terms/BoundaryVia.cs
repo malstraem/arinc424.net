@@ -9,6 +9,7 @@ namespace Arinc.Spec424.Terms;
 /// <remarks>See paragraph 5.118.</remarks>
 public enum BoundaryVia : int
 {
+    Unknown,
     Circle,
     GreatCircle,
     RhumbLine,

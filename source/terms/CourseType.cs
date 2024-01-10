@@ -6,6 +6,7 @@ namespace Arinc.Spec424.Terms;
 /// <remarks>See paragraph 5.165.</remarks>
 public enum CourseType : byte
 {
+    Unknown,
     Magnetic,
     True,
     Mixed

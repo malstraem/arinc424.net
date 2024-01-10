@@ -7,7 +7,8 @@ namespace Arinc.Spec424.Terms;
 [Flags]
 public enum PortPrivacy : byte
 {
+    Unknown,
     Civil,
     Military,
-    Private,
+    Private
 }
