@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-using Arinc.Spec424.Terms;
+using Arinc.Spec424.Records;
 
 namespace Arinc.Spec424.Attributes;
 

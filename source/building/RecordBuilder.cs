@@ -1,30 +1,30 @@
 namespace Arinc.Spec424.Building;
 
-internal class RecordBuilder
+internal static class RecordBuilder
 {
-    internal static object Build(BuildInfo info, string @string)
+    internal static TRecord Build<TRecord>(BuildInfo info, string @string) where TRecord : Record424, new()
     {
-        object record = info.Constructor.Invoke(null);
+        TRecord record = new();
 
-        foreach (var property in info.IndexInfo)
+        foreach (var indexInfo in info.IndexInfo)
         {
-            char @char = @string[property.Index];
+            char @char = @string[indexInfo.Index];
 
-            object value = property.Transform is not null ? property.Transform.Convert(@char) : @char;
+            object value = indexInfo.Transform is not null ? indexInfo.Transform.Convert(@char) : @char;
 
-            property.Property.SetValue(record, value);
+            indexInfo.Property.SetValue(record, value);
         }
 
-        foreach (var property in info.RangeInfo)
+        foreach (var rangeInfo in info.RangeInfo)
         {
-            string? trimmed = @string[property.Range].Trim();
+            string? trimmed = @string[rangeInfo.Range].Trim();
 
             if (trimmed.Length == 0)
                 trimmed = null;
 
-            object? value = property.Decode is not null && trimmed is not null ? property.Decode.Convert(@trimmed) : @trimmed;
+            object? value = rangeInfo.Decode is not null && trimmed is not null ? rangeInfo.Decode.Convert(@trimmed) : @trimmed;
 
-            property.Property.SetValue(record, value);
+            rangeInfo.Property.SetValue(record, value);
         }
 
         return record;

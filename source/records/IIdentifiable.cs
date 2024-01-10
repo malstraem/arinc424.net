@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Terms;
+namespace Arinc.Spec424.Records;
 
 internal interface IIdentifiable
 {

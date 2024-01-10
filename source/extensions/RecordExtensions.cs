@@ -1,7 +1,6 @@
 using System.Reflection;
 
 using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Records;
 

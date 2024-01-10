@@ -1,5 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>library</OutputType>
+    <RootNamespace>Arinc.Spec424</RootNamespace>
   </PropertyGroup>
 </Project>

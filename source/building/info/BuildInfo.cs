@@ -50,10 +50,8 @@ internal record BuildInfo
                     Regex = validationAttribute?.Regex,
                     Decode = property.GetCustomAttribute<DecodeAttribute>()
                 });
-                continue;
             }
-
-            if ((targetType is not null && TryTargetCharacterAttribute(property, targetType, out var characterAttribute))
+            else if ((targetType is not null && TryTargetCharacterAttribute(property, targetType, out var characterAttribute))
                 || TryCharacterAttribute(property, out characterAttribute))
             {
                 IndexInfo.Add(new IndexAssignmentInfo

@@ -2,8 +2,8 @@ using Arinc.Spec424.Records;
 
 namespace Arinc.Spec424.Building;
 
-internal static class RecordBuilder<TRecord, TSubsequence> where TRecord : SequencedRecord424<TSubsequence>
-                                                           where TSubsequence : Record424
+internal static class RecordBuilder<TRecord, TSubsequence> where TRecord : SequencedRecord424<TSubsequence>, new()
+                                                           where TSubsequence : Record424, new()
 {
     private readonly static BuildInfo subsequenceInfo = new(typeof(TSubsequence), typeof(TRecord));
 
@@ -14,7 +14,7 @@ internal static class RecordBuilder<TRecord, TSubsequence> where TRecord : Seque
         var record = RecordBuilder<TRecord>.Build(strings.First());
 
         while (strings.TryDequeue(out string? @string))
-            sequences.Add((TSubsequence)RecordBuilder.Build(subsequenceInfo, @string));
+            sequences.Add(RecordBuilder.Build<TSubsequence>(subsequenceInfo, @string));
 
         record.Sequences = sequences;
 

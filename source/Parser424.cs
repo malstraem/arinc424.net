@@ -1,8 +1,6 @@
 using Arinc.Spec424.Building;
 using Arinc.Spec424.Records;
-using Arinc.Spec424.Terms.Subsequences;
-
-using Arinc424.Terms.Subsequences;
+using Arinc.Spec424.Records.Subsequences;
 
 namespace Arinc.Spec424;
 
@@ -50,7 +48,7 @@ internal class Parser424
     /// </summary>
     /// <typeparam name="TRecord">Target type of records.</typeparam>
     /// <returns>Constructed records or empty.</returns>
-    private Queue<TRecord> Construct<TRecord>() where TRecord : Record424
+    private Queue<TRecord> Construct<TRecord>() where TRecord : Record424, new()
     {
         Queue<TRecord> records = [];
 
@@ -66,8 +64,8 @@ internal class Parser424
     /// <typeparam name="TSequencedRecord">Target type of records.</typeparam>
     /// <typeparam name="TSubsequence">Target sequence type.</typeparam>
     /// <returns>Constructed records or empty.</returns>
-    private Queue<TSequencedRecord> Construct<TSequencedRecord, TSubsequence>() where TSequencedRecord : SequencedRecord424<TSubsequence>
-                                                                                where TSubsequence : Record424
+    private Queue<TSequencedRecord> Construct<TSequencedRecord, TSubsequence>() where TSequencedRecord : SequencedRecord424<TSubsequence>, new()
+                                                                                where TSubsequence : Record424, new()
     {
         var info = (SequencedRecordInfo)Meta424.RecordInfo[typeof(TSequencedRecord)];
 
@@ -104,8 +102,6 @@ internal class Parser424
 
         var runways = Construct<Runway>();
         var airports = Construct<Airport>();
-
-        var airways = Construct<Airway, AirwayPoint>();
         var waypoints = Construct<Waypoint>();
         var cruisingTables = Construct<CruisingTable>();
         var holdingPatterns = Construct<HoldingPattern>();
@@ -116,6 +112,8 @@ internal class Parser424
         var microwaveLandingSystems = Construct<MicrowaveLandingSystem>();
         var standardTerminalArrivals = Construct<StandardTerminalArrival>();
         var standardInstrumentDepartures = Construct<StandardInstrumentDeparture>();
+
+        var airways = Construct<Airway, AirwayPoint>();
 
         var flightInfoRegions = Construct<FlightInfoRegion, BoundaryPoint>();
         var controlledAirspaces = Construct<ControlledAirspace, BoundaryPoint>();
