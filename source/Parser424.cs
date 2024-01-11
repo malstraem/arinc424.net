@@ -96,6 +96,7 @@ internal class Parser424
         return records;
     }
 
+    [Obsolete("TODO multithreading")]
     internal ArincData424 Parse(IEnumerable<string> strings)
     {
         ProcessStrings(strings);
@@ -107,13 +108,13 @@ internal class Parser424
         var holdingPatterns = Construct<HoldingPattern>();
         var flightPlannings = Construct<FlightPlanning>();
         var veryHighFrequencyAids = Construct<VeryHighFrequencyAid>();
-        var airportApproaches = Construct<AirportApproach>();
         var nonDirectionalBeacons = Construct<NonDirectionalBeacon>();
         var microwaveLandingSystems = Construct<MicrowaveLandingSystem>();
-        var standardTerminalArrivals = Construct<StandardTerminalArrival>();
-        var standardInstrumentDepartures = Construct<StandardInstrumentDeparture>();
 
         var airways = Construct<Airway, AirwayPoint>();
+        var airportApproaches = Construct<AirportApproach, ProcedurePoint>();
+        var standardTerminalArrivals = Construct<StandardTerminalArrival, ProcedurePoint>();
+        var standardInstrumentDepartures = Construct<StandardInstrumentDeparture, ProcedurePoint>();
 
         var flightInfoRegions = Construct<FlightInfoRegion, BoundaryPoint>();
         var controlledAirspaces = Construct<ControlledAirspace, BoundaryPoint>();

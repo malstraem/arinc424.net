@@ -56,7 +56,7 @@ public class Airport : Geo, IIdentifiable
     /// </summary>
     /// <remarks>See paragraph 5.108.</remarks>
     [Character(31), Transform<BoolConverter>]
-    public bool IsProcedureCapable { get; init; }
+    public bool IsProcedurePublished { get; init; }
 
     /// <summary>
     /// <c>Longest Runway Surface Code (LRSC)</c> character.

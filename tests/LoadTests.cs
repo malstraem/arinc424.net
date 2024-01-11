@@ -2,7 +2,7 @@ namespace Arinc.Spec424.Tests;
 
 public class LoadTests
 {
-    private readonly string[] strings = File.ReadAllLines("data/world.txt");
+    private readonly string[] strings = File.ReadAllLines("data/russia.txt");
 
     [Fact]
     public void Load()
@@ -23,11 +23,5 @@ public class LoadTests
         Assert.NotEmpty(data.Waypoints);
         Assert.NotEmpty(data.VeryHighFrequencyAids);
         Assert.NotEmpty(data.NonDirectionalBeacons);
-
-        foreach (var airport in data.Airports)
-        {
-            if (airport.LongestRunwaySurfaceType is Terms.RunwaySurfaceType.Unknown)
-                Console.WriteLine("beep");
-        }
     }
 }
