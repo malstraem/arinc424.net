@@ -15,16 +15,16 @@ internal class CharacterAttribute(int index) : Attribute
 }
 
 /// <inheritdoc/>
-/// <param name="targetType">Possible target type.</param>
+/// <param name="targetType">Target type that index is defined.</param>
 internal abstract class TargetCharacterAttribute(int index, Type targetType) : CharacterAttribute(index)
 {
     /// <summary>
-    /// Possible target type.
+    /// Target type that index is defined.
     /// </summary>
     internal Type TargetType { get; } = targetType;
 }
 
 /// <inheritdoc/>
-/// <typeparam name="TRecord">Target type of record.</typeparam>
+/// <typeparam name="TRecord">Target type of record that index is defined.</typeparam>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 internal class CharacterAttribute<TRecord>(int index) : TargetCharacterAttribute(index, typeof(TRecord)) { }

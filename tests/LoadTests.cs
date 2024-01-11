@@ -2,12 +2,12 @@ namespace Arinc.Spec424.Tests;
 
 public class LoadTests
 {
-    private readonly string[] strings = File.ReadAllLines("data/russia.txt");
+    private readonly string[] strings = File.ReadAllLines("data/ru.txt");
 
     [Fact]
     public void Load()
     {
-        var data = ArincData424.Load(strings);
+        var data = Data424.Load(strings);
 
         Assert.NotEmpty(data.Airports);
         Assert.NotEmpty(data.AirportApproaches);

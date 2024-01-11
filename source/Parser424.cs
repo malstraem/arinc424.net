@@ -97,7 +97,7 @@ internal class Parser424
     }
 
     [Obsolete("TODO multithreading")]
-    internal ArincData424 Parse(IEnumerable<string> strings)
+    internal Data424 Parse(IEnumerable<string> strings)
     {
         ProcessStrings(strings);
 
@@ -120,7 +120,7 @@ internal class Parser424
         var controlledAirspaces = Construct<ControlledAirspace, BoundaryPoint>();
         var restrictiveAirspaces = Construct<RestrictiveAirspace, BoundaryPoint>();
 
-        return new ArincData424
+        return new Data424
         {
             Runways = runways,
             Airways = airways,

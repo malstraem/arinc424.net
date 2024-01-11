@@ -6,6 +6,10 @@ namespace Arinc.Spec424.Records.Subsequences;
 
 #pragma warning disable CS8618
 
+/// <summary>
+/// Combination of procedure point properties used by
+/// <see cref="AirportApproach"/>, <see cref="StandardInstrumentDeparture"/> and <see cref="StandardTerminalArrival"/> like subsequence.
+/// </summary>
 [DebuggerDisplay("Fix - {FixIdentifier}")]
 public class ProcedurePoint : Record424
 {

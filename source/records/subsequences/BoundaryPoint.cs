@@ -7,8 +7,8 @@ using Arinc.Spec424.Terms.Converters;
 namespace Arinc.Spec424.Records.Subsequences;
 
 /// <summary>
-/// Combination of boundary point properties and subsequence used by
-/// <see cref="FlightInfoRegion"/>, <see cref="ControlledAirspace"/> and <see cref="RestrictiveAirspace"/>.
+/// Combination of boundary point properties used by
+/// <see cref="FlightInfoRegion"/>, <see cref="ControlledAirspace"/> and <see cref="RestrictiveAirspace"/> like subsequence.
 /// </summary>
 [DebuggerDisplay("{BoundaryVia} - {Latitude}, {Longitude}")]
 public class BoundaryPoint : Geo

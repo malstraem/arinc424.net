@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records.Subsequences;
 #pragma warning disable CS8618
 
 /// <summary>
-/// Subsequence used by <see cref="Airway"/>
+/// Used by <see cref="Airway"/> like subsequence.
 /// </summary>
 [DebuggerDisplay("Fix - {FixIdentifier}")]
 public class AirwayPoint : Record424

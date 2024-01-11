@@ -2,7 +2,7 @@ using Arinc.Spec424.Records;
 
 namespace Arinc.Spec424;
 
-public class ArincData424
+public class Data424
 {
     public required IReadOnlyCollection<Runway> Runways { get; init; }
 
@@ -36,10 +36,5 @@ public class ArincData424
 
     public required IReadOnlyCollection<RestrictiveAirspace> RestrictiveAirspaces { get; init; }
 
-    public static ArincData424 Load(IEnumerable<string> strings)
-    {
-        Parser424 parser = new();
-
-        return parser.Parse(strings);
-    }
+    public static Data424 Load(IEnumerable<string> strings) => new Parser424().Parse(strings);
 }
