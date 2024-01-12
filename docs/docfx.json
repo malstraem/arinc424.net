@@ -1,0 +1,42 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "source/Arinc424.csproj"
+          ],
+          "src": "../"
+        }
+      ],
+      "dest": "api/"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "dest": "../public",
+    "globalMetadata": {
+      "_appTitle": "Arinc424.NET"
+    },
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default",
+      "modern",
+      "templates/custom"
+    ]
+  }
+}
