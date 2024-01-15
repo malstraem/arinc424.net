@@ -27,7 +27,12 @@ internal class Meta424
                 RecordInfo.Add(type, recordInfo);
 
                 LinkInfo.Add(type, type.GetProperties().SelectMany(property => property.GetCustomAttributes<LinkAttribute>()));
-                ReceiveInfo.Add(type, type.GetProperties().SelectMany(property => property.GetCustomAttributes<ReceiveAttribute>()));
+                ReceiveInfo.Add(type, type.GetProperties().SelectMany(property => property.GetCustomAttributes<ManyAttribute>()));
+
+                var externalAttribute = type.GetCustomAttribute<ExternalAttribute>();
+
+                if (externalAttribute is not null)
+                    LinkedInfo.Add(type, externalAttribute);
             }
         }
     }
@@ -36,5 +41,7 @@ internal class Meta424
 
     internal static Dictionary<Type, IEnumerable<LinkAttribute>> LinkInfo { get; } = [];
 
-    internal static Dictionary<Type, IEnumerable<ReceiveAttribute>> ReceiveInfo { get; } = [];
+    internal static Dictionary<Type, ExternalAttribute> LinkedInfo { get; } = [];
+
+    internal static Dictionary<Type, IEnumerable<ManyAttribute>> ReceiveInfo { get; } = [];
 }

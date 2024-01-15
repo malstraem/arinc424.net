@@ -12,7 +12,7 @@ internal static class RecordExtensions
         where TLinked : Record424
     {
         var link = typeof(TLinked).GetProperties().SelectMany(property => property.GetCustomAttributes<LinkAttribute<TLinked, TRecipient>>()).FirstOrDefault();
-        var receive = typeof(TRecipient).GetProperties().SelectMany(property => property.GetCustomAttributes<ReceiveAttribute<TRecipient, TLinked>>()).FirstOrDefault();
+        var receive = typeof(TRecipient).GetProperties().SelectMany(property => property.GetCustomAttributes<ManyAttribute<TRecipient, TLinked>>()).FirstOrDefault();
 
         if (link is null || receive is null)
             throw new Exception("oops");

@@ -9,12 +9,11 @@ internal class Parser424
     private readonly Queue<string> skippedStrings = [];
 
     private readonly Dictionary<Type, Queue<string>> recordStrings = [];
-    private readonly Dictionary<Type, Queue<string>> sequencedRecordStrings = [];
 
     internal Parser424()
     {
         foreach (var (type, info) in Meta424.RecordInfo)
-            (info is SequencedRecordInfo ? sequencedRecordStrings : recordStrings).Add(type, []);
+            recordStrings.Add(type, []);
     }
 
     /// <summary>
@@ -36,7 +35,7 @@ internal class Parser424
         {
             if (info.IsMatch(@string))
             {
-                (info is SequencedRecordInfo ? sequencedRecordStrings[type] : recordStrings[type]).Enqueue(@string);
+                recordStrings[type].Enqueue(@string);
                 return true;
             }
         }
@@ -50,9 +49,11 @@ internal class Parser424
     /// <returns>Constructed records or empty.</returns>
     private Queue<TRecord> Construct<TRecord>() where TRecord : Record424, new()
     {
+        var type = typeof(TRecord);
+
         Queue<TRecord> records = [];
 
-        while (recordStrings[typeof(TRecord)].TryDequeue(out string? @string))
+        while (recordStrings[type].TryDequeue(out string? @string))
             records.Enqueue(RecordBuilder<TRecord>.Build(@string));
 
         return records;
@@ -67,19 +68,21 @@ internal class Parser424
     private Queue<TSequencedRecord> Construct<TSequencedRecord, TSubsequence>() where TSequencedRecord : SequencedRecord424<TSubsequence>, new()
                                                                                 where TSubsequence : Record424, new()
     {
-        var info = (SequencedRecordInfo)Meta424.RecordInfo[typeof(TSequencedRecord)];
+        var type = typeof(TSequencedRecord);
+
+        var info = (SequencedRecordInfo)Meta424.RecordInfo[type];
 
         Queue<string> sequence = [];
         Queue<TSequencedRecord> records = [];
 
         int number;
 
-        if (!sequencedRecordStrings[typeof(TSequencedRecord)].TryPeek(out string? @string))
+        if (!recordStrings[type].TryPeek(out string? @string))
             return records;
 
         number = int.Parse(@string[info.SequenceNumberRange]);
 
-        while (sequencedRecordStrings[typeof(TSequencedRecord)].TryDequeue(out @string))
+        while (recordStrings[type].TryDequeue(out @string))
         {
             int next = int.Parse(@string[info.SequenceNumberRange]);
 

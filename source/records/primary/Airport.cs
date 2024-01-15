@@ -154,21 +154,21 @@ public class Airport : Geo, IIdentifiable
     [Field(94, 123)]
     public string Name { get; init; }
 
-    [Receive<Airport, Runway>]
+    [Many<Airport, Runway>]
     public IReadOnlyList<Runway> Runways { get; init; }
 
-    [Receive<Airport, AirportApproach>]
+    [Many<Airport, AirportApproach>]
     public IReadOnlyList<AirportApproach> Approaches { get; init; }
 
-    [Receive<Airport, StandardTerminalArrival>]
+    [Many<Airport, StandardTerminalArrival>]
     public IReadOnlyList<StandardTerminalArrival> Arrivals { get; init; }
 
-    [Receive<Airport, StandardInstrumentDeparture>]
+    [Many<Airport, StandardInstrumentDeparture>]
     public IReadOnlyList<StandardInstrumentDeparture> Departures { get; init; }
 
-    [Receive<Airport, VeryHighFrequencyAid>]
+    [Many<Airport, VeryHighFrequencyAid>]
     public IReadOnlyList<VeryHighFrequencyAid> VeryHighFrequencyAids { get; init; }
 
-    [Receive<Airport, NonDirectionalBeacon>]
+    [Many<Airport, NonDirectionalBeacon>]
     public IReadOnlyList<NonDirectionalBeacon> NonDirectionalBeacons { get; init; }
 }

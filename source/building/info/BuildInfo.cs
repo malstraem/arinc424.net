@@ -32,16 +32,13 @@ internal record BuildInfo
 
     internal BuildInfo(Type type, Type? targetType = null)
     {
-        Constructor = type.GetConstructor([]) ?? throw new Exception($"Parameterless constructor was not found for `{type}`");
-
         var properties = type.GetProperties();
 
         foreach (var property in properties)
         {
             var validationAttribute = property.GetCustomAttribute<ValidationAttribute>();
 
-            if ((targetType is not null && TryTargetFieldAttribute(property, targetType, out var fieldAttribute))
-                || TryFieldAttribute(property, out fieldAttribute))
+            if ((targetType is not null && TryTargetFieldAttribute(property, targetType, out var fieldAttribute)) || TryFieldAttribute(property, out fieldAttribute))
             {
                 RangeInfo.Add(new RangeAssignmentInfo
                 {
@@ -51,8 +48,7 @@ internal record BuildInfo
                     Decode = property.GetCustomAttribute<DecodeAttribute>()
                 });
             }
-            else if ((targetType is not null && TryTargetCharacterAttribute(property, targetType, out var characterAttribute))
-                || TryCharacterAttribute(property, out characterAttribute))
+            else if ((targetType is not null && TryTargetCharacterAttribute(property, targetType, out var characterAttribute)) || TryCharacterAttribute(property, out characterAttribute))
             {
                 IndexInfo.Add(new IndexAssignmentInfo
                 {
@@ -64,8 +60,6 @@ internal record BuildInfo
             }
         }
     }
-
-    internal ConstructorInfo Constructor { get; }
 
     internal List<IndexAssignmentInfo> IndexInfo { get; } = [];
 
