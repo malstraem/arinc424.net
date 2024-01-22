@@ -60,7 +60,7 @@ public class ProcedurePoint : Record424
     /// </summary>
     /// <remarks>See paragraph 5.211.</remarks>
     [Field(45, 47)]
-    public string RNP { get; init; }
+    public string RequiredPerformanceNavigation { get; init; }
 
     /// <summary>
     /// <c>Path and Termination (PATH TERM)</c> field.
@@ -158,7 +158,7 @@ public class ProcedurePoint : Record424
     /// </summary>
     /// <remarks>See paragraph 5.81.</remarks>
     [Character(84)]
-    public char IndicatorATC { get; init; }
+    public char IndicatorAtc { get; init; }
 
     /// <summary>
     /// <c>Altitude/Minimum Altitude</c> field.

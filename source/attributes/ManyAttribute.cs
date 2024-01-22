@@ -20,6 +20,6 @@ internal abstract class ManyAttribute(Type recipientType, Type linkedType, strin
 
 [AttributeUsage(AttributeTargets.Property)]
 internal class ManyAttribute<TRecipient, TRecord>([CallerMemberName] string propertyName = "")
-    : ManyAttribute(typeof(TRecipient), typeof(TRecord), propertyName) where TRecipient : Record424, IIdentifiable
+    : ManyAttribute(typeof(TRecipient), typeof(TRecord), propertyName) where TRecipient : Record424, IIdentity
                                                                        where TRecord : Record424
 { }

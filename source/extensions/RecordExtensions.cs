@@ -8,7 +8,7 @@ internal static class RecordExtensions
 {
     [Obsolete("TODO rewrite")]
     internal static IReadOnlyCollection<TRecipient> Link<TRecipient, TLinked>(this IReadOnlyCollection<TRecipient> recipients, IEnumerable<TLinked> records)
-        where TRecipient : Record424, IIdentifiable
+        where TRecipient : Record424, IIdentity
         where TLinked : Record424
     {
         var link = typeof(TLinked).GetProperties().SelectMany(property => property.GetCustomAttributes<LinkAttribute<TLinked, TRecipient>>()).FirstOrDefault();

@@ -2,7 +2,7 @@ namespace Arinc.Spec424.Tests;
 
 public class LoadTests
 {
-    private readonly string[] strings = File.ReadAllLines("data/ru.txt");
+    private readonly string[] strings = File.ReadAllLines("data/world.txt");
 
     [Fact]
     public void Load()

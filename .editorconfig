@@ -9,18 +9,62 @@ charset = utf-8
 end_of_line = crlf
 insert_final_newline = true
 
-[*.{csproj,xml,xaml,yml,yaml,json}]
-indent_size = 2
+[*.{cs,vb}]
+resharper_check_namespace_highlighting = none
+resharper_use_roslyn_logic_for_evident_types = true
 
-[*]
-####################################################################################
-#                                   Style                                  #
-# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ #
-####################################################################################
+dotnet_diagnostic.ca1001.severity = warning
+dotnet_diagnostic.ca1003.severity = none
+dotnet_diagnostic.ca1047.severity = warning
+dotnet_diagnostic.ca1051.severity = none
+dotnet_diagnostic.ca1070.severity = warning
+dotnet_diagnostic.ca1707.severity = warning
+
+dotnet_diagnostic.cs1591.severity = none
+
+dotnet_diagnostic.ide0055.severity = warning
+
+dotnet_sort_system_directives_first = true
+
+dotnet_separate_import_directive_groups = true
+
 dotnet_code_quality_unused_parameters = all:warning
 
 dotnet_remove_unnecessary_suppression_exclusions = true:warning
 
+#==============================================================================================#
+#                                            Naming                                            #
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules #
+#==============================================================================================#
+dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
+dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
+dotnet_naming_rule.interface_should_be_begins_with_i.severity = error
+
+dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
+dotnet_naming_rule.types_should_be_pascal_case.symbols = types
+dotnet_naming_rule.types_should_be_pascal_case.severity = error
+
+dotnet_naming_rule.method_should_be_pascal_case.style = pascal_case
+dotnet_naming_rule.method_should_be_pascal_case.symbols = method
+dotnet_naming_rule.method_should_be_pascal_case.severity = error
+
+dotnet_naming_symbols.interface.applicable_kinds = interface
+dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+
+dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
+
+dotnet_naming_symbols.method.applicable_kinds = method
+dotnet_naming_symbols.method.applicable_accessibilities = public
+
+dotnet_naming_style.pascal_case.capitalization = pascal_case
+dotnet_naming_style.begins_with_i.capitalization = pascal_case
+dotnet_naming_style.begins_with_i.required_prefix = I
+
+#==================================================================================#
+#                                       Style                                      #
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ #
+#==================================================================================#
 dotnet_style_qualification_for_field = false:warning
 dotnet_style_qualification_for_event = false:warning
 dotnet_style_qualification_for_method = false:warning
@@ -47,6 +91,8 @@ dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity:sug
 dotnet_style_prefer_auto_properties = false:silent
 dotnet_style_prefer_compound_assignment = true:warning
 dotnet_style_prefer_inferred_tuple_names = true:warning
+dotnet_style_prefer_collection_expression = when_types_loosely_match:suggestion
+dotnet_style_prefer_simplified_interpolation = true:error
 dotnet_style_prefer_simplified_boolean_expressions = true:warning
 dotnet_style_prefer_foreach_explicit_cast_in_source = when_strongly_typed:warning
 dotnet_style_prefer_conditional_expression_over_return = true:warning
@@ -54,7 +100,8 @@ dotnet_style_prefer_inferred_anonymous_type_member_names = true:warning
 dotnet_style_prefer_conditional_expression_over_assignment = true:warning
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
 
-csharp_preferred_modifier_order = public, private, protected, internal, file, static, extern, sealed, abstract, virtual, override, new, readonly, unsafe, required, volatile, async
+[*.cs]
+csharp_preferred_modifier_order = public, private, protected, internal, file, static, extern, sealed, abstract, virtual, override, new, readonly, unsafe, required, volatile, async:suggestion
 
 csharp_using_directive_placement = outside_namespace:error
 
@@ -96,7 +143,6 @@ csharp_style_prefer_top_level_statements = true:warning
 csharp_style_prefer_primary_constructors = true:suggestion
 csharp_style_prefer_readonly_struct_member = true:suggestion
 csharp_style_prefer_method_group_conversion = true:warning
-dotnet_style_prefer_simplified_interpolation = true:error
 csharp_style_prefer_extended_property_pattern = true:warning
 csharp_style_prefer_null_check_over_type_check = true:error
 csharp_style_prefer_local_over_anonymous_function = true:suggestion
@@ -106,57 +152,10 @@ csharp_prefer_static_local_function = true:warning
 csharp_prefer_simple_using_statement = true:warning
 csharp_prefer_simple_default_expression = true:warning
 
-####################################################################################
-#                                 Design                               #
-# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ #
-####################################################################################
-dotnet_diagnostic.IDE0055.severity = warning
-
-dotnet_diagnostic.CA1001.severity = warning
-dotnet_diagnostic.CA1003.severity = none
-dotnet_diagnostic.CA1047.severity = warning
-dotnet_diagnostic.CA1051.severity = none
-dotnet_diagnostic.CA1070.severity = warning
-dotnet_diagnostic.CA1707.severity = warning
-
-dotnet_diagnostic.CS1591.severity = none
-
-################################################################################################
-#                                        Naming                                    #
-# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules #
-################################################################################################
-dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
-dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
-dotnet_naming_rule.interface_should_be_begins_with_i.severity = error
-
-dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
-dotnet_naming_rule.types_should_be_pascal_case.symbols = types
-dotnet_naming_rule.types_should_be_pascal_case.severity = error
-
-dotnet_naming_rule.method_should_be_pascal_case.style = pascal_case
-dotnet_naming_rule.method_should_be_pascal_case.symbols = method
-dotnet_naming_rule.method_should_be_pascal_case.severity = error
-
-dotnet_naming_symbols.interface.applicable_kinds = interface
-dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-
-dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
-dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-
-dotnet_naming_symbols.method.applicable_kinds = method
-dotnet_naming_symbols.method.applicable_accessibilities = public
-
-dotnet_naming_style.pascal_case.capitalization = pascal_case
-dotnet_naming_style.begins_with_i.capitalization = pascal_case
-dotnet_naming_style.begins_with_i.required_prefix = I
-
-###########################################################################################
-#                                       Formatting                                    #
-# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/ide0055 #
-###########################################################################################
-dotnet_sort_system_directives_first = true
-dotnet_separate_import_directive_groups = true
-
+#===========================================================================================================#
+#                                               C# formatting                                               #
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/csharp-formatting-options #
+#===========================================================================================================#
 csharp_new_line_before_else = true
 csharp_new_line_before_catch = true
 csharp_new_line_before_finally = true
@@ -166,7 +165,6 @@ csharp_new_line_before_members_in_anonymous_types = true
 csharp_new_line_before_members_in_object_initializers = true
 
 csharp_space_before_dot = false
-csharp_space_before_comma = false
 csharp_space_before_comma = false
 csharp_space_before_open_square_brackets = false
 csharp_space_before_semicolon_in_for_statement = false

@@ -31,13 +31,13 @@ internal class Parser424
 
     private bool TryEnqueue(string @string)
     {
-        foreach (var (type, info) in Meta424.RecordInfo)
+        foreach (var (type, strings) in recordStrings)
         {
-            if (info.IsMatch(@string))
-            {
-                recordStrings[type].Enqueue(@string);
-                return true;
-            }
+            if (!Meta424.RecordInfo[type].IsMatch(@string))
+                continue;
+            
+            strings.Enqueue(@string);
+            return true;
         }
         return false;
     }
@@ -75,12 +75,10 @@ internal class Parser424
         Queue<string> sequence = [];
         Queue<TSequencedRecord> records = [];
 
-        int number;
-
         if (!recordStrings[type].TryPeek(out string? @string))
             return records;
 
-        number = int.Parse(@string[info.SequenceNumberRange]);
+        int number = int.Parse(@string[info.SequenceNumberRange]);
 
         while (recordStrings[type].TryDequeue(out @string))
         {
@@ -106,6 +104,7 @@ internal class Parser424
 
         var runways = Construct<Runway>();
         var airports = Construct<Airport>();
+
         var waypoints = Construct<Waypoint>();
         var cruisingTables = Construct<CruisingTable>();
         var holdingPatterns = Construct<HoldingPattern>();

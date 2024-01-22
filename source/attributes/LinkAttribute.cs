@@ -15,5 +15,5 @@ internal abstract class LinkAttribute(Type linkedType, Type recipientType, strin
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 internal class LinkAttribute<TLinked, TRecipient>([CallerMemberName] string propertyName = "") : LinkAttribute(typeof(TLinked), typeof(TRecipient), propertyName)
     where TLinked : Record424
-    where TRecipient : Record424, IIdentifiable
+    where TRecipient : Record424, IIdentity
 { }

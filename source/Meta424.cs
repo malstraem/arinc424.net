@@ -1,13 +1,19 @@
 using System.Reflection;
 
 using Arinc.Spec424.Attributes;
+using Arinc.Spec424.Records;
+
+[assembly: OneToMany<Airport, Runway>]
+[assembly: OneToMany<Airport, AirportApproach>]
+[assembly: OneToMany<Airport, StandardInstrumentDeparture>]
+[assembly: OneToMany<Airport, StandardTerminalArrival>]
+[assembly: OneToMany<Airport, VeryHighFrequencyAid>]
+[assembly: OneToMany<Airport, NonDirectionalBeacon>]
 
 namespace Arinc.Spec424;
 
-internal class Meta424
+internal static class Meta424
 {
-    private static readonly Meta424 meta424 = new();
-
     static Meta424()
     {
         var types = Assembly.GetExecutingAssembly().GetTypes();
@@ -16,32 +22,25 @@ internal class Meta424
         {
             var recordAttribute = type.GetCustomAttribute<RecordAttribute>();
 
-            if (recordAttribute is not null)
-            {
-                var sequencedAttribute = type.GetCustomAttribute<SequencedAttribute>();
+            if (recordAttribute is null)
+                continue;
 
-                var recordInfo = sequencedAttribute is null
-                    ? new RecordInfo(type, recordAttribute)
-                    : new SequencedRecordInfo(type, recordAttribute, sequencedAttribute);
+            var sequencedAttribute = type.GetCustomAttribute<SequencedAttribute>();
 
-                RecordInfo.Add(type, recordInfo);
+            var recordInfo = sequencedAttribute is null
+                ? new RecordInfo(type, recordAttribute)
+                : new SequencedRecordInfo(type, recordAttribute, sequencedAttribute);
 
-                LinkInfo.Add(type, type.GetProperties().SelectMany(property => property.GetCustomAttributes<LinkAttribute>()));
-                ReceiveInfo.Add(type, type.GetProperties().SelectMany(property => property.GetCustomAttributes<ManyAttribute>()));
+            RecordInfo.Add(type, recordInfo);
 
-                var externalAttribute = type.GetCustomAttribute<ExternalAttribute>();
+            var externalAttribute = type.GetCustomAttribute<ExternalAttribute>();
 
-                if (externalAttribute is not null)
-                    LinkedInfo.Add(type, externalAttribute);
-            }
+            if (externalAttribute is not null)
+                LinkedInfo.Add(type, new ExternalLinkedInfo(type, externalAttribute));
         }
     }
 
     internal static Dictionary<Type, RecordInfo> RecordInfo { get; } = [];
 
-    internal static Dictionary<Type, IEnumerable<LinkAttribute>> LinkInfo { get; } = [];
-
-    internal static Dictionary<Type, ExternalAttribute> LinkedInfo { get; } = [];
-
-    internal static Dictionary<Type, IEnumerable<ManyAttribute>> ReceiveInfo { get; } = [];
+    internal static Dictionary<Type, ExternalLinkedInfo> LinkedInfo { get; } = [];
 }

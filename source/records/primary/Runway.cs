@@ -10,9 +10,9 @@ namespace Arinc.Spec424.Records;
 /// <c>Runway</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.10.1.</remarks>
-[Record('P', 'G', subsectionIndex: 13), Continuation, External(7, 10)]
+[Record('P', 'G', subsectionIndex: 13), Continuation]
 [DebuggerDisplay("Identifier - {Identifier}")]
-public class Runway : Geo
+public class Runway : Geo, IIcao, IIdentity
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT IDENT)</c> field.

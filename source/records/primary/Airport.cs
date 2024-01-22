@@ -14,7 +14,7 @@ namespace Arinc.Spec424.Records;
 /// <remarks>See paragraph 4.1.7.1.</remarks>
 [Record('P', 'A', subsectionIndex: 13), Continuation]
 [DebuggerDisplay("Identifier - {Identifier}, Name - {Name}")]
-public class Airport : Geo, IIdentifiable
+public class Airport : Geo, IIdentity
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT IDENT)</c> field.

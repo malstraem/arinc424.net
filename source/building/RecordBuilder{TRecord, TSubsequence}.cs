@@ -5,7 +5,7 @@ namespace Arinc.Spec424.Building;
 internal static class RecordBuilder<TRecord, TSubsequence> where TRecord : SequencedRecord424<TSubsequence>, new()
                                                            where TSubsequence : Record424, new()
 {
-    private readonly static BuildInfo subsequenceInfo = new(typeof(TSubsequence), typeof(TRecord));
+    private static readonly BuildInfo subsequenceInfo = new(typeof(TSubsequence), typeof(TRecord));
 
     internal static TRecord Build(Queue<string> strings)
     {

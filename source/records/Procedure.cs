@@ -12,7 +12,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.9.1.</remarks>
 [Continuation(39), Sequenced(27, 29), DebuggerDisplay("{Identifier}")]
-public abstract class Procedure : SequencedRecord424<ProcedurePoint>, IIdentifiable
+public abstract class Procedure : SequencedRecord424<ProcedurePoint>, IIdentity
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT)</c> field.

@@ -4,20 +4,29 @@ using Arinc.Spec424.Attributes;
 
 namespace Arinc.Spec424;
 
-internal record RecordInfo(Type recordType, RecordAttribute recordAttribute)
+internal record RecordInfo
 {
-    internal int SectionIndex { get; } = recordAttribute.Index;
+    private readonly int sectionIndex;
 
-    internal int SubsectionIndex { get; } = recordAttribute.SubsectionIndex;
+    private readonly int subsectionIndex;
 
-    internal char SectionChar { get; } = recordAttribute.Char;
+    private readonly char sectionChar;
 
-    internal char SubsectionChar { get; } = recordAttribute.SubsectionChar;
+    private readonly char subsectionChar;
 
-    internal int? ContinuationNumberIndex { get; } = recordType.GetCustomAttribute<ContinuationAttribute>()?.Index;
+    private readonly int? continuationNumberIndex;
+
+    internal RecordInfo(MemberInfo recordType, RecordAttribute recordAttribute)
+    {
+        sectionIndex = recordAttribute.SectionIndex;
+        sectionChar = recordAttribute.SectionChar;
+        subsectionIndex = recordAttribute.SubsectionIndex;
+        subsectionChar = recordAttribute.SubsectionChar;
+        continuationNumberIndex = recordType.GetCustomAttribute<ContinuationAttribute>()?.Index;
+    }
 
     internal bool IsMatch(string @string) => @string[0] is 'S'
-                                          && @string[SectionIndex] == SectionChar
-                                          && @string[SubsectionIndex] == SubsectionChar
-                                          && (ContinuationNumberIndex is null || @string[ContinuationNumberIndex.Value] is '0' or '1');
+                                          && @string[sectionIndex] == sectionChar
+                                          && @string[subsectionIndex] == subsectionChar
+                                          && (continuationNumberIndex is null || @string[continuationNumberIndex.Value] is '0' or '1');
 }
