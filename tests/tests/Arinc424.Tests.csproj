@@ -4,13 +4,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0-release-23619-01" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.9.0" />
 
     <PackageReference Include="xunit" Version="2.6.6" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.5.6" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
 
-    <ProjectReference Include="../source/Arinc424.csproj" />
+    <ProjectReference Include="../../source/Arinc424.csproj" />
 
-    <None Include="../data/**" LinkBase="data" CopyToOutputDirectory="always" />
+    <None Include="../../data/**" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

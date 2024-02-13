@@ -12,8 +12,8 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.25.1.</remarks>
 [Record('U', 'C'), Continuation(25), Sequenced(21, 24)]
-[DebuggerDisplay("Area - {AreaCode}, Name - {Name}")]
-public class ControlledAirspace : SequencedRecord424<BoundaryPoint>
+[DebuggerDisplay($"{{{nameof(AreaCode)}}}, {{{nameof(Name)}}}")]
+public class ControlledAirspace : SequencedRecord424<BoundaryPoint>, IIcao
 {
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.

@@ -10,9 +10,11 @@ namespace Arinc.Spec424.Records;
 /// <c>Waypoint</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.4.1</remarks>
-[Record('E', 'A'), Continuation, DebuggerDisplay("{Identifier}")]
 [Obsolete("TODO Terminal Waypoints")]
-public class Waypoint : Geo
+
+[Record('E', 'A'), Continuation]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+public class Waypoint : Geo, IIcao, IIdentity
 {
     /// <summary>
     /// <c>Region Code (REGN CODE)</c> field.

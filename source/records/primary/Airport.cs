@@ -1,6 +1,7 @@
 using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
+using Arinc.Spec424.Records.Subsequences;
 using Arinc.Spec424.Terms;
 using Arinc.Spec424.Terms.Converters;
 
@@ -13,8 +14,8 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.7.1.</remarks>
 [Record('P', 'A', subsectionIndex: 13), Continuation]
-[DebuggerDisplay("Identifier - {Identifier}, Name - {Name}")]
-public class Airport : Geo, IIdentity
+[DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
+public class Airport : Geo, IIcao, IIdentity
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT IDENT)</c> field.
@@ -23,10 +24,6 @@ public class Airport : Geo, IIdentity
     [Field(7, 10)]
     public string Identifier { get; init; }
 
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14.</remarks>
     [Field(11, 12)]
     public string IcaoCode { get; init; }
 
@@ -155,20 +152,23 @@ public class Airport : Geo, IIdentity
     public string Name { get; init; }
 
     [Many<Airport, Runway>]
-    public IReadOnlyList<Runway> Runways { get; init; }
+    public List<Runway> Runways { get; init; } = [];
 
-    [Many<Airport, AirportApproach>]
-    public IReadOnlyList<AirportApproach> Approaches { get; init; }
+    [Many<Airport, Approach>]
+    public List<Approach> Approaches { get; init; } = [];
 
     [Many<Airport, StandardTerminalArrival>]
-    public IReadOnlyList<StandardTerminalArrival> Arrivals { get; init; }
+    public List<StandardTerminalArrival> Arrivals { get; init; } = [];
 
     [Many<Airport, StandardInstrumentDeparture>]
-    public IReadOnlyList<StandardInstrumentDeparture> Departures { get; init; }
-
-    [Many<Airport, VeryHighFrequencyAid>]
-    public IReadOnlyList<VeryHighFrequencyAid> VeryHighFrequencyAids { get; init; }
+    public List<StandardInstrumentDeparture> Departures { get; init; } = [];
 
     [Many<Airport, NonDirectionalBeacon>]
-    public IReadOnlyList<NonDirectionalBeacon> NonDirectionalBeacons { get; init; }
+    public List<NonDirectionalBeacon> NonDirectionalBeacons { get; init; } = [];
+
+    [Many<Airport, OmnidirectionalStation>]
+    public List<OmnidirectionalStation> VeryHighFrequencyAids { get; init; } = [];
+
+    [Many<Airport, ProcedurePoint>]
+    public List<ProcedurePoint> ProcedurePoints { get; init; } = [];
 }

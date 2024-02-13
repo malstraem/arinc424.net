@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Records;
+namespace Arinc.Spec424;
 
 public interface IIdentity
 {

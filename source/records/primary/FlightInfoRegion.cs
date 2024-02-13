@@ -13,8 +13,8 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.17.1.</remarks>
 [Record('U', 'F'), Continuation(20), Sequenced(16, 19)]
-[DebuggerDisplay("Area - {AreaCode}, Identifier - {Identifier}, Name - {Name}")]
-public class FlightInfoRegion : SequencedRecord424<BoundaryPoint>
+[DebuggerDisplay($"{{{nameof(AreaCode)}}}, {{{nameof(Name)}}}")]
+public class FlightInfoRegion : SequencedRecord424<BoundaryPoint>, IIdentity
 {
     /// <summary>
     /// <c>FIR/UIR Identifier (FIR/UIR IDENT)</c> field.

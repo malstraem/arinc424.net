@@ -11,22 +11,11 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.10.1.</remarks>
 [Record('P', 'G', subsectionIndex: 13), Continuation]
-[DebuggerDisplay("Identifier - {Identifier}")]
-public class Runway : Geo, IIcao, IIdentity
+[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+public class Runway : Geo
 {
-    /// <summary>
-    /// <c>Airport Identifier (ARPT IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.6.</remarks>
-    [Field(7, 10), Link<Runway, Airport>]
-    public string AirportIdentifier { get; init; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14.</remarks>
-    [Field(11, 12)]
-    public string IcaoCode { get; init; }
+    [Foreign(7, 12)]
+    public Airport Airport { get; init; }
 
     /// <summary>
     /// <c>Runway Identifier (RUNWAY ID)</c> field.

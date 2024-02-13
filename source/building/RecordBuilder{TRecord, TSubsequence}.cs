@@ -9,14 +9,14 @@ internal static class RecordBuilder<TRecord, TSubsequence> where TRecord : Seque
 
     internal static TRecord Build(Queue<string> strings)
     {
-        List<TSubsequence> sequences = [];
+        List<TSubsequence> subsequences = [];
 
         var record = RecordBuilder<TRecord>.Build(strings.First());
 
-        while (strings.TryDequeue(out string? @string))
-            sequences.Add(RecordBuilder.Build<TSubsequence>(subsequenceInfo, @string));
+        foreach (string @string in strings)
+            subsequences.Add(RecordBuilder.Build<TSubsequence>(subsequenceInfo, @string));
 
-        record.Sequences = sequences;
+        record.Subsequences = subsequences;
 
         return record;
     }

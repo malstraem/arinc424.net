@@ -3,4 +3,7 @@
     <OutputType>library</OutputType>
     <RootNamespace>Arinc.Spec424</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ZeroLog" Version="2.1.1" />
+  </ItemGroup>
 </Project>

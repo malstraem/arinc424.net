@@ -10,6 +10,5 @@ internal class ContinuationAttribute(int index = 22) : Attribute
     /// <summary>
     /// Index of the continuation number.
     /// </summary>
-    /// <remarks>Default is 22.</remarks>
     internal int Index { get; } = index - 1;
 }

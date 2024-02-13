@@ -1,40 +1,48 @@
+using Arinc.Spec424.Attributes;
 using Arinc.Spec424.Records;
+
+[assembly: OneToMany<Airport, Runway>]
+[assembly: OneToMany<Airport, Approach>]
+[assembly: OneToMany<Airport, NonDirectionalBeacon>]
+[assembly: OneToMany<Airport, OmnidirectionalStation>]
+[assembly: OneToMany<Airport, StandardTerminalArrival>]
+[assembly: OneToMany<Airport, StandardInstrumentDeparture>]
 
 namespace Arinc.Spec424;
 
 public class Data424
 {
-    public required IReadOnlyCollection<Runway> Runways { get; init; }
+    public IReadOnlyCollection<Runway> Runways { get; set; }
 
-    public required IReadOnlyCollection<Airway> Airways { get; init; }
+    public IReadOnlyCollection<Airway> Airways { get; set; }
 
-    public required IReadOnlyCollection<Airport> Airports { get; init; }
+    public IReadOnlyCollection<Airport> Airports { get; set; }
 
-    public required IReadOnlyCollection<Waypoint> Waypoints { get; init; }
+    public IReadOnlyCollection<Waypoint> Waypoints { get; set; }
 
-    public required IReadOnlyCollection<CruisingTable> CruisingTables { get; init; }
+    public IReadOnlyCollection<CruisingTable> CruisingTables { get; set; }
 
-    public required IReadOnlyCollection<HoldingPattern> HoldingPatterns { get; init; }
+    public IReadOnlyCollection<HoldingPattern> HoldingPatterns { get; set; }
 
-    public required IReadOnlyCollection<AirportApproach> AirportApproaches { get; init; }
+    public IReadOnlyCollection<Approach> AirportApproaches { get; set; }
 
-    public required IReadOnlyCollection<NonDirectionalBeacon> NonDirectionalBeacons { get; init; }
+    public IReadOnlyCollection<NonDirectionalBeacon> NonDirectionalBeacons { get; set; }
 
-    public required IReadOnlyCollection<VeryHighFrequencyAid> VeryHighFrequencyAids { get; init; }
+    public IReadOnlyCollection<OmnidirectionalStation> VeryHighFrequencyAids { get; set; }
 
-    public required IReadOnlyCollection<MicrowaveLandingSystem> MicrowaveLandingSystems { get; init; }
+    public IReadOnlyCollection<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; }
 
-    public required IReadOnlyCollection<StandardTerminalArrival> StandardTerminalArrivals { get; init; }
+    public IReadOnlyCollection<StandardTerminalArrival> StandardTerminalArrivals { get; set; }
 
-    public required IReadOnlyCollection<StandardInstrumentDeparture> StandardInstrumentDepartures { get; init; }
+    public IReadOnlyCollection<StandardInstrumentDeparture> StandardInstrumentDepartures { get; set; }
 
-    public required IReadOnlyCollection<FlightPlanning> FlightPlannings { get; init; }
+    public IReadOnlyCollection<FlightPlanning> FlightPlannings { get; set; }
 
-    public required IReadOnlyCollection<FlightInfoRegion> FlightInfoRegions { get; init; }
+    public IReadOnlyCollection<FlightInfoRegion> FlightInfoRegions { get; set; }
 
-    public required IReadOnlyCollection<ControlledAirspace> ControlledAirspaces { get; init; }
+    public IReadOnlyCollection<ControlledAirspace> ControlledAirspaces { get; set; }
 
-    public required IReadOnlyCollection<RestrictiveAirspace> RestrictiveAirspaces { get; init; }
+    public IReadOnlyCollection<RestrictiveAirspace> RestrictiveAirspaces { get; set; }
 
     public static Data424 Load(IEnumerable<string> strings) => new Parser424().Parse(strings);
 }

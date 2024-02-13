@@ -8,38 +8,18 @@ namespace Arinc.Spec424.Records.Subsequences;
 
 /// <summary>
 /// Combination of procedure point properties used by
-/// <see cref="AirportApproach"/>, <see cref="StandardInstrumentDeparture"/> and <see cref="StandardTerminalArrival"/> like subsequence.
+/// <see cref="Approach"/>, <see cref="StandardInstrumentDeparture"/> and <see cref="StandardTerminalArrival"/> like subsequence.
 /// </summary>
-[DebuggerDisplay("Fix - {FixIdentifier}")]
+[DebuggerDisplay($"{{{nameof(Fix)}}}")]
 public class ProcedurePoint : Record424
 {
-    /// <summary>
-    /// <c>Fix Identifier (FIX IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.13.</remarks>
-    [Field(30, 34)]
-    public string FixIdentifier { get; init; }
+    [Foreign(7, 12)]
+    public Airport Airport { get; init; }
 
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14.</remarks>
-    [Field(35, 36)]
-    public string FixIcaoCode { get; init; }
-
-    /// <summary>
-    /// <c>Section Code (SEC CODE)</c> character.
-    /// </summary>
-    /// <remarks>See paragraph 5.4.</remarks>
-    [Character(37)]
-    public char FixSectionCode { get; init; }
-
-    /// <summary>
-    /// <c>Subsection Code (SUB CODE)</c> character.
-    /// </summary>
-    /// <remarks>See paragraph 5.5.</remarks>
-    [Character(38)]
-    public char FixSubsectionCode { get; init; }
+    [Foreign(30, 36)]
+    [Possible<Waypoint, OmnidirectionalStation, NonDirectionalBeacon>]
+    //[Possible<Runway>(nameof(Airport))]
+    public Geo Fix { get; init; }
 
     /// <summary>
     /// <c>Waypoint Description Code (DESC CODE)</c> field.
@@ -53,7 +33,7 @@ public class ProcedurePoint : Record424
     /// </summary>
     /// <remarks>See paragraph 5.20.</remarks>
     [Character(44)]
-    public char TumDirection { get; init; }
+    public char TurnDirection { get; init; }
 
     /// <summary>
     /// <c>Required Navigation Performance</c> field.

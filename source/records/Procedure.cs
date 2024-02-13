@@ -11,23 +11,12 @@ namespace Arinc.Spec424.Records;
 /// <c>Airport SID/STAR/Approach</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.9.1.</remarks>
-[Continuation(39), Sequenced(27, 29), DebuggerDisplay("{Identifier}")]
+[Continuation(39), Sequenced(27, 29)]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Procedure : SequencedRecord424<ProcedurePoint>, IIdentity
 {
-    /// <summary>
-    /// <c>Airport Identifier (ARPT)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.6.</remarks>
-    [Field(7, 10)]
-    [Link<AirportApproach, Airport>, Link<StandardTerminalArrival, Airport>, Link<StandardInstrumentDeparture, Airport>]
-    public string AirportIdentifier { get; init; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14.</remarks>
-    [Field(11, 12)]
-    public string IcaoCode { get; init; }
+    [Foreign(7, 12)]
+    public Airport? Airport { get; init; }
 
     /// <summary>
     /// <c>SID/STAR Route Identifier (SID/STAR IDENT)</c> or 

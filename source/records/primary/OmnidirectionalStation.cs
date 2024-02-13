@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 using Arinc.Spec424.Attributes;
 
 namespace Arinc.Spec424.Records;
@@ -9,21 +11,11 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.2.1.</remarks>
 [Record('D'), Continuation]
-public class VeryHighFrequencyAid : Record424
+[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+public class OmnidirectionalStation : Geo, IIcao, IIdentity
 {
-    /// <summary>
-    /// <c>Airport Identifier (ARPT)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.6.</remarks>
-    [Field(7, 10), Link<VeryHighFrequencyAid, Airport>]
-    public string? AirportIcaoIdentifier { get; init; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14.</remarks>
-    [Field(11, 12)]
-    public string? AirportIcaoCode { get; init; }
+    [Foreign(7, 12)]
+    public Airport? Airport { get; init; }
 
     /// <summary>
     /// <c>VOR Identifier (VOR IDENT)</c> field.
@@ -52,20 +44,6 @@ public class VeryHighFrequencyAid : Record424
     /// <remarks>See paragraph 5.35.</remarks>
     [Field(28, 32)]
     public string NavaidClass { get; init; }
-
-    /// <summary>
-    /// <c>Latitude (LATITUDE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.36.</remarks>
-    [Field(33, 41)]
-    public string VorLatitude { get; init; }
-
-    /// <summary>
-    /// <c>Longitude (LONGITUDE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.37.</remarks>
-    [Field(42, 51)]
-    public string VorLongitude { get; init; }
 
     /// <summary>
     /// <c>DME Identifier (DME IDENT)</c> field.

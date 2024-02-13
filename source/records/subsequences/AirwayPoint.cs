@@ -9,36 +9,12 @@ namespace Arinc.Spec424.Records.Subsequences;
 /// <summary>
 /// Used by <see cref="Airway"/> like subsequence.
 /// </summary>
-[DebuggerDisplay("Fix - {FixIdentifier}")]
+[DebuggerDisplay($"{{{nameof(Fix)}}}")]
 public class AirwayPoint : Record424
 {
-    /// <summary>
-    /// <c>Fix Identifier (FIX IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.13</remarks>
-    [Field(30, 34)]
-    public string FixIdentifier { get; init; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14</remarks>
-    [Field(35, 36)]
-    public string FixIcaoCode { get; init; }
-
-    /// <summary>
-    /// <c>Section code</c> character.
-    /// </summary>
-    /// <remarks>See paragraph 5.4</remarks>
-    [Character(37)]
-    public char FixSectionCode { get; init; }
-
-    /// <summary>
-    /// <c>Subsection Code (SUB CODE)</c> character.
-    /// </summary>
-    /// <remarks>See paragraph 5.5</remarks>
-    [Character(38)]
-    public char FixSubsectionCode { get; init; }
+    [Foreign(30, 36)]
+    [Possible<Waypoint, OmnidirectionalStation, NonDirectionalBeacon>]
+    public Geo Fix { get; init; }
 
     /// <summary>
     /// <c>Waypoint Description Code (DESC CODE)</c> field.

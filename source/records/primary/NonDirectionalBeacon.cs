@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 using Arinc.Spec424.Attributes;
 
 namespace Arinc.Spec424.Records;
@@ -9,21 +11,11 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.3.1.</remarks>
 [Record('D', 'B'), Continuation]
-public class NonDirectionalBeacon : Record424
+[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+public class NonDirectionalBeacon : Geo, IIcao, IIdentity
 {
-    /// <summary>
-    /// <c>Airport Identifier (IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.6.</remarks>
-    [Field(7, 10), Link<NonDirectionalBeacon, Airport>]
-    public string? AirportIdentifier { get; init; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14.</remarks>
-    [Field(11, 12)]
-    public string? AirportIcaoCode { get; init; }
+    [Foreign(7, 12)]
+    public Airport? Airport { get; init; }
 
     /// <summary>
     /// <c>NDB Identifier (NDB IDENT)</c> field.
@@ -52,20 +44,6 @@ public class NonDirectionalBeacon : Record424
     /// <remarks>See paragraph 5.35.</remarks>
     [Field(28, 32)]
     public string Class { get; init; }
-
-    /// <summary>
-    /// <c>Latitude (LATITUDE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.36.</remarks>
-    [Field(33, 41)]
-    public string Latitude { get; init; }
-
-    /// <summary>
-    /// <c>Longitude (LONGITUDE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.37.</remarks>
-    [Field(42, 51)]
-    public string Longitude { get; init; }
 
     /// <summary>
     /// <c>Magnetic Variation (MAG VAR, D MAG VAR)</c> field.

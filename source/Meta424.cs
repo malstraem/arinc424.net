@@ -1,14 +1,7 @@
 using System.Reflection;
 
 using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Records;
-
-[assembly: OneToMany<Airport, Runway>]
-[assembly: OneToMany<Airport, AirportApproach>]
-[assembly: OneToMany<Airport, StandardInstrumentDeparture>]
-[assembly: OneToMany<Airport, StandardTerminalArrival>]
-[assembly: OneToMany<Airport, VeryHighFrequencyAid>]
-[assembly: OneToMany<Airport, NonDirectionalBeacon>]
+using Arinc.Spec424.Linking;
 
 namespace Arinc.Spec424;
 
@@ -20,6 +13,12 @@ internal static class Meta424
 
         foreach (var type in types)
         {
+            if (LinkingInfo.TryCreate(type, out var linkingInfo))
+                LinkingInfos.Add(type, linkingInfo!);
+
+            if (type.IsSubclassOf(typeof(Record424)) && !type.IsAbstract)
+                RecordTypes.Add(type);
+
             var recordAttribute = type.GetCustomAttribute<RecordAttribute>();
 
             if (recordAttribute is null)
@@ -31,16 +30,13 @@ internal static class Meta424
                 ? new RecordInfo(type, recordAttribute)
                 : new SequencedRecordInfo(type, recordAttribute, sequencedAttribute);
 
-            RecordInfo.Add(type, recordInfo);
-
-            var externalAttribute = type.GetCustomAttribute<ExternalAttribute>();
-
-            if (externalAttribute is not null)
-                LinkedInfo.Add(type, new ExternalLinkedInfo(type, externalAttribute));
+            RecordInfos.Add(type, recordInfo);
         }
     }
 
-    internal static Dictionary<Type, RecordInfo> RecordInfo { get; } = [];
+    internal static List<Type> RecordTypes { get; } = [];
 
-    internal static Dictionary<Type, ExternalLinkedInfo> LinkedInfo { get; } = [];
+    internal static Dictionary<Type, RecordInfo> RecordInfos { get; } = [];
+
+    internal static Dictionary<Type, LinkingInfo> LinkingInfos { get; } = [];
 }

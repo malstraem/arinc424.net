@@ -9,21 +9,10 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.22.1.</remarks>
 [Record('P', 'L', subsectionIndex: 13), Continuation]
-public class MicrowaveLandingSystem : Record424
+public class MicrowaveLandingSystem : Record424, IIdentity
 {
-    /// <summary>
-    /// <c>Airport Identifier (ARPT IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.6.</remarks>
-    [Field(7, 10)]
-    public string AirportIdentifier { get; init; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14.</remarks>
-    [Field(11, 12)]
-    public string AirportIcaoCode { get; init; }
+    [Foreign(7, 12)]
+    public Airport Airport { get; init; }
 
     /// <summary>
     /// <c>MLS Identifier</c> field.

@@ -10,18 +10,18 @@ namespace Arinc.Spec424.Records.Subsequences;
 /// Combination of boundary point properties used by
 /// <see cref="FlightInfoRegion"/>, <see cref="ControlledAirspace"/> and <see cref="RestrictiveAirspace"/> like subsequence.
 /// </summary>
-[DebuggerDisplay("{BoundaryVia} - {Latitude}, {Longitude}")]
+[DebuggerDisplay($"{{{nameof(BoundaryVia)}}} - {{{nameof(Latitude)}}}, {{{nameof(Longitude)}}}")]
 public class BoundaryPoint : Geo
 {
     [Transform<BoundaryViaConverter>]
     [Character(31), Character<FlightInfoRegion>(33)]
     public BoundaryVia BoundaryVia { get; init; }
 
-    [DecodeAttribute<LatitudeConverter>]
+    [Decode<LatitudeConverter>]
     [Field(52, 60), Field<FlightInfoRegion>(54, 62)]
     public double? ArcOriginLatitude { get; init; }
 
-    [DecodeAttribute<LongitudeConverter>]
+    [Decode<LongitudeConverter>]
     [Field(61, 70), Field<FlightInfoRegion>(63, 72)]
     public double? ArcOriginLongitude { get; init; }
 

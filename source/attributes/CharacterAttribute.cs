@@ -4,15 +4,9 @@ namespace Arinc.Spec424.Attributes;
 /// Specifies the character index within an ARINC-424 string.
 /// </summary>
 /// <param name="index">Character index.</param>
-/// <remarks>Note that the <paramref name="index"/> must completely match those defined in the specification.</remarks>
+/// <inheritdoc/>
 [AttributeUsage(AttributeTargets.Property)]
-internal class CharacterAttribute(int index) : Attribute
-{
-    /// <summary>
-    /// Character index within an string.
-    /// </summary>
-    internal int Index { get; } = index - 1;
-}
+internal class CharacterAttribute(int index) : IndexAttribute(index) { }
 
 /// <inheritdoc/>
 /// <param name="targetType">Target type that index is defined.</param>

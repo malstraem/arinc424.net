@@ -7,4 +7,4 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.9.1.</remarks>
 [Record('P', 'F', subsectionIndex: 13)]
-public class AirportApproach : Procedure { }
+public class Approach : Procedure { }

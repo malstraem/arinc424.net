@@ -3,7 +3,7 @@ using Arinc.Spec424.Terms.Converters;
 
 namespace Arinc.Spec424.Records;
 
-public class Geo : Record424
+public abstract class Geo : Record424
 {
     /// <summary>
     /// <c>Latitude (LATITUDE)</c> field.

@@ -9,14 +9,14 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See paragraph 4.1.16.1.</remarks>
 [Record('T', 'C')]
-public class CruisingTable : Record424
+public class CruisingTable : Record424, IIdentity
 {
     /// <summary>
     /// <c>Cruise Table Identifier (CRSE TBL IDENT)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.134.</remarks>
     [Field(7, 8)]
-    public string CruisingTableIdentifier { get; init; }
+    public string Identifier { get; init; }
 
     /// <summary>
     /// <c>Course FROM</c> field.

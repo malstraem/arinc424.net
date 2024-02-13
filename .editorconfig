@@ -9,6 +9,9 @@ charset = utf-8
 end_of_line = crlf
 insert_final_newline = true
 
+[*.{csproj,props,xml,xaml,yml,yaml,json}]
+indent_size = 2
+
 [*.{cs,vb}]
 resharper_check_namespace_highlighting = none
 resharper_use_roslyn_logic_for_evident_types = true
@@ -36,30 +39,14 @@ dotnet_remove_unnecessary_suppression_exclusions = true:warning
 #                                            Naming                                            #
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules #
 #==============================================================================================#
-dotnet_naming_rule.interface_should_be_begins_with_i.style = begins_with_i
-dotnet_naming_rule.interface_should_be_begins_with_i.symbols = interface
-dotnet_naming_rule.interface_should_be_begins_with_i.severity = error
+dotnet_naming_symbols.private.applicable_kinds = field
+dotnet_naming_symbols.private.applicable_accessibilities = private
 
-dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case
-dotnet_naming_rule.types_should_be_pascal_case.symbols = types
-dotnet_naming_rule.types_should_be_pascal_case.severity = error
+dotnet_naming_style.private.capitalization = camel_case
 
-dotnet_naming_rule.method_should_be_pascal_case.style = pascal_case
-dotnet_naming_rule.method_should_be_pascal_case.symbols = method
-dotnet_naming_rule.method_should_be_pascal_case.severity = error
-
-dotnet_naming_symbols.interface.applicable_kinds = interface
-dotnet_naming_symbols.interface.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-
-dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
-dotnet_naming_symbols.types.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
-
-dotnet_naming_symbols.method.applicable_kinds = method
-dotnet_naming_symbols.method.applicable_accessibilities = public
-
-dotnet_naming_style.pascal_case.capitalization = pascal_case
-dotnet_naming_style.begins_with_i.capitalization = pascal_case
-dotnet_naming_style.begins_with_i.required_prefix = I
+dotnet_naming_rule.private.symbols = private
+dotnet_naming_rule.private.style = private
+dotnet_naming_rule.private.severity = error
 
 #==================================================================================#
 #                                       Style                                      #
