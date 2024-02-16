@@ -6,6 +6,5 @@ namespace Arinc.Spec424.Records;
 /// <c>STAR</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.9.1.</remarks>
-
 [Record('P', 'E', subsectionIndex: 13)]
-public class StandardTerminalArrival : Procedure { }
+public class AirportTerminalArrival : Procedure;

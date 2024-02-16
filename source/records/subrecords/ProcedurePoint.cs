@@ -8,7 +8,7 @@ namespace Arinc.Spec424.Records.Subsequences;
 
 /// <summary>
 /// Combination of procedure point properties used by
-/// <see cref="Approach"/>, <see cref="StandardInstrumentDeparture"/> and <see cref="StandardTerminalArrival"/> like subsequence.
+/// <see cref="AirportApproach"/>, <see cref="AirportInstrumentDeparture"/> and <see cref="AirportTerminalArrival"/> like subsequence.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(Fix)}}}")]
 public class ProcedurePoint : Record424

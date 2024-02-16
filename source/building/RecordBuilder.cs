@@ -4,10 +4,7 @@ internal static class RecordBuilder
 {
     internal static TRecord Build<TRecord>(BuildInfo info, string @string) where TRecord : Record424, new()
     {
-        TRecord record = new()
-        /*{
-            Source = @string
-        }*/;
+        TRecord record = new();
 
         foreach (var rangeInfo in info.RangeInfo)
         {
@@ -29,7 +26,6 @@ internal static class RecordBuilder
 
             indexInfo.Property.SetValue(record, value);
         }
-
         return record;
     }
 }

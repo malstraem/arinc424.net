@@ -14,7 +14,7 @@ internal record RecordInfo
 
     private readonly char subsectionChar;
 
-    private readonly int? continuationNumberIndex;
+    internal readonly int? continuationIndex;
 
     internal RecordInfo(MemberInfo recordType, RecordAttribute recordAttribute)
     {
@@ -22,11 +22,8 @@ internal record RecordInfo
         sectionChar = recordAttribute.SectionChar;
         subsectionIndex = recordAttribute.SubsectionIndex;
         subsectionChar = recordAttribute.SubsectionChar;
-        continuationNumberIndex = recordType.GetCustomAttribute<ContinuationAttribute>()?.Index;
+        continuationIndex = recordType.GetCustomAttribute<ContinuationAttribute>()?.Index;
     }
 
-    internal bool IsMatch(string @string) => @string[0] is 'S'
-                                          && @string[sectionIndex] == sectionChar
-                                          && @string[subsectionIndex] == subsectionChar
-                                          && (continuationNumberIndex is null || @string[continuationNumberIndex.Value] is '0' or '1');
+    internal bool IsMatch(string @string) => @string[sectionIndex] == sectionChar && @string[subsectionIndex] == subsectionChar;
 }

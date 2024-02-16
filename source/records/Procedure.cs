@@ -13,7 +13,7 @@ namespace Arinc.Spec424.Records;
 /// <remarks>See paragraph 4.1.9.1.</remarks>
 [Continuation(39), Sequenced(27, 29)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
-public abstract class Procedure : SequencedRecord424<ProcedurePoint>, IIdentity
+public abstract class Procedure : Record424<ProcedurePoint>, IIdentity
 {
     [Foreign(7, 12)]
     public Airport? Airport { get; init; }

@@ -10,26 +10,10 @@ namespace Arinc.Spec424.Records;
 /// <c>Waypoint</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.4.1</remarks>
-[Obsolete("TODO Terminal Waypoints")]
-
-[Record('E', 'A'), Continuation]
+[Continuation]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
-public class Waypoint : Geo, IIcao, IIdentity
+public abstract class Waypoint : Geo, IIcao, IIdentity
 {
-    /// <summary>
-    /// <c>Region Code (REGN CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.41</remarks>
-    [Field(7, 10)]
-    public string RegionCode { get; init; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14</remarks>
-    [Field(11, 12)]
-    public string RegionIcaoCode { get; init; }
-
     /// <summary>
     /// <c>Fix Identifier (FIX IDENT)</c> field.
     /// </summary>

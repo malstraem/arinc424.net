@@ -11,6 +11,6 @@
 
     <ProjectReference Include="../../source/Arinc424.csproj" />
 
-    <None Include="../../data/**" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../data/**" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

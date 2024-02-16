@@ -151,24 +151,24 @@ public class Airport : Geo, IIcao, IIdentity
     [Field(94, 123)]
     public string Name { get; init; }
 
-    [Many<Airport, Runway>]
+    [Many]
     public List<Runway> Runways { get; init; } = [];
 
-    [Many<Airport, Approach>]
-    public List<Approach> Approaches { get; init; } = [];
+    [Many]
+    public List<AirportApproach> Approaches { get; init; } = [];
 
-    [Many<Airport, StandardTerminalArrival>]
-    public List<StandardTerminalArrival> Arrivals { get; init; } = [];
+    [Many]
+    public List<AirportTerminalArrival> Arrivals { get; init; } = [];
 
-    [Many<Airport, StandardInstrumentDeparture>]
-    public List<StandardInstrumentDeparture> Departures { get; init; } = [];
+    [Many]
+    public List<AirportInstrumentDeparture> Departures { get; init; } = [];
 
-    [Many<Airport, NonDirectionalBeacon>]
+    [Many]
     public List<NonDirectionalBeacon> NonDirectionalBeacons { get; init; } = [];
 
-    [Many<Airport, OmnidirectionalStation>]
-    public List<OmnidirectionalStation> VeryHighFrequencyAids { get; init; } = [];
+    [Many]
+    public List<OmnidirectionalStation> OmnidirectionalStations { get; init; } = [];
 
-    [Many<Airport, ProcedurePoint>]
+    [Many]
     public List<ProcedurePoint> ProcedurePoints { get; init; } = [];
 }
