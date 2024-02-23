@@ -18,23 +18,23 @@ public class Data424
 
     public IReadOnlyCollection<Airport> Airports { get; set; }
 
-    public IReadOnlyCollection<Waypoint> Waypoints { get; set; }
+    public IReadOnlyCollection<AirportApproach> AirportApproaches { get; set; }
+
+    public IReadOnlyCollection<AirportTerminalArrival> AirportTerminalArrivals { get; set; }
+
+    public IReadOnlyCollection<AirportInstrumentDeparture> AirportInstrumentDepartures { get; set; }
+
+    public IReadOnlyCollection<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; }
+
+    public IReadOnlyCollection<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; }
 
     public IReadOnlyCollection<CruisingTable> CruisingTables { get; set; }
 
     public IReadOnlyCollection<HoldingPattern> HoldingPatterns { get; set; }
 
-    public IReadOnlyCollection<AirportApproach> AirportApproaches { get; set; }
-
     public IReadOnlyCollection<NonDirectionalBeacon> NonDirectionalBeacons { get; set; }
 
-    public IReadOnlyCollection<OmnidirectionalStation> VeryHighFrequencyAids { get; set; }
-
-    public IReadOnlyCollection<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; }
-
-    public IReadOnlyCollection<AirportTerminalArrival> StandardTerminalArrivals { get; set; }
-
-    public IReadOnlyCollection<AirportInstrumentDeparture> StandardInstrumentDepartures { get; set; }
+    public IReadOnlyCollection<OmnidirectionalStation> OmnidirectionalStations { get; set; }
 
     public IReadOnlyCollection<FlightPlanning> FlightPlannings { get; set; }
 

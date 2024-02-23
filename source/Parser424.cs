@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Concurrent;
 
 using Arinc.Spec424.Building;
@@ -14,7 +15,7 @@ internal partial class Parser424
     private readonly Dictionary<Type, Queue<string>> primary = [];
     private readonly Dictionary<Type, Queue<string>> continuation = [];
 
-    private readonly Dictionary<Type, ConcurrentQueue<(Record424, string)>> records = [];
+    private readonly Dictionary<Type, ConcurrentQueue<(Record424 Record, string Source)>> records = [];
 
     internal Parser424()
     {
@@ -170,6 +171,20 @@ internal partial class Parser424
         Construct();
         Link();
 
-        return new Data424();
+        var data = new Data424();
+
+        foreach (var property in typeof(Data424).GetProperties())
+        {
+            var type = property.PropertyType.GetGenericArguments().First();
+
+            var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(type))!;
+
+            while (records[type].TryDequeue(out var item))
+                _ = list.Add(item.Record);
+
+            property.SetValue(data, list);
+        }
+
+        return data;
     }
 }
