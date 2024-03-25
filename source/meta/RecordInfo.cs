@@ -22,7 +22,7 @@ internal record RecordInfo
         subsectionChar = recordAttribute.SubsectionChar;
         sectionIndex = recordAttribute.SectionIndex;
         subsectionIndex = recordAttribute.SubsectionIndex;
-        continuationIndex = recordType.GetCustomAttribute<ContiniousAttribute>()?.Index;
+        continuationIndex = recordType.GetCustomAttribute<ContinuousAttribute>()?.Index;
     }
 
     internal bool IsMatch(string @string) => @string[sectionIndex] == sectionChar && @string[subsectionIndex] == subsectionChar;

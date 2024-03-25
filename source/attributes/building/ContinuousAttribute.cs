@@ -5,10 +5,4 @@ namespace Arinc.Spec424.Attributes;
 /// </summary>
 /// <remarks>See paragraph 5.16.</remarks>
 [AttributeUsage(AttributeTargets.Class)]
-internal class ContiniousAttribute(int index = 22) : Attribute
-{
-    /// <summary>
-    /// Index of the continuation number.
-    /// </summary>
-    internal int Index { get; } = index - 1;
-}
+internal class ContinuousAttribute(int index = 22) : IndexAttribute(index);

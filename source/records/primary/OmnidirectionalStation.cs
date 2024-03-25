@@ -10,7 +10,7 @@ namespace Arinc.Spec424.Records;
 /// <c>VHF NAVAID</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.2.1.</remarks>
-[Record('D'), Continious]
+[Record('D'), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class OmnidirectionalStation : Geo, IIcao, IIdentity
 {

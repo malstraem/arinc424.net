@@ -11,7 +11,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Controlled Airspace</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.25.1.</remarks>
-[Record('U', 'C'), Continious(25), Sequenced(21, 24)]
+[Record('U', 'C'), Continuous(25), Sequenced(21, 24)]
 [DebuggerDisplay($"{{{nameof(AreaCode)}}}, {{{nameof(Name)}}}")]
 public class ControlledAirspace : Record424<BoundaryPoint>, IIcao
 {

@@ -7,10 +7,4 @@ namespace Arinc.Spec424.Attributes;
 /// <param name="end">Right bound.</param>
 /// <remarks>Note that the bounds must completely match those described in the specification.</remarks>
 [AttributeUsage(AttributeTargets.Class)]
-internal class SequencedAttribute(int start, int end) : Attribute
-{
-    /// <summary>
-    /// Range of the sequence number within an string.
-    /// </summary>
-    internal Range Range { get; } = new Range(start - 1, end);
-}
+internal class SequencedAttribute(int start, int end) : RangeAttribute(start, end);

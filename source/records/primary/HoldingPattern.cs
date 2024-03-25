@@ -8,7 +8,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Holding Pattern</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.5.1.</remarks>
-[Record('E', 'P'), Continious(39)]
+[Record('E', 'P'), Continuous(39)]
 public class HoldingPattern : Record424
 {
     /// <summary>

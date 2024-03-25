@@ -10,7 +10,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Runway</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.10.1.</remarks>
-[Record('P', 'G', subsectionIndex: 13), Continious]
+[Record('P', 'G', subsectionIndex: 13), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class Runway : Geo, IIdentity, IIcao
 {

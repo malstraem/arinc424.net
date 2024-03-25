@@ -120,6 +120,7 @@ internal partial class Parser424
         }
     }
 
+    [Obsolete("TODO: use meta info instead of generic to prepare for continuation records parsing")]
     private void Construct()
     {
         Parallel.Invoke

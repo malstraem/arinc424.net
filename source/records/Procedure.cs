@@ -11,7 +11,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Airport SID/STAR/Approach</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.9.1.</remarks>
-[Continious(39), Sequenced(27, 29)]
+[Continuous(39), Sequenced(27, 29)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Procedure : Record424<ProcedurePoint>, IIdentity
 {

@@ -10,7 +10,7 @@ namespace Arinc.Spec424.Records;
 /// <c>NDB Navaid</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.3.1.</remarks>
-[Record('D', 'B'), Continious]
+[Record('D', 'B'), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class NonDirectionalBeacon : Geo, IIcao, IIdentity
 {

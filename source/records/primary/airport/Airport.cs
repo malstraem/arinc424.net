@@ -12,7 +12,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Airport</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.7.1.</remarks>
-[Record('P', 'A', subsectionIndex: 13), Continious]
+[Record('P', 'A', subsectionIndex: 13), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
 public class Airport : Geo, IIcao, IIdentity
 {

@@ -11,7 +11,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Enroute Airways</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.6.1.</remarks>
-[Record('E', 'R'), Continious(39), Sequenced(26, 29)]
+[Record('E', 'R'), Continuous(39), Sequenced(26, 29)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class Airway : Record424<AirwayPoint>, IIdentity
 {

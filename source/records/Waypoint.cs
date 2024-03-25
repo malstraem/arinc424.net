@@ -10,7 +10,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Waypoint</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.4.1</remarks>
-[Continious]
+[Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Waypoint : Geo, IIcao, IIdentity
 {
