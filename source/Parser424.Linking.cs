@@ -1,89 +1,66 @@
 using System.Collections;
-using System.Reflection;
 
-using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Records;
+using Arinc.Spec424.Linking;
 
 namespace Arinc.Spec424;
 
 internal partial class Parser424
 {
-    private readonly Dictionary<Type, Dictionary<string, Record424>> identities = [];
+    private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
-    private void Link()
+    private void ProcessPrimaryKeys()
     {
-        LinkByAirport();
-    }
+        var types = Meta424.LinkingInfos.Where(x => x.Value.PrimaryRanges.Count != 0);
 
-    internal void LinkByAirport()
-    {
-        // hard coded test of airport linking
-
-        var airportType = typeof(Airport);
-
-        var properties = airportType.GetProperties().Where(p => p.GetCustomAttribute<ManyAttribute>() is not null);
-
-        var airports = identities[airportType] = [];
-
-        foreach (var (record, _) in records[airportType])
+        foreach (var (type, info) in types)
         {
-            var airport = (Airport)record;
-            airports.Add(airport.Identifier + airport.IcaoCode, airport);
-        }
+            unique[type] = [];
 
-        foreach (var property in properties)
-        {
-            var type = property.PropertyType.GetGenericArguments().First();
-
-            var info = Meta424.LinkingInfos[type];
-
-            foreach (var (record, @string) in records[type])
+            foreach (var record in records[type])
             {
-                var (links, airportLink) = info.GetLinks(@string);
+                string key = string.Empty;
 
-                if (airportLink is not null && airports.TryGetValue(airportLink.Key, out var airport))
-                {
-                    airportLink.Info.Property.SetValue(record, airport);
+                foreach (var range in info.PrimaryRanges)
+                    key += record.Source[range].Trim();
 
-                    _ = ((IList)property.GetValue(airport)!).Add(record);
-                }
+                unique[type].Add(key, record);
             }
         }
     }
-}
 
-/*internal static class RecordExtensions
-{
-    [Obsolete("TODO rewrite")]
-    internal static IReadOnlyCollection<TRecipient> Link<TRecipient, TLinked>(this IReadOnlyCollection<TRecipient> recipients, IEnumerable<TLinked> records)
-        where TRecipient : Record424, IIdentity
-        where TLinked : Record424
+    [Obsolete("TODO logging")]
+    private void ProcessLinkingInfo(Type type, Record424 record, LinkingInfo info)
     {
-        var link = typeof(TLinked).GetProperties().SelectMany(property => property.GetCustomAttributes<LinkAttribute<TLinked, TRecipient>>()).FirstOrDefault();
-        var receive = typeof(TRecipient).GetProperties().SelectMany(property => property.GetCustomAttributes<ManyAttribute<TRecipient, TLinked>>()).FirstOrDefault();
-
-        if (link is null || receive is null)
-            throw new Exception("oops");
-
-        Dictionary<string, List<TLinked>> linkedRecords = [];
-
-        foreach (var recipient in recipients)
-            linkedRecords.Add(recipient.Identifier, []);
-
-        foreach (var record in records)
+        foreach (var link in info.Links)
         {
-            object? value = link.Property.GetValue(record);
-
-            if (value is null)
+            if (!link.TryGetType(record.Source, out var linkType))
                 continue;
 
-            if (linkedRecords.TryGetValue((string)value, out var targetRecords))
-                targetRecords.Add(record);
+            if (!link.TryGetKey(linkType, record.Source, out string key))
+                continue;
+
+            if (unique[linkType].TryGetValue(key, out var referenced))
+            {
+                link.Property.SetValue(record, referenced);
+
+                if (Meta424.LinkingInfos[linkType].Many.TryGetValue(type, out var property))
+                    _ = ((IList)property.GetValue(referenced)!).Add(record);
+            }
+            else
+            {
+                Console.WriteLine("oops"); // TODO: logging path
+            }
         }
-
-        foreach (var recipient in recipients)
-            receive.Property.SetValue(recipient, linkedRecords[recipient.Identifier]);
-
-        return recipients;
     }
-}*/
+
+    private void Link()
+    {
+        ProcessPrimaryKeys();
+
+        foreach (var (type, info) in Meta424.LinkingInfos)
+        {
+            foreach (var record in records[type])
+                ProcessLinkingInfo(type, record, info);
+        }
+    }
+}

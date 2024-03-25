@@ -12,8 +12,9 @@ namespace Arinc.Spec424.Records.Subsequences;
 [DebuggerDisplay($"{{{nameof(Fix)}}}")]
 public class AirwayPoint : Record424
 {
-    [Foreign(30, 36)]
-    [Possible<Waypoint, OmnidirectionalStation, NonDirectionalBeacon>]
+    [Type(37, 38)]
+    [Foreign(30, 34)]
+    [Foreign(35, 36)]
     public Geo Fix { get; init; }
 
     /// <summary>

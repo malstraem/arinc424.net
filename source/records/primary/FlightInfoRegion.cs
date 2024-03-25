@@ -12,7 +12,7 @@ namespace Arinc.Spec424.Records;
 /// <c>FIR/UIR</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.17.1.</remarks>
-[Record('U', 'F'), Continuation(20), Sequenced(16, 19)]
+[Record('U', 'F'), Continious(20), Sequenced(16, 19)]
 [DebuggerDisplay($"{{{nameof(AreaCode)}}}, {{{nameof(Name)}}}")]
 public class FlightInfoRegion : Record424<BoundaryPoint>, IIdentity
 {

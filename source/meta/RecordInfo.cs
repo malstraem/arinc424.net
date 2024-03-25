@@ -10,19 +10,19 @@ internal record RecordInfo
 
     private readonly int subsectionIndex;
 
-    private readonly char sectionChar;
+    internal readonly char sectionChar;
 
-    private readonly char subsectionChar;
+    internal readonly char subsectionChar;
 
     internal readonly int? continuationIndex;
 
     internal RecordInfo(MemberInfo recordType, RecordAttribute recordAttribute)
     {
-        sectionIndex = recordAttribute.SectionIndex;
         sectionChar = recordAttribute.SectionChar;
-        subsectionIndex = recordAttribute.SubsectionIndex;
         subsectionChar = recordAttribute.SubsectionChar;
-        continuationIndex = recordType.GetCustomAttribute<ContinuationAttribute>()?.Index;
+        sectionIndex = recordAttribute.SectionIndex;
+        subsectionIndex = recordAttribute.SubsectionIndex;
+        continuationIndex = recordType.GetCustomAttribute<ContiniousAttribute>()?.Index;
     }
 
     internal bool IsMatch(string @string) => @string[sectionIndex] == sectionChar && @string[subsectionIndex] == subsectionChar;

@@ -4,9 +4,9 @@ namespace Arinc.Spec424.Records;
 
 #pragma warning disable CS8618
 
-[Record('P', 'C')]
+[Record('P', 'C', subsectionIndex: 13)]
 public class AirportTerminalWaypoint : Waypoint
 {
-    [Foreign(7, 12)]
+    [Foreign(7, 12), Primary]
     public Airport Airport { get; init; }
 }

@@ -10,19 +10,25 @@ namespace Arinc.Spec424.Records;
 /// <c>Runway</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.10.1.</remarks>
-[Record('P', 'G', subsectionIndex: 13), Continuation]
+[Record('P', 'G', subsectionIndex: 13), Continious]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
-public class Runway : Geo
+public class Runway : Geo, IIdentity, IIcao
 {
-    [Foreign(7, 12)]
+    [Foreign(7, 12), Primary]
     public Airport Airport { get; init; }
 
     /// <summary>
     /// <c>Runway Identifier (RUNWAY ID)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.46.</remarks>
-    [Field(14, 18)]
+    [Field(14, 18), Primary]
     public string Identifier { get; init; }
+
+    /// <summary>
+    /// Only for linking process.
+    /// </summary>
+    [Field(11, 12), Primary, Obsolete]
+    public string IcaoCode { get; init; }
 
     /// <summary>
     /// <c>Runway Length (RUNWAY LENGTH)</c> field.

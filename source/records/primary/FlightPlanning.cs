@@ -8,7 +8,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Flight Planning</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.27.1.</remarks>
-[Record('P', 'R', subsectionIndex: 13), Continuation(70)]
+[Record('P', 'R', subsectionIndex: 13), Continious(70)]
 public class FlightPlanning : Record424
 {
     [Field(7, 10)]

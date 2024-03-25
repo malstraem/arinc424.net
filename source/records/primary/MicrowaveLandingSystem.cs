@@ -8,7 +8,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Airport and Heliport MLS (Azimuth, Elevation and Back Azimuth)</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.22.1.</remarks>
-[Record('P', 'L', subsectionIndex: 13), Continuation]
+[Record('P', 'L', subsectionIndex: 13), Continious]
 public class MicrowaveLandingSystem : Record424, IIdentity
 {
     [Foreign(7, 12)]

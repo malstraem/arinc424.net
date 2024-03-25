@@ -10,7 +10,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Waypoint</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.4.1</remarks>
-[Continuation]
+[Continious]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Waypoint : Geo, IIcao, IIdentity
 {
@@ -18,14 +18,14 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
     /// <c>Fix Identifier (FIX IDENT)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.13</remarks>
-    [Field(14, 18)]
+    [Field(14, 18), Primary]
     public string Identifier { get; init; }
 
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.14</remarks>
-    [Field(20, 21)]
+    [Field(20, 21), Primary]
     public string IcaoCode { get; init; }
 
     /// <summary>

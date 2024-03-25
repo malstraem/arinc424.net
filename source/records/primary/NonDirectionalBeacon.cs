@@ -10,25 +10,22 @@ namespace Arinc.Spec424.Records;
 /// <c>NDB Navaid</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.3.1.</remarks>
-[Record('D', 'B'), Continuation]
+[Record('D', 'B'), Continious]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class NonDirectionalBeacon : Geo, IIcao, IIdentity
 {
-    [Foreign(7, 12)]
-    public Airport? Airport { get; init; }
-
     /// <summary>
     /// <c>NDB Identifier (NDB IDENT)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.33.</remarks>
-    [Field(14, 17)]
+    [Field(14, 17), Primary]
     public string Identifier { get; init; }
 
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.14.</remarks>
-    [Field(20, 21)]
+    [Field(20, 21), Primary]
     public string IcaoCode { get; init; }
 
     /// <summary>

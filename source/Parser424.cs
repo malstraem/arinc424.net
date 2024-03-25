@@ -11,17 +11,15 @@ internal partial class Parser424
 {
     private readonly Queue<string> skipped = [];
 
-    private readonly Dictionary<Type, Queue<string>> strings = [];
     private readonly Dictionary<Type, Queue<string>> primary = [];
     private readonly Dictionary<Type, Queue<string>> continuation = [];
 
-    private readonly Dictionary<Type, ConcurrentQueue<(Record424 Record, string Source)>> records = [];
+    private readonly Dictionary<Type, ConcurrentQueue<Record424>> records = [];
 
     internal Parser424()
     {
         foreach (var (type, _) in Meta424.RecordInfos)
         {
-            strings[type] = [];
             primary[type] = [];
             continuation[type] = [];
         }
@@ -38,40 +36,28 @@ internal partial class Parser424
                 skipped.Enqueue(@string);
         }
 
-        SplitStrings();
-
         // Checks that one of info matches the string and enqueue the matched to an associated queue.
         // (branching, apparently, will not give any tangible gain)
         bool TryEnqueue(string @string)
         {
-            foreach (var (type, strings) in this.strings)
+            foreach (var (type, info) in Meta424.RecordInfos)
             {
-                if (!Meta424.RecordInfos[type].IsMatch(@string))
+                if (!info.IsMatch(@string))
                     continue;
 
-                strings.Enqueue(@string);
+                if (info.continuationIndex is null)
+                {
+                    primary[type].Enqueue(@string);
+                }
+                else
+                {
+                    int index = info.continuationIndex.Value;
+
+                    (@string[index] is '0' or '1' ? primary[type] : continuation[type]).Enqueue(@string);
+                }
                 return true;
             }
             return false;
-        }
-    }
-
-    private void SplitStrings()
-    {
-        foreach (var (type, info) in Meta424.RecordInfos)
-        {
-            if (info.continuationIndex is null)
-            {
-                while (strings[type].TryDequeue(out string? @string))
-                    primary[type].Enqueue(@string);
-            }
-            else
-            {
-                int index = info.continuationIndex.Value;
-
-                while (strings[type].TryDequeue(out string? @string))
-                    (@string[index] is '0' or '1' ? primary[type] : continuation[type]).Enqueue(@string);
-            }
         }
     }
 
@@ -84,7 +70,7 @@ internal partial class Parser424
         var type = typeof(TRecord);
 
         while (primary[type].TryDequeue(out string? @string))
-            records[type].Enqueue((RecordBuilder<TRecord>.Build(@string), @string));
+            records[type].Enqueue(RecordBuilder<TRecord>.Build(@string));
     }
 
     /// <summary>
@@ -102,9 +88,9 @@ internal partial class Parser424
         if (!primary[type].TryDequeue(out string? @string))
             return;
 
-        var sequenceRange = ((SequencedRecordInfo)Meta424.RecordInfos[type]).SequenceRange;
-
         Queue<string> sequence = [];
+
+        var sequenceRange = ((SequencedRecordInfo)Meta424.RecordInfos[type]).SequenceRange;
 
         int number = int.Parse(@string[sequenceRange]);
 
@@ -127,15 +113,10 @@ internal partial class Parser424
         {
             var sequencedRecord = RecordBuilder<TRecord, TSub>.Build(sequence);
 
-            records[type].Enqueue((sequencedRecord, sequence.First()));
+            records[type].Enqueue(sequencedRecord);
 
-            int i = 0;
-
-            while (sequence.TryDequeue(out string? @substring))
-            {
-                records[subType].Enqueue((sequencedRecord.Sequence[i], substring));
-                i++;
-            }
+            foreach (var sub in sequencedRecord.Sequence)
+                records[subType].Enqueue(sub);
         }
     }
 
@@ -145,14 +126,15 @@ internal partial class Parser424
         (
             Construct<Runway>,
             Construct<Airport>,
+            Construct<AirportBeacon>,
             Construct<CruisingTable>,
             Construct<HoldingPattern>,
             Construct<FlightPlanning>,
             Construct<EnrouteWaypoint>,
-            Construct<AirportTerminalWaypoint>,
             Construct<NonDirectionalBeacon>,
             Construct<OmnidirectionalStation>,
             Construct<MicrowaveLandingSystem>,
+            Construct<AirportTerminalWaypoint>,
 
             Construct<Airway, AirwayPoint>,
             Construct<AirportApproach, ProcedurePoint>,
@@ -179,12 +161,11 @@ internal partial class Parser424
 
             var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(type))!;
 
-            while (records[type].TryDequeue(out var item))
-                _ = list.Add(item.Record);
+            while (records[type].TryDequeue(out var record))
+                _ = list.Add(record);
 
             property.SetValue(data, list);
         }
-
         return data;
     }
 }

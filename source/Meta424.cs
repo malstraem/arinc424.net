@@ -13,11 +13,13 @@ internal static class Meta424
 
         foreach (var type in types)
         {
-            if (LinkingInfo.TryCreate(type, out var linkingInfo))
-                LinkingInfos.Add(type, linkingInfo!);
-
             if (type.IsSubclassOf(typeof(Record424)) && !type.IsAbstract)
+            {
                 RecordTypes.Add(type);
+
+                if (LinkingInfo.TryCreate(type, out var linkingInfo))
+                    LinkingInfos.Add(type, linkingInfo!);
+            }
 
             var recordAttribute = type.GetCustomAttribute<RecordAttribute>();
 
@@ -31,6 +33,8 @@ internal static class Meta424
                 : new SequencedRecordInfo(type, recordAttribute, sequencedAttribute);
 
             RecordInfos.Add(type, recordInfo);
+
+            SpecTypes.Add((recordInfo.sectionChar, recordInfo.subsectionChar), type);
         }
     }
 
@@ -39,4 +43,6 @@ internal static class Meta424
     internal static Dictionary<Type, RecordInfo> RecordInfos { get; } = [];
 
     internal static Dictionary<Type, LinkingInfo> LinkingInfos { get; } = [];
+
+    internal static Dictionary<(char, char), Type> SpecTypes { get; } = [];
 }

@@ -13,13 +13,9 @@ namespace Arinc.Spec424.Records.Subsequences;
 [DebuggerDisplay($"{{{nameof(Fix)}}}")]
 public class ProcedurePoint : Record424
 {
-    [Foreign(7, 12)]
-    public Airport Airport { get; init; }
-
-    [Foreign(30, 36)]
-    [Possible<Waypoint, OmnidirectionalStation, NonDirectionalBeacon>]
-    //[Possible<Runway>(nameof(Airport))]
-    public Geo Fix { get; init; }
+    [Type(37, 38)]
+    [Foreign<Runway, AirportTerminalWaypoint, AirportBeacon>(7, 12), Foreign(30, 34), Foreign(35, 36)]
+    public Geo? Fix { get; init; }
 
     /// <summary>
     /// <c>Waypoint Description Code (DESC CODE)</c> field.

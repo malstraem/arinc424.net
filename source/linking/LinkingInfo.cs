@@ -1,16 +1,11 @@
 using System.Reflection;
 
 using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Records;
 
 namespace Arinc.Spec424.Linking;
 
 internal class LinkingInfo
 {
-    private readonly IReadOnlyList<LinkInfo> infos;
-
-    private LinkingInfo(IReadOnlyList<LinkInfo> infos) => this.infos = infos;
-
     internal static bool TryCreate(Type type, out LinkingInfo? linkingInfo)
     {
         linkingInfo = null;
@@ -18,45 +13,51 @@ internal class LinkingInfo
         if (type.IsAbstract)
             return false;
 
-        List<LinkInfo> links = [];
+        List<Link> links = [];
+        List<Range> ranges = [];
+        Dictionary<Type, PropertyInfo> many = [];
 
         var properties = type.GetProperties();
 
         foreach (var property in properties)
         {
-            var foreignAttribute = property.GetCustomAttribute<ForeignAttribute>();
+            if (property.GetCustomAttribute<PrimaryAttribute>() is not null)
+            {
+                var fieldAttribute = property.GetCustomAttribute<FieldAttribute>();
 
-            if (foreignAttribute is null)
-                continue;
+                if (fieldAttribute is not null)
+                {
+                    ranges.Add(fieldAttribute.Range);
+                }
+                else
+                {
+                    var foreignAttribute = property.GetCustomAttribute<ForeignAttribute>();
 
-            var possibleAttribute = property.GetCustomAttribute<PossibleAttribute>();
+                    if (foreignAttribute is not null)
+                        ranges.Add(foreignAttribute.Range);
+                }
+            }
 
-            var possibleTypes = possibleAttribute is null ? [property.PropertyType] : possibleAttribute.Types;
+            if (property.GetCustomAttribute<ManyAttribute>() is not null)
+                many.Add(property.PropertyType.GetGenericArguments().First(), property);
 
-            links.Add(new LinkInfo(property, foreignAttribute, possibleTypes));
+            var foreignAttributes = property.GetCustomAttributes<ForeignAttribute>();
+
+            if (foreignAttributes.Any())
+                links.Add(new Link(property, foreignAttributes, property.GetCustomAttribute<TypeAttribute>()));
         }
 
-        linkingInfo = new LinkingInfo([.. links]);
+        if (links.Count == 0 && ranges.Count == 0)
+            return false;
+
+        linkingInfo = new LinkingInfo { Links = links, PrimaryRanges = ranges, Many = many };
+
         return true;
     }
 
-    internal (IReadOnlyList<Link>, Link?) GetLinks(string @string)
-    {
-        List<Link> links = [];
+    internal required List<Link> Links { get; init; }
 
-        Link? airportLink = null;
+    internal required List<Range> PrimaryRanges { get; init; }
 
-        foreach (var info in infos)
-        {
-            string key = @string[info.KeyRange].Trim();
-
-            var link = new Link(info, key);
-
-            if (info.Property.PropertyType == typeof(Airport))
-                airportLink = link;
-            else
-                links.Add(link);
-        }
-        return (links, airportLink);
-    }
+    internal required Dictionary<Type, PropertyInfo> Many { get; init; }
 }

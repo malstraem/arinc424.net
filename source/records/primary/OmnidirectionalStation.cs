@@ -10,7 +10,7 @@ namespace Arinc.Spec424.Records;
 /// <c>VHF NAVAID</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.2.1.</remarks>
-[Record('D'), Continuation]
+[Record('D'), Continious]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class OmnidirectionalStation : Geo, IIcao, IIdentity
 {
@@ -21,14 +21,14 @@ public class OmnidirectionalStation : Geo, IIcao, IIdentity
     /// <c>VOR Identifier (VOR IDENT)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.33.</remarks>
-    [Field(14, 17)]
+    [Field(14, 17), Primary]
     public string Identifier { get; init; }
 
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.14.</remarks>
-    [Field(20, 21)]
+    [Field(20, 21), Primary]
     public string IcaoCode { get; init; }
 
     /// <summary>

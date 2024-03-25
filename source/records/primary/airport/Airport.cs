@@ -1,7 +1,6 @@
 using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Records.Subsequences;
 using Arinc.Spec424.Terms;
 using Arinc.Spec424.Terms.Converters;
 
@@ -13,7 +12,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Airport</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.7.1.</remarks>
-[Record('P', 'A', subsectionIndex: 13), Continuation]
+[Record('P', 'A', subsectionIndex: 13), Continious]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
 public class Airport : Geo, IIcao, IIdentity
 {
@@ -21,10 +20,10 @@ public class Airport : Geo, IIcao, IIdentity
     /// <c>Airport Identifier (ARPT IDENT)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.6.</remarks>
-    [Field(7, 10)]
+    [Field(7, 10), Primary]
     public string Identifier { get; init; }
 
-    [Field(11, 12)]
+    [Field(11, 12), Primary]
     public string IcaoCode { get; init; }
 
     /// <summary>
@@ -60,7 +59,7 @@ public class Airport : Geo, IIcao, IIdentity
     /// </summary>
     /// <remarks>See paragraph 5.249.</remarks>
     [Character(32), Transform<RunwaySurfaceTypeConverter>]
-    public RunwaySurfaceType LongestRunwaySurfaceType { get; init; }
+    public RunwaySurfaceType LongestRunwayType { get; init; }
 
     /// <summary>
     /// <c>Magnetic Variation (MAG VAR, D MAG VAR)</c> field.
@@ -84,18 +83,11 @@ public class Airport : Geo, IIcao, IIdentity
     public string? SpeedLimit { get; init; }
 
     /// <summary>
-    /// <c>Recommended NAVAID (RECD NAV)</c> field.
+    /// <c>Recommended NAVAID (RECD NAV)</c> and <c>ICAO Code (ICAO CODE)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.23.</remarks>
-    [Field(65, 68)]
-    public string? RecommendedNavaid { get; init; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14.</remarks>
-    [Field(69, 70)]
-    public string? RecommendedNavaidIcaoCode { get; init; }
+    [Foreign(65, 68), Foreign(69, 70)]
+    public OmnidirectionalStation? RecommendedStation { get; init; }
 
     /// <summary>
     /// <c>Transition Altitude (TRANS ALTITUDE)</c> field.
@@ -164,11 +156,11 @@ public class Airport : Geo, IIcao, IIdentity
     public List<AirportInstrumentDeparture> Departures { get; init; } = [];
 
     [Many]
-    public List<NonDirectionalBeacon> NonDirectionalBeacons { get; init; } = [];
+    public List<AirportTerminalWaypoint> TerminalWaypoints { get; init; } = [];
+
+    [Many]
+    public List<AirportBeacon> Beacons { get; init; } = [];
 
     [Many]
     public List<OmnidirectionalStation> OmnidirectionalStations { get; init; } = [];
-
-    [Many]
-    public List<ProcedurePoint> ProcedurePoints { get; init; } = [];
 }

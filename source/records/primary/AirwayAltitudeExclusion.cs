@@ -6,7 +6,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Enroute Airways Restriction Altitude Exclusion</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.21.1.</remarks>
-[Record('E', 'U'), Continuation(18)]
+[Record('E', 'U'), Continious(18)]
 public class AirwayAltitudeExclusion : Record424
 {
     /// <summary>

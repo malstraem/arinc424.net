@@ -6,7 +6,7 @@ namespace Arinc.Spec424.Records;
 /// <c>Special Activity Area</c> primary record.
 /// </summary>
 /// <remarks>See paragraph 4.1.33.1.</remarks>
-[Record('E', 'S'), Continuation]
+[Record('E', 'S'), Continious]
 public class SpecialActivityArea : Record424
 {
     /// <summary>

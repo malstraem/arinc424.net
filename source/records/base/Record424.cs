@@ -5,16 +5,21 @@ namespace Arinc.Spec424;
 #pragma warning disable CS8618
 
 /// <summary>
-/// Base ARINC-424 record having area/customer code, file record number and cycle date fields.
+/// Base ARINC-424 record with area/customer code, file record number and cycle date fields.
 /// </summary>
 public abstract class Record424
 {
+    /// <summary>
+    /// The source string from which the record was created.
+    /// </summary>
+    public string Source { get; set; }
+
     /// <summary>
     /// <c>Customer/Area Code (CUST/AREA)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.3.</remarks>
     [Field(2, 4), Validation("\\w{1,3}")]
-    public string AreaCode { get; init; }
+    public string AreaCode { get; set; }
 
     /*/// <summary>
     /// <c>File Record Number (FRN)</c> field.

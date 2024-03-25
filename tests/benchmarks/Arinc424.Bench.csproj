@@ -4,7 +4,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.12" />
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.13-nightly.20240319.148" />
 
     <ProjectReference Include="../../source/Arinc424.csproj" />
 
