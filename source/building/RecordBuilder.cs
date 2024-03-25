@@ -8,12 +8,15 @@ internal static class RecordBuilder
 
         foreach (var rangeInfo in info.RangeInfo)
         {
-            string? trimmed = @string[rangeInfo.Range].Trim();
+            object? value;
 
-            if (trimmed.Length == 0)
-                trimmed = null;
+            string @field = @string[rangeInfo.Range];
 
-            object? value = rangeInfo.Decode is not null && trimmed is not null ? rangeInfo.Decode.Convert(@trimmed) : @trimmed;
+            value = string.IsNullOrWhiteSpace(@field)
+                ? null
+                : rangeInfo.Decode is not null
+                    ? rangeInfo.Decode.Convert(@field)
+                    : @field.Trim();
 
             rangeInfo.Property.SetValue(record, value);
         }

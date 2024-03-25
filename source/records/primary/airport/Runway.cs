@@ -1,6 +1,8 @@
 using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
+using Arinc.Spec424.Terms;
+using Arinc.Spec424.Terms.Converters;
 
 namespace Arinc.Spec424.Records;
 
@@ -34,8 +36,8 @@ public class Runway : Geo, IIdentity, IIcao
     /// <c>Runway Length (RUNWAY LENGTH)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.57.</remarks>
-    [Field(23, 27)]
-    public string Length { get; init; }
+    [Field(23, 27), Decode<NumericConverter>]
+    public int Length { get; init; }
 
     /// <summary>
     /// <c>Runway Magnetic Bearing (RWY BRG)</c> field.
@@ -48,57 +50,53 @@ public class Runway : Geo, IIdentity, IIcao
     /// <c>Runway Gradient (RWY GRAD)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.212.</remarks>
-    [Field(52, 56)]
-    public string Gradient { get; init; }
+    [Field(52, 56), Decode<RunwayGradientConverter>]
+    public float? Gradient { get; init; }
 
     /// <summary>
     /// <c>Ellipsoidal Height</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.225.</remarks>
-    [Field(61, 66)]
-    public string EllipsoidHeight { get; init; }
+    [Field(61, 66), Decode<EllipsoidalHeightConverter>]
+    public float? EllipsoidHeight { get; init; }
 
     /// <summary>
     /// <c>Landing Threshold Elevation (LANDING THRES ELEV)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.68.</remarks>
-    [Field(67, 71)]
-    public string ThresholdElevation { get; init; }
+    [Field(67, 71), Decode<NumericConverter>]
+    public int ThresholdElevation { get; init; }
 
     /// <summary>
     /// <c>Threshold Displacement Distance (DSPLCD THR)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.69.</remarks>
-    [Field(72, 75)]
-    public string DisplacedThresholdDistance { get; init; }
+    [Field(72, 75), Decode<NumericConverter>]
+    public int? ThresholdDisplacementDistance { get; init; }
 
     /// <summary>
     /// <c>Runway Width (WIDTH)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.109.</remarks>
-    [Field(78, 80)]
-    public string Width { get; init; }
+    [Field(78, 80), Decode<NumericConverter>]
+    public int Width { get; init; }
 
-    /// <summary>
-    /// <c>TCH Value Indicator (TCHVI)</c> character.
-    /// </summary>
-    /// <remarks>See paragraph 5.270.</remarks>
-    [Character(81)]
-    public char TcgValueIndicator { get; init; }
+    [Character(81), Transform<ThresholdCrossingTypeConverter>]
+    public ThresholdCrossingType ThresholdCrossingType { get; init; }
 
     /// <summary>
     /// <c>Stopway</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.79.</remarks>
-    [Field(87, 90)]
-    public string Stopway { get; init; }
+    [Field(87, 90), Decode<NumericConverter>]
+    public int? Stopway { get; init; }
 
     /// <summary>
     /// <c>Threshold Crossing Height (TCH)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.67.</remarks>
-    [Field(96, 98)]
-    public string ThresholdCrossingHeight { get; init; }
+    [Field(96, 98), Decode<NumericConverter>]
+    public int? ThresholdCrossingHeight { get; init; }
 
     /// <summary>
     /// <c>Runway Description (RUNWAY DESCRIPTION)</c> field.

@@ -1,6 +1,8 @@
 using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
+using Arinc.Spec424.Terms;
+using Arinc.Spec424.Terms.Converters;
 
 namespace Arinc.Spec424.Records.Subsequences;
 
@@ -21,15 +23,15 @@ public class AirwayPoint : Record424
     /// <c>Waypoint Description Code (DESC CODE)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.17</remarks>
-    [Field(40, 43)]
-    public string WaypointDescriptionCode { get; init; }
+    [Field(40, 43), Decode<WaypointTypeConverter>]
+    public WaypointType WaypointType { get; init; }
 
     /// <summary>
     /// <c>Boundary Code (BDY CODE)</c> character.
     /// </summary>
     /// <remarks>See paragraph 5.18</remarks>
-    [Character(44)]
-    public char BoundaryCode { get; init; }
+    [Character(44), Transform<BoundaryCodeConverter>]
+    public BoundaryCode BoundaryCode { get; init; }
 
     /// <summary>
     /// <c>Route Type (RT TYPE)</c> character.
