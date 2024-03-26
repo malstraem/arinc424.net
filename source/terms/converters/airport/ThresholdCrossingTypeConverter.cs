@@ -6,7 +6,7 @@ internal class ThresholdCrossingTypeConverter : ICharConverter
     {
         'I' => ThresholdCrossingType.ElectronicGlideSlope,
         'R' => ThresholdCrossingType.RnavProcedure,
-        'D' => ThresholdCrossingType.RnavProcedure,
+        'D' => ThresholdCrossingType.Default,
         _ => ThresholdCrossingType.Unknown
     };
 }

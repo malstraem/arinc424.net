@@ -20,6 +20,8 @@ public class Data424
 
     public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
+    public List<EnrouteWaypoint> EnrouteWaypoints { get; set; } = [];
+
     public List<CruisingTable> CruisingTables { get; set; } = [];
 
     public List<HoldingPattern> HoldingPatterns { get; set; } = [];

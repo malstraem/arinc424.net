@@ -19,17 +19,11 @@ public class AirwayPoint : Record424
     [Foreign(35, 36)]
     public Geo Fix { get; init; }
 
-    /// <summary>
-    /// <c>Waypoint Description Code (DESC CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.17</remarks>
-    [Field(40, 43), Decode<WaypointTypeConverter>]
-    public WaypointType WaypointType { get; init; }
+    /// <inheritdoc cref="WaypointDescription" path="/summary"/>
+    [Field(40, 43), Decode<WaypointDescriptionConverter>]
+    public WaypointDescription Description { get; init; }
 
-    /// <summary>
-    /// <c>Boundary Code (BDY CODE)</c> character.
-    /// </summary>
-    /// <remarks>See paragraph 5.18</remarks>
+    /// <inheritdoc cref="BoundaryCode" path="/summary"/>
     [Character(44), Transform<BoundaryCodeConverter>]
     public BoundaryCode BoundaryCode { get; init; }
 

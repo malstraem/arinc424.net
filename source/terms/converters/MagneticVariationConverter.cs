@@ -10,7 +10,7 @@ internal class MagneticVariationConverter : IStringConverter
         if (@string[0] == 'T')
             return 0;
 
-        float degrees = float.Parse(@string[1..3]) + float.Parse(@string[3..5]) / 100;
+        float degrees = float.Parse(@string[1..3]) + (float.Parse(@string[3..5]) / 100);
 
         return @string[0] switch
         {

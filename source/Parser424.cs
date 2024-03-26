@@ -160,7 +160,7 @@ internal partial class Parser424
         {
             var type = property.PropertyType.GetGenericArguments().First();
 
-            var list = (IList)Activator.CreateInstance(typeof(List<>).MakeGenericType(type))!;
+            var list = (IList)property.GetValue(data)!;
 
             while (records[type].TryDequeue(out var record))
                 _ = list.Add(record);

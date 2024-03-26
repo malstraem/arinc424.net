@@ -1,6 +1,8 @@
 using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
+using Arinc.Spec424.Terms;
+using Arinc.Spec424.Terms.Converters;
 
 namespace Arinc.Spec424.Records;
 
@@ -21,33 +23,19 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
     [Field(14, 18), Primary]
     public string Identifier { get; init; }
 
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.14</remarks>
     [Field(20, 21), Primary]
     public string IcaoCode { get; init; }
 
-    /// <summary>
-    /// <c>Waypoint Type (TYPE)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.42</remarks>
-    [Field(27, 29)]
-    public string Type { get; init; }
+    /// <inheritdoc cref="WaypointType" path="/summary"/>
+    [Field(27, 29), Decode<WaypointTypeConverter>]
+    public WaypointType Type { get; init; }
 
-    /// <summary>
-    /// <c>Waypoint Usage</c> character.
-    /// </summary>
-    /// <remarks>See paragraph 5.82</remarks>
-    [Field(30, 31)]
-    public string Usage { get; init; }
-
-    /// <summary>
+    /// <summary> 
     /// <c>Magnetic Variation (MAG VAR, D MAG VAR)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.39</remarks>
-    [Field(75, 79)]
-    public string? DynamicMagneticVariation { get; init; }
+    [Field(75, 79), Decode<MagneticVariationConverter>]
+    public float DynamicMagneticVariation { get; init; }
 
     /// <summary>
     /// <c>Datum Code (DATUM)</c> field.
@@ -56,17 +44,14 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
     [Field(85, 87)]
     public string? DatumCode { get; init; }
 
-    /// <summary>
-    /// <c>Name Format Indicator (NAME IND)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.196</remarks>
-    [Field(96, 98)]
-    public string? FormatNameIndicator { get; init; }
+    /// <inheritdoc cref="WaypointNameFormat" path="/summary"/>
+    [Field(96, 98), Decode<WaypointNameFormatConverter>]
+    public WaypointNameFormat NameFormat { get; init; }
 
     /// <summary>
     /// <c>Waypoint Name (NAME)</c> field.
     /// </summary>
     /// <remarks>See paragraph 5.43</remarks>
     [Field(99, 123)]
-    public string Name { get; init; }
+    public string? Name { get; init; }
 }

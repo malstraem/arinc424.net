@@ -1,10 +1,14 @@
+using Arinc.Spec424.Attributes;
+using Arinc.Spec424.Terms.Converters;
+
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
 /// <c>Waypoint Description Code (DESC CODE)</c>. See paragraph 5.17.
 /// </summary>
+/// <remarks><see cref="DecodeAttribute">Decoded</see> by <see cref="WaypointDescriptionConverter"/>.</remarks>
 [Flags]
-public enum WaypointType : int
+public enum WaypointDescription : int
 {
     Unknown = 0,
     /// <summary>

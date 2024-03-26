@@ -11,7 +11,7 @@ namespace Arinc.Spec424.Attributes;
 internal class ValidationAttribute([StringSyntax(StringSyntaxAttribute.Regex)] string pattern) : Attribute
 {
     /// <summary>
-    /// Pattern to validate 
+    /// Pattern to validate.
     /// </summary>
     internal Regex Regex { get; } = new Regex(pattern, RegexOptions.Compiled);
 }
