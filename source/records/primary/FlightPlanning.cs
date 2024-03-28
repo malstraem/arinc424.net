@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Records;
 /// <summary>
 /// <c>Flight Planning</c> primary record.
 /// </summary>
-/// <remarks>See paragraph 4.1.27.1.</remarks>
+/// <remarks>See section 4.1.27.1.</remarks>
 [Record('P', 'R', subsectionIndex: 13), Continuous(70)]
 public class FlightPlanning : Record424
 {
@@ -86,7 +86,7 @@ public class FlightPlanning : Record424
     /// <summary>
     /// <c>Turboprop/Jet Indicator (TURBO)</c> character.
     /// </summary>
-    /// <remarks>See paragraph 5.233.</remarks>
+    /// <remarks>See section 5.233.</remarks>
     [Character(75)]
     public char EngineTypeRestriction { get; init; }
 

@@ -22,7 +22,7 @@ public class Data424
 
     public List<EnrouteWaypoint> EnrouteWaypoints { get; set; } = [];
 
-    public List<CruisingTable> CruisingTables { get; set; } = [];
+    public List<CruiseTable> CruisingTables { get; set; } = [];
 
     public List<HoldingPattern> HoldingPatterns { get; set; } = [];
 

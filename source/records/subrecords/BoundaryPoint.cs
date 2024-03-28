@@ -2,9 +2,9 @@ using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
 using Arinc.Spec424.Terms;
-using Arinc.Spec424.Terms.Converters;
+using Arinc.Spec424.Converters;
 
-namespace Arinc.Spec424.Records.Subsequences;
+namespace Arinc.Spec424.Records.Sub;
 
 /// <summary>
 /// Combination of boundary point properties used by

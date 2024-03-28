@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 
 using Arinc.Spec424.Building;
 using Arinc.Spec424.Records;
-using Arinc.Spec424.Records.Subsequences;
+using Arinc.Spec424.Records.Sub;
 
 namespace Arinc.Spec424;
 
@@ -128,7 +128,6 @@ internal partial class Parser424
             Construct<Runway>,
             Construct<Airport>,
             Construct<AirportBeacon>,
-            Construct<CruisingTable>,
             Construct<HoldingPattern>,
             Construct<FlightPlanning>,
             Construct<EnrouteWaypoint>,
@@ -144,7 +143,9 @@ internal partial class Parser424
 
             Construct<FlightInfoRegion, BoundaryPoint>,
             Construct<ControlledAirspace, BoundaryPoint>,
-            Construct<RestrictiveAirspace, BoundaryPoint>
+            Construct<RestrictiveAirspace, BoundaryPoint>,
+
+            Construct<CruiseTable, CruiseTableRow>
         );
     }
 
@@ -164,8 +165,6 @@ internal partial class Parser424
 
             while (records[type].TryDequeue(out var record))
                 _ = list.Add(record);
-
-            property.SetValue(data, list);
         }
         return data;
     }

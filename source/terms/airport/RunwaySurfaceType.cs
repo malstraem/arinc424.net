@@ -1,16 +1,22 @@
-using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Terms.Converters;
-
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Longest Runway Surface Code (LRSC)</c> character. See paragraph 5.249.
+/// <c>Longest Runway Surface Code (LRSC)</c> character.
 /// </summary>
-/// <remarks><see cref="TransformAttribute">Transformed</see> by <see cref="RunwaySurfaceTypeConverter"/>.</remarks>
+/// <remarks>See section 5.249.</remarks>
 public enum RunwaySurfaceType : byte
 {
     Unknown,
+    /// <summary>
+    /// Hard runway, for example, asphalt or concrete.
+    /// </summary>
     Hard,
+    /// <summary>
+    /// Soft runway, for example, gravel, grass or soil.
+    /// </summary>
     Soft,
+    /// <summary>
+    /// Water runway.
+    /// </summary>
     Water
 }

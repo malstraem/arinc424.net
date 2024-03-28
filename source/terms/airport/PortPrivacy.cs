@@ -1,17 +1,23 @@
-using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Terms.Converters;
-
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Public/Military Indicator (PUB/MIL)</c> character. See paragraph 5.177.
+/// <c>Public/Military Indicator (PUB/MIL)</c> character.
 /// </summary>
-/// <remarks><see cref="TransformAttribute">Transformed</see> by <see cref="PortPrivacyConverter"/>.</remarks>
+/// <remarks>See section 5.177.</remarks>
 [Flags]
 public enum PortPrivacy : byte
 {
     Unknown,
+    /// <summary>
+    /// Airport/Heliport is open to the public (civil).
+    /// </summary>
     Civil,
+    /// <summary>
+    /// Airport/Heliport is military.
+    /// </summary>
     Military,
+    /// <summary>
+    /// Airport/Heliport is not open to the public (private).
+    /// </summary>
     Private
 }

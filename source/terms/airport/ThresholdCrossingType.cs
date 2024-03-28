@@ -1,12 +1,9 @@
-using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Terms.Converters;
-
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>TCH Value Indicator (TCHVI)</c> character. See paragraph 5.270.
+/// <c>TCH Value Indicator (TCHVI)</c> character.
 /// </summary>
-/// <remarks><see cref="TransformAttribute">Transformed</see> by <see cref="ThresholdCrossingTypeConverter"/>.</remarks>
+/// <remarks>See section 5.270.</remarks>
 public enum ThresholdCrossingType : byte
 {
     Unknown,

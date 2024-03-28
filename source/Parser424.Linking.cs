@@ -29,7 +29,7 @@ internal partial class Parser424
     }
 
     [Obsolete("TODO logging")]
-    private void ProcessLinkingInfo(Type type, Record424 record, LinkingInfo info)
+    private void ProcessForeignKeys(Type type, Record424 record, LinkingInfo info)
     {
         foreach (var link in info.Links)
         {
@@ -60,7 +60,7 @@ internal partial class Parser424
         foreach (var (type, info) in Meta424.LinkingInfos)
         {
             foreach (var record in records[type])
-                ProcessLinkingInfo(type, record, info);
+                ProcessForeignKeys(type, record, info);
         }
     }
 }

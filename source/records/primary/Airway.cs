@@ -1,7 +1,7 @@
 using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Records.Subsequences;
+using Arinc.Spec424.Records.Sub;
 
 namespace Arinc.Spec424.Records;
 
@@ -10,15 +10,12 @@ namespace Arinc.Spec424.Records;
 /// <summary>
 /// <c>Enroute Airways</c> primary record.
 /// </summary>
-/// <remarks>See paragraph 4.1.6.1.</remarks>
+/// <remarks>See section 4.1.6.1.</remarks>
 [Record('E', 'R'), Continuous(39), Sequenced(26, 29)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class Airway : Record424<AirwayPoint>, IIdentity
 {
-    /// <summary>
-    /// <c>Route Identifier (ROUTE IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See paragraph 5.8</remarks>
+    /// <include file='Comments.xml' path="doc/member[@name='RouteIdentifier']/*"/>
     [Field(14, 18)]
     public string Identifier { get; init; }
 }

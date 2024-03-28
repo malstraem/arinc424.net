@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Attributes;
 /// <param name="subsectionChar">Subsection character. Default is whitespace.</param>
 /// <param name="sectionIndex">Index of the section character.</param>
 /// <param name="subsectionIndex">Index of the subsection character.</param>
-/// <remarks>See paragraph 5.4 and 5.5.</remarks>
+/// <remarks>See section 5.4 and 5.5.</remarks>
 [AttributeUsage(AttributeTargets.Class)]
 internal class RecordAttribute(char sectionChar, char subsectionChar = (char)32, int sectionIndex = 5, int subsectionIndex = 6) : Attribute
 {

@@ -1,12 +1,9 @@
-using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Terms.Converters;
-
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Boundary Code (BDY CODE)</c> character. See paragraph 5.18.
+/// <c>Boundary Code (BDY CODE)</c> character.
 /// </summary>
-/// <remarks><see cref="TransformAttribute">Transformed</see> by <see cref="BoundaryViaConverter"/>.</remarks>
+/// <remarks>See section 5.18.</remarks>
 public enum BoundaryCode : byte
 {
     Unknown,

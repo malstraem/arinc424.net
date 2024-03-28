@@ -1,4 +1,4 @@
-using Arinc.Spec424.Terms.Converters;
+using Arinc.Spec424.Converters;
 
 namespace Arinc.Spec424.Attributes;
 

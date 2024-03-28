@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<doc>
+  <member name="RouteIdentifier">
+    <summary>
+      <c>Route Identifier (ROUTE IDENT)</c> field.
+    </summary>
+    <remarks>See section 5.8.</remarks>
+  </member>
+
+  <member name="Theta">
+    <summary>
+      <c>Theta (THETA)</c> field.
+    </summary>
+    <value>Degrees and tenths of degree.</value>
+    <remarks>See section 5.24.</remarks>
+  </member>
+
+  <member name="Rho">
+    <summary>
+      <c>Rho (RHO)</c> field.
+    </summary>
+    <value>Nautical miles and tenths of mile.</value>
+    <remarks>See section 5.25.</remarks>
+  </member>
+
+  <member name="OutboundMagneticCourse">
+    <summary>
+      <c>Outbound Magnetic Course (OB MAG CRS)</c> field.
+    </summary>
+    <value>Degrees and tenths of degree.</value>
+    <remarks>See section 5.26.</remarks>
+  </member>
+
+  <member name="RouteDistanceFrom">
+    <summary>
+      <c>Route Distance From (RTE DIST FROM)</c> field.
+    </summary>
+    <value>Nautical miles and tenths of mile.</value>
+    <remarks>See section 5.27.</remarks>
+  </member>
+
+  <member name="HoldingDistanceTime">
+    <summary>
+      <c>Holding Distance/Time (HOLD DIST/TIME)</c> field.
+    </summary>
+    <value>Nautical miles and tenths of mile or minutes and tenths of minute.</value>
+    <remarks>See section 5.27.</remarks>
+  </member>
+
+  <member name="InboundMagneticCourse">
+    <summary>
+      <c>Inbound Magnetic Course (IB MAG CRS)</c> field.
+    </summary>
+    <value>Degrees and tenths of degree.</value>
+    <remarks>See section 5.28.</remarks>
+  </member>
+
+  <member name="MinimumAltitude">
+    <summary>
+      <c>Minimum Altitude</c> field.
+    </summary>
+    <remarks>See section 5.30.</remarks>
+  </member>
+
+  <member name="MagneticVariation">
+    <summary>
+      <c>Magnetic Variation (MAG VAR, D MAG VAR)</c> field.
+    </summary>
+    <value>Degrees and tenths of degree.</value>
+    <remarks>See section 5.39.</remarks>
+  </member>
+
+  <member name="TransitionAltitude">
+    <summary>
+      <c>TransitionAltitude (TRANS ALTITUDE)</c> field.
+    </summary>
+    <value>Feet.</value>
+    <remarks>See section 5.53.</remarks>
+  </member>
+
+  <member name="TransitionLevel">
+    <summary>
+      <c>Transition Level (TRANS LEVEL)</c> field.
+    </summary>
+    <value>Flight level.</value>
+   <remarks>See section 5.53.</remarks>
+  </member>
+
+  <member name="SpeedLimit">
+    <summary>
+      <c>Speed Limit (SPEED LIMIT)</c> field.
+    </summary>
+   <value>Knots.</value>
+   <remarks>See section 5.72.</remarks>
+  </member>
+  
+  <member name="MaximumAltitude">
+    <summary>
+      <c>Maximum Altitude (MAX ALT)</c> field.
+    </summary>
+    <remarks>See section 5.127.</remarks>
+  </member>
+
+  <member name="RNP">
+    <summary>
+      <c>Required Navigation Performance (RNP)</c> field.
+    </summary>
+    <remarks>See section 5.211.</remarks>
+  </member>
+
+  <member name="VSF">
+    <summary>
+      <c>Vertical Scale Factor (VSF)</c> field.
+    </summary>
+    <value>Feet.</value>
+    <remarks>See section 5.293.</remarks>
+  </member>
+
+  <member name="RvsmMinimum">
+    <summary>
+      <c>RVSM Minimum Level</c> field.
+    </summary>
+    <value>Flight level.</value>
+    <remarks>See section 5.294.</remarks>
+  </member>
+
+  <member name="RvsmMaximum">
+    <summary>
+      <c>RVSM Maximum Level</c> field.
+    </summary>
+    <value>Flight level.</value>
+    <remarks>See section 5.295.</remarks>
+  </member>
+</doc>
