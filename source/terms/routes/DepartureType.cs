@@ -1,9 +1,10 @@
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Route Type (RT TYPE)</c> -> <c>SID Route Type Description</c>. See table 5-4.
+/// <c>Route Type (RT TYPE)</c> -> <c>SID Route Type Description</c> character.
 /// </summary>
-internal enum DepartureType : byte
+/// <remarks>See table 5-4.</remarks>
+public enum DepartureType : byte
 {
     Unknown,
     /// <summary>
@@ -41,5 +42,5 @@ internal enum DepartureType : byte
     /// <summary>
     /// Vector SID Enroute Transition.
     /// </summary>
-    VectorEnrouteTransition,
+    VectorEnrouteTransition
 }

@@ -1,7 +1,7 @@
 namespace Arinc.Spec424.Attributes;
 
 /// <summary>
-/// Specifies the section and subsection characters and indices to define the entity of the string.
+/// Specifies the section and subsection characters/indices to define the entity of the string.
 /// </summary>
 /// <param name="sectionChar">Section character.</param>
 /// <param name="subsectionChar">Subsection character. Default is whitespace.</param>

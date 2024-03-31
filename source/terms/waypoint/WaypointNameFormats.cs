@@ -1,9 +1,10 @@
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Name Format Indicator (NAME IND)</c>.
+/// <c>Name Format Indicator (NAME IND)</c> field.
 /// </summary>
 /// <remarks>See section 5.196.</remarks>
+[Flags]
 public enum WaypointNameFormats : uint
 {
     Unknown = 0u,

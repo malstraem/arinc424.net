@@ -2,20 +2,19 @@ using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Converters;
 
-internal class WaypointUsagesConverter : IStringConverter
+internal class WaypointUsagesConverter : IStringConverter<WaypointUsagesConverter, WaypointUsages>
 {
-    public static object Convert(string @string)
+    public static WaypointUsages Convert(string @string)
     {
         var first = @string[0] is 'R' ? WaypointUsages.AreaNavigation : WaypointUsages.Unknown;
 
         char @char = @string[1];
 
-        var second = @char switch
+        var second = char.IsWhiteSpace(@char) ? WaypointUsages.TerminalOnly : @char switch
         {
             'B' => WaypointUsages.LowAltitude | WaypointUsages.HighAltitude,
             'H' => WaypointUsages.HighAltitude,
             'L' => WaypointUsages.LowAltitude,
-            _ when char.IsWhiteSpace(@char) => WaypointUsages.TerminalOnly,
             _ => WaypointUsages.Unknown
         };
 

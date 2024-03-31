@@ -7,17 +7,17 @@ namespace Arinc.Spec424.Terms;
 [Flags]
 public enum PortPrivacy : byte
 {
-    Unknown,
+    Unknown = 0,
     /// <summary>
     /// Airport/Heliport is open to the public (civil).
     /// </summary>
-    Civil,
+    Civil = 1,
     /// <summary>
     /// Airport/Heliport is military.
     /// </summary>
-    Military,
+    Military = 1 << 1,
     /// <summary>
     /// Airport/Heliport is not open to the public (private).
     /// </summary>
-    Private
+    Private = 1 << 2
 }

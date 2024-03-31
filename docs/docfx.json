@@ -1,17 +1,4 @@
 {
-  "metadata": [
-    {
-      "src": [
-        {
-          "files": [
-            "source/Arinc424.csproj"
-          ],
-          "src": "../"
-        }
-      ],
-      "dest": "api/"
-    }
-  ],
   "build": {
     "content": [
       {
@@ -38,5 +25,19 @@
       "modern",
       "templates/custom"
     ]
-  }
+  },
+  "metadata": [
+    {
+      "dest": "api/",
+      "enumSortOrder": "declaringOrder",
+      "src": [
+        {
+          "files": [
+            "source/Arinc424.csproj"
+          ],
+          "src": "../"
+        }
+      ]
+    }
+  ]
 }

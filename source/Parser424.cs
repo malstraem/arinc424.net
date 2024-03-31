@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 
 using Arinc.Spec424.Building;
 using Arinc.Spec424.Records;
-using Arinc.Spec424.Records.Sub;
 
 namespace Arinc.Spec424;
 
@@ -138,8 +137,8 @@ internal partial class Parser424
 
             Construct<Airway, AirwayPoint>,
             Construct<AirportApproach, ProcedurePoint>,
-            Construct<AirportTerminalArrival, ProcedurePoint>,
-            Construct<AirportInstrumentDeparture, ProcedurePoint>,
+            Construct<AirportArrival, ProcedurePoint>,
+            Construct<AirportDeparture, ProcedurePoint>,
 
             Construct<FlightInfoRegion, BoundaryPoint>,
             Construct<ControlledAirspace, BoundaryPoint>,
@@ -157,7 +156,7 @@ internal partial class Parser424
 
         var data = new Data424();
 
-        foreach (var property in typeof(Data424).GetProperties())
+        _ = Parallel.ForEach(typeof(Data424).GetProperties(), property =>
         {
             var type = property.PropertyType.GetGenericArguments().First();
 
@@ -165,7 +164,7 @@ internal partial class Parser424
 
             while (records[type].TryDequeue(out var record))
                 _ = list.Add(record);
-        }
+        });
         return data;
     }
 }

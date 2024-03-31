@@ -1,12 +1,12 @@
 namespace Arinc.Spec424.Converters;
 
-internal class RnpConverter : IStringConverter
+internal abstract class RnpConverter : IStringConverter<RnpConverter, float>
 {
-    public static object Convert(string @string)
+    public static float Convert(string @string)
     {
         float value = float.Parse(@string[..2]);
 
-        int exp = int.Parse(@string[2].ToString());
+        int exp = @string[2] - '0';
 
         if (exp != 0)
             value /= 10 * exp;

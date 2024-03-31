@@ -1,7 +1,7 @@
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Waypoint Usage</c>.
+/// <c>Waypoint Usage</c> field.
 /// </summary>
 /// <remarks>See section 5.82.</remarks>
 [Flags]

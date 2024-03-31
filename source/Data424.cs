@@ -12,9 +12,9 @@ public class Data424
 
     public List<AirportApproach> AirportApproaches { get; set; } = [];
 
-    public List<AirportTerminalArrival> AirportTerminalArrivals { get; set; } = [];
+    public List<AirportArrival> AirportArrivals { get; set; } = [];
 
-    public List<AirportInstrumentDeparture> AirportInstrumentDepartures { get; set; } = [];
+    public List<AirportDeparture> AirportDepartures { get; set; } = [];
 
     public List<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; } = [];
 
@@ -37,6 +37,8 @@ public class Data424
     public List<ControlledAirspace> ControlledAirspaces { get; set; } = [];
 
     public List<RestrictiveAirspace> RestrictiveAirspaces { get; set; } = [];
+
+    public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
 
     public static Data424 Load(IEnumerable<string> strings) => new Parser424().Parse(strings);
 }

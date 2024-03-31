@@ -2,12 +2,12 @@ namespace Arinc.Spec424.Tests;
 
 public class LoadTests
 {
-    private readonly string[] strings = File.ReadAllLines("data/world.txt");
-
-    [Fact]
-    public void Load()
+    [Theory]
+    [InlineData("ru.txt")]
+    [InlineData("world.txt")]
+    public void Load(string file)
     {
-        var data = Data424.Load(strings);
+        var data = Data424.Load(File.ReadAllLines($"data/{file}"));
 
         Assert.NotEmpty(data.Airports);
         Assert.NotEmpty(data.AirportApproaches);
@@ -18,8 +18,8 @@ public class LoadTests
         Assert.NotEmpty(data.HoldingPatterns);
         Assert.NotEmpty(data.RestrictiveAirspaces);
         Assert.NotEmpty(data.Runways);
-        Assert.NotEmpty(data.AirportInstrumentDepartures);
-        Assert.NotEmpty(data.AirportTerminalArrivals);
+        Assert.NotEmpty(data.AirportDepartures);
+        Assert.NotEmpty(data.AirportArrivals);
         Assert.NotEmpty(data.OmnidirectionalStations);
         Assert.NotEmpty(data.NonDirectionalBeacons);
     }

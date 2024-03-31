@@ -2,9 +2,12 @@ using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Converters;
 
-internal class AirwayTypeConverter : ICharConverter
+/// <summary>
+/// Converter for <see cref="AirwayType"/>.
+/// </summary>
+internal abstract class AirwayTypeConverter : ICharConverter<AirwayTypeConverter, AirwayType>
 {
-    public static object Convert(char @char) => @char switch
+    public static AirwayType Convert(char @char) => @char switch
     {
         'A' => AirwayType.Airline,
         'C' => AirwayType.Control,

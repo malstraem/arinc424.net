@@ -4,6 +4,7 @@ namespace Arinc.Spec424.Records;
 
 #pragma warning disable CS8618
 
+/// <inheritdoc />
 [Record('P', 'N')]
 public class AirportBeacon : NonDirectionalBeacon
 {

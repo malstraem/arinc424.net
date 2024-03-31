@@ -3,7 +3,7 @@ using Arinc.Spec424.Converters;
 namespace Arinc.Spec424.Attributes;
 
 /// <summary>
-/// Specifies that the property is a string and the value must be decoded using the associated converter before assignment.
+/// Specifies that the property value must be decoded from the field string using the associated converter before assignment.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 internal abstract class DecodeAttribute : Attribute

@@ -1,7 +1,7 @@
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Route Type (RT TYPE)</c> -> <c>Airway Type</c>.
+/// <c>Route Type (RT TYPE)</c> -> <c>Airway Type</c> character.
 /// </summary>
 /// <remarks>See table 5-2.</remarks>
 public enum AirwayType : byte

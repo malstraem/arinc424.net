@@ -8,11 +8,9 @@ internal static class RecordBuilder
 
         foreach (var rangeInfo in info.RangeInfo)
         {
-            object? value;
-
             string @field = @string[rangeInfo.Range];
 
-            value = string.IsNullOrWhiteSpace(@field)
+            object? value = string.IsNullOrWhiteSpace(@field)
                 ? null
                 : rangeInfo.Decode is not null
                     ? rangeInfo.Decode.Convert(@field)

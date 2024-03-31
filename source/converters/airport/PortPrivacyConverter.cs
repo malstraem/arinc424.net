@@ -2,9 +2,9 @@ using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Converters;
 
-internal class PortPrivacyConverter : ICharConverter
+internal abstract class PortPrivacyConverter : ICharConverter<PortPrivacyConverter, PortPrivacy>
 {
-    public static object Convert(char @char) => @char switch
+    public static PortPrivacy Convert(char @char) => @char switch
     {
         'C' => PortPrivacy.Civil,
         'M' => PortPrivacy.Military,

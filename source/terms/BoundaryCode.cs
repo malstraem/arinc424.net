@@ -7,7 +7,7 @@ namespace Arinc.Spec424.Terms;
 public enum BoundaryCode : byte
 {
     Unknown,
-    USA,
+    UnitedStates,
     CanadaAlaska,
     Pacific,
     LatinAmerica,

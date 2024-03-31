@@ -2,13 +2,13 @@ using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Converters;
 
-internal class ThresholdCrossingTypeConverter : ICharConverter
+internal abstract class ThresholdCrossingTypeConverter : ICharConverter<ThresholdCrossingTypeConverter, ThresholdType>
 {
-    public static object Convert(char @char) => @char switch
+    public static ThresholdType Convert(char @char) => @char switch
     {
-        'I' => ThresholdCrossingType.ElectronicGlideSlope,
-        'R' => ThresholdCrossingType.RnavProcedure,
-        'D' => ThresholdCrossingType.Default,
-        _ => ThresholdCrossingType.Unknown
+        'I' => ThresholdType.ElectronicGlideSlope,
+        'R' => ThresholdType.RnavProcedure,
+        'D' => ThresholdType.Default,
+        _ => ThresholdType.Unknown
     };
 }

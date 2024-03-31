@@ -12,7 +12,7 @@ public enum AirwayRestriction : byte
     /// </summary>
     None,
     /// <summary>
-    /// One way in direction route is coded (Forward).
+    /// One way in direction route is coded (forward).
     /// </summary>
     Forward,
     /// <summary>

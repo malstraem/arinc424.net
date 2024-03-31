@@ -45,7 +45,7 @@ public class Airport : Geo, IIcao, IIdentity
     /// </summary>
     /// <value>Hundreds of feet.</value>
     /// <remarks>See section 5.54.</remarks>
-    [Field(28, 30), Decode<NumericConverter>]
+    [Field(28, 30), Decode<IntConverter>]
     public int LongestRunwayLength { get; init; }
 
     /// <summary>
@@ -68,11 +68,11 @@ public class Airport : Geo, IIcao, IIdentity
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.55.</remarks>
-    [Field(57, 61), Decode<NumericConverter>]
+    [Field(57, 61), Decode<IntConverter>]
     public int Elevation { get; init; }
 
     /// <include file='Comments.xml' path="doc/member[@name='SpeedLimit']/*"/>
-    [Field(62, 64), Decode<NumericConverter>]
+    [Field(62, 64), Decode<IntConverter>]
     public int SpeedLimit { get; init; }
 
     /// <summary>
@@ -83,12 +83,12 @@ public class Airport : Geo, IIcao, IIdentity
     public OmnidirectionalStation? RecommendedStation { get; init; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>
-    [Field(71, 75), Decode<NumericConverter>]
+    [Field(71, 75), Decode<IntConverter>]
     public int TransitionAltitude { get; init; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionLevel']/*"/>
-    [Field(76, 80)]
-    public string? TransitionLevel { get; init; }
+    [Field(76, 80), Decode<IntConverter>]
+    public int TransitionLevel { get; init; }
 
     /// <inheritdoc cref="PortPrivacy"/>
     [Character(81), Transform<PortPrivacyConverter>]
@@ -112,17 +112,11 @@ public class Airport : Geo, IIcao, IIdentity
     [Character(86), Transform<CourseTypeConverter>]
     public CourseType CourseType { get; init; }
 
-    /// <summary>
-    /// <c>Datum Code (DATUM)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.197.</remarks>
+    /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
     [Field(87, 89)]
     public string DatumCode { get; init; }
 
-    /// <summary>
-    /// <c>Name</c> field.
-    /// </summary>
-    /// <remarks>See section 5.71.</remarks>
+    /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
     [Field(94, 123)]
     public string Name { get; init; }
 
@@ -133,10 +127,10 @@ public class Airport : Geo, IIcao, IIdentity
     public List<AirportApproach> Approaches { get; init; } = [];
 
     [Many]
-    public List<AirportTerminalArrival> Arrivals { get; init; } = [];
+    public List<AirportArrival> Arrivals { get; init; } = [];
 
     [Many]
-    public List<AirportInstrumentDeparture> Departures { get; init; } = [];
+    public List<AirportDeparture> Departures { get; init; } = [];
 
     [Many]
     public List<AirportTerminalWaypoint> TerminalWaypoints { get; init; } = [];

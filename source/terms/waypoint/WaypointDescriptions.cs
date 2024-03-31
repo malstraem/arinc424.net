@@ -1,7 +1,7 @@
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Waypoint Description Code (DESC CODE)</c>.
+/// <c>Waypoint Description Code (DESC CODE)</c> field.
 /// </summary>
 /// <remarks>See section 5.17.</remarks>
 [Flags]
@@ -107,7 +107,7 @@ public enum WaypointDescriptions : uint
     /// <summary>
     /// Initial Approach Fix at FACF.
     /// </summary>
-    InitialApproachFACF = 1u << 24,
+    InitialApproachFacf = 1u << 24,
     /// <summary>
     /// Final End Point.
     /// </summary>

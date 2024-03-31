@@ -2,9 +2,12 @@ using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Converters;
 
-internal class DepartureTypeConverter : ICharConverter
+/// <summary>
+/// Converter for <see cref="DepartureType"/>.
+/// </summary>
+internal abstract class DepartureTypeConverter : ICharConverter<DepartureTypeConverter, DepartureType>
 {
-    public static object Convert(char @char) => @char switch
+    public static DepartureType Convert(char @char) => @char switch
     {
         '0' => DepartureType.EngineOut,
         '1' => DepartureType.RunwayTransition,

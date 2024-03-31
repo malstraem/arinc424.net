@@ -11,7 +11,7 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See section 4.1.2.1.</remarks>
 [Record('D'), Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}, Name - {{{nameof(Name)}}}")]
 public class OmnidirectionalStation : Geo, IIcao, IIdentity
 {
     [Foreign(7, 12)]
@@ -24,10 +24,6 @@ public class OmnidirectionalStation : Geo, IIcao, IIdentity
     [Field(14, 17), Primary]
     public string Identifier { get; init; }
 
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.14.</remarks>
     [Field(20, 21), Primary]
     public string IcaoCode { get; init; }
 
@@ -113,7 +109,7 @@ public class OmnidirectionalStation : Geo, IIcao, IIdentity
     /// </summary>
     /// <remarks>See section 5.71.</remarks>
     [Field(94, 118)]
-    public string VorName { get; init; }
+    public string Name { get; init; }
 
     /// <summary>
     /// <c>Route Inappropriate Navaid Indicator</c> character.

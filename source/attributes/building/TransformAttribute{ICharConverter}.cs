@@ -3,7 +3,7 @@ using Arinc.Spec424.Converters;
 namespace Arinc.Spec424.Attributes;
 
 /// <summary>
-/// Specifies that the property is a char and the value must be transformed using the associated converter before assignment.
+/// Specifies that the property value must be transformed from the field character using the associated converter before assignment.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 internal abstract class TransformAttribute : Attribute

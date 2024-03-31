@@ -1,9 +1,9 @@
 namespace Arinc.Spec424.Terms;
 
 /// <summary>
-/// <c>Waypoint Type (TYPE)</c>.
+/// <c>Waypoint Type (TYPE)</c> field.
 /// </summary>
-/// <remarks> See section 5.42.</remarks>
+/// <remarks>See section 5.42.</remarks>
 [Flags]
 public enum WaypointTypes : uint
 {
@@ -17,7 +17,7 @@ public enum WaypointTypes : uint
     /// </summary>
     CombinedIntersection = 1u << 1,
     /// <summary>
-    /// Unnamed, Charted Intersection and/or Unnamed DME Fix
+    /// Unnamed, Charted Intersection and/or Unnamed DME Fix.
     /// </summary>
     ChartedIntersection = 1u << 2,
     /// <summary>
