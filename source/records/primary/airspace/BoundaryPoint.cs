@@ -17,17 +17,7 @@ public class BoundaryPoint : Geo
     [Character(31), Character<FlightInfoRegion>(33)]
     public BoundaryVia BoundaryVia { get; init; }
 
-    [Decode<LatitudeConverter>]
-    [Field(52, 60), Field<FlightInfoRegion>(54, 62)]
-    public double? ArcOriginLatitude { get; init; }
-
-    [Decode<LongitudeConverter>]
-    [Field(61, 70), Field<FlightInfoRegion>(63, 72)]
-    public double? ArcOriginLongitude { get; init; }
-
-    [Field(71, 74), Field<FlightInfoRegion>(73, 76)]
-    public string? ArcDistance { get; init; }
-
-    [Field(75, 78), Field<FlightInfoRegion>(77, 80)]
-    public string? ArcBearing { get; init; }
+    [Decode<ArcConverter>]
+    [Field(52, 78), Field<FlightInfoRegion>(54, 80)]
+    public Arc? Arc { get; init; }
 }

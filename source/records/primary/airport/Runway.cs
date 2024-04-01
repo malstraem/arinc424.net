@@ -82,7 +82,7 @@ public class Runway : Geo, IIdentity, IIcao
     public int Width { get; init; }
 
     /// <inheritdoc cref="Terms.ThresholdType"/>
-    [Character(81), Transform<ThresholdCrossingTypeConverter>]
+    [Character(81), Transform<ThresholdTypeConverter>]
     public ThresholdType ThresholdType { get; init; }
 
     /// <summary>

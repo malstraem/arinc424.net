@@ -1,6 +1,8 @@
 using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
+using Arinc.Spec424.Converters;
+using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Records;
 
@@ -11,8 +13,8 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See section 4.1.18.1.</remarks>
 [Record('U', 'R'), Continuous(25), Sequenced(21, 24)]
-[DebuggerDisplay($"{{{nameof(AreaCode)}}}, {{{nameof(Name)}}}")]
-public class RestrictiveAirspace : Record424<BoundaryPoint>, IIcao
+[DebuggerDisplay($"{{{nameof(IcaoCode)}}}, {{{nameof(Designation)}}}")]
+public class RestrictiveAirspace : Volume, IIcao
 {
     /// <summary>
     /// <c>ICAO Code (ICAO CODE)</c> field.
@@ -21,12 +23,9 @@ public class RestrictiveAirspace : Record424<BoundaryPoint>, IIcao
     [Field(7, 8)]
     public string IcaoCode { get; init; }
 
-    /// <summary>
-    /// <c>Restrictive Airspace Type (REST TYPE)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.128.</remarks>
-    [Character(9)]
-    public char Type { get; init; }
+    /// <inheritdoc cref="RestrictiveType"/>
+    [Character(9), Transform<RestrictiveTypeConverter>]
+    public RestrictiveType Type { get; init; }
 
     /// <summary>
     /// <c>Restrictive Airspace Designation</c> field.
@@ -42,12 +41,9 @@ public class RestrictiveAirspace : Record424<BoundaryPoint>, IIcao
     [Character(20)]
     public char MultipleCode { get; init; }
 
-    /// <summary>
-    /// <c>Level (LEVEL)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.19.</remarks>
-    [Character(26)]
-    public char Level { get; init; }
+    /// <inheritdoc cref="Terms.LevelType"/>
+    [Character(26), Transform<LevelTypeConverter>]
+    public LevelType LevelType { get; init; }
 
     /// <summary>
     /// <c>Time Code (TIME CD)</c> character.
@@ -64,37 +60,9 @@ public class RestrictiveAirspace : Record424<BoundaryPoint>, IIcao
     public char Notam { get; init; }
 
     /// <summary>
-    /// <c>Lower Limit</c> field.
-    /// </summary>
-    /// <remarks>See section 5.121.</remarks>
-    [Field(82, 86)]
-    public string LowerLimit { get; init; }
-
-    /// <summary>
-    /// <c>Unit Indicator (UNIT IND)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.133.</remarks>
-    [Character(87)]
-    public char LowerLimitUnit { get; init; }
-
-    /// <summary>
-    /// <c>Upper Limit</c> field.
-    /// </summary>
-    /// <remarks>See section 5.121.</remarks>
-    [Field(88, 92)]
-    public string UpperLimit { get; init; }
-
-    /// <summary>
-    /// <c>Unit Indicator (UNIT IND)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.133.</remarks>
-    [Character(93)]
-    public char UpperLimitUnit { get; init; }
-
-    /// <summary>
     /// <c>Restrictive Airspace Name</c> field.
     /// </summary>
     /// <remarks>See section 5.126.</remarks>
     [Field(94, 123)]
-    public string Name { get; init; }
+    public string? Name { get; init; }
 }

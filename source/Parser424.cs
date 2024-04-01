@@ -140,7 +140,7 @@ internal partial class Parser424
             Construct<AirportArrival, ProcedurePoint>,
             Construct<AirportDeparture, ProcedurePoint>,
 
-            Construct<FlightInfoRegion, BoundaryPoint>,
+            Construct<FlightInfoRegion, InfoRegionPoint>,
             Construct<ControlledAirspace, BoundaryPoint>,
             Construct<RestrictiveAirspace, BoundaryPoint>,
 

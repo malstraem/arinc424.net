@@ -9,11 +9,11 @@ internal abstract class AirspaceTypeConverter : ICharConverter<AirspaceTypeConve
 {
     public static AirspaceType Convert(char @char) => @char switch
     {
-        'A' => AirspaceType.ClassC,
+        'A' => AirspaceType.Charlie,
         'C' => AirspaceType.ControlArea,
         'M' => AirspaceType.TerminalControlArea,
         'R' => AirspaceType.RadarZone,
-        'T' => AirspaceType.ClassB,
+        'T' => AirspaceType.Bravo,
         'Z' => AirspaceType.ControlZone,
         _ => AirspaceType.Unknown
     };

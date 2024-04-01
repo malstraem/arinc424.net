@@ -7,9 +7,9 @@ public enum AltitudeUnit : byte
 {
     Unknown,
     /// <summary>
-    /// Altitude has not been established by the appropriate authority.
+    /// Altitude has not been specified or established by the appropriate authority.
     /// </summary>
-    NotEstablished,
+    NotSpecified,
     /// <summary>
     /// Altitude is unlimited.
     /// </summary>
@@ -21,5 +21,8 @@ public enum AltitudeUnit : byte
     /// <summary>
     /// Altitude is flight level.
     /// </summary>
-    Level
+    Level,
+    Ground,
+    Sea,
+    Notam
 }

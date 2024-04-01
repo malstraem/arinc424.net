@@ -2,6 +2,7 @@ using System.Diagnostics;
 
 using Arinc.Spec424.Attributes;
 using Arinc.Spec424.Converters;
+using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Records;
 
@@ -12,13 +13,10 @@ namespace Arinc.Spec424.Records;
 /// </summary>
 /// <remarks>See section 4.1.17.1.</remarks>
 [Record('U', 'F'), Continuous(20), Sequenced(16, 19)]
-[DebuggerDisplay($"{{{nameof(AreaCode)}}}, {{{nameof(Name)}}}")]
-public class FlightInfoRegion : Record424<BoundaryPoint>, IIdentity
+[DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
+public class FlightInfoRegion : Record424<InfoRegionPoint>, IIdentity
 {
-    /// <summary>
-    /// <c>FIR/UIR Identifier (FIR/UIR IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.116.</remarks>
+    /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
     [Field(7, 10)]
     public string Identifier { get; init; }
 
@@ -36,26 +34,9 @@ public class FlightInfoRegion : Record424<BoundaryPoint>, IIdentity
     [Character(15)]
     public char Indicator { get; init; }
 
-    /// <summary>
-    /// <c>FIR Identifier (FIR IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.116.</remarks>
-    [Field(21, 24)]
-    public string? AdjacentIdentifier { get; init; }
-
-    /// <summary>
-    /// <c>UIR Identifier (UIR IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.116.</remarks>
-    [Field(25, 28)]
-    public string? AdjacentUirIdentifier { get; init; }
-
-    /// <summary>
-    /// <c>FIR/UIR ATC Reporting Units Speed (RUS)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.122.</remarks>
-    [Character(29)]
-    public char ReportSpeedUnits { get; init; }
+    /// <inheritdoc cref="Terms.SpeedReportUnit"/>
+    [Character(29), Transform<SpeedReportUnitConverter>]
+    public SpeedReportUnit SpeedReportUnit { get; init; }
 
     /// <summary>
     /// <c>FIR/UIR ATC Reporting Units Altitude (RUA)</c> character.
@@ -71,33 +52,20 @@ public class FlightInfoRegion : Record424<BoundaryPoint>, IIdentity
     [Character(31), Transform<BoolConverter>]
     public bool EntryReportRequired { get; init; }
 
-    /// <summary>
-    /// <c>Upper Limit</c> field.
-    /// </summary>
-    /// <remarks>See section 5.121.</remarks>
-    [Field(81, 85)]
-    public string UpperLimit { get; init; }
+    /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
+    [Field(81, 85), Decode<AltitudeConverter>]
+    public (int Altitude, AltitudeUnit Unit) Up { get; init; }
 
-    /// <summary>
-    /// <c>Lower Limit</c> field.
-    /// </summary>
-    /// <remarks>See section 5.121.</remarks>
-    [Field(86, 90)]
-    public string? UirLowerLimit { get; init; }
+    /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
+    [Field(86, 90), Decode<AltitudeConverter>]
+    public (int Altitude, AltitudeUnit Unit)? UpperLow { get; init; }
 
-    /// <summary>
-    /// <c>Upper Limit</c> field.
-    /// </summary>
-    /// <remarks>See section 5.121.</remarks>
-    [Field(91, 95)]
-    public string? UirUpperLimit { get; init; }
+    /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
+    [Field(91, 95), Decode<AltitudeConverter>]
+    public (int Altitude, AltitudeUnit Unit)? UpperUp { get; init; }
 
-    /// <summary>
-    /// <c>Cruise Table Identifier (CRSE TBL IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.134.</remarks>
-    [Field(96, 97)]
-    public string? CruiseTableIndicator { get; init; }
+    [Foreign(96, 97)]
+    public CruiseTable? CruiseTable { get; init; }
 
     /// <summary>
     /// <c>FIR/UIR Name</c> field.

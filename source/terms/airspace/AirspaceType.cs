@@ -10,7 +10,7 @@ public enum AirspaceType : byte
     /// <summary>
     /// Class C Airspace.
     /// </summary>
-    ClassC,
+    Charlie,
     /// <summary>
     /// Control Area, ICAO Designation (CTA).
     /// </summary>
@@ -26,7 +26,7 @@ public enum AirspaceType : byte
     /// <summary>
     /// Class B Airspace.
     /// </summary>
-    ClassB,
+    Bravo,
     /// <summary>
     /// Control Zone, ICAO Designation (CTR).
     /// </summary>

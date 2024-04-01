@@ -1,8 +1,8 @@
 namespace Arinc.Spec424.Converters;
 
-internal abstract class LongitudeConverter : IStringConverter
+internal abstract class LongitudeConverter : IStringConverter<LongitudeConverter, double>
 {
-    public static object Convert(string @string)
+    public static double Convert(string @string)
     {
         if (@string.Length != 10)
             throw new ConvertException(@string, "Length of string is not valid");

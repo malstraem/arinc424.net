@@ -5,6 +5,7 @@ public class LoadTests
     [Theory]
     [InlineData("ru.txt")]
     [InlineData("world.txt")]
+    [InlineData("FAACIFP18_230223.txt")]
     public void Load(string file)
     {
         var data = Data424.Load(File.ReadAllLines($"data/{file}"));

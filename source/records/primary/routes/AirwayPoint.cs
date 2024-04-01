@@ -3,7 +3,6 @@ using System.Diagnostics;
 using Arinc.Spec424.Attributes;
 using Arinc.Spec424.Terms;
 using Arinc.Spec424.Converters;
-using System.Runtime.Intrinsics.X86;
 
 namespace Arinc.Spec424.Records;
 
@@ -60,7 +59,7 @@ public class AirwayPoint : Record424
     public OmnidirectionalStation? RecommendedNavaid { get; init; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(57, 59), Decode<RnpConverter>]
+    [Field(57, 59), Decode<NavigationPerformanceConverter>]
     public float NavigationPerformance { get; init; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Theta']/*"/>

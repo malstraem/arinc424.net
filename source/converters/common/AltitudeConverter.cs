@@ -4,10 +4,15 @@ namespace Arinc.Spec424.Converters;
 
 public abstract class AltitudeConverter : IStringConverter<AltitudeConverter, (int, AltitudeUnit)>
 {
-    public static (int, AltitudeUnit) Convert(string @string) => @string[0] is 'F' ? (int.Parse(@string[2..]), AltitudeUnit.Level) : @string switch
+    public static (int, AltitudeUnit) Convert(string @string) => @string switch
     {
-        "NESTB" => (0, AltitudeUnit.NotEstablished),
+        "NOTAM" => (0, AltitudeUnit.Notam),
+        "UNKNN" => (0, AltitudeUnit.Unknown),
         "UNLTD" => (int.MaxValue, AltitudeUnit.Unlimited),
-        _ => (0, AltitudeUnit.Unknown),
+        "NESTB" or "NOTSP" => (0, AltitudeUnit.NotSpecified),
+        _ when @string[0] is 'F' => (int.Parse(@string[2..]), AltitudeUnit.Level),
+        _ when @string.Trim() is "GND" => (0, AltitudeUnit.Ground),
+        _ when @string.Trim() is "MSL" => (0, AltitudeUnit.Sea),
+        _ => (int.Parse(@string), AltitudeUnit.Feet)
     };
 }

@@ -35,10 +35,7 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
     [Field(75, 79), Decode<MagneticVariationConverter>]
     public float DynamicMagneticVariation { get; init; }
 
-    /// <summary>
-    /// <c>Datum Code (DATUM)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.197.</remarks>
+    /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
     [Field(85, 87)]
     public string? DatumCode { get; init; }
 

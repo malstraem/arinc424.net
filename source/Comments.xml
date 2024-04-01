@@ -99,7 +99,21 @@
    <value>Knots.</value>
    <remarks>See section 5.72.</remarks>
   </member>
+
+  <member name="FIR">
+    <summary>
+      <c>FIR/UIR Identifier (FIR/UIR IDENT)</c> field.
+    </summary>
+    <remarks>See section 5.116.</remarks>
+  </member>
   
+  <member name="Limit">
+    <summary>
+      <c>Lower/Upper Limit</c> field.
+    </summary>
+    <remarks>See section 5.121.</remarks>
+  </member>
+
   <member name="MaximumAltitude">
     <summary>
       <c>Maximum Altitude (MAX ALT)</c> field.

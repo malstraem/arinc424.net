@@ -111,7 +111,7 @@ public class HoldingPattern : Record424
     public string HoldingSpeed { get; init; }
 
     /// <include file='Comments.xml' path="doc/members/member[@name='RNP']/*"/>
-    [Field(63, 65), Decode<RnpConverter>]
+    [Field(63, 65), Decode<NavigationPerformanceConverter>]
     public float NavigationPerformance { get; init; }
 
     /// <summary>
@@ -143,8 +143,7 @@ public class HoldingPattern : Record424
     public string MaximumLevel { get; init; }
 
     /// <summary>
-    /// <c>Holding Pattern/Race Track Course 
-    /// Reversal Leg Inbound/Outbound Indicator</c> character.
+    /// <c>Holding Pattern/Race Track Course Reversal Leg Inbound/Outbound Indicator</c> character.
     /// </summary>
     /// <remarks>See section 2.298.</remarks>
     [Character(81)]
