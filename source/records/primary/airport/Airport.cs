@@ -120,24 +120,45 @@ public class Airport : Geo, IIcao, IIdentity
     [Field(94, 123)]
     public string Name { get; init; }
 
+    /// <summary>
+    /// Runways associated with this airport.
+    /// </summary>
     [Many]
     public List<Runway> Runways { get; init; } = [];
 
+    /// <summary>
+    /// Approach Procedures associated with this airport.
+    /// </summary>
     [Many]
     public List<AirportApproach> Approaches { get; init; } = [];
 
+    /// <summary>
+    /// STARs associated with this airport.
+    /// </summary>
     [Many]
     public List<AirportArrival> Arrivals { get; init; } = [];
 
+    /// <summary>
+    /// SIDs associated with this airport.
+    /// </summary>
     [Many]
     public List<AirportDeparture> Departures { get; init; } = [];
 
+    /// <summary>
+    /// Terminal Waypoints associated with this airport.
+    /// </summary>
     [Many]
     public List<AirportTerminalWaypoint> TerminalWaypoints { get; init; } = [];
 
+    /// <summary>
+    /// Non-Directional Beacons associated with this airport.
+    /// </summary>
     [Many]
     public List<AirportBeacon> Beacons { get; init; } = [];
 
+    /// <summary>
+    /// VHF Navaids associated with this airport.
+    /// </summary>
     [Many]
     public List<OmnidirectionalStation> OmnidirectionalStations { get; init; } = [];
 }

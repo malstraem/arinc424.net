@@ -2,7 +2,7 @@ using Arinc.Spec424.Terms;
 
 namespace Arinc.Spec424.Converters;
 
-public abstract class AltitudeConverter : IStringConverter<AltitudeConverter, (int, AltitudeUnit)>
+internal abstract class AltitudeConverter : IStringConverter<AltitudeConverter, (int, AltitudeUnit)>
 {
     public static (int, AltitudeUnit) Convert(string @string) => @string switch
     {

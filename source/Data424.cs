@@ -2,6 +2,9 @@ using Arinc.Spec424.Records;
 
 namespace Arinc.Spec424;
 
+/// <summary>
+/// Data container that representing <c>ARINC 424</c> database.
+/// </summary>
 public class Data424
 {
     public List<Runway> Runways { get; set; } = [];
