@@ -1,4 +1,4 @@
-namespace Arinc.Spec424;
+namespace Arinc424;
 
 /// <summary>
 /// <c>ARINC 424</c> record that describes by sequence of strings.

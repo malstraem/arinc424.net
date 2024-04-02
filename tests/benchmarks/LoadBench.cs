@@ -1,6 +1,6 @@
 using BenchmarkDotNet.Attributes;
 
-namespace Arinc.Spec424.Bench;
+namespace Arinc424.Bench;
 
 public class LoadBench
 {

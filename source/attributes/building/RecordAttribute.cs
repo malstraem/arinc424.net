@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Attributes;
+namespace Arinc424.Attributes;
 
 /// <summary>
 /// Specifies the section and subsection characters/indices to define the entity of the string.

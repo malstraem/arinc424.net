@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Terms;
+namespace Arinc424.Airspace.Terms;
 
 /// <summary>
 /// <c>FIR/UIR ATC Reporting Units Speed (RUS)</c> character.

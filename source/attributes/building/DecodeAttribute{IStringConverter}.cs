@@ -1,6 +1,6 @@
-using Arinc.Spec424.Converters;
+using Arinc424.Converters;
 
-namespace Arinc.Spec424.Attributes;
+namespace Arinc424.Attributes;
 
 /// <summary>
 /// Specifies that the property value must be decoded from the field string using the associated converter before assignment.

@@ -1,27 +1,27 @@
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-using Arinc.Spec424.Attributes;
+using Arinc424.Attributes;
 
-namespace Arinc.Spec424.Building;
+namespace Arinc424.Building;
 
 internal record AssignmentInfo
 {
-    internal Regex? Regex { get; init; }
+    internal Regex? Regex { get; set; }
 
-    internal required PropertyInfo Property { get; init; }
+    internal required PropertyInfo Property { get; set; }
 }
 
 internal record IndexAssignmentInfo : AssignmentInfo
 {
-    internal required int Index { get; init; }
+    internal required int Index { get; set; }
 
-    internal TransformAttribute? Transform { get; init; }
+    internal TransformAttribute? Transform { get; set; }
 }
 
 internal record RangeAssignmentInfo : AssignmentInfo
 {
-    internal required Range Range { get; init; }
+    internal required Range Range { get; set; }
 
-    internal DecodeAttribute? Decode { get; init; }
+    internal DecodeAttribute? Decode { get; set; }
 }

@@ -1,6 +1,6 @@
 using System.Collections.Frozen;
 
-namespace Arinc.Spec424.Attributes;
+namespace Arinc424.Attributes;
 
 /// <summary>
 /// Specifies the range of the foreign key part to establish a relationship.

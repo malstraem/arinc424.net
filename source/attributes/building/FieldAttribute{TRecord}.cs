@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Attributes;
+namespace Arinc424.Attributes;
 
 /// <inheritdoc cref="FieldAttribute"/>
 internal abstract class TargetFieldAttribute(int start, int end, Type targetType) : FieldAttribute(start, end)

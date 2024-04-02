@@ -1,9 +1,9 @@
 using System.Reflection;
 
-using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Linking;
+using Arinc424.Attributes;
+using Arinc424.Linking;
 
-namespace Arinc.Spec424;
+namespace Arinc424;
 
 internal static class Meta424
 {

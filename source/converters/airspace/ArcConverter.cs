@@ -1,6 +1,6 @@
-using Arinc.Spec424.Records;
+using Arinc424.Airspace;
 
-namespace Arinc.Spec424.Converters;
+namespace Arinc424.Converters;
 
 internal abstract class ArcConverter : IStringConverter<ArcConverter, Arc>
 {

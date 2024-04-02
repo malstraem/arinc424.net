@@ -1,6 +1,6 @@
-using Arinc.Spec424.Attributes;
+using Arinc424.Attributes;
 
-namespace Arinc.Spec424;
+namespace Arinc424;
 
 #pragma warning disable CS8618
 
@@ -26,5 +26,5 @@ public abstract class Record424
     /// </summary>
     /// <remarks>See section 5.31.</remarks>
     [Field(124, 128), Decode<NumericConverter>]
-    public int RecordNumber { get; init; }*/
+    public int RecordNumber { get; set; }*/
 }

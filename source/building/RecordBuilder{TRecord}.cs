@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Building;
+namespace Arinc424.Building;
 
 internal static class RecordBuilder<TRecord> where TRecord : Record424, new()
 {

@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Converters;
+namespace Arinc424.Converters;
 
 /// <summary>
 /// Converter that transforms character to the type representing an associated term according to the specification.

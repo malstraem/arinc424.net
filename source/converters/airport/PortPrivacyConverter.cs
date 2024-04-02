@@ -1,6 +1,6 @@
-using Arinc.Spec424.Terms;
+using Arinc424.Ports.Terms;
 
-namespace Arinc.Spec424.Converters;
+namespace Arinc424.Converters;
 
 internal abstract class PortPrivacyConverter : ICharConverter<PortPrivacyConverter, PortPrivacy>
 {

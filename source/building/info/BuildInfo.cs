@@ -1,8 +1,8 @@
 using System.Reflection;
 
-using Arinc.Spec424.Attributes;
+using Arinc424.Attributes;
 
-namespace Arinc.Spec424.Building;
+namespace Arinc424.Building;
 
 internal record BuildInfo
 {

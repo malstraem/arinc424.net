@@ -1,8 +1,8 @@
 using System.Reflection;
 
-using Arinc.Spec424.Attributes;
+using Arinc424.Attributes;
 
-namespace Arinc.Spec424.Linking;
+namespace Arinc424.Linking;
 
 internal class Link
 {

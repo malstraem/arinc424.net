@@ -1,23 +1,21 @@
 using System.Diagnostics;
 
-using Arinc.Spec424.Attributes;
-using Arinc.Spec424.Terms;
-using Arinc.Spec424.Converters;
+using Arinc424.Attributes;
+using Arinc424.Converters;
 
-namespace Arinc.Spec424.Records;
+namespace Arinc424.Airspace;
 
 /// <summary>
-/// Combination of boundary point properties used by
-/// <see cref="FlightInfoRegion"/>, <see cref="ControlledAirspace"/> and <see cref="RestrictiveAirspace"/> like subsequence.
+/// Combination of boundary point properties used by <see cref="ControlledAirspace"/> and <see cref="RestrictiveAirspace"/> like subsequence.
 /// </summary>
 [DebuggerDisplay($"{{{nameof(BoundaryVia)}}} - {{{nameof(Latitude)}}}, {{{nameof(Longitude)}}}")]
 public class BoundaryPoint : Geo
 {
     [Transform<BoundaryViaConverter>]
     [Character(31), Character<FlightInfoRegion>(33)]
-    public BoundaryVia BoundaryVia { get; init; }
+    public Terms.BoundaryVia BoundaryVia { get; set; }
 
     [Decode<ArcConverter>]
     [Field(52, 78), Field<FlightInfoRegion>(54, 80)]
-    public Arc? Arc { get; init; }
+    public Arc? Arc { get; set; }
 }

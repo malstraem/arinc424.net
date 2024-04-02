@@ -1,6 +1,6 @@
-using Arinc.Spec424.Terms;
+using Arinc424.Routing.Terms;
 
-namespace Arinc.Spec424.Converters;
+namespace Arinc424.Converters;
 
 /// <summary>
 /// Converter for <see cref="AirwayRestriction"/>.

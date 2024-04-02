@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Text.RegularExpressions;
 
-namespace Arinc.Spec424.Attributes;
+namespace Arinc424.Attributes;
 
 /// <summary>
 /// Specifies the regex pattern to validate a value of the property according to the specification.

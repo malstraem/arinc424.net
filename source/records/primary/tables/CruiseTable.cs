@@ -1,6 +1,6 @@
-using Arinc.Spec424.Attributes;
+using Arinc424.Attributes;
 
-namespace Arinc.Spec424.Records;
+namespace Arinc424.Tables;
 
 #pragma warning disable CS8618
 
@@ -16,5 +16,5 @@ public class CruiseTable : Record424<CruiseTableRow>, IIdentity
     /// </summary>
     /// <remarks>See section 5.134.</remarks>
     [Field(7, 8), Primary]
-    public string Identifier { get; init; }
+    public string Identifier { get; set; }
 }

@@ -1,6 +1,12 @@
-using Arinc.Spec424.Records;
+using Arinc424.Airspace;
+using Arinc424.Navigation;
+using Arinc424.Ports;
+using Arinc424.Procedures;
+using Arinc424.Routing;
+using Arinc424.Tables;
+using Arinc424.Waypoints;
 
-namespace Arinc.Spec424;
+namespace Arinc424;
 
 /// <summary>
 /// Data container that representing <c>ARINC 424</c> database.

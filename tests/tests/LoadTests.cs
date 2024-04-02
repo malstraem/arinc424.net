@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Tests;
+namespace Arinc424.Tests;
 
 public class LoadTests
 {

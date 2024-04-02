@@ -18,8 +18,6 @@
     "globalMetadata": {
       "_appTitle": "Arinc424.NET"
     },
-    "globalMetadataFiles": [],
-    "fileMetadataFiles": [],
     "template": [
       "default",
       "modern",
@@ -28,8 +26,10 @@
   },
   "metadata": [
     {
+      "filter": "filter.yml",
       "dest": "api/",
       "enumSortOrder": "declaringOrder",
+      "namespaceLayout": "nested",
       "src": [
         {
           "files": [

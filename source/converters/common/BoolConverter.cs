@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Converters;
+namespace Arinc424.Converters;
 
 internal abstract class BoolConverter : ICharConverter<BoolConverter, bool>
 {

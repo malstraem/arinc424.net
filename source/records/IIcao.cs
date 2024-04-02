@@ -1,4 +1,4 @@
-namespace Arinc.Spec424;
+namespace Arinc424;
 
 public interface IIcao
 {

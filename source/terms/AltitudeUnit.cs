@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Terms;
+namespace Arinc424;
 
 /// <summary>
 /// Unit of measurement of different altitudes according to specification.

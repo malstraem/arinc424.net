@@ -1,4 +1,4 @@
-namespace Arinc.Spec424.Attributes;
+namespace Arinc424.Attributes;
 
 /// <summary>
 /// Specifies the range of a field within an ARINC-424 string.

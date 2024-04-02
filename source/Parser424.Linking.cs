@@ -1,8 +1,8 @@
 using System.Collections;
 
-using Arinc.Spec424.Linking;
+using Arinc424.Linking;
 
-namespace Arinc.Spec424;
+namespace Arinc424;
 
 internal partial class Parser424
 {

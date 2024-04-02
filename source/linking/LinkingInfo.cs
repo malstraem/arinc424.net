@@ -1,8 +1,8 @@
 using System.Reflection;
 
-using Arinc.Spec424.Attributes;
+using Arinc424.Attributes;
 
-namespace Arinc.Spec424.Linking;
+namespace Arinc424.Linking;
 
 internal class LinkingInfo
 {
@@ -55,9 +55,9 @@ internal class LinkingInfo
         return true;
     }
 
-    internal required List<Link> Links { get; init; }
+    internal required List<Link> Links { get; set; }
 
-    internal required List<Range> PrimaryRanges { get; init; }
+    internal required List<Range> PrimaryRanges { get; set; }
 
-    internal required Dictionary<Type, PropertyInfo> Many { get; init; }
+    internal required Dictionary<Type, PropertyInfo> Many { get; set; }
 }

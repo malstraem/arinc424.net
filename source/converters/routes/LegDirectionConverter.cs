@@ -1,6 +1,4 @@
-using Arinc.Spec424.Terms;
-
-namespace Arinc.Spec424.Converters;
+namespace Arinc424.Converters;
 
 internal abstract class LegDirectionConverter : ICharConverter<LegDirectionConverter, LegDirection>
 {
