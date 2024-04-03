@@ -44,7 +44,7 @@ internal class LinkingInfo
             var foreignAttributes = property.GetCustomAttributes<ForeignAttribute>();
 
             if (foreignAttributes.Any())
-                links.Add(new Link(property, foreignAttributes, property.GetCustomAttribute<TypeAttribute>()));
+                links.Add(new Link(property, foreignAttributes.ToArray(), property.GetCustomAttribute<TypeAttribute>()));
         }
 
         if (links.Count == 0 && ranges.Count == 0)

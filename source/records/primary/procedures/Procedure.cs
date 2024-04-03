@@ -2,23 +2,15 @@ using System.Diagnostics;
 
 using Arinc424.Attributes;
 using Arinc424.Converters;
-using Arinc424.Ports;
 
 namespace Arinc424.Procedures;
 
 #pragma warning disable CS8618
 
-/// <summary>
-/// <c>Airport SID/STAR/Approach</c> primary record.
-/// </summary>
-/// <remarks>See section 4.1.9.1.</remarks>
 [Continuous(39), Sequenced(27, 29)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Procedure : Record424<ProcedurePoint>, IIdentity
 {
-    [Foreign(7, 12)]
-    public Airport Airport { get; set; }
-
     /// <summary>
     /// <para>
     ///   <c>SID/STAR Route Identifier (SID/STAR IDENT)</c> field. See section 5.9.

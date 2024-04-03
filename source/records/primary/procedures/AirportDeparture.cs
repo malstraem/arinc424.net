@@ -9,7 +9,7 @@ namespace Arinc424.Procedures;
 /// <remarks>See section 4.1.9.1.</remarks>
 
 [Record('P', 'D', subsectionIndex: 13)]
-public class AirportDeparture : Procedure
+public class AirportDeparture : AirportProcedure
 {
     /// <inheritdoc cref="DepartureType"/>
     [Character(20), Transform<DepartureTypeConverter>]

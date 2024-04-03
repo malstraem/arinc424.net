@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Diagnostics;
 
 using Arinc424.Linking;
 
@@ -21,9 +22,12 @@ internal partial class Parser424
                 string key = string.Empty;
 
                 foreach (var range in info.PrimaryRanges)
-                    key += record.Source[range].Trim();
+                    key += record.Source[range].Replace(" ", null); // potentially need faster (unsafe?) way
 
-                unique[type].Add(key, record);
+                if (!unique[type].TryAdd(key, record))
+                {
+                    Debug.WriteLine($"{type} entity with key '{key}' already exist"); // TODO: logging path
+                }
             }
         }
     }
@@ -33,22 +37,26 @@ internal partial class Parser424
     {
         foreach (var link in info.Links)
         {
-            if (!link.TryGetType(record.Source, out var linkType))
+            if (!link.TryGetKeyType(record.Source, out string? key, out var linkType))
                 continue;
 
-            if (!link.TryGetKey(linkType, record.Source, out string key))
-                continue;
-
-            if (unique[linkType].TryGetValue(key, out var referenced))
+            if (unique.TryGetValue(linkType, out var uniqueTypes))
             {
-                link.Property.SetValue(record, referenced);
+                if (uniqueTypes.TryGetValue(key!, out var referenced))
+                {
+                    link.Property.SetValue(record, referenced);
 
-                if (Meta424.LinkingInfos[linkType].Many.TryGetValue(type, out var property))
-                    _ = ((IList)property.GetValue(referenced)!).Add(record);
+                    if (Meta424.LinkingInfos[linkType].Many.TryGetValue(type, out var property))
+                        _ = ((IList)property.GetValue(referenced)!).Add(record);
+                }
+                else
+                {
+                    Debug.WriteLine($"{linkType} entity with key '{key}' not found"); // TODO: logging path
+                }
             }
             else
             {
-                Console.WriteLine("oops"); // TODO: logging path
+                Debug.WriteLine($"{linkType} entity with key '{key}' is not valid for relationship"); // TODO: logging path
             }
         }
     }

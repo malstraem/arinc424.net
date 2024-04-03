@@ -18,8 +18,7 @@ namespace Arinc424.Routing;
 public class AirwayPoint : Record424
 {
     [Type(37, 38)]
-    [Foreign(30, 34)]
-    [Foreign(35, 36)]
+    [Foreign(30, 36)]
     public Geo Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>

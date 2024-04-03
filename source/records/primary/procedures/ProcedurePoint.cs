@@ -19,7 +19,7 @@ namespace Arinc424.Procedures;
 public class ProcedurePoint : Record424
 {
     [Type(37, 38)]
-    [Foreign<Runway, AirportTerminalWaypoint, AirportBeacon>(7, 12), Foreign(30, 34), Foreign(35, 36)]
+    [Foreign<Runway, AirportTerminalWaypoint, AirportBeacon>(7, 12), Foreign(30, 36)]
     public Geo? Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
@@ -47,7 +47,7 @@ public class ProcedurePoint : Record424
 
     [Obsolete("TODO abstract navaid instead of geo point")]
     [Type(79, 80)]
-    [Foreign(51, 54), Foreign(55, 56)]
+    [Foreign<AirportBeacon>(7, 12), Foreign(51, 56)]
     public Geo? RecommendedNavaid { get; set; }
 
     /// <summary>

@@ -8,7 +8,7 @@ namespace Arinc424.Procedures;
 /// </summary>
 /// <remarks>See section 4.1.9.1.</remarks>
 [Record('P', 'F', subsectionIndex: 13)]
-public class AirportApproach : Procedure
+public class AirportApproach : AirportProcedure
 {
     /// <inheritdoc cref="ApproachType"/>
     [Character(20), Transform<ApproachTypeConverter>]
