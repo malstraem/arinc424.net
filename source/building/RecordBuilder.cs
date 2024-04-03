@@ -6,15 +6,17 @@ internal static class RecordBuilder
     {
         TRecord record = new() { Source = @string };
 
+        ReadOnlySpan<char> chars = @string;
+
         foreach (var rangeInfo in info.RangeInfo)
         {
-            string @field = @string[rangeInfo.Range];
+            var @field = chars[rangeInfo.Range];
 
-            object? value = string.IsNullOrWhiteSpace(@field)
+            object? value = MemoryExtensions.IsWhiteSpace(@field)
                 ? null
                 : rangeInfo.Decode is not null
                     ? rangeInfo.Decode.Convert(@field)
-                    : @field.Trim();
+                    : MemoryExtensions.Trim(@field).ToString();
 
             rangeInfo.Property.SetValue(record, value);
         }

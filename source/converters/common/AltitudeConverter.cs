@@ -2,7 +2,7 @@ namespace Arinc424.Converters;
 
 internal abstract class AltitudeConverter : IStringConverter<AltitudeConverter, (int, AltitudeUnit)>
 {
-    public static (int, AltitudeUnit) Convert(string @string) => @string switch
+    public static (int, AltitudeUnit) Convert(ReadOnlySpan<char> @string) => @string switch
     {
         "NOTAM" => (0, AltitudeUnit.Notam),
         "UNKNN" => (0, AltitudeUnit.Unknown),

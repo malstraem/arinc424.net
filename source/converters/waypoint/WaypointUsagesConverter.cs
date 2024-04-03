@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal class WaypointUsagesConverter : IStringConverter<WaypointUsagesConverter, WaypointUsages>
 {
-    public static WaypointUsages Convert(string @string)
+    public static WaypointUsages Convert(ReadOnlySpan<char> @string)
     {
         var first = @string[0] is 'R' ? WaypointUsages.AreaNavigation : WaypointUsages.Unknown;
 

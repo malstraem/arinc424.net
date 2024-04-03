@@ -2,7 +2,7 @@ namespace Arinc424.Converters;
 
 internal abstract class NavigationPerformanceConverter : IStringConverter<NavigationPerformanceConverter, float>
 {
-    public static float Convert(string @string)
+    public static float Convert(ReadOnlySpan<char> @string)
     {
         float value = float.Parse(@string[..2]);
 

@@ -2,7 +2,7 @@ namespace Arinc424.Converters;
 
 internal abstract class LatitudeConverter : IStringConverter<LatitudeConverter, double>
 {
-    public static double Convert(string @string)
+    public static double Convert(ReadOnlySpan<char> @string)
     {
         double degrees = double.Parse(@string[1..3]);
         double minutes = double.Parse(@string[3..5]);
@@ -15,7 +15,7 @@ internal abstract class LatitudeConverter : IStringConverter<LatitudeConverter, 
         {
             'N' => latitude,
             'S' => -latitude,
-            _ => throw new ConvertException(@string, $"{@string[0]} is not valid symbol to define a sign of latitude")
+            _ => throw new ConvertException(@string.ToString(), $"{@string[0]} is not valid symbol to define a sign of latitude")
         };
     }
 }

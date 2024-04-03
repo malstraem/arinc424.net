@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal class WaypointTypesConverter : IStringConverter<WaypointTypesConverter, WaypointTypes>
 {
-    public static WaypointTypes Convert(string @string) => @string[0] switch
+    public static WaypointTypes Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {
         'A' => WaypointTypes.ArcCenter,
         'C' => WaypointTypes.CombinedIntersection,

@@ -9,6 +9,7 @@ internal partial class Parser424
 {
     private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
+    [Obsolete("TODO diagnostic log")]
     private void ProcessPrimaryKeys()
     {
         var types = Meta424.LinkingInfos.Where(x => x.Value.PrimaryRanges.Count != 0);
@@ -32,7 +33,7 @@ internal partial class Parser424
         }
     }
 
-    [Obsolete("TODO logging")]
+    [Obsolete("TODO diagnostic log")]
     private void ProcessForeignKeys(Type type, Record424 record, LinkingInfo info)
     {
         foreach (var link in info.Links)
@@ -61,6 +62,7 @@ internal partial class Parser424
         }
     }
 
+    [Obsolete("TODO diagnostic log")]
     private void Link()
     {
         ProcessPrimaryKeys();

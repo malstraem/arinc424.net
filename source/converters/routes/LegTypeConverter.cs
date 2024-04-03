@@ -7,7 +7,7 @@ namespace Arinc424.Converters;
 /// </summary>
 internal abstract class LegTypeConverter : IStringConverter<LegTypeConverter, LegType>
 {
-    public static LegType Convert(string @string) => @string switch
+    public static LegType Convert(ReadOnlySpan<char> @string) => @string switch
     {
         "IF" => LegType.Initial,
         "TF" => LegType.TrackToFix,

@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal class ArrivalQualifiersConverter : IStringConverter<ArrivalQualifiersConverter, ArrivalQualifiers>
 {
-    public static ArrivalQualifiers Convert(string @string) => @string[0] switch
+    public static ArrivalQualifiers Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {
         'D' => ArrivalQualifiers.DistanceEquipment,
         'R' => ArrivalQualifiers.Radar,

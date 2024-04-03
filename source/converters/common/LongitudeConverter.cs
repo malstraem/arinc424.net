@@ -2,11 +2,8 @@ namespace Arinc424.Converters;
 
 internal abstract class LongitudeConverter : IStringConverter<LongitudeConverter, double>
 {
-    public static double Convert(string @string)
+    public static double Convert(ReadOnlySpan<char> @string)
     {
-        if (@string.Length != 10)
-            throw new ConvertException(@string, "Length of string is not valid");
-
         double degrees = double.Parse(@string[1..4]);
         double minutes = double.Parse(@string[4..6]);
         double seconds = double.Parse(@string[6..8]);
@@ -18,7 +15,7 @@ internal abstract class LongitudeConverter : IStringConverter<LongitudeConverter
         {
             'E' => longitude,
             'W' => -longitude,
-            _ => throw new ConvertException(@string, $"{@string[0]} is not valid symbol to define a sign of longitude")
+            _ => throw new ConvertException(@string.ToString(), $"{@string[0]} is not valid symbol to define a sign of longitude")
         };
     }
 }

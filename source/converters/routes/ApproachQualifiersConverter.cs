@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal abstract class ApproachQualifiersConverter : IStringConverter<ApproachQualifiersConverter, ApproachQualifiers>
 {
-    public static ApproachQualifiers Convert(string @string) => @string[0] switch
+    public static ApproachQualifiers Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {
         'B' => ApproachQualifiers.AreaNavigationVisual,
         'D' => ApproachQualifiers.DistanceEquipment,

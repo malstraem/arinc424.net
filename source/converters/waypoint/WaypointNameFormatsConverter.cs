@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal class WaypointNameFormatsConverter : IStringConverter<WaypointNameFormatsConverter, WaypointNameFormats>
 {
-    public static WaypointNameFormats Convert(string @string) => @string[0] switch
+    public static WaypointNameFormats Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {
         'A' => WaypointNameFormats.Abeam,
         'B' => WaypointNameFormats.BearingDistance,

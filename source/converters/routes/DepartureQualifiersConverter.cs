@@ -7,7 +7,7 @@ namespace Arinc424.Converters;
 /// </summary>
 internal abstract class DepartureQualifiersConverter : IStringConverter<DepartureQualifiersConverter, DepartureQualifiers>
 {
-    public static DepartureQualifiers Convert(string @string) => @string[0] switch
+    public static DepartureQualifiers Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {
         'D' => DepartureQualifiers.DistanceEquipment,
         'G' => DepartureQualifiers.GlobalNavigation,

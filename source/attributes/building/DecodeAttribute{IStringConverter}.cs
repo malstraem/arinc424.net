@@ -8,7 +8,7 @@ namespace Arinc424.Attributes;
 [AttributeUsage(AttributeTargets.Property)]
 internal abstract class DecodeAttribute : Attribute
 {
-    internal abstract object Convert(string @string);
+    internal abstract object Convert(ReadOnlySpan<char> @string);
 }
 
 /// <inheritdoc/>
@@ -16,5 +16,5 @@ internal abstract class DecodeAttribute : Attribute
 [AttributeUsage(AttributeTargets.Property)]
 internal class DecodeAttribute<TConverter> : DecodeAttribute where TConverter : IStringConverter
 {
-    internal override object Convert(string @string) => TConverter.Convert(@string);
+    internal override object Convert(ReadOnlySpan<char> @string) => TConverter.Convert(@string);
 }

@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal class WaypointDescriptionsConverter : IStringConverter<WaypointDescriptionsConverter, WaypointDescriptions>
 {
-    public static WaypointDescriptions Convert(string @string) => @string[0] switch
+    public static WaypointDescriptions Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {
         'A' => WaypointDescriptions.Airport,
         'E' => WaypointDescriptions.Essential,

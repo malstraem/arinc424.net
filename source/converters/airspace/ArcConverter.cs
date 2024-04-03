@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal abstract class ArcConverter : IStringConverter<ArcConverter, Arc>
 {
-    public static Arc Convert(string @string)
+    public static Arc Convert(ReadOnlySpan<char> @string)
     {
         Arc arc = new()
         {
@@ -12,13 +12,13 @@ internal abstract class ArcConverter : IStringConverter<ArcConverter, Arc>
             Longitude = LongitudeConverter.Convert(@string[9..19]),
         };
 
-        string distance = @string[19..23];
-        string bearing = @string[23..];
+        var distance = @string[19..23];
+        var bearing = @string[23..];
 
-        if (!string.IsNullOrWhiteSpace(distance))
+        if (!MemoryExtensions.IsWhiteSpace(distance))
             arc.Distance = float.Parse(distance) / 10;
 
-        if (!string.IsNullOrWhiteSpace(bearing))
+        if (!MemoryExtensions.IsWhiteSpace(bearing))
             arc.Bearing = float.Parse(bearing) / 10;
 
         return arc;
