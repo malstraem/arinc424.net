@@ -22,7 +22,7 @@ public class RestrictiveAirspace : Volume, IIcao
     [Field(7, 8)]
     public string IcaoCode { get; set; }
 
-    /// <inheritdoc cref="RestrictiveType"/>
+    /// <inheritdoc cref="Terms.RestrictiveType"/>
     [Character(9), Transform<RestrictiveTypeConverter>]
     public Terms.RestrictiveType Type { get; set; }
 
@@ -40,7 +40,7 @@ public class RestrictiveAirspace : Volume, IIcao
     [Character(20)]
     public char MultipleCode { get; set; }
 
-    /// <inheritdoc cref="Terms.LevelType"/>
+    /// <inheritdoc cref="Arinc424.LevelType"/>
     [Character(26), Transform<LevelTypeConverter>]
     public LevelType LevelType { get; set; }
 

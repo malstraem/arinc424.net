@@ -25,7 +25,7 @@ public enum AircraftTypes : uint
     /// </summary>
     CategoryD = 1u << 3,
     /// <summary>
-    /// Aircraft Category E only
+    /// Aircraft Category E only.
     /// </summary>
     CategoryE = 1u << 4,
     /// <summary>

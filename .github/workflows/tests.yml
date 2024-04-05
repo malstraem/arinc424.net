@@ -1,0 +1,22 @@
+on:
+  push:
+    branches: [main, dev/**]
+  pull_request:
+    branches: [main]
+
+name: tests
+jobs:
+  tests:
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.x
+    - run: dotnet build -c release
+    - run: dotnet test -c release --no-build
+    - uses: actions/upload-artifact@v4
+      with:
+        name: artifacts
+        path: artifacts
+        if-no-files-found: error
+    runs-on: ubuntu-latest

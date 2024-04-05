@@ -10,11 +10,11 @@ namespace Arinc424.Procedures;
 [Record('P', 'E', subsectionIndex: 13)]
 public class AirportArrival : AirportProcedure
 {
-    /// <inheritdoc cref="ArrivalType"/>
+    /// <inheritdoc cref="Terms.ArrivalType"/>
     [Character(20), Transform<ArrivalTypeConverter>]
     public Terms.ArrivalType Type { get; set; }
 
-    /// <inheritdoc cref="ArrivalQualifiers"/>
+    /// <inheritdoc cref="Terms.ArrivalQualifiers"/>
     [Field(119, 120), Decode<ArrivalQualifiersConverter>]
     public Terms.ArrivalQualifiers Qualifiers { get; set; }
 }

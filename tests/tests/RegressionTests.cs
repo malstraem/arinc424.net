@@ -5,7 +5,9 @@ namespace Arinc424.Tests;
 
 public class RegressionTests
 {
-    [Fact]
+#pragma warning disable xUnit1004
+    [Fact(Skip = "manual")]
+#pragma warning restore xUnit1004
     public void MakeRegression()
     {
         foreach (string path in Directory.GetFiles("data"))

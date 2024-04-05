@@ -2,7 +2,7 @@
 .idea/
 
 artifacts/
-public/
+site/
 
 docs/api/**.yml
 

@@ -29,15 +29,15 @@ public class AirwayPoint : Record424
     [Character(44), Transform<BoundaryCodeConverter>]
     public Terms.BoundaryCode BoundaryCode { get; set; }
 
-    /// <inheritdoc cref="AirwayType"/>
+    /// <inheritdoc cref="Terms.AirwayType"/>
     [Character(45), Transform<AirwayTypeConverter>]
     public Terms.AirwayType Type { get; set; }
 
-    /// <inheritdoc cref="Terms.LevelType"/>
+    /// <inheritdoc cref="Arinc424.LevelType"/>
     [Character(46), Transform<LevelTypeConverter>]
     public LevelType LevelType { get; set; }
 
-    /// <inheritdoc cref="AirwayRestriction"/>
+    /// <inheritdoc cref="Terms.AirwayRestriction"/>
     [Character(47), Transform<AirwayRestrictionConverter>]
     public Terms.AirwayRestriction Restriction { get; set; }
 

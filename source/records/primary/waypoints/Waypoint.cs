@@ -22,11 +22,11 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
     [Field(20, 21), Primary]
     public string IcaoCode { get; set; }
 
-    /// <inheritdoc cref="WaypointTypes"/>
+    /// <inheritdoc cref="Terms.WaypointTypes"/>
     [Field(27, 29), Decode<WaypointTypesConverter>]
     public Terms.WaypointTypes Types { get; set; }
 
-    /// <inheritdoc cref="WaypointUsages"/>
+    /// <inheritdoc cref="Terms.WaypointUsages"/>
     [Field(30, 31), Decode<WaypointUsagesConverter>]
     public Terms.WaypointUsages Usages { get; set; }
 
@@ -38,7 +38,7 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
     [Field(85, 87)]
     public string? DatumCode { get; set; }
 
-    /// <inheritdoc cref="WaypointNameFormats"/>
+    /// <inheritdoc cref="Terms.WaypointNameFormats"/>
     [Field(96, 98), Decode<WaypointNameFormatsConverter>]
     public Terms.WaypointNameFormats NameFormats { get; set; }
 

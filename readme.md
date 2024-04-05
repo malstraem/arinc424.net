@@ -4,67 +4,68 @@
 
 # Overview
 
-While the `ARINC424` format describes entities (*or records*) with 132-byte fixed-length string, this library creates 
+While the **`ARINC 424`** specification describes entities (*or records*) with 132-byte fixed-length string, this library creates 
 a database object model at load time via building entities using reflection. Most terms are converted according 
 to the specification into associated enums or numeric values on the fly.
 
 In addition, relationships between entities are established after the building stage.
 
-In practice, this allows you to explore and manipulate the tree-like representation of `ARINC424` database.
+In practice, this allows you to explore and manipulate the tree-like representation of **`ARINC 424`** database.
 
 # State and plans
 
 After the finalization of the primary records, the error handle and log during parsing will be introduced to guarantee 
 that as many objects and relationships as possible will be created from the strings.
 
-- Grid MORA 
+The NuGet package will be deployed once the API is stabilized.
+
+- Grid MORA 🚧
 - Navaid
   - VHF Navaid 🚧
   - NDB Navaid 🚧
-  - TACAN Duplicates 
+  - TACAN 🚧
 - Enroute
   - Waypoints ✔️
-  - Airway Markers 
+  - Airway Markers 🚧
   - Holding Patterns 🚧
   - Airways and Routes ✔️
   - Special Activity Areas 🚧
-  - Preferred Routes 
+  - Preferred Routes 🚧
   - Airway Restrictions 🚧
   - Communications 
 - Heliport
-  - Pads 
+  - Pads 🚧
   - Terminal Waypoints 🚧
   - SID/STAR/Approach Procedures 🚧
-  - TAA 
-  - MSA 
-  - SBAS Path Point 
-  - Communications 
+  - TAA 🚧
+  - MSA 🚧
+  - SBAS Path Point 🚧
+  - Communications 🚧
 - Airport
   - Reference Points ✔️
-  - Gates 
+  - Gates 🚧
   - Terminal Waypoints ✔️
   - SID/STAR/Approach Procedures 🚧
   - Runways ✔️
-  - Localizer/Glide Slope 
-  - TAA 
-  - MLS 
-  - Localizer Marker 
+  - Localizer/Glide Slope 🚧
+  - TAA 🚧
+  - MLS 🚧
+  - Localizer Marker 🚧
   - Terminal NDB 🚧
-  - SBAS Path Point 
-  - GBAS Path Point 
-  - Flt Planning ARR/DEP 🚧
-  - MSA 
-  - GLS Station 
-  - Communications 
+  - SBAS Path Point 🚧
+  - GBAS Path Point 🚧
+  - Flight Planning 🚧
+  - MSA 🚧
+  - GLS Station 🚧
+  - Communications 🚧
 - Company Routes
-  - Company Routes 
-  - Alternate Records 
-  - Helicopter operation Routes 
+  - Company Routes 🚧
+  - Alternate Records 🚧
+  - Helicopter operation Routes 🚧
 - Tables
   - Cruising Tables 🚧
-  - Geographical Reference 
-  - RNAV Name Table 
-  - Communication Type 
+  - Geographical Reference 🚧
+  - Communication Type 🚧
 - Airspace
   - Controlled Airspace 🚧
   - FIR/UIR 🚧

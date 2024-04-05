@@ -11,6 +11,7 @@ namespace Arinc424.Airspace;
 [DebuggerDisplay($"{{{nameof(BoundaryVia)}}} - {{{nameof(Latitude)}}}, {{{nameof(Longitude)}}}")]
 public class BoundaryPoint : Geo
 {
+    /// <inheritdoc cref="Terms.BoundaryVia"/>
     [Transform<BoundaryViaConverter>]
     [Character(31), Character<FlightInfoRegion>(33)]
     public Terms.BoundaryVia BoundaryVia { get; set; }

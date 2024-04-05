@@ -14,9 +14,13 @@
         ]
       }
     ],
-    "dest": "../public",
+    "dest": "../site",
     "globalMetadata": {
       "_appTitle": "Arinc424.NET"
+    },
+    "sitemap": {
+      "baseUrl": "https://maltraem.github.io/arinc424.net",
+      "changefreq": "weekly"
     },
     "template": [
       "default",

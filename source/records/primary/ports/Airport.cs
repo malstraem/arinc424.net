@@ -57,7 +57,7 @@ public class Airport : Geo, IIcao, IIdentity
     [Character(31), Transform<BoolConverter>]
     public bool IsProcedurePublished { get; set; }
 
-    /// <inheritdoc cref="RunwaySurfaceType"/>
+    /// <inheritdoc cref="Terms.RunwaySurfaceType"/>
     [Character(32), Transform<RunwaySurfaceTypeConverter>]
     public Terms.RunwaySurfaceType LongestRunwayType { get; set; }
 
@@ -92,7 +92,7 @@ public class Airport : Geo, IIcao, IIdentity
     [Field(76, 80), Decode<IntConverter>]
     public int TransitionLevel { get; set; }
 
-    /// <inheritdoc cref="PortPrivacy"/>
+    /// <inheritdoc cref="Terms.PortPrivacy"/>
     [Character(81), Transform<PortPrivacyConverter>]
     public Terms.PortPrivacy Privacy { get; set; }
 
@@ -110,7 +110,7 @@ public class Airport : Geo, IIcao, IIdentity
     [Character(85), Transform<BoolConverter>]
     public bool IsDaylightTime { get; set; }
 
-    /// <inheritdoc cref="Terms.CourseType"/>
+    /// <inheritdoc cref="Arinc424.CourseType"/>
     [Character(86), Transform<CourseTypeConverter>]
     public CourseType CourseType { get; set; }
 

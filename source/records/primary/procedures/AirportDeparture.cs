@@ -11,11 +11,11 @@ namespace Arinc424.Procedures;
 [Record('P', 'D', subsectionIndex: 13)]
 public class AirportDeparture : AirportProcedure
 {
-    /// <inheritdoc cref="DepartureType"/>
+    /// <inheritdoc cref="Terms.DepartureType"/>
     [Character(20), Transform<DepartureTypeConverter>]
     public Terms.DepartureType Type { get; set; }
 
-    /// <inheritdoc cref="DepartureQualifiers"/>
+    /// <inheritdoc cref="Terms.DepartureQualifiers"/>
     [Field(119, 120), Decode<DepartureQualifiersConverter>]
     public Terms.DepartureQualifiers Qualifiers { get; set; }
 }

@@ -18,7 +18,7 @@ public class ControlledAirspace : Volume, IIcao
     [Field(7, 8)]
     public string IcaoCode { get; set; }
 
-    /// <inheritdoc cref="AirspaceType"/>
+    /// <inheritdoc cref="Terms.AirspaceType"/>
     [Character(9), Transform<AirspaceTypeConverter>]
     public Terms.AirspaceType Type { get; set; }
 
@@ -30,7 +30,7 @@ public class ControlledAirspace : Volume, IIcao
     [Foreign(10, 14), Foreign(7, 8)]
     public Geo Center { get; set; }
 
-    /// <inheritdoc cref="AirspaceClass"/>
+    /// <inheritdoc cref="Terms.AirspaceClass"/>
     [Character(17), Transform<AirspaceClassConverter>]
     public Terms.AirspaceClass Class { get; set; }
 
@@ -41,7 +41,7 @@ public class ControlledAirspace : Volume, IIcao
     [Character(20)]
     public char MultipleCode { get; set; }
 
-    /// <inheritdoc cref="Terms.LevelType"/>
+    /// <inheritdoc cref="Arinc424.LevelType"/>
     [Character(26), Transform<LevelTypeConverter>]
     public LevelType LevelType { get; set; }
 

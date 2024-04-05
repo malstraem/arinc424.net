@@ -1,0 +1,42 @@
+on:
+  workflow_run:
+    types: [completed]
+    branches: [main]
+    workflows: [tests]
+
+permissions:
+  pages: write
+  actions: read
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+name: docs
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+      - uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          name: artifacts
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Generate Pages
+        run: |
+          dotnet tool update -g docfx
+          docfx docs/docfx.json
+      - name: Upload Pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+    runs-on: ubuntu-latest
