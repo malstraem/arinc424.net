@@ -2,6 +2,7 @@
   "profiles": {
     "Arinc424.Docs": {
       "commandName": "Project",
+      "workingDirectory": "./",
       "hotReloadEnabled": false
     }
   }

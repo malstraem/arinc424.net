@@ -8,7 +8,7 @@ In addition, relationships between entities are established after the building s
 
 In practice, this allows you to explore and manipulate the tree-like representation of **`ARINC 424`** database.
 
-# Specification map
+## Specification map
 
 - [Grid MORA](api/Arinc424.MinimumAltitudesGrid.yml) 🚧
 - Navaid

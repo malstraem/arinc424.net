@@ -16,7 +16,8 @@
     ],
     "dest": "../site",
     "globalMetadata": {
-      "_appTitle": "Arinc424.NET"
+      "_appName": "arinc424.net",
+      "_appTitle": "arinc424.net"
     },
     "sitemap": {
       "baseUrl": "https://maltraem.github.io/arinc424.net",
@@ -25,7 +26,7 @@
     "template": [
       "default",
       "modern",
-      "templates/custom"
+      "custom"
     ]
   },
   "metadata": [
@@ -34,6 +35,7 @@
       "dest": "api/",
       "enumSortOrder": "declaringOrder",
       "namespaceLayout": "nested",
+      "noRestore": true,
       "src": [
         {
           "files": [
