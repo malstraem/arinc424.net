@@ -15,6 +15,5 @@ public enum RestrictiveType : byte
     Prohibited,
     Restricted,
     Training,
-    Warning,
-
+    Warning
 }
