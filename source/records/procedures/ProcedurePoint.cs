@@ -24,9 +24,9 @@ public class ProcedurePoint : Record424
     [Field(40, 43), Decode<WaypointDescriptionsConverter>]
     public WaypointDescriptions Descriptions { get; set; }
 
-    /// <inheritdoc cref="Terms.TurnDirection"/>
-    [Character(44), Transform<TurnDirectionConverter>]
-    public Terms.TurnDirection TurnDirection { get; set; }
+    /// <inheritdoc cref="Arinc424.Turn"/>
+    [Character(44), Transform<TurnConverter>]
+    public Turn Turn { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(45, 47), Decode<NavigationPerformanceConverter>]
@@ -48,11 +48,7 @@ public class ProcedurePoint : Record424
     [Foreign<AirportBeacon>(7, 12), Foreign(51, 56)]
     public Geo? RecommendedNavaid { get; set; }
 
-    /// <summary>
-    /// <c>ARC Radius (ARC RAD)</c> field.
-    /// </summary>
-    /// <value>Nautical miles and thousands of mile.</value>
-    /// <remarks>See section 5.204.</remarks>
+    /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
     [Field(57, 62), Decode<ThousandsConverter>]
     public float ArcRadius { get; set; }
 

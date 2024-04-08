@@ -48,7 +48,7 @@
 
   <member name="Altitude">
     <summary>
-      <c>Minimum Altitude</c> field.
+      <c>Altitude/Minimum Altitude</c> field.
     </summary>
     <remarks>See section 5.30.</remarks>
   </member>
@@ -125,6 +125,14 @@
       <c>Datum Code (DATUM)</c> field.
     </summary>
     <remarks>See section 5.197.</remarks>
+  </member>
+
+  <member name="ArcRadius">
+    <summary>
+      <c>ARC Radius (ARC RAD)</c> field.
+    </summary>
+    <value>Nautical miles and thousands of mile.</value>
+    <remarks>See section 5.204.</remarks>
   </member>
 
   <member name="RNP">

@@ -1,5 +1,9 @@
+using System.Diagnostics;
+
 using Arinc424.Attributes;
 using Arinc424.Converters;
+using Arinc424.Navigation;
+using Arinc424.Waypoints;
 
 namespace Arinc424.Routing;
 
@@ -10,19 +14,9 @@ namespace Arinc424.Routing;
 /// </summary>
 /// <remarks>See section 4.1.5.1.</remarks>
 [Record('E', 'P'), Continuous(39)]
-public class HoldingPattern : Record424
+[DebuggerDisplay($"Fix - {{{nameof(Fix)}}}")]
+public class HoldingPattern : Record424, IIcao
 {
-    /// <summary>
-    /// <c>Region Code (REGN CODE)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.41.</remarks>
-    [Field(7, 10)]
-    public string RegionCode { get; set; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.14 and Note 1.</remarks>
     [Field(11, 12)]
     public string IcaoCode { get; set; }
 
@@ -31,128 +25,83 @@ public class HoldingPattern : Record424
     /// </summary>
     /// <remarks>See section 5.114.</remarks>
     [Field(28, 29)]
-    public string DuplicateIdentifier { get; set; }
+    public string? DuplicateIndicator { get; set; }
 
-    /// <summary>
-    /// <c>Fix Identifier (FIX IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.13.</remarks>
-    [Field(30, 34)]
-    public string FixIdentifier { get; set; }
-
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.14.</remarks>
-    [Field(35, 36)]
-    public string FixIcaoCode { get; set; }
-
-    /// <summary>
-    /// <c>Section Code (SEC CODE)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.4.</remarks>
-    [Character(37)]
-    public char FixSectionCode { get; set; }
-
-    /// <summary>
-    /// <c>Subsection Code (SUB CODE)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.5.</remarks>
-    [Character(38)]
-    public char FixSubsectionCode { get; set; }
+    [Type(37, 38)]
+    [Foreign<AirportBeacon, AirportTerminalWaypoint>(7, 12), Foreign(30, 36)]
+    public Geo Fix { get; set; }
 
     /// <summary>
     /// <c>Inbound Holding Course (IB HOLD CRS)</c> field.
     /// </summary>
     /// <remarks>See section 5.62.</remarks>
-    [Field(40, 43)]
-    public string InboundHoldingCourse { get; set; }
+    [Field(40, 43), Decode<CourseConverter>]
+    public Course In { get; set; }
 
-    /// <summary>
-    /// <c>Turn (TURN)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.63.</remarks>
-    [Character(44)]
-    public char TurnDirection { get; set; }
+    /// <inheritdoc cref="Arinc424.Turn"/>
+    [Character(44), Transform<TurnConverter>]
+    public Turn Turn { get; set; }
 
     /// <summary>
     /// <c>Leg Length (LEG LENGTH)</c> field.
     /// </summary>
+    /// <value>Nautical miles and tenths of mile.</value>
     /// <remarks>See section 5.64.</remarks>
-    [Field(45, 47)]
-    public string LegLength { get; set; }
+    [Field(45, 47), Decode<TenthsConverter>]
+    public float LegLength { get; set; }
 
     /// <summary>
     /// <c>Leg Time (LEG TIME)</c> field.
     /// </summary>
+    /// <value>Minutes and tenths of minute.</value>
     /// <remarks>See section 5.65.</remarks>
-    [Field(48, 49)]
-    public string LegTime { get; set; }
+    [Field(48, 49), Decode<TenthsConverter>]
+    public float LegTime { get; set; }
 
-    /// <summary>
-    /// <c>Minimum Altitude</c> field.
-    /// </summary>
-    /// <remarks>See section 5.30.</remarks>
-    [Field(50, 54)]
-    public string Minimum { get; set; }
+    /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
+    [Field(50, 54), Decode<AltitudeConverter>]
+    public Altitude Minimum { get; set; }
 
-    /// <summary>
-    /// <c>Maximum Altitude (MAX ALT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.127.</remarks>
-    [Field(55, 59)]
-    public string MaximumAltitude { get; set; }
+    /// <include file='Comments.xml' path="doc/member[@name='MaximumAltitude']/*"/>
+    [Field(55, 59), Decode<AltitudeConverter>]
+    public Altitude Maximum { get; set; }
 
     /// <summary>
     /// <c>Holding Speed (HOLD SPEED)</c> field.
     /// </summary>
+    /// <value>Knots.</value>
     /// <remarks>See section 5.175.</remarks>
-    [Field(60, 62)]
-    public string HoldingSpeed { get; set; }
+    [Field(60, 62), Decode<IntConverter>]
+    public int Speed { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(63, 65), Decode<NavigationPerformanceConverter>]
     public float NavigationPerformance { get; set; }
 
-    /// <summary>
-    /// <c>ARC Radius (ARC RAD)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.204.</remarks>
-    [Field(66, 71)]
-    public string ArcRadius { get; set; }
+    /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
+    [Field(66, 71), Decode<ThousandsConverter>]
+    public float ArcRadius { get; set; }
 
-    /// <summary>
-    /// <c>Vertical Scale Factor (VSF)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.293.</remarks>
-    [Field(72, 74)]
-    public string VerticalScaleFactor { get; set; }
+    /// <include file='Comments.xml' path="doc/member[@name='VSF']/*"/>
+    [Field(72, 74), Decode<IntConverter>]
+    public int ScaleFactor { get; set; }
 
-    /// <summary>
-    /// <c>RVSM Minimum Leve</c> field.
-    /// </summary>
-    /// <remarks>See section 5.294.</remarks>
-    [Field(75, 77)]
-    public string MinimumLevel { get; set; }
+    /// <include file='Comments.xml' path="doc/member[@name='RvsmMinimum']/*"/>
+    [Field(75, 77), Decode<IntConverter>]
+    public int MinLevel { get; set; }
 
-    /// <summary>
-    /// <c>RVSM Maximum Level</c> field.
-    /// </summary>
-    /// <remarks>See section 5.295.</remarks>
-    [Field(78, 80)]
-    public string MaximumLevel { get; set; }
+    /// <include file='Comments.xml' path="doc/member[@name='RvsmMaximum']/*"/>
+    [Field(78, 80), Decode<IntConverter>]
+    public int MaxLevel { get; set; }
 
-    /// <summary>
-    /// <c>Holding Pattern/Race Track Course Reversal Leg Inbound/Outbound Indicator</c> character.
-    /// </summary>
-    /// <remarks>See section 2.298.</remarks>
-    [Character(81)]
-    public char LegInOutIndicator { get; set; }
+    /// <inheritdoc cref="LegDirection"/>
+    [Character(81), Transform<LegDirectionConverter>]
+    public LegDirection Direction { get; set; }
 
     /// <summary>
     /// <c>Name (NAME)</c> field.
     /// </summary>
     /// <remarks>See section 5.60.</remarks>
     [Field(98, 123)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 }
