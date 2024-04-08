@@ -9,8 +9,6 @@ using Arinc424.Waypoints.Terms;
 
 namespace Arinc424.Procedures;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// Fields of <c>SID/STAR/Approach</c> primary record. Used by <see cref="AirportApproach"/>, <see cref="AirportDeparture"/>
 /// and <see cref="AirportArrival"/> like subsequence.
@@ -53,9 +51,10 @@ public class ProcedurePoint : Record424
     /// <summary>
     /// <c>ARC Radius (ARC RAD)</c> field.
     /// </summary>
+    /// <value>Nautical miles and thousands of mile.</value>
     /// <remarks>See section 5.204.</remarks>
-    [Field(57, 62)]
-    public string? ArcRadius { get; set; }
+    [Field(57, 62), Decode<ThousandsConverter>]
+    public float ArcRadius { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Theta']/*"/>
     [Field(63, 66), Decode<TenthsConverter>]
@@ -67,7 +66,7 @@ public class ProcedurePoint : Record424
 
     /// <include file='Comments.xml' path="doc/member[@name='OutboundMagneticCourse']/*"/>
     [Field(71, 74), Decode<CourseConverter>]
-    public (float Value, CourseType Type) Course { get; set; }
+    public Course Course { get; set; }
 
     /// <summary>
     /// <c>Route Distance From, Holding Distance/Time (RTE DIST FROM, HOLD DIST/TIME)</c> field.
@@ -80,96 +79,53 @@ public class ProcedurePoint : Record424
     [Character(81), Transform<LegDirectionConverter>]
     public LegDirection Direction { get; set; }
 
-    /// <summary>
-    /// <c>Altitude Description (ALT DESC)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.29.</remarks>
-    [Character(83)]
-    public char AltitudeDescription { get; set; }
+    /// <inheritdoc cref="Arinc424.AltitudeDescription"/>
+    [Character(83), Transform<AltitudeDescriptionConverter>]
+    public AltitudeDescription AltitudeDescription { get; set; }
 
     /// <summary>
     /// <c>ATC Indicator (ATC)</c> character.
     /// </summary>
     /// <remarks>See section 5.81.</remarks>
     [Character(84)]
-    public char IndicatorAtc { get; set; }
+    public char AtcIndicator { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
     [Field(85, 89), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit) Altitude { get; set; }
+    public Altitude Altitude { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
     [Field(90, 94), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit) Altitude2 { get; set; }
+    public Altitude Altitude2 { get; set; }
+
+    /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>
+    [Field(95, 99), Decode<IntConverter>]
+    public int TransitionAltitude { get; set; }
+
+    /// <include file='Comments.xml' path="doc/member[@name='SpeedLimit']/*"/>
+    [Field(100, 102), Decode<IntConverter>]
+    public int SpeedLimit { get; set; }
 
     /// <summary>
-    /// <c>Transition Altitude/Level (TRANS ALTITUDE/LEVEL)</c> field.
+    /// <c>Center Fix (CENTER FIX).
     /// </summary>
-    /// <remarks>See section 5.53.</remarks>
-    [Field(95, 99)]
-    public string TransitionAltitude { get; set; }
+    /// <remarks>See section 5.144.</remarks>
+    [Type(115, 116)]
+    [Foreign(107, 111), Foreign(113, 114)]
+    public Geo? CenterFix { get; set; }
 
     /// <summary>
-    /// <c>Speed Limit (SPEED LIMIT)</c> field.
+    /// <c>Multiple Code (MULTI CD)</c> or <c>Procedure Turn Indicator</c> character.
     /// </summary>
-    /// <remarks>See section 5.72.</remarks>
-    [Field(100, 102)]
-    public string SpeedLimit { get; set; }
-
-    /// <summary>
-    /// <c>Vertical Angle (VERT ANGLE)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.70.</remarks>
-    [Field(103, 106)]
-    public string VerticalAngel { get; set; }
-
-    /// <summary>
-    /// <c>Center Fix (CENTER FIX)
-    /// Procedure Turn (PROC TURN)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.144 or 5.271.</remarks>
-    [Field(107, 111)]
-    public string FixProcedureIndicator { get; set; }
-
-    /// <summary>
-    /// <c>Multiple Code (MULTI CD)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.130 or 5.271 .</remarks>
+    /// <remarks>See section 5.130 or 5.271.</remarks>
     [Character(112)]
-    public char? CodeTaaIndicator { get; set; }
+    public char CodeTaaIndicator { get; set; }
 
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.14.</remarks>
-    [Field(113, 114)]
-    public string? FixProcedureIcaoCode { get; set; }
+    /// <inheritdoc cref="Terms.Overlay"/>
+    [Character(117), Transform<OverlayConverter>]
+    public Terms.Overlay Overlay { get; set; }
 
-    /// <summary>
-    /// <c>Section Code (SEC CODE)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.4.</remarks>
-    [Character(115)]
-    public char? FixProcedureSectionCode { get; set; }
-
-    /// <summary>
-    /// <c>Subsection Code (SUB CODE)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.5.</remarks>
-    [Character(116)]
-    public char? FixProcedureSubsectionCode { get; set; }
-
-    /// <summary>
-    /// <c>GNSS/FMS Indicator (GNSS/FMS IND)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.222.</remarks>
-    [Character(117)]
-    public char GnssFmsIndication { get; set; }
-
-    /// <summary>
-    /// <c>Speed Limit Description (SLD)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.261.</remarks>
-    [Character(118)]
-    public char SpeedLimitDescription { get; set; }
+    /// <inheritdoc cref="Terms.SpeedLimitType"/>
+    [Character(118), Transform<SpeedLimitTypeConverter>]
+    public Terms.SpeedLimitType SpeedLimitType { get; set; }
 }

@@ -1,6 +1,5 @@
 using System.Diagnostics;
 
-using Arinc424.Airspace.Terms;
 using Arinc424.Attributes;
 using Arinc424.Converters;
 using Arinc424.Tables;
@@ -37,14 +36,11 @@ public class FlightInfoRegion : Record424<InfoRegionPoint>, IIdentity
 
     /// <inheritdoc cref="Terms.SpeedReportUnit"/>
     [Character(29), Transform<SpeedReportUnitConverter>]
-    public SpeedReportUnit SpeedReportUnit { get; set; }
+    public Terms.SpeedReportUnit SpeedReportUnit { get; set; }
 
-    /// <summary>
-    /// <c>FIR/UIR ATC Reporting Units Altitude (RUA)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.123.</remarks>
-    [Character(30)]
-    public char ReportAltitudeUnits { get; set; }
+    /// <inheritdoc cref="Terms.AltitudeReportUnit"/>
+    [Character(30), Transform<AltitudeReportUnitConverter>]
+    public Terms.AltitudeReportUnit AltitudeReportUnit { get; set; }
 
     /// <summary>
     /// <c>FIR/UIR Entry Report (ENTRY)</c> character.
@@ -55,15 +51,15 @@ public class FlightInfoRegion : Record424<InfoRegionPoint>, IIdentity
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(81, 85), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit) Up { get; set; }
+    public Altitude Up { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(86, 90), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit)? UpperLow { get; set; }
+    public Altitude? UpperLow { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(91, 95), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit)? UpperUp { get; set; }
+    public Altitude? UpperUp { get; set; }
 
     [Foreign(96, 97)]
     public CruiseTable? CruiseTable { get; set; }
@@ -73,5 +69,5 @@ public class FlightInfoRegion : Record424<InfoRegionPoint>, IIdentity
     /// </summary>
     /// <remarks>See section 5.125.</remarks>
     [Field(99, 123)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 }

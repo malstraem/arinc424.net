@@ -40,7 +40,7 @@ public class Airport : Geo, IIcao, IIdentity
     /// </summary>
     /// <remarks>See section 5.73.</remarks>
     [Field(23, 27), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit) Limit { get; set; }
+    public Altitude Limit { get; set; }
 
     /// <summary>
     /// <c>Longest Runway (LONGEST RWY)</c> field.

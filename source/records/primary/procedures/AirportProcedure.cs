@@ -9,7 +9,7 @@ namespace Arinc424.Procedures;
 /// <c>Airport SID/STAR/Approach</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.9.1.</remarks>
-public class AirportProcedure : Procedure
+public class AirportProcedure<TPoint> : Procedure<TPoint> where TPoint : ProcedurePoint
 {
     [Foreign(7, 12)]
     public Airport Airport { get; set; }

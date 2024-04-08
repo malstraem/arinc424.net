@@ -8,7 +8,7 @@ namespace Arinc424.Procedures;
 /// <remarks>See section 4.2.3.1.</remarks>
 [Record('H', 'E', subsectionIndex: 13)]
 [Obsolete("placeholder")]
-public class HeliportArrival : Procedure
+public class HeliportArrival : Arrival
 {
 
 }

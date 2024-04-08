@@ -73,7 +73,7 @@ public class AirwayPoint : Record424
 
     /// <include file='Comments.xml' path="doc/member[@name='OutboundMagneticCourse']/*"/>
     [Field(71, 74), Decode<CourseConverter>]
-    public (float Course, CourseType Type) Out { get; set; }
+    public Course Out { get; set; }
 
     /// <summary>
     /// <c>Route Distance From(RTE DIST FROM)</c> field.
@@ -85,19 +85,19 @@ public class AirwayPoint : Record424
 
     /// <include file='Comments.xml' path="doc/member[@name='InboundMagneticCourse']/*"/>
     [Field(79, 82), Decode<CourseConverter>]
-    public (float Course, CourseType Type) In { get; set; }
+    public Course In { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
     [Field(84, 88), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit) Minimum { get; set; }
+    public Altitude Minimum { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
     [Field(89, 93), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit) Minimum2 { get; set; }
+    public Altitude Minimum2 { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MaximumAltitude']/*"/>
     [Field(94, 98), Decode<AltitudeConverter>]
-    public (int Altitude, AltitudeUnit Unit) Maximum { get; set; }
+    public Altitude Maximum { get; set; }
 
     /// <summary>
     /// <c>Fixed Radius Transition Indicator (FIXED RAD IND)</c> field.

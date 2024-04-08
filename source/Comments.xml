@@ -63,18 +63,10 @@
 
   <member name="TransitionAltitude">
     <summary>
-      <c>TransitionAltitude (TRANS ALTITUDE)</c> field.
+      <c>Transition Altitude/Level (TRANS ALTITUDE/LEVEL)</c> field.
     </summary>
-    <value>Feet.</value>
+    <value>Feet or flight level.</value>
     <remarks>See section 5.53.</remarks>
-  </member>
-
-  <member name="TransitionLevel">
-    <summary>
-      <c>Transition Level (TRANS LEVEL)</c> field.
-    </summary>
-    <value>Flight level.</value>
-   <remarks>See section 5.53.</remarks>
   </member>
 
   <member name="TCH">
@@ -106,7 +98,7 @@
     </summary>
     <remarks>See section 5.116.</remarks>
   </member>
-  
+
   <member name="Limit">
     <summary>
       <c>Lower/Upper Limit</c> field.
@@ -119,6 +111,13 @@
       <c>Maximum Altitude (MAX ALT)</c> field.
     </summary>
     <remarks>See section 5.127.</remarks>
+  </member>
+
+  <member name="MultipleCode">
+    <summary>
+      <c>Multiple Code (MULTI CD)</c> character.
+    </summary>
+    <remarks>See section 5.130.</remarks>
   </member>
 
   <member name="Datum">

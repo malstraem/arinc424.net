@@ -1,7 +1,9 @@
 using Arinc424.Attributes;
-using Arinc424.Converters;
+using Arinc424.Ports;
 
 namespace Arinc424.Procedures;
+
+#pragma warning disable CS8618
 
 /// <summary>
 /// <c>Airport SID</c> primary record.
@@ -9,13 +11,8 @@ namespace Arinc424.Procedures;
 /// <remarks>See section 4.1.9.1.</remarks>
 
 [Record('P', 'D', subsectionIndex: 13)]
-public class AirportDeparture : AirportProcedure
+public class AirportDeparture : Departure
 {
-    /// <inheritdoc cref="Terms.DepartureType"/>
-    [Character(20), Transform<DepartureTypeConverter>]
-    public Terms.DepartureType Type { get; set; }
-
-    /// <inheritdoc cref="Terms.DepartureQualifiers"/>
-    [Field(119, 120), Decode<DepartureQualifiersConverter>]
-    public Terms.DepartureQualifiers Qualifiers { get; set; }
+    [Foreign(7, 12)]
+    public Airport Airport { get; set; }
 }

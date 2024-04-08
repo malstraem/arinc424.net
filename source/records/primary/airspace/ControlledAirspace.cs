@@ -34,10 +34,7 @@ public class ControlledAirspace : Volume, IIcao
     [Character(17), Transform<AirspaceClassConverter>]
     public Terms.AirspaceClass Class { get; set; }
 
-    /// <summary>
-    /// <c>Multiple Code (MULTI CD)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.130.</remarks>
+    /// <include file='Comments.xml' path="doc/member[@name='MultipleCode']/*"/>
     [Character(20)]
     public char MultipleCode { get; set; }
 
@@ -45,12 +42,9 @@ public class ControlledAirspace : Volume, IIcao
     [Character(26), Transform<LevelTypeConverter>]
     public LevelType LevelType { get; set; }
 
-    /// <summary>
-    /// <c>Time Code (TIME CD)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.131.</remarks>
-    [Character(27)]
-    public char TimeCode { get; set; }
+    /// <inheritdoc cref="Arinc424.TimeCode"/>
+    [Character(27), Transform<TimeCodeConverter>]
+    public TimeCode TimeCode { get; set; }
 
     /// <summary>
     /// <c>NOTAM</c> character.
@@ -59,7 +53,7 @@ public class ControlledAirspace : Volume, IIcao
     [Character(28)]
     public char Notam { get; set; }
 
-    /// <include file='Comments.xml' path="doc/members/member[@name='RNP']/*"/>
+    /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(79, 81), Decode<NavigationPerformanceConverter>]
     public float NavigationPerformance { get; set; }
 

@@ -42,7 +42,7 @@ public class Runway : Geo, IIdentity, IIcao
     /// <value>Degrees and tenths of a degree.</value>
     /// <remarks>See section 5.58.</remarks>
     [Field(28, 31), Decode<CourseConverter>]
-    public (float Value, CourseType Type) Bearing { get; set; }
+    public Course Bearing { get; set; }
 
     /// <summary>
     /// <c>Runway Gradient (RWY GRAD)</c> field.

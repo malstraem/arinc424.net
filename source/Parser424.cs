@@ -142,9 +142,9 @@ internal partial class Parser424
             Construct<AirportTerminalWaypoint>,
 
             Construct<Airway, AirwayPoint>,
-            Construct<AirportApproach, ProcedurePoint>,
-            Construct<AirportArrival, ProcedurePoint>,
-            Construct<AirportDeparture, ProcedurePoint>,
+            Construct<AirportApproach, ApproachPoint>,
+            Construct<AirportArrival, ArrivalPoint>,
+            Construct<AirportDeparture, DeparturePoint>,
 
             Construct<FlightInfoRegion, InfoRegionPoint>,
             Construct<ControlledAirspace, BoundaryPoint>,

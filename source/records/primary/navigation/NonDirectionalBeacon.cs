@@ -1,6 +1,7 @@
 using System.Diagnostics;
 
 using Arinc424.Attributes;
+using Arinc424.Converters;
 
 namespace Arinc424.Navigation;
 
@@ -32,8 +33,8 @@ public class NonDirectionalBeacon : Geo, IIcao, IIdentity
     /// <c>NDB Frequency (NDB FREQ)</c> field.
     /// </summary>
     /// <remarks>See section 5.34.</remarks>
-    [Field(23, 27)]
-    public string Frequency { get; set; }
+    [Field(23, 27), Decode<TenthsConverter>]
+    public float Frequency { get; set; }
 
     /// <summary>
     /// <c>NAVAID Class (CLASS)</c> field.
@@ -42,24 +43,21 @@ public class NonDirectionalBeacon : Geo, IIcao, IIdentity
     [Field(28, 32)]
     public string Class { get; set; }
 
-    /// <summary>
-    /// <c>Magnetic Variation (MAG VAR, D MAG VAR)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.39.</remarks>
-    [Field(75, 79)]
-    public string MagneticVariation { get; set; }
+    /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
+    [Field(75, 79), Decode<MagneticVariationConverter>]
+    public float MagneticVariation { get; set; }
 
     /// <summary>
     /// <c>Datum Code (DATUM)</c> field.
     /// </summary>
     /// <remarks>See section 5.197.</remarks>
     [Field(91, 93)]
-    public string DatumCode { get; set; }
+    public string? DatumCode { get; set; }
 
     /// <summary>
     /// <c>Name Field</c> field.
     /// </summary>
     /// <remarks>See section 5.71.</remarks>
     [Field(94, 123)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
 }

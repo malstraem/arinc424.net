@@ -110,7 +110,7 @@ public class HoldingPattern : Record424
     [Field(60, 62)]
     public string HoldingSpeed { get; set; }
 
-    /// <include file='Comments.xml' path="doc/members/member[@name='RNP']/*"/>
+    /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(63, 65), Decode<NavigationPerformanceConverter>]
     public float NavigationPerformance { get; set; }
 
