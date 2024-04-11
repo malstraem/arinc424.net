@@ -103,11 +103,11 @@ public class ProcedurePoint : Record424
     public int SpeedLimit { get; set; }
 
     /// <summary>
-    /// <c>Center Fix (CENTER FIX).
+    /// <c>Center Fix (CENTER FIX)</c>.
     /// </summary>
     /// <remarks>See section 5.144.</remarks>
     [Type(115, 116)]
-    [Foreign(107, 111), Foreign(113, 114)]
+    [Foreign<Runway, AirportTerminalWaypoint, AirportBeacon>(7, 12), Foreign(107, 111), Foreign(113, 114)]
     public Geo? CenterFix { get; set; }
 
     /// <summary>

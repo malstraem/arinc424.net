@@ -28,7 +28,7 @@ public class ControlledAirspace : Volume, IIcao
     /// <remarks>See section 5.214.</remarks>
     [Type(15, 16)]
     [Foreign(10, 14), Foreign(7, 8)]
-    public Geo Center { get; set; }
+    public IIdentity Center { get; set; }
 
     /// <inheritdoc cref="Terms.AirspaceClass"/>
     [Character(17), Transform<AirspaceClassConverter>]

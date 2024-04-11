@@ -41,9 +41,9 @@ internal partial class Parser424
             if (!link.TryGetKeyType(record.Source, out string? key, out var linkType))
                 continue;
 
-            if (unique.TryGetValue(linkType, out var uniqueTypes))
+            if (this.unique.TryGetValue(linkType, out var unique))
             {
-                if (uniqueTypes.TryGetValue(key!, out var referenced))
+                if (unique.TryGetValue(key!, out var referenced))
                 {
                     link.Property.SetValue(record, referenced);
 

@@ -6,11 +6,7 @@ internal abstract class ArcConverter : IStringConverter<ArcConverter, Arc>
 {
     public static Arc Convert(ReadOnlySpan<char> @string)
     {
-        Arc arc = new()
-        {
-            Latitude = LatitudeConverter.Convert(@string[..9]),
-            Longitude = LongitudeConverter.Convert(@string[9..19]),
-        };
+        Arc arc = new() { Coordinates = CoordinatesConverter.Convert(@string[..19]) };
 
         var distance = @string[19..23];
         var bearing = @string[23..];

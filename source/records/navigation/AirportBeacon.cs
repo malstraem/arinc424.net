@@ -7,7 +7,7 @@ namespace Arinc424.Navigation;
 
 /// <inheritdoc />
 [Record('P', 'N')]
-public class AirportBeacon : NonDirectionalBeacon
+public class AirportBeacon : NondirectionalBeacon
 {
     [Foreign(7, 12), Primary]
     public Airport Airport { get; set; }

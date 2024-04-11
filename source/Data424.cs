@@ -35,7 +35,7 @@ public class Data424
 
     public List<HoldingPattern> HoldingPatterns { get; set; } = [];
 
-    public List<NonDirectionalBeacon> NonDirectionalBeacons { get; set; } = [];
+    public List<NondirectionalBeacon> NondirectionalBeacons { get; set; } = [];
 
     public List<OmnidirectionalStation> OmnidirectionalStations { get; set; } = [];
 

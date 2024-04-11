@@ -136,7 +136,7 @@ internal partial class Parser424
             Construct<HoldingPattern>,
             Construct<FlightPlanning>,
             Construct<EnrouteWaypoint>,
-            Construct<NonDirectionalBeacon>,
+            Construct<NondirectionalBeacon>,
             Construct<OmnidirectionalStation>,
             Construct<MicrowaveLandingSystem>,
             Construct<AirportTerminalWaypoint>,

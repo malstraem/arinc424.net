@@ -8,7 +8,7 @@ namespace Arinc424.Airspace;
 /// <summary>
 /// Combination of boundary point properties used by <see cref="ControlledAirspace"/> and <see cref="RestrictiveAirspace"/> like subsequence.
 /// </summary>
-[DebuggerDisplay($"{{{nameof(BoundaryVia)}}} - {{{nameof(Latitude)}}}, {{{nameof(Longitude)}}}")]
+[DebuggerDisplay($"{{{nameof(BoundaryVia)}}} - {{{nameof(Coordinates)}}}")]
 public class BoundaryPoint : Geo
 {
     /// <inheritdoc cref="Terms.BoundaryVia"/>

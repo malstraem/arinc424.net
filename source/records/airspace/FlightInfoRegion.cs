@@ -14,11 +14,14 @@ namespace Arinc424.Airspace;
 /// <remarks>See section 4.1.17.1.</remarks>
 [Record('U', 'F'), Continuous(20), Sequenced(16, 19)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
-public class FlightInfoRegion : Record424<InfoRegionPoint>, IIdentity
+public class FlightInfoRegion : Record424<InfoRegionPoint>, IIdentity, IIcao
 {
     /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
-    [Field(7, 10)]
+    [Field(7, 10), Primary]
     public string Identifier { get; set; }
+
+    [Field(7, 8), Primary]
+    public string IcaoCode { get; set; }
 
     /// <summary>
     /// <c>FIR/UIR Address (ADDRESS)</c> field.
