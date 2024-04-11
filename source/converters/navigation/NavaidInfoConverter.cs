@@ -2,7 +2,7 @@ using Arinc424.Navigation.Terms;
 
 namespace Arinc424.Converters;
 
-internal class NavaidInfoConverter : ICharConverter<NavaidInfoConverter, NavaidInfo>
+internal abstract class NavaidInfoConverter : ICharConverter<NavaidInfoConverter, NavaidInfo>
 {
     public static NavaidInfo Convert(char @char) => char.IsWhiteSpace(@char) ? NavaidInfo.Voice : @char switch
     {

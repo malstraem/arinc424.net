@@ -2,7 +2,7 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Converters;
 
-internal class OverlayConverter : ICharConverter<OverlayConverter, Overlay>
+internal abstract class OverlayConverter : ICharConverter<OverlayConverter, Overlay>
 {
     public static Overlay Convert(char @char) => @char switch
     {

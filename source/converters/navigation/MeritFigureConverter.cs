@@ -2,7 +2,7 @@ using Arinc424.Navigation.Terms;
 
 namespace Arinc424.Converters;
 
-internal class MeritFigureConverter : ICharConverter<MeritFigureConverter, MeritFigure>
+internal abstract class MeritFigureConverter : ICharConverter<MeritFigureConverter, MeritFigure>
 {
     public static MeritFigure Convert(char @char) => @char switch
     {

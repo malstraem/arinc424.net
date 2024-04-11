@@ -2,9 +2,6 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <see cref="DepartureQualifiers"/>.
-/// </summary>
 internal abstract class DepartureQualifiersConverter : IStringConverter<DepartureQualifiersConverter, DepartureQualifiers>
 {
     public static DepartureQualifiers Convert(ReadOnlySpan<char> @string) => @string[0] switch

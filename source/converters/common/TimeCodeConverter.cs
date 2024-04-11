@@ -1,6 +1,6 @@
 namespace Arinc424.Converters;
 
-internal class TimeCodeConverter : ICharConverter<TimeCodeConverter, TimeCode>
+internal abstract class TimeCodeConverter : ICharConverter<TimeCodeConverter, TimeCode>
 {
     public static TimeCode Convert(char @char) => @char switch
     {

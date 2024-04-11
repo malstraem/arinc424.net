@@ -8,9 +8,6 @@ internal abstract class NavigationPerformanceConverter : IStringConverter<Naviga
 
         int exp = @string[2] - '0';
 
-        if (exp != 0)
-            value /= 10 * exp;
-
-        return value;
+        return exp != 0 ? value / 10 * exp : value;
     }
 }

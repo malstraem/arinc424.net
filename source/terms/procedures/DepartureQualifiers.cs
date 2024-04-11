@@ -5,43 +5,43 @@ namespace Arinc424.Procedures.Terms;
 /// </summary>
 /// <remarks>See table 5-5.</remarks>
 [Flags]
-public enum DepartureQualifiers : uint
+public enum DepartureQualifiers : ushort
 {
-    Unknown = 0u,
+    Unknown = 0,
     /// <summary>
     /// DME required.
     /// </summary>
-    DistanceEquipment = 1u,
+    DistanceEquipment = 1,
     /// <summary>
     /// GNSS required.
     /// </summary>
-    GlobalNavigation = 1u << 1,
+    GlobalNavigation = 1 << 1,
     /// <summary>
     /// Radar required.
     /// </summary>
-    Radar = 1u << 2,
+    Radar = 1 << 2,
     /// <summary>
     /// Helicopter SID from Runway.
     /// </summary>
-    Helicopter = 1u << 3,
+    Helicopter = 1 << 3,
     /// <summary>
     /// RNP SAAAR/AR.
     /// </summary>
-    NavPerformance = 1u << 4,
+    NavPerformance = 1 << 4,
     /// <summary>
     /// VOR/DME RNAV.
     /// </summary>
-    AreaNavigation = 1u << 5,
+    AreaNavigation = 1 << 5,
     /// <summary>
     /// Database supported RNAV.
     /// </summary>
-    DatabaseAreaNavigation = 1u << 6,
+    DatabaseAreaNavigation = 1 << 6,
     /// <summary>
     /// FMS required.
     /// </summary>
-    FlightManagement = 1u << 7,
+    FlightManagement = 1 << 7,
     /// <summary>
     /// Conventional Departures.
     /// </summary>
-    Conventional = 1u << 8,
+    Conventional = 1 << 8
 }

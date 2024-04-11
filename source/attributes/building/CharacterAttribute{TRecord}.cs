@@ -3,8 +3,7 @@ namespace Arinc424.Attributes;
 /// <summary>
 /// Specifies the target character index within an ARINC-424 string.
 /// </summary>
-/// <param name="targetType">The target type for which the index is defined.</param>
-/// <remarks>Used by sequence or base types to define different positions.</remarks>
+/// <remarks>Used by sequence or base types to define different indexes.</remarks>
 internal abstract class TargetCharacterAttribute(int index, Type targetType) : CharacterAttribute(index)
 {
     /// <summary>

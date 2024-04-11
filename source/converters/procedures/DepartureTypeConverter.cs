@@ -2,9 +2,6 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <see cref="DepartureType"/>.
-/// </summary>
 internal abstract class DepartureTypeConverter : ICharConverter<DepartureTypeConverter, DepartureType>
 {
     public static DepartureType Convert(char @char) => @char switch

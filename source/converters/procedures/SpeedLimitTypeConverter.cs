@@ -2,7 +2,7 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Converters;
 
-internal class SpeedLimitTypeConverter : ICharConverter<SpeedLimitTypeConverter, SpeedLimitType>
+internal abstract class SpeedLimitTypeConverter : ICharConverter<SpeedLimitTypeConverter, SpeedLimitType>
 {
     public static SpeedLimitType Convert(char @char) => char.IsWhiteSpace(@char) ? SpeedLimitType.Mandatory : @char switch
     {

@@ -2,7 +2,7 @@ using Arinc424.Navigation.Terms;
 
 namespace Arinc424.Converters;
 
-internal class OmnidirectionalTypeConverter : IStringConverter<OmnidirectionalTypeConverter, NavaidType>
+internal abstract class OmnidirectionalTypeConverter : IStringConverter<OmnidirectionalTypeConverter, NavaidType>
 {
     public static NavaidType Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {

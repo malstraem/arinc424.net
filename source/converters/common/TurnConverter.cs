@@ -1,9 +1,6 @@
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <see cref="Turn"/>.
-/// </summary>
-internal class TurnConverter : ICharConverter<TurnConverter, Turn>
+internal abstract class TurnConverter : ICharConverter<TurnConverter, Turn>
 {
     public static Turn Convert(char @char) => @char switch
     {

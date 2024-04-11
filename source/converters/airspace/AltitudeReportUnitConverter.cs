@@ -3,7 +3,7 @@ using Arinc424.Converters;
 
 namespace Arinc424.Airspace;
 
-internal class AltitudeReportUnitConverter : ICharConverter<AltitudeReportUnitConverter, AltitudeReportUnit>
+internal abstract class AltitudeReportUnitConverter : ICharConverter<AltitudeReportUnitConverter, AltitudeReportUnit>
 {
     public static AltitudeReportUnit Convert(char @char) => @char switch
     {

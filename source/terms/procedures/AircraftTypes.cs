@@ -5,47 +5,47 @@ namespace Arinc424.Procedures.Terms;
 /// </summary>
 /// <remarks>See section 5.301.</remarks>
 [Flags]
-public enum AircraftTypes : uint
+public enum AircraftTypes : ushort
 {
-    Unknown = 0u,
+    Unknown = 0,
     /// <summary>
     /// Aircraft Category A only.
     /// </summary>
-    CategoryA = 1u,
+    CategoryA = 1,
     /// <summary>
     /// Aircraft Category B only.
     /// </summary>
-    CategoryB = 1u << 1,
+    CategoryB = 1 << 1,
     /// <summary>
     /// Aircraft Category C only.
     /// </summary>
-    CategoryC = 1u << 2,
+    CategoryC = 1 << 2,
     /// <summary>
     /// Aircraft Category D only.
     /// </summary>
-    CategoryD = 1u << 3,
+    CategoryD = 1 << 3,
     /// <summary>
     /// Aircraft Category E only.
     /// </summary>
-    CategoryE = 1u << 4,
+    CategoryE = 1 << 4,
     /// <summary>
     /// Aircraft Category H – (Helicopter) only.
     /// </summary>
-    Helicopter = 1u << 5,
+    Helicopter = 1 << 5,
     /// <summary>
     /// Aircraft Type Not Limited.
     /// </summary>
-    NotLimited = 1u << 6,
+    NotLimited = 1 << 6,
     /// <summary>
     /// Aircraft Type Turbojet only.
     /// </summary>
-    Turbojet = 1u << 7,
+    Turbojet = 1 << 7,
     /// <summary>
     /// Aircraft Type Turboprop only.
     /// </summary>
-    Turboprop = 1u << 8,
+    Turboprop = 1 << 8,
     /// <summary>
     /// Aircraft Type Prop only.
     /// </summary>
-    Prop = 1u << 9,
+    Prop = 1 << 9,
 }

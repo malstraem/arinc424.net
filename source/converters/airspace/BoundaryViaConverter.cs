@@ -2,9 +2,6 @@ using Arinc424.Airspace.Terms;
 
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <see cref="BoundaryVia"/>.
-/// </summary>
 internal abstract class BoundaryViaConverter : ICharConverter<BoundaryViaConverter, BoundaryVia>
 {
     public static BoundaryVia Convert(char @char) => @char switch

@@ -1,6 +1,9 @@
 namespace Arinc424.Attributes;
 
-/// <inheritdoc cref="FieldAttribute"/>
+/// <summary>
+/// Specifies the target field range within an ARINC-424 string.
+/// </summary>
+/// <remarks>Used by sequence or base types to define different ranges.</remarks>
 internal abstract class TargetFieldAttribute(int start, int end, Type targetType) : FieldAttribute(start, end)
 {
     /// <summary>

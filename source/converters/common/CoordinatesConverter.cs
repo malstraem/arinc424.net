@@ -1,6 +1,6 @@
 namespace Arinc424.Converters;
 
-internal class CoordinatesConverter : IStringConverter<CoordinatesConverter, Coordinates>
+internal abstract class CoordinatesConverter : IStringConverter<CoordinatesConverter, Coordinates>
 {
     public static Coordinates Convert(ReadOnlySpan<char> @string)
     {
@@ -10,18 +10,12 @@ internal class CoordinatesConverter : IStringConverter<CoordinatesConverter, Coo
 
         double latitude = degrees + (minutes / 60) + (centiseconds / 360000);
 
-        if (@string[0] is 'S')
-            latitude = -latitude;
-
         degrees = double.Parse(@string[10..13]);
         minutes = double.Parse(@string[13..15]);
         centiseconds = double.Parse(@string[15..19]);
 
         double longitude = degrees + (minutes / 60) + (centiseconds / 360000);
 
-        if (@string[0] is 'W')
-            longitude = -longitude;
-
-        return new Coordinates(latitude, longitude);
+        return new Coordinates(@string[0] is 'S' ? -latitude : latitude, @string[9] is 'W' ? -longitude : longitude);
     }
 }

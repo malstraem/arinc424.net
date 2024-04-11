@@ -5,4 +5,4 @@ namespace Arinc424.Attributes;
 /// </summary>
 /// <inheritdoc/>
 [AttributeUsage(AttributeTargets.Property)]
-internal class FieldAttribute(int start, int end) : RangeAttribute(start, end) { }
+internal class FieldAttribute(int start, int end) : RangeAttribute(start, end);

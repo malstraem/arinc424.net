@@ -6,8 +6,5 @@ namespace Arinc424.Attributes;
 /// <remarks>Note that the index are exactly the same as those defined in the specification.</remarks>
 internal abstract class IndexAttribute(int index) : Attribute
 {
-    /// <summary>
-    /// Index within an string.
-    /// </summary>
     internal int Index { get; } = index - 1;
 }

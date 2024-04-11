@@ -21,13 +21,13 @@ The NuGet package will be deployed once the API is stabilized.
 
 - Grid MORA 🚧
 - Navaid
-  - VHF Navaid 🚧
-  - NDB Navaid 🚧
+  - VHF Navaid ✔️
+  - NDB Navaid ✔️
   - TACAN 🚧
 - Enroute
   - Waypoints ✔️
   - Airway Markers 🚧
-  - Holding Patterns 🚧
+  - Holding Patterns ✔️
   - Airways and Routes ✔️
   - Special Activity Areas 🚧
   - Preferred Routes 🚧
@@ -45,13 +45,13 @@ The NuGet package will be deployed once the API is stabilized.
   - Reference Points ✔️
   - Gates 🚧
   - Terminal Waypoints ✔️
-  - SID/STAR/Approach Procedures 🚧
+  - SID/STAR/Approach Procedures ✔️
   - Runways ✔️
   - Localizer/Glide Slope 🚧
   - TAA 🚧
   - MLS 🚧
   - Localizer Marker 🚧
-  - Terminal NDB 🚧
+  - Terminal NDB ✔️
   - SBAS Path Point 🚧
   - GBAS Path Point 🚧
   - Flight Planning 🚧
@@ -67,6 +67,6 @@ The NuGet package will be deployed once the API is stabilized.
   - Geographical Reference 🚧
   - Communication Type 🚧
 - Airspace
-  - Controlled Airspace 🚧
-  - FIR/UIR 🚧
-  - Restrictive Airspace 🚧
+  - Controlled Airspace ✔️
+  - FIR/UIR ✔️
+  - Restrictive Airspace ✔️

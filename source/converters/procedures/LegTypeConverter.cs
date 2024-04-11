@@ -2,9 +2,6 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <see cref="LegType"/>.
-/// </summary>
 internal abstract class LegTypeConverter : IStringConverter<LegTypeConverter, LegType>
 {
     public static LegType Convert(ReadOnlySpan<char> @string) => @string switch

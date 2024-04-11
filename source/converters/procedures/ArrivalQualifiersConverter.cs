@@ -2,7 +2,7 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Converters;
 
-internal class ArrivalQualifiersConverter : IStringConverter<ArrivalQualifiersConverter, ArrivalQualifiers>
+internal abstract class ArrivalQualifiersConverter : IStringConverter<ArrivalQualifiersConverter, ArrivalQualifiers>
 {
     public static ArrivalQualifiers Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {

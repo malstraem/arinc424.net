@@ -2,10 +2,7 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <see cref="AircraftTypes"/>.
-/// </summary>
-internal class AircraftTypesConverter : ICharConverter<AircraftTypesConverter, AircraftTypes>
+internal abstract class AircraftTypesConverter : ICharConverter<AircraftTypesConverter, AircraftTypes>
 {
     public static AircraftTypes Convert(char @char) => @char switch
     {

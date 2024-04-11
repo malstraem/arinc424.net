@@ -2,9 +2,6 @@ using Arinc424.Routing.Terms;
 
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <see cref="BoundaryCode"/>.
-/// </summary>
 internal abstract class BoundaryCodeConverter : ICharConverter<BoundaryCodeConverter, BoundaryCode>
 {
     public static BoundaryCode Convert(char @char) => @char switch

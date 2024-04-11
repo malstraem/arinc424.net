@@ -2,9 +2,6 @@ using Arinc424.Routing.Terms;
 
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <see cref="AirwayType"/>.
-/// </summary>
 internal abstract class AirwayTypeConverter : ICharConverter<AirwayTypeConverter, AirwayType>
 {
     public static AirwayType Convert(char @char) => @char switch

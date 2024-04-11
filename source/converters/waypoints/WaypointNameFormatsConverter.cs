@@ -2,7 +2,7 @@ using Arinc424.Waypoints.Terms;
 
 namespace Arinc424.Converters;
 
-internal class WaypointNameFormatsConverter : IStringConverter<WaypointNameFormatsConverter, WaypointNameFormats>
+internal abstract class WaypointNameFormatsConverter : IStringConverter<WaypointNameFormatsConverter, WaypointNameFormats>
 {
     public static WaypointNameFormats Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {

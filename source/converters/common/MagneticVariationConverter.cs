@@ -9,11 +9,6 @@ internal abstract class MagneticVariationConverter : IStringConverter<MagneticVa
 
         float degrees = float.Parse(@string[1..]) / 10;
 
-        return @string[0] switch
-        {
-            'E' => degrees,
-            'W' => -degrees,
-            _ => throw new ConvertException(@string.ToString(), $"'{@string[0]}' is not valid type of magnetic variation")
-        };
+        return @string[0] is 'W' ? -degrees : degrees;
     }
 }

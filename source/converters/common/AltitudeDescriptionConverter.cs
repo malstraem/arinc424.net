@@ -1,6 +1,6 @@
 namespace Arinc424.Converters;
 
-internal class AltitudeDescriptionConverter : ICharConverter<AltitudeDescriptionConverter, AltitudeDescription>
+internal abstract class AltitudeDescriptionConverter : ICharConverter<AltitudeDescriptionConverter, AltitudeDescription>
 {
     public static AltitudeDescription Convert(char @char) => char.IsWhiteSpace(@char) ? AltitudeDescription.AtFirst : @char switch
     {

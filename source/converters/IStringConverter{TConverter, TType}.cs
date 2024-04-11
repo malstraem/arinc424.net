@@ -8,7 +8,9 @@ internal interface IStringConverter
     static abstract object Convert(ReadOnlySpan<char> @string);
 }
 
-/// <inheritdoc cref="IStringConverter"/>
+/// <summary>
+/// Converter that decodes string to <typeparamref name="TType"/> according to the specification.
+/// </summary>
 /// <typeparam name="TSelf">Converter itself.</typeparam>
 /// <typeparam name="TType">Provided type.</typeparam>
 internal interface IStringConverter<TSelf, TType> : IStringConverter where TType : notnull
