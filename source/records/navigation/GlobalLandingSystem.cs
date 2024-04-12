@@ -1,6 +1,6 @@
 using Arinc424.Attributes;
 
-namespace Arinc424.Ports;
+namespace Arinc424.Navigation;
 
 /// <summary>
 /// <c>GLS</c> primary record.

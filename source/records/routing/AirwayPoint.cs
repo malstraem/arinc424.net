@@ -76,7 +76,7 @@ public class AirwayPoint : Record424
     public Course Out { get; set; }
 
     /// <summary>
-    /// <c>Route Distance From(RTE DIST FROM)</c> field.
+    /// <c>Route Distance From (RTE DIST FROM)</c> field.
     /// </summary>
     /// <value>Nautical miles and tenths of mile.</value>
     /// <remarks>See section 5.27.</remarks>

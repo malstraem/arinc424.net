@@ -84,19 +84,19 @@
     <remarks>See section 5.53.</remarks>
   </member>
 
+  <member name="Name">
+    <summary>
+      <c>Name</c> field.
+    </summary>
+    <remarks>See section 5.60 and 5.71.</remarks>
+  </member>
+
   <member name="TCH">
     <summary>
       <c>Threshold Crossing Height (TCH)</c> field.
     </summary>
     <value>Feet.</value>
     <remarks>See section 5.67.</remarks>
-  </member>
-
-  <member name="Name">
-    <summary>
-      <c>Name</c> field.
-    </summary>
-    <remarks>See section 5.71.</remarks>
   </member>
 
   <member name="SpeedLimit">

@@ -6,8 +6,6 @@ using Arinc424.Ports;
 
 namespace Arinc424.Navigation;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>VHF NAVAID</c> primary record.
 /// </summary>
@@ -33,8 +31,8 @@ public class OmnidirectionalStation : Navaid
     /// <c>Station Declination (STN DEC)</c> field.
     /// </summary>
     /// <remarks>See section 5.66.</remarks>
-    [Field(75, 79)]
-    public string? StationDeclination { get; set; }
+    [Field(75, 79), Obsolete("TODO")]
+    public string StationDeclination { get; set; }
 
     /// <summary>
     /// <c>DME Elevation (DME ELEV)</c> field.

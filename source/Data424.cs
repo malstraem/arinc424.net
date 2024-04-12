@@ -9,10 +9,12 @@ using Arinc424.Waypoints;
 namespace Arinc424;
 
 /// <summary>
-/// Data container that representing <c>ARINC 424</c> database.
+/// Container that representing <c>ARINC 424</c> database.
 /// </summary>
 public class Data424
 {
+    public List<Gate> Gates { get; set; } = [];
+
     public List<Runway> Runways { get; set; } = [];
 
     public List<Airway> Airways { get; set; } = [];
@@ -24,6 +26,8 @@ public class Data424
     public List<AirportArrival> AirportArrivals { get; set; } = [];
 
     public List<AirportDeparture> AirportDepartures { get; set; } = [];
+
+    public List<InstrumentLandingSystem> InstrumentLandingSystems { get; set; } = [];
 
     public List<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; } = [];
 

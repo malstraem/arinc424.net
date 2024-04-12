@@ -101,7 +101,7 @@ public class Airport : Geo, IIcao, IIdentity
     /// </summary>
     /// <remarks>See section 5.178.</remarks>
     [Field(82, 84)]
-    public string TimeZone { get; set; }
+    public string? TimeZone { get; set; }
 
     /// <summary>
     /// <c>Daylight Time Indicator (DAY TIME)</c> character.
@@ -116,17 +116,29 @@ public class Airport : Geo, IIcao, IIdentity
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
     [Field(87, 89)]
-    public string DatumCode { get; set; }
+    public string? DatumCode { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
     [Field(94, 123)]
-    public string Name { get; set; }
+    public string? Name { get; set; }
+
+    /// <summary>
+    /// Gates associated with this airport.
+    /// </summary>
+    [Many]
+    public List<Gate> Gates { get; set; } = [];
 
     /// <summary>
     /// Runways associated with this airport.
     /// </summary>
     [Many]
     public List<Runway> Runways { get; set; } = [];
+
+    /// <summary>
+    /// ILS associated with this airport.
+    /// </summary>
+    [Many]
+    public List<InstrumentLandingSystem> InstrumentLandingSystems { get; set; } = [];
 
     /// <summary>
     /// Approach Procedures associated with this airport.

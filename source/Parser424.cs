@@ -130,6 +130,7 @@ internal partial class Parser424
     {
         Parallel.Invoke
         (
+            Construct<Gate>,
             Construct<Runway>,
             Construct<Airport>,
             Construct<AirportBeacon>,
@@ -139,6 +140,7 @@ internal partial class Parser424
             Construct<NondirectionalBeacon>,
             Construct<OmnidirectionalStation>,
             Construct<MicrowaveLandingSystem>,
+            Construct<InstrumentLandingSystem>,
             Construct<AirportTerminalWaypoint>,
 
             Construct<Airway, AirwayPoint>,
