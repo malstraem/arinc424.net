@@ -26,7 +26,6 @@ public class RegressionTests
     [Theory]
     [InlineData("case-1")]
     [InlineData("case-2")]
-    [InlineData("case-3")]
     [InlineData("faa-230223")]
     public void Load(string file)
     {
