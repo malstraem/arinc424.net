@@ -6,7 +6,7 @@ namespace Arinc424.Procedures;
 /// <c>Heliport Approach</c> primary record.
 /// </summary>
 /// <remarks>See section 4.2.3.1.</remarks>
-[Record('H', 'F', subsectionIndex: 13)]
+[Section('H', 'F', subsectionIndex: 13)]
 [Obsolete("placeholder")]
 public class HeliportApproach : Approach
 {

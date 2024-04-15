@@ -14,7 +14,7 @@ namespace Arinc424.Ports;
 /// <c>Airport</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.7.1.</remarks>
-[Record('P', 'A', subsectionIndex: 13), Continuous]
+[Section('P', 'A', subsectionIndex: 13), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
 public class Airport : Geo, IIcao, IIdentity
 {
@@ -116,7 +116,7 @@ public class Airport : Geo, IIcao, IIdentity
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
     [Field(87, 89)]
-    public string? DatumCode { get; set; }
+    public string? Datum { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
     [Field(94, 123)]

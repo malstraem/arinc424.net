@@ -9,7 +9,7 @@ namespace Arinc424.Procedures;
 /// <c>Airport Approach</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.9.1.</remarks>
-[Record('P', 'F', subsectionIndex: 13)]
+[Section('P', 'F', subsectionIndex: 13)]
 public class AirportApproach : Approach
 {
     [Foreign(7, 12)]

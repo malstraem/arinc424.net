@@ -1,14 +1,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 
-using Arinc424.Airspace;
-using Arinc424.Building;
-using Arinc424.Navigation;
-using Arinc424.Ports;
-using Arinc424.Procedures;
-using Arinc424.Routing;
-using Arinc424.Tables;
-using Arinc424.Waypoints;
+using Arinc424.Attributes;
 
 namespace Arinc424;
 
@@ -23,14 +16,12 @@ internal partial class Parser424
 
     internal Parser424()
     {
-        foreach (var (type, _) in Meta424.RecordInfos)
+        foreach (var (_, type) in Meta424.Types)
         {
+            records[type] = [];
             primary[type] = [];
             continuation[type] = [];
         }
-
-        foreach (var type in Meta424.RecordTypes)
-            records[type] = [];
     }
 
     private void Process(IEnumerable<string> strings)
@@ -45,18 +36,18 @@ internal partial class Parser424
         // (branching, apparently, will not give any tangible gain)
         bool TryEnqueue(string @string)
         {
-            foreach (var (type, info) in Meta424.RecordInfos)
+            foreach (var (type, info) in Meta424.Infos)
             {
-                if (!info.IsMatch(@string))
+                if (!info.Section.IsMatch(@string))
                     continue;
 
-                if (info.continuationIndex is null)
+                if (info.ContinuationIndex is null)
                 {
                     primary[type].Enqueue(@string);
                 }
                 else
                 {
-                    int index = info.continuationIndex.Value;
+                    int index = info.ContinuationIndex.Value;
 
                     (@string[index] is '0' or '1' ? primary[type] : continuation[type]).Enqueue(@string);
                 }
@@ -66,100 +57,51 @@ internal partial class Parser424
         }
     }
 
-    /// <summary>
-    /// Constructs <see cref="Record424"/> objects type of <typeparamref name="TRecord"/>.
-    /// </summary>
-    /// <typeparam name="TRecord">Target type of records.</typeparam>
-    private void Construct<TRecord>() where TRecord : Record424, new()
+    private void BuildSequences()
     {
-        var type = typeof(TRecord);
+        _ = Parallel.ForEach(Meta424.Sequences, sequence =>
+        {
+            if (!primary[sequence.Type].TryDequeue(out string? @string))
+                return;
 
-        while (primary[type].TryDequeue(out string? @string))
-            records[type].Enqueue(RecordBuilder<TRecord>.Build(@string));
+            Queue<string> strings = [];
+
+            int number = int.Parse(@string[sequence.Range]);
+
+            do
+            {
+                int next = int.Parse(@string[sequence.Range]);
+
+                if (next < number)
+                    ConstructSequence(strings, sequence);
+
+                number = next;
+
+                strings.Enqueue(@string);
+            }
+            while (primary[sequence.Type].TryDequeue(out @string));
+
+            ConstructSequence(strings, sequence);
+
+            void ConstructSequence(Queue<string> strings, SequenceAttribute sequence) => records[sequence.Type].Enqueue(sequence.Build(strings));
+        });
     }
 
-    /// <summary>
-    /// Constructs <see cref="Record424{TSub}"/> type of <typeparamref name="TRecord"/> with sequence type of <typeparamref name="TSub"/>.
-    /// </summary>
-    /// <typeparam name="TRecord">Target type of records.</typeparam>
-    /// <typeparam name="TSub">Target sequence type.</typeparam>
-    /// <returns>Constructed records or empty.</returns>
-    private void Construct<TRecord, TSub>() where TRecord : Record424<TSub>, new()
-                                            where TSub : Record424, new()
+    private void Build()
     {
-        var type = typeof(TRecord);
-        var subType = typeof(TSub);
-
-        if (!primary[type].TryDequeue(out string? @string))
-            return;
-
-        Queue<string> sequence = [];
-
-        var sequenceRange = ((SequencedRecordInfo)Meta424.RecordInfos[type]).SequenceRange;
-
-        int number = int.Parse(@string[sequenceRange]);
-
-        do
+        _ = Parallel.ForEach(Meta424.Records, record =>
         {
-            int next = int.Parse(@string[sequenceRange]);
+            while (primary[record.Type].TryDequeue(out string? @string))
+                records[record.Type].Enqueue(record.Build(@string));
+        });
 
-            if (next < number)
-                ConstructSequenced(sequence);
-
-            number = next;
-
-            sequence.Enqueue(@string);
-        }
-        while (primary[type].TryDequeue(out @string));
-
-        ConstructSequenced(sequence);
-
-        void ConstructSequenced(Queue<string> sequence)
-        {
-            var sequencedRecord = RecordBuilder<TRecord, TSub>.Build(sequence);
-
-            records[type].Enqueue(sequencedRecord);
-
-            foreach (var sub in sequencedRecord.Sequence)
-                records[subType].Enqueue(sub);
-        }
-    }
-
-    [Obsolete("TODO: use meta info instead of generic to prepare for continuation records parsing")]
-    private void Construct()
-    {
-        Parallel.Invoke
-        (
-            Construct<Gate>,
-            Construct<Runway>,
-            Construct<Airport>,
-            Construct<AirportBeacon>,
-            Construct<HoldingPattern>,
-            Construct<FlightPlanning>,
-            Construct<EnrouteWaypoint>,
-            Construct<NondirectionalBeacon>,
-            Construct<OmnidirectionalStation>,
-            Construct<MicrowaveLandingSystem>,
-            Construct<InstrumentLandingSystem>,
-            Construct<AirportTerminalWaypoint>,
-
-            Construct<Airway, AirwayPoint>,
-            Construct<AirportApproach, ApproachPoint>,
-            Construct<AirportArrival, ArrivalPoint>,
-            Construct<AirportDeparture, DeparturePoint>,
-
-            Construct<FlightInfoRegion, InfoRegionPoint>,
-            Construct<ControlledAirspace, BoundaryPoint>,
-            Construct<RestrictiveAirspace, BoundaryPoint>,
-
-            Construct<CruiseTable, CruiseTableRow>
-        );
+        BuildSequences();
     }
 
     internal Data424 Parse(IEnumerable<string> strings)
     {
         Process(strings);
-        Construct();
+        Build();
         Link();
 
         var data = new Data424();

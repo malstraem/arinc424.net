@@ -10,7 +10,7 @@ namespace Arinc424.Procedures;
 /// </summary>
 /// <remarks>See section 4.1.9.1.</remarks>
 
-[Record('P', 'D', subsectionIndex: 13)]
+[Section('P', 'D', subsectionIndex: 13)]
 public class AirportDeparture : Departure
 {
     [Foreign(7, 12)]

@@ -6,7 +6,7 @@ namespace Arinc424.Ports;
 /// <c>Heliport Communications</c> primary record.
 /// </summary>
 /// <remarks>See section 4.2.5.1.</remarks>
-[Record('H', 'V', subsectionIndex: 13)]
+[Section('H', 'V', subsectionIndex: 13)]
 [Obsolete("placeholder")]
 public class HeliportCommunications : Record424
 {

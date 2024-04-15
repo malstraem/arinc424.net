@@ -14,7 +14,7 @@ namespace Arinc424.Procedures;
 /// and <see cref="AirportArrival"/> like subsequence.
 /// </summary>
 [DebuggerDisplay($"Fix - {{{nameof(Fix)}}}")]
-public class ProcedurePoint : Record424
+public abstract class ProcedurePoint : Record424
 {
     [Type(37, 38)]
     [Foreign<Runway, AirportTerminalWaypoint, AirportBeacon>(7, 12), Foreign(30, 36)]
@@ -46,7 +46,7 @@ public class ProcedurePoint : Record424
     [Obsolete("TODO abstract navaid instead of geo point")]
     [Type(79, 80)]
     [Foreign<AirportBeacon>(7, 12), Foreign(51, 56)]
-    public Geo? RecommendedNavaid { get; set; }
+    public Navaid? RecommendedNavaid { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
     [Field(57, 62), Decode<ThousandsConverter>]

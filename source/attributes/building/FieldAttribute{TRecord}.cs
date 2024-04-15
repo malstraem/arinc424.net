@@ -12,7 +12,9 @@ internal abstract class TargetFieldAttribute(int start, int end, Type targetType
     internal Type TargetType { get; } = targetType;
 }
 
-/// <inheritdoc cref="FieldAttribute"/>
+/// <summary>
+/// Specifies the target field range for <typeparamref name="TRecord"/> within an ARINC-424 string.
+/// </summary>
 /// <typeparam name="TRecord">Target record type in which the field is defined.</typeparam>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 internal class FieldAttribute<TRecord>(int start, int end) : TargetFieldAttribute(start, end, typeof(TRecord)) where TRecord : Record424;

@@ -3,4 +3,9 @@
     <OutputType>library</OutputType>
     <RootNamespace>Arinc424</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="meta\**" />
+    <EmbeddedResource Remove="meta\**" />
+    <None Remove="meta\**" />
+  </ItemGroup>
 </Project>

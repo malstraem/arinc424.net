@@ -1,7 +1,40 @@
 using System.Reflection;
 
+using Arinc424.Airspace;
 using Arinc424.Attributes;
-using Arinc424.Linking;
+using Arinc424.Navigation;
+using Arinc424.Ports;
+using Arinc424.Procedures;
+using Arinc424.Routing;
+using Arinc424.Tables;
+using Arinc424.Waypoints;
+
+[assembly:
+Record<Gate>,
+Record<Runway>,
+Record<Airport>,
+Record<AirportBeacon>,
+Record<HoldingPattern>,
+Record<FlightPlanning>,
+Record<EnrouteWaypoint>,
+Record<SpecialActivityArea>,
+Record<GlobalLandingSystem>,
+Record<NondirectionalBeacon>,
+Record<OmnidirectionalStation>,
+Record<MicrowaveLandingSystem>,
+Record<InstrumentLandingSystem>,
+Record<AirportTerminalWaypoint>,
+
+Sequence<Airway, AirwayPoint>,
+Sequence<AirportArrival, ArrivalPoint>,
+Sequence<AirportApproach, ApproachPoint>,
+Sequence<AirportDeparture, DeparturePoint>,
+
+Sequence<FlightInfoRegion, InfoRegionPoint>,
+Sequence<ControlledAirspace, BoundaryPoint>,
+Sequence<RestrictiveAirspace, BoundaryPoint>,
+
+Sequence<CruiseTable, CruiseTableRow>]
 
 namespace Arinc424;
 
@@ -9,40 +42,20 @@ internal static class Meta424
 {
     static Meta424()
     {
-        var types = Assembly.GetExecutingAssembly().GetTypes();
+        var infos = Records.Cast<InfoAttribute>().Concat(Sequences);
 
-        foreach (var type in types)
+        foreach (var info in infos)
         {
-            if (type.IsSubclassOf(typeof(Record424)) && !type.IsAbstract)
-            {
-                RecordTypes.Add(type);
-
-                if (LinkingInfo.TryCreate(type, out var linkingInfo))
-                    LinkingInfos.Add(type, linkingInfo!);
-            }
-
-            var recordAttribute = type.GetCustomAttribute<RecordAttribute>();
-
-            if (recordAttribute is null)
-                continue;
-
-            var sequencedAttribute = type.GetCustomAttribute<SequencedAttribute>();
-
-            var recordInfo = sequencedAttribute is null
-                ? new RecordInfo(type, recordAttribute)
-                : new SequencedRecordInfo(type, recordAttribute, sequencedAttribute);
-
-            RecordInfos.Add(type, recordInfo);
-
-            SpecTypes.Add((recordInfo.sectionChar, recordInfo.subsectionChar), type);
+            Infos.Add(info.Type, info);
+            Types.Add((info.Section.SectionChar, info.Section.SubsectionChar), info.Type);
         }
     }
 
-    internal static List<Type> RecordTypes { get; } = [];
+    internal static Dictionary<(char, char), Type> Types { get; } = [];
 
-    internal static Dictionary<Type, RecordInfo> RecordInfos { get; } = [];
+    internal static Dictionary<Type, InfoAttribute> Infos { get; } = [];
 
-    internal static Dictionary<Type, LinkingInfo> LinkingInfos { get; } = [];
+    internal static IEnumerable<RecordAttribute> Records { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
 
-    internal static Dictionary<(char, char), Type> SpecTypes { get; } = [];
+    internal static IEnumerable<SequenceAttribute> Sequences { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<SequenceAttribute>();
 }

@@ -6,7 +6,7 @@ namespace Arinc424.Procedures;
 /// <c>Heliport STAR</c> primary record.
 /// </summary>
 /// <remarks>See section 4.2.3.1.</remarks>
-[Record('H', 'E', subsectionIndex: 13)]
+[Section('H', 'E', subsectionIndex: 13)]
 [Obsolete("placeholder")]
 public class HeliportArrival : Arrival
 {

@@ -12,7 +12,10 @@ internal abstract class TargetCharacterAttribute(int index, Type targetType) : C
     internal Type TargetType { get; } = targetType;
 }
 
-/// <inheritdoc/>
+/// <summary>
+/// Specifies the target character index for <typeparamref name="TRecord"/> within an ARINC-424 string.
+/// </summary>
+/// <remarks>Used by sequence or base types to define different indexes.</remarks>
 /// <typeparam name="TRecord">Target type of record that index is defined.</typeparam>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 internal class CharacterAttribute<TRecord>(int index) : TargetCharacterAttribute(index, typeof(TRecord));

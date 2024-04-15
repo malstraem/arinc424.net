@@ -8,7 +8,7 @@ namespace Arinc424.Tables;
 /// <c>Cruising Table</c> record.
 /// </summary>
 /// <remarks>See section 4.1.16.1.</remarks>
-[Record('T', 'C'), Sequenced(9)]
+[Section('T', 'C'), Sequenced(9)]
 public class CruiseTable : Record424<CruiseTableRow>, IIdentity
 {
     /// <summary>

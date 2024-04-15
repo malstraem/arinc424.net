@@ -1,5 +1,8 @@
 namespace Arinc424;
 
+/// <summary>
+/// An entity that has two character ICAO code.
+/// </summary>
 public interface IIcao
 {
     /// <summary>

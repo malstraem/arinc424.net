@@ -6,7 +6,7 @@ namespace Arinc424.Navigation;
 /// <c>TACAN-Only NAVAID</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.32.</remarks>
-[Record('D', 'T')]
+[Section('D', 'T')]
 [Obsolete("placeholder")]
 public class TacticalSystem : Record424
 {

@@ -6,7 +6,7 @@ namespace Arinc424.Navigation;
 #pragma warning disable CS8618
 
 /// <inheritdoc />
-[Record('P', 'N')]
+[Section('P', 'N')]
 public class AirportBeacon : NondirectionalBeacon
 {
     [Foreign(7, 12), Primary]
