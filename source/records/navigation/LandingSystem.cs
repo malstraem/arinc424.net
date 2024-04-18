@@ -12,17 +12,18 @@ namespace Arinc424.Navigation;
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, Airport - {{{nameof(Airport)}}}")]
 public abstract class LandingSystem : Geo, IIcao, IIdentity
 {
-    [Foreign(7, 12)]
+    [Foreign(7, 12), Primary]
     public Airport Airport { get; set; }
-
-    public string IcaoCode => Airport.IcaoCode;
 
     /// <summary>
     /// <c>Localizer/MLS/GLS Identifier (LOC, MLS, GLS IDENT)</c> field.
     /// </summary>
     /// <remarks>See section 5.44.</remarks>
-    [Field(14, 17)]
+    [Field(14, 17), Primary]
     public string Identifier { get; set; }
+
+    [Field(11, 12), Primary]
+    public string IcaoCode { get; set; }
 
     /// <inheritdoc cref="Terms.LandingSystemType"/>
     [Character(18), Transform<LandingSystemTypeConverter>]

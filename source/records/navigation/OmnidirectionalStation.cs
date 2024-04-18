@@ -6,8 +6,6 @@ using Arinc424.Ports;
 
 namespace Arinc424.Navigation;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>VHF NAVAID</c> primary record.
 /// </summary>

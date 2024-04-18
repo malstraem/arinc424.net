@@ -2,10 +2,7 @@
   <PropertyGroup>
     <OutputType>library</OutputType>
     <RootNamespace>Arinc424</RootNamespace>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Remove="meta\**" />
-    <EmbeddedResource Remove="meta\**" />
-    <None Remove="meta\**" />
-  </ItemGroup>
 </Project>
