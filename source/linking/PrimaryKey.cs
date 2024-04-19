@@ -6,9 +6,8 @@ namespace Arinc424.Linking;
 
 internal class PrimaryKey(int length, ReadOnlyMemory<Range> ranges) : Key(length, ranges)
 {
-    internal static bool TryCreate(PropertyInfo[] properties, out PrimaryKey? key)
+    internal static PrimaryKey? Create(PropertyInfo[] properties)
     {
-        key = null;
         int length = 0;
         List<Range> ranges = [];
 
@@ -40,11 +39,7 @@ internal class PrimaryKey(int length, ReadOnlyMemory<Range> ranges) : Key(length
             }
         }
 
-        if (ranges.Count == 0)
-            return false;
-
-        key = new(length, ranges.ToArray());
-        return true;
+        return ranges.Count == 0 ? null : new(length, ranges.ToArray());
     }
 
     internal string GetPrimaryKey(ReadOnlySpan<char> @string)

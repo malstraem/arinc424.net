@@ -23,7 +23,7 @@ internal class ForeignKey(int length, ReadOnlyMemory<Range> ranges, ReadOnlyMemo
         return new ForeignKey(keyLength, ranges.ToArray(), exceptAttributes.ToArray());
     }
 
-    internal bool TryGetKey(string @string, Type type, out string key)
+    internal bool TryGetKey(ReadOnlySpan<char> @string, Type type, out string key)
     {
         int index = 0, exceptIndex = 0;
 

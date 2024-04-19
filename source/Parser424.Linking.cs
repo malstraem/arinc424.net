@@ -21,11 +21,14 @@ internal partial class Parser424
     }
 
     [Obsolete("TODO diagnostic log")]
-    private void ProcessForeignKeys(Record424 record, InfoAttribute info)
+    private void ProcessForeignKeys(Record424 record, RelationAttribute relation)
     {
-        foreach (var reference in info.GetReferences(record))
+        foreach (var link in relation.Links!)
         {
-            if (!this.unique.TryGetValue(reference.Type, out var unique))
+            if (!link.TryGetReference(record.Source, out var reference))
+                continue;
+
+            if (!this.unique.TryGetValue(reference!.Type, out var unique))
             {
                 Debug.WriteLine($"Entity type '{reference.Type} not found in unique types"); // TODO: logging path
                 continue;
@@ -37,12 +40,19 @@ internal partial class Parser424
                 continue;
             }
 
-            reference.Property.SetValue(record, referenced);
+            try
+            {
+                reference.Property.SetValue(record, referenced);
 
-            var many = Meta424.Infos[reference.Type].Many;
+                var many = Meta424.Infos[reference.Type].Many;
 
-            if (many is not null && many.TryGetValue(info.Type, out var property))
-                _ = ((IList)property.GetValue(referenced)!).Add(record);
+                if (many is not null && many.TryGetValue(relation.Type, out var property))
+                    _ = ((IList)property.GetValue(referenced)!).Add(record);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex); // TODO: logging path
+            }
         }
     }
 
