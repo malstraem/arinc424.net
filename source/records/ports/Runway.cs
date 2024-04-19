@@ -11,7 +11,7 @@ namespace Arinc424.Ports;
 /// <c>Runway</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.10.1.</remarks>
-[Record('P', 'G', subsectionIndex: 13), Continuous]
+[Section('P', 'G', subsectionIndex: 13), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, Airport - {{{nameof(Airport)}}}")]
 public class Runway : Geo, IIdentity, IIcao
 {

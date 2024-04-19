@@ -14,10 +14,10 @@ namespace Arinc424.Procedures;
 /// and <see cref="AirportArrival"/> like subsequence.
 /// </summary>
 [DebuggerDisplay($"Fix - {{{nameof(Fix)}}}")]
-public class ProcedurePoint : Record424
+public abstract class ProcedurePoint : Record424
 {
     [Type(37, 38)]
-    [Foreign<Runway, AirportTerminalWaypoint, AirportBeacon>(7, 12), Foreign(30, 36)]
+    [ForeignExcept<Airport, EnrouteWaypoint, OmnidirectionalStation, NondirectionalBeacon>(7, 12), Foreign(30, 36)]
     public Geo? Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
@@ -45,8 +45,8 @@ public class ProcedurePoint : Record424
 
     [Obsolete("TODO abstract navaid instead of geo point")]
     [Type(79, 80)]
-    [Foreign<AirportBeacon>(7, 12), Foreign(51, 56)]
-    public Geo? RecommendedNavaid { get; set; }
+    [ForeignExcept<OmnidirectionalStation, NondirectionalBeacon>(7, 12), Foreign(51, 56)]
+    public Geo? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
     [Field(57, 62), Decode<ThousandsConverter>]
@@ -103,19 +103,20 @@ public class ProcedurePoint : Record424
     public int SpeedLimit { get; set; }
 
     /// <summary>
-    /// <c>Center Fix (CENTER FIX)</c>.
+    /// <c>Center Fix (CENTER FIX)</c> or <c>TAA Sector Identifier</c> field.
     /// </summary>
-    /// <remarks>See section 5.144.</remarks>
+    /// <remarks>See section 5.144 and 5.272.</remarks>
     [Type(115, 116)]
-    [Foreign<Runway, AirportTerminalWaypoint, AirportBeacon>(7, 12), Foreign(107, 111), Foreign(113, 114)]
-    public Geo? CenterFix { get; set; }
+    [ForeignExcept<Airport, OmnidirectionalStation, NondirectionalBeacon, EnrouteWaypoint>(7, 12)]
+    [Foreign(107, 111), Foreign(113, 114)]
+    public IIdentity? Center { get; set; }
 
     /// <summary>
     /// <c>Multiple Code (MULTI CD)</c> or <c>Procedure Turn Indicator</c> character.
     /// </summary>
     /// <remarks>See section 5.130 or 5.271.</remarks>
     [Character(112)]
-    public char CodeTaaIndicator { get; set; }
+    public char CodeTurnIndicator { get; set; }
 
     /// <inheritdoc cref="Terms.Overlay"/>
     [Character(117), Transform<OverlayConverter>]

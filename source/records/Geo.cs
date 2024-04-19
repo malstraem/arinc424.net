@@ -1,12 +1,14 @@
 using Arinc424.Airspace;
 using Arinc424.Attributes;
 using Arinc424.Converters;
+using Arinc424.Navigation;
 
 namespace Arinc424;
 
 public abstract class Geo : Record424
 {
-    [Decode<CoordinatesConverter>]
-    [Field(33, 51), Field<FlightInfoRegion>(35, 53)]
+    [Field(33, 51), Decode<CoordinatesConverter>]
+    [Field<FlightInfoRegion>(35, 53)]
+    [Field<GlobalLandingSystem>(56, 74)]
     public Coordinates Coordinates { get; set; }
 }

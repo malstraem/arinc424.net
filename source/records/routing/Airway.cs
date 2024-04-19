@@ -10,7 +10,7 @@ namespace Arinc424.Routing;
 /// <c>Enroute Airways</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.6.1.</remarks>
-[Record('E', 'R'), Continuous(39), Sequenced(26, 29)]
+[Section('E', 'R'), Continuous(39), Sequenced(26, 29)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class Airway : Record424<AirwayPoint>, IIdentity
 {

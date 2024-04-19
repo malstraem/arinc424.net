@@ -9,7 +9,7 @@ namespace Arinc424.Procedures;
 /// <c>Airport STAR</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.9.1.</remarks>
-[Record('P', 'E', subsectionIndex: 13)]
+[Section('P', 'E', subsectionIndex: 13)]
 public class AirportArrival : Arrival
 {
     [Foreign(7, 12)]

@@ -6,7 +6,7 @@ namespace Arinc424.Routing;
 /// <c>Airways Marker</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.15.1.</remarks>
-[Record('E', 'M')]
+[Section('E', 'M')]
 [Obsolete("placeholder")]
 public class AirwayMarker : Record424
 {

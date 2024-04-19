@@ -13,7 +13,7 @@ namespace Arinc424.Routing;
 /// <c>Holding Pattern</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.5.1.</remarks>
-[Record('E', 'P'), Continuous(39)]
+[Section('E', 'P'), Continuous(39)]
 [DebuggerDisplay($"Fix - {{{nameof(Fix)}}}")]
 public class HoldingPattern : Record424, IIcao
 {
@@ -28,7 +28,7 @@ public class HoldingPattern : Record424, IIcao
     public string? DuplicateIndicator { get; set; }
 
     [Type(37, 38)]
-    [Foreign<AirportBeacon, AirportTerminalWaypoint>(7, 12), Foreign(30, 36)]
+    [ForeignExcept<EnrouteWaypoint, OmnidirectionalStation, NondirectionalBeacon>(7, 12), Foreign(30, 36)]
     public Geo Fix { get; set; }
 
     /// <summary>

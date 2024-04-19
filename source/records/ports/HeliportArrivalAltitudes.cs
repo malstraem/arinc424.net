@@ -6,7 +6,7 @@ namespace Arinc424.Ports;
 /// <c>Heliport TAA</c> primary record.
 /// </summary>
 /// <remarks>See section 4.2.6.1.</remarks>
-[Record('H', 'K', subsectionIndex: 13)]
+[Section('H', 'K', subsectionIndex: 13)]
 [Obsolete("placeholder")]
 public class HeliportArrivalAltitudes : Record424
 {

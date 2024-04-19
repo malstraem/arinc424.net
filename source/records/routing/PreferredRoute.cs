@@ -6,7 +6,7 @@ namespace Arinc424.Routing;
 /// <c>Preferred Route</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.24.1.</remarks>
-[Record('E', 'T')]
+[Section('E', 'T')]
 [Obsolete("placeholder")]
 public class PreferredRoute : Record424
 {

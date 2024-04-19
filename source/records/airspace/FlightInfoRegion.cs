@@ -12,7 +12,7 @@ namespace Arinc424.Airspace;
 /// <c>FIR/UIR</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.17.1.</remarks>
-[Record('U', 'F'), Continuous(20), Sequenced(16, 19)]
+[Section('U', 'F'), Continuous(20), Sequenced(16, 19)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
 public class FlightInfoRegion : Record424<InfoRegionPoint>, IIdentity, IIcao
 {

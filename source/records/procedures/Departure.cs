@@ -3,7 +3,7 @@ using Arinc424.Converters;
 
 namespace Arinc424.Procedures;
 
-public class Departure : Procedure<DeparturePoint>
+public abstract class Departure : Procedure<DeparturePoint>
 {
     /// <inheritdoc cref="Terms.DepartureType"/>
     [Character(20), Transform<DepartureTypeConverter>]

@@ -4,30 +4,31 @@ using Arinc424.Attributes;
 
 namespace Arinc424.Linking;
 
-internal class Link(PropertyInfo property, ForeignAttribute[] foreigns, TypeAttribute? typeAttribute)
+internal class Link(PropertyInfo property, ForeignAttribute[] foreignAttributes, TypeAttribute? typeAttribute)
 {
-    private bool TryGetKey(string @string, Type linkType, out string key)
+    private readonly ForeignKey foreignKey = ForeignKey.Create(foreignAttributes);
+
+    private readonly PropertyInfo property = property;
+
+    private readonly TypeAttribute? typeAttribute = typeAttribute;
+
+    internal bool TryGetReference(string @string, out Reference? reference)
     {
-        key = string.Empty;
+        string key;
 
-        foreach (var foreign in foreigns)
-        {
-            if (foreign is TypedForeignAttribute exceptAttribute && !exceptAttribute.Types.Contains(linkType))
-                continue;
+        reference = null;
 
-            key += @string[foreign.Range].Replace(" ", null); // potentially need faster (unsafe?) way
-        }
-
-        return !string.IsNullOrEmpty(key);
-    }
-
-    internal bool TryGetKeyType(string @string, out string? key, out Type type)
-    {
-        key = null;
-        type = Property.PropertyType;
+        var type = property.PropertyType;
 
         if (typeAttribute is null)
-            return TryGetKey(@string, type, out key);
+        {
+            if (foreignKey.TryGetKey(@string, type, out key))
+            {
+                reference = new(key, type, property);
+                return true;
+            }
+            return false;
+        }
 
         char section = @string[typeAttribute.SectionIndex];
         char subsection = @string[typeAttribute.SubsectionIndex];
@@ -35,13 +36,11 @@ internal class Link(PropertyInfo property, ForeignAttribute[] foreigns, TypeAttr
         if (char.IsWhiteSpace(section) && char.IsWhiteSpace(subsection))
             return false;
 
-        if (Meta424.SpecTypes.TryGetValue((section, subsection), out var specType))
+        if (Meta424.Types.TryGetValue((section, subsection), out type) && foreignKey.TryGetKey(@string, type, out key))
         {
-            type = specType;
-            return TryGetKey(@string, type, out key);
+            reference = new(key, type, property);
+            return true;
         }
         return false;
     }
-
-    internal PropertyInfo Property { get; } = property;
 }

@@ -32,11 +32,11 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(75, 79), Decode<MagneticVariationConverter>]
-    public float DynamicMagneticVariation { get; set; }
+    public float MagneticVariation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
     [Field(85, 87)]
-    public string? DatumCode { get; set; }
+    public string? Datum { get; set; }
 
     /// <inheritdoc cref="Terms.WaypointNameFormats"/>
     [Field(96, 98), Decode<WaypointNameFormatsConverter>]

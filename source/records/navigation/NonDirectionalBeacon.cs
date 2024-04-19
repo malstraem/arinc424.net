@@ -7,7 +7,7 @@ namespace Arinc424.Navigation;
 /// <c>NDB Navaid</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.3.1.</remarks>
-[Record('D', 'B'), Continuous]
+[Section('D', 'B'), Continuous]
 public class NondirectionalBeacon : Navaid
 {
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>

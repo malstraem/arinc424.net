@@ -11,7 +11,7 @@ namespace Arinc424.Airspace;
 /// <c>Restrictive Airspace</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.18.1.</remarks>
-[Record('U', 'R'), Continuous(25), Sequenced(21, 24)]
+[Section('U', 'R'), Continuous(25), Sequenced(21, 24)]
 [DebuggerDisplay($"{{{nameof(IcaoCode)}}}, {{{nameof(Designation)}}}")]
 public class RestrictiveAirspace : Volume, IIcao
 {

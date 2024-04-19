@@ -2,5 +2,7 @@
   <PropertyGroup>
     <OutputType>library</OutputType>
     <RootNamespace>Arinc424</RootNamespace>
+
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 </Project>
