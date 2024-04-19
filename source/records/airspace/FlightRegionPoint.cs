@@ -2,7 +2,7 @@ using Arinc424.Attributes;
 
 namespace Arinc424.Airspace;
 
-public class InfoRegionPoint : BoundaryPoint
+public class FlightRegionPoint : BoundaryPoint
 {
     /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
     [Field(21, 24)]

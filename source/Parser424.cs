@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Concurrent;
 
 namespace Arinc424;
 
@@ -10,7 +9,7 @@ internal partial class Parser424
     private readonly Dictionary<Type, Queue<string>> primary = [];
     private readonly Dictionary<Type, Queue<string>> continuation = [];
 
-    private readonly Dictionary<Type, ConcurrentQueue<Record424>> records = [];
+    private readonly Dictionary<Type, Queue<Record424>> records = [];
 
     internal Parser424()
     {
