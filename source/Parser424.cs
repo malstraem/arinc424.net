@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Concurrent;
 
-using Arinc424.Attributes;
-
 namespace Arinc424;
 
 internal partial class Parser424
@@ -59,40 +57,34 @@ internal partial class Parser424
 
     private void BuildSequences()
     {
-        _ = Parallel.ForEach(Meta424.Sequences, sequence =>
+        _ = Parallel.ForEach(Meta424.Sequences, attribute =>
         {
-            if (!primary[sequence.Type].TryDequeue(out string? @string))
-                return;
+            var queue = records[attribute.Type];
+            var strings = primary[attribute.Type];
 
-            Queue<string> strings = [];
+            Queue<string> sequence = [];
 
-            int number = int.Parse(@string[sequence.Range]);
-
-            do
+            while (strings.TryDequeue(out string? @string))
             {
-                int next = int.Parse(@string[sequence.Range]);
+                sequence.Enqueue(@string);
 
-                if (next < number)
-                    ConstructSequence(strings, sequence);
+                int number = int.Parse(@string[attribute.Range]);
 
-                number = next;
-
-                strings.Enqueue(@string);
+                if (!strings.TryPeek(out @string) || int.Parse(@string[attribute.Range]) <= number)
+                    queue.Enqueue(attribute.Build(sequence));
             }
-            while (primary[sequence.Type].TryDequeue(out @string));
-
-            ConstructSequence(strings, sequence);
-
-            void ConstructSequence(Queue<string> strings, SequenceAttribute sequence) => records[sequence.Type].Enqueue(sequence.Build(strings));
         });
     }
 
     private void Build()
     {
-        _ = Parallel.ForEach(Meta424.Records, record =>
+        _ = Parallel.ForEach(Meta424.Records, attribute =>
         {
-            while (primary[record.Type].TryDequeue(out string? @string))
-                records[record.Type].Enqueue(record.Build(@string));
+            var queue = records[attribute.Type];
+            var strings = primary[attribute.Type];
+
+            while (strings.TryDequeue(out string? @string))
+                queue.Enqueue(attribute.Build(@string));
         });
 
         BuildSequences();

@@ -123,55 +123,67 @@ public class Airport : Geo, IIcao, IIdentity
     public string? Name { get; set; }
 
     /// <summary>
-    /// Gates associated with this airport.
+    /// Associated gates.
     /// </summary>
     [Many]
     public List<Gate> Gates { get; set; } = [];
 
     /// <summary>
-    /// Runways associated with this airport.
+    /// Associated runways.
     /// </summary>
     [Many]
     public List<Runway> Runways { get; set; } = [];
 
     /// <summary>
-    /// ILS associated with this airport.
+    /// Associated GLS's.
+    /// </summary>
+    [Many]
+    public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
+
+    /// <summary>
+    /// Associated MLS's.
+    /// </summary>
+    [Many]
+    public List<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; } = [];
+
+    /// <summary>
+    /// Associated ILS's.
     /// </summary>
     [Many]
     public List<InstrumentLandingSystem> InstrumentLandingSystems { get; set; } = [];
 
     /// <summary>
-    /// Approach Procedures associated with this airport.
+    /// Associated Approach Procedures.
     /// </summary>
     [Many]
     public List<AirportApproach> Approaches { get; set; } = [];
 
     /// <summary>
-    /// STARs associated with this airport.
+    /// Associated STARs.
     /// </summary>
     [Many]
     public List<AirportArrival> Arrivals { get; set; } = [];
 
     /// <summary>
-    /// SIDs associated with this airport.
+    /// Associated SIDs.
     /// </summary>
     [Many]
     public List<AirportDeparture> Departures { get; set; } = [];
 
     /// <summary>
-    /// Terminal Waypoints associated with this airport.
+    /// Associated Terminal Waypoints.
     /// </summary>
     [Many]
     public List<AirportTerminalWaypoint> TerminalWaypoints { get; set; } = [];
 
     /// <summary>
-    /// Non-Directional Beacons associated with this airport.
+    /// Associated NDBs.
     /// </summary>
     [Many]
     public List<AirportBeacon> Beacons { get; set; } = [];
 
     /// <summary>
-    /// VHF Navaids associated with this airport.
+    /// Associated VHF Navaids.
     /// </summary>
     [Many]
     public List<OmnidirectionalStation> OmnidirectionalStations { get; set; } = [];
