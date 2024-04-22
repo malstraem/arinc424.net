@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -5,21 +6,22 @@ using Arinc424.Attributes;
 
 namespace Arinc424.Building;
 
-internal record AssignmentInfo
+[DebuggerDisplay($"{{{nameof(Property)}}}")]
+internal class AssignmentInfo
 {
     internal Regex? Regex { get; set; }
 
     internal required PropertyInfo Property { get; set; }
 }
 
-internal record IndexAssignmentInfo : AssignmentInfo
+internal class IndexAssignmentInfo : AssignmentInfo
 {
     internal required int Index { get; set; }
 
     internal TransformAttribute? Transform { get; set; }
 }
 
-internal record RangeAssignmentInfo : AssignmentInfo
+internal class RangeAssignmentInfo : AssignmentInfo
 {
     internal required Range Range { get; set; }
 

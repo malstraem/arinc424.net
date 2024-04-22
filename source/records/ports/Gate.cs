@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 using Arinc424.Attributes;
 
 namespace Arinc424.Ports;
@@ -9,6 +11,7 @@ namespace Arinc424.Ports;
 /// </summary>
 /// <remarks>See section 4.1.8.1.</remarks>
 [Section('P', 'B', subsectionIndex: 13), Continuous]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class Gate : Geo, IIdentity
 {
     [Foreign(7, 12)]

@@ -1,3 +1,5 @@
+using System.Diagnostics;
+
 using Arinc424.Attributes;
 using Arinc424.Ports;
 
@@ -7,6 +9,7 @@ namespace Arinc424.Navigation;
 
 /// <inheritdoc />
 [Section('P', 'N')]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class AirportBeacon : NondirectionalBeacon
 {
     [Foreign(7, 12), Primary]

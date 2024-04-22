@@ -4,7 +4,7 @@ using Arinc424.Linking;
 
 namespace Arinc424.Attributes;
 
-internal abstract class InfoAttribute(Type type, PropertyInfo[] properties) : RelationAttribute(type, properties)
+internal abstract class InfoAttribute(Type type, PropertyInfo[] properties) : RelationsAttribute(type, properties)
 {
     internal readonly PrimaryKey? PrimaryKey = PrimaryKey.Create(properties);
 

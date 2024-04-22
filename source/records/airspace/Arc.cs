@@ -1,7 +1,7 @@
 namespace Arinc424.Airspace;
 
 /// <summary>
-/// Circular arc that may used by <see cref="BoundaryPoint"/>.
+/// Circular arc that may be used by <see cref="BoundaryPoint"/>.
 /// </summary>
 public class Arc : Geo
 {

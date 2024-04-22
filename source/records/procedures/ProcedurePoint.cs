@@ -13,7 +13,7 @@ namespace Arinc424.Procedures;
 /// Fields of <c>SID/STAR/Approach</c> primary record. Used by <see cref="AirportApproach"/>, <see cref="AirportDeparture"/>
 /// and <see cref="AirportArrival"/> like subsequence.
 /// </summary>
-[DebuggerDisplay($"Fix - {{{nameof(Fix)}}}")]
+[DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public abstract class ProcedurePoint : Record424
 {
     [Type(37, 38)]

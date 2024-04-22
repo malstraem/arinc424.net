@@ -14,7 +14,7 @@ namespace Arinc424.Routing;
 /// </summary>
 /// <remarks>See section 4.1.5.1.</remarks>
 [Section('E', 'P'), Continuous(39)]
-[DebuggerDisplay($"Fix - {{{nameof(Fix)}}}")]
+[DebuggerDisplay($"{nameof(Fix)}  - {{{nameof(Fix)}}}")]
 public class HoldingPattern : Record424, IIcao
 {
     [Field(11, 12)]

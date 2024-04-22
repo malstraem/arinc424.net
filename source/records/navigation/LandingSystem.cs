@@ -9,7 +9,7 @@ namespace Arinc424.Navigation;
 #pragma warning disable CS8618
 
 [Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, Airport - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public abstract class LandingSystem : Geo, IIcao, IIdentity
 {
     [Foreign(7, 12), Primary]

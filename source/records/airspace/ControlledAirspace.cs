@@ -12,7 +12,7 @@ namespace Arinc424.Airspace;
 /// </summary>
 /// <remarks>See section 4.1.25.1.</remarks>
 [Section('U', 'C'), Continuous(25), Sequenced(21, 24)]
-[DebuggerDisplay($"{{{nameof(AreaCode)}}}, {{{nameof(Name)}}}")]
+[DebuggerDisplay($"{{{nameof(AreaCode)}}}, {nameof(Name)} - {{{nameof(Name)}}}")]
 public class ControlledAirspace : Volume, IIcao
 {
     [Field(7, 8)]

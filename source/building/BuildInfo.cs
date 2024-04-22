@@ -32,6 +32,8 @@ internal record BuildInfo
 
     internal BuildInfo(Type type, Type? targetType = null)
     {
+        targetType ??= type;
+
         var properties = type.GetProperties();
 
         List<IndexAssignmentInfo> indexInfos = [];
@@ -41,7 +43,7 @@ internal record BuildInfo
         {
             var validationAttribute = property.GetCustomAttribute<ValidationAttribute>();
 
-            if ((targetType is not null && TryTargetFieldAttribute(property, targetType, out var fieldAttribute)) || TryFieldAttribute(property, out fieldAttribute))
+            if (TryTargetFieldAttribute(property, targetType, out var fieldAttribute) || TryFieldAttribute(property, out fieldAttribute))
             {
                 rangeInfos.Add(new RangeAssignmentInfo
                 {
@@ -51,7 +53,7 @@ internal record BuildInfo
                     Decode = property.GetCustomAttribute<DecodeAttribute>()
                 });
             }
-            else if ((targetType is not null && TryTargetCharacterAttribute(property, targetType, out var characterAttribute)) || TryCharacterAttribute(property, out characterAttribute))
+            else if (TryTargetCharacterAttribute(property, targetType, out var characterAttribute) || TryCharacterAttribute(property, out characterAttribute))
             {
                 indexInfos.Add(new IndexAssignmentInfo
                 {

@@ -7,14 +7,14 @@ internal abstract class LandingSystemTypeConverter : ICharConverter<LandingSyste
     public static LandingSystemType Convert(char @char) => @char switch
     {
         '0' => LandingSystemType.NoGlideSlope,
-        '1' => LandingSystemType.CategoryI,
-        '2' => LandingSystemType.CategoryII,
-        '3' => LandingSystemType.CategoryIII,
+        '1' => LandingSystemType.CategoryOne,
+        '2' => LandingSystemType.CategoryTwo,
+        '3' => LandingSystemType.CategoryThree,
         'I' => LandingSystemType.InstrumentGuidance,
-        'L' => LandingSystemType.DirectionalGlidSlope,
+        'L' => LandingSystemType.DirectionalGlideSlope,
         'A' => LandingSystemType.DirectionalNoGlideSlope,
-        'S' => LandingSystemType.SimplifiedGlidSlope,
-        'F' => LandingSystemType.SimplifiedNoGlidSlope,
+        'S' => LandingSystemType.SimplifiedGlideSlope,
+        'F' => LandingSystemType.SimplifiedNoGlideSlope,
         _ => LandingSystemType.Unknown
     };
 }

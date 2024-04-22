@@ -2,6 +2,7 @@ using System.Diagnostics;
 
 using Arinc424.Attributes;
 using Arinc424.Converters;
+using Arinc424.Navigation;
 
 namespace Arinc424.Ports;
 
@@ -12,7 +13,7 @@ namespace Arinc424.Ports;
 /// </summary>
 /// <remarks>See section 4.1.10.1.</remarks>
 [Section('P', 'G', subsectionIndex: 13), Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, Airport - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class Runway : Geo, IIdentity, IIcao
 {
     [Foreign(7, 12), Primary]
@@ -102,4 +103,28 @@ public class Runway : Geo, IIdentity, IIcao
     /// <remarks>See section 5.59.</remarks>
     [Field(102, 123)]
     public string? Description { get; set; }
+
+    /// <summary>
+    /// Associated GLS's.
+    /// </summary>
+    [One]
+    public GlobalLandingSystem? GlobalLandingSystem { get; set; }
+
+    /// <summary>
+    /// Associated MLS's.
+    /// </summary>
+    [One]
+    public MicrowaveLandingSystem? MicrowaveLandingSystem { get; set; }
+
+    /// <summary>
+    /// Associated ILS's.
+    /// </summary>
+    [One]
+    public InstrumentLandingSystem? InstrumentLandingSystem { get; set; }
+
+    /// <summary>
+    /// Associated ILS Markers.
+    /// </summary>
+    [Many]
+    public List<InstrumentLandingMarker> Markers { get; set; } = [];
 }

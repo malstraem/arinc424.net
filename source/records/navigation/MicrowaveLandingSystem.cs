@@ -3,8 +3,6 @@ using Arinc424.Converters;
 
 namespace Arinc424.Navigation;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airport and Heliport MLS (Azimuth, Elevation and Back Azimuth)</c> primary record.
 /// </summary>
@@ -86,7 +84,7 @@ public class MicrowaveLandingSystem : LandingSystem
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(99, 103), Decode<MagneticVariationConverter>]
-    public string MagneticVariation { get; set; }
+    public float MagneticVariation { get; set; }
 
     /// <summary>
     /// <c>Nominal Elevation Angle (NOM ELEV ANGLE)</c> field.

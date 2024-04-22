@@ -6,7 +6,7 @@ internal abstract class CoordinatesConverter : IStringConverter<CoordinatesConve
     {
         double degrees = double.Parse(@string[1..3]);
         double minutes = double.Parse(@string[3..5]);
-        double centiseconds = double.Parse(@string[7..9]);
+        double centiseconds = double.Parse(@string[5..9]);
 
         double latitude = degrees + (minutes / 60) + (centiseconds / 360000);
 

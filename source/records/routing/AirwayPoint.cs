@@ -14,7 +14,7 @@ namespace Arinc424.Routing;
 /// Fields of <c>Enroute Airways</c> primary record. Used by <see cref="Airway"/> like subsequence.
 /// </summary>
 /// <remarks>See section 4.1.6.1.</remarks>
-[DebuggerDisplay($"Fix - {{{nameof(Fix)}}}")]
+[DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public class AirwayPoint : Record424
 {
     [Type(37, 38)]

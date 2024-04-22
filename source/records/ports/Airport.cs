@@ -153,6 +153,12 @@ public class Airport : Geo, IIcao, IIdentity
     public List<InstrumentLandingSystem> InstrumentLandingSystems { get; set; } = [];
 
     /// <summary>
+    /// Associated Localizer Markers.
+    /// </summary>
+    [Many]
+    public List<InstrumentLandingMarker> Markers { get; set; } = [];
+
+    /// <summary>
     /// Associated Approach Procedures.
     /// </summary>
     [Many]

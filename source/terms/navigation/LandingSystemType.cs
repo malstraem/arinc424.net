@@ -14,15 +14,15 @@ public enum LandingSystemType : byte
     /// <summary>
     /// ILS Localizer/MLS/GLS Category I.
     /// </summary>
-    CategoryI,
+    CategoryOne,
     /// <summary>
     /// ILS Localizer/MLS/GLS Category II.
     /// </summary>
-    CategoryII,
+    CategoryTwo,
     /// <summary>
     /// ILS Localizer/MLS/GLS Category III.
     /// </summary>
-    CategoryIII,
+    CategoryThree,
     /// <summary>
     /// IGS Facility.
     /// </summary>
@@ -30,7 +30,7 @@ public enum LandingSystemType : byte
     /// <summary>
     /// LDA Facility with Glideslope.
     /// </summary>
-    DirectionalGlidSlope,
+    DirectionalGlideSlope,
     /// <summary>
     /// LDA Facility, no Glideslope.
     /// </summary>
@@ -38,9 +38,9 @@ public enum LandingSystemType : byte
     /// <summary>
     /// SDF Facility with Glideslope.
     /// </summary>
-    SimplifiedGlidSlope,
+    SimplifiedGlideSlope,
     /// <summary>
     /// SDF Facility, no Glideslope.
     /// </summary>
-    SimplifiedNoGlidSlope
+    SimplifiedNoGlideSlope
 }

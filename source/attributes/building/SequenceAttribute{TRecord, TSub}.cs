@@ -9,13 +9,13 @@ internal abstract class SequenceAttribute : InfoAttribute
 {
     internal readonly Range Range;
 
-    internal readonly RelationAttribute SubInfo;
+    internal readonly RelationsAttribute SubInfo;
 
     internal SequenceAttribute(Type type, Type subType) : base(type, type.GetProperties())
     {
         Range = type.GetCustomAttribute<SequencedAttribute>()!.Range;
 
-        SubInfo = new RelationAttribute(subType, subType.GetProperties());
+        SubInfo = new RelationsAttribute(subType, subType.GetProperties());
     }
 
     internal abstract Record424 Build(Queue<string> strings);

@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 using Arinc424.Attributes;
 using Arinc424.Converters;
 using Arinc424.Ports;
@@ -11,7 +9,6 @@ namespace Arinc424.Navigation;
 /// </summary>
 /// <remarks>See section 4.1.2.1.</remarks>
 [Section('D'), Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, Name - {{{nameof(Name)}}}")]
 public class OmnidirectionalStation : Navaid
 {
     [Foreign(7, 12)]
@@ -31,7 +28,7 @@ public class OmnidirectionalStation : Navaid
     /// <c>Station Declination (STN DEC)</c> field.
     /// </summary>
     /// <remarks>See section 5.66.</remarks>
-    [Field(75, 79)]
+    [Field(75, 79), Obsolete("todo")]
     public string? StationDeclination { get; set; }
 
     /// <summary>

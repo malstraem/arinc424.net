@@ -42,7 +42,7 @@ internal class PrimaryKey(int length, ReadOnlyMemory<Range> ranges) : Key(length
         return ranges.Count == 0 ? null : new(length, ranges.ToArray());
     }
 
-    internal string GetPrimaryKey(ReadOnlySpan<char> @string)
+    internal string GetKey(ReadOnlySpan<char> @string)
     {
         int index = 0;
 

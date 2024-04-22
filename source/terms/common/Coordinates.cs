@@ -1,5 +1,8 @@
+using System.Diagnostics;
+
 namespace Arinc424;
 
+[DebuggerDisplay($"{{{nameof(Latitude)}}}, {{{nameof(Longitude)}}}")]
 public struct Coordinates(double latitude, double longitude)
 {
     /// <summary>
