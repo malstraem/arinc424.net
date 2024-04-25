@@ -20,20 +20,22 @@ internal record BuildInfo
 
     private static bool TryTargetFieldAttribute(PropertyInfo property, Type targetType, out FieldAttribute? targetFieldAttribute)
     {
-        targetFieldAttribute = property.GetCustomAttributes<TargetFieldAttribute>().SingleOrDefault(attribute => attribute.TargetType == targetType);
+        targetFieldAttribute = property.GetCustomAttributes<TargetFieldAttribute>()
+            .SingleOrDefault(attribute => attribute.TargetType == targetType || targetType.IsSubclassOf(attribute.TargetType));
+
         return targetFieldAttribute is not null;
     }
 
     private static bool TryTargetCharacterAttribute(PropertyInfo property, Type targetType, out CharacterAttribute? targetCharacterAttribute)
     {
-        targetCharacterAttribute = property.GetCustomAttributes<TargetCharacterAttribute>().SingleOrDefault(attribute => attribute.TargetType == targetType);
+        targetCharacterAttribute = property.GetCustomAttributes<TargetCharacterAttribute>()
+            .SingleOrDefault(attribute => attribute.TargetType == targetType || targetType.IsSubclassOf(attribute.TargetType));
+
         return targetCharacterAttribute is not null;
     }
 
-    internal BuildInfo(Type type, Type? targetType = null)
+    internal BuildInfo(Type type)
     {
-        targetType ??= type;
-
         var properties = type.GetProperties();
 
         List<IndexAssignmentInfo> indexInfos = [];
@@ -43,7 +45,7 @@ internal record BuildInfo
         {
             var validationAttribute = property.GetCustomAttribute<ValidationAttribute>();
 
-            if (TryTargetFieldAttribute(property, targetType, out var fieldAttribute) || TryFieldAttribute(property, out fieldAttribute))
+            if (TryTargetFieldAttribute(property, type, out var fieldAttribute) || TryFieldAttribute(property, out fieldAttribute))
             {
                 rangeInfos.Add(new RangeAssignmentInfo
                 {
@@ -53,7 +55,7 @@ internal record BuildInfo
                     Decode = property.GetCustomAttribute<DecodeAttribute>()
                 });
             }
-            else if (TryTargetCharacterAttribute(property, targetType, out var characterAttribute) || TryCharacterAttribute(property, out characterAttribute))
+            else if (TryTargetCharacterAttribute(property, type, out var characterAttribute) || TryCharacterAttribute(property, out characterAttribute))
             {
                 indexInfos.Add(new IndexAssignmentInfo
                 {

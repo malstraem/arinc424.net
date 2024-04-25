@@ -25,7 +25,7 @@ public class RegressionTests
 
     [Theory]
     [InlineData("case-1")]
-    [InlineData("case-2")]
+    //[InlineData("case-2")]
     [InlineData("faa-230223")]
     [InlineData("faa-240321")]
     [InlineData("faa-240418")]

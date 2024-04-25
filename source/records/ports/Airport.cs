@@ -126,71 +126,71 @@ public class Airport : Geo, IIcao, IIdentity
     /// Associated gates.
     /// </summary>
     [Many]
-    public List<Gate> Gates { get; set; } = [];
+    public List<Gate>? Gates { get; set; }// = [];
 
     /// <summary>
     /// Associated runways.
     /// </summary>
     [Many]
-    public List<Runway> Runways { get; set; } = [];
+    public List<Runway>? Runways { get; set; }// = [];
 
     /// <summary>
     /// Associated GLS's.
     /// </summary>
     [Many]
-    public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
+    public List<GlobalLandingSystem>? GlobalLandingSystems { get; set; }// = [];
 
     /// <summary>
     /// Associated MLS's.
     /// </summary>
     [Many]
-    public List<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; } = [];
+    public List<MicrowaveLandingSystem>? MicrowaveLandingSystems { get; set; }// = [];
 
     /// <summary>
     /// Associated ILS's.
     /// </summary>
     [Many]
-    public List<InstrumentLandingSystem> InstrumentLandingSystems { get; set; } = [];
+    public List<InstrumentLandingSystem>? InstrumentLandingSystems { get; set; }// = [];
 
     /// <summary>
     /// Associated Localizer Markers.
     /// </summary>
     [Many]
-    public List<InstrumentLandingMarker> Markers { get; set; } = [];
+    public List<InstrumentLandingMarker>? Markers { get; set; }// = [];
 
     /// <summary>
     /// Associated Approach Procedures.
     /// </summary>
     [Many]
-    public List<AirportApproach> Approaches { get; set; } = [];
+    public List<AirportApproach>? Approaches { get; set; }// = [];
 
     /// <summary>
     /// Associated STARs.
     /// </summary>
     [Many]
-    public List<AirportArrival> Arrivals { get; set; } = [];
+    public List<AirportArrival>? Arrivals { get; set; }// = [];
 
     /// <summary>
     /// Associated SIDs.
     /// </summary>
     [Many]
-    public List<AirportDeparture> Departures { get; set; } = [];
+    public List<AirportDeparture>? Departures { get; set; }// = [];
 
     /// <summary>
     /// Associated Terminal Waypoints.
     /// </summary>
     [Many]
-    public List<AirportTerminalWaypoint> TerminalWaypoints { get; set; } = [];
+    public List<AirportTerminalWaypoint>? TerminalWaypoints { get; set; }// = [];
 
     /// <summary>
     /// Associated NDBs.
     /// </summary>
     [Many]
-    public List<AirportBeacon> Beacons { get; set; } = [];
+    public List<AirportBeacon>? Beacons { get; set; }// = [];
 
     /// <summary>
     /// Associated VHF Navaids.
     /// </summary>
     [Many]
-    public List<OmnidirectionalStation> OmnidirectionalStations { get; set; } = [];
+    public List<OmnidirectionalStation>? OmnidirectionalStations { get; set; }// = [];
 }

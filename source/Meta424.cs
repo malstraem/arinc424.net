@@ -2,6 +2,7 @@ using System.Reflection;
 
 using Arinc424.Airspace;
 using Arinc424.Attributes;
+using Arinc424.Comms;
 using Arinc424.Navigation;
 using Arinc424.Ports;
 using Arinc424.Procedures;
@@ -14,13 +15,12 @@ Record<Gate>,
 Record<Runway>,
 Record<Airport>,
 Record<FlightPlanning>,
-Record<InstrumentLandingMarker>,
 Record<GroundAugmentPoint>,
-Record<AirportCommunications>,
 Record<AirportArrivalAltitudes>,
 Record<AirportMinimumAltitudes>,
 Record<AirportTerminalWaypoint>,
 Record<AirportSatelliteAugmentPoint>,
+Sequence<AirportCommunications, PortTransmitter>,
 
 Record<Heliport>,
 Record<HeliportCommunications>,
@@ -43,6 +43,7 @@ Record<OmnidirectionalStation>,
 Record<GlobalLandingSystem>,
 Record<MicrowaveLandingSystem>,
 Record<InstrumentLandingSystem>,
+Record<InstrumentLandingMarker>,
 
 Record<Alternate>,
 Record<AirwayMarker>,

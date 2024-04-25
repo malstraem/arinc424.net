@@ -44,13 +44,20 @@ internal partial class Parser424
             {
                 reference.Property.SetValue(record, referenced);
 
-                var many = Meta424.Infos[reference.Type].Many;
                 var one = Meta424.Infos[reference.Type].One;
+                var many = Meta424.Infos[reference.Type].Many;
 
                 if (many is not null && many.TryGetValue(relations.Type, out var property))
+                {
+                    if (property.GetValue(referenced) is null)
+                        property.SetValue(referenced, Activator.CreateInstance(typeof(List<>).MakeGenericType(relations.Type)));
+
                     _ = ((IList)property.GetValue(referenced)!).Add(record);
+                }
                 else if (one is not null && one.TryGetValue(relations.Type, out property))
+                {
                     property.SetValue(referenced, record);
+                }
             }
             catch (Exception ex)
             {
