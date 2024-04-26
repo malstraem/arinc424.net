@@ -1,4 +1,5 @@
 using Arinc424.Attributes;
+using Arinc424.Comms;
 
 namespace Arinc424.Ports;
 
@@ -7,8 +8,8 @@ namespace Arinc424.Ports;
 /// </summary>
 /// <remarks>See section 4.2.5.1.</remarks>
 [Section('H', 'V', subsectionIndex: 13)]
-[Obsolete("placeholder")]
-public class HeliportCommunications : Record424
+public class HeliportCommunications : Communications<PortTransmitter>
 {
-
+    [Foreign(7, 12)]
+    public Heliport Heliport { get; set; }
 }

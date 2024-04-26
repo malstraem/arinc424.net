@@ -90,7 +90,7 @@ dotnet_style_prefer_is_null_check_over_reference_equality_method = true:warning
 [*.cs]
 csharp_preferred_modifier_order = public, private, protected, internal, file, static, extern, sealed, abstract, virtual, override, new, readonly, unsafe, required, volatile, async:suggestion
 
-csharp_using_directive_placement = outside_namespace:error
+csharp_using_directive_placement = outside_namespace:none
 
 csharp_style_var_elsewhere = true:warning
 csharp_style_var_for_built_in_types = false:warning

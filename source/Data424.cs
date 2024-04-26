@@ -1,4 +1,5 @@
 using Arinc424.Airspace;
+using Arinc424.Comms;
 using Arinc424.Navigation;
 using Arinc424.Ports;
 using Arinc424.Procedures;
@@ -27,6 +28,8 @@ public class Data424
 
     public List<AirportDeparture> AirportDepartures { get; set; } = [];
 
+    public List<AirportCommunications> AirportCommunications { get; set; } = [];
+
     public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
     public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
@@ -48,6 +51,8 @@ public class Data424
     public List<EnrouteWaypoint> EnrouteWaypoints { get; set; } = [];
 
     public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
+
+    public List<AirwayCommunications> AirwayCommunications { get; set; } = [];
 
     public List<FlightPlanning> FlightPlannings { get; set; } = [];
 

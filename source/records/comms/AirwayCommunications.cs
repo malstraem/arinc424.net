@@ -1,4 +1,5 @@
 using Arinc424.Attributes;
+using Arinc424.Comms;
 
 namespace Arinc424.Routing;
 
@@ -7,8 +8,14 @@ namespace Arinc424.Routing;
 /// </summary>
 /// <remarks>See section 4.1.8.1.</remarks>
 [Section('E', 'V')]
-[Obsolete("placeholder")]
-public class AirwayCommunications : Record424
+public class AirwayCommunications : Communications<AirwayTransmitter>
 {
+    [Field(7, 10), Obsolete("todo")]
+    public string FirIdentifier { get; set; }
 
+    [Field(11, 14), Obsolete("todo")]
+    public string FirAddress { get; set; }
+
+    [Character(15), Obsolete("todo")]
+    public char Indicator { get; set; }
 }

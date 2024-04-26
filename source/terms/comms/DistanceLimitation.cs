@@ -3,6 +3,7 @@ namespace Arinc424.Comms.Terms;
 /// <summary>
 /// <c>Distance Description (DIST DESC)</c> character.
 /// </summary>
+/// <remarks>See section 5.187.</remarks>
 public enum DistanceLimitation : byte
 {
     Unknown,
