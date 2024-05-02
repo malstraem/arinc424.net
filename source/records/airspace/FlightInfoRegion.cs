@@ -20,7 +20,7 @@ public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao
     [Field(7, 10), Primary]
     public string Identifier { get; set; }
 
-    [Field(7, 8), Primary]
+    [Field(7, 8)]
     public string IcaoCode { get; set; }
 
     /// <summary>
@@ -34,7 +34,7 @@ public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao
     /// <c>FIR/UIR Indicator (IND)</c> character.
     /// </summary>
     /// <remarks>See section 5.117.</remarks>
-    [Character(15)]
+    [Character(15), Obsolete("todo")]
     public char Indicator { get; set; }
 
     /// <inheritdoc cref="Terms.SpeedReportUnit"/>
@@ -50,7 +50,7 @@ public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao
     /// </summary>
     /// <remarks>See section 5.124.</remarks>
     [Character(31), Transform<BoolConverter>]
-    public bool EntryReportRequired { get; set; }
+    public bool IsEntryReport { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(81, 85), Decode<AltitudeConverter>]

@@ -13,7 +13,7 @@ public class PortTransmitter : Transmitter
 
     /// <inheritdoc cref="Terms.Sector"/>
     [Field(69, 74), Decode<SectorConverter>]
-    public Sector Sector { get; set; }
+    public Sector? Sector { get; set; }
 
     [Type(81, 82)]
     [Foreign(75, 80)]

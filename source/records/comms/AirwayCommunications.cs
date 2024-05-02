@@ -1,3 +1,4 @@
+using Arinc424.Airspace;
 using Arinc424.Attributes;
 using Arinc424.Comms;
 
@@ -10,11 +11,15 @@ namespace Arinc424.Routing;
 [Section('E', 'V')]
 public class AirwayCommunications : Communications<AirwayTransmitter>
 {
-    [Field(7, 10), Obsolete("todo")]
-    public string FirIdentifier { get; set; }
+    [Foreign(7, 10), Obsolete("todo")]
+    public FlightInfoRegion FlightInfoRegion { get; set; }
 
+    /// <summary>
+    /// <c>FIR/UIR Address (ADDRESS)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.151.</remarks>
     [Field(11, 14), Obsolete("todo")]
-    public string FirAddress { get; set; }
+    public string Address { get; set; }
 
     [Character(15), Obsolete("todo")]
     public char Indicator { get; set; }

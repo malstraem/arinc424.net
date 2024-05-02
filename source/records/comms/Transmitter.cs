@@ -7,6 +7,8 @@ namespace Arinc424.Comms;
 
 using Terms;
 
+#pragma warning disable CS8618
+
 [DebuggerDisplay($"{nameof(CallSign)} - {{{nameof(CallSign)}}}, {nameof(Type)} - {{{nameof(Type)}}}")]
 public abstract class Transmitter : Geo
 {
