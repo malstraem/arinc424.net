@@ -1,8 +1,7 @@
 using Arinc424.Airspace;
 using Arinc424.Attributes;
-using Arinc424.Comms;
 
-namespace Arinc424.Routing;
+namespace Arinc424.Comms;
 
 /// <summary>
 /// <c>Enroute Communications</c> primary record.

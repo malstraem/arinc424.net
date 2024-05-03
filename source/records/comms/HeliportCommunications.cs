@@ -1,7 +1,7 @@
 using Arinc424.Attributes;
-using Arinc424.Comms;
+using Arinc424.Ports;
 
-namespace Arinc424.Ports;
+namespace Arinc424.Comms;
 
 /// <summary>
 /// <c>Heliport Communications</c> primary record.
