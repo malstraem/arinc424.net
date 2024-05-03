@@ -12,11 +12,11 @@ internal static class RecordBuilder
         {
             var @field = chars[rangeInfo.Range];
 
-            object? value = MemoryExtensions.IsWhiteSpace(@field)
+            object? value = @field.IsWhiteSpace()
                 ? null
                 : rangeInfo.Decode is not null
                     ? rangeInfo.Decode.Convert(@field)
-                    : MemoryExtensions.Trim(@field).ToString();
+                    : @field.Trim().ToString();
 
             rangeInfo.Property.SetValue(record, value);
         }

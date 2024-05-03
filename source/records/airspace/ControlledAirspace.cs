@@ -27,7 +27,7 @@ public class ControlledAirspace : Volume, IIcao
     /// </summary>
     /// <remarks>See section 5.214.</remarks>
     [Type(15, 16)]
-    [Foreign(10, 14), Foreign(7, 8)]
+    [Foreign(10, 14), ForeignExcept<FlightInfoRegion>(7, 8)]
     public IIdentity Center { get; set; }
 
     /// <inheritdoc cref="Terms.AirspaceClass"/>
@@ -35,7 +35,7 @@ public class ControlledAirspace : Volume, IIcao
     public Terms.AirspaceClass Class { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MultipleCode']/*"/>
-    [Character(20)]
+    [Character(20), Obsolete("todo")]
     public char MultipleCode { get; set; }
 
     /// <inheritdoc cref="Arinc424.LevelType"/>
@@ -50,7 +50,7 @@ public class ControlledAirspace : Volume, IIcao
     /// <c>NOTAM</c> character.
     /// </summary>
     /// <remarks>See section 5.132.</remarks>
-    [Character(28)]
+    [Character(28), Obsolete("todo")]
     public char Notam { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>

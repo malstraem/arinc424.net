@@ -105,19 +105,19 @@ public class Runway : Geo, IIdentity, IIcao
     public string? Description { get; set; }
 
     /// <summary>
-    /// Associated GLS's.
+    /// Associated GLS.
     /// </summary>
     [One]
     public GlobalLandingSystem? GlobalLandingSystem { get; set; }
 
     /// <summary>
-    /// Associated MLS's.
+    /// Associated MLS.
     /// </summary>
     [One]
     public MicrowaveLandingSystem? MicrowaveLandingSystem { get; set; }
 
     /// <summary>
-    /// Associated ILS's.
+    /// Associated ILS.
     /// </summary>
     [One]
     public InstrumentLandingSystem? InstrumentLandingSystem { get; set; }
@@ -126,5 +126,5 @@ public class Runway : Geo, IIdentity, IIcao
     /// Associated ILS Markers.
     /// </summary>
     [Many]
-    public List<InstrumentLandingMarker> Markers { get; set; } = [];
+    public List<InstrumentLandingMarker>? Markers { get; set; }
 }

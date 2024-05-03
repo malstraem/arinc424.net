@@ -2,6 +2,7 @@ using System.Reflection;
 
 using Arinc424.Airspace;
 using Arinc424.Attributes;
+using Arinc424.Comms;
 using Arinc424.Navigation;
 using Arinc424.Ports;
 using Arinc424.Procedures;
@@ -14,19 +15,18 @@ Record<Gate>,
 Record<Runway>,
 Record<Airport>,
 Record<FlightPlanning>,
-Record<InstrumentLandingMarker>,
 Record<GroundAugmentPoint>,
-Record<AirportCommunications>,
 Record<AirportArrivalAltitudes>,
 Record<AirportMinimumAltitudes>,
 Record<AirportTerminalWaypoint>,
 Record<AirportSatelliteAugmentPoint>,
+Sequence<AirportCommunications, PortTransmitter>,
 
-Record<Heliport>,
-Record<HeliportCommunications>,
-Record<HeliportArrivalAltitudes>,
-Record<HeliportMinimumAltitudes>,
-Record<HeliportTerminalWaypoint>,
+//Record<Heliport>,
+//Record<HeliportCommunications>,
+//Record<HeliportArrivalAltitudes>,
+//Record<HeliportMinimumAltitudes>,
+//Record<HeliportTerminalWaypoint>,
 
 Sequence<AirportArrival, ArrivalPoint>,
 Sequence<AirportApproach, ApproachPoint>,
@@ -43,14 +43,15 @@ Record<OmnidirectionalStation>,
 Record<GlobalLandingSystem>,
 Record<MicrowaveLandingSystem>,
 Record<InstrumentLandingSystem>,
+Record<InstrumentLandingMarker>,
 
 Record<Alternate>,
 Record<AirwayMarker>,
 Record<HoldingPattern>,
 Record<EnrouteWaypoint>,
 Record<SpecialActivityArea>,
-Record<AirwayCommunications>,
 Sequence<Airway, AirwayPoint>,
+Sequence<AirwayCommunications, AirwayTransmitter>,
 
 Sequence<FlightInfoRegion, FlightRegionPoint>,
 Sequence<ControlledAirspace, BoundaryPoint>,
@@ -68,14 +69,14 @@ internal static class Meta424
 
         foreach (var info in infos)
         {
-            Infos.Add(info.Type, info);
+            Info.Add(info.Type, info);
             Types.Add((info.Section.SectionChar, info.Section.SubsectionChar), info.Type);
         }
     }
 
     internal static Dictionary<(char, char), Type> Types { get; } = [];
 
-    internal static Dictionary<Type, InfoAttribute> Infos { get; } = [];
+    internal static Dictionary<Type, InfoAttribute> Info { get; } = [];
 
     internal static IEnumerable<RecordAttribute> Records { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
 

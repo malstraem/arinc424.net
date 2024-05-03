@@ -1,0 +1,62 @@
+using System.Diagnostics;
+
+using Arinc424.Attributes;
+using Arinc424.Converters;
+
+namespace Arinc424.Comms;
+
+using Terms;
+
+#pragma warning disable CS8618
+
+[DebuggerDisplay($"{nameof(CallSign)} - {{{nameof(CallSign)}}}, {nameof(Type)} - {{{nameof(Type)}}}")]
+public abstract class Transmitter : Geo
+{
+    /// <inheritdoc cref="CommType"/>
+    [Field(23, 25), Decode<CommTypeConverter>]
+    public CommType Type { get; set; }
+
+    /// <summary>
+    /// <c>Communications Frequency (COMM FREQ)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.103.</remarks>
+    [Field(26, 40), Decode<FrequencyConverter>]
+    public Frequency Frequency { get; set; }
+
+    [Character(41), Transform<RadarAvailabilityConverter>]
+    public bool? IsRadarAvailable { get; set; }
+
+    /// <summary>
+    /// <c>H24 Indicator (H24)</c> character.
+    /// </summary>
+    /// <remarks>See section.</remarks>
+    [Character(42), Transform<BoolConverter>]
+    public bool IsWholeDay { get; set; }
+
+    [Field(43, 67)]
+    public string CallSign { get; set; }
+
+    /// <inheritdoc cref="Arinc424.AltitudeDescription"/>
+    [Character(83), Character<AirwayTransmitter>(117), Transform<AltitudeDescriptionConverter>]
+    public AltitudeDescription AltitudeDescription { get; set; }
+
+    /// <summary>
+    /// <c>Communication Altitude (COMM ALTITUDE)</c> field.
+    /// </summary>
+    /// <value>Hundredth of feet.</value>
+    /// <remarks>See section 5.184.</remarks>
+    [Field(84, 86), Field<AirwayTransmitter>(118, 120), Decode<IntConverter>]
+    public int Altitude { get; set; }
+
+    /// <inheritdoc cref="Altitude"/>
+    [Field(87, 89), Field<AirwayTransmitter>(121, 123), Decode<IntConverter>]
+    public int Altitude2 { get; set; }
+
+    /// <inheritdoc cref="Terms.Modulation"/>
+    [Character(115), Transform<ModulationConverter>]
+    public Modulation Modulation { get; set; }
+
+    /// <inheritdoc cref="Terms.Emission"/>
+    [Character(116), Transform<EmissionConverter>]
+    public Emission Emission { get; set; }
+}

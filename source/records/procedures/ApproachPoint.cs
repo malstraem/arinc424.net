@@ -1,5 +1,6 @@
 using Arinc424.Attributes;
 using Arinc424.Converters;
+using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Procedures;
 
@@ -12,7 +13,7 @@ public class ApproachPoint : ProcedurePoint
     [Field(103, 106), Decode<HundredthsConverter>]
     public float VerticalAngel { get; set; }
 
-    /// <inheritdoc cref="Terms.ApproachQualifiers"/>
+    /// <inheritdoc cref="ApproachQualifiers"/>
     [Field(119, 120), Decode<ApproachQualifiersConverter>]
-    public Terms.ApproachQualifiers Qualifiers { get; set; }
+    public ApproachQualifiers Qualifiers { get; set; }
 }

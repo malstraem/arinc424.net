@@ -44,13 +44,20 @@ internal partial class Parser424
             {
                 reference.Property.SetValue(record, referenced);
 
-                var many = Meta424.Infos[reference.Type].Many;
-                var one = Meta424.Infos[reference.Type].One;
+                var one = Meta424.Info[reference.Type].One;
+                var many = Meta424.Info[reference.Type].Many;
 
                 if (many is not null && many.TryGetValue(relations.Type, out var property))
+                {
+                    if (property.GetValue(referenced) is null)
+                        property.SetValue(referenced, Activator.CreateInstance(typeof(List<>).MakeGenericType(relations.Type)));
+
                     _ = ((IList)property.GetValue(referenced)!).Add(record);
+                }
                 else if (one is not null && one.TryGetValue(relations.Type, out property))
+                {
                     property.SetValue(referenced, record);
+                }
             }
             catch (Exception ex)
             {
@@ -62,7 +69,7 @@ internal partial class Parser424
     [Obsolete("TODO diagnostic log")]
     private void Link()
     {
-        var infos = Meta424.Infos.Where(x => x.Value.PrimaryKey is not null);
+        var infos = Meta424.Info.Where(x => x.Value.PrimaryKey is not null);
 
         foreach (var (type, _) in infos)
             unique[type] = [];
@@ -73,7 +80,7 @@ internal partial class Parser424
                 ProcessPrimaryKey(record, x.Value);
         });
 
-        _ = Parallel.ForEach(Meta424.Infos.Where(x => x.Value.Links is not null), x =>
+        _ = Parallel.ForEach(Meta424.Info.Where(x => x.Value.Links is not null), x =>
         {
             foreach (var record in records[x.Key])
                 ProcessForeignKeys(record, x.Value);
