@@ -33,7 +33,7 @@ internal partial class Parser424
         // (branching, apparently, will not give any tangible gain)
         bool TryEnqueue(string @string)
         {
-            foreach (var (type, info) in Meta424.Infos)
+            foreach (var (type, info) in Meta424.Info)
             {
                 if (!info.Section.IsMatch(@string))
                     continue;

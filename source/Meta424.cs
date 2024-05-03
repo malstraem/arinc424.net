@@ -22,11 +22,11 @@ Record<AirportTerminalWaypoint>,
 Record<AirportSatelliteAugmentPoint>,
 Sequence<AirportCommunications, PortTransmitter>,
 
-Record<Heliport>,
-Record<HeliportCommunications>,
-Record<HeliportArrivalAltitudes>,
-Record<HeliportMinimumAltitudes>,
-Record<HeliportTerminalWaypoint>,
+//Record<Heliport>,
+//Record<HeliportCommunications>,
+//Record<HeliportArrivalAltitudes>,
+//Record<HeliportMinimumAltitudes>,
+//Record<HeliportTerminalWaypoint>,
 
 Sequence<AirportArrival, ArrivalPoint>,
 Sequence<AirportApproach, ApproachPoint>,
@@ -69,14 +69,14 @@ internal static class Meta424
 
         foreach (var info in infos)
         {
-            Infos.Add(info.Type, info);
+            Info.Add(info.Type, info);
             Types.Add((info.Section.SectionChar, info.Section.SubsectionChar), info.Type);
         }
     }
 
     internal static Dictionary<(char, char), Type> Types { get; } = [];
 
-    internal static Dictionary<Type, InfoAttribute> Infos { get; } = [];
+    internal static Dictionary<Type, InfoAttribute> Info { get; } = [];
 
     internal static IEnumerable<RecordAttribute> Records { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
 

@@ -126,5 +126,5 @@ public class Runway : Geo, IIdentity, IIcao
     /// Associated ILS Markers.
     /// </summary>
     [Many]
-    public List<InstrumentLandingMarker> Markers { get; set; } = [];
+    public List<InstrumentLandingMarker>? Markers { get; set; }
 }

@@ -8,7 +8,7 @@ namespace Arinc424.Navigation;
 #pragma warning disable CS8618
 
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
-public abstract class Navaid : Geo, IIcao, IIdentity
+public abstract class Navaid : Geo, IIcao, IIdentity, INamed
 {
     /// <include file='Comments.xml' path="doc/member[@name='AidIdentifier']/*"/>
     [Field(14, 17), Primary]

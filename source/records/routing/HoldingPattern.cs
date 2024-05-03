@@ -15,7 +15,7 @@ namespace Arinc424.Routing;
 /// <remarks>See section 4.1.5.1.</remarks>
 [Section('E', 'P'), Continuous(39)]
 [DebuggerDisplay($"{nameof(Fix)}  - {{{nameof(Fix)}}}")]
-public class HoldingPattern : Record424, IIcao
+public class HoldingPattern : Record424, IIcao, INamed
 {
     [Field(11, 12)]
     public string IcaoCode { get; set; }
@@ -98,10 +98,7 @@ public class HoldingPattern : Record424, IIcao
     [Character(81), Transform<LegDirectionConverter>]
     public LegDirection Direction { get; set; }
 
-    /// <summary>
-    /// <c>Name (NAME)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.60.</remarks>
+    /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
     [Field(98, 123)]
     public string? Name { get; set; }
 }
