@@ -10,10 +10,4 @@
     <IsPackable>false</IsPackable>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
-      <_Parameter1>tests/tests/$(MSBuildProjectName).Tests</_Parameter1>
-    </AssemblyAttribute>
-  </ItemGroup>
 </Project>
