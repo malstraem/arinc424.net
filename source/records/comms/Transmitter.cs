@@ -1,8 +1,3 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Comms;
 
 using Terms;
@@ -16,10 +11,7 @@ public abstract class Transmitter : Geo
     [Field(23, 25), Decode<CommTypeConverter>]
     public CommType Type { get; set; }
 
-    /// <summary>
-    /// <c>Communications Frequency (COMM FREQ)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.103.</remarks>
+    /// <inheritdoc cref="Terms.Frequency"/>
     [Field(26, 40), Decode<FrequencyConverter>]
     public Frequency Frequency { get; set; }
 

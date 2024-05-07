@@ -1,8 +1,3 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Airspace;
 
 #pragma warning disable CS8618
@@ -13,12 +8,8 @@ namespace Arinc424.Airspace;
 /// <remarks>See section 4.1.18.1.</remarks>
 [Section('U', 'R'), Continuous(25), Sequenced(21, 24)]
 [DebuggerDisplay($"{{{nameof(IcaoCode)}}}, {{{nameof(Designation)}}}")]
-public class RestrictiveAirspace : Volume, IIcao
+public class RestrictiveAirspace : Volume, IIcao, INamed
 {
-    /// <summary>
-    /// <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.14.</remarks>
     [Field(7, 8)]
     public string IcaoCode { get; set; }
 

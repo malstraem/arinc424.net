@@ -1,5 +1,3 @@
-using Arinc424.Attributes;
-using Arinc424.Converters;
 using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Procedures;

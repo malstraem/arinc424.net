@@ -1,14 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>library</OutputType>
     <RootNamespace>Arinc424</RootNamespace>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="$(CompilerGeneratedFilesOutputPath)/**" />
+
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>Arinc424.Bench</_Parameter1>
     </AssemblyAttribute>
+
+    <ProjectReference Include="../codegen/Arinc424.Gen.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>

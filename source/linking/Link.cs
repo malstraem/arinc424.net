@@ -1,7 +1,5 @@
 using System.Reflection;
 
-using Arinc424.Attributes;
-
 namespace Arinc424.Linking;
 
 internal class Link(PropertyInfo property, ForeignAttribute[] foreignAttributes, TypeAttribute? typeAttribute)

@@ -1,5 +1,4 @@
 using Arinc424.Airspace;
-using Arinc424.Attributes;
 
 namespace Arinc424.Comms;
 

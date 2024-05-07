@@ -1,7 +1,5 @@
 using Arinc424.Airspace;
-using Arinc424.Attributes;
 using Arinc424.Comms;
-using Arinc424.Converters;
 using Arinc424.Navigation;
 
 namespace Arinc424;

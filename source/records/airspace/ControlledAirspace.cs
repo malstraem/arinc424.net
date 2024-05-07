@@ -1,9 +1,6 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Airspace;
+
+using Terms;
 
 #pragma warning disable CS8618
 
@@ -13,14 +10,14 @@ namespace Arinc424.Airspace;
 /// <remarks>See section 4.1.25.1.</remarks>
 [Section('U', 'C'), Continuous(25), Sequenced(21, 24)]
 [DebuggerDisplay($"{{{nameof(AreaCode)}}}, {nameof(Name)} - {{{nameof(Name)}}}")]
-public class ControlledAirspace : Volume, IIcao
+public class ControlledAirspace : Volume, IIcao, INamed
 {
     [Field(7, 8)]
     public string IcaoCode { get; set; }
 
-    /// <inheritdoc cref="Terms.AirspaceType"/>
+    /// <inheritdoc cref="AirspaceType"/>
     [Character(9), Transform<AirspaceTypeConverter>]
-    public Terms.AirspaceType Type { get; set; }
+    public AirspaceType Type { get; set; }
 
     /// <summary>
     /// <c>Controlled Airspace Center (ARSP CNTR)</c> field.
@@ -30,9 +27,9 @@ public class ControlledAirspace : Volume, IIcao
     [Foreign(10, 14), ForeignExcept<FlightInfoRegion>(7, 8)]
     public IIdentity Center { get; set; }
 
-    /// <inheritdoc cref="Terms.AirspaceClass"/>
+    /// <inheritdoc cref="AirspaceClass"/>
     [Character(17), Transform<AirspaceClassConverter>]
-    public Terms.AirspaceClass Class { get; set; }
+    public AirspaceClass Class { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MultipleCode']/*"/>
     [Character(20), Obsolete("todo")]

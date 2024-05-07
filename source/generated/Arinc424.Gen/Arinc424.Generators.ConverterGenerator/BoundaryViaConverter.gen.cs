@@ -1,4 +1,4 @@
-using Arinc424.Airspace.Terms;
+﻿using Arinc424.Airspace.Terms;
 
 namespace Arinc424.Converters;
 

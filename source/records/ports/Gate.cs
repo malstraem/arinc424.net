@@ -1,7 +1,3 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-
 namespace Arinc424.Ports;
 
 #pragma warning disable CS8618

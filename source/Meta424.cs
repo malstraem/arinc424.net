@@ -1,7 +1,6 @@
 using System.Reflection;
 
 using Arinc424.Airspace;
-using Arinc424.Attributes;
 using Arinc424.Comms;
 using Arinc424.Navigation;
 using Arinc424.Ports;

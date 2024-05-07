@@ -1,5 +1,3 @@
-using Arinc424.Attributes;
-using Arinc424.Converters;
 using Arinc424.Ports;
 
 namespace Arinc424.Navigation;

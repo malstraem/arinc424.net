@@ -1,7 +1,6 @@
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Airspace;
+
+using Terms;
 
 /// <summary>
 /// Space volume with low and up limits.
@@ -14,7 +13,7 @@ public abstract class Volume : Record424<BoundaryPoint>
 
     /// <inheritdoc cref="LimitUnit"/>
     [Character(87), Transform<LimitUnitConverter>]
-    public Terms.LimitUnit LowUnit { get; set; }
+    public LimitUnit LowUnit { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>>
     [Field(88, 92), Decode<AltitudeConverter>]
@@ -22,5 +21,5 @@ public abstract class Volume : Record424<BoundaryPoint>
 
     /// <inheritdoc cref="LimitUnit"/>s>
     [Character(93), Transform<LimitUnitConverter>]
-    public Terms.LimitUnit UpUnit { get; set; }
+    public LimitUnit UpUnit { get; set; }
 }

@@ -1,8 +1,5 @@
-using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
-
-using Arinc424.Attributes;
 
 namespace Arinc424.Building;
 

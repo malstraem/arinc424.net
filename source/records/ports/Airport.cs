@@ -1,7 +1,3 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
 using Arinc424.Navigation;
 using Arinc424.Procedures;
 using Arinc424.Waypoints;
@@ -18,7 +14,7 @@ using Terms;
 /// <remarks>See section 4.1.7.1.</remarks>
 [Section('P', 'A', subsectionIndex: 13), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
-public class Airport : Geo, IIcao, IIdentity
+public class Airport : Geo, IIdentity, IIcao, INamed
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT IDENT)</c> field.
