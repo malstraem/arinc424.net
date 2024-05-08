@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace Arinc424;
 
 [DebuggerDisplay($"{{{nameof(Value)}}}, {{{nameof(Unit)}}}")]

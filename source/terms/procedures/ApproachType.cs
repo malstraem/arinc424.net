@@ -4,95 +4,96 @@ namespace Arinc424.Procedures.Terms;
 /// <c>Route Type (RT TYPE)</c> -> <c>Approach Route Type Description</c> character.
 /// </summary>
 /// <remarks>See table 5-7.</remarks>
+[Char]
 public enum ApproachType : byte
 {
     Unknown,
     /// <summary>
     /// Approach Transition.
     /// </summary>
-    Transition,
+    [Map('A')] Transition,
     /// <summary>
     /// Localizer/Back course Approach.
     /// </summary>
-    LocalizerBackCourse,
+    [Map('B')] LocalizerBackCourse,
     /// <summary>
     /// VORDME Approach.
     /// </summary>
-    DistanceEquipment,
+    [Map('D')] DistanceEquipment,
     /// <summary>
     /// Flight Management System (FMS) Approach.
     /// </summary>
-    FlightManagement,
+    [Map('F')] FlightManagement,
     /// <summary>
     /// Instrument Guidance System (IGS) Approach.
     /// </summary>
-    InstrumentGuidance,
+    [Map('G')] InstrumentGuidance,
     /// <summary>
     /// Area Navigation (RNAV) Approach with Required Navigation  Performance (RNP) Approach.
     /// </summary>
-    AreaNavigationPerformance,
+    [Map('H')] AreaNavigationPerformance,
     /// <summary>
     /// Instrument Landing System (ILS) Approach.
     /// </summary>
-    InstrumentLanding,
+    [Map('I')] InstrumentLanding,
     /// <summary>
     /// GNSS Landing System (GLS) Approach.
     /// </summary>
-    GlobalNavigationLanding,
+    [Map('J')] GlobalNavigationLanding,
     /// <summary>
     /// Localizer Only (LOC) Approach.
     /// </summary>
-    LocalizerOnly,
+    [Map('L')] LocalizerOnly,
     /// <summary>
     /// Microwave Landing System (MLS) Approach.
     /// </summary>
-    MicrowaveLanding,
+    [Map('M')] MicrowaveLanding,
     /// <summary>
     /// Non-Directional Beacon (NDB) Approach.
     /// </summary>
-    NonDirectional,
+    [Map('N')] Nondirectional,
     /// <summary>
     /// Global Positioning System (GPS) Approach.
     /// </summary>
-    GlobalPositioning,
+    [Map('P')] GlobalPositioning,
     /// <summary>
     /// Non-Directional Beacon + DME (NDB+DME) Approach.
     /// </summary>
-    NonDirectionalDistanceEquipment,
+    [Map('Q')] NondirectionalDistanceEquipment,
     /// <summary>
     /// Area Navigation (RNAV) Approach.
     /// </summary>
-    AreaNavigation,
+    [Map('R')] AreaNavigation,
     /// <summary>
     /// VOR Approach using VORDME/VORTAC.
     /// </summary>
-    DistanceEquipmentTactical,
+    [Map('S')] DistanceEquipmentTactical,
     /// <summary>
     /// TACAN Approach.
     /// </summary>
-    Tactical,
+    [Map('T')] Tactical,
     /// <summary>
     /// Simplified Directional Facility (SDF) Approach.
     /// </summary>
-    SimplifiedDirectionalFacility,
+    [Map('U')] SimplifiedDirectionalFacility,
     /// <summary>
     /// VOR Approach.
     /// </summary>
-    Omnidirectional,
+    [Map('V')] Omnidirectional,
     /// <summary>
     /// Microwave Landing System (MLS), Type A Approach.
     /// </summary>
-    TypeA,
+    [Map('W')] TypeA,
     /// <summary>
     /// Localizer Directional Aid (LDA) Approach.
     /// </summary>
-    LocalizerDirectionalAid,
+    [Map('X')] LocalizerDirectionalAid,
     /// <summary>
     /// Microwave Landing System (MLS), Type B and C Approach.
     /// </summary>
-    TypeBTypeC,
+    [Map('Y')] TypeBTypeC,
     /// <summary>
     /// Missed Approach.
     /// </summary>
-    Missed
+    [Map('Z')] Missed
 }

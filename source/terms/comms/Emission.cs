@@ -4,35 +4,36 @@ namespace Arinc424.Comms.Terms;
 /// <c>Signal Emission (SIG EM)</c> character.
 /// </summary>
 /// <remarks>See section 5.199.</remarks>
+[Char, Description("Signal Emission (SIG EM)")]
 public enum Emission : byte
 {
     Unknown,
     /// <summary>
     /// Double Sideband (A3).
     /// </summary>
-    Double,
+    [Map('3')] Double,
     /// <summary>
     /// Single sideband, reduced carrier (A3A).
     /// </summary>
-    SingleReducedCarrier,
+    [Map('A')] SingleReducedCarrier,
     /// <summary>
     /// Two Independent sidebands (A3B).
     /// </summary>
-    TwoIndependent,
+    [Map('B')] TwoIndependent,
     /// <summary>
     /// Single sideband, full carrier (A3H).
     /// </summary>
-    SingleFullCarrier,
+    [Map('H')] SingleFullCarrier,
     /// <summary>
     /// Single sideband, suppressed carrier (A3J).
     /// </summary>
-    SingleSuppressedCarrier,
+    [Map('J')] SingleSuppressedCarrier,
     /// <summary>
     /// Lower (single) sideband, carrier unknown.
     /// </summary>
-    LowerUnknownCarrier,
+    [Map('L')] LowerUnknownCarrier,
     /// <summary>
     /// Upper (single) sideband, carrier unknown.
     /// </summary>
-    UpperUnknownCarrier
+    [Map('U')] UpperUnknownCarrier
 }

@@ -4,23 +4,24 @@ namespace Arinc424.Airspace.Terms;
 /// <c>FIR/UIR ATC Reporting Units Speed (RUS)</c> character.
 /// </summary>
 /// <remarks>See section 5.122.</remarks>
+[Char, Description("FIR/UIR ATC Reporting Units Speed (RUS)")]
 public enum SpeedReportUnit : byte
 {
     Unknown,
     /// <summary>
     /// Not specified.
     /// </summary>
-    NotSpecified,
+    [Map('0')] Unspecified,
     /// <summary>
     /// TAS in Knots.
     /// </summary>
-    Knots,
+    [Map('1')] Knots,
     /// <summary>
     /// TAS in Mach.
     /// </summary>
-    Mach,
+    [Map('2')] Mach,
     /// <summary>
-    /// TAS in Kilometers/hr
+    /// TAS in Kilometers/hr.
     /// </summary>
-    KilometersPerHour
+    [Map('3')] KilometersPerHour
 }

@@ -4,43 +4,44 @@ namespace Arinc424.Procedures.Terms;
 /// <c>Route Type (RT TYPE)</c> -> <c>SID Route Type Description</c> character.
 /// </summary>
 /// <remarks>See table 5-4.</remarks>
+[Char]
 public enum DepartureType : byte
 {
     Unknown,
     /// <summary>
     /// Engine Out SID.
     /// </summary>
-    EngineOut,
+    [Map('0')] EngineOut,
     /// <summary>
     /// SID Runway Transition.
     /// </summary>
-    RunwayTransition,
+    [Map('1')] RunwayTransition,
     /// <summary>
     /// SID or SID Common Route.
     /// </summary>
-    Common,
+    [Map('2')] Common,
     /// <summary>
     /// SID Enroute Transition.
     /// </summary>
-    EnrouteTransition,
+    [Map('3')] EnrouteTransition,
     /// <summary>
     /// RNP SID Runway Transition.
     /// </summary>
-    PerformanceRunwayTransition,
+    [Map('R')] PerformanceRunwayTransition,
     /// <summary>
     /// RNP SID or SID Common Route.
     /// </summary>
-    PerformanceCommonRoute,
+    [Map('N')] PerformanceCommonRoute,
     /// <summary>
     /// RNP SID Enroute Transition.
     /// </summary>
-    PerformanceEnrouteTransition,
+    [Map('P')] PerformanceEnrouteTransition,
     /// <summary>
     /// Vector SID Runway Transition.
     /// </summary>
-    VectorRunwayTransition,
+    [Map('T')] VectorRunwayTransition,
     /// <summary>
     /// Vector SID Enroute Transition.
     /// </summary>
-    VectorEnrouteTransition
+    [Map('V')] VectorEnrouteTransition
 }

@@ -8,8 +8,6 @@ namespace Arinc424.Airspace.Terms;
 public enum LimitUnit : byte
 {
     Unknown,
-    [Map('M')]
-    Sea,
-    [Map('G')]
-    Ground
+    [Map('M')] Sea,
+    [Map('G')] Ground
 }

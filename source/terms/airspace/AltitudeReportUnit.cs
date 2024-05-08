@@ -8,12 +8,8 @@ namespace Arinc424.Airspace.Terms;
 public enum AltitudeReportUnit : byte
 {
     Unknown,
-    [Map('0')]
-    Unspecified,
-    [Map('1')]
-    Level,
-    [Map('2')]
-    Meters,
-    [Map('3')]
-    Feet
+    [Map('0')] Unspecified,
+    [Map('1')] Level,
+    [Map('2')] Meters,
+    [Map('3')] Feet
 }

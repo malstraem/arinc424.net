@@ -4,15 +4,16 @@ namespace Arinc424.Comms.Terms;
 /// <c>Modulation (MODULN)</c> character.
 /// </summary>
 /// <remarks>See section 5.198.</remarks>
+[Char, Description("Modulation (MODULN)")]
 public enum Modulation : byte
 {
     Unknown,
     /// <summary>
     /// Amplitude Modulated Frequency.
     /// </summary>
-    Amplitude,
+    [Map('A')] Amplitude,
     /// <summary>
     /// Frequency Modulated  Frequency.
     /// </summary>
-    Frequency
+    [Map('F')] Frequency
 }

@@ -4,20 +4,21 @@ namespace Arinc424.Ports.Terms;
 /// <c>Public/Military Indicator (PUB/MIL)</c> character.
 /// </summary>
 /// <remarks>See section 5.177.</remarks>
-[Flags]
+[Char, Flags]
 public enum PortPrivacy : byte
 {
     Unknown = 0,
     /// <summary>
     /// Airport/Heliport is open to the public (civil).
     /// </summary>
-    Civil = 1,
+    [Map('C')] Civil = 1,
     /// <summary>
     /// Airport/Heliport is military.
     /// </summary>
-    Military = 1 << 1,
+    [Map('M')] Military = 1 << 1,
     /// <summary>
     /// Airport/Heliport is not open to the public (private).
     /// </summary>
-    Private = 1 << 2
+    [Map('P')] Private = 1 << 2,
+    [Map('J')] Joint = Civil | Military
 }

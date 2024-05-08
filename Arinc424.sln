@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arinc424.Tests", "tests\tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arinc424.Bench", "tests\benchmarks\Arinc424.Bench.csproj", "{A1DF49EA-81E4-4AC2-8AF3-5C8F36424815}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arinc424.Gen", "codegen\Arinc424.Gen.csproj", "{0EC5A959-869C-4F79-A44B-D5BC73FC2A2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arinc424.Generators", "codegen\Arinc424.Generators.csproj", "{0EC5A959-869C-4F79-A44B-D5BC73FC2A2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

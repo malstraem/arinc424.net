@@ -1,7 +1,3 @@
-using System.ComponentModel;
-
-using Arinc424.Attributes;
-
 namespace Arinc424.Airspace.Terms;
 
 /// <summary>
@@ -15,31 +11,25 @@ public enum AirspaceType : byte
     /// <summary>
     /// Class C Airspace.
     /// </summary>
-    [Map('A')]
-    Charlie,
+    [Map('A')] Charlie,
     /// <summary>
     /// Control Area, ICAO Designation (CTA).
     /// </summary>
-    [Map('C')]
-    ControlArea,
+    [Map('C')] ControlArea,
     /// <summary>
     /// Terminal Control Area, ICAO Designation (TMA or TCA).
     /// </summary>
-    [Map('M')]
-    TerminalControlArea,
+    [Map('M')] TerminalControlArea,
     /// <summary>
     /// Radar Zone or Radar Area.
     /// </summary>
-    [Map('R')]
-    RadarZone,
+    [Map('R')] RadarZone,
     /// <summary>
     /// Class B Airspace.
     /// </summary>
-    [Map('T')]
-    Bravo,
+    [Map('T')] Bravo,
     /// <summary>
     /// Control Zone, ICAO Designation (CTR).
     /// </summary>
-    [Map('Z')]
-    ControlZone
+    [Map('Z')] ControlZone
 }

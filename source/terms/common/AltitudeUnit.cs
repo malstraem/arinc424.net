@@ -9,7 +9,7 @@ public enum AltitudeUnit : byte
     /// <summary>
     /// Altitude has not been specified or established by the appropriate authority.
     /// </summary>
-    NotSpecified,
+    Unspecified,
     /// <summary>
     /// Altitude is unlimited.
     /// </summary>

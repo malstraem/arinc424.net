@@ -42,7 +42,7 @@ internal abstract class {symbol.Name}Converter : ICharConverter<{symbol.Name}Con
     }};
 }}").Append("\n");
 
-        return ($"{symbol.Name}Converter.gen.cs", builder.ToString());
+        return ($"converters/{symbol.Name}Converter.gen.cs", builder.ToString());
     }
 
     private void Process(SourceProductionContext context, ImmutableArray<Target> targets)

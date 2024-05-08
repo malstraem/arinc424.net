@@ -66,12 +66,12 @@ internal partial class Parser424
     [Obsolete("TODO diagnostic log")]
     private void Link()
     {
-        var infos = Meta424.Info.Where(x => x.Value.PrimaryKey is not null);
+        var info = Meta424.Info.Where(x => x.Value.PrimaryKey is not null);
 
-        foreach (var (type, _) in infos)
+        foreach (var (type, _) in info)
             unique[type] = [];
 
-        _ = Parallel.ForEach(infos, x =>
+        _ = Parallel.ForEach(info, x =>
         {
             foreach (var record in records[x.Key])
                 ProcessPrimaryKey(record, x.Value);

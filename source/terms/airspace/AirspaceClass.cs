@@ -1,7 +1,3 @@
-using System.ComponentModel;
-
-using Arinc424.Attributes;
-
 namespace Arinc424.Airspace.Terms;
 
 /// <summary>
@@ -12,18 +8,11 @@ namespace Arinc424.Airspace.Terms;
 public enum AirspaceClass : byte
 {
     Unknown,
-    [Map('A')]
-    Alpha,
-    [Map('B')]
-    Bravo,
-    [Map('C')]
-    Charlie,
-    [Map('D')]
-    Delta,
-    [Map('E')]
-    Echo,
-    [Map('F')]
-    Foxtrot,
-    [Map('G')]
-    Golf
+    [Map('A')] Alpha,
+    [Map('B')] Bravo,
+    [Map('C')] Charlie,
+    [Map('D')] Delta,
+    [Map('E')] Echo,
+    [Map('F')] Foxtrot,
+    [Map('G')] Golf
 }

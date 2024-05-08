@@ -8,14 +8,9 @@ namespace Arinc424.Airspace.Terms;
 public enum BoundaryVia : byte
 {
     Unknown,
-    [Map('C')]
-    Circle,
-    [Map('G')]
-    GreatCircle,
-    [Map('H')]
-    RhumbLine,
-    [Map('L')]
-    CounterClockwiseArc,
-    [Map('R')]
-    ClockwiseArc
+    [Map('C')] Circle,
+    [Map('G')] GreatCircle,
+    [Map('H')] RhumbLine,
+    [Map('L')] CounterClockwiseArc,
+    [Map('R')] ClockwiseArc
 }
