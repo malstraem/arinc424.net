@@ -4,158 +4,159 @@ namespace Arinc424.Comms.Terms;
 /// <c>Communications Type (COMM TYPE)</c> field.
 /// </summary>
 /// <remarks>See section 5.101.</remarks>
+[String]
 public enum CommType : byte
 {
     Unknown,
     /// <summary>
     /// Area Control Center.
     /// </summary>
-    Area,
+    [Map("ACC")] Area,
     /// <summary>
     /// Airlift Command Post.
     /// </summary>
-    Airlift,
+    [Map("ACP")] Airlift,
     /// <summary>
     /// Air to Air.
     /// </summary>
-    Air,
+    [Map("AIR")] Air,
     /// <summary>
     /// Approach Control.
     /// </summary>
-    Approach,
+    [Map("APP")] Approach,
     /// <summary>
     /// Arrival Control.
     /// </summary>
-    Arrival,
+    [Map("ARR")] Arrival,
     /// <summary>
     /// Automatic Surface Observing System (ASOS).
     /// </summary>
-    SurfaceObserving,
+    [Map("ASO")] SurfaceObserving,
     /// <summary>
     /// Automatic Terminal Info Service (ATIS).
     /// </summary>
-    TerminalInfoService,
+    [Map("ATI")] TerminalInfoService,
     /// <summary>
     /// Airport Weather Information Broadcast (AWIB).
     /// </summary>
-    WeatherBroadcast,
+    [Map("AWI")] WeatherBroadcast,
     /// <summary>
     /// Automatic Weather Observing Service (AWOS).
     /// </summary>
-    WeatherObserving,
+    [Map("AWO")] WeatherObserving,
     /// <summary>
     /// Aerodrome Weather Information Services (AWIS).
     /// </summary>
-    WeatherServices,
+    [Map("AWS")] WeatherServices,
     /// <summary>
     /// Class B Airspace.
     /// </summary>
-    Bravo,
+    [Map("CBA")] Bravo,
     /// <summary>
     /// Class C Airspace.
     /// </summary>
-    Charlie,
+    [Map("CCA")] Charlie,
     /// <summary>
     /// Clearance Delivery.
     /// </summary>
-    DeliveryClearance,
+    [Map("CLD")] DeliveryClearance,
     /// <summary>
     /// Clearance, Pre-Taxi.
     /// </summary>
-    PreTaxiClearance,
+    [Map("CPT")] PreTaxiClearance,
     /// <summary>
     /// Control Area (Terminal).
     /// </summary>
-    ControlArea,
+    [Map("CTA")] ControlArea,
     /// <summary>
     /// Common Traffic Advisory Frequencies.
     /// </summary>
-    CommonTrafficAdvisory,
-    Control,
+    [Map("CTF")] CommonTrafficAdvisory,
+    [Map("CTL")] Control,
     /// <summary>
     /// Departure Control.
     /// </summary>
-    Departure,
+    [Map("DEP")] Departure,
     /// <summary>
     /// Director (Approach Control Radar).
     /// </summary>
-    Director,
+    [Map("DIR")] Director,
     /// <summary>
     /// Enroute Flight Advisory Service (EFAS).
     /// </summary>
-    FlightAdvisory,
+    [Map("EFS")] FlightAdvisory,
     /// <summary>
     /// Emergency.
     /// </summary>
-    Emergency,
+    [Map("EMR")] Emergency,
     /// <summary>
     /// Flight Service Station.
     /// </summary>
-    FlightService,
+    [Map("FSS")] FlightService,
     /// <summary>
     /// Ground Comm Outlet.
     /// </summary>
-    GroundOutlet,
+    [Map("GCO")] GroundOutlet,
     /// <summary>
     /// Ground Control.
     /// </summary>
-    Ground,
+    [Map("GND")] Ground,
     /// <summary>
     /// Gate Control.
     /// </summary>
-    Gate,
+    [Map("GTE")] Gate,
     /// <summary>
     /// Helicopter Frequency.
     /// </summary>
-    Helicopter,
-    Information,
+    [Map("HEL")] Helicopter,
+    [Map("INF")] Information,
     /// <summary>
     /// Mandatory Broadcast Zone.
     /// </summary>
-    BroadcastZone,
+    [Map("MBZ")] BroadcastZone,
     /// <summary>
     /// Military Frequency.
     /// </summary>
-    Military,
-    Multicom,
-    Operations,
-    ActivatedLighting,
-    Radio,
-    Radar,
+    [Map("MIL")] Military,
+    [Map("MUL")] Multicom,
+    [Map("OPS")] Operations,
+    [Map("PAL")] ActivatedLighting,
+    [Map("RDO")] Radio,
+    [Map("RDR")] Radar,
     /// <summary>
     /// Remote Flight Service Station (RFSS).
     /// </summary>
-    RemoteFlightService,
-    RampTaxi,
+    [Map("RFS")] RemoteFlightService,
+    [Map("RMP")] RampTaxi,
     /// <summary>
     /// Airport Radar Service Area (ARSA).
     /// </summary>
-    RadarService,
+    [Map("RSA")] RadarService,
     /// <summary>
     /// Terminal Control Area (TCA).
     /// </summary>
-    TerminalControlArea,
+    [Map("TCA")] TerminalControlArea,
     /// <summary>
     /// Terminal Control Area (TMA).
     /// </summary>
-    TerminalManeuveringArea,
-    Terminal,
+    [Map("TMA")] TerminalManeuveringArea,
+    [Map("TML")] Terminal,
     /// <summary>
     /// Terminal Radar Service Area (TRSA).
     /// </summary>
-    TerminalRadarService,
+    [Map("TRS")] TerminalRadarService,
     /// <summary>
     /// Transcriber Weather Broadcast (TWEB).
     /// </summary>
-    TranscriberWeatherBroadcast,
+    [Map("TWE")] TranscriberWeatherBroadcast,
     /// <summary>
     /// Tower, Air Traffic Control.
     /// </summary>
-    Tower,
+    [Map("TWR")] Tower,
     /// <summary>
     /// Upper Area Control.
     /// </summary>
-    UpperArea,
-    Unicom,
-    Volmet
+    [Map("UAC")] UpperArea,
+    [Map("UNI")] Unicom,
+    [Map("VOL")] Volmet
 }

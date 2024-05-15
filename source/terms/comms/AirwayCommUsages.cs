@@ -1,7 +1,7 @@
 namespace Arinc424.Comms.Terms;
 
 /// <summary>
-/// <c>Service Indicator (SERV IND)</c> -> <c>Enroute</c>
+/// <c>Service Indicator (SERV IND)</c> -> <c>Enroute</c>.
 /// </summary>
 /// <remarks>See table 5-21.</remarks>
 [String, Flags]

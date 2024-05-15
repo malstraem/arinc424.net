@@ -12,11 +12,11 @@ namespace Arinc424;
 /// </para>
 /// </summary>
 /// <remarks>See section 5.26, 5.28, 5.165.</remarks>
-[Flags]
+[Char, Flags]
 public enum CourseType : byte
 {
     Unknown = 0,
-    Magnetic = 1,
-    True = 1 << 1,
-    Mixed = Magnetic | True
+    [Map('M')] Magnetic = 1,
+    [Map('T')] True = 1 << 1,
+    [Map] Mixed = Magnetic | True
 }
