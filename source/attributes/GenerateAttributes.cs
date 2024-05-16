@@ -16,7 +16,7 @@ internal class StringAttribute : Attribute;
 /// Specifies the mapping value of an enum member. Default is blank.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field)]
-public class MapAttribute(string @string = "") : Attribute
+internal class MapAttribute(string @string = "") : Attribute
 {
     internal MapAttribute(char @char) : this(@char.ToString()) { }
 
