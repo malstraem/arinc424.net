@@ -53,7 +53,7 @@
     <remarks>See section 5.30.</remarks>
   </member>
 
-  <member name="AidIdentifier">
+  <member name="Navaid">
     <summary>
       <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field.
     </summary>

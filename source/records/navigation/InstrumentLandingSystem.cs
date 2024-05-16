@@ -1,6 +1,3 @@
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Navigation;
 
 #pragma warning disable CS8618
@@ -31,7 +28,7 @@ public class InstrumentLandingSystem : LandingSystem
     [Field(75, 78), Decode<IntConverter>]
     public int Position { get; set; }
 
-    [Character(79), Obsolete("TODO combine with position")]
+    [Character(79), Obsolete("todo - combine with position")]
     public char PositionReference { get; set; }
 
     /// <summary>
@@ -58,7 +55,7 @@ public class InstrumentLandingSystem : LandingSystem
     [Field(88, 90), Decode<HundredthsConverter>]
     public float SlopeAngle { get; set; }
 
-    [Field(91, 95), Obsolete("TODO")]
+    [Field(91, 95), Obsolete("todo")]
     public string Declination { get; set; }
 
     [Type(109, 110)]

@@ -1,11 +1,12 @@
 namespace Arinc424.Converters;
 
-internal abstract class RadarAvailabilityConverter : ICharConverter<RadarAvailabilityConverter, bool?>
+internal abstract class RadarAvailabilityConverter : ICharConverter<RadarAvailabilityConverter, Bool>
 {
-    public static bool? Convert(char @char) => @char switch
+    public static Bool Convert(char @char) => @char switch
     {
-        'R' => true,
-        'N' => false,
-        'U' or _ => null
+        'R' => Bool.Yes,
+        'N' => Bool.No,
+        'U' => Bool.Unspecified,
+        _ => Bool.Unknown
     };
 }

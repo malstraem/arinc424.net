@@ -4,39 +4,40 @@ namespace Arinc424.Routing.Terms;
 /// <c>Route Type (RT TYPE)</c> -> <c>Airway Type</c> character.
 /// </summary>
 /// <remarks>See table 5-2.</remarks>
+[Char]
 public enum AirwayType : byte
 {
     Unknown,
     /// <summary>
     /// Airline Airway (Tailored Data).
     /// </summary>
-    Airline,
+    [Map('A')] Airline,
     /// <summary>
     /// Control.
     /// </summary>
-    Control,
+    [Map('C')] Control,
     /// <summary>
     /// Direct Route.
     /// </summary>
-    Direct,
+    [Map('D')] Direct,
     /// <summary>
     /// Helicopter Airways.
     /// </summary>
-    Helicopter,
+    [Map('H')] Helicopter,
     /// <summary>
     /// Officially Designated Airways, except RNAV, Helicopter Airways.
     /// </summary>
-    Designated,
+    [Map('O')] Designated,
     /// <summary>
     /// RNAV Airways.
     /// </summary>
-    AreaNavigation,
+    [Map('R')] AreaNavigation,
     /// <summary>
     /// Undesignated ATS Route.
     /// </summary>
-    Undesignated,
+    [Map('S')] Undesignated,
     /// <summary>
     /// TACAN Airway.
     /// </summary>
-    Tactical
+    [Map('T')] Tactical
 }

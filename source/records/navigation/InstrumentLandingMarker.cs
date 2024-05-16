@@ -1,10 +1,8 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
 using Arinc424.Ports;
 
 namespace Arinc424.Navigation;
+
+using Terms;
 
 #pragma warning disable CS8618
 
@@ -25,8 +23,9 @@ public class InstrumentLandingMarker : Geo, IIcao, IIdentity
     [Field(14, 17)]
     public string Identifier { get; set; }
 
+    /// <inheritdoc cref="MarkerType"/>
     [Field(18, 20), Decode<MarkerTypeConverter>]
-    public Terms.MarkerType Type { get; set; }
+    public MarkerType Type { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
     [Field(23, 27), Decode<TenthsConverter>]
@@ -43,19 +42,19 @@ public class InstrumentLandingMarker : Geo, IIcao, IIdentity
 
     /// <inheritdoc cref="Terms.NavaidType"/>
     [Field(75, 76), Decode<NondirectionalTypeConverter>]
-    public Terms.NavaidType NavaidType { get; set; }
+    public NavaidType NavaidType { get; set; }
 
-    /// <inheritdoc cref="Terms.NavaidCoverage"/>
+    /// <inheritdoc cref="NavaidCoverage"/>
     [Character(77), Transform<NondirectionalCoverageConverter>]
-    public Terms.NavaidCoverage Coverage { get; set; }
+    public NavaidCoverage Coverage { get; set; }
 
-    /// <inheritdoc cref="Terms.NavaidInfo"/>
+    /// <inheritdoc cref="NavaidInfo"/>
     [Character(78), Transform<NavaidInfoConverter>]
-    public Terms.NavaidInfo Info { get; set; }
+    public NavaidInfo Info { get; set; }
 
-    /// <inheritdoc cref="Terms.NavaidCollocation"/>
+    /// <inheritdoc cref="NavaidCollocation"/>
     [Character(79), Transform<NavaidCollocationConverter>]
-    public Terms.NavaidCollocation Collocation { get; set; }
+    public NavaidCollocation Collocation { get; set; }
 
     [Field(80, 84), Obsolete("need more section 5.93 analysis")]
     public string? Facility { get; set; }

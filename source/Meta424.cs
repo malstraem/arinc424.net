@@ -1,7 +1,6 @@
 using System.Reflection;
 
 using Arinc424.Airspace;
-using Arinc424.Attributes;
 using Arinc424.Comms;
 using Arinc424.Navigation;
 using Arinc424.Ports;
@@ -65,9 +64,7 @@ internal static class Meta424
 {
     static Meta424()
     {
-        var infos = Records.Cast<InfoAttribute>().Concat(Sequences);
-
-        foreach (var info in infos)
+        foreach (var info in Records.Cast<InfoAttribute>().Concat(Sequences))
         {
             Info.Add(info.Type, info);
             Types.Add((info.Section.SectionChar, info.Section.SubsectionChar), info.Type);

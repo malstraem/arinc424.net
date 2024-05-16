@@ -4,19 +4,20 @@ namespace Arinc424.Ports.Terms;
 /// <c>Longest Runway Surface Code (LRSC)</c> character.
 /// </summary>
 /// <remarks>See section 5.249.</remarks>
+[Char]
 public enum RunwaySurfaceType : byte
 {
     Unknown,
     /// <summary>
     /// Hard runway, for example, asphalt or concrete.
     /// </summary>
-    Hard,
+    [Map('H')] Hard,
     /// <summary>
     /// Soft runway, for example, gravel, grass or soil.
     /// </summary>
-    Soft,
+    [Map('S')] Soft,
     /// <summary>
     /// Water runway.
     /// </summary>
-    Water
+    [Map('W')] Water
 }

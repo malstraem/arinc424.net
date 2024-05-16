@@ -3,32 +3,33 @@ namespace Arinc424.Procedures.Terms;
 /// <summary>
 /// <c>Route Type (RT TYPE)</c> -> <c>STAR Route Type Description</c> character.
 /// </summary>
-/// <remarks>See table 5-6.</remarks>
+/// <remarks>See section 5.7, Table 5-6.</remarks>
+[Char]
 public enum ArrivalType : byte
 {
     Unknown,
     /// <summary>
     /// STAR Enroute Transition.
     /// </summary>
-    EnrouteTransition,
+    [Map('1')] EnrouteTransition,
     /// <summary>
     /// STAR or STAR Common Route.
     /// </summary>
-    Common,
+    [Map('2')] Common,
     /// <summary>
     /// STAR Runway Transition.
     /// </summary>
-    RunwayTransition,
+    [Map('3')] RunwayTransition,
     /// <summary>
     /// RNP STAR Enroute Transition.
     /// </summary>
-    PerformanceEnrouteTransition,
+    [Map('R')] PerformanceEnrouteTransition,
     /// <summary>
     /// RNP STAR or STAR Common Route.
     /// </summary>
-    PerformanceCommonRoute,
+    [Map('N')] PerformanceCommonRoute,
     /// <summary>
     /// RNP STAR Runway Transition.
     /// </summary>
-    PerformanceRunwayTransition
+    [Map('P')] PerformanceRunwayTransition
 }

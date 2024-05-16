@@ -1,6 +1,3 @@
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Navigation;
 
 /// <summary>
@@ -28,7 +25,7 @@ public class GlobalLandingSystem : LandingSystem
     /// <c>TDMA Slots </c> field.
     /// </summary>
     /// <remarks>See section 5.246.</remarks>
-    [Field(86, 87), Decode<ByteConverter>]
+    [Field(86, 87), Decode<Converters.ByteConverter>]
     public int Slots { get; set; }
 
     /// <summary>

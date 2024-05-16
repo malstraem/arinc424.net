@@ -4,19 +4,20 @@ namespace Arinc424.Comms.Terms;
 /// <c>Distance Description (DIST DESC)</c> character.
 /// </summary>
 /// <remarks>See section 5.187.</remarks>
+[Char]
 public enum DistanceLimitation : byte
 {
     Unknown,
     /// <summary>
     /// No restrictions/limitations apply.
     /// </summary>
-    None,
+    [Map] None,
     /// <summary>
     /// Communications frequency or navaid limitation is out to a specified distance.
     /// </summary>
-    Out,
+    [Map('-')] Out,
     /// <summary>
     /// Communications frequency is used or the navaid limitation applies beyond a specified distance.
     /// </summary>
-    Beyond
+    [Map('+')] Beyond
 }

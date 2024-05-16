@@ -1,7 +1,3 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
 using Arinc424.Navigation;
 
 namespace Arinc424.Ports;

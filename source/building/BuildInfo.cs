@@ -1,7 +1,5 @@
 using System.Reflection;
 
-using Arinc424.Attributes;
-
 namespace Arinc424.Building;
 
 internal record BuildInfo
@@ -38,8 +36,8 @@ internal record BuildInfo
     {
         var properties = type.GetProperties();
 
-        List<IndexAssignmentInfo> indexInfos = [];
-        List<RangeAssignmentInfo> rangeInfos = [];
+        List<IndexAssignmentInfo> indexInfo = [];
+        List<RangeAssignmentInfo> rangeInfo = [];
 
         foreach (var property in properties)
         {
@@ -47,7 +45,7 @@ internal record BuildInfo
 
             if (TryTargetFieldAttribute(property, type, out var fieldAttribute) || TryFieldAttribute(property, out fieldAttribute))
             {
-                rangeInfos.Add(new RangeAssignmentInfo
+                rangeInfo.Add(new RangeAssignmentInfo
                 {
                     Property = property,
                     Range = fieldAttribute!.Range,
@@ -57,7 +55,7 @@ internal record BuildInfo
             }
             else if (TryTargetCharacterAttribute(property, type, out var characterAttribute) || TryCharacterAttribute(property, out characterAttribute))
             {
-                indexInfos.Add(new IndexAssignmentInfo
+                indexInfo.Add(new IndexAssignmentInfo
                 {
                     Property = property,
                     Index = characterAttribute!.Index,
@@ -66,11 +64,11 @@ internal record BuildInfo
                 });
             }
         }
-        IndexInfos = [.. indexInfos];
-        RangeInfos = [.. rangeInfos];
+        IndexInfo = [.. indexInfo];
+        RangeInfo = [.. rangeInfo];
     }
 
-    internal IndexAssignmentInfo[] IndexInfos { get; }
+    internal IndexAssignmentInfo[] IndexInfo { get; }
 
-    internal RangeAssignmentInfo[] RangeInfos { get; }
+    internal RangeAssignmentInfo[] RangeInfo { get; }
 }

@@ -1,16 +1,13 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Navigation;
+
+using Terms;
 
 #pragma warning disable CS8618
 
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Navaid : Geo, IIcao, IIdentity, INamed
 {
-    /// <include file='Comments.xml' path="doc/member[@name='AidIdentifier']/*"/>
+    /// <include file='Comments.xml' path="doc/member[@name='Navaid']/*"/>
     [Field(14, 17), Primary]
     public string Identifier { get; set; }
 
@@ -21,21 +18,23 @@ public abstract class Navaid : Geo, IIcao, IIdentity, INamed
     [Field(23, 27), Decode<TenthsConverter>]
     public float Frequency { get; set; }
 
-    /// <inheritdoc cref="Terms.NavaidType"/>
+    /// <inheritdoc cref="NavaidType"/>
+    [Obsolete("todo type target converter")]
     [Field(28, 29), Decode<NondirectionalTypeConverter>]
-    public Terms.NavaidType Type { get; set; }
+    public NavaidType Type { get; set; }
 
-    /// <inheritdoc cref="Terms.NavaidCoverage"/>
+    /// <inheritdoc cref="NavaidCoverage"/>
+    [Obsolete("todo type target converter")]
     [Character(30), Transform<NondirectionalCoverageConverter>]
-    public Terms.NavaidCoverage Coverage { get; set; }
+    public NavaidCoverage Coverage { get; set; }
 
-    /// <inheritdoc cref="Terms.NavaidInfo"/>
+    /// <inheritdoc cref="NavaidInfo"/>
     [Character(31), Transform<NavaidInfoConverter>]
-    public Terms.NavaidInfo Info { get; set; }
+    public NavaidInfo Info { get; set; }
 
-    /// <inheritdoc cref="Terms.NavaidCollocation"/>
+    /// <inheritdoc cref="NavaidCollocation"/>
     [Character(32), Transform<NavaidCollocationConverter>]
-    public Terms.NavaidCollocation Collocation { get; set; }
+    public NavaidCollocation Collocation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
     [Field(91, 93)]

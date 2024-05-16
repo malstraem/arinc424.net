@@ -1,9 +1,6 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Waypoints;
+
+using Terms;
 
 #pragma warning disable CS8618
 
@@ -13,7 +10,7 @@ namespace Arinc424.Waypoints;
 /// <remarks>See section 4.1.4.1.</remarks>
 [Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
-public abstract class Waypoint : Geo, IIcao, IIdentity
+public abstract class Waypoint : Geo, IIdentity, IIcao, INamed
 {
     /// <include file='Comments.xml' path="doc/member[@name='FixIdentifier']/*"/>
     [Field(14, 18), Primary]
@@ -22,13 +19,13 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
     [Field(20, 21), Primary]
     public string IcaoCode { get; set; }
 
-    /// <inheritdoc cref="Terms.WaypointTypes"/>
+    /// <inheritdoc cref="WaypointTypes"/>
     [Field(27, 29), Decode<WaypointTypesConverter>]
-    public Terms.WaypointTypes Types { get; set; }
+    public WaypointTypes Types { get; set; }
 
-    /// <inheritdoc cref="Terms.WaypointUsages"/>
+    /// <inheritdoc cref="WaypointUsages"/>
     [Field(30, 31), Decode<WaypointUsagesConverter>]
-    public Terms.WaypointUsages Usages { get; set; }
+    public WaypointUsages Usages { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(75, 79), Decode<MagneticVariationConverter>]
@@ -38,9 +35,9 @@ public abstract class Waypoint : Geo, IIcao, IIdentity
     [Field(85, 87)]
     public string? Datum { get; set; }
 
-    /// <inheritdoc cref="Terms.WaypointNameFormats"/>
+    /// <inheritdoc cref="WaypointNameFormats"/>
     [Field(96, 98), Decode<WaypointNameFormatsConverter>]
-    public Terms.WaypointNameFormats NameFormats { get; set; }
+    public WaypointNameFormats NameFormats { get; set; }
 
     /// <summary>
     /// <c>Waypoint Name (NAME)</c> field.

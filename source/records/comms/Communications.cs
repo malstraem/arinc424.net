@@ -1,6 +1,3 @@
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Comms;
 
 [Sequenced(20, 21), Continuous]

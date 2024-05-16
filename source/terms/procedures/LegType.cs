@@ -3,100 +3,101 @@ namespace Arinc424.Procedures.Terms;
 /// <summary>
 /// <c>Path and Termination (PATH TERM)</c> field.
 /// </summary>
-/// <remarks>See section 5.21 and attachment 5.</remarks>
+/// <remarks>See section 5.21.</remarks>
+[String]
 public enum LegType : byte
 {
     Unknown,
     /// <summary>
     /// Initial Fix or IF Leg.
     /// </summary>
-    Initial,
+    [Map("IF")] Initial,
     /// <summary>
     /// Track to a Fix or TF Leg.
     /// </summary>
-    TrackToFix,
+    [Map("TF")] TrackToFix,
     /// <summary>
     /// Course to a Fix or CF Leg.
     /// </summary>
-    CourseToFix,
+    [Map("CF")] CourseToFix,
     /// <summary>
     /// Direct to a Fix or DF Leg.
     /// </summary>
-    DirectToFix,
+    [Map("DF")] DirectToFix,
     /// <summary>
     ///  Fix to an Altitude or FA Leg.
     /// </summary>
-    FixToAltitude,
+    [Map("FA")] FixToAltitude,
     /// <summary>
     /// Track from a Fix to a Distance or FC Leg.
     /// </summary>
-    FromFixToDistance,
+    [Map("FC")] FromFixToDistance,
     /// <summary>
     /// Track from a Fix to a DME Distance or FD Leg.
     /// </summary>
-    FromFixToDme,
+    [Map("FD")] FromFixToDme,
     /// <summary>
     /// From a Fix to a Manual termination or FM Leg.
     /// </summary>
-    FromFixToManual,
+    [Map("FM")] FromFixToManual,
     /// <summary>
     /// Course to an Altitude or CA Leg.
     /// </summary>
-    CourseToAltitude,
+    [Map("CA")] CourseToAltitude,
     /// <summary>
     /// Course to a DME Distance or CD Leg.
     /// </summary>
-    CourseToDme,
+    [Map("CD")] CourseToDme,
     /// <summary>
     /// Course to an Intercept or CI Leg.
     /// </summary>
-    CourseToIntercept,
+    [Map("CI")] CourseToIntercept,
     /// <summary>
     /// Course to a Radial termination or CR Leg.
     /// </summary>
-    CourseToRadial,
+    [Map("CR")] CourseToRadial,
     /// <summary>
     /// Constant Radius Arc or RF Leg.
     /// </summary>
-    ConstantRadiusArc,
+    [Map("RF")] ConstantRadiusArc,
     /// <summary>
     /// Arc to a Fix or AF Leg.
     /// </summary>
-    ArcToFix,
+    [Map("AF")] ArcToFix,
     /// <summary>
     /// Heading to an Altitude termination or VA Leg.
     /// </summary>
-    HeadingToAltitude,
+    [Map("VA")] HeadingToAltitude,
     /// <summary>
     /// Heading to a DME Distance termination or VD Leg.
     /// </summary>
-    HeadingToDme,
+    [Map("VD")] HeadingToDme,
     /// <summary>
     /// Heading to an Intercept or VI Leg.
     /// </summary>
-    HeadingToIntercept,
+    [Map("VI")] HeadingToIntercept,
     /// <summary>
     /// Heading to a Manual termination or VM Leg.
     /// </summary>
-    HeadingToManual,
+    [Map("VM")] HeadingToManual,
     /// <summary>
     /// Heading to a Radial termination or VR Leg.
     /// </summary>
-    HeadingToRadial,
+    [Map("VR")] HeadingToRadial,
     /// <summary>
     /// Procedure Turn or PI Leg.
     /// </summary>
-    Turn,
+    [Map("PI")] Turn,
     /// <summary>
     /// Altitude Termination or HA Leg.
     /// </summary>
-    AltitudeTermination,
+    [Map("HA")] AltitudeTermination,
     /// <summary>
     /// Single circuit terminating at the fix or HF Leg.
     /// </summary>
-    SingleCircuitTermination,
+    [Map("HF")] SingleCircuitTermination,
     /// <summary>
     /// Manual Termination or HM Leg.
     /// </summary>
-    ManualTermination
+    [Map("HM")] ManualTermination
 }

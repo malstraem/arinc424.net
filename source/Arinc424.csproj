@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>library</OutputType>
     <RootNamespace>Arinc424</RootNamespace>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -10,5 +9,7 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>Arinc424.Bench</_Parameter1>
     </AssemblyAttribute>
+
+    <ProjectReference Include="..\codegen\Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>

@@ -1,7 +1,5 @@
 using System.Reflection;
 
-using Arinc424.Attributes;
-
 namespace Arinc424.Linking;
 
 internal class PrimaryKey(int length, ReadOnlyMemory<Range> ranges) : Key(length, ranges)

@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 namespace Arinc424.Comms.Terms;
 
 [DebuggerDisplay($"{nameof(Start)} - {{{nameof(Start)}}}, {nameof(End)} - {{{nameof(End)}}}")]

@@ -4,43 +4,44 @@ namespace Arinc424.Navigation.Terms;
 /// <c>ILS/MLS/GLS Category (CAT)</c> character.
 /// </summary>
 /// <remarks>See section 5.80.</remarks>
+[Char, Description("ILS/MLS/GLS Category (CAT)")]
 public enum LandingSystemType : byte
 {
     Unknown,
     /// <summary>
     /// ILS Localizer Only, No Glideslope.
     /// </summary>
-    NoGlideSlope,
+    [Map('0')] NoGlideSlope,
     /// <summary>
     /// ILS Localizer/MLS/GLS Category I.
     /// </summary>
-    CategoryOne,
+    [Map('1')] CategoryOne,
     /// <summary>
     /// ILS Localizer/MLS/GLS Category II.
     /// </summary>
-    CategoryTwo,
+    [Map('2')] CategoryTwo,
     /// <summary>
     /// ILS Localizer/MLS/GLS Category III.
     /// </summary>
-    CategoryThree,
+    [Map('3')] CategoryThree,
     /// <summary>
     /// IGS Facility.
     /// </summary>
-    InstrumentGuidance,
+    [Map('I')] InstrumentGuidance,
     /// <summary>
     /// LDA Facility with Glideslope.
     /// </summary>
-    DirectionalGlideSlope,
+    [Map('L')] DirectionalGlideSlope,
     /// <summary>
     /// LDA Facility, no Glideslope.
     /// </summary>
-    DirectionalNoGlideSlope,
+    [Map('A')] DirectionalNoGlideSlope,
     /// <summary>
     /// SDF Facility with Glideslope.
     /// </summary>
-    SimplifiedGlideSlope,
+    [Map('S')] SimplifiedGlideSlope,
     /// <summary>
     /// SDF Facility, no Glideslope.
     /// </summary>
-    SimplifiedNoGlideSlope
+    [Map('F')] SimplifiedNoGlideSlope
 }

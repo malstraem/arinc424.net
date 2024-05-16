@@ -8,7 +8,7 @@ internal static class RecordBuilder
 
         ReadOnlySpan<char> chars = @string;
 
-        foreach (var rangeInfo in info.RangeInfos)
+        foreach (var rangeInfo in info.RangeInfo)
         {
             var @field = chars[rangeInfo.Range];
 
@@ -21,7 +21,7 @@ internal static class RecordBuilder
             rangeInfo.Property.SetValue(record, value);
         }
 
-        foreach (var indexInfo in info.IndexInfos)
+        foreach (var indexInfo in info.IndexInfo)
         {
             char @char = @string[indexInfo.Index];
 

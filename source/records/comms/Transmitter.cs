@@ -1,8 +1,3 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Comms;
 
 using Terms;
@@ -16,23 +11,28 @@ public abstract class Transmitter : Geo
     [Field(23, 25), Decode<CommTypeConverter>]
     public CommType Type { get; set; }
 
-    /// <summary>
-    /// <c>Communications Frequency (COMM FREQ)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.103.</remarks>
+    /// <inheritdoc cref="Terms.Frequency"/>
     [Field(26, 40), Decode<FrequencyConverter>]
     public Frequency Frequency { get; set; }
 
+    /// <summary>
+    /// <c>Radar (RADAR)</c> character.
+    /// </summary>
+    /// <remarks>See section 5.102.</remarks>
     [Character(41), Transform<RadarAvailabilityConverter>]
-    public bool? IsRadarAvailable { get; set; }
+    public Bool IsRadarAvailable { get; set; }
 
     /// <summary>
     /// <c>H24 Indicator (H24)</c> character.
     /// </summary>
-    /// <remarks>See section.</remarks>
+    /// <remarks>See section 5.181.</remarks>
     [Character(42), Transform<BoolConverter>]
-    public bool IsWholeDay { get; set; }
+    public Bool IsWholeDay { get; set; }
 
+    /// <summary>
+    /// <c>Call Sign (CALL SIGN)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.105.</remarks>
     [Field(43, 67)]
     public string CallSign { get; set; }
 

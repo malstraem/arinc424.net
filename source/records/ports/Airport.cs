@@ -1,7 +1,3 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
 using Arinc424.Navigation;
 using Arinc424.Procedures;
 using Arinc424.Waypoints;
@@ -18,7 +14,7 @@ using Terms;
 /// <remarks>See section 4.1.7.1.</remarks>
 [Section('P', 'A', subsectionIndex: 13), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
-public class Airport : Geo, IIcao, IIdentity
+public class Airport : Geo, IIdentity, IIcao, INamed
 {
     /// <summary>
     /// <c>Airport Identifier (ARPT IDENT)</c> field.
@@ -57,7 +53,7 @@ public class Airport : Geo, IIcao, IIdentity
     /// </summary>
     /// <remarks>See section 5.108.</remarks>
     [Character(31), Transform<BoolConverter>]
-    public bool IsProcedurePublished { get; set; }
+    public Bool IsProcedurePublished { get; set; }
 
     /// <inheritdoc cref="RunwaySurfaceType"/>
     [Character(32), Transform<RunwaySurfaceTypeConverter>]
@@ -110,7 +106,7 @@ public class Airport : Geo, IIcao, IIdentity
     /// </summary>
     /// <remarks>See section 5.179.</remarks>
     [Character(85), Transform<BoolConverter>]
-    public bool IsDaylightTime { get; set; }
+    public Bool IsDaylightTime { get; set; }
 
     /// <inheritdoc cref="Arinc424.CourseType"/>
     [Character(86), Transform<CourseTypeConverter>]

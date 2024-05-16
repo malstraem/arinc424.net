@@ -4,48 +4,76 @@ namespace Arinc424.Procedures.Terms;
 /// <c>Procedure Design Aircraft Category or Type</c> character.
 /// </summary>
 /// <remarks>See section 5.301.</remarks>
-[Flags]
+[Char, Flags]
 public enum AircraftTypes : ushort
 {
     Unknown = 0,
     /// <summary>
     /// Aircraft Category A only.
     /// </summary>
-    CategoryA = 1,
+    [Map('A')] Alpha = 1,
     /// <summary>
     /// Aircraft Category B only.
     /// </summary>
-    CategoryB = 1 << 1,
+    [Map('B')] Bravo = 1 << 1,
     /// <summary>
     /// Aircraft Category C only.
     /// </summary>
-    CategoryC = 1 << 2,
+    [Map('C')] Charlie = 1 << 2,
     /// <summary>
     /// Aircraft Category D only.
     /// </summary>
-    CategoryD = 1 << 3,
+    [Map('D')] Delta = 1 << 3,
     /// <summary>
     /// Aircraft Category E only.
     /// </summary>
-    CategoryE = 1 << 4,
+    [Map('E')] Echo = 1 << 4,
+    /// <summary>
+    /// Aircraft Categories A and B only.
+    /// </summary>
+    [Map('F')] AlphaBravo = Alpha | Bravo,
+    /// <summary>
+    /// Aircraft Categories C and D only.
+    /// </summary>
+    [Map('G')] CharlieDelta = Charlie | Delta,
+    /// <summary>
+    /// Aircraft Categories A, B and C only.
+    /// </summary>
+    [Map('I')] AlphaBravoCharlie = Alpha | Bravo | Charlie,
+    /// <summary>
+    /// Aircraft Categories A, B, C and D only.
+    /// </summary>
+    [Map('J')] AlphaBravoCharlieDelta = Alpha | Bravo | Charlie | Delta,
+    /// <summary>
+    /// Aircraft Categories A, B, C, D and E only.
+    /// </summary>
+    [Map('K')] AlphaBravoCharlieDeltaEcho = Alpha | Bravo | Charlie | Delta | Echo,
+    /// <summary>
+    /// Aircraft Categories D and E only.
+    /// </summary>
+    [Map('L')] DeltaEcho = Delta | Echo,
     /// <summary>
     /// Aircraft Category H – (Helicopter) only.
     /// </summary>
-    Helicopter = 1 << 5,
+    [Map('H')] Helicopter = 1 << 5,
     /// <summary>
     /// Aircraft Type Not Limited.
     /// </summary>
-    NotLimited = 1 << 6,
+    [Map('P')] NotLimited = 1 << 6,
     /// <summary>
     /// Aircraft Type Turbojet only.
     /// </summary>
-    Turbojet = 1 << 7,
+    [Map('R')] Turbojet = 1 << 7,
     /// <summary>
     /// Aircraft Type Turboprop only.
     /// </summary>
-    Turboprop = 1 << 8,
+    [Map('S')] Turboprop = 1 << 8,
     /// <summary>
     /// Aircraft Type Prop only.
     /// </summary>
-    Prop = 1 << 9,
+    [Map('T')] Prop = 1 << 9,
+    /// <summary>
+    /// Aircraft Type Turboprop and Prop.
+    /// </summary>
+    [Map('U')] PropTurboProp = Turboprop | Prop
 }

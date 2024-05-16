@@ -1,5 +1,3 @@
-using Arinc424.Attributes;
-
 namespace Arinc424.Tables;
 
 public class CruiseTableRow : Record424

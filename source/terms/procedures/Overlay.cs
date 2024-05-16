@@ -4,51 +4,52 @@ namespace Arinc424.Procedures.Terms;
 /// <c>GNSS/FMS Indicator (GNSS/FMS IND)</c> character.
 /// </summary>
 /// <remarks>See section 5.222.</remarks>
+[Char]
 public enum Overlay : byte
 {
     Unknown,
     /// <summary>
     /// Procedure not authorized for GNSS or FMS overlay.
     /// </summary>
-    NotAuthorized,
+    [Map('0')] Unauthorized,
     /// <summary>
     /// Procedure authorized for GNSS Overlay, primary Navaids operating and monitored.
     /// </summary>
-    Monitored,
+    [Map('1')] Monitored,
     /// <summary>
     /// Procedure authorized for GNSS Overlay, primary Navaids installed, not monitored.
     /// </summary>
-    NotMonitored,
+    [Map('2')] Unmonitored,
     /// <summary>
     /// Procedure authorized for GNSS Overlay, Procedure Title includes GPS or GNSS.
     /// </summary>
-    Global,
+    [Map('3')] Global,
     /// <summary>
     /// Procedure authorized for FMS Overlay.
     /// </summary>
-    FlightManagement,
+    [Map('4')] FlightManagement,
     /// <summary>
     /// RNAV (GPS), RNAV (RNP) or RNAV (GNSS) Procedure SBAS use authorized, SBAS-based vertical navigation authorized.
     /// </summary>
-    AreaNavigation,
+    [Map('A')] AreaNavigation,
     /// <summary>
     /// RNAV (GPS), RNAV (RNP), RNAV (GNSS) or RNAV Visual Procedure, SBAS-based vertical navigation not authorized.
     /// </summary>
-    AreaNavigationVisual,
+    [Map('B')] AreaNavigationVisual,
     /// <summary>
     /// RNAV (GPS) RNAV (RNP), or RNAV (GNSS) Procedure, SBAS-based vertical navigation use not published.
     /// </summary>
-    SatelliteAugmentNotPublished,
+    [Map('C')] SatelliteAugmentNotPublished,
     /// <summary>
     /// RNAV (GPS) RNAV (RNP), or RNAV (GNSS) Procedure within the SBAS operational footprint, but SBAS-based vertical navigation not authorized.
     /// </summary>
-    SatelliteAugmentFootprint,
+    [Map('D')] SatelliteAugmentFootprint,
     /// <summary>
     /// Stand Alone GPS (GNSS) Procedure.
     /// </summary>
-    StandAlone,
+    [Map('P')] Standalone,
     /// <summary>
     /// Procedure Overlay authorization not published.
     /// </summary>
-    NotPublished
+    [Map('U')] Unspecified
 }

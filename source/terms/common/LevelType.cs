@@ -4,11 +4,11 @@ namespace Arinc424;
 /// <c>Level (LEVEL)</c> character.
 /// </summary>
 /// <remarks>See section 5.19.</remarks>
-[Flags]
+[Char, Flags, Description("Level (LEVEL)")]
 public enum LevelType : byte
 {
     Unknown = 0,
-    Low = 1,
-    High = 1 << 1,
-    All = Low | High
+    [Map('L')] Low = 1,
+    [Map('H')] High = 1 << 1,
+    [Map('B')] All = Low | High
 }

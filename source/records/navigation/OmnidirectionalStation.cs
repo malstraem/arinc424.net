@@ -1,5 +1,3 @@
-using Arinc424.Attributes;
-using Arinc424.Converters;
 using Arinc424.Ports;
 
 namespace Arinc424.Navigation;
@@ -63,7 +61,7 @@ public class OmnidirectionalStation : Navaid
     /// </summary>
     /// <remarks>See section 5.297.</remarks>
     [Character(122), Transform<BoolConverter>]
-    public bool NotAreaNavigation { get; set; }
+    public Bool NotAreaNavigation { get; set; }
 
     /// <inheritdoc cref="Terms.ServiceVolume"/>
     [Character(123), Transform<ServiceVolumeConverter>]

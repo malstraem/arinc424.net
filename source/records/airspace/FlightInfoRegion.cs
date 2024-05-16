@@ -1,7 +1,3 @@
-using System.Diagnostics;
-
-using Arinc424.Attributes;
-using Arinc424.Converters;
 using Arinc424.Tables;
 
 namespace Arinc424.Airspace;
@@ -14,7 +10,7 @@ namespace Arinc424.Airspace;
 /// <remarks>See section 4.1.17.1.</remarks>
 [Section('U', 'F'), Continuous(20), Sequenced(16, 19)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
-public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao
+public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao, INamed
 {
     /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
     [Field(7, 10), Primary]
@@ -50,7 +46,7 @@ public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao
     /// </summary>
     /// <remarks>See section 5.124.</remarks>
     [Character(31), Transform<BoolConverter>]
-    public bool IsEntryReport { get; set; }
+    public Bool IsEntryReport { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(81, 85), Decode<AltitudeConverter>]

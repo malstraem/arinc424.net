@@ -4,19 +4,20 @@ namespace Arinc424.Routing.Terms;
 /// <c>Directional Restriction</c> character.
 /// </summary>
 /// <remarks>See section 5.115.</remarks>
+[Char]
 public enum AirwayRestriction : byte
 {
     Unknown,
     /// <summary>
     /// No restrictions on direction.
     /// </summary>
-    None,
+    [Map] None,
     /// <summary>
     /// One way in direction route is coded (forward).
     /// </summary>
-    Forward,
+    [Map('F')] Forward,
     /// <summary>
     /// One way in opposite direction route is coded (backward).
     /// </summary>
-    Backward
+    [Map('B')] Backward
 }

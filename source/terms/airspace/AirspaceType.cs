@@ -4,31 +4,32 @@ namespace Arinc424.Airspace.Terms;
 /// <c>Controlled Airspace Type (ARSP TYPE)</c> character.
 /// </summary>
 /// <remarks>See section 5.213.</remarks>
+[Char, Description("Controlled Airspace Type (ARSP TYPE)")]
 public enum AirspaceType : byte
 {
     Unknown,
     /// <summary>
     /// Class C Airspace.
     /// </summary>
-    Charlie,
+    [Map('A')] Charlie,
     /// <summary>
     /// Control Area, ICAO Designation (CTA).
     /// </summary>
-    ControlArea,
+    [Map('C')] ControlArea,
     /// <summary>
     /// Terminal Control Area, ICAO Designation (TMA or TCA).
     /// </summary>
-    TerminalControlArea,
+    [Map('M')] TerminalControlArea,
     /// <summary>
     /// Radar Zone or Radar Area.
     /// </summary>
-    RadarZone,
+    [Map('R')] RadarZone,
     /// <summary>
     /// Class B Airspace.
     /// </summary>
-    Bravo,
+    [Map('T')] Bravo,
     /// <summary>
     /// Control Zone, ICAO Designation (CTR).
     /// </summary>
-    ControlZone
+    [Map('Z')] ControlZone
 }

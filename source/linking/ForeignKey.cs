@@ -1,5 +1,3 @@
-using Arinc424.Attributes;
-
 namespace Arinc424.Linking;
 
 internal class ForeignKey(int length, ReadOnlyMemory<Range> ranges, ReadOnlyMemory<ForeignExceptAttribute?> exceptAttributes) : Key(length, ranges)
@@ -45,6 +43,7 @@ internal class ForeignKey(int length, ReadOnlyMemory<Range> ranges, ReadOnlyMemo
                 if (!char.IsWhiteSpace(@char))
                     chars[index++] = @char;
             }
+            exceptIndex++;
         }
         unsafe
         {

@@ -1,15 +1,15 @@
-using Arinc424.Attributes;
-using Arinc424.Converters;
-
 namespace Arinc424.Comms;
 
 using Terms;
 
 public class PortTransmitter : Transmitter
 {
-    /// <inheritdoc cref="Terms.SectorIndicator"/>
-    [Character(68), Transform<SectorIndicatorConverter>]
-    public SectorIndicator SectorIndicator { get; set; }
+    /// <summary>
+    /// <c>Multi-Sector Indicator (MSEC IND)</c> character.
+    /// </summary>
+    /// <remarks>See section 5.286.</remarks>
+    [Character(68), Transform<BoolConverter>]
+    public Bool IsMultiSector { get; set; }
 
     /// <inheritdoc cref="Terms.Sector"/>
     [Field(69, 74), Decode<SectorConverter>]

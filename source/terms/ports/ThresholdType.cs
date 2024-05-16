@@ -4,20 +4,21 @@ namespace Arinc424.Ports.Terms;
 /// <c>TCH Value Indicator (TCHVI)</c> character.
 /// </summary>
 /// <remarks>See section 5.270.</remarks>
+[Char]
 public enum ThresholdType : byte
 {
     Unknown,
     /// <summary>
     /// TCH provided in Runway Record is that of the Electronic Glide Slope.
     /// </summary>
-    ElectronicGlideSlope,
+    [Map('I')] ElectronicGlideSlope,
     /// <summary>
     /// TCH provided in Runway Record is that of an RNAV procedure to the runway.
     /// </summary>
-    RnavProcedure,
+    [Map('R')] AreaNavigation,
     /// <summary>
     /// TCH provided in the Runway Record is the default value of 40 or 50 feet.
     /// </summary>
     /// <remarks>See section 5.67.</remarks>
-    Default
+    [Map('D')] Default
 }

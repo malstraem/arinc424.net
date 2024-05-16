@@ -41,7 +41,7 @@ public abstract class ProcedurePoint : Record424
     /// </summary>
     /// <remarks>See section 5.22.</remarks>
     [Character(50), Transform<BoolConverter>]
-    public bool IsTurnRequired { get; set; }
+    public Bool IsTurnRequired { get; set; }
 
     [Obsolete("TODO abstract navaid instead of geo point")]
     [Type(79, 80)]
