@@ -12,6 +12,6 @@ jobs:
     - uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.x
-    - run: dotnet build -c release
+    - run: dotnet build -c release --tl
     - run: dotnet test -c release --no-build
     runs-on: ubuntu-latest

@@ -25,6 +25,7 @@ jobs:
       - name: Generate Pages
         run: |
           dotnet tool update -g docfx
+          dotnet build -c release --tl
           docfx docs/docfx.json
       - name: Upload Pages
         uses: actions/upload-pages-artifact@v3
