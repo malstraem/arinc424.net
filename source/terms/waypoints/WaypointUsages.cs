@@ -4,24 +4,30 @@ namespace Arinc424.Waypoints.Terms;
 /// <c>Waypoint Usage</c> field.
 /// </summary>
 /// <remarks>See section 5.82.</remarks>
-[Flags]
+[String, Flags]
 public enum WaypointUsages : byte
 {
     Unknown = 0,
     /// <summary>
+    /// RNAV.
+    /// </summary>
+    [Map('R')] AreaNavigation = 1,
+
+    [Offset]
+    /// <summary>
     /// LO Altitude.
     /// </summary>
-    LowAltitude = 1,
+    [Map('B')] LowHigh = Low | High,
     /// <summary>
     /// HI Altitude.
     /// </summary>
-    HighAltitude = 1 << 1,
+    [Map('H')] High = 1 << 1,
+    /// <summary>
+    /// LO Altitude.
+    /// </summary>
+    [Map('L')] Low = 1 << 2,
     /// <summary>
     /// Terminal Use Only.
     /// </summary>
-    TerminalOnly = 1 << 2,
-    /// <summary>
-    /// RNAV.
-    /// </summary>
-    AreaNavigation = 1 << 3
+    [Map] Terminal = 1 << 3
 }

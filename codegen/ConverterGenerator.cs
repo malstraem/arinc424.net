@@ -1,4 +1,4 @@
-﻿using System.Collections.Immutable;
+using System.Collections.Immutable;
 using System.Text;
 
 using Microsoft.CodeAnalysis;
@@ -17,11 +17,11 @@ public abstract class ConverterGenerator(string qualifier) : IIncrementalGenerat
 
         if (members is null)
             return builder;
-        
-        string offset = target.IsChar 
+
+        string offset = target.IsChar
             ? Char
             : target.IsFlags ? $"{String}[0]" : String;
-        
+
         var blank = members.FirstOrDefault(x => x.IsBlank);
 
         if (blank is not null)
@@ -29,12 +29,12 @@ public abstract class ConverterGenerator(string qualifier) : IIncrementalGenerat
             var (member, argument) = blank;
 
             string check = target.IsChar ? $"char.IsWhiteSpace({Char})" : $"{String}.IsWhiteSpace()";
-            
+
             _ = builder.Append($"{check} ? {member} : ");
-            
+
             members = members.Except([blank]).ToArray();
         }
-        
+
         return builder.WriteOffset(offset).WriteMembers(members, target.Unknown).Append("\n    }");
     }
 
@@ -51,12 +51,12 @@ namespace Arinc424.Converters;
 internal abstract class {symbol.Name}Converter : {converter}<{symbol.Name}Converter, {symbol.Name}>
 {{
     public static {symbol.Name} Convert({signature}) => ");
-        
+
         _ = WriteTarget(builder, target).Append(";\n}\n");
 
         return ($"{symbol.Name}Converter.gen.cs", builder.ToString());
     }
-    
+
     private void Process(SourceProductionContext context, ImmutableArray<Target> targets)
     {
         foreach (var target in targets)

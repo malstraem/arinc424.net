@@ -14,7 +14,27 @@ public class StringGenerator() : ConverterGenerator(Constants.StringAttribute)
         if (target.IsFlags)
         {
             for (int i = 1; i < target.Members.Length; i++)
-                _ = builder.Append("\n    | ").WriteOffset($"{Constants.String}[{i}]").WriteMembers(target.Members[i], target.Unknown).Append("\n    }");
+            {
+                _ = builder.Append("\n    | ");
+
+                var members = target.Members[i];
+
+                var blank = members.FirstOrDefault(x => x.IsBlank);
+
+                if (blank is not null)
+                {
+                    (string member, _) = blank;
+
+                    _ = builder.Append($"(char.IsWhiteSpace({Constants.String}[{i}]) ? {member} : ");
+
+                    members = members.Except([blank]).ToArray();
+                }
+                
+                _ = builder.WriteOffset($"{Constants.String}[{i}]").WriteMembers(members, target.Unknown).Append("\n    }");
+
+                if (blank is not null)
+                    _ = builder.Append(')');
+            }
         }
         return builder;
     }

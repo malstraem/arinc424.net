@@ -4,28 +4,15 @@ namespace Arinc424.Navigation.Terms;
 /// <c>Marker Type (MKR TYPE)</c> field.
 /// </summary>
 /// <remarks>See section 5.99.</remarks>
-[Flags]
+[String, Flags]
 public enum MarkerType : byte
 {
     Unknown = 0,
-    /// <summary>
-    /// Inner Marker.
-    /// </summary>
-    Inner = 1,
-    /// <summary>
-    /// Middle Marker.
-    /// </summary>
-    Middle = 1 << 1,
-    /// <summary>
-    /// Outer Marker.
-    /// </summary>
-    Outer = 1 << 2,
-    /// <summary>
-    /// Back Marker.
-    /// </summary>
-    Back = 1 << 3,
-    /// <summary>
-    /// Locator at Marker.
-    /// </summary>
-    Locator = 1 << 4
+    [Map('L')]
+    Locator = 1,
+    [Offset]
+    [Map('I')] Inner = 1 << 1,
+    [Map('M')] Middle = 1 << 2,
+    [Map('O')] Outer = 1 << 3,
+    [Map('B')] Back = 1 << 4,
 }

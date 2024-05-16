@@ -83,7 +83,7 @@ public enum ApproachType : byte
     /// <summary>
     /// Microwave Landing System (MLS), Type A Approach.
     /// </summary>
-    [Map('W')] TypeA,
+    [Map('W')] Alpha,
     /// <summary>
     /// Localizer Directional Aid (LDA) Approach.
     /// </summary>
@@ -91,7 +91,7 @@ public enum ApproachType : byte
     /// <summary>
     /// Microwave Landing System (MLS), Type B and C Approach.
     /// </summary>
-    [Map('Y')] TypeBTypeC,
+    [Map('Y')] BravoCharlie,
     /// <summary>
     /// Missed Approach.
     /// </summary>
