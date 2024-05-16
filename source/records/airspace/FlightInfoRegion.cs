@@ -46,7 +46,7 @@ public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao, 
     /// </summary>
     /// <remarks>See section 5.124.</remarks>
     [Character(31), Transform<BoolConverter>]
-    public bool IsEntryReport { get; set; }
+    public Bool IsEntryReport { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(81, 85), Decode<AltitudeConverter>]

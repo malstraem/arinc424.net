@@ -23,5 +23,8 @@ public class MapAttribute(string @string = "") : Attribute
     public string Value { get; } = @string;
 }
 
+/// <summary>
+/// Specifies that the member starts new array of mapping values inside a ARINC-424 string.
+/// </summary>
 [AttributeUsage(AttributeTargets.Field)]
 internal class Offset : Attribute;

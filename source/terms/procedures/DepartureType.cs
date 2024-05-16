@@ -3,7 +3,7 @@ namespace Arinc424.Procedures.Terms;
 /// <summary>
 /// <c>Route Type (RT TYPE)</c> -> <c>SID Route Type Description</c> character.
 /// </summary>
-/// <remarks>See table 5-4.</remarks>
+/// <remarks>See section 5.7, Table 5-4.</remarks>
 [Char]
 public enum DepartureType : byte
 {

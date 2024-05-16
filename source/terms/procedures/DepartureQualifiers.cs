@@ -3,7 +3,7 @@ namespace Arinc424.Procedures.Terms;
 /// <summary>
 /// <c>Route Type (RT TYPE)</c> -> <c>SID Qualifier Description</c> field.
 /// </summary>
-/// <remarks>See table 5-5.</remarks>
+/// <remarks>See section 5.7, Table 5-5.</remarks>
 [String, Flags]
 public enum DepartureQualifiers : ushort
 {

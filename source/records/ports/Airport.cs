@@ -53,7 +53,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <remarks>See section 5.108.</remarks>
     [Character(31), Transform<BoolConverter>]
-    public bool IsProcedurePublished { get; set; }
+    public Bool IsProcedurePublished { get; set; }
 
     /// <inheritdoc cref="RunwaySurfaceType"/>
     [Character(32), Transform<RunwaySurfaceTypeConverter>]
@@ -106,7 +106,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <remarks>See section 5.179.</remarks>
     [Character(85), Transform<BoolConverter>]
-    public bool IsDaylightTime { get; set; }
+    public Bool IsDaylightTime { get; set; }
 
     /// <inheritdoc cref="Arinc424.CourseType"/>
     [Character(86), Transform<CourseTypeConverter>]

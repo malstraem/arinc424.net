@@ -29,7 +29,7 @@ public class StringGenerator() : ConverterGenerator(Constants.StringAttribute)
 
                     members = members.Except([blank]).ToArray();
                 }
-                
+
                 _ = builder.WriteOffset($"{Constants.String}[{i}]").WriteMembers(members, target.Unknown).Append("\n    }");
 
                 if (blank is not null)

@@ -4,6 +4,7 @@ namespace Arinc424.Routing;
 /// <c>Special Activity Area</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.33.1.</remarks>
+[Obsolete("todo")]
 [Section('E', 'S'), Continuous]
 public class SpecialActivityArea : Record424
 {

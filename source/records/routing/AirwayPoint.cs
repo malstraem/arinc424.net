@@ -46,7 +46,7 @@ public class AirwayPoint : Record424
     /// </summary>
     /// <remarks>See section 5.164.</remarks>
     [Character(50), Transform<BoolConverter>]
-    public bool HasRestrictions { get; set; }
+    public Bool HasRestrictions { get; set; }
 
     /// <summary>
     /// <c>Recommended NAVAID (RECD NAV)</c> and <c>ICAO Code (ICAO CODE)</c> field.

@@ -3,7 +3,7 @@ namespace Arinc424.Procedures.Terms;
 /// <summary>
 /// <c>Route Type (RT TYPE)</c> -> <c>Approach Route Type Description</c> character.
 /// </summary>
-/// <remarks>See table 5-7.</remarks>
+/// <remarks>See section 5.7, Table 5-7.</remarks>
 [Char]
 public enum ApproachType : byte
 {

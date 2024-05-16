@@ -3,7 +3,7 @@ namespace Arinc424.Procedures.Terms;
 /// <summary>
 /// <c>Route Type (RT TYPE)</c> -> <c>STAR Qualifier Description</c> field.
 /// </summary>
-/// <remarks>See table 5-6.</remarks>
+/// <remarks>See section 5.7, Table 5-6.</remarks>
 [String, Flags]
 public enum ArrivalQualifiers : ushort
 {
