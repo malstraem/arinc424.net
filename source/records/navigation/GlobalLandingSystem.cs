@@ -38,7 +38,7 @@ public class GlobalLandingSystem : LandingSystem
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(91, 95), Decode<MagneticVariationConverter>]
-    public float MagneticVariation { get; set; }
+    public float Variation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
     [Field(103, 105)]
@@ -48,6 +48,7 @@ public class GlobalLandingSystem : LandingSystem
     /// <c>Station Type</c> field.
     /// </summary>
     /// <remarks>See section 5.247.</remarks>
+    [Obsolete("todo")]
     [Field(106, 108)]
     public string? StationType { get; set; }
 

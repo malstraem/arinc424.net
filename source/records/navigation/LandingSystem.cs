@@ -6,7 +6,7 @@ namespace Arinc424.Navigation;
 
 [Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public abstract class LandingSystem : Geo, IIcao, IIdentity
+public abstract class LandingSystem : Geo, IIdentity, IIcao
 {
     [Foreign(7, 12), Primary]
     public Airport Airport { get; set; }

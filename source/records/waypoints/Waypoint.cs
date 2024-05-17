@@ -12,7 +12,7 @@ using Terms;
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Waypoint : Geo, IIdentity, IIcao, INamed
 {
-    /// <include file='Comments.xml' path="doc/member[@name='FixIdentifier']/*"/>
+    /// <include file='Comments.xml' path="doc/member[@name='Fix']/*"/>
     [Field(14, 18), Primary]
     public string Identifier { get; set; }
 
@@ -29,7 +29,7 @@ public abstract class Waypoint : Geo, IIdentity, IIcao, INamed
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(75, 79), Decode<MagneticVariationConverter>]
-    public float MagneticVariation { get; set; }
+    public float Variation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
     [Field(85, 87)]

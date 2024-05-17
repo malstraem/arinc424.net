@@ -61,7 +61,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(52, 56), Decode<MagneticVariationConverter>]
-    public float MagneticVariation { get; set; }
+    public float Variation { get; set; }
 
     /// <summary>
     /// <c>Airport Elevation (ELEV)</c> field.

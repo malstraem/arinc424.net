@@ -10,7 +10,7 @@ namespace Arinc424.Routing;
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class Airway : Record424<AirwayPoint>, IIdentity
 {
-    /// <include file='Comments.xml' path="doc/member[@name='RouteIdentifier']/*"/>
+    /// <include file='Comments.xml' path="doc/member[@name='Route']/*"/>
     [Field(14, 18)]
     public string Identifier { get; set; }
 }

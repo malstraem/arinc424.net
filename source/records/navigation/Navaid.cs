@@ -5,7 +5,7 @@ using Terms;
 #pragma warning disable CS8618
 
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
-public abstract class Navaid : Geo, IIcao, IIdentity, INamed
+public abstract class Navaid : Geo, IIdentity, IIcao, INamed
 {
     /// <include file='Comments.xml' path="doc/member[@name='Navaid']/*"/>
     [Field(14, 17), Primary]

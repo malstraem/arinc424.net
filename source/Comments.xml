@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <doc>
-  <member name="RouteIdentifier">
+  <member name="Route">
     <summary>
       <c>Route Identifier (ROUTE IDENT)</c> field.
     </summary>
     <remarks>See section 5.8.</remarks>
   </member>
 
-  <member name="FixIdentifier">
+  <member name="Fix">
     <summary>
       <c>Fix Identifier (FIX IDENT)</c> field.
     </summary>

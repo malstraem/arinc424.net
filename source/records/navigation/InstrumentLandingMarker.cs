@@ -12,7 +12,7 @@ using Terms;
 /// <remarks>See section 4.1.13.1.</remarks>
 [Section('P', 'M', subsectionIndex: 13), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public class InstrumentLandingMarker : Geo, IIcao, IIdentity
+public class InstrumentLandingMarker : Geo, IIdentity, IIcao
 {
     [Foreign(7, 12)]
     public Airport Airport { get; set; }
@@ -20,6 +20,10 @@ public class InstrumentLandingMarker : Geo, IIcao, IIdentity
     [Field(11, 12)]
     public string IcaoCode { get; set; }
 
+    /// <summary>
+    /// <c>Localizer(LOC IDENT)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.44.</remarks>
     [Field(14, 17)]
     public string Identifier { get; set; }
 
@@ -64,7 +68,7 @@ public class InstrumentLandingMarker : Geo, IIcao, IIdentity
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(91, 95), Decode<MagneticVariationConverter>]
-    public float MagneticVariation { get; set; }
+    public float Variation { get; set; }
 
     /// <summary>
     /// <c>Facility Elevation (FAC ELEV)</c> field.

@@ -3,20 +3,49 @@ namespace Arinc424.Comms.Terms;
 /// <summary>
 /// <c>Service Indicator (SERV IND)</c> -> <c>Enroute</c>.
 /// </summary>
-/// <remarks>See table 5-21.</remarks>
+/// <remarks>See section 5.106, Table 5-21.</remarks>
 [String, Flags]
 public enum AirwayCommUsages : ushort
 {
     Unknown = 0,
+    /// <summary>
+    /// Aeronautical Enroute Information Service (AEIS).
+    /// </summary>
     [Map('A')] AeronauticalInfo = 1,
+    /// <summary>
+    /// Flight Information Service (FIS).
+    /// </summary>
     [Map('F')] FlightInfo = 1 << 1,
+
     [Offset]
+    /// <summary>
+    /// Air/Ground.
+    /// </summary>
     [Map('A')] AirGround = 1 << 2,
+    /// <summary>
+    /// Discrete Frequency.
+    /// </summary>
     [Map('D')] Discrete = 1 << 3,
+    /// <summary>
+    /// Mandatory Frequency.
+    /// </summary>
     [Map('M')] Mandatory = 1 << 4,
+    /// <summary>
+    /// Secondary Frequency.
+    /// </summary>
     [Map('S')] Secondary = 1 << 5,
+
     [Offset]
+    /// <summary>
+    /// VHF Direction Finding Service (VDF).
+    /// </summary>
     [Map('D')] DirectionFinding = 1 << 6,
+    /// <summary>
+    /// Language other than English.
+    /// </summary>
     [Map('L')] NonEnglish = 1 << 7,
+    /// <summary>
+    /// Military Use Frequency.
+    /// </summary>
     [Map('M')] Military = 1 << 8
 }

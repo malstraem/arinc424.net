@@ -10,6 +10,7 @@ public enum MarkerType : byte
     Unknown = 0,
     [Map('L')]
     Locator = 1,
+
     [Offset]
     [Map('I')] Inner = 1 << 1,
     [Map('M')] Middle = 1 << 2,

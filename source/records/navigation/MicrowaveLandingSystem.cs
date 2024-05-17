@@ -81,7 +81,7 @@ public class MicrowaveLandingSystem : LandingSystem
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(99, 103), Decode<MagneticVariationConverter>]
-    public float MagneticVariation { get; set; }
+    public float Variation { get; set; }
 
     /// <summary>
     /// <c>Nominal Elevation Angle (NOM ELEV ANGLE)</c> field.

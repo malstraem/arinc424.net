@@ -1,12 +1,64 @@
 namespace Arinc424.Routing;
 
+using Terms;
+
+#pragma warning disable CS8618
+
 /// <summary>
 /// <c>Airways Marker</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.15.1.</remarks>
-[Section('E', 'M')]
-[Obsolete("placeholder")]
-public class AirwayMarker : Record424
+[Section('E', 'M'), Continuous]
+public class AirwayMarker : Geo, IIdentity, IIcao, INamed
 {
+    /// <summary>
+    /// <c>Marker Ident (MARKER IDENT)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.110.</remarks>
+    [Field(14, 17)]
+    public string Identifier { get; set; }
 
+    [Field(20, 21)]
+    public string IcaoCode { get; set; }
+
+    /// <summary>
+    /// <c>Marker Code (MARKER CODE)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.111.</remarks>
+    [Field(23, 26)]
+    public string Code { get; set; }
+
+    /// <inheritdoc cref="MarkerShape"/>
+    [Character(28), Transform<MarkerShapeConverter>]
+    public MarkerShape Shape { get; set; }
+
+    /// <inheritdoc cref="MarkerPower"/>
+    [Character(29), Transform<MarkerPowerConverter>]
+    public MarkerPower Power { get; set; }
+
+    /// <summary>
+    /// <c>Minor Axis Bearing (MINOR AXIS TRUE BRG)</c> field.
+    /// </summary>
+    [Field(52, 55), Decode<TenthsConverter>]
+    public float Bearing { get; set; }
+
+    /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
+    [Field(75, 79), Decode<MagneticVariationConverter>]
+    public float Variation { get; set; }
+
+    /// <summary>
+    /// <c>Facility Elevation (FAC ELEV)</c> field.
+    /// </summary>
+    /// <value>Feet.</value>
+    /// <remarks>See section 5.92.</remarks>
+    [Field(88, 93), Decode<IntConverter>]
+    public int Elevation { get; set; }
+
+    /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>
+    [Field(85, 87)]
+    public string? Datum { get; set; }
+
+    /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
+    [Field(94, 123)]
+    public string? Name { get; set; }
 }

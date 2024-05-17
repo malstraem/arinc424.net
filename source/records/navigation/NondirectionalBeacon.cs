@@ -9,5 +9,5 @@ public class NondirectionalBeacon : Navaid
 {
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
     [Field(75, 79), Decode<MagneticVariationConverter>]
-    public float MagneticVariation { get; set; }
+    public float Variation { get; set; }
 }
