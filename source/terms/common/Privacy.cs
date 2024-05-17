@@ -1,11 +1,11 @@
-namespace Arinc424.Ports.Terms;
+namespace Arinc424;
 
 /// <summary>
 /// <c>Public/Military Indicator (PUB/MIL)</c> character.
 /// </summary>
 /// <remarks>See section 5.177.</remarks>
 [Char, Flags]
-public enum PortPrivacy : byte
+public enum Privacy : byte
 {
     Unknown = 0,
     /// <summary>

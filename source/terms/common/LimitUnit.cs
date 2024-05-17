@@ -1,4 +1,4 @@
-namespace Arinc424.Airspace.Terms;
+namespace Arinc424;
 
 /// <summary>
 /// <c>Unit Indicator (UNIT IND)</c> character.

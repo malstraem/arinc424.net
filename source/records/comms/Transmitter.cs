@@ -11,7 +11,7 @@ public abstract class Transmitter : Geo
     [Field(23, 25), Decode<CommTypeConverter>]
     public CommType Type { get; set; }
 
-    /// <inheritdoc cref="Terms.Frequency"/>
+    /// <inheritdoc cref="Arinc424.Frequency"/>
     [Field(26, 40), Decode<FrequencyConverter>]
     public Frequency Frequency { get; set; }
 

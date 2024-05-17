@@ -90,9 +90,9 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     [Field(76, 80), Decode<IntConverter>]
     public int TransitionLevel { get; set; }
 
-    /// <inheritdoc cref="PortPrivacy"/>
-    [Character(81), Transform<PortPrivacyConverter>]
-    public PortPrivacy Privacy { get; set; }
+    /// <inheritdoc cref="Arinc424.Privacy"/>
+    [Character(81), Transform<PrivacyConverter>]
+    public Privacy Privacy { get; set; }
 
     /// <summary>
     /// <c>Time Zone</c> field.

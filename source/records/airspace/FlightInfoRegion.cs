@@ -12,6 +12,9 @@ namespace Arinc424.Airspace;
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
 public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao, INamed
 {
+    [Foreign(96, 97)]
+    public CruiseTable? CruiseTable { get; set; }
+
     /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
     [Field(7, 10), Primary]
     public string Identifier { get; set; }
@@ -59,9 +62,6 @@ public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao, 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(91, 95), Decode<AltitudeConverter>]
     public Altitude? UpperUp { get; set; }
-
-    [Foreign(96, 97)]
-    public CruiseTable? CruiseTable { get; set; }
 
     /// <summary>
     /// <c>FIR/UIR Name</c> field.

@@ -1,4 +1,4 @@
-namespace Arinc424.Comms.Terms;
+namespace Arinc424;
 
 /// <summary>
 /// <c>Communications Type (COMM TYPE)</c> field.

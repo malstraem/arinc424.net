@@ -1,7 +1,5 @@
 namespace Arinc424.Airspace;
 
-using Terms;
-
 /// <summary>
 /// Space volume with low and up limits.
 /// </summary>

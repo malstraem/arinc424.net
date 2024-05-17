@@ -1,5 +1,3 @@
-using Arinc424.Comms.Terms;
-
 namespace Arinc424.Converters;
 
 internal abstract class FrequencyConverter : IStringConverter<FrequencyConverter, Frequency>
