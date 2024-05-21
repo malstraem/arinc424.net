@@ -1,5 +1,3 @@
-using Arinc424.Converters;
-
 namespace Arinc424.Attributes;
 
 /// <summary>

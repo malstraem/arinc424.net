@@ -9,7 +9,7 @@ internal abstract class TargetCharacterAttribute(int index, Type targetType) : C
     /// <summary>
     /// The target type for which the index is defined.
     /// </summary>
-    internal Type TargetType { get; } = targetType;
+    public Type TargetType { get; } = targetType;
 }
 
 /// <summary>
@@ -18,4 +18,4 @@ internal abstract class TargetCharacterAttribute(int index, Type targetType) : C
 /// <remarks>Used by sequence or base types to define different indexes.</remarks>
 /// <typeparam name="TRecord">Target type of record that index is defined.</typeparam>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-internal class CharacterAttribute<TRecord>(int index) : TargetCharacterAttribute(index, typeof(TRecord));
+internal class CharacterAttribute<TRecord>(int index) : TargetCharacterAttribute(index, typeof(TRecord)) where TRecord : Record424;

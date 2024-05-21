@@ -4,6 +4,8 @@ namespace Arinc424;
 
 internal partial class Parser424
 {
+    private readonly Meta424 meta = new();
+
     private readonly Queue<string> skipped = [];
 
     private readonly Dictionary<Type, Queue<string>> primary = [];
@@ -13,7 +15,7 @@ internal partial class Parser424
 
     internal Parser424()
     {
-        foreach (var (_, type) in Meta424.Types)
+        foreach (var (_, type) in meta.Types)
         {
             records[type] = [];
             primary[type] = [];
@@ -33,7 +35,7 @@ internal partial class Parser424
         // (branching, apparently, will not give any tangible gain)
         bool TryEnqueue(string @string)
         {
-            foreach (var (type, info) in Meta424.Info)
+            foreach (var (type, info) in meta.Info)
             {
                 if (!info.Section.IsMatch(@string))
                     continue;
@@ -56,7 +58,7 @@ internal partial class Parser424
 
     private void BuildSequences()
     {
-        _ = Parallel.ForEach(Meta424.Sequences, attribute =>
+        _ = Parallel.ForEach(meta.Sequences, attribute =>
         {
             var queue = records[attribute.Type];
             var strings = primary[attribute.Type];
@@ -77,7 +79,7 @@ internal partial class Parser424
 
     private void Build()
     {
-        _ = Parallel.ForEach(Meta424.Records, attribute =>
+        _ = Parallel.ForEach(meta.Records, attribute =>
         {
             var queue = records[attribute.Type];
             var strings = primary[attribute.Type];

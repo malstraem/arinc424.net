@@ -4,11 +4,11 @@ using Arinc424.Linking;
 
 namespace Arinc424.Attributes;
 
-internal abstract class InfoAttribute(Type type, PropertyInfo[] properties) : RelationsAttribute(type, properties)
+internal abstract class InfoAttribute(Type type, PropertyInfo[] properties) : BuildAttribute(type, properties)
 {
-    internal readonly PrimaryKey? PrimaryKey = PrimaryKey.Create(properties);
+    internal PrimaryKey? PrimaryKey { get; } = PrimaryKey.Create(properties);
 
-    internal readonly SectionAttribute Section = type.GetCustomAttribute<SectionAttribute>()!;
+    internal SectionAttribute Section { get; } = type.GetCustomAttribute<SectionAttribute>()!;
 
-    internal readonly int? ContinuationIndex = type.GetCustomAttribute<ContinuousAttribute>()?.Index;
+    internal int? ContinuationIndex { get; } = type.GetCustomAttribute<ContinuousAttribute>()?.Index;
 }

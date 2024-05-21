@@ -1,7 +1,3 @@
-using System.Reflection;
-
-using Arinc424.Attributes;
-
 using BenchmarkDotNet.Attributes;
 
 namespace Arinc424.Bench;
@@ -10,19 +6,10 @@ namespace Arinc424.Bench;
 public class MetaBench
 {
     [Benchmark]
-    public Dictionary<(char, char), Type> Grab()
+    public Dictionary<(char, char), Type> GrabTypesInfo()
     {
-        Dictionary<(char, char), Type> types = [];
-        Dictionary<Type, InfoAttribute> infos = [];
+        var meta = new Meta424();
 
-        var records = Assembly.GetAssembly(typeof(Meta424))!.GetCustomAttributes<RecordAttribute>();
-        var sequences = Assembly.GetAssembly(typeof(Meta424))!.GetCustomAttributes<SequenceAttribute>();
-
-        foreach (var info in records.Cast<InfoAttribute>().Concat(sequences))
-        {
-            infos.Add(info.Type, info);
-            types.Add((info.Section.SectionChar, info.Section.SubsectionChar), info.Type);
-        }
-        return types;
+        return meta.Types;
     }
 }

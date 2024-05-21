@@ -2,6 +2,7 @@ namespace Arinc424.Converters;
 
 internal abstract class CoordinatesConverter : IStringConverter<CoordinatesConverter, Coordinates>
 {
+    [Obsolete("todo")]
     public static Coordinates Convert(ReadOnlySpan<char> @string)
     {
         double degrees = double.Parse(@string[1..3]);

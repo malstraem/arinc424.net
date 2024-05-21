@@ -3,24 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace Arinc424.Building;
 
-[DebuggerDisplay($"{{{nameof(Property)}}}")]
-internal class AssignmentInfo
+internal abstract class AssignmentInfo(PropertyInfo property, Regex? regex)
 {
-    internal Regex? Regex { get; set; }
+    internal Regex? Regex { get; } = regex;
 
-    internal required PropertyInfo Property { get; set; }
-}
-
-internal class IndexAssignmentInfo : AssignmentInfo
-{
-    internal required int Index { get; set; }
-
-    internal TransformAttribute? Transform { get; set; }
-}
-
-internal class RangeAssignmentInfo : AssignmentInfo
-{
-    internal required Range Range { get; set; }
-
-    internal DecodeAttribute? Decode { get; set; }
+    internal PropertyInfo Property { get; } = property;
 }

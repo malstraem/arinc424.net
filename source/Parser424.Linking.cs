@@ -6,33 +6,36 @@ internal partial class Parser424
 {
     private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
-    [Obsolete("TODO diagnostic log")]
+    [Obsolete("todo: diagnostic log")]
     private void ProcessPrimaryKey(Record424 record, InfoAttribute info)
     {
         string key = info.PrimaryKey!.GetKey(record.Source);
 
         if (!unique[info.Type].TryAdd(key, record))
         {
+            // todo: diagnostic log
             Debug.WriteLine($"{info.Type} entity with key '{key}' already exist"); // TODO: logging path
         }
     }
 
-    [Obsolete("TODO diagnostic log")]
-    private void ProcessForeignKeys(Record424 record, RelationsAttribute relations)
+    [Obsolete("todo: diagnostic log")]
+    private void ProcessForeignKeys(Record424 record, BuildAttribute info)
     {
-        foreach (var link in relations.Links!)
+        foreach (var link in info.Links!)
         {
-            if (!link.TryGetReference(record.Source, out var reference))
+            if (!link.TryGetReference(record.Source, meta, out var reference))
                 continue;
 
             if (!this.unique.TryGetValue(reference!.Type, out var unique))
             {
+                // todo: diagnostic log
                 Debug.WriteLine($"Entity type '{reference.Type} not found in unique types"); // TODO: logging path
                 continue;
             }
 
             if (!unique.TryGetValue(reference.Key, out var referenced))
             {
+                // todo: diagnostic log
                 Debug.WriteLine($"{reference.Type} entity with key '{reference.Key}' not found"); // TODO: logging path
                 continue;
             }
@@ -41,24 +44,25 @@ internal partial class Parser424
             {
                 reference.Property.SetValue(record, referenced);
 
-                var one = Meta424.Info[reference.Type].One;
-                var many = Meta424.Info[reference.Type].Many;
+                var one = meta.Info[reference.Type].One;
+                var many = meta.Info[reference.Type].Many;
 
-                if (many is not null && many.TryGetValue(relations.Type, out var property))
+                if (many is not null && many.TryGetValue(info.Type, out var property))
                 {
                     if (property.GetValue(referenced) is null)
-                        property.SetValue(referenced, Activator.CreateInstance(typeof(List<>).MakeGenericType(relations.Type)));
+                        property.SetValue(referenced, Activator.CreateInstance(typeof(List<>).MakeGenericType(info.Type)));
 
                     _ = ((IList)property.GetValue(referenced)!).Add(record);
                 }
-                else if (one is not null && one.TryGetValue(relations.Type, out property))
+                else if (one is not null && one.TryGetValue(info.Type, out property))
                 {
                     property.SetValue(referenced, record);
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex); // TODO: logging path
+                // todo: diagnostic log
+                Debug.WriteLine(ex);
             }
         }
     }
@@ -66,7 +70,7 @@ internal partial class Parser424
     [Obsolete("TODO diagnostic log")]
     private void Link()
     {
-        var info = Meta424.Info.Where(x => x.Value.PrimaryKey is not null);
+        var info = meta.Info.Where(x => x.Value.PrimaryKey is not null);
 
         foreach (var (type, _) in info)
             unique[type] = [];
@@ -77,13 +81,13 @@ internal partial class Parser424
                 ProcessPrimaryKey(record, x.Value);
         });
 
-        _ = Parallel.ForEach(Meta424.Info.Where(x => x.Value.Links is not null), x =>
+        _ = Parallel.ForEach(meta.Info.Where(x => x.Value.Links is not null), x =>
         {
             foreach (var record in records[x.Key])
                 ProcessForeignKeys(record, x.Value);
         });
 
-        _ = Parallel.ForEach(Meta424.Sequences.Where(x => x.SubInfo.Links is not null), x =>
+        _ = Parallel.ForEach(meta.Sequences.Where(x => x.SubInfo.Links is not null), x =>
         {
             foreach (var record in records[x.Type])
             {

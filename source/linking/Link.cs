@@ -10,7 +10,7 @@ internal class Link(PropertyInfo property, ForeignAttribute[] foreignAttributes,
 
     private readonly TypeAttribute? typeAttribute = typeAttribute;
 
-    internal bool TryGetReference(string @string, out Reference? reference)
+    internal bool TryGetReference(string @string, Meta424 meta, out Reference? reference)
     {
         string key;
 
@@ -34,7 +34,7 @@ internal class Link(PropertyInfo property, ForeignAttribute[] foreignAttributes,
         if (char.IsWhiteSpace(section) && char.IsWhiteSpace(subsection))
             return false;
 
-        if (Meta424.Types.TryGetValue((section, subsection), out type) && foreignKey.TryGetKey(@string, type, out key))
+        if (meta.Types.TryGetValue((section, subsection), out type) && foreignKey.TryGetKey(@string, type, out key))
         {
             reference = new(key, type, property);
             return true;

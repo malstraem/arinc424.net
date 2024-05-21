@@ -60,10 +60,15 @@ Sequence<CruiseTable, CruiseTableRow>]
 
 namespace Arinc424;
 
-internal static class Meta424
+internal class Meta424
 {
-    static Meta424()
+    internal Meta424()
     {
+        var assembly = Assembly.GetExecutingAssembly();
+
+        Records = assembly.GetCustomAttributes<RecordAttribute>();
+        Sequences = assembly.GetCustomAttributes<SequenceAttribute>();
+
         foreach (var info in Records.Cast<InfoAttribute>().Concat(Sequences))
         {
             Info.Add(info.Type, info);
@@ -71,11 +76,11 @@ internal static class Meta424
         }
     }
 
-    internal static Dictionary<(char, char), Type> Types { get; } = [];
+    internal Dictionary<(char, char), Type> Types { get; } = [];
 
-    internal static Dictionary<Type, InfoAttribute> Info { get; } = [];
+    internal Dictionary<Type, InfoAttribute> Info { get; } = [];
 
-    internal static IEnumerable<RecordAttribute> Records { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
+    internal IEnumerable<RecordAttribute> Records { get; }
 
-    internal static IEnumerable<SequenceAttribute> Sequences { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<SequenceAttribute>();
+    internal IEnumerable<SequenceAttribute> Sequences { get; }
 }

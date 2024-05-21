@@ -8,7 +8,7 @@ internal abstract class RecordAttribute(Type type) : InfoAttribute(type, type.Ge
     internal abstract Record424 Build(string @string);
 }
 
-internal class RecordAttribute<TRecord>() : RecordAttribute(typeof(TRecord)) where TRecord : Record424, new()
+internal sealed class RecordAttribute<TRecord>() : RecordAttribute(typeof(TRecord)) where TRecord : Record424, new()
 {
-    internal override Record424 Build(string @string) => RecordBuilder<TRecord>.Build(@string);
+    internal override Record424 Build(string @string) => RecordBuilder<TRecord>.Build(@string, this);
 }

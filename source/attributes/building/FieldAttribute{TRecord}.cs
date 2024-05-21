@@ -9,7 +9,7 @@ internal abstract class TargetFieldAttribute(int start, int end, Type targetType
     /// <summary>
     /// Target record type in which the field is defined.
     /// </summary>
-    internal Type TargetType { get; } = targetType;
+    public Type TargetType { get; } = targetType;
 }
 
 /// <summary>

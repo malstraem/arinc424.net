@@ -11,9 +11,12 @@ public class PortTransmitter : Transmitter
     [Character(68), Transform<BoolConverter>]
     public Bool IsMultiSector { get; set; }
 
-    /// <inheritdoc cref="Terms.Sector"/>
-    [Field(69, 74), Decode<SectorConverter>]
-    public Sector? Sector { get; set; }
+    /// <summary>
+    /// <c>Sectorization (SECTOR)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.183.</remarks>
+    [Field(69, 74), Decode<SectorizationConverter>]
+    public Sectorization? Sectorization { get; set; }
 
     [Type(81, 82)]
     [Foreign(75, 80)]

@@ -6,6 +6,7 @@ namespace Arinc424.Ports;
 /// <c>Flight Planning</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.27.1.</remarks>
+[Obsolete("todo")]
 [Section('P', 'R', subsectionIndex: 13), Continuous(70)]
 public class FlightPlanning : Record424
 {

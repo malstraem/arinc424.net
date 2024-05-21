@@ -1,10 +1,8 @@
-using Arinc424.Comms.Terms;
-
 namespace Arinc424.Converters;
 
-internal abstract class SectorConverter : IStringConverter<SectorConverter, Sector>
+internal abstract class SectorizationConverter : IStringConverter<SectorizationConverter, Sectorization>
 {
-    public static Sector Convert(ReadOnlySpan<char> @string)
+    public static Sectorization Convert(ReadOnlySpan<char> @string)
     {
         var start = @string[0..3];
         var end = @string[3..6];
