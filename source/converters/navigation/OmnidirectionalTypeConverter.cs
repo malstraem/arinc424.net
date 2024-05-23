@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal abstract class OmnidirectionalTypeConverter : IStringConverter<OmnidirectionalTypeConverter, NavaidType>
 {
-    public static NavaidType Convert(ReadOnlySpan<char> @string) => @string[0] switch
+    public static Result<NavaidType> Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {
         'V' => NavaidType.Omnidirectional,
         _ => NavaidType.Unknown

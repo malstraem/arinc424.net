@@ -4,7 +4,7 @@ namespace Arinc424.Converters;
 
 internal abstract class NondirectionalTypeConverter : IStringConverter<NondirectionalTypeConverter, NavaidType>
 {
-    public static NavaidType Convert(ReadOnlySpan<char> @string) => @string[0] switch
+    public static Result<NavaidType> Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {
         'H' => NavaidType.Nondirectional,
         'S' => NavaidType.SABH,

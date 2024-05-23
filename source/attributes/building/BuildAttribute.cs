@@ -28,18 +28,29 @@ internal class BuildAttribute : Attribute
 
             if (property.TryCharacterAttribute(type, out var characterAttribute))
             {
-                indexInfo.Add(new IndexAssignmentInfo(property, regex, characterAttribute!.Index, property.GetCustomAttribute<TransformAttribute>()));
+                // prefer attribute attached to the property to override behavior
+                var transform = property.GetCustomAttribute<TransformAttribute>() ?? property.PropertyType.GetCustomAttribute<TransformAttribute>();
+                indexInfo.Add(new IndexAssignmentInfo(property, regex, characterAttribute!.Index, transform));
                 continue;
             }
             else if (property.TryFieldAttribute(type, out var fieldAttribute))
             {
-                var arrayAttribute = property.GetCustomAttribute<CountAttributeAttribute>();
+                var count = property.GetCustomAttribute<CountAttribute>();
 
-                if (arrayAttribute is not null)
-                    arrayInfo.Add(new ArrayAssignmentInfo(property, regex, fieldAttribute!.Range, arrayAttribute));
-                else
-                    rangeInfo.Add(new RangeAssignmentInfo(property, regex, fieldAttribute!.Range, property.GetCustomAttribute<DecodeAttribute>()));
+                if (count is not null)
+                {
+                    arrayInfo.Add(new ArrayAssignmentInfo(property, regex, fieldAttribute!.Range, count));
+                    continue;
+                }
 
+                // prefer attribute attached to the property to override behavior
+                var decode = property.GetCustomAttribute<DecodeAttribute>();
+
+                decode ??= property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
+                        ? property.PropertyType.GetGenericArguments().First().GetCustomAttribute<DecodeAttribute>()
+                        : property.PropertyType.GetCustomAttribute<DecodeAttribute>();
+
+                rangeInfo.Add(new RangeAssignmentInfo(property, regex, fieldAttribute!.Range, decode));
                 continue;
             }
 

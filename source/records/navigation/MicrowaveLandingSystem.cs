@@ -14,7 +14,7 @@ public class MicrowaveLandingSystem : LandingSystem
     [Field(23, 25), Decode<IntConverter>]
     public int Channel { get; set; }
 
-    [Field(56, 74), Decode<CoordinatesConverter>]
+    [Field(56, 74)]
     public Coordinates ElevationCoordinates { get; set; }
 
     /// <summary>

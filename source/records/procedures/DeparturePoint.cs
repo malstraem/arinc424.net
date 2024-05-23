@@ -5,6 +5,6 @@ namespace Arinc424.Procedures;
 public class DeparturePoint : ProcedurePoint
 {
     /// <inheritdoc cref="DepartureQualifiers"/>
-    [Field(119, 120), Decode<DepartureQualifiersConverter>]
+    [Field(119, 120)]
     public DepartureQualifiers Qualifiers { get; set; }
 }

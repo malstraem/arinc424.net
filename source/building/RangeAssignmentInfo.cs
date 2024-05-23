@@ -10,16 +10,45 @@ internal class RangeAssignmentInfo(PropertyInfo property, Regex? regex, Range ra
 
     private readonly DecodeAttribute? decode = decode;
 
-    public void Process(Record424 record)
+    public bool TryProcess(Record424 record, out string? message)
     {
+        message = null;
+
         ReadOnlySpan<char> @string = record.Source;
 
         var @field = @string[range];
 
-        object? value = @field.IsWhiteSpace() ? null : decode is not null
-            ? decode.Convert(@field)
-            : @field.Trim().ToString();
+        object? value;
+
+        if (@field.IsWhiteSpace())
+        {
+            return true;
+            // todo: diagnostic nullable of property
+            // value = null;
+        }
+        else
+        {
+            if (decode is null)
+            {
+                value = @field.Trim().ToString();
+            }
+            else
+            {
+                var result = decode.Convert(@field);
+
+                if (result.IsError)
+                {
+                    message = result.Message;
+                    return false;
+                }
+                else
+                {
+                    value = result.Value;
+                }
+            }
+        }
 
         Property.SetValue(record, value);
+        return true;
     }
 }

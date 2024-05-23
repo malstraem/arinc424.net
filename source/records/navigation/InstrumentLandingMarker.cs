@@ -28,7 +28,7 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     public string Identifier { get; set; }
 
     /// <inheritdoc cref="MarkerType"/>
-    [Field(18, 20), Decode<MarkerTypeConverter>]
+    [Field(18, 20)]
     public MarkerType Type { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
@@ -41,7 +41,7 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     [Field(52, 55), Decode<TenthsConverter>]
     public float Bearing { get; set; }
 
-    [Field(56, 74), Decode<CoordinatesConverter>]
+    [Field(56, 74)]
     public Coordinates LocatorCoordinates { get; set; }
 
     /// <inheritdoc cref="Terms.NavaidType"/>
@@ -53,11 +53,11 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     public NavaidCoverage Coverage { get; set; }
 
     /// <inheritdoc cref="NavaidInfo"/>
-    [Character(78), Transform<NavaidInfoConverter>]
+    [Character(78)]
     public NavaidInfo Info { get; set; }
 
     /// <inheritdoc cref="NavaidCollocation"/>
-    [Character(79), Transform<NavaidCollocationConverter>]
+    [Character(79)]
     public NavaidCollocation Collocation { get; set; }
 
     [Field(80, 84), Obsolete("need more section 5.93 analysis")]

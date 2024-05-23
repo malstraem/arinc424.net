@@ -26,7 +26,7 @@ public class GlobalLandingSystem : LandingSystem
     /// </summary>
     /// <remarks>See section 5.246.</remarks>
     [Field(86, 87), Decode<Converters.ByteConverter>]
-    public int Slots { get; set; }
+    public byte Slots { get; set; }
 
     /// <summary>
     /// <c>Glide Slope Angle (GS ANGLE)</c> field.

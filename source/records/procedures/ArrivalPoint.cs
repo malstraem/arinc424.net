@@ -12,6 +12,6 @@ public class ArrivalPoint : ProcedurePoint
     public float VerticalAngel { get; set; }
 
     /// <inheritdoc cref="ArrivalQualifiers"/>
-    [Field(119, 120), Decode<ArrivalQualifiersConverter>]
+    [Field(119, 120)]
     public ArrivalQualifiers Qualifiers { get; set; }
 }

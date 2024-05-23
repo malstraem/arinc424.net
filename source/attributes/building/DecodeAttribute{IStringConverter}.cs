@@ -1,18 +1,17 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies that the property value must be decoded from the field string using the associated converter before assignment.
+/// Specifies that the value will be decoded by associated converter before assignment using <see cref="FieldAttribute"/> range.
 /// </summary>
-[AttributeUsage(AttributeTargets.Property)]
 internal abstract class DecodeAttribute : Attribute
 {
-    internal abstract object Convert(ReadOnlySpan<char> @string);
+    internal abstract Result<object> Convert(ReadOnlySpan<char> @string);
 }
 
 /// <inheritdoc/>
 /// <typeparam name="TConverter">Associated <see cref="IStringConverter"/>.</typeparam>
-[AttributeUsage(AttributeTargets.Property)]
+[AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Property)]
 internal class DecodeAttribute<TConverter> : DecodeAttribute where TConverter : IStringConverter
 {
-    internal override object Convert(ReadOnlySpan<char> @string) => TConverter.Convert(@string);
+    internal override Result<object> Convert(ReadOnlySpan<char> @string) => TConverter.Convert(@string);
 }

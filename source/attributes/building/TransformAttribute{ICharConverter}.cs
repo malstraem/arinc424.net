@@ -1,9 +1,8 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies that the property value must be transformed from the field character using the associated converter before assignment.
+/// Specifies that the value will be transformed by associated converter before assignment using <see cref="CharacterAttribute"/> index.
 /// </summary>
-[AttributeUsage(AttributeTargets.Property)]
 internal abstract class TransformAttribute : Attribute
 {
     internal abstract object Convert(char @char);
@@ -11,7 +10,7 @@ internal abstract class TransformAttribute : Attribute
 
 /// <inheritdoc/>
 /// <typeparam name="TConverter">Associated <see cref="ICharConverter"/>.</typeparam>
-[AttributeUsage(AttributeTargets.Property)]
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
 internal class TransformAttribute<TConverter> : TransformAttribute where TConverter : ICharConverter
 {
     internal override object Convert(char @char) => TConverter.Convert(@char);

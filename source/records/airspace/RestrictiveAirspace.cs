@@ -14,7 +14,7 @@ public class RestrictiveAirspace : Volume, IIcao, INamed
     public string IcaoCode { get; set; }
 
     /// <inheritdoc cref="Terms.RestrictiveType"/>
-    [Character(9), Transform<RestrictiveTypeConverter>]
+    [Character(9)]
     public Terms.RestrictiveType Type { get; set; }
 
     /// <summary>
@@ -29,11 +29,11 @@ public class RestrictiveAirspace : Volume, IIcao, INamed
     public char MultipleCode { get; set; }
 
     /// <inheritdoc cref="Arinc424.LevelType"/>
-    [Character(26), Transform<LevelTypeConverter>]
+    [Character(26)]
     public LevelType LevelType { get; set; }
 
     /// <inheritdoc cref="Arinc424.TimeCode"/>
-    [Character(27), Transform<TimeCodeConverter>]
+    [Character(27)]
     public TimeCode TimeCode { get; set; }
 
     /// <summary>

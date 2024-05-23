@@ -4,7 +4,7 @@ namespace Arinc424.Navigation.Terms;
 /// <c>Figure of Merit (MERIT)</c> character.
 /// </summary>
 /// <remarks>See section 5.149.</remarks>
-[Char]
+[Char, Transform<MeritFigureConverter>]
 public enum MeritFigure : byte
 {
     Unknown,

@@ -17,11 +17,11 @@ public abstract class ProcedurePoint : Record424
     public Geo? Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
-    [Field(40, 43), Decode<WaypointDescriptionsConverter>]
+    [Field(40, 43)]
     public WaypointDescriptions Descriptions { get; set; }
 
     /// <inheritdoc cref="Arinc424.Turn"/>
-    [Character(44), Transform<TurnConverter>]
+    [Character(44)]
     public Turn Turn { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
@@ -29,14 +29,14 @@ public abstract class ProcedurePoint : Record424
     public float NavigationPerformance { get; set; }
 
     /// <inheritdoc cref="Terms.LegType"/>
-    [Field(48, 49), Decode<LegTypeConverter>]
+    [Field(48, 49)]
     public Terms.LegType LegType { get; set; }
 
     /// <summary>
     /// <c>Turn Direction Valid (TDV)</c> character.
     /// </summary>
     /// <remarks>See section 5.22.</remarks>
-    [Character(50), Transform<BoolConverter>]
+    [Character(50)]
     public Bool IsTurnRequired { get; set; }
 
     [Obsolete("TODO abstract navaid instead of geo point")]
@@ -57,7 +57,7 @@ public abstract class ProcedurePoint : Record424
     public float Rho { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='OutboundMagneticCourse']/*"/>
-    [Field(71, 74), Decode<CourseConverter>]
+    [Field(71, 74)]
     public Course Course { get; set; }
 
     /// <summary>
@@ -68,11 +68,11 @@ public abstract class ProcedurePoint : Record424
     public string? DistanceTiming { get; set; }
 
     /// <inheritdoc cref="LegDirection"/>
-    [Character(81), Transform<LegDirectionConverter>]
+    [Character(81)]
     public LegDirection Direction { get; set; }
 
     /// <inheritdoc cref="Arinc424.AltitudeDescription"/>
-    [Character(83), Transform<AltitudeDescriptionConverter>]
+    [Character(83)]
     public AltitudeDescription AltitudeDescription { get; set; }
 
     /// <summary>
@@ -83,11 +83,11 @@ public abstract class ProcedurePoint : Record424
     public char AtcIndicator { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
-    [Field(85, 89), Decode<AltitudeConverter>]
+    [Field(85, 89)]
     public Altitude Altitude { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
-    [Field(90, 94), Decode<AltitudeConverter>]
+    [Field(90, 94)]
     public Altitude Altitude2 { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>
@@ -115,10 +115,10 @@ public abstract class ProcedurePoint : Record424
     public char CodeTurnIndicator { get; set; }
 
     /// <inheritdoc cref="Terms.Overlay"/>
-    [Character(117), Transform<OverlayConverter>]
+    [Character(117)]
     public Terms.Overlay Overlay { get; set; }
 
     /// <inheritdoc cref="Terms.SpeedLimitType"/>
-    [Character(118), Transform<SpeedLimitTypeConverter>]
+    [Character(118)]
     public Terms.SpeedLimitType SpeedLimitType { get; set; }
 }

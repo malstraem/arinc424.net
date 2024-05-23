@@ -42,19 +42,23 @@ public abstract class ConverterGenerator(string qualifier) : IIncrementalGenerat
     {
         var symbol = target.Symbol;
 
-        var (converter, signature) = target.IsChar ? (CharConverter, CharSignature) : (StringConverter, StringSignature);
+        var (converter, signature, @return) = target.IsChar
+            ? (CharConverter, CharSignature, symbol.Name)
+            : (StringConverter, StringSignature, $"Result<{symbol.Name}>");
+
+        string name = $"{symbol.Name}Converter";
 
         var builder = new StringBuilder().Append($@"using {symbol.ContainingNamespace};
 
 namespace Arinc424.Converters;
 
-internal abstract class {symbol.Name}Converter : {converter}<{symbol.Name}Converter, {symbol.Name}>
+internal abstract class {name} : {converter}<{name}, {symbol.Name}>
 {{
-    public static {symbol.Name} Convert({signature}) => ");
+    public static {@return} Convert({signature}) => ");
 
         _ = WriteTarget(builder, target).Append(";\n}\n");
 
-        return ($"{symbol.Name}Converter.gen.cs", builder.ToString());
+        return ($"{name}", builder.ToString());
     }
 
     private void Process(SourceProductionContext context, ImmutableArray<Target> targets)

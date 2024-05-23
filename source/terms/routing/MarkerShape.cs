@@ -4,7 +4,7 @@ namespace Arinc424.Routing.Terms;
 /// <c>Marker Shape (SHAPE)</c> character.
 /// </summary>
 /// <remarks>See section 5.112.</remarks>
-[Char]
+[Char, Transform<MarkerShapeConverter>]
 public enum MarkerShape : byte
 {
     Unknown,

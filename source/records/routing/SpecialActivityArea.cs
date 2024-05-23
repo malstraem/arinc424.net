@@ -17,7 +17,7 @@ public class SpecialActivityArea : Geo, IIdentity, IIcao, INamed
     public Airport Airport { get; set; }
 
     /// <inheritdoc cref="ActivityType"/>
-    [Character(7), Transform<ActivityTypeConverter>]
+    [Character(7)]
     public ActivityType Type { get; set; }
 
     /// <summary>
@@ -39,11 +39,11 @@ public class SpecialActivityArea : Geo, IIdentity, IIcao, INamed
     public float Size { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
-    [Field(46, 51), Decode<AltitudeConverter>]
+    [Field(46, 51)]
     public Altitude Up { get; set; }
 
     /// <inheritdoc cref="LimitUnit"/>
-    [Character(52), Transform<LimitUnitConverter>]
+    [Character(52)]
     public LimitUnit UpUnit { get; set; }
 
     /// <summary>
@@ -54,11 +54,11 @@ public class SpecialActivityArea : Geo, IIdentity, IIcao, INamed
     public char Volume { get; set; }
 
     /// <inheritdoc cref="OperatingTimes"/>
-    [Field(54, 56), Decode<OperatingTimesConverter>]
+    [Field(54, 56)]
     public OperatingTimes Times { get; set; }
 
     /// <inheritdoc cref="Arinc424.Privacy"/>
-    [Character(57), Transform<PrivacyConverter>]
+    [Character(57)]
     public Privacy Privacy { get; set; }
 
     /// <summary>
@@ -69,11 +69,11 @@ public class SpecialActivityArea : Geo, IIdentity, IIcao, INamed
     public string? ControllingAgency { get; set; }
 
     /// <inheritdoc cref="Arinc424.CommType"/>
-    [Field(84, 86), Decode<CommTypeConverter>]
+    [Field(84, 86)]
     public CommType CommType { get; set; }
 
     /// <inheritdoc cref="Arinc424.Frequency"/>
-    [Field(87, 93), Decode<FrequencyConverter>]
+    [Field(87, 93)]
     public Frequency Frequency { get; set; }
 
     /// <summary>

@@ -4,12 +4,13 @@ namespace Arinc424;
 /// <c>Communications Frequency (COMM FREQ)</c> field.
 /// </summary>
 /// <remarks>See section 5.103.</remarks>
+[Decode<FrequencyConverter>]
 [DebuggerDisplay($"{nameof(Receive)} - {{{nameof(Receive)}}}, {nameof(Transmit)} - {{{nameof(Transmit)}}}, {{{nameof(Unit)}}}")]
-public struct Frequency(float receive, float transmit, FrequencyUnit unit)
+public readonly struct Frequency(FrequencyUnit unit, float? transmit, float? receive)
 {
-    public float Receive = receive;
+    public FrequencyUnit Unit { get; } = unit;
 
-    public float Transmit = transmit;
+    public float? Receive { get; } = receive;
 
-    public FrequencyUnit Unit = unit;
+    public float? Transmit { get; } = transmit;
 }

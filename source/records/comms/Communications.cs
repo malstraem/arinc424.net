@@ -4,6 +4,6 @@ namespace Arinc424.Comms;
 public abstract class Communications<TTransmitter> : Record424<TTransmitter> where TTransmitter : Transmitter
 {
     /// <inheritdoc cref="Terms.CommClass"/>
-    [Field(16, 19), Decode<CommClassConverter>]
+    [Field(16, 19)]
     public Terms.CommClass Class { get; set; }
 }

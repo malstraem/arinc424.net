@@ -12,7 +12,7 @@ namespace Arinc424;
 /// </para>
 /// </summary>
 /// <remarks>See section 5.26, 5.28, 5.165.</remarks>
-[Char, Flags]
+[Char, Flags, Transform<CourseTypeConverter>]
 public enum CourseType : byte
 {
     Unknown = 0,

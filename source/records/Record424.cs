@@ -10,7 +10,7 @@ public abstract class Record424
     /// <summary>
     /// The source string from which the record was created.
     /// </summary>
-    public string Source { get; set; }
+    public string? Source { get; set; }
 
     /// <summary>
     /// <c>Customer/Area Code (CUST/AREA)</c> field.

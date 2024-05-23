@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Reflection;
 
 using Arinc424.Airspace;
@@ -69,18 +70,23 @@ internal class Meta424
         Records = assembly.GetCustomAttributes<RecordAttribute>();
         Sequences = assembly.GetCustomAttributes<SequenceAttribute>();
 
-        foreach (var info in Records.Cast<InfoAttribute>().Concat(Sequences))
+        Dictionary<Type, InfoAttribute> info = [];
+        Dictionary<(char, char), Type> types = [];
+
+        foreach (var attribute in Records.Cast<InfoAttribute>().Concat(Sequences))
         {
-            Info.Add(info.Type, info);
-            Types.Add((info.Section.SectionChar, info.Section.SubsectionChar), info.Type);
+            info.Add(attribute.Type, attribute);
+            types.Add((attribute.Section.SectionChar, attribute.Section.SubsectionChar), attribute.Type);
         }
+        Info = info.ToFrozenDictionary();
+        Types = types.ToFrozenDictionary();
     }
-
-    internal Dictionary<(char, char), Type> Types { get; } = [];
-
-    internal Dictionary<Type, InfoAttribute> Info { get; } = [];
 
     internal IEnumerable<RecordAttribute> Records { get; }
 
     internal IEnumerable<SequenceAttribute> Sequences { get; }
+
+    internal FrozenDictionary<Type, InfoAttribute> Info { get; }
+
+    internal FrozenDictionary<(char, char), Type> Types { get; }
 }

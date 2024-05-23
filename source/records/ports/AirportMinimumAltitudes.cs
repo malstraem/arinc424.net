@@ -27,6 +27,6 @@ public class AirportMinimumAltitudes : Record424
     [Field(43, 53), Count<Sector, SectorConverter>(7)]
     public Sector[] Sectors { get; set; }
 
-    [Character(120), Transform<CourseTypeConverter>]
+    [Character(120)]
     public CourseType CourseType { get; set; }
 }

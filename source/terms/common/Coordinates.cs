@@ -3,6 +3,7 @@ namespace Arinc424;
 /// <summary>
 /// Latitude and longitude according to the specification.
 /// </summary>
+[Decode<CoordinatesConverter>]
 [DebuggerDisplay($"{{{nameof(Latitude)}}}, {{{nameof(Longitude)}}}")]
 public readonly struct Coordinates(double latitude, double longitude)
 {

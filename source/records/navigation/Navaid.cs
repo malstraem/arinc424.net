@@ -29,11 +29,11 @@ public abstract class Navaid : Geo, IIdentity, IIcao, INamed
     public NavaidCoverage Coverage { get; set; }
 
     /// <inheritdoc cref="NavaidInfo"/>
-    [Character(31), Transform<NavaidInfoConverter>]
+    [Character(31)]
     public NavaidInfo Info { get; set; }
 
     /// <inheritdoc cref="NavaidCollocation"/>
-    [Character(32), Transform<NavaidCollocationConverter>]
+    [Character(32)]
     public NavaidCollocation Collocation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

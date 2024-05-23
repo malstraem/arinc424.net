@@ -19,7 +19,7 @@ public class OmnidirectionalStation : Navaid
     [Field(52, 55)]
     public string? EquipmentIdentifier { get; set; }
 
-    [Field(56, 74), Decode<CoordinatesConverter>]
+    [Field(56, 74)]
     public Coordinates? EquipmentCoordinates { get; set; }
 
     /// <summary>
@@ -37,7 +37,7 @@ public class OmnidirectionalStation : Navaid
     public int EquipmentElevation { get; set; }
 
     /// <inheritdoc cref="Terms.MeritFigure"/>
-    [Character(85), Transform<MeritFigureConverter>]
+    [Character(85)]
     public Terms.MeritFigure MeritFigure { get; set; }
 
     /// <summary>
@@ -60,10 +60,10 @@ public class OmnidirectionalStation : Navaid
     /// <c>Route Inappropriate Navaid Indicator</c> character.
     /// </summary>
     /// <remarks>See section 5.297.</remarks>
-    [Character(122), Transform<BoolConverter>]
+    [Character(122)]
     public Bool NotAreaNavigation { get; set; }
 
     /// <inheritdoc cref="Terms.ServiceVolume"/>
-    [Character(123), Transform<ServiceVolumeConverter>]
+    [Character(123)]
     public Terms.ServiceVolume ServiceVolume { get; set; }
 }

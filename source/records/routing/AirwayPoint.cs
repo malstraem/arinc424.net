@@ -18,23 +18,23 @@ public class AirwayPoint : Record424
     public Geo Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
-    [Field(40, 43), Decode<WaypointDescriptionsConverter>]
+    [Field(40, 43)]
     public WaypointDescriptions Descriptions { get; set; }
 
     /// <inheritdoc cref="Terms.BoundaryCode"/>
-    [Character(44), Transform<BoundaryCodeConverter>]
+    [Character(44)]
     public Terms.BoundaryCode BoundaryCode { get; set; }
 
     /// <inheritdoc cref="Terms.AirwayType"/>
-    [Character(45), Transform<AirwayTypeConverter>]
+    [Character(45)]
     public Terms.AirwayType Type { get; set; }
 
     /// <inheritdoc cref="Arinc424.LevelType"/>
-    [Character(46), Transform<LevelTypeConverter>]
+    [Character(46)]
     public LevelType LevelType { get; set; }
 
     /// <inheritdoc cref="Terms.AirwayRestriction"/>
-    [Character(47), Transform<AirwayRestrictionConverter>]
+    [Character(47)]
     public Terms.AirwayRestriction Restriction { get; set; }
 
     /// <inheritdoc cref="Records.CruiseTable"/>
@@ -45,7 +45,7 @@ public class AirwayPoint : Record424
     /// <c>EU Indicator (EU IND)</c> character.
     /// </summary>
     /// <remarks>See section 5.164.</remarks>
-    [Character(50), Transform<BoolConverter>]
+    [Character(50)]
     public Bool HasRestrictions { get; set; }
 
     /// <summary>
@@ -68,7 +68,7 @@ public class AirwayPoint : Record424
     public float Rho { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='OutboundMagneticCourse']/*"/>
-    [Field(71, 74), Decode<CourseConverter>]
+    [Field(71, 74)]
     public Course Out { get; set; }
 
     /// <summary>
@@ -80,19 +80,19 @@ public class AirwayPoint : Record424
     public float DistanceFrom { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='InboundMagneticCourse']/*"/>
-    [Field(79, 82), Decode<CourseConverter>]
+    [Field(79, 82)]
     public Course In { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
-    [Field(84, 88), Decode<AltitudeConverter>]
+    [Field(84, 88)]
     public Altitude Minimum { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
-    [Field(89, 93), Decode<AltitudeConverter>]
+    [Field(89, 93)]
     public Altitude Minimum2 { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MaximumAltitude']/*"/>
-    [Field(94, 98), Decode<AltitudeConverter>]
+    [Field(94, 98)]
     public Altitude Maximum { get; set; }
 
     /// <summary>

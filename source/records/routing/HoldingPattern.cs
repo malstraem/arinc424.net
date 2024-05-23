@@ -31,11 +31,11 @@ public class HoldingPattern : Record424, IIcao, INamed
     /// <c>Inbound Holding Course (IB HOLD CRS)</c> field.
     /// </summary>
     /// <remarks>See section 5.62.</remarks>
-    [Field(40, 43), Decode<CourseConverter>]
+    [Field(40, 43)]
     public Course In { get; set; }
 
     /// <inheritdoc cref="Arinc424.Turn"/>
-    [Character(44), Transform<TurnConverter>]
+    [Character(44)]
     public Turn Turn { get; set; }
 
     /// <summary>
@@ -55,11 +55,11 @@ public class HoldingPattern : Record424, IIcao, INamed
     public float LegTime { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
-    [Field(50, 54), Decode<AltitudeConverter>]
+    [Field(50, 54)]
     public Altitude Minimum { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MaximumAltitude']/*"/>
-    [Field(55, 59), Decode<AltitudeConverter>]
+    [Field(55, 59)]
     public Altitude Maximum { get; set; }
 
     /// <summary>
@@ -91,7 +91,7 @@ public class HoldingPattern : Record424, IIcao, INamed
     public int MaxLevel { get; set; }
 
     /// <inheritdoc cref="LegDirection"/>
-    [Character(81), Transform<LegDirectionConverter>]
+    [Character(81)]
     public LegDirection Direction { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>

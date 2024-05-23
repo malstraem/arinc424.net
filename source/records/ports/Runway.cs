@@ -38,7 +38,7 @@ public class Runway : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Degrees and tenths of a degree.</value>
     /// <remarks>See section 5.58.</remarks>
-    [Field(28, 31), Decode<CourseConverter>]
+    [Field(28, 31)]
     public Course Bearing { get; set; }
 
     /// <summary>
@@ -78,7 +78,7 @@ public class Runway : Geo, IIdentity, IIcao
     public int Width { get; set; }
 
     /// <inheritdoc cref="Terms.ThresholdType"/>
-    [Character(81), Transform<ThresholdTypeConverter>]
+    [Character(81)]
     public Terms.ThresholdType ThresholdType { get; set; }
 
     /// <summary>

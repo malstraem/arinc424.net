@@ -10,6 +10,6 @@ public class AirwayTransmitter : Transmitter
     public string? Narrative { get; set; }
 
     /// <inheritdoc cref="Terms.AirwayCommUsages"/>
-    [Field(112, 114), Decode<AirwayCommUsagesConverter>]
+    [Field(112, 114)]
     public Terms.AirwayCommUsages Usages { get; set; }
 }

@@ -5,7 +5,7 @@ namespace Arinc424.Converters;
 /// </summary>
 internal interface IStringConverter
 {
-    static abstract object Convert(ReadOnlySpan<char> @string);
+    static abstract Result<object> Convert(ReadOnlySpan<char> @string);
 }
 
 /// <summary>
@@ -16,7 +16,7 @@ internal interface IStringConverter
 internal interface IStringConverter<TSelf, TType> : IStringConverter where TType : notnull
                                                                      where TSelf : IStringConverter<TSelf, TType>
 {
-    static abstract new TType Convert(ReadOnlySpan<char> @string);
+    static abstract new Result<TType> Convert(ReadOnlySpan<char> @string);
 
-    static object IStringConverter.Convert(ReadOnlySpan<char> @string) => TSelf.Convert(@string);
+    static Result<object> IStringConverter.Convert(ReadOnlySpan<char> @string) => TSelf.Convert(@string);
 }

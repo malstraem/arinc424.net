@@ -4,7 +4,7 @@ namespace Arinc424.Ports.Terms;
 /// <c>TCH Value Indicator (TCHVI)</c> character.
 /// </summary>
 /// <remarks>See section 5.270.</remarks>
-[Char]
+[Char, Transform<ThresholdTypeConverter>]
 public enum ThresholdType : byte
 {
     Unknown,

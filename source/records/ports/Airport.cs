@@ -37,7 +37,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// <c>Speed Limit Altitude</c> field.
     /// </summary>
     /// <remarks>See section 5.73.</remarks>
-    [Field(23, 27), Decode<AltitudeConverter>]
+    [Field(23, 27)]
     public Altitude Limit { get; set; }
 
     /// <summary>
@@ -52,11 +52,11 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// <c>IFR Capability (IFR)</c> character.
     /// </summary>
     /// <remarks>See section 5.108.</remarks>
-    [Character(31), Transform<BoolConverter>]
+    [Character(31)]
     public Bool IsProcedurePublished { get; set; }
 
     /// <inheritdoc cref="RunwaySurfaceType"/>
-    [Character(32), Transform<RunwaySurfaceTypeConverter>]
+    [Character(32)]
     public RunwaySurfaceType LongestRunwayType { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
@@ -91,7 +91,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     public int TransitionLevel { get; set; }
 
     /// <inheritdoc cref="Arinc424.Privacy"/>
-    [Character(81), Transform<PrivacyConverter>]
+    [Character(81)]
     public Privacy Privacy { get; set; }
 
     /// <summary>
@@ -105,11 +105,11 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// <c>Daylight Time Indicator (DAY TIME)</c> character.
     /// </summary>
     /// <remarks>See section 5.179.</remarks>
-    [Character(85), Transform<BoolConverter>]
+    [Character(85)]
     public Bool IsDaylightTime { get; set; }
 
     /// <inheritdoc cref="Arinc424.CourseType"/>
-    [Character(86), Transform<CourseTypeConverter>]
+    [Character(86)]
     public CourseType CourseType { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

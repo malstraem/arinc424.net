@@ -4,7 +4,7 @@ namespace Arinc424.Waypoints.Terms;
 /// <c>Waypoint Description Code (DESC CODE)</c> field.
 /// </summary>
 /// <remarks>See section 5.17.</remarks>
-[String, Flags]
+[String, Flags, Decode<WaypointDescriptionsConverter>]
 public enum WaypointDescriptions : uint
 {
     Unknown = 0u,

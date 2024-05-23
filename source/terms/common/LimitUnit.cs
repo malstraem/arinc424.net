@@ -4,7 +4,8 @@ namespace Arinc424;
 /// <c>Unit Indicator (UNIT IND)</c> character.
 /// </summary>
 /// <remarks>See section 5.133.</remarks>
-[Char, Description("Unit Indicator (UNIT IND)")]
+[Char, Transform<LimitUnitConverter>]
+[Description("Unit Indicator (UNIT IND)")]
 public enum LimitUnit : byte
 {
     Unknown,

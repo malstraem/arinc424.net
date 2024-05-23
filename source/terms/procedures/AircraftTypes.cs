@@ -4,7 +4,7 @@ namespace Arinc424.Procedures.Terms;
 /// <c>Procedure Design Aircraft Category or Type</c> character.
 /// </summary>
 /// <remarks>See section 5.301.</remarks>
-[Char, Flags]
+[Char, Flags, Transform<AircraftTypesConverter>]
 public enum AircraftTypes : ushort
 {
     Unknown = 0,

@@ -29,11 +29,11 @@ public class AirwayMarker : Geo, IIdentity, IIcao, INamed
     public string Code { get; set; }
 
     /// <inheritdoc cref="MarkerShape"/>
-    [Character(28), Transform<MarkerShapeConverter>]
+    [Character(28)]
     public MarkerShape Shape { get; set; }
 
     /// <inheritdoc cref="MarkerPower"/>
-    [Character(29), Transform<MarkerPowerConverter>]
+    [Character(29)]
     public MarkerPower Power { get; set; }
 
     /// <summary>

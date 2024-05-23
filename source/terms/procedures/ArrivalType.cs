@@ -4,7 +4,7 @@ namespace Arinc424.Procedures.Terms;
 /// <c>Route Type (RT TYPE)</c> -> <c>STAR Route Type Description</c> character.
 /// </summary>
 /// <remarks>See section 5.7, Table 5-6.</remarks>
-[Char]
+[Char, Transform<ArrivalTypeConverter>]
 public enum ArrivalType : byte
 {
     Unknown,

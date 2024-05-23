@@ -56,6 +56,7 @@ internal partial class Parser424
         }
     }
 
+    [Obsolete("todo: try parse sequence number")]
     private void BuildSequences()
     {
         _ = Parallel.ForEach(meta.Sequences, attribute =>
@@ -87,7 +88,6 @@ internal partial class Parser424
             while (strings.TryDequeue(out string? @string))
                 queue.Enqueue(attribute.Build(@string));
         });
-
         BuildSequences();
     }
 

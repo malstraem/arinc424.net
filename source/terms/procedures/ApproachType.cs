@@ -4,7 +4,7 @@ namespace Arinc424.Procedures.Terms;
 /// <c>Route Type (RT TYPE)</c> -> <c>Approach Route Type Description</c> character.
 /// </summary>
 /// <remarks>See section 5.7, Table 5-7.</remarks>
-[Char]
+[Char, Transform<ApproachTypeConverter>]
 public enum ApproachType : byte
 {
     Unknown,

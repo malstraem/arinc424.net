@@ -20,11 +20,11 @@ public abstract class Waypoint : Geo, IIdentity, IIcao, INamed
     public string IcaoCode { get; set; }
 
     /// <inheritdoc cref="WaypointTypes"/>
-    [Field(27, 29), Decode<WaypointTypesConverter>]
+    [Field(27, 29)]
     public WaypointTypes Types { get; set; }
 
     /// <inheritdoc cref="WaypointUsages"/>
-    [Field(30, 31), Decode<WaypointUsagesConverter>]
+    [Field(30, 31)]
     public WaypointUsages Usages { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
@@ -36,7 +36,7 @@ public abstract class Waypoint : Geo, IIdentity, IIcao, INamed
     public string? Datum { get; set; }
 
     /// <inheritdoc cref="WaypointNameFormats"/>
-    [Field(96, 98), Decode<WaypointNameFormatsConverter>]
+    [Field(96, 98)]
     public WaypointNameFormats NameFormats { get; set; }
 
     /// <summary>

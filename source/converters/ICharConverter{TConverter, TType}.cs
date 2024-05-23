@@ -13,7 +13,7 @@ internal interface ICharConverter
 /// </summary>
 /// <typeparam name="TSelf">Converter itself.</typeparam>
 /// <typeparam name="TType">Provided type.</typeparam>
-internal interface ICharConverter<TSelf, TType> : ICharConverter where TType : notnull
+internal interface ICharConverter<TSelf, TType> : ICharConverter where TType : Enum
                                                                  where TSelf : ICharConverter<TSelf, TType>
 {
     static abstract new TType Convert(char @char);

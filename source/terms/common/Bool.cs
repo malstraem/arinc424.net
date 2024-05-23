@@ -3,7 +3,7 @@ namespace Arinc424;
 /// <summary>
 /// Boolean type according to the specification.
 /// </summary>
-[Char]
+[Char, Transform<BoolConverter>]
 public enum Bool : byte
 {
     Unknown,

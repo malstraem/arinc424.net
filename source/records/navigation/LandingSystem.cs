@@ -22,7 +22,7 @@ public abstract class LandingSystem : Geo, IIdentity, IIcao
     public string IcaoCode { get; set; }
 
     /// <inheritdoc cref="Terms.LandingSystemType"/>
-    [Character(18), Transform<LandingSystemTypeConverter>]
+    [Character(18)]
     public Terms.LandingSystemType Type { get; set; }
 
     [Foreign(7, 12), Foreign(28, 32), Foreign(11, 12)]
@@ -33,7 +33,7 @@ public abstract class LandingSystem : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Degrees and tenths of a degree.</value>
     /// <remarks>See section 5.47 and 5.167.</remarks>
-    [Field(52, 55), Decode<CourseConverter>]
+    [Field(52, 55)]
     public Course Bearing { get; set; }
 
     /// <summary>

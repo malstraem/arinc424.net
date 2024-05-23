@@ -4,7 +4,7 @@ namespace Arinc424;
 /// <c>Public/Military Indicator (PUB/MIL)</c> character.
 /// </summary>
 /// <remarks>See section 5.177.</remarks>
-[Char, Flags]
+[Char, Flags, Transform<PrivacyConverter>]
 public enum Privacy : byte
 {
     Unknown = 0,

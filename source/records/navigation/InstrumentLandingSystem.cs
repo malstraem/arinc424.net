@@ -17,7 +17,7 @@ public class InstrumentLandingSystem : LandingSystem
     [Field(23, 27), Decode<LocalizerFrequencyConverter>]
     public int Frequency { get; set; }
 
-    [Field(56, 74), Decode<CoordinatesConverter>]
+    [Field(56, 74)]
     public Coordinates GlideSlopeCoordinates { get; set; }
 
     /// <summary>

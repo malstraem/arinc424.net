@@ -4,7 +4,8 @@ namespace Arinc424;
 /// <c>Holding Pattern/Race Track Course Reversal Leg Inbound/Outbound Indicator</c> character.
 /// </summary>
 /// <remarks>See section 5.298.</remarks>
-[Char, Description("Holding Pattern/Race Track Course Reversal Leg Inbound/Outbound Indicator")]
+[Char, Transform<LegDirectionConverter>]
+[Description("Holding Pattern/Race Track Course Reversal Leg Inbound/Outbound Indicator")]
 public enum LegDirection : byte
 {
     Unknown,

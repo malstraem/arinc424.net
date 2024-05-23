@@ -12,6 +12,6 @@ public class ApproachPoint : ProcedurePoint
     public float VerticalAngel { get; set; }
 
     /// <inheritdoc cref="ApproachQualifiers"/>
-    [Field(119, 120), Decode<ApproachQualifiersConverter>]
+    [Field(119, 120)]
     public ApproachQualifiers Qualifiers { get; set; }
 }
