@@ -28,9 +28,9 @@ internal class BuildAttribute : Attribute
 
             if (property.TryCharacterAttribute(type, out var characterAttribute))
             {
-                // prefer attribute attached to the property to override behavior
+                // prefer transform attached to the property
                 var transform = property.GetCustomAttribute<TransformAttribute>() ?? property.PropertyType.GetCustomAttribute<TransformAttribute>();
-                indexInfo.Add(new IndexAssignmentInfo(property, regex, characterAttribute!.Index, transform));
+                indexInfo.Add(new IndexAssignmentInfo(property, regex, characterAttribute.Index, transform));
                 continue;
             }
             else if (property.TryFieldAttribute(type, out var fieldAttribute))
@@ -39,18 +39,18 @@ internal class BuildAttribute : Attribute
 
                 if (count is not null)
                 {
-                    arrayInfo.Add(new ArrayAssignmentInfo(property, regex, fieldAttribute!.Range, count));
+                    arrayInfo.Add(new ArrayAssignmentInfo(property, regex, fieldAttribute.Range, count));
                     continue;
                 }
-
-                // prefer attribute attached to the property to override behavior
+                // prefer decode attached to the property
                 var decode = property.GetCustomAttribute<DecodeAttribute>();
 
+                // look inside Nullable <T> if that's the case
                 decode ??= property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
                         ? property.PropertyType.GetGenericArguments().First().GetCustomAttribute<DecodeAttribute>()
                         : property.PropertyType.GetCustomAttribute<DecodeAttribute>();
 
-                rangeInfo.Add(new RangeAssignmentInfo(property, regex, fieldAttribute!.Range, decode));
+                rangeInfo.Add(new RangeAssignmentInfo(property, regex, fieldAttribute.Range, decode));
                 continue;
             }
 

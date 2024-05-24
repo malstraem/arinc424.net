@@ -5,10 +5,10 @@ internal static class RecordBuilder<TRecord, TSub> where TRecord : Record424<TSu
 {
     internal static TRecord Build(Queue<string> strings, BuildAttribute info, BuildAttribute subInfo)
     {
-        var record = RecordBuilder<TRecord>.Build(strings.First(), info);
+        var record = RecordBuilder<TRecord>.Build(strings.First(), info, out _);
 
         while (strings.TryDequeue(out string? @string))
-            record.Sequence.Add(RecordBuilder<TSub>.Build(@string, subInfo));
+            record.Sequence.Add(RecordBuilder<TSub>.Build(@string, subInfo, out _));
 
         return record;
     }

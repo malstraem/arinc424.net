@@ -7,19 +7,19 @@ internal readonly ref struct Result<T> where T : notnull
 {
     internal readonly T? Value;
 
-    internal readonly string? Message;
+    internal readonly string? Problem;
 
-    private Result(T? value, string? message)
+    private Result(T? value, string? problem)
     {
         Value = value;
-        Message = message;
+        Problem = problem;
     }
 
     internal Result(T value) => Value = value;
 
-    internal Result(string message) => Message = message;
+    internal Result(string message) => Problem = message;
 
-    internal bool IsError => Message is not null;
+    internal bool IsError => Problem is not null;
 
     public static implicit operator Result<T>(T value) => new(value);
 
@@ -27,5 +27,5 @@ internal readonly ref struct Result<T> where T : notnull
     /// Auto <see cref="IStringConverter.Convert"/> resolution.
     /// </summary>
 
-    public static implicit operator Result<object>(Result<T> self) => new(self.Value, self.Message);
+    public static implicit operator Result<object>(Result<T> self) => new(self.Value, self.Problem);
 }

@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.RegularExpressions;
+
+using Arinc424.Diagnostics;
 
 namespace Arinc424.Building;
 
@@ -10,15 +13,13 @@ internal class RangeAssignmentInfo(PropertyInfo property, Regex? regex, Range ra
 
     private readonly DecodeAttribute? decode = decode;
 
-    public bool TryProcess(Record424 record, out string? message)
+    public bool TryProcess(Record424 record, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        message = null;
+        diagnostic = null;
 
         ReadOnlySpan<char> @string = record.Source;
 
         var @field = @string[range];
-
-        object? value;
 
         if (@field.IsWhiteSpace())
         {
@@ -26,26 +27,23 @@ internal class RangeAssignmentInfo(PropertyInfo property, Regex? regex, Range ra
             // todo: diagnostic nullable of property
             // value = null;
         }
+
+        object? value;
+
+        if (decode is null)
+        {
+            value = @field.Trim().ToString();
+        }
         else
         {
-            if (decode is null)
-            {
-                value = @field.Trim().ToString();
-            }
-            else
-            {
-                var result = decode.Convert(@field);
+            var result = decode.Convert(@field);
 
-                if (result.IsError)
-                {
-                    message = result.Message;
-                    return false;
-                }
-                else
-                {
-                    value = result.Value;
-                }
+            if (result.IsError)
+            {
+                diagnostic = new RangeDiagnostic(result.Problem!, range);
+                return false;
             }
+            value = result.Value;
         }
 
         Property.SetValue(record, value);

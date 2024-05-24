@@ -7,18 +7,16 @@ internal abstract class SectorConverter : IStringConverter<SectorConverter, Sect
     [Obsolete("todo")]
     public static Result<Sector> Convert(ReadOnlySpan<char> @string)
     {
-        var sub = @string[..6];
-
-        var sectorization = SectorizationConverter.Convert(sub);
+        var sectorization = SectorizationConverter.Convert(@string[..6]);
 
         return sectorization.IsError
-            ? new(sectorization.Message!)
+            ? new(sectorization.Problem!)
             : !int.TryParse(@string[6..9], out int altitude)
 
-                ? new($"Altitude '{@string[6..9]}' cannot be parsed.")
+                ? new($"Altitude '{@string[6..9]}' can't be parsed.")
                 : !int.TryParse(@string[9..11], out int radius)
 
-                    ? new($"Radius '{@string[9..11]}' cannot be parsed.")
+                    ? new($"Radius '{@string[9..11]}' can't be parsed.")
                     : new(new Sector(sectorization.Value, altitude, radius));
     }
 }

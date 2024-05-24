@@ -5,13 +5,13 @@ internal abstract class SectorizationConverter : IStringConverter<SectorizationC
     [Obsolete("todo")]
     public static Result<Sectorization> Convert(ReadOnlySpan<char> @string)
     {
-        var start = @string[0..3];
-        var end = @string[3..6];
+        var start = IntConverter.Convert(@string[0..3]);
 
-        return new Sectorization
-        (
-            start: start.IsWhiteSpace() ? 0 : int.Parse(start),
-            end: end.IsWhiteSpace() ? 0 : int.Parse(end)
-        );
+        if (start.IsError)
+            return new(start.Problem!);
+
+        var end = IntConverter.Convert(@string[3..6]);
+
+        return start.IsError ? new Result<Sectorization>(end.Problem!) : new Sectorization(start.Value, end.Value);
     }
 }

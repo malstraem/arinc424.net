@@ -1,10 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Arinc424.Building;
 
 internal static class MemberExtensions
 {
-    internal static bool TryCharacterAttribute(this MemberInfo member, Type type, out CharacterAttribute? characterAttribute)
+    internal static bool TryCharacterAttribute(this MemberInfo member, Type type, [NotNullWhen(true)] out CharacterAttribute? characterAttribute)
     {
         var attributes = member.GetCustomAttributes<CharacterAttribute>();
 
@@ -21,7 +22,7 @@ internal static class MemberExtensions
         return characterAttribute is not null;
     }
 
-    internal static bool TryFieldAttribute(this MemberInfo member, Type type, out FieldAttribute? fieldAttribute)
+    internal static bool TryFieldAttribute(this MemberInfo member, Type type, [NotNullWhen(true)] out FieldAttribute? fieldAttribute)
     {
         var attributes = member.GetCustomAttributes<FieldAttribute>();
 

@@ -12,7 +12,7 @@ internal abstract class ArcConverter : IStringConverter<ArcConverter, Arc>
         var coordinates = CoordinatesConverter.Convert(sub);
 
         if (coordinates.IsError)
-            return new(coordinates.Message!);
+            return new(coordinates.Problem!);
 
         float? distance;
 

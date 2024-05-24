@@ -86,7 +86,7 @@ internal partial class Parser424
             var strings = primary[attribute.Type];
 
             while (strings.TryDequeue(out string? @string))
-                queue.Enqueue(attribute.Build(@string));
+                queue.Enqueue(attribute.Build(@string, out _));
         });
         BuildSequences();
     }
