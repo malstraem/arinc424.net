@@ -40,7 +40,7 @@ public abstract class LandingSystem : Geo, IIdentity, IIcao
     /// <c>Component Elevation</c> field.
     /// </summary>
     /// <remarks>See section 5.74.</remarks>
-    [Field(98, 102), Decode<IntConverter>]
+    [Field(98, 102), Integer]
     [Field<MicrowaveLandingSystem>(104, 108)]
     public int Elevation { get; set; }
 }

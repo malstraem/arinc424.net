@@ -19,13 +19,9 @@ internal readonly ref struct Result<T> where T : notnull
 
     internal Result(string message) => Problem = message;
 
+    internal Result<object> Box() => new(Value, Problem);
+
     internal bool IsError => Problem is not null;
 
     public static implicit operator Result<T>(T value) => new(value);
-
-    /// <summary>
-    /// Auto <see cref="IStringConverter.Convert"/> resolution.
-    /// </summary>
-
-    public static implicit operator Result<object>(Result<T> self) => new(self.Value, self.Problem);
 }

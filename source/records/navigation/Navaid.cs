@@ -15,7 +15,7 @@ public abstract class Navaid : Geo, IIdentity, IIcao, INamed
     public string IcaoCode { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
-    [Field(23, 27), Decode<TenthsConverter>]
+    [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
 
     /// <inheritdoc cref="NavaidType"/>

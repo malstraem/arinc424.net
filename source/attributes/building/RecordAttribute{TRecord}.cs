@@ -6,10 +6,10 @@ namespace Arinc424.Attributes;
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 internal abstract class RecordAttribute(Type type) : InfoAttribute(type, type.GetProperties())
 {
-    internal abstract Record424 Build(string @string, out Queue<Diagnostic> diagnostics);
+    internal abstract Record424 Build(string @string, Queue<Diagnostic> diagnostics);
 }
 
 internal sealed class RecordAttribute<TRecord>() : RecordAttribute(typeof(TRecord)) where TRecord : Record424, new()
 {
-    internal override Record424 Build(string @string, out Queue<Diagnostic> diagnostics) => RecordBuilder<TRecord>.Build(@string, this, out diagnostics);
+    internal override Record424 Build(string @string, Queue<Diagnostic> diagnostics) => RecordBuilder<TRecord>.Build(@string, this, diagnostics);
 }

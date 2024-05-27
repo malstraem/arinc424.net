@@ -35,7 +35,7 @@ public class SpecialActivityArea : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <value>Nautical miles and tenths of mile.</value>
     /// <remarks>See section 5.280.</remarks>
-    [Field(43, 45), Decode<TenthsConverter>]
+    [Field(43, 45), Float(10)]
     public float Size { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>

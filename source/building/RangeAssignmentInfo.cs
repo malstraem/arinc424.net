@@ -1,4 +1,3 @@
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
@@ -13,40 +12,39 @@ internal class RangeAssignmentInfo(PropertyInfo property, Regex? regex, Range ra
 
     private readonly DecodeAttribute? decode = decode;
 
-    public bool TryProcess(Record424 record, [NotNullWhen(false)] out Diagnostic? diagnostic)
+    internal virtual void Process(Record424 record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
-        diagnostic = null;
-
-        ReadOnlySpan<char> @string = record.Source;
-
         var @field = @string[range];
 
         if (@field.IsWhiteSpace())
         {
-            return true;
-            // todo: diagnostic nullable of property
-            // value = null;
+            // todo: process nullability by provided conditional settings
+
+            /*if (NullabilityInfo.WriteState is NullabilityState.NotNull)
+            {
+                diagnostic = new NullDiagnostic(record, $"Property {Property} does not allow blank values.", range);
+                return false;
+            }*/
+            return;
         }
 
         object? value;
 
-        if (decode is null)
-        {
-            value = @field.Trim().ToString();
-        }
-        else
+        if (decode is not null)
         {
             var result = decode.Convert(@field);
 
             if (result.IsError)
             {
-                diagnostic = new RangeDiagnostic(result.Problem!, range);
-                return false;
+                diagnostics.Enqueue(new ValueDiagnostic(record, result.Problem!, range));
+                return;
             }
             value = result.Value;
         }
-
+        else
+        {
+            value = @field.Trim().ToString();
+        }
         Property.SetValue(record, value);
-        return true;
     }
 }

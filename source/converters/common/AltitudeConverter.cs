@@ -11,14 +11,14 @@ internal abstract class AltitudeConverter : IStringConverter<AltitudeConverter, 
 
         _ when @string[0] is 'F' => int.TryParse(@string[2..], out int value)
             ? new Altitude(value, AltitudeUnit.Level)
-            : new Result<Altitude>($"Altitude '{@string}' is defined as flight level, but the integer component '{@string[2..]}' cannot be parsed."),
+            : new Result<Altitude>($"Altitude '{@string}' is defined as flight level, but '{@string[2..]}' can't be parsed as an integer."),
 
         _ when @string[..3] is "GND" => new Altitude(0, AltitudeUnit.Ground),
         _ when @string[..3] is "MSL" => new Altitude(0, AltitudeUnit.Sea),
 
         _ => int.TryParse(@string, out int value)
             ? new Altitude(value, AltitudeUnit.Feet)
-            : new Result<Altitude>($"Altitude '{@string}' is defined as feet, but the integer cannot be parsed.")
+            : new Result<Altitude>($"Altitude '{@string}' is defined as feet, but can't be parsed as an integer.")
     };
     /* @string switch
     {

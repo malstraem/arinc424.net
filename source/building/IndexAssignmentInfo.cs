@@ -10,9 +10,9 @@ internal class IndexAssignmentInfo(PropertyInfo property, Regex? regex, int inde
 
     private readonly TransformAttribute? transform = transform;
 
-    internal void Process(Record424 record)
+    internal void Process(Record424 record, ReadOnlySpan<char> @string)
     {
-        char @char = record.Source[index];
+        char @char = @string[index];
 
         object value = transform is not null ? transform.Convert(@char) : @char;
 

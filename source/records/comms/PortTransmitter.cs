@@ -31,7 +31,7 @@ public class PortTransmitter : Transmitter
     /// </summary>
     /// <value>Nautical miles.</value>
     /// <remarks>See section 5.188.</remarks>
-    [Field(91, 92), Decode<IntConverter>]
+    [Field(91, 92), Integer]
     public int Distance { get; set; }
 
     /// <inheritdoc cref="PortCommUsages"/>

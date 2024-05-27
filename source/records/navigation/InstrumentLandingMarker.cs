@@ -32,13 +32,13 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     public MarkerType Type { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
-    [Field(23, 27), Decode<TenthsConverter>]
+    [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
 
     [Foreign(7, 12), Foreign(28, 32), Foreign(11, 12)]
     public Runway Runway { get; set; }
 
-    [Field(52, 55), Decode<TenthsConverter>]
+    [Field(52, 55), Float(10)]
     public float Bearing { get; set; }
 
     [Field(56, 74)]
@@ -75,6 +75,6 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.92.</remarks>
-    [Field(98, 102), Decode<IntConverter>]
+    [Field(98, 102), Integer]
     public int Elevation { get; set; }
 }

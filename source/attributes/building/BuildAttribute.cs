@@ -15,7 +15,6 @@ internal class BuildAttribute : Attribute
 
         List<IndexAssignmentInfo> indexInfo = [];
         List<RangeAssignmentInfo> rangeInfo = [];
-        List<ArrayAssignmentInfo> arrayInfo = [];
 
         List<Link> links = [];
 
@@ -35,13 +34,6 @@ internal class BuildAttribute : Attribute
             }
             else if (property.TryFieldAttribute(type, out var fieldAttribute))
             {
-                var count = property.GetCustomAttribute<CountAttribute>();
-
-                if (count is not null)
-                {
-                    arrayInfo.Add(new ArrayAssignmentInfo(property, regex, fieldAttribute.Range, count));
-                    continue;
-                }
                 // prefer decode attached to the property
                 var decode = property.GetCustomAttribute<DecodeAttribute>();
 
@@ -50,7 +42,13 @@ internal class BuildAttribute : Attribute
                         ? property.PropertyType.GetGenericArguments().First().GetCustomAttribute<DecodeAttribute>()
                         : property.PropertyType.GetCustomAttribute<DecodeAttribute>();
 
-                rangeInfo.Add(new RangeAssignmentInfo(property, regex, fieldAttribute.Range, decode));
+                var count = property.GetCustomAttribute<CountAttribute>();
+
+                var assignment = count is not null
+                    ? new ArrayAssignmentInfo(property, regex, fieldAttribute.Range, count)
+                    : new RangeAssignmentInfo(property, regex, fieldAttribute.Range, decode);
+
+                rangeInfo.Add(assignment);
                 continue;
             }
 
@@ -73,7 +71,6 @@ internal class BuildAttribute : Attribute
 
         IndexInfo = [.. indexInfo];
         RangeInfo = [.. rangeInfo];
-        ArrayInfo = [.. arrayInfo];
 
         if (links.Count > 0)
             Links = [.. links];
@@ -90,8 +87,6 @@ internal class BuildAttribute : Attribute
     internal IndexAssignmentInfo[] IndexInfo { get; }
 
     internal RangeAssignmentInfo[] RangeInfo { get; }
-
-    internal ArrayAssignmentInfo[] ArrayInfo { get; }
 
     internal Link[]? Links { get; }
 

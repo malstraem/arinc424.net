@@ -1,6 +1,7 @@
 using System.Reflection;
 
 using Arinc424.Building;
+using Arinc424.Diagnostics;
 
 namespace Arinc424.Attributes;
 
@@ -18,7 +19,7 @@ internal abstract class SequenceAttribute : InfoAttribute
         SubInfo = new BuildAttribute(subType, subType.GetProperties());
     }
 
-    internal abstract Record424 Build(Queue<string> strings);
+    internal abstract Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics);
 
     internal abstract IEnumerable<Record424> GetSequence(Record424 record);
 }
@@ -27,7 +28,7 @@ internal sealed class SequenceAttribute<TRecord, TSub>() : SequenceAttribute(typ
     where TRecord : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    internal override Record424 Build(Queue<string> strings) => RecordBuilder<TRecord, TSub>.Build(strings, this, SubInfo);
+    internal override Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics) => RecordBuilder<TRecord, TSub>.Build(strings, this, diagnostics);
 
     internal override IEnumerable<Record424> GetSequence(Record424 record) => ((TRecord)record).Sequence;
 }

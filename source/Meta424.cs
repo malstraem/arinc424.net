@@ -22,11 +22,11 @@ Record<AirportTerminalWaypoint>,
 Record<AirportSatelliteAugmentPoint>,
 Sequence<AirportCommunications, PortTransmitter>,
 
-//Record<Heliport>,
-//Record<HeliportCommunications>,
-//Record<HeliportArrivalAltitudes>,
-//Record<HeliportMinimumAltitudes>,
-//Record<HeliportTerminalWaypoint>,
+Record<Heliport>,
+Record<HeliportCommunications>,
+Record<HeliportArrivalAltitudes>,
+Record<HeliportMinimumAltitudes>,
+Record<HeliportTerminalWaypoint>,
 
 Sequence<AirportArrival, ArrivalPoint>,
 Sequence<AirportApproach, ApproachPoint>,
@@ -81,6 +81,10 @@ internal class Meta424
         Info = info.ToFrozenDictionary();
         Types = types.ToFrozenDictionary();
     }
+
+    internal IEnumerable<InfoAttribute> GetWithPrimaryKey() => Info.Select(x => x.Value).Where(x => x.PrimaryKey is not null);
+
+    internal IEnumerable<InfoAttribute> GetWithLinks() => Info.Select(x => x.Value).Where(x => x.Links is not null);
 
     internal IEnumerable<RecordAttribute> Records { get; }
 

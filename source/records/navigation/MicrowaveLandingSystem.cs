@@ -11,7 +11,7 @@ public class MicrowaveLandingSystem : LandingSystem
     /// <c>Channel</c> field.
     /// </summary>
     /// <remarks>See section 5.166.</remarks>
-    [Field(23, 25), Decode<IntConverter>]
+    [Field(23, 25), Integer]
     public int Channel { get; set; }
 
     [Field(56, 74)]
@@ -22,7 +22,7 @@ public class MicrowaveLandingSystem : LandingSystem
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.48.</remarks>
-    [Field(75, 78), Decode<IntConverter>]
+    [Field(75, 78), Integer]
     public int Position { get; set; }
 
     /// <summary>
@@ -36,7 +36,7 @@ public class MicrowaveLandingSystem : LandingSystem
     /// <c>Elevation Position (EL FR RW THRES)</c> field.
     /// </summary>
     /// <remarks>See section 5.50.</remarks>
-    [Field(80, 83), Decode<IntConverter>]
+    [Field(80, 83), Integer]
     public int ElevationPosition { get; set; }
 
     /// <summary>
@@ -44,7 +44,7 @@ public class MicrowaveLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees.</value>
     /// <remarks>See section 5.168.</remarks>
-    [Field(84, 86), Decode<IntConverter>]
+    [Field(84, 86), Integer]
     public int RightAngle { get; set; }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class MicrowaveLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees.</value>
     /// <remarks>See section 5.168.</remarks>
-    [Field(87, 89), Decode<IntConverter>]
+    [Field(87, 89), Integer]
     public int LeftAngle { get; set; }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class MicrowaveLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees.</value>
     /// <remarks>See section 5.172.</remarks>
-    [Field(90, 92), Decode<IntConverter>]
+    [Field(90, 92), Integer]
     public int RightCoverage { get; set; }
 
     /// <summary>
@@ -68,7 +68,7 @@ public class MicrowaveLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees.</value>
     /// <remarks>See section 5.172.</remarks>
-    [Field(93, 95), Decode<IntConverter>]
+    [Field(93, 95), Integer]
     public int LeftCoverage { get; set; }
 
     /// <summary>
@@ -76,7 +76,7 @@ public class MicrowaveLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees and tenths of degree.</value>
     /// <remarks>See section 5.169.</remarks>
-    [Field(96, 98), Decode<TenthsConverter>]
+    [Field(96, 98), Float(10)]
     public float AngleSpan { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
@@ -88,14 +88,14 @@ public class MicrowaveLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees and hundredths of degree.</value>
     /// <remarks>See section 5.173.</remarks>
-    [Field(109, 112), Decode<HundredthsConverter>]
+    [Field(109, 112), Float(100)]
     public float NominalElevationAngle { get; set; }
 
     /// <summary>
     /// <c>Glide Slope Angle (GS ANGLE)</c> field.
     /// </summary>
     /// <remarks>See section 5.52.</remarks>
-    [Field(113, 115), Decode<HundredthsConverter>]
+    [Field(113, 115), Float(100)]
     public float MinimumGlideAngle { get; set; }
 
     [Type(122, 123)]

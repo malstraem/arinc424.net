@@ -43,7 +43,7 @@ public class HoldingPattern : Record424, IIcao, INamed
     /// </summary>
     /// <value>Nautical miles and tenths of mile.</value>
     /// <remarks>See section 5.64.</remarks>
-    [Field(45, 47), Decode<TenthsConverter>]
+    [Field(45, 47), Float(10)]
     public float LegLength { get; set; }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class HoldingPattern : Record424, IIcao, INamed
     /// </summary>
     /// <value>Minutes and tenths of minute.</value>
     /// <remarks>See section 5.65.</remarks>
-    [Field(48, 49), Decode<TenthsConverter>]
+    [Field(48, 49), Float(10)]
     public float LegTime { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
@@ -67,7 +67,7 @@ public class HoldingPattern : Record424, IIcao, INamed
     /// </summary>
     /// <value>Knots.</value>
     /// <remarks>See section 5.175.</remarks>
-    [Field(60, 62), Decode<IntConverter>]
+    [Field(60, 62), Integer]
     public int Speed { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
@@ -75,19 +75,19 @@ public class HoldingPattern : Record424, IIcao, INamed
     public float NavigationPerformance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
-    [Field(66, 71), Decode<ThousandsConverter>]
+    [Field(66, 71), Float(1000)]
     public float ArcRadius { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='VSF']/*"/>
-    [Field(72, 74), Decode<IntConverter>]
+    [Field(72, 74), Integer]
     public int ScaleFactor { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RvsmMinimum']/*"/>
-    [Field(75, 77), Decode<IntConverter>]
+    [Field(75, 77), Integer]
     public int MinLevel { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RvsmMaximum']/*"/>
-    [Field(78, 80), Decode<IntConverter>]
+    [Field(78, 80), Integer]
     public int MaxLevel { get; set; }
 
     /// <inheritdoc cref="LegDirection"/>

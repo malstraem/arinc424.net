@@ -11,14 +11,14 @@ public class GlobalLandingSystem : LandingSystem
     /// <c>GLS Channel</c> field.
     /// </summary>
     /// <remarks>See section 5.244.</remarks>
-    [Field(23, 27), Decode<IntConverter>]
+    [Field(23, 27), Integer]
     public int Channel { get; set; }
 
     /// <summary>
     /// <c>Service Volume Radius</c> field.
     /// </summary>
     /// <remarks>See section 5.245.</remarks>
-    [Field(84, 85), Decode<IntConverter>]
+    [Field(84, 85), Integer]
     public int Radius { get; set; }
 
     /// <summary>
@@ -33,7 +33,7 @@ public class GlobalLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees and hundredths of degree.</value>
     /// <remarks>See section 5.52.</remarks>
-    [Field(88, 90), Decode<HundredthsConverter>]
+    [Field(88, 90), Float(100)]
     public float SlopeAngle { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
@@ -55,6 +55,6 @@ public class GlobalLandingSystem : LandingSystem
     /// <summary>
     /// <c>Station Elevation WGS84</c> field.
     /// </summary>
-    [Field(111, 115), Decode<IntConverter>]
+    [Field(111, 115), Integer]
     public int ElevationWgs84 { get; set; }
 }

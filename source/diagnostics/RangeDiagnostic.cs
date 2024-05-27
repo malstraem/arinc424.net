@@ -1,6 +1,6 @@
 namespace Arinc424.Diagnostics;
 
-public class RangeDiagnostic(string problem, Range range) : Diagnostic(problem, DiagnosticType.InvalidValue)
+public abstract class RangeDiagnostic(Record424 record, string problem, Range range) : Diagnostic(record, problem)
 {
     public Range Range { get; } = range;
 }

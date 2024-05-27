@@ -60,11 +60,11 @@ public class AirwayPoint : Record424
     public float NavigationPerformance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Theta']/*"/>
-    [Field(63, 66), Decode<TenthsConverter>]
+    [Field(63, 66), Float(10)]
     public float Theta { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Rho']/*"/>
-    [Field(67, 70), Decode<TenthsConverter>]
+    [Field(67, 70), Float(10)]
     public float Rho { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='OutboundMagneticCourse']/*"/>
@@ -76,7 +76,7 @@ public class AirwayPoint : Record424
     /// </summary>
     /// <value>Nautical miles and tenths of mile.</value>
     /// <remarks>See section 5.27.</remarks>
-    [Field(75, 78), Decode<TenthsConverter>]
+    [Field(75, 78), Float(10)]
     public float DistanceFrom { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='InboundMagneticCourse']/*"/>
@@ -100,18 +100,18 @@ public class AirwayPoint : Record424
     /// </summary>
     /// <value>Nautical miles and tenths of mile.</value>
     /// <remarks>See section 5.254</remarks>
-    [Field(99, 101), Decode<TenthsConverter>]
+    [Field(99, 101), Float(10)]
     public float FixRadius { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='VSF']/*"/>
-    [Field(102, 104), Decode<IntConverter>]
+    [Field(102, 104), Integer]
     public int ScaleFactor { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RvsmMinimum']/*"/>
-    [Field(105, 107), Decode<IntConverter>]
+    [Field(105, 107), Integer]
     public int MinLevel { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RvsmMaximum']/*"/>
-    [Field(108, 110), Decode<IntConverter>]
+    [Field(108, 110), Integer]
     public int MaxLevel { get; set; }
 }

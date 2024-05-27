@@ -39,7 +39,7 @@ public class AirwayMarker : Geo, IIdentity, IIcao, INamed
     /// <summary>
     /// <c>Minor Axis Bearing (MINOR AXIS TRUE BRG)</c> field.
     /// </summary>
-    [Field(52, 55), Decode<TenthsConverter>]
+    [Field(52, 55), Float(10)]
     public float Bearing { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
@@ -51,7 +51,7 @@ public class AirwayMarker : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.92.</remarks>
-    [Field(88, 93), Decode<IntConverter>]
+    [Field(88, 93), Integer]
     public int Elevation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

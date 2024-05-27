@@ -45,11 +45,11 @@ public abstract class Transmitter : Geo
     /// </summary>
     /// <value>Hundredth of feet.</value>
     /// <remarks>See section 5.184.</remarks>
-    [Field(84, 86), Field<AirwayTransmitter>(118, 120), Decode<IntConverter>]
+    [Field(84, 86), Field<AirwayTransmitter>(118, 120), Integer]
     public int Altitude { get; set; }
 
     /// <inheritdoc cref="Altitude"/>
-    [Field(87, 89), Field<AirwayTransmitter>(121, 123), Decode<IntConverter>]
+    [Field(87, 89), Field<AirwayTransmitter>(121, 123), Integer]
     public int Altitude2 { get; set; }
 
     /// <inheritdoc cref="Terms.Modulation"/>

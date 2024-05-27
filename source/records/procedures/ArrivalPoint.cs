@@ -8,7 +8,7 @@ public class ArrivalPoint : ProcedurePoint
     /// <c>Vertical Angle (VERT ANGLE)</c> field.
     /// </summary>
     /// <remarks>See section 5.70.</remarks>
-    [Field(103, 106), Decode<HundredthsConverter>]
+    [Field(103, 106), Float(100)]
     public float VerticalAngel { get; set; }
 
     /// <inheritdoc cref="ArrivalQualifiers"/>

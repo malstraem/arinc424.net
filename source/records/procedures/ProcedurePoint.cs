@@ -45,15 +45,15 @@ public abstract class ProcedurePoint : Record424
     public Geo? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
-    [Field(57, 62), Decode<ThousandsConverter>]
+    [Field(57, 62), Float(1000)]
     public float ArcRadius { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Theta']/*"/>
-    [Field(63, 66), Decode<TenthsConverter>]
+    [Field(63, 66), Float(10)]
     public float Theta { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Rho']/*"/>
-    [Field(67, 70), Decode<TenthsConverter>]
+    [Field(67, 70), Float(10)]
     public float Rho { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='OutboundMagneticCourse']/*"/>
@@ -91,11 +91,11 @@ public abstract class ProcedurePoint : Record424
     public Altitude Altitude2 { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>
-    [Field(95, 99), Decode<IntConverter>]
+    [Field(95, 99), Integer]
     public int TransitionAltitude { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='SpeedLimit']/*"/>
-    [Field(100, 102), Decode<IntConverter>]
+    [Field(100, 102), Integer]
     public int SpeedLimit { get; set; }
 
     /// <summary>

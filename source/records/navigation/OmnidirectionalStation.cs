@@ -33,7 +33,7 @@ public class OmnidirectionalStation : Navaid
     /// <c>DME Elevation (DME ELEV)</c> field.
     /// </summary>
     /// <remarks>See section 5.40.</remarks>
-    [Field(80, 84), Decode<IntConverter>]
+    [Field(80, 84), Integer]
     public int EquipmentElevation { get; set; }
 
     /// <inheritdoc cref="Terms.MeritFigure"/>
@@ -45,7 +45,7 @@ public class OmnidirectionalStation : Navaid
     /// </summary>
     /// <value>Nautical miles and tenths of mile.</value>
     /// <remarks>See section 5.90.</remarks>
-    [Field(86, 87), Decode<TenthsConverter>]
+    [Field(86, 87), Float(10)]
     public float EquipmentOffset { get; set; }
 
     /// <summary>
@@ -53,7 +53,7 @@ public class OmnidirectionalStation : Navaid
     /// </summary>
     /// <value>Nautical miles.</value>
     /// <remarks>See section 5.150.</remarks>
-    [Field(88, 90), Decode<IntConverter>]
+    [Field(88, 90), Integer]
     public int ProtectionDistance { get; set; }
 
     /// <summary>

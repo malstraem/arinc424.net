@@ -45,7 +45,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <value>Hundreds of feet.</value>
     /// <remarks>See section 5.54.</remarks>
-    [Field(28, 30), Decode<IntConverter>]
+    [Field(28, 30), Integer]
     public int LongestRunwayLength { get; set; }
 
     /// <summary>
@@ -68,11 +68,11 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.55.</remarks>
-    [Field(57, 61), Decode<IntConverter>]
+    [Field(57, 61), Integer]
     public int Elevation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='SpeedLimit']/*"/>
-    [Field(62, 64), Decode<IntConverter>]
+    [Field(62, 64), Integer]
     public int SpeedLimit { get; set; }
 
     /// <summary>
@@ -83,11 +83,11 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     public OmnidirectionalStation? RecommendedStation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>
-    [Field(71, 75), Decode<IntConverter>]
+    [Field(71, 75), Integer]
     public int TransitionAltitude { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionLevel']/*"/>
-    [Field(76, 80), Decode<IntConverter>]
+    [Field(76, 80), Integer]
     public int TransitionLevel { get; set; }
 
     /// <inheritdoc cref="Arinc424.Privacy"/>

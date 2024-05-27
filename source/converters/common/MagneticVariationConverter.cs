@@ -9,15 +9,15 @@ internal abstract class MagneticVariationConverter : IStringConverter<MagneticVa
         if (sign is 'T')
             return 0;
 
-        var degrees = TenthsConverter.Convert(@string[1..]);
+        var value = @string[1..];
 
-        if (degrees.IsError)
-            return degrees;
+        if (!float.TryParse(value, out float degrees))
+            return new($"'{value}' can't be parsed as a float.");
 
         if (sign is 'W')
-            return -degrees.Value;
+            return -degrees;
         else if (sign is not 'E')
-            return new Result<float>($"Magnetic variation sign '{sign}' is not valid.");
+            return new($"Magnetic variation sign '{sign}' is not valid.");
 
         return degrees;
     }
