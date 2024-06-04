@@ -14,7 +14,7 @@ public class InstrumentLandingSystem : LandingSystem
     /// </summary>
     /// <value>Kilohertz.</value>
     /// <remarks>See section 5.45.</remarks>
-    [Field(23, 27), Decode<LocalizerFrequencyConverter>]
+    [Field(23, 27), Decode<LocalizerFrequencyConverter, int>]
     public int Frequency { get; set; }
 
     [Field(56, 74)]

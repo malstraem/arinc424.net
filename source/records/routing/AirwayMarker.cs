@@ -43,7 +43,7 @@ public class AirwayMarker : Geo, IIdentity, IIcao, INamed
     public float Bearing { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(75, 79), Decode<MagneticVariationConverter>]
+    [Field(75, 79), MagneticVariation]
     public float Variation { get; set; }
 
     /// <summary>

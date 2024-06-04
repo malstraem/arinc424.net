@@ -4,7 +4,7 @@ namespace Arinc424.Procedures.Terms;
 /// <c>Route Type (RT TYPE)</c> -> <c>SID Qualifier Description</c> field.
 /// </summary>
 /// <remarks>See section 5.7, Table 5-5.</remarks>
-[String, Flags, Decode<DepartureQualifiersConverter>]
+[String, Flags, Decode<DepartureQualifiersConverter, DepartureQualifiers>]
 public enum DepartureQualifiers : ushort
 {
     Unknown = 0,

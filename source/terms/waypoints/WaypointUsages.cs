@@ -4,7 +4,7 @@ namespace Arinc424.Waypoints.Terms;
 /// <c>Waypoint Usage</c> field.
 /// </summary>
 /// <remarks>See section 5.82.</remarks>
-[String, Flags, Decode<WaypointUsagesConverter>]
+[String, Flags, Decode<WaypointUsagesConverter, WaypointUsages>]
 public enum WaypointUsages : byte
 {
     Unknown = 0,

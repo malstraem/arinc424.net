@@ -25,7 +25,7 @@ public class GlobalLandingSystem : LandingSystem
     /// <c>TDMA Slots </c> field.
     /// </summary>
     /// <remarks>See section 5.246.</remarks>
-    [Field(86, 87), Decode<Converters.ByteConverter>]
+    [Field(86, 87), Decode<Converters.ByteConverter, byte>]
     public byte Slots { get; set; }
 
     /// <summary>
@@ -37,7 +37,7 @@ public class GlobalLandingSystem : LandingSystem
     public float SlopeAngle { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(91, 95), Decode<MagneticVariationConverter>]
+    [Field(91, 95), MagneticVariation]
     public float Variation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

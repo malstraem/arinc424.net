@@ -51,7 +51,7 @@ public class ControlledAirspace : Volume, IIcao, INamed
     public char Notam { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(79, 81), Decode<NavigationPerformanceConverter>]
+    [Field(79, 81), NavigationPerformance]
     public float NavigationPerformance { get; set; }
 
     /// <summary>

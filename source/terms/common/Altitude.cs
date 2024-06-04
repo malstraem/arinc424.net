@@ -1,6 +1,6 @@
 namespace Arinc424;
 
-[Decode<AltitudeConverter>]
+[Decode<AltitudeConverter, Altitude>]
 [DebuggerDisplay($"{{{nameof(Value)}}}, {{{nameof(Unit)}}}")]
 public readonly struct Altitude(int value, AltitudeUnit unit)
 {

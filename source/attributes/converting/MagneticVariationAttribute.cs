@@ -1,8 +1,8 @@
-namespace Arinc424.Converters;
+namespace Arinc424.Attributes;
 
-internal abstract class MagneticVariationConverter : IStringConverter<MagneticVariationConverter, float>
+internal sealed class MagneticVariationAttribute : DecodeAttribute<float>
 {
-    public static Result<float> Convert(ReadOnlySpan<char> @string)
+    internal override Result<float> Convert(ReadOnlySpan<char> @string)
     {
         char sign = @string[0];
 

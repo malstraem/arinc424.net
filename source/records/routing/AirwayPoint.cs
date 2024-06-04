@@ -56,7 +56,7 @@ public class AirwayPoint : Record424
     public OmnidirectionalStation? RecommendedNavaid { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(57, 59), Decode<NavigationPerformanceConverter>]
+    [Field(57, 59), NavigationPerformance]
     public float NavigationPerformance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Theta']/*"/>

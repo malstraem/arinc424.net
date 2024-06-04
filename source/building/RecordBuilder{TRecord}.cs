@@ -5,7 +5,7 @@ namespace Arinc424.Building;
 internal static class RecordBuilder<TRecord> where TRecord : Record424, new()
 {
     [Obsolete("todo")]
-    internal static TRecord Build(string @string, BuildAttribute info, Queue<Diagnostic> diagnostics)
+    internal static TRecord Build(string @string, BuildInfo<TRecord> info, Queue<Diagnostic> diagnostics)
     {
         TRecord record = new() { Source = @string };
 

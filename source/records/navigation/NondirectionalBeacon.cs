@@ -8,6 +8,6 @@ namespace Arinc424.Navigation;
 public class NondirectionalBeacon : Navaid
 {
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(75, 79), Decode<MagneticVariationConverter>]
+    [Field(75, 79), MagneticVariation]
     public float Variation { get; set; }
 }

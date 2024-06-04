@@ -4,7 +4,7 @@ namespace Arinc424;
 /// <c>Communications Type (COMM TYPE)</c> field.
 /// </summary>
 /// <remarks>See section 5.101.</remarks>
-[String, Decode<CommTypeConverter>]
+[String, Decode<CommTypeConverter, CommType>]
 public enum CommType : byte
 {
     Unknown,

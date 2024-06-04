@@ -4,18 +4,27 @@ using System.Text.RegularExpressions;
 namespace Arinc424.Building;
 
 [DebuggerDisplay($"{{{nameof(Property)}}} - {{{nameof(index)}}}")]
-internal class IndexAssignmentInfo(PropertyInfo property, Regex? regex, int index, TransformAttribute? transform) : AssignmentInfo(property, regex)
+internal abstract class IndexAssignmentInfo<TRecord>(PropertyInfo property, Regex? regex, int index, TransformAttribute? transform)
+    : AssignmentInfo(property, regex) where TRecord : Record424
 {
-    private readonly int index = index;
+    protected readonly int index = index;
 
-    private readonly TransformAttribute? transform = transform;
+    protected readonly TransformAttribute? transform = transform;
 
-    internal void Process(Record424 record, ReadOnlySpan<char> @string)
+    internal abstract void Process(TRecord record, ReadOnlySpan<char> @string);
+}
+
+internal class IndexAssignmentInfo<TRecord, TValue>(PropertyInfo property, Regex? regex, int index, TransformAttribute? transform)
+    : IndexAssignmentInfo<TRecord>(property, regex, index, transform) where TRecord : Record424
+{
+    private readonly Action<TRecord, TValue> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TValue>>();
+
+    internal override void Process(TRecord record, ReadOnlySpan<char> @string)
     {
         char @char = @string[index];
 
         object value = transform is not null ? transform.Convert(@char) : @char;
 
-        Property.SetValue(record, value);
+        set(record, (TValue)value);
     }
 }

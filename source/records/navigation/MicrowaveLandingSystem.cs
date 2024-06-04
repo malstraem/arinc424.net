@@ -80,7 +80,7 @@ public class MicrowaveLandingSystem : LandingSystem
     public float AngleSpan { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(99, 103), Decode<MagneticVariationConverter>]
+    [Field(99, 103), MagneticVariation]
     public float Variation { get; set; }
 
     /// <summary>

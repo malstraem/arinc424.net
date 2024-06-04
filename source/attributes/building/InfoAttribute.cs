@@ -4,7 +4,7 @@ using Arinc424.Linking;
 
 namespace Arinc424.Attributes;
 
-internal abstract class InfoAttribute(Type type, PropertyInfo[] properties) : BuildAttribute(type, properties)
+internal abstract class InfoAttribute(Type type, PropertyInfo[] properties) : LinksAttribute(type, properties)
 {
     private readonly int? continuationIndex = type.GetCustomAttribute<ContinuousAttribute>()?.Index;
 

@@ -11,5 +11,7 @@ internal abstract class RecordAttribute(Type type) : InfoAttribute(type, type.Ge
 
 internal sealed class RecordAttribute<TRecord>() : RecordAttribute(typeof(TRecord)) where TRecord : Record424, new()
 {
-    internal override Record424 Build(string @string, Queue<Diagnostic> diagnostics) => RecordBuilder<TRecord>.Build(@string, this, diagnostics);
+    private readonly BuildInfo<TRecord> info = new(typeof(TRecord), typeof(TRecord).GetProperties());
+
+    internal override Record424 Build(string @string, Queue<Diagnostic> diagnostics) => RecordBuilder<TRecord>.Build(@string, info, diagnostics);
 }

@@ -4,7 +4,7 @@ namespace Arinc424.Navigation.Terms;
 /// <c>Marker Type (MKR TYPE)</c> field.
 /// </summary>
 /// <remarks>See section 5.99.</remarks>
-[String, Flags, Decode<MarkerTypeConverter>]
+[String, Flags, Decode<MarkerTypeConverter, MarkerType>]
 public enum MarkerType : byte
 {
     Unknown = 0,

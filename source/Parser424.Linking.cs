@@ -24,7 +24,7 @@ internal partial class Parser424
     }
 
     [Obsolete("todo: diagnostic log")]
-    private void ProcessForeignKeys(Record424 record, BuildAttribute info)
+    private void ProcessForeignKeys(Record424 record, LinksAttribute info)
     {
         foreach (var link in info.Links!)
         {
@@ -93,12 +93,12 @@ internal partial class Parser424
         });
 
         // todo
-        _ = Parallel.ForEach(meta.Sequences.Where(x => x.SubInfo.Links is not null), x =>
+        _ = Parallel.ForEach(meta.Sequences.Where(x => x.SubLinks.Links is not null), x =>
         {
             foreach (var record in builds[x.Type])
             {
                 foreach (var sub in x.GetSequence(record.Record))
-                    ProcessForeignKeys(sub, x.SubInfo);
+                    ProcessForeignKeys(sub, x.SubLinks);
             }
         });
     }

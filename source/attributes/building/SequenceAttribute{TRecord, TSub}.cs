@@ -8,15 +8,15 @@ namespace Arinc424.Attributes;
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 internal abstract class SequenceAttribute : InfoAttribute
 {
-    internal readonly Range Range;
+    internal Range Range { get; }
 
-    internal readonly BuildAttribute SubInfo;
+    internal LinksAttribute SubLinks { get; }
 
     internal SequenceAttribute(Type type, Type subType) : base(type, type.GetProperties())
     {
         Range = type.GetCustomAttribute<SequencedAttribute>()!.Range;
 
-        SubInfo = new BuildAttribute(subType, subType.GetProperties());
+        SubLinks = new LinksAttribute(subType, subType.GetProperties());
     }
 
     internal abstract Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics);
@@ -28,7 +28,12 @@ internal sealed class SequenceAttribute<TRecord, TSub>() : SequenceAttribute(typ
     where TRecord : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    internal override Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics) => RecordBuilder<TRecord, TSub>.Build(strings, this, diagnostics);
+    private readonly BuildInfo<TRecord> info = new(typeof(TRecord), typeof(TRecord).GetProperties());
+
+    private readonly BuildInfo<TSub> subInfo = new(typeof(TSub), typeof(TSub).GetProperties());
+
+    internal override Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics)
+        => RecordBuilder<TRecord, TSub>.Build(strings, info, subInfo, diagnostics);
 
     internal override IEnumerable<Record424> GetSequence(Record424 record) => ((TRecord)record).Sequence;
 }

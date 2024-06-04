@@ -20,7 +20,7 @@ public abstract class Navaid : Geo, IIdentity, IIcao, INamed
 
     /// <inheritdoc cref="NavaidType"/>
     [Obsolete("todo type target converter")]
-    [Field(28, 29), Decode<NondirectionalTypeConverter>]
+    [Field(28, 29), Decode<NondirectionalTypeConverter, NavaidType>]
     public NavaidType Type { get; set; }
 
     /// <inheritdoc cref="NavaidCoverage"/>

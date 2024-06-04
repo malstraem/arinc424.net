@@ -3,7 +3,7 @@ namespace Arinc424.Airspace.Terms;
 /// <summary>
 /// Circular arc that may be used by <see cref="BoundaryPoint"/>.
 /// </summary>
-[Decode<ArcConverter>]
+[Decode<ArcConverter, Arc>]
 [DebuggerDisplay($"{{{nameof(Coordinates)}}}")]
 public class Arc(Coordinates coordinates, float? distance, float? bearing)
 {

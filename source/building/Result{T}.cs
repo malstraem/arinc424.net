@@ -5,7 +5,7 @@ namespace Arinc424;
 /// </summary>
 internal readonly ref struct Result<T> where T : notnull
 {
-    internal readonly T? Value;
+    internal readonly T Value;
 
     internal readonly string? Problem;
 

@@ -45,7 +45,7 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     public Coordinates LocatorCoordinates { get; set; }
 
     /// <inheritdoc cref="Terms.NavaidType"/>
-    [Field(75, 76), Decode<NondirectionalTypeConverter>]
+    [Field(75, 76), Decode<NondirectionalTypeConverter, NavaidType>]
     public NavaidType NavaidType { get; set; }
 
     /// <inheritdoc cref="NavaidCoverage"/>
@@ -67,7 +67,7 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     public string? LocatorIdentifier { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(91, 95), Decode<MagneticVariationConverter>]
+    [Field(91, 95), MagneticVariation]
     public float Variation { get; set; }
 
     /// <summary>

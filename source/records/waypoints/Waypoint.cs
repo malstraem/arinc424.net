@@ -28,7 +28,7 @@ public abstract class Waypoint : Geo, IIdentity, IIcao, INamed
     public WaypointUsages Usages { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(75, 79), Decode<MagneticVariationConverter>]
+    [Field(75, 79), MagneticVariation]
     public float Variation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

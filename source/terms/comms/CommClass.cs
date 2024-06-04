@@ -4,7 +4,7 @@ namespace Arinc424.Comms.Terms;
 /// <c>Communications Class (Comm Class)</c> field.
 /// </summary>
 /// <remarks>See section 5.283.</remarks>
-[String, Decode<CommClassConverter>]
+[String, Decode<CommClassConverter, CommClass>]
 public enum CommClass : byte
 {
     Unknown,

@@ -60,7 +60,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     public RunwaySurfaceType LongestRunwayType { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(52, 56), Decode<MagneticVariationConverter>]
+    [Field(52, 56), MagneticVariation]
     public float Variation { get; set; }
 
     /// <summary>
