@@ -2,7 +2,7 @@ namespace Arinc424.Diagnostics;
 
 public enum DiagnosticType
 {
-    PrimaryKey,
+    Duplicate,
     Nullability,
     InvalidType,
     InvalidValue,

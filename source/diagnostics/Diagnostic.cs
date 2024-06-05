@@ -1,12 +1,11 @@
 namespace Arinc424.Diagnostics;
 
-public abstract class Diagnostic(Record424 record, string message)
+public abstract class Diagnostic(Record424 record, string problem, DiagnosticType diagnosticType)
 {
-    protected DiagnosticType diagnosticType;
+    public string Problem { get; } = problem;
 
-    public string Problem { get; } = message;
-
+    [Obsolete("the need is in question")]
     public Record424 Record { get; } = record;
 
-    public DiagnosticType DiagnosticType => diagnosticType;
+    public DiagnosticType DiagnosticType { get; } = diagnosticType;
 }

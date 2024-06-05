@@ -1,6 +1,7 @@
 using System.Collections;
 
 using Arinc424.Building;
+using Arinc424.Diagnostics;
 using Arinc424.Linking;
 
 namespace Arinc424;
@@ -9,7 +10,6 @@ internal partial class Parser424
 {
     private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
-    [Obsolete("todo: diagnostic log")]
     private void ProcessPrimaryKey(Build build, Type type, PrimaryKey primaryKey)
     {
         var record = build.Record;
@@ -18,8 +18,8 @@ internal partial class Parser424
 
         if (!unique[type].TryAdd(key, record))
         {
-            // todo: diagnostic log
-            Debug.WriteLine($"{type} entity with key '{key}' already exist"); // TODO: logging path
+            build.Diagnostics ??= [];
+            build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, type, key));
         }
     }
 

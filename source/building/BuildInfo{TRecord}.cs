@@ -27,8 +27,6 @@ internal class BuildInfo<TRecord> where TRecord : Record424
         // prefer decode attached to the property
         var decode = property.GetCustomAttribute<DecodeAttribute>() ?? type.GetCustomAttribute<DecodeAttribute>();
 
-        //var count = property.GetCustomAttribute<CountAttribute>();
-
         return decode is not null
             ? type.IsArray
                 ? (RangeAssignment<TRecord>)
