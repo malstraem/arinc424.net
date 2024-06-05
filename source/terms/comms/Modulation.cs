@@ -4,7 +4,7 @@ namespace Arinc424.Comms.Terms;
 /// <c>Modulation (MODULN)</c> character.
 /// </summary>
 /// <remarks>See section 5.198.</remarks>
-[Char, Transform<ModulationConverter>]
+[Char, Transform<ModulationConverter, Modulation>]
 [Description("Modulation (MODULN)")]
 public enum Modulation : byte
 {

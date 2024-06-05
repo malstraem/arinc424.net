@@ -4,7 +4,7 @@ namespace Arinc424.Comms.Terms;
 /// <c>Signal Emission (SIG EM)</c> character.
 /// </summary>
 /// <remarks>See section 5.199.</remarks>
-[Char, Transform<EmissionConverter>]
+[Char, Transform<EmissionConverter, Emission>]
 [Description("Signal Emission (SIG EM)")]
 public enum Emission : byte
 {

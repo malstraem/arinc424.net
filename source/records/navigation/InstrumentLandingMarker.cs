@@ -49,7 +49,7 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     public NavaidType NavaidType { get; set; }
 
     /// <inheritdoc cref="NavaidCoverage"/>
-    [Character(77), Transform<NondirectionalCoverageConverter>]
+    [Character(77), Transform<NondirectionalCoverageConverter, NavaidCoverage>]
     public NavaidCoverage Coverage { get; set; }
 
     /// <inheritdoc cref="NavaidInfo"/>

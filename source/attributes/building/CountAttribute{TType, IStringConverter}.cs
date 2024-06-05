@@ -5,21 +5,23 @@ namespace Arinc424.Attributes;
 /// <summary>
 /// Specifies that property value is an array and will be found within an ARINC-424 string using <see cref="FieldAttribute"/> range.
 /// </summary>
-[AttributeUsage(AttributeTargets.Property)]
-internal abstract class CountAttribute(uint count) : Attribute
+internal abstract class CountAttribute<TType>(uint count) : DecodeAttribute<TType> where TType : notnull
 {
-    protected uint count = count;
+    protected readonly uint count = count;
 
-    internal abstract object GetArray(Range range, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
+    internal abstract TType[] GetArray(Range range, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
 }
 
 /// <inheritdoc />
-internal sealed class CountAttribute<TType, TConverter>(uint count) : CountAttribute(count)
-    where TType : notnull
+[AttributeUsage(AttributeTargets.Property)]
+internal sealed class CountAttribute<TConverter, TType>(uint count) : CountAttribute<TType>(count)
     where TConverter : IStringConverter<TConverter, TType>
+    where TType : notnull
 {
+    internal override Result<TType> Convert(ReadOnlySpan<char> @string) => TConverter.Convert(@string);
+
     [Obsolete("todo")]
-    internal override object GetArray(Range range, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
+    internal override TType[] GetArray(Range range, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
         List<TType> list = [];
 
@@ -33,10 +35,10 @@ internal sealed class CountAttribute<TType, TConverter>(uint count) : CountAttri
                 break;
 
             // todo: process error
-            list.Add(TConverter.Convert(@field).Value);
+            list.Add(Convert(@field).Value);
 
             range = new(range.Start.Value + length, range.End.Value + length);
         }
-        return list.ToArray();
+        return [.. list];
     }
 }

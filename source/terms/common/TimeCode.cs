@@ -4,7 +4,7 @@ namespace Arinc424;
 /// <c>Time Code (TIME CD)</c> character.
 /// </summary>
 /// <remarks>See section 5.131.</remarks>
-[Char, Transform<TimeCodeConverter>]
+[Char, Transform<TimeCodeConverter, TimeCode>]
 [Description("Time Code (TIME CD)")]
 public enum TimeCode : byte
 {

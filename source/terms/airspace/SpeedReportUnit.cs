@@ -4,7 +4,7 @@ namespace Arinc424.Airspace.Terms;
 /// <c>FIR/UIR ATC Reporting Units Speed (RUS)</c> character.
 /// </summary>
 /// <remarks>See section 5.122.</remarks>
-[Char, Transform<SpeedReportUnitConverter>]
+[Char, Transform<SpeedReportUnitConverter, SpeedReportUnit>]
 [Description("FIR/UIR ATC Reporting Units Speed (RUS)")]
 public enum SpeedReportUnit : byte
 {

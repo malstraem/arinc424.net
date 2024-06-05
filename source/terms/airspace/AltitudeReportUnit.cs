@@ -4,7 +4,7 @@ namespace Arinc424.Airspace.Terms;
 /// <c>FIR/UIR ATC Reporting Units Altitude (RUA)</c> character.
 /// </summary>
 /// <remarks>See section 5.123.</remarks>
-[Char, Transform<AltitudeReportUnitConverter>]
+[Char, Transform<AltitudeReportUnitConverter, AltitudeReportUnit>]
 [Description("FIR/UIR ATC Reporting Units Altitude (RUA)")]
 public enum AltitudeReportUnit : byte
 {

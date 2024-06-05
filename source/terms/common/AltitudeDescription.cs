@@ -4,7 +4,7 @@ namespace Arinc424;
 /// <c>Altitude Description (ALT DESC)</c> character.
 /// </summary>
 /// <remarks>See section 5.29.</remarks>
-[Char, Transform<AltitudeDescriptionConverter>]
+[Char, Transform<AltitudeDescriptionConverter, AltitudeDescription>]
 public enum AltitudeDescription : byte
 {
     Unknown,

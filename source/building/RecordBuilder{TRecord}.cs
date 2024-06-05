@@ -9,13 +9,8 @@ internal static class RecordBuilder<TRecord> where TRecord : Record424, new()
     {
         TRecord record = new() { Source = @string };
 
-        ReadOnlySpan<char> chars = @string;
-
-        foreach (var indexInfo in info.IndexInfo)
-            indexInfo.Process(record, chars);
-
-        foreach (var rangeInfo in info.RangeInfo)
-            rangeInfo.Process(record, chars, diagnostics);
+        foreach (var assignment in info.Assignments)
+            assignment.Assign(record, @string, diagnostics);
 
         return record;
     }

@@ -7,45 +7,39 @@ using Arinc424.Diagnostics;
 namespace Arinc424.Building;
 
 [DebuggerDisplay($"{{{nameof(Property)}}} - {{{nameof(range)}}}")]
-internal abstract class RangeAssignmentInfo<TRecord>(PropertyInfo property, Regex? regex, Range range)
-    : AssignmentInfo(property, regex) where TRecord : Record424
+internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Regex? regex, Range range)
+    : Assignment<TRecord>(property, regex) where TRecord : Record424
 {
     protected readonly Range range = range;
 
-    [Obsolete("todo")]
-    protected static Action<TRecord, TValue> CompileSetter<TValue>(PropertyInfo property)
+    [Obsolete("todo: maybe replace with emit op codes")]
+    protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property, bool isValueNullable)
     {
         var record = Expression.Parameter(typeof(TRecord));
 
-        var value = Expression.Parameter(typeof(TValue), property.Name);
+        var value = Expression.Parameter(typeof(TType), property.Name);
 
         var setter = Expression.Property(record, property.Name);
 
         Expression rightExpression = value;
 
-        // todo: reduce check
-        if (property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-            rightExpression = Expression.New(property.PropertyType.GetConstructor([typeof(TValue)])!, value);
+        if (isValueNullable)
+            rightExpression = Expression.New(property.PropertyType.GetConstructor([typeof(TType)])!, value);
 
-        return Expression.Lambda<Action<TRecord, TValue?>>
-        (
-            Expression.Assign(setter, rightExpression), record, value
-        ).Compile();
+        return Expression.Lambda<Action<TRecord, TType>>(Expression.Assign(setter, rightExpression), record, value).Compile();
     }
-
-    internal abstract void Process(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
 }
 
-internal sealed class DecodeAssignmentInfo<TRecord, TValue>(PropertyInfo property, Regex? regex, Range range, DecodeAttribute<TValue> decode)
-    : RangeAssignmentInfo<TRecord>(property, regex, range)
+internal sealed class DecodeAssignment<TRecord, TValue>(PropertyInfo property, Regex? regex, Range range, DecodeAttribute<TValue> decode, bool isValueNullable)
+    : RangeAssignment<TRecord>(property, regex, range)
         where TValue : notnull
         where TRecord : Record424
 {
-    private readonly Action<TRecord, TValue> set = CompileSetter<TValue>(property);
+    private readonly Action<TRecord, TValue> set = GetCompiledSetter<TValue>(property, isValueNullable);
 
     private readonly DecodeAttribute<TValue> decode = decode;
 
-    internal override void Process(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
+    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
         var @field = @string[range];
 
@@ -60,7 +54,6 @@ internal sealed class DecodeAssignmentInfo<TRecord, TValue>(PropertyInfo propert
             }*/
             return;
         }
-
         var result = decode.Convert(@field);
 
         if (result.IsError)
@@ -72,12 +65,12 @@ internal sealed class DecodeAssignmentInfo<TRecord, TValue>(PropertyInfo propert
     }
 }
 
-internal class StringAssignmentInfo<TRecord>(PropertyInfo property, Regex? regex, Range range)
-    : RangeAssignmentInfo<TRecord>(property, regex, range) where TRecord : Record424
+internal sealed class StringAssignment<TRecord>(PropertyInfo property, Regex? regex, Range range)
+    : RangeAssignment<TRecord>(property, regex, range) where TRecord : Record424
 {
-    private readonly Action<TRecord, string> set = CompileSetter<string>(property);
+    private readonly Action<TRecord, string> set = GetCompiledSetter<string>(property, false);
 
-    internal override void Process(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
+    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
         var @field = @string[range];
 

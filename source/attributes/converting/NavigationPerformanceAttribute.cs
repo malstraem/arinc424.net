@@ -2,6 +2,7 @@ namespace Arinc424.Attributes;
 
 internal sealed class NavigationPerformanceAttribute : DecodeAttribute<float>
 {
+    [Obsolete("todo: try parse")]
     internal override Result<float> Convert(ReadOnlySpan<char> @string)
     {
         float value = float.Parse(@string[..2]);

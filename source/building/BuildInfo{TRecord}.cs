@@ -1,14 +1,50 @@
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Arinc424.Building;
 
 internal class BuildInfo<TRecord> where TRecord : Record424
 {
+    private static IndexAssignment<TRecord> GetIndexAssignment(PropertyInfo property, Regex? regex, int index)
+    {
+        // prefer transform attached to the property
+        var transform = property.GetCustomAttribute<TransformAttribute>() ?? property.PropertyType.GetCustomAttribute<TransformAttribute>();
+
+        return transform is not null
+            ? (IndexAssignment<TRecord>)
+                Activator.CreateInstance(typeof(TransformAssignment<,>)
+                    .MakeGenericType(typeof(TRecord), property.PropertyType), property, regex, index, transform)!
+
+            : new CharAssignment<TRecord>(property, regex, index)!;
+    }
+
+    private static RangeAssignment<TRecord> GetRangeAssignment(PropertyInfo property, Regex? regex, Range range)
+    {
+        var (type, isValueNullable) = property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            ? (property.PropertyType.GetGenericArguments().First(), true) // look inside Nullable<T> if that's the case
+            : (property.PropertyType, false);
+
+        // prefer decode attached to the property
+        var decode = property.GetCustomAttribute<DecodeAttribute>() ?? type.GetCustomAttribute<DecodeAttribute>();
+
+        //var count = property.GetCustomAttribute<CountAttribute>();
+
+        return decode is not null
+            ? type.IsArray
+                ? (RangeAssignment<TRecord>)
+                    Activator.CreateInstance(typeof(ArrayAssignment<,>)
+                        .MakeGenericType(typeof(TRecord), type.GetElementType()!), property, regex, range, decode)!
+
+                : (RangeAssignment<TRecord>)
+                    Activator.CreateInstance(typeof(DecodeAssignment<,>)
+                        .MakeGenericType(typeof(TRecord), type), property, regex, range, decode, isValueNullable)!
+
+            : new StringAssignment<TRecord>(property, regex, range);
+    }
+
     internal BuildInfo(Type type, PropertyInfo[] properties)
     {
-        List<IndexAssignmentInfo<TRecord>> indexInfo = [];
-        List<RangeAssignmentInfo<TRecord>> rangeInfo = [];
-        //List<ArrayAssignmentInfo> arrayInfo = [];
+        List<Assignment<TRecord>> assignments = [];
 
         foreach (var property in properties)
         {
@@ -16,68 +52,15 @@ internal class BuildInfo<TRecord> where TRecord : Record424
 
             if (property.TryCharacterAttribute(type, out var characterAttribute))
             {
-                // prefer transform attached to the property
-                var transform = property.GetCustomAttribute<TransformAttribute>() ?? property.PropertyType.GetCustomAttribute<TransformAttribute>();
-
-                var assignmentType = typeof(IndexAssignmentInfo<,>).MakeGenericType(type, property.PropertyType);
-
-                object info = Activator.CreateInstance(assignmentType, property, regex, characterAttribute.Index, transform)!;
-
-                indexInfo.Add((IndexAssignmentInfo<TRecord>)info);
-                continue;
+                assignments.Add(GetIndexAssignment(property, regex, characterAttribute.Index));
             }
             else if (property.TryFieldAttribute(type, out var fieldAttribute))
             {
-                // prefer decode attached to the property
-                var decode = property.GetCustomAttribute<DecodeAttribute>();
-
-                // look inside Nullable <T> if that's the case
-                decode ??= property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
-                        ? property.PropertyType.GetGenericArguments().First().GetCustomAttribute<DecodeAttribute>()
-                        : property.PropertyType.GetCustomAttribute<DecodeAttribute>();
-
-                var count = property.GetCustomAttribute<CountAttribute>();
-
-                RangeAssignmentInfo<TRecord> assignment;
-
-                if (count is not null)
-                {
-                    assignment = new ArrayAssignmentInfo<TRecord>(property, regex, fieldAttribute.Range, count);
-                }
-                else
-                {
-                    if (decode is not null)
-                    {
-                        // look inside Nullable <T> if that's the case
-                        var propType = property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
-                                ? property.PropertyType.GetGenericArguments().First()
-                                : property.PropertyType;
-
-                        var actionType = typeof(Action<,>).MakeGenericType(type, property.PropertyType);
-
-                        //var action = property.GetSetMethod()!.CreateDelegate(actionType);
-
-                        var assType = typeof(DecodeAssignmentInfo<,>).MakeGenericType(type, propType);
-
-                        assignment = (RangeAssignmentInfo<TRecord>)
-                            Activator.CreateInstance(assType, property, regex, fieldAttribute.Range, decode)!;
-                    }
-                    else
-                    {
-                        assignment = (RangeAssignmentInfo<TRecord>)
-                            Activator.CreateInstance(typeof(StringAssignmentInfo<>)
-                                .MakeGenericType(type), property, regex, fieldAttribute.Range)!;
-                    }
-                }
-                rangeInfo.Add(assignment);
-                continue;
+                assignments.Add(GetRangeAssignment(property, regex, fieldAttribute.Range));
             }
         }
-        IndexInfo = [.. indexInfo];
-        RangeInfo = [.. rangeInfo];
+        Assignments = [.. assignments];
     }
 
-    internal IndexAssignmentInfo<TRecord>[] IndexInfo { get; }
-
-    internal RangeAssignmentInfo<TRecord>[] RangeInfo { get; }
+    internal Assignment<TRecord>[] Assignments { get; }
 }

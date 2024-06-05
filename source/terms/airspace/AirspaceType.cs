@@ -4,7 +4,7 @@ namespace Arinc424.Airspace.Terms;
 /// <c>Controlled Airspace Type (ARSP TYPE)</c> character.
 /// </summary>
 /// <remarks>See section 5.213.</remarks>
-[Char, Transform<AirspaceTypeConverter>]
+[Char, Transform<AirspaceTypeConverter, AirspaceType>]
 [Description("Controlled Airspace Type (ARSP TYPE)")]
 public enum AirspaceType : byte
 {

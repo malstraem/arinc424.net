@@ -9,7 +9,7 @@ public class ApproachPoint : ProcedurePoint
     /// </summary>
     /// <remarks>See section 5.70.</remarks>
     [Field(103, 106), Float(100)]
-    public float VerticalAngel { get; set; }
+    public float VerticalAngle { get; set; }
 
     /// <inheritdoc cref="ApproachQualifiers"/>
     [Field(119, 120)]

@@ -10,7 +10,7 @@ using Arinc424.Waypoints;
 namespace Arinc424;
 
 /// <summary>
-/// Container that represents<c>ARINC 424</c> database.
+/// Container that represents <c>ARINC 424</c> database.
 /// </summary>
 public class Data424
 {
@@ -64,5 +64,5 @@ public class Data424
 
     public List<CruiseTable> CruisingTables { get; set; } = [];
 
-    public static Data424 Load(IEnumerable<string> strings) => new Parser424().Parse(strings);
+    public static Data424 Create(IEnumerable<string> strings) => new Parser424().Parse(strings);
 }

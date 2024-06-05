@@ -7,5 +7,5 @@ public class LoadBench
     private readonly string[] world = File.ReadAllLines("data/case-2");
 
     [Benchmark]
-    public Data424 LoadWorld() => Data424.Load(world);
+    public Data424 LoadWorld() => Data424.Create(world);
 }

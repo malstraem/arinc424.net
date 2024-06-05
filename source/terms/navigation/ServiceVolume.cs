@@ -4,7 +4,7 @@ namespace Arinc424.Navigation.Terms;
 /// <c>DME Operational Service Volume (D-OSV)</c> character.
 /// </summary>
 /// <remarks>See section 5.277.</remarks>
-[Char, Transform<ServiceVolumeConverter>]
+[Char, Transform<ServiceVolumeConverter, ServiceVolume>]
 public enum ServiceVolume : byte
 {
     Unknown,

@@ -19,7 +19,7 @@ public abstract class Transmitter : Geo
     /// <c>Radar (RADAR)</c> character.
     /// </summary>
     /// <remarks>See section 5.102.</remarks>
-    [Character(41), Transform<RadarAvailabilityConverter>]
+    [Character(41), Transform<RadarAvailabilityConverter, Bool>]
     public Bool IsRadarAvailable { get; set; }
 
     /// <summary>

@@ -19,13 +19,11 @@ public abstract class Navaid : Geo, IIdentity, IIcao, INamed
     public float Frequency { get; set; }
 
     /// <inheritdoc cref="NavaidType"/>
-    [Obsolete("todo type target converter")]
     [Field(28, 29), Decode<NondirectionalTypeConverter, NavaidType>]
     public NavaidType Type { get; set; }
 
     /// <inheritdoc cref="NavaidCoverage"/>
-    [Obsolete("todo type target converter")]
-    [Character(30), Transform<NondirectionalCoverageConverter>]
+    [Character(30), Transform<NondirectionalCoverageConverter, NavaidCoverage>]
     public NavaidCoverage Coverage { get; set; }
 
     /// <inheritdoc cref="NavaidInfo"/>
