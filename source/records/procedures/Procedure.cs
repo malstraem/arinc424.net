@@ -25,6 +25,6 @@ public abstract class Procedure<TPoint> : Record424<TPoint>, IIdentity where TPo
     public string? TransitionIdentifier { get; set; }
 
     /// <inheritdoc cref="Terms.AircraftTypes"/>
-    [Character(26), Transform<AircraftTypesConverter>]
+    [Character(26)]
     public Terms.AircraftTypes AircraftTypes { get; set; }
 }

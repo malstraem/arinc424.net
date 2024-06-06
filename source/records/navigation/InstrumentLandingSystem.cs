@@ -14,10 +14,10 @@ public class InstrumentLandingSystem : LandingSystem
     /// </summary>
     /// <value>Kilohertz.</value>
     /// <remarks>See section 5.45.</remarks>
-    [Field(23, 27), Decode<LocalizerFrequencyConverter>]
+    [Field(23, 27), Decode<LocalizerFrequencyConverter, int>]
     public int Frequency { get; set; }
 
-    [Field(56, 74), Decode<CoordinatesConverter>]
+    [Field(56, 74)]
     public Coordinates GlideSlopeCoordinates { get; set; }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class InstrumentLandingSystem : LandingSystem
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.48.</remarks>
-    [Field(75, 78), Decode<IntConverter>]
+    [Field(75, 78), Integer]
     public int Position { get; set; }
 
     [Character(79), Obsolete("todo - combine with position")]
@@ -36,7 +36,7 @@ public class InstrumentLandingSystem : LandingSystem
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.50.</remarks>
-    [Field(80, 83), Decode<IntConverter>]
+    [Field(80, 83), Integer]
     public int GlideSlopePosition { get; set; }
 
     /// <summary>
@@ -44,7 +44,7 @@ public class InstrumentLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees and hundredths of degree.</value>
     /// <remarks>See section 5.51.</remarks>
-    [Field(84, 87), Decode<HundredthsConverter>]
+    [Field(84, 87), Float(100)]
     public float Width { get; set; }
 
     /// <summary>
@@ -52,7 +52,7 @@ public class InstrumentLandingSystem : LandingSystem
     /// </summary>
     /// <value>Degrees and hundredths of degree.</value>
     /// <remarks>See section 5.52.</remarks>
-    [Field(88, 90), Decode<HundredthsConverter>]
+    [Field(88, 90), Float(100)]
     public float SlopeAngle { get; set; }
 
     [Field(91, 95), Obsolete("todo")]
@@ -63,6 +63,6 @@ public class InstrumentLandingSystem : LandingSystem
     public Geo? SupportingFacility { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>
-    [Field(111, 113), Decode<IntConverter>]
+    [Field(111, 113), Integer]
     public int ThresholdHeight { get; set; }
 }

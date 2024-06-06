@@ -4,7 +4,8 @@ namespace Arinc424.Airspace.Terms;
 /// <c>Boundary Via (BDRY VIA)</c> character.
 /// </summary>
 /// <remarks>See section 5.118.</remarks>
-[Char, Description("Boundary Via (BDRY VIA)")]
+[Char, Transform<BoundaryViaConverter, BoundaryVia>]
+[Description("Boundary Via (BDRY VIA)")]
 public enum BoundaryVia : byte
 {
     Unknown,

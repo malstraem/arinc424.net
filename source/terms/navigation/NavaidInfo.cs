@@ -4,7 +4,7 @@ namespace Arinc424.Navigation.Terms;
 /// Fourth character of <c>NAVAID Class (CLASS)</c> field.
 /// </summary>
 /// <remarks>See section 5.35.</remarks>
-[Char]
+[Char, Transform<NavaidInfoConverter, NavaidInfo>]
 public enum NavaidInfo : byte
 {
     Unknown,

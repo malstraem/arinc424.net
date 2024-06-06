@@ -28,36 +28,36 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     public string Identifier { get; set; }
 
     /// <inheritdoc cref="MarkerType"/>
-    [Field(18, 20), Decode<MarkerTypeConverter>]
+    [Field(18, 20)]
     public MarkerType Type { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
-    [Field(23, 27), Decode<TenthsConverter>]
+    [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
 
     [Foreign(7, 12), Foreign(28, 32), Foreign(11, 12)]
     public Runway Runway { get; set; }
 
-    [Field(52, 55), Decode<TenthsConverter>]
+    [Field(52, 55), Float(10)]
     public float Bearing { get; set; }
 
-    [Field(56, 74), Decode<CoordinatesConverter>]
+    [Field(56, 74)]
     public Coordinates LocatorCoordinates { get; set; }
 
     /// <inheritdoc cref="Terms.NavaidType"/>
-    [Field(75, 76), Decode<NondirectionalTypeConverter>]
+    [Field(75, 76), Decode<NondirectionalTypeConverter, NavaidType>]
     public NavaidType NavaidType { get; set; }
 
     /// <inheritdoc cref="NavaidCoverage"/>
-    [Character(77), Transform<NondirectionalCoverageConverter>]
+    [Character(77), Transform<NondirectionalCoverageConverter, NavaidCoverage>]
     public NavaidCoverage Coverage { get; set; }
 
     /// <inheritdoc cref="NavaidInfo"/>
-    [Character(78), Transform<NavaidInfoConverter>]
+    [Character(78)]
     public NavaidInfo Info { get; set; }
 
     /// <inheritdoc cref="NavaidCollocation"/>
-    [Character(79), Transform<NavaidCollocationConverter>]
+    [Character(79)]
     public NavaidCollocation Collocation { get; set; }
 
     [Field(80, 84), Obsolete("need more section 5.93 analysis")]
@@ -67,7 +67,7 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     public string? LocatorIdentifier { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(91, 95), Decode<MagneticVariationConverter>]
+    [Field(91, 95), MagneticVariation]
     public float Variation { get; set; }
 
     /// <summary>
@@ -75,6 +75,6 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.92.</remarks>
-    [Field(98, 102), Decode<IntConverter>]
+    [Field(98, 102), Integer]
     public int Elevation { get; set; }
 }

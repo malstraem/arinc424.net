@@ -4,7 +4,7 @@ namespace Arinc424.Waypoints.Terms;
 /// <c>Waypoint Type (TYPE)</c> field.
 /// </summary>
 /// <remarks>See section 5.42.</remarks>
-[String, Flags]
+[String, Flags, Decode<WaypointTypesConverter, WaypointTypes>]
 public enum WaypointTypes : uint
 {
     Unknown = 0u,

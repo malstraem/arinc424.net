@@ -5,17 +5,37 @@ namespace Arinc424.Converters;
 internal abstract class ArcConverter : IStringConverter<ArcConverter, Arc>
 {
     [Obsolete("todo")]
-    public static Arc Convert(ReadOnlySpan<char> @string)
+    public static Result<Arc> Convert(ReadOnlySpan<char> @string)
     {
-        var coordinates = @string[..19];
-        var distance = @string[19..23];
-        var bearing = @string[23..];
+        var sub = @string[..19];
 
-        return new
-        (
-            CoordinatesConverter.Convert(coordinates),
-            distance.IsWhiteSpace() ? null : float.Parse(distance) / 10,
-            bearing.IsWhiteSpace() ? null : float.Parse(bearing) / 10
-        );
+        var coordinates = CoordinatesConverter.Convert(sub);
+
+        if (coordinates.IsError)
+            return new(coordinates.Problem!);
+
+        float? distance;
+
+        sub = @string[19..23];
+
+        if (sub.IsWhiteSpace())
+            distance = null;
+        else if (!float.TryParse(sub, out float value))
+            return new($"Distance '{sub}' cannot be parsed.");
+        else
+            distance = value / 10;
+
+        float? bearing;
+
+        sub = @string[23..];
+
+        if (sub.IsWhiteSpace())
+            bearing = null;
+        else if (!float.TryParse(sub, out float value))
+            return new($"Distance '{sub}' cannot be parsed.");
+        else
+            bearing = value / 10;
+
+        return new Arc(coordinates.Value, distance, bearing);
     }
 }

@@ -37,30 +37,30 @@ public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao, 
     public char Indicator { get; set; }
 
     /// <inheritdoc cref="Terms.SpeedReportUnit"/>
-    [Character(29), Transform<SpeedReportUnitConverter>]
+    [Character(29)]
     public Terms.SpeedReportUnit SpeedReportUnit { get; set; }
 
     /// <inheritdoc cref="Terms.AltitudeReportUnit"/>
-    [Character(30), Transform<AltitudeReportUnitConverter>]
+    [Character(30)]
     public Terms.AltitudeReportUnit AltitudeReportUnit { get; set; }
 
     /// <summary>
     /// <c>FIR/UIR Entry Report (ENTRY)</c> character.
     /// </summary>
     /// <remarks>See section 5.124.</remarks>
-    [Character(31), Transform<BoolConverter>]
+    [Character(31)]
     public Bool IsEntryReport { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
-    [Field(81, 85), Decode<AltitudeConverter>]
+    [Field(81, 85)]
     public Altitude Up { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
-    [Field(86, 90), Decode<AltitudeConverter>]
+    [Field(86, 90)]
     public Altitude? UpperLow { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
-    [Field(91, 95), Decode<AltitudeConverter>]
+    [Field(91, 95)]
     public Altitude? UpperUp { get; set; }
 
     /// <summary>

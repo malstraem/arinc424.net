@@ -4,7 +4,7 @@ namespace Arinc424.Ports.Terms;
 /// <c>Longest Runway Surface Code (LRSC)</c> character.
 /// </summary>
 /// <remarks>See section 5.249.</remarks>
-[Char]
+[Char, Transform<RunwaySurfaceTypeConverter, RunwaySurfaceType>]
 public enum RunwaySurfaceType : byte
 {
     Unknown,

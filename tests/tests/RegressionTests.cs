@@ -12,7 +12,7 @@ public class RegressionTests
     {
         foreach (string path in Directory.GetFiles("data"))
         {
-            var data = Data424.Load(File.ReadAllLines(path));
+            var data = Data424.Create(File.ReadAllLines(path));
 
             Dictionary<string, int> counts = [];
 
@@ -25,13 +25,13 @@ public class RegressionTests
 
     [Theory]
     [InlineData("case-1")]
-    //[InlineData("case-2")]
+    [InlineData("case-2")]
     [InlineData("faa-230223")]
     [InlineData("faa-240321")]
     [InlineData("faa-240418")]
     public void Load(string file)
     {
-        var data = Data424.Load(File.ReadAllLines($"data/{file}"));
+        var data = Data424.Create(File.ReadAllLines($"data/{file}"));
 
         var counts = JsonSerializer.Deserialize<Dictionary<string, int>>(File.ReadAllText($"data/regression/{file}.json"))!;
 

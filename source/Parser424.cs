@@ -1,5 +1,8 @@
 using System.Collections;
 
+using Arinc424.Building;
+using Arinc424.Diagnostics;
+
 namespace Arinc424;
 
 internal partial class Parser424
@@ -8,18 +11,16 @@ internal partial class Parser424
 
     private readonly Queue<string> skipped = [];
 
-    private readonly Dictionary<Type, Queue<string>> primary = [];
-    private readonly Dictionary<Type, Queue<string>> continuation = [];
+    private readonly Dictionary<Type, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
 
-    private readonly Dictionary<Type, Queue<Record424>> records = [];
+    private readonly Dictionary<Type, Queue<Build>> builds = [];
 
     internal Parser424()
     {
         foreach (var (_, type) in meta.Types)
         {
-            records[type] = [];
-            primary[type] = [];
-            continuation[type] = [];
+            builds[type] = [];
+            strings[type] = ([], []);
         }
     }
 
@@ -40,39 +41,45 @@ internal partial class Parser424
                 if (!info.Section.IsMatch(@string))
                     continue;
 
-                if (info.ContinuationIndex is null)
-                {
-                    primary[type].Enqueue(@string);
-                }
-                else
-                {
-                    int index = info.ContinuationIndex.Value;
-
-                    (@string[index] is '0' or '1' ? primary[type] : continuation[type]).Enqueue(@string);
-                }
+                (info.IsContinuation(@string) ? this.strings[type].Continuation : this.strings[type].Primary).Enqueue(@string);
                 return true;
             }
             return false;
         }
     }
 
+    private static void Enqueue(Record424 record, Queue<Build> builds, ref Queue<Diagnostic> diagnostics)
+    {
+        if (diagnostics.Count > 0)
+        {
+            builds.Enqueue(new(record, diagnostics));
+            diagnostics = [];
+        }
+        else
+        {
+            builds.Enqueue(new(record, null));
+        }
+    }
+
+    [Obsolete("todo: try parse sequence number")]
     private void BuildSequences()
     {
         _ = Parallel.ForEach(meta.Sequences, attribute =>
         {
-            var queue = records[attribute.Type];
-            var strings = primary[attribute.Type];
+            var queue = builds[attribute.Type];
+            var primary = strings[attribute.Type].Primary;
 
             Queue<string> sequence = [];
+            Queue<Diagnostic> diagnostics = [];
 
-            while (strings.TryDequeue(out string? @string))
+            while (primary.TryDequeue(out string? @string))
             {
                 sequence.Enqueue(@string);
 
                 int number = int.Parse(@string[attribute.Range]);
 
-                if (!strings.TryPeek(out @string) || int.Parse(@string[attribute.Range]) <= number)
-                    queue.Enqueue(attribute.Build(sequence));
+                if (!primary.TryPeek(out @string) || int.Parse(@string[attribute.Range]) <= number)
+                    Enqueue(attribute.Build(sequence, diagnostics), queue, ref diagnostics);
             }
         });
     }
@@ -81,13 +88,14 @@ internal partial class Parser424
     {
         _ = Parallel.ForEach(meta.Records, attribute =>
         {
-            var queue = records[attribute.Type];
-            var strings = primary[attribute.Type];
+            var queue = builds[attribute.Type];
+            var primary = strings[attribute.Type].Primary;
 
-            while (strings.TryDequeue(out string? @string))
-                queue.Enqueue(attribute.Build(@string));
+            Queue<Diagnostic> diagnostics = [];
+
+            while (primary.TryDequeue(out string? @string))
+                Enqueue(attribute.Build(@string, diagnostics), queue, ref diagnostics);
         });
-
         BuildSequences();
     }
 
@@ -105,8 +113,8 @@ internal partial class Parser424
 
             var list = (IList)property.GetValue(data)!;
 
-            while (records[type].TryDequeue(out var record))
-                _ = list.Add(record);
+            while (builds[type].TryDequeue(out var record))
+                _ = list.Add(record.Record);
         });
         return data;
     }

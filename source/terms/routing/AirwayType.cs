@@ -4,7 +4,7 @@ namespace Arinc424.Routing.Terms;
 /// <c>Route Type (RT TYPE)</c> -> <c>Airway Type</c> character.
 /// </summary>
 /// <remarks>See table 5-2.</remarks>
-[Char]
+[Char, Transform<AirwayTypeConverter, AirwayType>]
 public enum AirwayType : byte
 {
     Unknown,

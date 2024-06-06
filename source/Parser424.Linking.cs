@@ -1,29 +1,34 @@
 using System.Collections;
 
+using Arinc424.Building;
+using Arinc424.Diagnostics;
+using Arinc424.Linking;
+
 namespace Arinc424;
 
 internal partial class Parser424
 {
     private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
-    [Obsolete("todo: diagnostic log")]
-    private void ProcessPrimaryKey(Record424 record, InfoAttribute info)
+    private void ProcessPrimaryKey(Build build, Type type, PrimaryKey primaryKey)
     {
-        string key = info.PrimaryKey!.GetKey(record.Source);
+        var record = build.Record;
 
-        if (!unique[info.Type].TryAdd(key, record))
+        string key = primaryKey.GetKey(record.Source);
+
+        if (!unique[type].TryAdd(key, record))
         {
-            // todo: diagnostic log
-            Debug.WriteLine($"{info.Type} entity with key '{key}' already exist"); // TODO: logging path
+            build.Diagnostics ??= [];
+            build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, type, key));
         }
     }
 
     [Obsolete("todo: diagnostic log")]
-    private void ProcessForeignKeys(Record424 record, BuildAttribute info)
+    private void ProcessForeignKeys(Record424 record, LinksAttribute info)
     {
         foreach (var link in info.Links!)
         {
-            if (!link.TryGetReference(record.Source, meta, out var reference))
+            if (!link.TryGetReference(record.Source!, meta, out var reference))
                 continue;
 
             if (!this.unique.TryGetValue(reference!.Type, out var unique))
@@ -70,29 +75,30 @@ internal partial class Parser424
     [Obsolete("TODO diagnostic log")]
     private void Link()
     {
-        var info = meta.Info.Where(x => x.Value.PrimaryKey is not null);
+        var attributes = meta.GetWithPrimaryKey();
 
-        foreach (var (type, _) in info)
-            unique[type] = [];
+        foreach (var attribute in attributes)
+            unique[attribute.Type] = [];
 
-        _ = Parallel.ForEach(info, x =>
+        _ = Parallel.ForEach(attributes, x =>
         {
-            foreach (var record in records[x.Key])
-                ProcessPrimaryKey(record, x.Value);
+            foreach (var build in builds[x.Type])
+                ProcessPrimaryKey(build, x.Type, x.PrimaryKey!);
         });
 
-        _ = Parallel.ForEach(meta.Info.Where(x => x.Value.Links is not null), x =>
+        _ = Parallel.ForEach(meta.GetWithLinks(), x =>
         {
-            foreach (var record in records[x.Key])
-                ProcessForeignKeys(record, x.Value);
+            foreach (var build in builds[x.Type])
+                ProcessForeignKeys(build.Record, x);
         });
 
-        _ = Parallel.ForEach(meta.Sequences.Where(x => x.SubInfo.Links is not null), x =>
+        // todo
+        _ = Parallel.ForEach(meta.Sequences.Where(x => x.SubLinks.Links is not null), x =>
         {
-            foreach (var record in records[x.Type])
+            foreach (var record in builds[x.Type])
             {
-                foreach (var sub in x.GetSequence(record))
-                    ProcessForeignKeys(sub, x.SubInfo);
+                foreach (var sub in x.GetSequence(record.Record))
+                    ProcessForeignKeys(sub, x.SubLinks);
             }
         });
     }

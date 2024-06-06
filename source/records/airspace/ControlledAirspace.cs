@@ -16,7 +16,7 @@ public class ControlledAirspace : Volume, IIcao, INamed
     public string IcaoCode { get; set; }
 
     /// <inheritdoc cref="AirspaceType"/>
-    [Character(9), Transform<AirspaceTypeConverter>]
+    [Character(9)]
     public AirspaceType Type { get; set; }
 
     /// <summary>
@@ -28,7 +28,7 @@ public class ControlledAirspace : Volume, IIcao, INamed
     public IIdentity Center { get; set; }
 
     /// <inheritdoc cref="AirspaceClass"/>
-    [Character(17), Transform<AirspaceClassConverter>]
+    [Character(17)]
     public AirspaceClass Class { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MultipleCode']/*"/>
@@ -36,11 +36,11 @@ public class ControlledAirspace : Volume, IIcao, INamed
     public char MultipleCode { get; set; }
 
     /// <inheritdoc cref="Arinc424.LevelType"/>
-    [Character(26), Transform<LevelTypeConverter>]
+    [Character(26)]
     public LevelType LevelType { get; set; }
 
     /// <inheritdoc cref="Arinc424.TimeCode"/>
-    [Character(27), Transform<TimeCodeConverter>]
+    [Character(27)]
     public TimeCode TimeCode { get; set; }
 
     /// <summary>
@@ -51,7 +51,7 @@ public class ControlledAirspace : Volume, IIcao, INamed
     public char Notam { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(79, 81), Decode<NavigationPerformanceConverter>]
+    [Field(79, 81), NavigationPerformance]
     public float NavigationPerformance { get; set; }
 
     /// <summary>

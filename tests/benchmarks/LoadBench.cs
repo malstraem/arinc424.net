@@ -2,10 +2,11 @@ using BenchmarkDotNet.Attributes;
 
 namespace Arinc424.Bench;
 
+[SimpleJob]
 public class LoadBench
 {
-    private readonly string[] world = File.ReadAllLines("data/faa-240418");
+    private readonly string[] world = File.ReadAllLines("data/case-1");
 
     [Benchmark]
-    public Data424 LoadWorld() => Data424.Load(world);
+    public Data424 LoadWorld() => Data424.Create(world);
 }

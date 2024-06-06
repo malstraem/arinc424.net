@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Reflection;
 
 using Arinc424.Airspace;
@@ -21,11 +22,11 @@ Record<AirportTerminalWaypoint>,
 Record<AirportSatelliteAugmentPoint>,
 Sequence<AirportCommunications, PortTransmitter>,
 
-//Record<Heliport>,
-//Record<HeliportCommunications>,
-//Record<HeliportArrivalAltitudes>,
-//Record<HeliportMinimumAltitudes>,
-//Record<HeliportTerminalWaypoint>,
+Record<Heliport>,
+Record<HeliportCommunications>,
+Record<HeliportArrivalAltitudes>,
+Record<HeliportMinimumAltitudes>,
+Record<HeliportTerminalWaypoint>,
 
 Sequence<AirportArrival, ArrivalPoint>,
 Sequence<AirportApproach, ApproachPoint>,
@@ -69,18 +70,27 @@ internal class Meta424
         Records = assembly.GetCustomAttributes<RecordAttribute>();
         Sequences = assembly.GetCustomAttributes<SequenceAttribute>();
 
-        foreach (var info in Records.Cast<InfoAttribute>().Concat(Sequences))
+        Dictionary<Type, InfoAttribute> info = [];
+        Dictionary<(char, char), Type> types = [];
+
+        foreach (var attribute in Records.Cast<InfoAttribute>().Concat(Sequences))
         {
-            Info.Add(info.Type, info);
-            Types.Add((info.Section.SectionChar, info.Section.SubsectionChar), info.Type);
+            info.Add(attribute.Type, attribute);
+            types.Add((attribute.Section.SectionChar, attribute.Section.SubsectionChar), attribute.Type);
         }
+        Info = info.ToFrozenDictionary();
+        Types = types.ToFrozenDictionary();
     }
 
-    internal Dictionary<(char, char), Type> Types { get; } = [];
+    internal IEnumerable<InfoAttribute> GetWithPrimaryKey() => Info.Select(x => x.Value).Where(x => x.PrimaryKey is not null);
 
-    internal Dictionary<Type, InfoAttribute> Info { get; } = [];
+    internal IEnumerable<InfoAttribute> GetWithLinks() => Info.Select(x => x.Value).Where(x => x.Links is not null);
 
     internal IEnumerable<RecordAttribute> Records { get; }
 
     internal IEnumerable<SequenceAttribute> Sequences { get; }
+
+    internal FrozenDictionary<Type, InfoAttribute> Info { get; }
+
+    internal FrozenDictionary<(char, char), Type> Types { get; }
 }

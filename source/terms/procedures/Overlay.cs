@@ -4,7 +4,7 @@ namespace Arinc424.Procedures.Terms;
 /// <c>GNSS/FMS Indicator (GNSS/FMS IND)</c> character.
 /// </summary>
 /// <remarks>See section 5.222.</remarks>
-[Char]
+[Char, Transform<OverlayConverter, Overlay>]
 public enum Overlay : byte
 {
     Unknown,

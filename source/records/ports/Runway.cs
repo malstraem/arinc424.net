@@ -30,7 +30,7 @@ public class Runway : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.57.</remarks>
-    [Field(23, 27), Decode<IntConverter>]
+    [Field(23, 27), Integer]
     public int Length { get; set; }
 
     /// <summary>
@@ -38,7 +38,7 @@ public class Runway : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Degrees and tenths of a degree.</value>
     /// <remarks>See section 5.58.</remarks>
-    [Field(28, 31), Decode<CourseConverter>]
+    [Field(28, 31)]
     public Course Bearing { get; set; }
 
     /// <summary>
@@ -46,11 +46,11 @@ public class Runway : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Percent.</value>
     /// <remarks>See section 5.212.</remarks>
-    [Field(52, 56), Decode<ThousandsConverter>]
+    [Field(52, 56), Float(1000)]
     public float Gradient { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='EllipsoidalHeight']/*"/>
-    [Field(61, 66), Decode<TenthsConverter>]
+    [Field(61, 66), Float(10)]
     public float EllipsoidalHeight { get; set; }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class Runway : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.68.</remarks>
-    [Field(67, 71), Decode<IntConverter>]
+    [Field(67, 71), Integer]
     public int ThresholdElevation { get; set; }
 
     /// <summary>
@@ -66,7 +66,7 @@ public class Runway : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.69.</remarks>
-    [Field(72, 75), Decode<IntConverter>]
+    [Field(72, 75), Integer]
     public int ThresholdDistance { get; set; }
 
     /// <summary>
@@ -74,11 +74,11 @@ public class Runway : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.109.</remarks>
-    [Field(78, 80), Decode<IntConverter>]
+    [Field(78, 80), Integer]
     public int Width { get; set; }
 
     /// <inheritdoc cref="Terms.ThresholdType"/>
-    [Character(81), Transform<ThresholdTypeConverter>]
+    [Character(81)]
     public Terms.ThresholdType ThresholdType { get; set; }
 
     /// <summary>
@@ -86,11 +86,11 @@ public class Runway : Geo, IIdentity, IIcao
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.79.</remarks>
-    [Field(87, 90), Decode<IntConverter>]
+    [Field(87, 90), Integer]
     public int Stopway { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>
-    [Field(96, 98), Decode<IntConverter>]
+    [Field(96, 98), Integer]
     public int ThresholdHeight { get; set; }
 
     /// <summary>

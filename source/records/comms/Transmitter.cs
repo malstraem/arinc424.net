@@ -8,25 +8,25 @@ using Terms;
 public abstract class Transmitter : Geo
 {
     /// <inheritdoc cref="CommType"/>
-    [Field(23, 25), Decode<CommTypeConverter>]
+    [Field(23, 25)]
     public CommType Type { get; set; }
 
     /// <inheritdoc cref="Arinc424.Frequency"/>
-    [Field(26, 40), Decode<FrequencyConverter>]
+    [Field(26, 40)]
     public Frequency Frequency { get; set; }
 
     /// <summary>
     /// <c>Radar (RADAR)</c> character.
     /// </summary>
     /// <remarks>See section 5.102.</remarks>
-    [Character(41), Transform<RadarAvailabilityConverter>]
+    [Character(41), Transform<RadarAvailabilityConverter, Bool>]
     public Bool IsRadarAvailable { get; set; }
 
     /// <summary>
     /// <c>H24 Indicator (H24)</c> character.
     /// </summary>
     /// <remarks>See section 5.181.</remarks>
-    [Character(42), Transform<BoolConverter>]
+    [Character(42)]
     public Bool IsWholeDay { get; set; }
 
     /// <summary>
@@ -37,7 +37,7 @@ public abstract class Transmitter : Geo
     public string CallSign { get; set; }
 
     /// <inheritdoc cref="Arinc424.AltitudeDescription"/>
-    [Character(83), Character<AirwayTransmitter>(117), Transform<AltitudeDescriptionConverter>]
+    [Character(83), Character<AirwayTransmitter>(117)]
     public AltitudeDescription AltitudeDescription { get; set; }
 
     /// <summary>
@@ -45,18 +45,18 @@ public abstract class Transmitter : Geo
     /// </summary>
     /// <value>Hundredth of feet.</value>
     /// <remarks>See section 5.184.</remarks>
-    [Field(84, 86), Field<AirwayTransmitter>(118, 120), Decode<IntConverter>]
+    [Field(84, 86), Field<AirwayTransmitter>(118, 120), Integer]
     public int Altitude { get; set; }
 
     /// <inheritdoc cref="Altitude"/>
-    [Field(87, 89), Field<AirwayTransmitter>(121, 123), Decode<IntConverter>]
+    [Field(87, 89), Field<AirwayTransmitter>(121, 123), Integer]
     public int Altitude2 { get; set; }
 
     /// <inheritdoc cref="Terms.Modulation"/>
-    [Character(115), Transform<ModulationConverter>]
+    [Character(115)]
     public Modulation Modulation { get; set; }
 
     /// <inheritdoc cref="Terms.Emission"/>
-    [Character(116), Transform<EmissionConverter>]
+    [Character(116)]
     public Emission Emission { get; set; }
 }

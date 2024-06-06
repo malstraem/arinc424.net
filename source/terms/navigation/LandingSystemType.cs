@@ -4,7 +4,8 @@ namespace Arinc424.Navigation.Terms;
 /// <c>ILS/MLS/GLS Category (CAT)</c> character.
 /// </summary>
 /// <remarks>See section 5.80.</remarks>
-[Char, Description("ILS/MLS/GLS Category (CAT)")]
+[Char, Transform<LandingSystemTypeConverter, LandingSystemType>]
+[Description("ILS/MLS/GLS Category (CAT)")]
 public enum LandingSystemType : byte
 {
     Unknown,

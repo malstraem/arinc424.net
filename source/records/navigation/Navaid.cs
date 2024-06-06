@@ -15,25 +15,23 @@ public abstract class Navaid : Geo, IIdentity, IIcao, INamed
     public string IcaoCode { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
-    [Field(23, 27), Decode<TenthsConverter>]
+    [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
 
     /// <inheritdoc cref="NavaidType"/>
-    [Obsolete("todo type target converter")]
-    [Field(28, 29), Decode<NondirectionalTypeConverter>]
+    [Field(28, 29), Decode<NondirectionalTypeConverter, NavaidType>]
     public NavaidType Type { get; set; }
 
     /// <inheritdoc cref="NavaidCoverage"/>
-    [Obsolete("todo type target converter")]
-    [Character(30), Transform<NondirectionalCoverageConverter>]
+    [Character(30), Transform<NondirectionalCoverageConverter, NavaidCoverage>]
     public NavaidCoverage Coverage { get; set; }
 
     /// <inheritdoc cref="NavaidInfo"/>
-    [Character(31), Transform<NavaidInfoConverter>]
+    [Character(31)]
     public NavaidInfo Info { get; set; }
 
     /// <inheritdoc cref="NavaidCollocation"/>
-    [Character(32), Transform<NavaidCollocationConverter>]
+    [Character(32)]
     public NavaidCollocation Collocation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

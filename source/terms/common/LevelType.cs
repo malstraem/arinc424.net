@@ -4,7 +4,8 @@ namespace Arinc424;
 /// <c>Level (LEVEL)</c> character.
 /// </summary>
 /// <remarks>See section 5.19.</remarks>
-[Char, Flags, Description("Level (LEVEL)")]
+[Char, Flags, Transform<LevelTypeConverter, LevelType>]
+[Description("Level (LEVEL)")]
 public enum LevelType : byte
 {
     Unknown = 0,

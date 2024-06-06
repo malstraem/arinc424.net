@@ -4,7 +4,7 @@ namespace Arinc424.Routing.Terms;
 /// <c>Directional Restriction</c> character.
 /// </summary>
 /// <remarks>See section 5.115.</remarks>
-[Char]
+[Char, Transform<AirwayRestrictionConverter, AirwayRestriction>]
 public enum AirwayRestriction : byte
 {
     Unknown,

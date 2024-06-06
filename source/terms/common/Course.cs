@@ -1,5 +1,6 @@
 namespace Arinc424;
 
+[Decode<CourseConverter, Course>]
 [DebuggerDisplay($"{{{nameof(Value)}}}, {{{nameof(Type)}}}")]
 public struct Course(float value, CourseType type)
 {

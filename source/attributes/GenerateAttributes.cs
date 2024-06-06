@@ -1,13 +1,13 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies that enum values are mapped to characters and <see cref="ICharConverter{TSelf, TType}"/> implementation must be generated.
+/// Specifies that enum values are mapped to characters and <see cref="ICharConverter{TSelf, TType}"/> implementation will be generated.
 /// </summary>
 [AttributeUsage(AttributeTargets.Enum)]
 internal class CharAttribute : Attribute;
 
 /// <summary>
-/// Specifies that enum values are mapped to strings or characters (in case of flags) and <see cref="IStringConverter{TSelf, TType}"/> implementation must be generated.
+/// Specifies that enum values are mapped to strings or characters (in case of flags) and <see cref="IStringConverter{TSelf, TType}"/> implementation will be generated.
 /// </summary>
 [AttributeUsage(AttributeTargets.Enum)]
 internal class StringAttribute : Attribute;

@@ -4,7 +4,7 @@ namespace Arinc424.Routing.Terms;
 /// <c>Activity Type</c> character.
 /// </summary>
 /// <remarks>See section 5.278.</remarks>
-[Char]
+[Char, Transform<ActivityTypeConverter, ActivityType>]
 public enum ActivityType : byte
 {
     Unknown,

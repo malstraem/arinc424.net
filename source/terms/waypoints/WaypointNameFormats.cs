@@ -4,7 +4,7 @@ namespace Arinc424.Waypoints.Terms;
 /// <c>Name Format Indicator (NAME IND)</c> field.
 /// </summary>
 /// <remarks>See section 5.196.</remarks>
-[String, Flags]
+[String, Flags, Decode<WaypointNameFormatsConverter, WaypointNameFormats>]
 public enum WaypointNameFormats : ushort
 {
     Unknown = 0,

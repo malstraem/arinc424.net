@@ -37,7 +37,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// <c>Speed Limit Altitude</c> field.
     /// </summary>
     /// <remarks>See section 5.73.</remarks>
-    [Field(23, 27), Decode<AltitudeConverter>]
+    [Field(23, 27)]
     public Altitude Limit { get; set; }
 
     /// <summary>
@@ -45,22 +45,22 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <value>Hundreds of feet.</value>
     /// <remarks>See section 5.54.</remarks>
-    [Field(28, 30), Decode<IntConverter>]
+    [Field(28, 30), Integer]
     public int LongestRunwayLength { get; set; }
 
     /// <summary>
     /// <c>IFR Capability (IFR)</c> character.
     /// </summary>
     /// <remarks>See section 5.108.</remarks>
-    [Character(31), Transform<BoolConverter>]
+    [Character(31)]
     public Bool IsProcedurePublished { get; set; }
 
     /// <inheritdoc cref="RunwaySurfaceType"/>
-    [Character(32), Transform<RunwaySurfaceTypeConverter>]
+    [Character(32)]
     public RunwaySurfaceType LongestRunwayType { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(52, 56), Decode<MagneticVariationConverter>]
+    [Field(52, 56), MagneticVariation]
     public float Variation { get; set; }
 
     /// <summary>
@@ -68,11 +68,11 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.55.</remarks>
-    [Field(57, 61), Decode<IntConverter>]
+    [Field(57, 61), Integer]
     public int Elevation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='SpeedLimit']/*"/>
-    [Field(62, 64), Decode<IntConverter>]
+    [Field(62, 64), Integer]
     public int SpeedLimit { get; set; }
 
     /// <summary>
@@ -83,15 +83,15 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     public OmnidirectionalStation? RecommendedStation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>
-    [Field(71, 75), Decode<IntConverter>]
+    [Field(71, 75), Integer]
     public int TransitionAltitude { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionLevel']/*"/>
-    [Field(76, 80), Decode<IntConverter>]
+    [Field(76, 80), Integer]
     public int TransitionLevel { get; set; }
 
     /// <inheritdoc cref="Arinc424.Privacy"/>
-    [Character(81), Transform<PrivacyConverter>]
+    [Character(81)]
     public Privacy Privacy { get; set; }
 
     /// <summary>
@@ -105,11 +105,11 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// <c>Daylight Time Indicator (DAY TIME)</c> character.
     /// </summary>
     /// <remarks>See section 5.179.</remarks>
-    [Character(85), Transform<BoolConverter>]
+    [Character(85)]
     public Bool IsDaylightTime { get; set; }
 
     /// <inheritdoc cref="Arinc424.CourseType"/>
-    [Character(86), Transform<CourseTypeConverter>]
+    [Character(86)]
     public CourseType CourseType { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

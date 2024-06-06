@@ -4,6 +4,19 @@ namespace Arinc424.Converters;
 
 internal abstract class SectorConverter : IStringConverter<SectorConverter, Sector>
 {
-    public static Sector Convert(ReadOnlySpan<char> @string)
-        => new(SectorizationConverter.Convert(@string[..6]), int.Parse(@string[6..9]), int.Parse(@string[9..11]));
+    [Obsolete("todo")]
+    public static Result<Sector> Convert(ReadOnlySpan<char> @string)
+    {
+        var sectorization = SectorizationConverter.Convert(@string[..6]);
+
+        return sectorization.IsError
+            ? new(sectorization.Problem!)
+            : !int.TryParse(@string[6..9], out int altitude)
+
+                ? new($"Altitude '{@string[6..9]}' can't be parsed.")
+                : !int.TryParse(@string[9..11], out int radius)
+
+                    ? new($"Radius '{@string[9..11]}' can't be parsed.")
+                    : new(new Sector(sectorization.Value, altitude, radius));
+    }
 }

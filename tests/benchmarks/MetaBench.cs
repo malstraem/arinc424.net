@@ -1,3 +1,5 @@
+using System.Collections.Immutable;
+
 using BenchmarkDotNet.Attributes;
 
 namespace Arinc424.Bench;
@@ -6,10 +8,10 @@ namespace Arinc424.Bench;
 public class MetaBench
 {
     [Benchmark]
-    public Dictionary<(char, char), Type> GrabTypesInfo()
+    public ImmutableArray<Type> GrabTypesInfo()
     {
         var meta = new Meta424();
 
-        return meta.Types;
+        return meta.Types.Values;
     }
 }

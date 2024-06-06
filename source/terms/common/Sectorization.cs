@@ -4,6 +4,7 @@ namespace Arinc424;
 /// <c>Sector Bearing (SEC BRG)</c> or <c>Sectorization (SECTOR)</c> field.
 /// </summary>
 /// <remarks>See section 5.146 or 5.183.</remarks>
+[Decode<SectorizationConverter, Sectorization>]
 [DebuggerDisplay($"From {{{nameof(Start)}}} to {{{nameof(End)}}}")]
 public readonly struct Sectorization(int start, int end)
 {
