@@ -30,14 +30,14 @@ internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Regex? r
     }
 }
 
-internal sealed class DecodeAssignment<TRecord, TValue>(PropertyInfo property, Regex? regex, Range range, DecodeAttribute<TValue> decode, bool isValueNullable)
+internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Regex? regex, Range range, DecodeAttribute<TType> decode, bool isValueNullable)
     : RangeAssignment<TRecord>(property, regex, range)
-        where TValue : notnull
+        where TType : notnull
         where TRecord : Record424
 {
-    private readonly Action<TRecord, TValue> set = GetCompiledSetter<TValue>(property, isValueNullable);
+    private readonly DecodeAttribute<TType> decode = decode;
 
-    private readonly DecodeAttribute<TValue> decode = decode;
+    private readonly Action<TRecord, TType> set = GetCompiledSetter<TType>(property, isValueNullable);
 
     internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
@@ -57,11 +57,9 @@ internal sealed class DecodeAssignment<TRecord, TValue>(PropertyInfo property, R
         var result = decode.Convert(@field);
 
         if (result.IsError)
-        {
             diagnostics.Enqueue(new ValueDiagnostic(record, result.Problem!, range));
-            return;
-        }
-        set(record, result.Value);
+        else
+            set(record, result.Value);
     }
 }
 

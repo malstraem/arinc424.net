@@ -24,7 +24,7 @@ public class AirportMinimumAltitudes : Record424
     [Character(23)]
     public char MultipleCode { get; set; }
 
-    [Field(43, 53), Count<SectorConverter, Sector>(7)]
+    [Field(43, 53), Count(7)]
     public Sector[] Sectors { get; set; }
 
     [Character(120)]

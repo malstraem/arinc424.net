@@ -1,5 +1,6 @@
 namespace Arinc424.Ports.Terms;
 
+[Decode<SectorConverter, Sector>]
 public class Sector(Sectorization sectorization, int altitude, int radius)
 {
     /// <summary>

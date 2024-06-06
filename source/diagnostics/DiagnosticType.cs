@@ -6,5 +6,5 @@ public enum DiagnosticType
     Nullability,
     InvalidType,
     InvalidValue,
-    ReferenceNotFound
+    InvalidReference
 }

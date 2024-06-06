@@ -25,13 +25,15 @@ internal class BuildInfo<TRecord> where TRecord : Record424
             : (property.PropertyType, false);
 
         // prefer decode attached to the property
-        var decode = property.GetCustomAttribute<DecodeAttribute>() ?? type.GetCustomAttribute<DecodeAttribute>();
+        var decode = property.GetCustomAttribute<DecodeAttribute>() ?? (type.IsArray
+            ? type.GetElementType()!.GetCustomAttribute<DecodeAttribute>()
+            : type.GetCustomAttribute<DecodeAttribute>());
 
         return decode is not null
             ? type.IsArray
                 ? (RangeAssignment<TRecord>)
                     Activator.CreateInstance(typeof(ArrayAssignment<,>)
-                        .MakeGenericType(typeof(TRecord), type.GetElementType()!), property, regex, range, decode)!
+                        .MakeGenericType(typeof(TRecord), type.GetElementType()!), property, regex, range, decode, property.GetCustomAttribute<CountAttribute>()!.Count)!
 
                 : (RangeAssignment<TRecord>)
                     Activator.CreateInstance(typeof(DecodeAssignment<,>)
