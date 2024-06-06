@@ -3,19 +3,20 @@ namespace Arinc424;
 #pragma warning disable CS8618
 
 /// <summary>
-/// Simple result pattern implementation to avoid try-catch when populating properties with converters.
+/// Simple result pattern to avoid try-catch when populating properties
+/// using <see cref="IStringConverter{TSelf, TType}"/> or <see cref="ICharConverter{TSelf, TType}"/> implementations.
 /// </summary>
-internal readonly ref struct Result<T> where T : notnull
+internal readonly ref struct Result<TType> where TType : notnull
 {
-    internal readonly T Value;
+    internal readonly TType Value;
 
     internal readonly string? Problem;
 
-    internal Result(T value) => Value = value;
+    internal Result(TType value) => Value = value;
 
     internal Result(string problem) => Problem = problem;
 
     internal bool IsError => Problem is not null;
 
-    public static implicit operator Result<T>(T value) => new(value);
+    public static implicit operator Result<TType>(TType value) => new(value);
 }
