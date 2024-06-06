@@ -8,7 +8,7 @@ internal abstract class CoordinatesConverter : IStringConverter<CoordinatesConve
          || !double.TryParse(@string[3..5], out double minutes)
          || !double.TryParse(@string[5..9], out double centiseconds))
         {
-            return new($"Latitude '{@string[0..9]}' can't be parsed.");
+            return $"Latitude '{@string[0..9]}' can't be parsed.";
         }
 
         double latitude = degrees + (minutes / 60) + (centiseconds / 360000);
@@ -18,13 +18,13 @@ internal abstract class CoordinatesConverter : IStringConverter<CoordinatesConve
         if (sign is 'S')
             latitude = -latitude;
         else if (sign is not 'N')
-            return new($"Latitude sign '{sign}' is not valid.");
+            return $"Latitude sign '{sign}' is not valid.";
 
         if (!double.TryParse(@string[10..13], out degrees)
          || !double.TryParse(@string[13..15], out minutes)
          || !double.TryParse(@string[15..19], out centiseconds))
         {
-            return new($"Longitude '{@string[9..13]}' can't be parsed.");
+            return $"Longitude '{@string[9..13]}' can't be parsed.";
         }
 
         double longitude = degrees + (minutes / 60) + (centiseconds / 360000);
@@ -34,7 +34,7 @@ internal abstract class CoordinatesConverter : IStringConverter<CoordinatesConve
         if (sign is 'W')
             longitude = -longitude;
         else if (sign is not 'E')
-            return new($"Longitude sign '{sign}' is not valid.");
+            return $"Longitude sign '{sign}' is not valid.";
 
         return new Coordinates(latitude, longitude);
     }

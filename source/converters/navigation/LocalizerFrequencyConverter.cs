@@ -6,9 +6,6 @@ internal abstract class LocalizerFrequencyConverter : IStringConverter<Localizer
     {
         var value = IntConverter.Convert(@string);
 
-        if (value.IsError)
-            return value;
-
-        return value.Value * 10;
+        return value.IsError ? value : value.Value * 10;
     }
 }

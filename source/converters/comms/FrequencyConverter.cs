@@ -15,7 +15,7 @@ internal abstract class FrequencyConverter : IStringConverter<FrequencyConverter
         else if (sub.IsWhiteSpace())
             transmit = null;
         else
-            return new Result<Frequency>($"Transmit frequency '{sub}' can't be parsed.");
+            return $"Transmit frequency '{sub}' can't be parsed.";
 
         sub = @string[7..14];
 
@@ -24,7 +24,7 @@ internal abstract class FrequencyConverter : IStringConverter<FrequencyConverter
         else if (sub.IsWhiteSpace())
             receive = null;
         else
-            return new Result<Frequency>($"Receive frequency '{sub}' can't be parsed.");
+            return $"Receive frequency '{sub}' can't be parsed.";
 
         return new Frequency
         (

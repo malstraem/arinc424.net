@@ -19,10 +19,23 @@ public enum AltitudeUnit : byte
     /// </summary>
     Feet,
     /// <summary>
+    /// Altitude is in meters.
+    /// </summary>
+    Meters,
+    /// <summary>
     /// Altitude is flight level.
     /// </summary>
     Level,
+    /// <summary>
+    /// Ground altitude.
+    /// </summary>
     Ground,
+    /// <summary>
+    /// Sea altitude.
+    /// </summary>
     Sea,
+    /// <summary>
+    /// Specified by NOTAM.
+    /// </summary>
     Notam
 }

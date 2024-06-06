@@ -7,6 +7,7 @@ namespace Arinc424.Tables;
 /// </summary>
 /// <remarks>See section 4.1.16.1.</remarks>
 [Section('T', 'C'), Sequenced(9)]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class CruiseTable : Record424<CruiseTableRow>, IIdentity
 {
     /// <summary>
