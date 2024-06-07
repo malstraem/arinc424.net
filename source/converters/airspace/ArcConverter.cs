@@ -2,7 +2,7 @@ using Arinc424.Airspace.Terms;
 
 namespace Arinc424.Converters;
 
-internal abstract class ArcConverter : IStringConverter<ArcConverter, Arc>
+internal abstract class ArcConverter : IStringConverter<Arc>
 {
     public static Result<Arc> Convert(ReadOnlySpan<char> @string)
     {
@@ -12,7 +12,7 @@ internal abstract class ArcConverter : IStringConverter<ArcConverter, Arc>
 
         var coordinates = CoordinatesConverter.Convert(sub);
 
-        if (coordinates.IsError)
+        if (coordinates.Invalid)
             problem = coordinates.Problem;
 
         float? distance = null;

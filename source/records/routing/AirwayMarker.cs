@@ -9,6 +9,7 @@ using Terms;
 /// </summary>
 /// <remarks>See section 4.1.15.1.</remarks>
 [Section('E', 'M'), Continuous]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public class AirwayMarker : Geo, IIdentity, IIcao, INamed
 {
     /// <summary>

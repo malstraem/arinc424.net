@@ -2,9 +2,9 @@ using Arinc424.Tables.Terms;
 
 namespace Arinc424.Converters;
 
-internal abstract class LevelRangeConverter : IStringConverter<LevelRangeConverter, LevelRange>
+internal abstract class LevelConverter : IStringConverter<Level>
 {
-    public static Result<LevelRange> Convert(ReadOnlySpan<char> @string)
+    public static Result<Level> Convert(ReadOnlySpan<char> @string)
     {
         string? problem = null;
 
@@ -12,21 +12,21 @@ internal abstract class LevelRangeConverter : IStringConverter<LevelRangeConvert
 
         var altitude = AltitudeConverter.Convert(@string[..5]);
 
-        if (altitude.IsError)
+        if (altitude.Invalid)
             problem = altitude.Problem;
         else
             from = altitude.Value;
 
         altitude = AltitudeConverter.Convert(@string[5..10]);
 
-        if (altitude.IsError)
+        if (altitude.Invalid)
             problem += altitude.Problem;
         else
             separation = altitude.Value;
 
         altitude = AltitudeConverter.Convert(@string[10..15]);
 
-        if (altitude.IsError)
+        if (altitude.Invalid)
             problem += altitude.Problem;
         else
             to = altitude.Value;
@@ -43,6 +43,6 @@ internal abstract class LevelRangeConverter : IStringConverter<LevelRangeConvert
         if (to.Unit is AltitudeUnit.Meters)
             to *= 10;
 
-        return new LevelRange(from, separation, to);
+        return new Level(from, separation, to);
     }
 }

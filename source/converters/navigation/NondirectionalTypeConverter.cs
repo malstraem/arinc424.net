@@ -3,7 +3,7 @@ using Arinc424.Navigation.Terms;
 namespace Arinc424.Converters;
 
 [Obsolete("todo separated types")]
-internal abstract class NondirectionalTypeConverter : IStringConverter<NondirectionalTypeConverter, NavaidType>
+internal abstract class NondirectionalTypeConverter : IStringConverter<NavaidType>
 {
     public static Result<NavaidType> Convert(ReadOnlySpan<char> @string) => @string[0] switch
     {

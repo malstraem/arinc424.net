@@ -1,6 +1,6 @@
 namespace Arinc424.Converters;
 
-internal abstract class FrequencyConverter : IStringConverter<FrequencyConverter, Frequency>
+internal abstract class FrequencyConverter : IStringConverter<Frequency>
 {
     public static Result<Frequency> Convert(ReadOnlySpan<char> @string)
     {

@@ -16,7 +16,7 @@ internal abstract class DecodeAttribute<TType> : DecodeAttribute where TType : n
 /// <typeparam name="TConverter">Associated <see cref="IStringConverter{, TType}"/>.</typeparam>
 [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Property)]
 internal sealed class DecodeAttribute<TConverter, TType> : DecodeAttribute<TType>
-    where TConverter : IStringConverter<TConverter, TType> where TType : notnull
+    where TConverter : IStringConverter<TType> where TType : notnull
 {
     internal override Result<TType> Convert(ReadOnlySpan<char> @string) => TConverter.Convert(@string);
 }

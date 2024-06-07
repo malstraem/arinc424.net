@@ -111,7 +111,7 @@ public abstract class ProcedurePoint : Record424
     /// <c>Multiple Code (MULTI CD)</c> or <c>Procedure Turn Indicator</c> character.
     /// </summary>
     /// <remarks>See section 5.130 or 5.271.</remarks>
-    [Character(112)]
+    [Character(112), Obsolete("todo")]
     public char CodeTurnIndicator { get; set; }
 
     /// <inheritdoc cref="Terms.Overlay"/>

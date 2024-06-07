@@ -1,6 +1,6 @@
 namespace Arinc424.Converters;
 
-internal abstract class CourseConverter : IStringConverter<CourseConverter, Course>
+internal abstract class CourseConverter : IStringConverter<Course>
 {
     public static Result<Course> Convert(ReadOnlySpan<char> @string) => @string[^1] is 'T'
         ? float.TryParse(@string[..^1], out float course)

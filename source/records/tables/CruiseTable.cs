@@ -8,7 +8,7 @@ namespace Arinc424.Tables;
 /// <remarks>See section 4.1.16.1.</remarks>
 [Section('T', 'C'), Sequenced(9)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
-public class CruiseTable : Record424<CruiseTableRow>, IIdentity
+public class CruiseTable : Record424<CruiseRow>, IIdentity
 {
     /// <summary>
     /// <c>Cruise Table Identifier (CRSE TBL IDENT)</c> field.

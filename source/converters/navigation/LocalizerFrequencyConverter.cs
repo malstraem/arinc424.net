@@ -1,11 +1,11 @@
 namespace Arinc424.Converters;
 
-internal abstract class LocalizerFrequencyConverter : IStringConverter<LocalizerFrequencyConverter, int>
+internal abstract class LocalizerFrequencyConverter : IStringConverter<int>
 {
     public static Result<int> Convert(ReadOnlySpan<char> @string)
     {
         var value = IntConverter.Convert(@string);
 
-        return value.IsError ? value : value.Value * 10;
+        return value.Invalid ? value : value.Value * 10;
     }
 }

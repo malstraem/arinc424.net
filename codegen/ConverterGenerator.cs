@@ -52,7 +52,7 @@ public abstract class ConverterGenerator(string qualifier) : IIncrementalGenerat
 
 namespace Arinc424.Converters;
 
-internal abstract class {name} : {converter}<{name}, {symbol.Name}>
+internal abstract class {name} : {converter}<{symbol.Name}>
 {{
     public static {@return} Convert({signature}) => ");
 

@@ -20,6 +20,7 @@ internal partial class Parser424
         {
             build.Diagnostics ??= [];
             build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, type, key));
+            Debug.WriteLine(build.Diagnostics.Last());
         }
     }
 

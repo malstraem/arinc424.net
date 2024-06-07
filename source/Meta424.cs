@@ -57,7 +57,7 @@ Sequence<FlightInfoRegion, FlightRegionPoint>,
 Sequence<ControlledAirspace, BoundaryPoint>,
 Sequence<RestrictiveAirspace, BoundaryPoint>,
 
-Sequence<CruiseTable, CruiseTableRow>]
+Sequence<CruiseTable, CruiseRow>]
 
 namespace Arinc424;
 

@@ -3,7 +3,7 @@ using Arinc424.Navigation.Terms;
 namespace Arinc424.Converters;
 
 [Obsolete("todo separated types")]
-internal abstract class OmnidirectionalCoverageConverter : ICharConverter<OmnidirectionalCoverageConverter, NavaidCoverage>
+internal abstract class OmnidirectionalCoverageConverter : ICharConverter<NavaidCoverage>
 {
     public static NavaidCoverage Convert(char @char) => @char switch
     {

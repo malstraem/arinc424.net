@@ -8,4 +8,6 @@ public abstract class Diagnostic(Record424 record, string problem, DiagnosticTyp
     public Record424 Record { get; } = record;
 
     public DiagnosticType DiagnosticType { get; } = diagnosticType;
+
+    public override string ToString() => Problem;
 }

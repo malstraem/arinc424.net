@@ -32,6 +32,10 @@ public class Data424
 
     public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
+    public List<AirportArrivalAltitudes> AirportArrivalAltitudes { get; set; } = [];
+
+    public List<AirportMinimumAltitudes> AirportMinimumAltitudes { get; set; } = [];
+
     public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
 
     public List<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; } = [];

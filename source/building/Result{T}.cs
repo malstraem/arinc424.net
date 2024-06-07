@@ -16,7 +16,7 @@ internal readonly ref struct Result<TType> where TType : notnull
 
     internal Result(string problem) => Problem = problem;
 
-    internal bool IsError => Problem is not null;
+    internal bool Invalid => Problem is not null;
 
     public static implicit operator Result<TType>(TType value) => new(value);
 

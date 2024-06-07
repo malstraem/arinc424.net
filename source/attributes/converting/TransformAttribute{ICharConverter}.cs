@@ -16,7 +16,7 @@ internal abstract class TransformAttribute<TType> : TransformAttribute where TTy
 /// <typeparam name="TConverter">Associated <see cref="ICharConverter{, TType}"/>.</typeparam>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
 internal sealed class TransformAttribute<TConverter, TType> : TransformAttribute<TType>
-    where TConverter : ICharConverter<TConverter, TType> where TType : Enum
+    where TConverter : ICharConverter<TType> where TType : Enum
 {
     internal override TType Convert(char @char) => TConverter.Convert(@char);
 }

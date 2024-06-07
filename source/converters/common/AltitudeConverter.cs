@@ -1,6 +1,6 @@
 namespace Arinc424.Converters;
 
-internal abstract class AltitudeConverter : IStringConverter<AltitudeConverter, Altitude>
+internal abstract class AltitudeConverter : IStringConverter<Altitude>
 {
     public static Result<Altitude> Convert(ReadOnlySpan<char> @string) => @string switch
     {

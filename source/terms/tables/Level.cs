@@ -1,7 +1,7 @@
 namespace Arinc424.Tables.Terms;
 
-[Decode<LevelRangeConverter, LevelRange>]
-public class LevelRange(Altitude from, Altitude separation, Altitude to)
+[Decode<LevelConverter, Level>]
+public class Level(Altitude from, Altitude separation, Altitude to)
 {
     /// <summary>
     /// <c>Cruise Level From</c> field.

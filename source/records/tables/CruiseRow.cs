@@ -4,7 +4,7 @@ namespace Arinc424.Tables;
 
 #pragma warning disable CS8618
 
-public class CruiseTableRow : Record424
+public class CruiseRow : Record424
 {
     /// <summary>
     /// <c>Course FROM</c> field.
@@ -30,5 +30,5 @@ public class CruiseTableRow : Record424
     public CourseType CourseType { get; set; }
 
     [Field(40, 54), Count(4)]
-    public LevelRange[] LevelRanges { get; set; }
+    public Level[] LevelRanges { get; set; }
 }
