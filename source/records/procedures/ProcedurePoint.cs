@@ -13,7 +13,7 @@ namespace Arinc424.Procedures;
 public abstract class ProcedurePoint : Record424
 {
     [Type(37, 38)]
-    [ForeignExcept<Airport, EnrouteWaypoint, OmnidirectionalStation, NondirectionalBeacon>(7, 12), Foreign(30, 36)]
+    [ForeignExcept<Airport, EnrouteWaypoint, Omnidirectional, Nondirectional>(7, 12), Foreign(30, 36)]
     public Geo? Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
@@ -41,7 +41,7 @@ public abstract class ProcedurePoint : Record424
 
     [Obsolete("TODO abstract navaid instead of geo point")]
     [Type(79, 80)]
-    [ForeignExcept<OmnidirectionalStation, NondirectionalBeacon>(7, 12), Foreign(51, 56)]
+    [ForeignExcept<Omnidirectional, Nondirectional>(7, 12), Foreign(51, 56)]
     public Geo? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
@@ -103,7 +103,7 @@ public abstract class ProcedurePoint : Record424
     /// </summary>
     /// <remarks>See section 5.144 and 5.272.</remarks>
     [Type(115, 116)]
-    [ForeignExcept<Airport, OmnidirectionalStation, NondirectionalBeacon, EnrouteWaypoint>(7, 12)]
+    [ForeignExcept<Airport, Omnidirectional, Nondirectional, EnrouteWaypoint>(7, 12)]
     [Foreign(107, 111), Foreign(113, 114)]
     public IIdentity? Center { get; set; }
 

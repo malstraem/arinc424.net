@@ -37,8 +37,8 @@ Sequence<HeliportDeparture, DeparturePoint>,
 
 Record<AirportBeacon>,
 Record<TacticalSystem>,
-Record<NondirectionalBeacon>,
-Record<OmnidirectionalStation>,
+Record<Nondirectional>,
+Record<Omnidirectional>,
 
 Record<GlobalLandingSystem>,
 Record<MicrowaveLandingSystem>,

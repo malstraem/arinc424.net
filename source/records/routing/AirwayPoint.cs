@@ -53,7 +53,7 @@ public class AirwayPoint : Record424
     /// </summary>
     /// <remarks>See section 5.23 and 5.14.</remarks>
     [Foreign(51, 54), Foreign(55, 56)]
-    public OmnidirectionalStation? RecommendedNavaid { get; set; }
+    public Omnidirectional? RecommendedNavaid { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(57, 59), NavigationPerformance]

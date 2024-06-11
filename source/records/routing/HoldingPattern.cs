@@ -24,7 +24,7 @@ public class HoldingPattern : Record424, IIcao, INamed
     public string? DuplicateIndicator { get; set; }
 
     [Type(37, 38)]
-    [ForeignExcept<EnrouteWaypoint, OmnidirectionalStation, NondirectionalBeacon>(7, 12), Foreign(30, 36)]
+    [ForeignExcept<EnrouteWaypoint, Omnidirectional, Nondirectional>(7, 12), Foreign(30, 36)]
     public Geo Fix { get; set; }
 
     /// <summary>

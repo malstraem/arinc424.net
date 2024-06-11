@@ -44,21 +44,21 @@ public class InstrumentLandingMarker : Geo, IIdentity, IIcao
     [Field(56, 74)]
     public Coordinates LocatorCoordinates { get; set; }
 
-    /// <inheritdoc cref="Terms.NavaidType"/>
-    [Field(75, 76), Decode<NondirectionalTypeConverter, NavaidType>]
-    public NavaidType NavaidType { get; set; }
+    /// <inheritdoc cref="NondirectType"/>
+    [Field(75, 76)]
+    public NondirectType NavaidType { get; set; }
 
-    /// <inheritdoc cref="NavaidCoverage"/>
-    [Character(77), Transform<NondirectionalCoverageConverter, NavaidCoverage>]
-    public NavaidCoverage Coverage { get; set; }
+    /// <inheritdoc cref="NondirectCoverage"/>
+    [Character(77)]
+    public NondirectCoverage Coverage { get; set; }
 
-    /// <inheritdoc cref="NavaidInfo"/>
+    /// <inheritdoc cref="NondirectInfo"/>
     [Character(78)]
-    public NavaidInfo Info { get; set; }
+    public NondirectInfo Info { get; set; }
 
-    /// <inheritdoc cref="NavaidCollocation"/>
+    /// <inheritdoc cref="MarkerCollocation"/>
     [Character(79)]
-    public NavaidCollocation Collocation { get; set; }
+    public MarkerCollocation Collocation { get; set; }
 
     [Field(80, 84), Obsolete("need more section 5.93 analysis")]
     public string? Facility { get; set; }

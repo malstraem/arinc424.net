@@ -13,7 +13,7 @@ internal abstract class TransformAttribute<TType> : TransformAttribute where TTy
 }
 
 /// <inheritdoc/>
-/// <typeparam name="TConverter">Associated <see cref="ICharConverter{, TType}"/>.</typeparam>
+/// <typeparam name="TConverter">Associated <see cref="ICharConverter{TType}"/>.</typeparam>
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
 internal sealed class TransformAttribute<TConverter, TType> : TransformAttribute<TType>
     where TConverter : ICharConverter<TType> where TType : Enum

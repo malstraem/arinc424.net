@@ -2,15 +2,33 @@ using Arinc424.Ports;
 
 namespace Arinc424.Navigation;
 
+using Terms;
+
 /// <summary>
 /// <c>VHF NAVAID</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.2.1.</remarks>
 [Section('D'), Continuous]
-public class OmnidirectionalStation : Navaid
+public class Omnidirectional : Navaid
 {
     [Foreign(7, 12)]
     public Airport? Airport { get; set; }
+
+    /// <inheritdoc cref="OmnidirectType"/>
+    [Field(28, 29)]
+    public OmnidirectType Type { get; set; }
+
+    /// <inheritdoc cref="OmnidirectCoverage"/>
+    [Character(30)]
+    public OmnidirectCoverage Coverage { get; set; }
+
+    /// <inheritdoc cref="OmnidirectInfo"/>
+    [Character(31)]
+    public OmnidirectInfo Info { get; set; }
+
+    /// <inheritdoc cref="OmnidirectCollocation"/>
+    [Character(32)]
+    public OmnidirectCollocation Collocation { get; set; }
 
     /// <summary>
     /// <c>DME Identifier (DME IDENT)</c> field.
@@ -38,7 +56,7 @@ public class OmnidirectionalStation : Navaid
 
     /// <inheritdoc cref="Terms.MeritFigure"/>
     [Character(85)]
-    public Terms.MeritFigure MeritFigure { get; set; }
+    public MeritFigure MeritFigure { get; set; }
 
     /// <summary>
     /// <c>ILS/DME Bias</c> field.
@@ -65,5 +83,5 @@ public class OmnidirectionalStation : Navaid
 
     /// <inheritdoc cref="Terms.ServiceVolume"/>
     [Character(123)]
-    public Terms.ServiceVolume ServiceVolume { get; set; }
+    public ServiceVolume ServiceVolume { get; set; }
 }

@@ -13,7 +13,7 @@ internal abstract class DecodeAttribute<TType> : DecodeAttribute where TType : n
 }
 
 /// <inheritdoc/>
-/// <typeparam name="TConverter">Associated <see cref="IStringConverter{, TType}"/>.</typeparam>
+/// <typeparam name="TConverter">Associated <see cref="IStringConverter{TType}"/>.</typeparam>
 [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Property)]
 internal sealed class DecodeAttribute<TConverter, TType> : DecodeAttribute<TType>
     where TConverter : IStringConverter<TType> where TType : notnull

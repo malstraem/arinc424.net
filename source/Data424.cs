@@ -44,9 +44,9 @@ public class Data424
 
     public List<InstrumentLandingMarker> InstrumentLandingMarkers { get; set; } = [];
 
-    public List<NondirectionalBeacon> NondirectionalBeacons { get; set; } = [];
+    public List<Nondirectional> Nondirectionals { get; set; } = [];
 
-    public List<OmnidirectionalStation> OmnidirectionalStations { get; set; } = [];
+    public List<Omnidirectional> Omnidirectionals { get; set; } = [];
 
     public List<Airway> Airways { get; set; } = [];
 

@@ -80,7 +80,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <remarks>See section 5.23 and 5.14.</remarks>
     [Foreign(65, 68), Foreign(69, 70)]
-    public OmnidirectionalStation? RecommendedStation { get; set; }
+    public Omnidirectional? RecommendedStation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>
     [Field(71, 75), Integer]
@@ -190,5 +190,5 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// Associated VHF Navaids.
     /// </summary>
     [Many]
-    public List<OmnidirectionalStation>? OmnidirectionalStations { get; set; }
+    public List<Omnidirectional>? OmnidirectionalStations { get; set; }
 }

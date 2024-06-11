@@ -17,7 +17,7 @@ public class AirportMinimumAltitudes : Record424
     public Airport Airport { get; set; }
 
     [Type(21, 22)]
-    [ForeignExcept<Airport, OmnidirectionalStation, NondirectionalBeacon, EnrouteWaypoint>(7, 12)]
+    [ForeignExcept<Airport, Omnidirectional, Nondirectional, EnrouteWaypoint>(7, 12)]
     [Foreign(14, 20)]
     public IIdentity Center { get; set; }
 

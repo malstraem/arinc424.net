@@ -25,7 +25,7 @@ public class AirportArrivalAltitudes : Record424, IIcao
     public string Approach { get; set; }
 
     [Type(27, 28)]
-    [ForeignExcept<EnrouteWaypoint, OmnidirectionalStation, NondirectionalBeacon>(7, 12), Foreign(20, 26)]
+    [ForeignExcept<EnrouteWaypoint, Omnidirectional, Nondirectional>(7, 12), Foreign(20, 26)]
     public Geo Fix { get; set; }
 
     /// <inheritdoc cref="Terms.FixPosition"/>
