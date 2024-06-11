@@ -1,21 +1,23 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies the target character index within an ARINC-424 string.
+/// Specifies the index of a character within an ARINC-424 string. Must come before <see cref="CharacterAttribute{TRecord}"/>.
 /// </summary>
-/// <remarks>Used by sequence or base types to define different indexes.</remarks>
-internal abstract class TargetCharacterAttribute(int index, Type targetType) : CharacterAttribute(index)
+/// <inheritdoc/>
+[AttributeUsage(AttributeTargets.Property)]
+internal class CharacterAttribute(int index) : IndexAttribute(index)
 {
-    /// <summary>
-    /// The target type for which the index is defined.
-    /// </summary>
-    public Type TargetType { get; } = targetType;
+    internal virtual bool IsMatch<TMatch>() where TMatch : Record424 => false;
 }
 
 /// <summary>
 /// Specifies the target character index for <typeparamref name="TRecord"/> within an ARINC-424 string.
+/// Used by sequence or base types to define different indexes.
 /// </summary>
-/// <remarks>Used by sequence or base types to define different indexes.</remarks>
+/// <inheritdoc/>
 /// <typeparam name="TRecord">Target type of record that index is defined.</typeparam>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-internal class CharacterAttribute<TRecord>(int index) : TargetCharacterAttribute(index, typeof(TRecord)) where TRecord : Record424;
+internal class CharacterAttribute<TRecord>(int index) : CharacterAttribute(index) where TRecord : Record424
+{
+    internal override bool IsMatch<TMatch>() => typeof(TMatch).IsAssignableTo(typeof(TRecord));
+}

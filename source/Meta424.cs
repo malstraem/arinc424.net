@@ -19,7 +19,7 @@ Record<GroundAugmentPoint>,
 Record<AirportArrivalAltitudes>,
 Record<AirportMinimumAltitudes>,
 Record<AirportTerminalWaypoint>,
-Record<AirportSatelliteAugmentPoint>,
+Record<AirportSatellitePoint>,
 Sequence<AirportCommunications, PortTransmitter>,
 
 Record<Heliport>,

@@ -28,9 +28,9 @@ internal sealed class SequenceAttribute<TRecord, TSub>() : SequenceAttribute(typ
     where TRecord : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    private readonly BuildInfo<TRecord> info = new(typeof(TRecord), typeof(TRecord).GetProperties());
+    private readonly BuildInfo<TRecord> info = new(typeof(TRecord).GetProperties());
 
-    private readonly BuildInfo<TSub> subInfo = new(typeof(TSub), typeof(TSub).GetProperties());
+    private readonly BuildInfo<TSub> subInfo = new(typeof(TSub).GetProperties());
 
     internal override Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics)
         => RecordBuilder<TRecord, TSub>.Build(strings, info, subInfo, diagnostics);
