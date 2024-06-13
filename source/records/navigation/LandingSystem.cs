@@ -2,8 +2,6 @@ using Arinc424.Ports;
 
 namespace Arinc424.Navigation;
 
-#pragma warning disable CS8618
-
 [Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public abstract class LandingSystem : Geo, IIdentity, IIcao

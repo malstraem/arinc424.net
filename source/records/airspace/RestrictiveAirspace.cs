@@ -1,7 +1,5 @@
 namespace Arinc424.Airspace;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Restrictive Airspace</c> primary record.
 /// </summary>

@@ -2,22 +2,15 @@ namespace Arinc424.Ports;
 
 using Terms;
 
-/// <summary>
-/// <c>Airport SBAS Path Point</c> primary record.
-/// </summary>
-/// <remarks>See section 4.1.28.1.</remarks>
-[Section('P', 'P', subsectionIndex: 13), Continuous(27)]
-public class AirportSatellitePoint : Geo
+[Continuous(27)]
+public abstract class PathPoint : Geo, IIcao, IIdentity
 {
-    [Foreign(7, 12)]
-    public Airport Airport { get; set; }
+    [Field(11, 12)]
+    public string IcaoCode { get; set; }
 
     [Obsolete("todo: linking when procedures will be post processed")]
     [Field(14, 19)]
     public string Approach { get; set; }
-
-    [Foreign(7, 12), Foreign(20, 24), Foreign(11, 12)]
-    public Runway Runway { get; set; }
 
     /// <inheritdoc cref="SatelliteOperationType"/>
     [Field(25, 26)]
@@ -29,10 +22,6 @@ public class AirportSatellitePoint : Geo
     /// <remarks>See section 5.224.</remarks>
     [Character(28)]
     public char RouteIndicator { get; set; }
-
-    /// <inheritdoc cref="SatelliteService"/>
-    [Field(29, 30)]
-    public SatelliteService Service { get; set; }
 
     /// <summary>
     /// <c>Reference Path Data Selector (REF PDS)</c> field.
@@ -46,7 +35,7 @@ public class AirportSatellitePoint : Geo
     /// </summary>
     /// <remarks>See section 5.257.</remarks>
     [Field(33, 36)]
-    public string PathIdentifier { get; set; }
+    public string Identifier { get; set; }
 
     /// <inheritdoc cref="Terms.ApproachPerformance"/>
     [Character(37)]
@@ -76,4 +65,23 @@ public class AirportSatellitePoint : Geo
     /// <remarks>See section 5.228.</remarks>
     [Field(94, 98), Float(100)]
     public float CourseWidth { get; set; }
+
+    /// <summary>
+    /// <c>Length Offset (OFFSET)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.259.</remarks>
+    [Field(99, 102), Integer]
+    public int LengthOffset { get; set; }
+
+    /// <inheritdoc cref="Terms.ThresholdHeight"/>
+    [Field(103, 109)]
+    public ThresholdHeight ThresholdHeight { get; set; }
+
+    /// <summary>
+    /// <c>Final Approach Segment Data CRC Remainder (FAS CRC)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.229.</remarks>
+    [Obsolete("need to convert?")]
+    [Field(116, 123)]
+    public string Remainder { get; set; }
 }

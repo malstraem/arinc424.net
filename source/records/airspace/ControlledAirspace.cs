@@ -2,8 +2,6 @@ namespace Arinc424.Airspace;
 
 using Terms;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Controlled Airspace</c> primary record.
 /// </summary>

@@ -2,8 +2,6 @@ using Arinc424.Ports;
 
 namespace Arinc424.Comms;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airport Communications</c> primary record.
 /// </summary>

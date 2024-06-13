@@ -2,8 +2,6 @@ using Arinc424.Tables;
 
 namespace Arinc424.Airspace;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>FIR/UIR</c> primary record.
 /// </summary>

@@ -1,7 +1,5 @@
 namespace Arinc424.Ports;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Flight Planning</c> primary record.
 /// </summary>

@@ -4,8 +4,6 @@ namespace Arinc424.Navigation;
 
 using Terms;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airport and Heliport Localizer Marker</c> primary record.
 /// </summary>

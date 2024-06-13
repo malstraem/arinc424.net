@@ -1,7 +1,5 @@
 namespace Arinc424.Tables;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Cruising Table</c> record.
 /// </summary>

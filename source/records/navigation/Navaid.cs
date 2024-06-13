@@ -1,7 +1,5 @@
 namespace Arinc424.Navigation;
 
-#pragma warning disable CS8618
-
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Navaid : Geo, IIdentity, IIcao, INamed
 {

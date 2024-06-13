@@ -4,8 +4,6 @@ using Arinc424.Waypoints;
 
 namespace Arinc424.Ports;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airport MSA</c> primary record.
 /// </summary>

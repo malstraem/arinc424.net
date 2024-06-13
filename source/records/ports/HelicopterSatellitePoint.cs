@@ -6,7 +6,7 @@ namespace Arinc424.Ports;
 /// <remarks>See section 4.2.8.1.</remarks>
 [Section('H', 'P', subsectionIndex: 13)]
 [Obsolete("placeholder")]
-public class HelicopterSatelliteAugmentPoint : Record424
+public class HelicopterSatellitePoint : SatellitePoint
 {
 
 }

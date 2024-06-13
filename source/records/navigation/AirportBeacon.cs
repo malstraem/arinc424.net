@@ -2,8 +2,6 @@ using Arinc424.Ports;
 
 namespace Arinc424.Navigation;
 
-#pragma warning disable CS8618
-
 /// <inheritdoc />
 [Section('P', 'N')]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]

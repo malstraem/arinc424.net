@@ -2,8 +2,6 @@ using Arinc424.Ports;
 
 namespace Arinc424.Procedures;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airport Approach</c> primary record.
 /// </summary>
