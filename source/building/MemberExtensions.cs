@@ -5,37 +5,37 @@ namespace Arinc424.Building;
 
 internal static class MemberExtensions
 {
-    internal static bool TryCharacterAttribute(this MemberInfo member, Type type, [NotNullWhen(true)] out CharacterAttribute? characterAttribute)
+    internal static bool TryCharacterAttribute<TRecord>(this MemberInfo member, [NotNullWhen(true)] out CharacterAttribute? character) where TRecord : Record424
     {
         var attributes = member.GetCustomAttributes<CharacterAttribute>();
 
-        characterAttribute = attributes.FirstOrDefault();
+        character = attributes.FirstOrDefault();
 
         foreach (var attribute in attributes)
         {
-            if (attribute is TargetCharacterAttribute target && (target.TargetType == type || type.IsSubclassOf(target.TargetType)))
+            if (attribute.IsMatch<TRecord>())
             {
-                characterAttribute = target;
+                character = attribute;
                 break;
             }
         }
-        return characterAttribute is not null;
+        return character is not null;
     }
 
-    internal static bool TryFieldAttribute(this MemberInfo member, Type type, [NotNullWhen(true)] out FieldAttribute? fieldAttribute)
+    internal static bool TryFieldAttribute<TRecord>(this MemberInfo member, [NotNullWhen(true)] out FieldAttribute? field) where TRecord : Record424
     {
         var attributes = member.GetCustomAttributes<FieldAttribute>();
 
-        fieldAttribute = attributes.FirstOrDefault();
+        field = attributes.FirstOrDefault();
 
         foreach (var attribute in attributes)
         {
-            if (attribute is TargetFieldAttribute target && (target.TargetType == type || type.IsSubclassOf(target.TargetType)))
+            if (attribute.IsMatch<TRecord>())
             {
-                fieldAttribute = target;
+                field = attribute;
                 break;
             }
         }
-        return fieldAttribute is not null;
+        return field is not null;
     }
 }

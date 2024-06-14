@@ -6,8 +6,6 @@ namespace Arinc424.Ports;
 
 using Terms;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airport</c> primary record.
 /// </summary>
@@ -53,7 +51,7 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <remarks>See section 5.108.</remarks>
     [Character(31)]
-    public Bool IsProcedurePublished { get; set; }
+    public Bool ProcedurePublished { get; set; }
 
     /// <inheritdoc cref="RunwaySurfaceType"/>
     [Character(32)]
@@ -190,5 +188,5 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     /// Associated VHF Navaids.
     /// </summary>
     [Many]
-    public List<Omnidirectional>? OmnidirectionalStations { get; set; }
+    public List<Omnidirectional>? Omnidirectionals { get; set; }
 }

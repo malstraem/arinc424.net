@@ -2,8 +2,6 @@ using Arinc424.Navigation;
 
 namespace Arinc424.Ports;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Runway</c> primary record.
 /// </summary>

@@ -4,8 +4,6 @@ using Arinc424.Ports;
 
 using Terms;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Special Activity Area</c> primary record.
 /// </summary>

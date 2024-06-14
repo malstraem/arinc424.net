@@ -1,7 +1,5 @@
 namespace Arinc424.Routing;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Enroute Airways</c> primary record.
 /// </summary>

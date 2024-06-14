@@ -4,8 +4,6 @@ using Arinc424.Waypoints.Terms;
 
 namespace Arinc424.Routing;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// Fields of <c>Enroute Airways</c> primary record. Used by <see cref="Airway"/> like subsequence.
 /// </summary>

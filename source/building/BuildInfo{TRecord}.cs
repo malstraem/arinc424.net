@@ -25,9 +25,21 @@ internal class BuildInfo<TRecord> where TRecord : Record424
             : (property.PropertyType, false);
 
         // prefer decode attached to the property
-        var decode = property.GetCustomAttribute<DecodeAttribute>() ?? (type.IsArray
-            ? type.GetElementType()!.GetCustomAttribute<DecodeAttribute>()
-            : type.GetCustomAttribute<DecodeAttribute>());
+        var decodes = property.GetCustomAttributes<DecodeAttribute>();
+
+        if (!decodes.Any())
+            decodes = type.IsArray ? type.GetElementType()!.GetCustomAttributes<DecodeAttribute>() : type.GetCustomAttributes<DecodeAttribute>();
+
+        var decode = decodes.FirstOrDefault();
+
+        foreach (var attribute in decodes)
+        {
+            if (attribute.IsMatch<TRecord>())
+            {
+                decode = attribute;
+                break;
+            }
+        }
 
         return decode is not null
             ? type.IsArray
@@ -42,7 +54,7 @@ internal class BuildInfo<TRecord> where TRecord : Record424
             : new StringAssignment<TRecord>(property, regex, range);
     }
 
-    internal BuildInfo(Type type, PropertyInfo[] properties)
+    internal BuildInfo(PropertyInfo[] properties)
     {
         List<Assignment<TRecord>> assignments = [];
 
@@ -50,11 +62,11 @@ internal class BuildInfo<TRecord> where TRecord : Record424
         {
             var regex = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
 
-            if (property.TryCharacterAttribute(type, out var characterAttribute))
+            if (property.TryCharacterAttribute<TRecord>(out var characterAttribute))
             {
                 assignments.Add(GetIndexAssignment(property, regex, characterAttribute.Index));
             }
-            else if (property.TryFieldAttribute(type, out var fieldAttribute))
+            else if (property.TryFieldAttribute<TRecord>(out var fieldAttribute))
             {
                 assignments.Add(GetRangeAssignment(property, regex, fieldAttribute.Range));
             }

@@ -2,8 +2,6 @@ namespace Arinc424.Waypoints;
 
 using Terms;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Waypoint</c> primary record.
 /// </summary>

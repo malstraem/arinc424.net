@@ -1,7 +1,5 @@
 namespace Arinc424.Navigation;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airport and Heliport Localizer and Glide Slope</c> primary record.
 /// </summary>

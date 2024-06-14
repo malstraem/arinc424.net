@@ -1,7 +1,5 @@
 namespace Arinc424;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// Base ARINC-424 record with area/customer code, file record number and cycle date fields.
 /// </summary>

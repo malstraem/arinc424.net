@@ -3,8 +3,6 @@ using Arinc424.Waypoints;
 
 namespace Arinc424.Routing;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Holding Pattern</c> primary record.
 /// </summary>

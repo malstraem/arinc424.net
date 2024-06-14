@@ -2,8 +2,6 @@ namespace Arinc424.Routing;
 
 using Terms;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airways Marker</c> primary record.
 /// </summary>

@@ -5,8 +5,6 @@ namespace Arinc424.Ports;
 
 using Terms;
 
-#pragma warning disable CS8618
-
 /// <summary>
 /// <c>Airport TAA</c> primary record.
 /// </summary>

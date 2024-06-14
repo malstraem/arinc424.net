@@ -2,8 +2,6 @@ using Arinc424.Tables.Terms;
 
 namespace Arinc424.Tables;
 
-#pragma warning disable CS8618
-
 public class CruiseRow : Record424
 {
     /// <summary>

@@ -1,5 +1,8 @@
 namespace Arinc424;
 
+/// <summary>
+/// Various courses and bearings according to the specification.
+/// </summary>
 [Decode<CourseConverter, Course>]
 [DebuggerDisplay($"{{{nameof(Value)}}}, {{{nameof(Type)}}}")]
 public struct Course(float value, CourseType type)

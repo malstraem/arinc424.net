@@ -1,5 +1,8 @@
 namespace Arinc424;
 
+/// <summary>
+/// Various altitudes according to the specification.
+/// </summary>
 [Decode<AltitudeConverter, Altitude>]
 [DebuggerDisplay($"{{{nameof(Value)}}}, {{{nameof(Unit)}}}")]
 public readonly struct Altitude(int value, AltitudeUnit unit)

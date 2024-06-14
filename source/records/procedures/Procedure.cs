@@ -1,7 +1,5 @@
 namespace Arinc424.Procedures;
 
-#pragma warning disable CS8618
-
 [Continuous(39), Sequenced(27, 29)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class Procedure<TPoint> : Record424<TPoint>, IIdentity where TPoint : ProcedurePoint
