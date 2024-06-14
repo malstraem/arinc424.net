@@ -16,12 +16,10 @@ public enum AirwayCommUsages : ushort
     /// Flight Information Service (FIS).
     /// </summary>
     [Map('F')] FlightInfo = 1 << 1,
-
-    [Offset]
     /// <summary>
     /// Air/Ground.
     /// </summary>
-    [Map('A')] AirGround = 1 << 2,
+    [Offset, Map('A')] AirGround = 1 << 2,
     /// <summary>
     /// Discrete Frequency.
     /// </summary>
@@ -34,12 +32,10 @@ public enum AirwayCommUsages : ushort
     /// Secondary Frequency.
     /// </summary>
     [Map('S')] Secondary = 1 << 5,
-
-    [Offset]
     /// <summary>
     /// VHF Direction Finding Service (VDF).
     /// </summary>
-    [Map('D')] DirectionFinding = 1 << 6,
+    [Offset, Map('D')] DirectionFinding = 1 << 6,
     /// <summary>
     /// Language other than English.
     /// </summary>

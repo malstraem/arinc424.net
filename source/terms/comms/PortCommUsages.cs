@@ -40,12 +40,10 @@ public enum PortCommUsages : ushort
     /// Terminal Area Control (other than dedicated Terminal Control Unit).
     /// </summary>
     [Map('T')] TerminalAreaControl = 1 << 7,
-
-    [Offset]
     /// <summary>
     /// Aerodrome Traffic Frequency (ATF).
     /// </summary>
-    [Map('A')] AerodromeTraffic = 1 << 8,
+    [Offset, Map('A')] AerodromeTraffic = 1 << 8,
     /// <summary>
     /// Common Traffic Advisory Frequency (CTAF).
     /// </summary>
@@ -58,12 +56,10 @@ public enum PortCommUsages : ushort
     /// Secondary Frequency.
     /// </summary>
     [Map('S')] Secondary = 1 << 11,
-
-    [Offset]
     /// <summary>
     /// VHF Direction Finding Service (VDF).
     /// </summary>
-    [Map('D')] DirectionFinding = 1 << 12,
+    [Offset, Map('D')] DirectionFinding = 1 << 12,
     /// <summary>
     /// Language other than English.
     /// </summary>

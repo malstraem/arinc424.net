@@ -12,12 +12,10 @@ public enum WaypointUsages : byte
     /// RNAV.
     /// </summary>
     [Map('R')] AreaNavigation = 1,
-
-    [Offset]
     /// <summary>
     /// LO Altitude.
     /// </summary>
-    [Map('B')] LowHigh = Low | High,
+    [Offset, Map('B')] LowHigh = Low | High,
     /// <summary>
     /// HI Altitude.
     /// </summary>

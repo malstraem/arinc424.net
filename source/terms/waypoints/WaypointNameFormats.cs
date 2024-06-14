@@ -64,12 +64,10 @@ public enum WaypointNameFormats : ushort
     /// UIR Fix.
     /// </summary>
     [Map('U')] UpperInfoRegion = 1 << 13,
-
-    [Offset]
     /// <summary>
     /// Localizer Marker with officially published five - letter identifier.
     /// </summary>
-    [Map('O')] LocalizerOfficialFive = 1 << 14,
+    [Offset, Map('O')] LocalizerOfficialFive = 1 << 14,
     /// <summary>
     /// Localizer Marker without officially published five - letter identifier.
     /// </summary>

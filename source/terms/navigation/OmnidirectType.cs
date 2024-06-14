@@ -12,18 +12,16 @@ public enum OmnidirectType : byte
     /// VOR.
     /// </summary>
     [Map('V')] Omnidirect = 1,
-
-    [Offset]
     /// <summary>
     /// DME.
     /// </summary>
-    [Map('D')] DistanceEquipment = 1 << 1,
+    [Offset, Map('D')] DistanceEquipment = 1 << 1,
     /// <summary>
-    /// TACAN (channels 17-59 & 70-126).
+    /// TACAN (channels 17-59 and 70-126).
     /// </summary>
     [Map('T')] Tactical = 1 << 2,
     /// <summary>
-    /// MIL TACAN (channels 1-16 & 60-69).
+    /// MIL TACAN (channels 1-16 and 60-69).
     /// </summary>
     [Map('M')] MilitaryTactical = 1 << 3,
     /// <summary>

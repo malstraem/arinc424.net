@@ -28,12 +28,10 @@ public enum DepartureQualifiers : ushort
     /// RNP SAAAR/AR.
     /// </summary>
     [Map('F')] NavPerformance = 1 << 4,
-
-    [Offset]
     /// <summary>
     /// VOR/DME RNAV.
     /// </summary>
-    [Map('C')] AreaNavigation = 1 << 5,
+    [Offset, Map('C')] AreaNavigation = 1 << 5,
     /// <summary>
     /// Database supported RNAV.
     /// </summary>

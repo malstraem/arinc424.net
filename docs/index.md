@@ -26,8 +26,8 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [MLS](api/Arinc424.Navigation.MicrowaveLandingSystem.yml) ✔️
 - [Localizer Marker](api/Arinc424.Navigation.InstrumentLandingMarker.yml) ✔️
 - [Terminal NDB](api/Arinc424.Navigation.AirportBeacon.yml) ✔️
-- [SBAS Path Point](api/Arinc424.Ports.AirportSatelliteAugmentPoint.yml) 🚧
-- [GBAS Path Point](api/Arinc424.Ports.GroundAugmentPoint.yml) 🚧
+- [SBAS Path Point](api/Arinc424.Ports.AirportSatellitePoint.yml) ✔️
+- [GBAS Path Point](api/Arinc424.Ports.GroundPoint.yml) ✔️
 - [Flight Planning](api/Arinc424.Ports.FlightPlanning.yml) 🚧
 - [MSA](api/Arinc424.Ports.AirportMinimumAltitudes.yml) ✔️
 - [GLS Station](api/Arinc424.Navigation.GlobalLandingSystem.yml) ✔️
@@ -39,7 +39,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [SID](api/Arinc424.Procedures.HeliportDeparture.yml)/[STAR](api/Arinc424.Procedures.HeliportArrival.yml)/[Approach](api/Arinc424.Procedures.HeliportApproach.yml) 🚧
 - [TAA](api/Arinc424.Ports.HeliportArrivalAltitudes.yml) 🚧
 - [MSA](api/Arinc424.Ports.HeliportMinimumAltitudes.yml) 🚧
-- [SBAS Path Point](api/Arinc424.Ports.HelicopterSatelliteAugmentPoint.yml) 🚧
+- [SBAS Path Point](api/Arinc424.Ports.HelicopterSatellitePoint.yml) 🚧
 - [Communications](api/Arinc424.Comms.HeliportCommunications.yml) 🚧
 
 # [Enroute](#tab/enroute)
@@ -53,8 +53,8 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [Communications](api/Arinc424.Comms.AirwayCommunications.yml) ✔️
 
 # [Navaid](#tab/navaid)
-- [VHF Navaid](api/Arinc424.Navigation.OmnidirectionalStation.yml) ✔️
-- [NDB Navaid](api/Arinc424.Navigation.NondirectionalBeacon.yml) ✔️
+- [VHF Navaid](api/Arinc424.Navigation.Omnidirectional.yml) ✔️
+- [NDB Navaid](api/Arinc424.Navigation.Nondirectional.yml) ✔️
 - [TACAN](api/Arinc424.Navigation.TacticalSystem.yml) 🚧
 
 # [Airspace](#tab/airspace)

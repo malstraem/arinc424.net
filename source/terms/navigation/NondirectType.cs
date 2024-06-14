@@ -20,12 +20,10 @@ public enum NondirectType : byte
     /// Marine Beacon.
     /// </summary>
     [Map('M')] Marine = 1 << 2,
-
-    [Offset]
     /// <summary>
     /// Inner Marker.
     /// </summary>
-    [Map('I')] Inner = 1 << 3,
+    [Offset, Map('I')] Inner = 1 << 3,
     /// <summary>
     /// Middle Marker.
     /// </summary>

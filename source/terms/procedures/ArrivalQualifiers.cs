@@ -32,12 +32,10 @@ public enum ArrivalQualifiers : ushort
     /// Continuous Descent STAR.
     /// </summary>
     [Map('P')] Continuous = 1 << 5,
-
-    [Offset]
     /// <summary>
     /// VOR/DME RNAV.
     /// </summary>
-    [Map('C')] AreaNavigation = 1 << 6,
+    [Offset, Map('C')] AreaNavigation = 1 << 6,
     /// <summary>
     /// Database supported RNAV.
     /// </summary>

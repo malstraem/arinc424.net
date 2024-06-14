@@ -48,12 +48,10 @@ public enum WaypointDescriptions : uint
     /// VHF Navaid As Waypoint.
     /// </summary>
     [Map('V')] Omnidirectional = 1u << 9,
-
-    [Offset]
     /// <summary>
     /// Flyover Waypoint, Ending Leg.
     /// </summary>
-    [Map('B')] Ending = 1u << 10,
+    [Offset, Map('B')] Ending = 1u << 10,
     /// <summary>
     /// End of Continuous Segment.
     /// </summary>
@@ -66,12 +64,10 @@ public enum WaypointDescriptions : uint
     /// Fly-Over Waypoint.
     /// </summary>
     [Map('Y')] FlyOver = 1u << 13,
-
-    [Offset]
     /// <summary>
     /// Unnamed Stepdown Fix Final Approach Segment.
     /// </summary>
-    [Map('A')] StepdownFinal = 1u << 14,
+    [Offset, Map('A')] StepdownFinal = 1u << 14,
     /// <summary>
     /// Unnamed Stepdown Fix Intermediate Approach Segment.
     /// </summary>
@@ -96,12 +92,10 @@ public enum WaypointDescriptions : uint
     /// Named Stepdown Fix.
     /// </summary>
     [Map('S')] NamedStepdown = 1u << 20,
-
-    [Offset]
     /// <summary>
     /// Initial Approach Fix.
     /// </summary>
-    [Map('A')] InitialApproach = 1u << 21,
+    [Offset, Map('A')] InitialApproach = 1u << 21,
     /// <summary>
     /// Intermediate Approach Fix.
     /// </summary>

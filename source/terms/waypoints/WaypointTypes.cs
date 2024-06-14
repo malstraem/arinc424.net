@@ -48,12 +48,10 @@ public enum WaypointTypes : uint
     /// RNAV Waypoint.
     /// </summary>
     [Map('W')] AreaNavigation = 1u << 9,
-
-    [Offset]
     /// <summary>
     /// Final Approach Fix.
     /// </summary>
-    [Map('A')] FinalApproach = 1u << 10,
+    [Offset, Map('A')] FinalApproach = 1u << 10,
     /// <summary>
     /// Initial Approach Fix and Final Approach Fix.
     /// </summary>
@@ -118,12 +116,10 @@ public enum WaypointTypes : uint
     /// Latitude/Longitude Fix, Half Degree of Latitude.
     /// </summary>
     [Map('W')] HalfLatitude = 1u << 26,
-
-    [Offset]
     /// <summary>
     /// Published for use in SID.
     /// </summary>
-    [Map('D')] DepartureUse = 1u << 27,
+    [Offset, Map('D')] DepartureUse = 1u << 27,
     /// <summary>
     /// Published for use in STAR.
     /// </summary>

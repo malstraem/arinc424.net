@@ -13,12 +13,10 @@ public enum MarkerType : byte
     /// </summary>
     [Map('L')]
     Locator = 1,
-
-    [Offset]
     /// <summary>
     /// Inner Marker.
     /// </summary>
-    [Map('I')] Inner = 1 << 1,
+    [Offset, Map('I')] Inner = 1 << 1,
     /// <summary>
     /// Middle Marker.
     /// </summary>

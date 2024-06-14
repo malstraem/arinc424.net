@@ -15,15 +15,6 @@ internal partial class Parser424
 
     private readonly Dictionary<Type, Queue<Build>> builds = [];
 
-    internal Parser424()
-    {
-        foreach (var (_, type) in meta.Types)
-        {
-            builds[type] = [];
-            strings[type] = ([], []);
-        }
-    }
-
     private void Process(IEnumerable<string> strings)
     {
         foreach (string @string in strings)
@@ -99,10 +90,26 @@ internal partial class Parser424
         BuildSequences();
     }
 
+    [Obsolete("placeholder")]
+    private void Postprocess()
+    {
+
+    }
+
+    internal Parser424()
+    {
+        foreach (var (_, type) in meta.Types)
+        {
+            builds[type] = [];
+            strings[type] = ([], []);
+        }
+    }
+
     internal Data424 Parse(IEnumerable<string> strings)
     {
         Process(strings);
         Build();
+        Postprocess();
         Link();
 
         var data = new Data424();

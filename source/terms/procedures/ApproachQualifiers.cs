@@ -60,12 +60,10 @@ public enum ApproachQualifiers : uint
     /// RNAV Procedure that Requires FAS Data Block.
     /// </summary>
     [Map('W')] FinalApproachSegmentDataBlock = 1u << 12,
-
-    [Offset]
     /// <summary>
     /// Primary Missed Approach.
     /// </summary>
-    [Map('A')] PrimaryMissed = 1u << 13,
+    [Offset, Map('A')] PrimaryMissed = 1u << 13,
     /// <summary>
     /// Secondary Missed Approach.
     /// </summary>
