@@ -131,6 +131,18 @@ public class Airport : Geo, IIdentity, IIcao, INamed
     public List<Runway>? Runways { get; set; }
 
     /// <summary>
+    /// Associated GBAS points.
+    /// </summary>
+    [Many]
+    public List<GroundPoint>? GroundPoints { get; set; }
+
+    /// <summary>
+    /// Associated SBAS points.
+    /// </summary>
+    [Many]
+    public List<AirportSatellitePoint>? SattelitePoints { get; set; }
+
+    /// <summary>
     /// Associated GLS's.
     /// </summary>
     [Many]

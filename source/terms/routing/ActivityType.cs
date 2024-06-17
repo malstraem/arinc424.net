@@ -8,7 +8,7 @@ namespace Arinc424.Routing.Terms;
 public enum ActivityType : byte
 {
     Unknown,
-    [Map('P')] Jumping,
+    [Map('P')] Parachute,
     [Map('G')] Glider,
     [Map('H')] HangGlider,
     [Map('U')] Ultralight

@@ -1,6 +1,7 @@
 using System.Collections.Frozen;
 using System.Reflection;
 
+using Arinc424;
 using Arinc424.Airspace;
 using Arinc424.Comms;
 using Arinc424.Navigation;
@@ -11,6 +12,8 @@ using Arinc424.Tables;
 using Arinc424.Waypoints;
 
 [assembly:
+Record<OffrouteAltitude>,
+
 Record<Gate>,
 Record<Runway>,
 Record<Airport>,
@@ -63,6 +66,7 @@ namespace Arinc424;
 
 internal class Meta424
 {
+    [Obsolete("todo: versioning")]
     internal Meta424()
     {
         var assembly = Assembly.GetExecutingAssembly();
@@ -70,8 +74,8 @@ internal class Meta424
         Records = assembly.GetCustomAttributes<RecordAttribute>();
         Sequences = assembly.GetCustomAttributes<SequenceAttribute>();
 
-        Dictionary<Type, InfoAttribute> info = [];
         Dictionary<(char, char), Type> types = [];
+        Dictionary<Type, InfoAttribute> info = [];
 
         foreach (var attribute in Records.Cast<InfoAttribute>().Concat(Sequences))
         {
@@ -90,7 +94,7 @@ internal class Meta424
 
     internal IEnumerable<SequenceAttribute> Sequences { get; }
 
-    internal FrozenDictionary<Type, InfoAttribute> Info { get; }
-
     internal FrozenDictionary<(char, char), Type> Types { get; }
+
+    internal FrozenDictionary<Type, InfoAttribute> Info { get; }
 }

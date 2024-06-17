@@ -3,6 +3,8 @@
     <RootNamespace>Arinc424</RootNamespace>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

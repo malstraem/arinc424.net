@@ -13,7 +13,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 
 ## Specification map
 
-- [Grid MORA](api/Arinc424.MinimumAltitudesGrid.yml) 🚧
+- [Grid MORA](api/Arinc424.OffrouteAltitude.yml) 🚧
 
 # [Airport](#tab/airport)
 - [Reference Points](api/Arinc424.Ports.Airport.yml) ✔️

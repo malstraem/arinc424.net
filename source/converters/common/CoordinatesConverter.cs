@@ -1,5 +1,8 @@
 namespace Arinc424.Converters;
 
+/// <summary>
+/// See section 5.36 and 5.37.
+/// </summary>
 internal abstract class CoordinatesConverter : IStringConverter<Coordinates>
 {
     public static Result<Coordinates> Convert(ReadOnlySpan<char> @string)

@@ -14,11 +14,15 @@ namespace Arinc424;
 /// </summary>
 public class Data424
 {
+    public List<OffrouteAltitude> OffrouteAltitudes { get; set; } = [];
+
     public List<Gate> Gates { get; set; } = [];
 
     public List<Runway> Runways { get; set; } = [];
 
     public List<Airport> Airports { get; set; } = [];
+
+    public List<GroundPoint> GroundPoints { get; set; } = [];
 
     public List<AirportBeacon> AirportBeacons { get; set; } = [];
 
@@ -30,11 +34,13 @@ public class Data424
 
     public List<AirportCommunications> AirportCommunications { get; set; } = [];
 
-    public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
+    public List<AirportSatellitePoint> AirportSatellitePoints { get; set; } = [];
 
     public List<AirportArrivalAltitudes> AirportArrivalAltitudes { get; set; } = [];
 
     public List<AirportMinimumAltitudes> AirportMinimumAltitudes { get; set; } = [];
+
+    public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
     public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
 
