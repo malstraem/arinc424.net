@@ -12,11 +12,11 @@ internal abstract class SequenceAttribute : InfoAttribute
 
     internal LinksAttribute SubLinks { get; }
 
-    internal SequenceAttribute(Type type, Type subType) : base(type, type.GetProperties())
+    internal SequenceAttribute(Type type, Type subType) : base(type)
     {
         Range = type.GetCustomAttribute<SequencedAttribute>()!.Range;
 
-        SubLinks = new LinksAttribute(subType, subType.GetProperties());
+        SubLinks = new LinksAttribute(subType);
     }
 
     internal abstract Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics);

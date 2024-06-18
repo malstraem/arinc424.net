@@ -3,14 +3,11 @@ namespace Arinc424.Ports;
 using Terms;
 
 [Continuous(27)]
+[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
 public abstract class PathPoint : Geo, IIcao, IIdentity
 {
     [Field(11, 12)]
     public string IcaoCode { get; set; }
-
-    [Obsolete("todo: linking when procedures will be post processed")]
-    [Field(14, 19)]
-    public string Approach { get; set; }
 
     /// <inheritdoc cref="SatelliteOperationType"/>
     [Field(25, 26)]

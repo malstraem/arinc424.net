@@ -6,7 +6,7 @@ namespace Arinc424.Procedures;
 /// <remarks>See section 4.2.3.1.</remarks>
 [Section('H', 'D', subsectionIndex: 13)]
 [Obsolete("placeholder")]
-public class HeliportDeparture : Departure
+public class HeliportDeparture : DepartureSequence
 {
 
 }

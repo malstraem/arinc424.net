@@ -35,7 +35,7 @@ public class AirwayPoint : Record424
     [Character(47)]
     public Terms.AirwayRestriction Restriction { get; set; }
 
-    /// <inheritdoc cref="Records.CruiseTable"/>
+    /// <inheritdoc cref="Tables.CruiseTable"/>
     [Foreign(48, 49)]
     public CruiseTable? CruiseTable { get; set; }
 

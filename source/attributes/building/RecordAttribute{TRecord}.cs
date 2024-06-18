@@ -4,7 +4,7 @@ using Arinc424.Diagnostics;
 namespace Arinc424.Attributes;
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-internal abstract class RecordAttribute(Type type) : InfoAttribute(type, type.GetProperties())
+internal abstract class RecordAttribute(Type type) : InfoAttribute(type)
 {
     internal abstract Record424 Build(string @string, Queue<Diagnostic> diagnostics);
 }

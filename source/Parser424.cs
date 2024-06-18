@@ -90,12 +90,6 @@ internal partial class Parser424
         BuildSequences();
     }
 
-    [Obsolete("placeholder")]
-    private void Postprocess()
-    {
-
-    }
-
     internal Parser424()
     {
         foreach (var (_, type) in meta.Types)

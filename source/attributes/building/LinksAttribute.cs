@@ -8,9 +8,13 @@ namespace Arinc424.Attributes;
 
 internal class LinksAttribute : Attribute
 {
-    internal LinksAttribute(Type type, PropertyInfo[] properties)
+    internal LinksAttribute(Type type)
     {
         Type = type;
+
+        var properties = type.GetProperties();
+
+        PrimaryKey = PrimaryKey.Create(properties);
 
         List<Link> links = [];
 
@@ -50,6 +54,8 @@ internal class LinksAttribute : Attribute
     internal Type Type { get; }
 
     internal Link[]? Links { get; }
+
+    internal PrimaryKey? PrimaryKey { get; }
 
     internal Dictionary<Type, PropertyInfo>? One { get; }
 

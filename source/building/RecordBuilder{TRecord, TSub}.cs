@@ -9,9 +9,14 @@ internal static class RecordBuilder<TRecord, TSub> where TRecord : Record424<TSu
     {
         var record = RecordBuilder<TRecord>.Build(strings.First(), info, diagnostics);
 
-        while (strings.TryDequeue(out string? @string))
-            record.Sequence.Add(RecordBuilder<TSub>.Build(@string, subInfo, diagnostics));
+        var sequence = record.Sequence = new TSub[strings.Count];
 
+        int i = 0;
+        while (strings.TryDequeue(out string? @string))
+        {
+            sequence[unchecked(i)] = RecordBuilder<TSub>.Build(@string, subInfo, diagnostics);
+            i++;
+        }
         return record;
     }
 }

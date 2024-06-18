@@ -31,9 +31,9 @@ Record<HeliportArrivalAltitudes>,
 Record<HeliportMinimumAltitudes>,
 Record<HeliportTerminalWaypoint>,
 
-Sequence<AirportArrival, ArrivalPoint>,
-Sequence<AirportApproach, ApproachPoint>,
-Sequence<AirportDeparture, DeparturePoint>,
+Sequence<AirportArrivalSequence, ArrivalPoint>,
+Sequence<AirportApproachSequence, ApproachPoint>,
+Sequence<AirportDepartureSequence, DeparturePoint>,
 Sequence<HeliportArrival, ArrivalPoint>,
 Sequence<HeliportApproach, ApproachPoint>,
 Sequence<HeliportDeparture, DeparturePoint>,
@@ -76,19 +76,26 @@ internal class Meta424
 
         Dictionary<(char, char), Type> types = [];
         Dictionary<Type, InfoAttribute> info = [];
+        Dictionary<Type, LinksAttribute> links = [];
 
         foreach (var attribute in Records.Cast<InfoAttribute>().Concat(Sequences))
         {
             info.Add(attribute.Type, attribute);
+            links.Add(attribute.Type, attribute);
             types.Add((attribute.Section.SectionChar, attribute.Section.SubsectionChar), attribute.Type);
         }
+        links.Add(typeof(AirportArrival), new LinksAttribute(typeof(AirportArrival)));
+        links.Add(typeof(AirportApproach), new LinksAttribute(typeof(AirportApproach)));
+        links.Add(typeof(AirportDeparture), new LinksAttribute(typeof(AirportDeparture)));
+
         Info = info.ToFrozenDictionary();
         Types = types.ToFrozenDictionary();
+        Links = links.ToFrozenDictionary();
     }
 
-    internal IEnumerable<InfoAttribute> GetWithPrimaryKey() => Info.Select(x => x.Value).Where(x => x.PrimaryKey is not null);
+    internal IEnumerable<LinksAttribute> GetWithPrimaryKey() => Links.Select(x => x.Value).Where(x => x.PrimaryKey is not null);
 
-    internal IEnumerable<InfoAttribute> GetWithLinks() => Info.Select(x => x.Value).Where(x => x.Links is not null);
+    internal IEnumerable<LinksAttribute> GetWithLinks() => Links.Select(x => x.Value).Where(x => x.Links is not null);
 
     internal IEnumerable<RecordAttribute> Records { get; }
 
@@ -97,4 +104,6 @@ internal class Meta424
     internal FrozenDictionary<(char, char), Type> Types { get; }
 
     internal FrozenDictionary<Type, InfoAttribute> Info { get; }
+
+    internal FrozenDictionary<Type, LinksAttribute> Links { get; }
 }

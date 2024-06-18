@@ -50,8 +50,8 @@ internal partial class Parser424
             {
                 reference.Property.SetValue(record, referenced);
 
-                var one = meta.Info[reference.Type].One;
-                var many = meta.Info[reference.Type].Many;
+                var one = meta.Links[reference.Type].One;
+                var many = meta.Links[reference.Type].Many;
 
                 if (many is not null && many.TryGetValue(info.Type, out var property))
                 {
