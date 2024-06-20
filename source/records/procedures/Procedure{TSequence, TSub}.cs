@@ -1,7 +1,7 @@
 namespace Arinc424.Procedures;
 
 [DebuggerDisplay($"{{{nameof(Identifier)}}}")]
-public abstract class Procedure<TSequence, TSub> : Record424, IIdentity, IIcao where TSequence : ProcedureSequence<TSub> where TSub : ProcedurePoint
+public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdentity, IIcao where TSequence : ProcedureSequence<TSub> where TSub : ProcedurePoint
 {
     /// <summary>
     /// <para>
@@ -17,6 +17,4 @@ public abstract class Procedure<TSequence, TSub> : Record424, IIdentity, IIcao w
 
     [Field(11, 12), Primary, Obsolete("same")]
     public string IcaoCode { get; set; }
-
-    public TSequence[] Sequences { get; set; }
 }

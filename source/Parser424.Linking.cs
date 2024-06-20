@@ -94,13 +94,13 @@ internal partial class Parser424
         });
 
         // todo
-        _ = Parallel.ForEach(meta.Sequences.Where(x => x.SubLinks.Links is not null), x =>
+        /*_ = Parallel.ForEach(meta.Sequences.Where(x => x.SubLinks.Links is not null), x =>
         {
             foreach (var record in builds[x.Type])
             {
                 foreach (var sub in x.GetSequence(record.Record))
                     ProcessForeignKeys(sub, x.SubLinks);
             }
-        });
+        });*/
     }
 }

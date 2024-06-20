@@ -5,42 +5,62 @@ namespace Arinc424;
 
 internal partial class Parser424
 {
-    private void ConcatProcedureSequences<TProcedure, TSequence, TSub>()
-        where TProcedure : Procedure<TSequence, TSub>, new()
-        where TSequence : ProcedureSequence<TSub>
-        where TSub : ProcedurePoint
+    private void Concat<TSequence, TSub>(Func<TSub, TSequence> @new, Func<TSub, TSub, bool> trigger)
+        where TSequence : Record424<TSub>
+        where TSub : Record424
     {
+        var builds = this.builds[typeof(TSub)];
+
+        var enumerator = builds.GetEnumerator();
+
+        Queue<TSub> sequence = [];
         Queue<Build> procedures = [];
-        Queue<TSequence> sequences = [];
 
-        var builds = this.builds[typeof(TSequence)];
+        TSub sub, next;
 
-        while (builds.TryDequeue(out var build))
+        if (enumerator.MoveNext())
         {
-            var sequence = (TSequence)build.Record;
-            sequences.Enqueue(sequence);
+            sequence.Enqueue(sub = (TSub)enumerator.Current.Record);
 
-            if (!builds.TryPeek(out build) || ((TSequence)build.Record).Identifier != sequence.Identifier)
+            while (enumerator.MoveNext())
             {
-                procedures.Enqueue(new Build(new TProcedure
+                next = (TSub)enumerator.Current.Record;
+
+                if (trigger(next, sub))
                 {
-                    Source = sequence.Source,
-                    AreaCode = sequence.AreaCode,
-                    IcaoCode = sequence.IcaoCode,
-                    Identifier = sequence.Identifier,
-                    Sequences = [.. sequences],
-                }, null)); // todo: save diagnostics
-                sequences.Clear();
+                    Enqueue();
+                    sequence.Clear();
+                }
+                sequence.Enqueue(sub = next);
+            }
+            Enqueue();
+
+            void Enqueue()
+            {
+                var result = @new(sub);
+                result.Sequence = [.. sequence];
+
+                procedures.Enqueue(new Build<TSequence, TSub>(result)); // todo: save diagnostics
+                sequence.Clear();
             }
         }
-        this.builds[typeof(TProcedure)] = procedures;
+        this.builds[typeof(TSequence)] = procedures;
     }
 
-    [Obsolete("placeholder")]
     private void Postprocess()
     {
-        ConcatProcedureSequences<AirportArrival, AirportArrivalSequence, ArrivalPoint>();
-        ConcatProcedureSequences<AirportApproach, AirportApproachSequence, ApproachPoint>();
-        ConcatProcedureSequences<AirportDeparture, AirportDepartureSequence, DeparturePoint>();
+        static AirportArrival @new(AirportArrivalSequence sub) => new()
+        {
+            Source = sub.Source,
+            AreaCode = sub.AreaCode,
+            IcaoCode = sub.IcaoCode,
+            Identifier = sub.Identifier,
+        };
+
+        static bool trigger(AirportArrivalSequence one, AirportArrivalSequence other) => one.Identifier != other.Identifier;
+
+        Concat<AirportArrival, AirportArrivalSequence>(@new, trigger);
+        //Concat<AirportApproach, AirportApproachSequence>();
+        //Concat<AirportDeparture, AirportDepartureSequence>();
     }
 }

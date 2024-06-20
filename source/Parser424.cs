@@ -1,7 +1,6 @@
 using System.Collections;
 
 using Arinc424.Building;
-using Arinc424.Diagnostics;
 
 namespace Arinc424;
 
@@ -11,9 +10,9 @@ internal partial class Parser424
 
     private readonly Queue<string> skipped = [];
 
-    private readonly Dictionary<Type, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
-
     private readonly Dictionary<Type, Queue<Build>> builds = [];
+
+    private readonly Dictionary<Type, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
 
     private void Process(IEnumerable<string> strings)
     {
@@ -29,7 +28,7 @@ internal partial class Parser424
         {
             foreach (var (type, info) in meta.Info)
             {
-                if (!info.Section.IsMatch(@string))
+                if (!info.IsMatch(@string))
                     continue;
 
                 (info.IsContinuation(@string) ? this.strings[type].Continuation : this.strings[type].Primary).Enqueue(@string);
@@ -39,56 +38,7 @@ internal partial class Parser424
         }
     }
 
-    private static void Enqueue(Record424 record, Queue<Build> builds, ref Queue<Diagnostic> diagnostics)
-    {
-        if (diagnostics.Count > 0)
-        {
-            builds.Enqueue(new(record, diagnostics));
-            diagnostics = [];
-        }
-        else
-        {
-            builds.Enqueue(new(record, null));
-        }
-    }
-
-    [Obsolete("todo: try parse sequence number")]
-    private void BuildSequences()
-    {
-        _ = Parallel.ForEach(meta.Sequences, attribute =>
-        {
-            var queue = builds[attribute.Type];
-            var primary = strings[attribute.Type].Primary;
-
-            Queue<string> sequence = [];
-            Queue<Diagnostic> diagnostics = [];
-
-            while (primary.TryDequeue(out string? @string))
-            {
-                sequence.Enqueue(@string);
-
-                int number = int.Parse(@string[attribute.Range]);
-
-                if (!primary.TryPeek(out @string) || int.Parse(@string[attribute.Range]) <= number)
-                    Enqueue(attribute.Build(sequence, diagnostics), queue, ref diagnostics);
-            }
-        });
-    }
-
-    private void Build()
-    {
-        _ = Parallel.ForEach(meta.Records, attribute =>
-        {
-            var queue = builds[attribute.Type];
-            var primary = strings[attribute.Type].Primary;
-
-            Queue<Diagnostic> diagnostics = [];
-
-            while (primary.TryDequeue(out string? @string))
-                Enqueue(attribute.Build(@string, diagnostics), queue, ref diagnostics);
-        });
-        BuildSequences();
-    }
+    private void Build() => Parallel.ForEach(meta.Builds, attribute => builds[attribute.Type] = attribute.Build(strings[attribute.Type].Primary));
 
     internal Parser424()
     {
@@ -104,7 +54,7 @@ internal partial class Parser424
         Process(strings);
         Build();
         Postprocess();
-        Link();
+        //Link();
 
         var data = new Data424();
 

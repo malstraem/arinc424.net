@@ -5,35 +5,41 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Attributes;
 
-[AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-internal abstract class SequenceAttribute : InfoAttribute
-{
-    internal Range Range { get; }
-
-    internal LinksAttribute SubLinks { get; }
-
-    internal SequenceAttribute(Type type, Type subType) : base(type)
-    {
-        Range = type.GetCustomAttribute<SequencedAttribute>()!.Range;
-
-        SubLinks = new LinksAttribute(subType);
-    }
-
-    internal abstract Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics);
-
-    internal abstract IEnumerable<Record424> GetSequence(Record424 record);
-}
-
-internal sealed class SequenceAttribute<TRecord, TSub>() : SequenceAttribute(typeof(TRecord), typeof(TSub))
+internal sealed class SequenceAttribute<TRecord, TSub>() : RecordAttribute<TRecord>
     where TRecord : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    private readonly BuildInfo<TRecord> info = new(typeof(TRecord).GetProperties());
+    internal Range range = typeof(TRecord).GetCustomAttribute<SequencedAttribute>()!.Range;
 
     private readonly BuildInfo<TSub> subInfo = new(typeof(TSub).GetProperties());
 
-    internal override Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics)
-        => RecordBuilder<TRecord, TSub>.Build(strings, info, subInfo, diagnostics);
+    [Obsolete("todo: try parse sequence number")]
+    internal override Queue<Build> Build(Queue<string> strings)
+    {
+        Queue<Build> builds = [];
+        Queue<string> sequence = [];
+        Queue<Diagnostic> diagnostics = [];
 
-    internal override IEnumerable<Record424> GetSequence(Record424 record) => ((TRecord)record).Sequence;
+        while (strings.TryDequeue(out string? @string))
+        {
+            sequence.Enqueue(@string);
+
+            int number = int.Parse(@string[range]);
+
+            if (!strings.TryPeek(out @string) || int.Parse(@string[range]) <= number)
+            {
+                var build = new Build<TRecord, TSub>(RecordBuilder<TRecord, TSub>.Build(sequence, info, subInfo, diagnostics));
+
+                if (diagnostics.Count > 0)
+                {
+                    build.Diagnostics = diagnostics;
+                    diagnostics = [];
+                }
+                builds.Enqueue(build);
+            }
+        }
+        return builds;
+    }
+
+    internal LinksAttribute SubLinks { get; } = new LinksAttribute(typeof(TSub));
 }
