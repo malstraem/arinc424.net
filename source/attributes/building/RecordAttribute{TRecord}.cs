@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using Arinc424.Building;
 using Arinc424.Diagnostics;
 
@@ -8,11 +10,13 @@ internal class RecordAttribute<TRecord>() : BuildAttribute(typeof(TRecord)) wher
 {
     protected readonly BuildInfo<TRecord> info = new(typeof(TRecord).GetProperties());
 
-    internal override Queue<Build> Build(Queue<string> strings)
+    protected readonly ProcessAttribute<TRecord>? process = typeof(TRecord).GetCustomAttribute<ProcessAttribute<TRecord>>();
+
+    internal override IEnumerable<Build> Build(Queue<string> strings)
     {
         Queue<Diagnostic> diagnostics = [];
 
-        Queue<Build> builds = new(strings.Count);
+        Queue<Build<TRecord>> builds = new(strings.Count);
 
         while (strings.TryDequeue(out string? @string))
         {
@@ -27,4 +31,6 @@ internal class RecordAttribute<TRecord>() : BuildAttribute(typeof(TRecord)) wher
         }
         return builds;
     }
+
+    internal override Type Type => process is null ? base.Type : process.NewType;
 }

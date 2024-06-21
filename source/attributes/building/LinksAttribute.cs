@@ -51,7 +51,7 @@ internal class LinksAttribute : Attribute
             Many = many;
     }
 
-    internal Type Type { get; }
+    internal virtual Type Type { get; }
 
     internal Link[]? Links { get; }
 

@@ -10,7 +10,7 @@ internal partial class Parser424
 
     private readonly Queue<string> skipped = [];
 
-    private readonly Dictionary<Type, Queue<Build>> builds = [];
+    private readonly Dictionary<Type, IEnumerable<Build>> builds = [];
 
     private readonly Dictionary<Type, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
 
@@ -43,17 +43,13 @@ internal partial class Parser424
     internal Parser424()
     {
         foreach (var (_, type) in meta.Types)
-        {
-            builds[type] = [];
             strings[type] = ([], []);
-        }
     }
 
     internal Data424 Parse(IEnumerable<string> strings)
     {
         Process(strings);
         Build();
-        Postprocess();
         //Link();
 
         var data = new Data424();
@@ -64,8 +60,8 @@ internal partial class Parser424
 
             var list = (IList)property.GetValue(data)!;
 
-            while (builds[type].TryDequeue(out var record))
-                _ = list.Add(record.Record);
+            foreach (var build in builds[type])
+                _ = list.Add(build.Record);
         });
         return data;
     }

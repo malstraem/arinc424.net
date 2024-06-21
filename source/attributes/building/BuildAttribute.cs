@@ -10,7 +10,7 @@ internal abstract class BuildAttribute(Type type) : LinksAttribute(type)
 
     private readonly int? continuationIndex = type.GetCustomAttribute<ContinuousAttribute>()?.Index;
 
-    internal abstract Queue<Build> Build(Queue<string> strings);
+    internal abstract IEnumerable<Build> Build(Queue<string> strings);
 
     internal bool IsMatch(string @string) => section.IsMatch(@string);
 

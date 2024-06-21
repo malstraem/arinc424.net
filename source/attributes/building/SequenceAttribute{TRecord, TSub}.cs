@@ -5,20 +5,21 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Attributes;
 
-internal sealed class SequenceAttribute<TRecord, TSub>() : RecordAttribute<TRecord>
-    where TRecord : Record424<TSub>, new()
+internal sealed class SequenceAttribute<TSequence, TSub>() : RecordAttribute<TSequence>
+    where TSequence : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    internal Range range = typeof(TRecord).GetCustomAttribute<SequencedAttribute>()!.Range;
-
     private readonly BuildInfo<TSub> subInfo = new(typeof(TSub).GetProperties());
 
-    [Obsolete("todo: try parse sequence number")]
-    internal override Queue<Build> Build(Queue<string> strings)
+    private readonly Range range = typeof(TSequence).GetCustomAttribute<SequencedAttribute>()!.Range;
+
+    [Obsolete("todo: sequence number try parsing")]
+    internal override IEnumerable<Build> Build(Queue<string> strings)
     {
-        Queue<Build> builds = [];
         Queue<string> sequence = [];
         Queue<Diagnostic> diagnostics = [];
+
+        Queue<Build<TSequence>> builds = [];
 
         while (strings.TryDequeue(out string? @string))
         {
@@ -28,7 +29,7 @@ internal sealed class SequenceAttribute<TRecord, TSub>() : RecordAttribute<TReco
 
             if (!strings.TryPeek(out @string) || int.Parse(@string[range]) <= number)
             {
-                var build = new Build<TRecord, TSub>(RecordBuilder<TRecord, TSub>.Build(sequence, info, subInfo, diagnostics));
+                var build = new Build<TSequence, TSub>(RecordBuilder<TSequence, TSub>.Build(sequence, info, subInfo, diagnostics));
 
                 if (diagnostics.Count > 0)
                 {
@@ -38,7 +39,7 @@ internal sealed class SequenceAttribute<TRecord, TSub>() : RecordAttribute<TReco
                 builds.Enqueue(build);
             }
         }
-        return builds;
+        return process is not null ? process.Process(builds) : builds;
     }
 
     internal LinksAttribute SubLinks { get; } = new LinksAttribute(typeof(TSub));

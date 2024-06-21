@@ -26,11 +26,11 @@ public class Data424
 
     public List<AirportBeacon> AirportBeacons { get; set; } = [];
 
-    /*public List<AirportArrival> AirportArrivals { get; set; } = [];
+    public List<AirportArrival> AirportArrivals { get; set; } = [];
 
     public List<AirportApproach> AirportApproaches { get; set; } = [];
 
-    public List<AirportDeparture> AirportDepartures { get; set; } = [];*/
+    public List<AirportDeparture> AirportDepartures { get; set; } = [];
 
     public List<AirportCommunications> AirportCommunications { get; set; } = [];
 

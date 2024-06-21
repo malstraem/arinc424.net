@@ -107,10 +107,6 @@ internal class Meta424
             links.Add(attribute.Type, attribute);
             types.Add(attribute.Section, attribute.Type);
         }
-        links.Add(typeof(AirportArrival), new LinksAttribute(typeof(AirportArrival)));
-        links.Add(typeof(AirportApproach), new LinksAttribute(typeof(AirportApproach)));
-        links.Add(typeof(AirportDeparture), new LinksAttribute(typeof(AirportDeparture)));
-
         Info = info.ToFrozenDictionary();
         Types = types.ToFrozenDictionary();
         Links = links.ToFrozenDictionary();
