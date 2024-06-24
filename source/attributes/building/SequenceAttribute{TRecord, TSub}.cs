@@ -9,7 +9,7 @@ internal sealed class SequenceAttribute<TSequence, TSub>() : RecordAttribute<TSe
     where TSequence : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    private readonly BuildInfo<TSub> subInfo = new(typeof(TSub).GetProperties());
+    private readonly BuildInfo<TSub> subInfo = new();
 
     private readonly Range range = typeof(TSequence).GetCustomAttribute<SequencedAttribute>()!.Range;
 
@@ -41,6 +41,4 @@ internal sealed class SequenceAttribute<TSequence, TSub>() : RecordAttribute<TSe
         }
         return process is not null ? process.Process(builds) : builds;
     }
-
-    internal LinksAttribute SubLinks { get; } = new LinksAttribute(typeof(TSub));
 }

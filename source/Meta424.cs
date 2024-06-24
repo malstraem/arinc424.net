@@ -95,32 +95,21 @@ internal class Meta424
     [Obsolete("todo: supplement versioning (v18 - v23)")]
     internal Meta424()
     {
-        Builds = Assembly.GetExecutingAssembly().GetCustomAttributes<BuildAttribute>();
-
         Dictionary<(char, char), Type> types = [];
-        Dictionary<Type, BuildAttribute> info = [];
-        Dictionary<Type, LinksAttribute> links = [];
+        Dictionary<Type, InfoAttribute> typeInfo = [];
 
-        foreach (var attribute in Builds)
+        foreach (var info in Info)
         {
-            info.Add(attribute.Type, attribute);
-            links.Add(attribute.Type, attribute);
-            types.Add(attribute.Section, attribute.Type);
+            types.Add(info.Section, info.Type);
+            typeInfo.Add(info.Type, info);
         }
-        Info = info.ToFrozenDictionary();
         Types = types.ToFrozenDictionary();
-        Links = links.ToFrozenDictionary();
+        TypeInfo = typeInfo.ToFrozenDictionary();
     }
-
-    internal IEnumerable<LinksAttribute> GetWithPrimaryKey() => Links.Select(x => x.Value).Where(x => x.PrimaryKey is not null);
-
-    internal IEnumerable<LinksAttribute> GetWithLinks() => Links.Select(x => x.Value).Where(x => x.Links is not null);
-
-    internal IEnumerable<BuildAttribute> Builds { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<BuildAttribute>();
 
     internal FrozenDictionary<(char, char), Type> Types { get; }
 
-    internal FrozenDictionary<Type, BuildAttribute> Info { get; }
+    internal FrozenDictionary<Type, InfoAttribute> TypeInfo { get; }
 
-    internal FrozenDictionary<Type, LinksAttribute> Links { get; }
+    internal IEnumerable<InfoAttribute> Info { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
 }

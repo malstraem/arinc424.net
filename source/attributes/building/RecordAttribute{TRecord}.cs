@@ -1,17 +1,11 @@
-using System.Reflection;
-
 using Arinc424.Building;
 using Arinc424.Diagnostics;
 
 namespace Arinc424.Attributes;
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-internal class RecordAttribute<TRecord>() : BuildAttribute(typeof(TRecord)) where TRecord : Record424, new()
+internal class RecordAttribute<TRecord>() : InfoAttribute<TRecord> where TRecord : Record424, new()
 {
-    protected readonly BuildInfo<TRecord> info = new(typeof(TRecord).GetProperties());
-
-    protected readonly ProcessAttribute<TRecord>? process = typeof(TRecord).GetCustomAttribute<ProcessAttribute<TRecord>>();
-
     internal override IEnumerable<Build> Build(Queue<string> strings)
     {
         Queue<Diagnostic> diagnostics = [];
@@ -31,6 +25,4 @@ internal class RecordAttribute<TRecord>() : BuildAttribute(typeof(TRecord)) wher
         }
         return builds;
     }
-
-    internal override Type Type => process is null ? base.Type : process.NewType;
 }

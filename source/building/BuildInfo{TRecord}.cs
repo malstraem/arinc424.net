@@ -54,11 +54,11 @@ internal class BuildInfo<TRecord> where TRecord : Record424
             : new StringAssignment<TRecord>(property, regex, range);
     }
 
-    internal BuildInfo(PropertyInfo[] properties)
+    internal BuildInfo()
     {
         List<Assignment<TRecord>> assignments = [];
 
-        foreach (var property in properties)
+        foreach (var property in typeof(TRecord).GetProperties())
         {
             var regex = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
 

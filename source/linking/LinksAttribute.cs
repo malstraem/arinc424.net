@@ -1,37 +1,25 @@
 using System.Reflection;
 
-using Arinc424.Linking;
+namespace Arinc424.Linking;
 
-namespace Arinc424.Attributes;
-
-#pragma warning disable CA1018
-
-internal class LinksAttribute : Attribute
+internal class LinksInfo
 {
-    internal LinksAttribute(Type type)
+    internal LinksInfo(Type type)
     {
-        Type = type;
-
-        var properties = type.GetProperties();
-
-        PrimaryKey = PrimaryKey.Create(properties);
-
         List<Link> links = [];
 
         Dictionary<Type, PropertyInfo> one = [];
         Dictionary<Type, PropertyInfo> many = [];
 
-        foreach (var property in properties)
+        foreach (var property in type.GetProperties())
         {
             var foreignAttributes = property.GetCustomAttributes<ForeignAttribute>();
 
             if (foreignAttributes.Any())
             {
                 links.Add(new Link(property, foreignAttributes.ToArray(), property.GetCustomAttribute<TypeAttribute>()));
-                continue;
             }
-
-            if (property.GetCustomAttribute<ManyAttribute>() is not null)
+            else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {
                 many.Add(property.PropertyType.GetGenericArguments().First(), property);
             }
@@ -51,11 +39,7 @@ internal class LinksAttribute : Attribute
             Many = many;
     }
 
-    internal virtual Type Type { get; }
-
     internal Link[]? Links { get; }
-
-    internal PrimaryKey? PrimaryKey { get; }
 
     internal Dictionary<Type, PropertyInfo>? One { get; }
 

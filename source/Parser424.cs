@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Concurrent;
 
 using Arinc424.Building;
+using Arinc424.Linking;
 
 namespace Arinc424;
 
@@ -10,7 +12,7 @@ internal partial class Parser424
 
     private readonly Queue<string> skipped = [];
 
-    private readonly Dictionary<Type, IEnumerable<Build>> builds = [];
+    private readonly ConcurrentDictionary<Type, IEnumerable<Build>> builds = [];
 
     private readonly Dictionary<Type, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
 
@@ -26,31 +28,39 @@ internal partial class Parser424
         // (branching, apparently, will not give any tangible gain)
         bool TryEnqueue(string @string)
         {
-            foreach (var (type, info) in meta.Info)
+            foreach (var info in meta.Info)
             {
                 if (!info.IsMatch(@string))
                     continue;
 
-                (info.IsContinuation(@string) ? this.strings[type].Continuation : this.strings[type].Primary).Enqueue(@string);
+                (info.IsContinuation(@string) ? this.strings[info.Type].Continuation : this.strings[info.Type].Primary).Enqueue(@string);
                 return true;
             }
             return false;
         }
     }
 
-    private void Build() => Parallel.ForEach(meta.Builds, attribute => builds[attribute.Type] = attribute.Build(strings[attribute.Type].Primary));
+    private void Build() => Parallel.ForEach(meta.Info, info => builds[info.Type] = info.Build(strings[info.Type].Primary));
+
+    [Obsolete("TODO diagnostic log")]
+    private void Link()
+    {
+        var unique = new Unique(meta.Info, builds);
+
+        _ = Parallel.ForEach(meta.Info, info => info.Link(builds[info.Type], unique, meta));
+    }
 
     internal Parser424()
     {
-        foreach (var (_, type) in meta.Types)
-            strings[type] = ([], []);
+        foreach (var info in meta.Info)
+            strings[info.Type] = ([], []);
     }
 
     internal Data424 Parse(IEnumerable<string> strings)
     {
         Process(strings);
         Build();
-        //Link();
+        Link();
 
         var data = new Data424();
 
