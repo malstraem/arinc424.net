@@ -71,6 +71,8 @@ Sequence<AirportCommunications, PortTransmitter>,
 
 #region Company Routes
 Record<Alternate>,
+Record<CompanyRoute>,
+Record<HelicopterCompanyRoute>,
 #endregion
 
 #region Tables
@@ -81,7 +83,7 @@ Sequence<CruiseTable, CruiseRow>,
 #endregion
 
 #region Airspace
-Sequence<FlightInfoRegion, FlightRegionPoint>,
+Sequence<FlightInfoRegion, RegionPoint>,
 Sequence<ControlledAirspace, BoundaryPoint>,
 Sequence<RestrictiveAirspace, BoundaryPoint>,
 #endregion 

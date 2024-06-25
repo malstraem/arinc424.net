@@ -42,12 +42,14 @@ internal partial class Parser424
 
     private void Build() => Parallel.ForEach(meta.Info, info => builds[info.Type] = info.Build(strings[info.Type].Primary));
 
-    [Obsolete("TODO diagnostic log")]
     private void Link()
     {
         var unique = new Unique(meta.Info, builds);
 
         _ = Parallel.ForEach(meta.Info, info => info.Link(builds[info.Type], unique, meta));
+
+        /*foreach (var info in meta.Info)
+            info.Link(builds[info.Type], unique, meta);*/
     }
 
     internal Parser424()
