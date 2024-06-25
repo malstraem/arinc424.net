@@ -20,3 +20,19 @@ public class AirportApproach : AirportProcedure<AirportApproachSequence, Approac
 }
 
 public class AirportDeparture : AirportProcedure<AirportDepartureSequence, DeparturePoint>;
+
+public class HeliportProcedure<TSequence, TSub> : Procedure<TSequence, TSub> where TSequence : ProcedureSequence<TSub> where TSub : ProcedurePoint
+{
+    [Foreign(7, 12), Primary]
+    public Heliport Heliport { get; set; }
+}
+
+public class HeliportArrival : HeliportProcedure<HeliportArrivalSequence, ArrivalPoint>;
+
+public class HeliportApproach : HeliportProcedure<HeliportApproachSequence, ApproachPoint>
+{
+    [One]
+    public HelicopterSatellitePoint? SatellitePoint { get; set; }
+}
+
+public class HeliportDeparture : HeliportProcedure<HeliportDepartureSequence, DeparturePoint>;

@@ -40,9 +40,9 @@ Record<HeliportMinimumAltitudes>,
 Record<HeliportTerminalWaypoint>,
 Record<HelicopterSatellitePoint>,
 
-Sequence<HeliportArrival, ArrivalPoint>,
-Sequence<HeliportApproach, ApproachPoint>,
-Sequence<HeliportDeparture, DeparturePoint>,
+Sequence<HeliportArrivalSequence, ArrivalPoint>,
+Sequence<HeliportApproachSequence, ApproachPoint>,
+Sequence<HeliportDepartureSequence, DeparturePoint>,
 #endregion
 
 #region Airport

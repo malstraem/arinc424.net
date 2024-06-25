@@ -5,10 +5,11 @@ public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdenti
 {
     /// <summary>
     /// <para>
-    ///   <c>SID/STAR Route Identifier (SID/STAR IDENT)</c> field for <see cref="DepartureSequence"/> and <see cref="ArrivalSequence"/>.
+    ///   <c>SID/STAR Route Identifier (SID/STAR IDENT)</c> field
+    ///   for <see cref="AirportDeparture"/>, <see cref="AirportArrival"/>, <see cref="HeliportDeparture"/> and <see cref="HeliportArrival"/>.
     /// </para>
     /// <para>
-    ///   <c>Approach Route Identifier (APPROACH IDENT)</c> field for <see cref="Appa"/>.
+    ///   <c>Approach Route Identifier (APPROACH IDENT)</c> field for <see cref="AirportApproach"/> and <see cref="HeliportApproach"/>.
     /// </para>
     /// </summary>
     /// <remarks>See section 5.9 and 5.10.</remarks>
