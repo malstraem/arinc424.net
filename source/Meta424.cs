@@ -11,90 +11,107 @@ using Arinc424.Routing;
 using Arinc424.Tables;
 using Arinc424.Waypoints;
 
+#region Mappping
+// see specification Table 5-1
 [assembly:
 Record<OffrouteAltitude>,
 
-Record<Gate>,
-Record<Runway>,
-Record<Airport>,
-Record<FlightPlanning>,
-Record<GroundPoint>,
-Record<AirportArrivalAltitudes>,
-Record<AirportMinimumAltitudes>,
-Record<AirportTerminalWaypoint>,
-Record<AirportSatellitePoint>,
-Sequence<AirportCommunications, PortTransmitter>,
+#region Navaid
+Record<Tactical>,
+Record<Nondirectional>,
+Record<Omnidirectional>,
+#endregion
 
+#region Enroute
+Record<AirwayMarker>,
+Record<HoldingPattern>,
+Record<EnrouteWaypoint>,
+Record<SpecialActivityArea>,
+
+Sequence<Airway, AirwayPoint>,
+Sequence<AirwayCommunications, AirwayTransmitter>,
+#endregion
+
+#region Heliport
 Record<Heliport>,
 Record<HeliportCommunications>,
 Record<HeliportArrivalAltitudes>,
 Record<HeliportMinimumAltitudes>,
 Record<HeliportTerminalWaypoint>,
+Record<HelicopterSatellitePoint>,
 
-Sequence<AirportArrival, ArrivalPoint>,
-Sequence<AirportApproach, ApproachPoint>,
-Sequence<AirportDeparture, DeparturePoint>,
-Sequence<HeliportArrival, ArrivalPoint>,
-Sequence<HeliportApproach, ApproachPoint>,
-Sequence<HeliportDeparture, DeparturePoint>,
+Sequence<HeliportArrivalSequence, ArrivalPoint>,
+Sequence<HeliportApproachSequence, ApproachPoint>,
+Sequence<HeliportDepartureSequence, DeparturePoint>,
+#endregion
+
+#region Airport
+Record<Gate>,
+Record<Runway>,
+Record<Airport>,
+Record<GroundPoint>,
+Record<FlightPlanning>,
+Record<AirportSatellitePoint>,
+Record<AirportArrivalAltitudes>,
+Record<AirportMinimumAltitudes>,
+Record<AirportTerminalWaypoint>,
 
 Record<AirportBeacon>,
-Record<TacticalSystem>,
-Record<Nondirectional>,
-Record<Omnidirectional>,
-
 Record<GlobalLandingSystem>,
 Record<MicrowaveLandingSystem>,
 Record<InstrumentLandingSystem>,
 Record<InstrumentLandingMarker>,
 
-Record<Alternate>,
-Record<AirwayMarker>,
-Record<HoldingPattern>,
-Record<EnrouteWaypoint>,
-Record<SpecialActivityArea>,
-Sequence<Airway, AirwayPoint>,
-Sequence<AirwayCommunications, AirwayTransmitter>,
+Sequence<AirportArrivalSequence, ArrivalPoint>,
+Sequence<AirportApproachSequence, ApproachPoint>,
+Sequence<AirportDepartureSequence, DeparturePoint>,
 
-Sequence<FlightInfoRegion, FlightRegionPoint>,
+Sequence<AirportCommunications, PortTransmitter>,
+#endregion
+
+#region Company Routes
+Record<Alternate>,
+Record<CompanyRoute>,
+Record<HelicopterCompanyRoute>,
+#endregion
+
+#region Tables
+Record<CommunicationType>,
+Record<GeographicalReference>,
+
+Sequence<CruiseTable, CruiseRow>,
+#endregion
+
+#region Airspace
+Sequence<FlightInfoRegion, RegionPoint>,
 Sequence<ControlledAirspace, BoundaryPoint>,
 Sequence<RestrictiveAirspace, BoundaryPoint>,
-
-Sequence<CruiseTable, CruiseRow>]
+#endregion 
+]
+#endregion
 
 namespace Arinc424;
 
 internal class Meta424
 {
-    [Obsolete("todo: versioning")]
+    [Obsolete("todo: supplement versioning (v18 - v23)")]
     internal Meta424()
     {
-        var assembly = Assembly.GetExecutingAssembly();
-
-        Records = assembly.GetCustomAttributes<RecordAttribute>();
-        Sequences = assembly.GetCustomAttributes<SequenceAttribute>();
-
         Dictionary<(char, char), Type> types = [];
-        Dictionary<Type, InfoAttribute> info = [];
+        Dictionary<Type, InfoAttribute> typeInfo = [];
 
-        foreach (var attribute in Records.Cast<InfoAttribute>().Concat(Sequences))
+        foreach (var info in Info)
         {
-            info.Add(attribute.Type, attribute);
-            types.Add((attribute.Section.SectionChar, attribute.Section.SubsectionChar), attribute.Type);
+            types.Add(info.Section, info.Type);
+            typeInfo.Add(info.Type, info);
         }
-        Info = info.ToFrozenDictionary();
         Types = types.ToFrozenDictionary();
+        TypeInfo = typeInfo.ToFrozenDictionary();
     }
-
-    internal IEnumerable<InfoAttribute> GetWithPrimaryKey() => Info.Select(x => x.Value).Where(x => x.PrimaryKey is not null);
-
-    internal IEnumerable<InfoAttribute> GetWithLinks() => Info.Select(x => x.Value).Where(x => x.Links is not null);
-
-    internal IEnumerable<RecordAttribute> Records { get; }
-
-    internal IEnumerable<SequenceAttribute> Sequences { get; }
 
     internal FrozenDictionary<(char, char), Type> Types { get; }
 
-    internal FrozenDictionary<Type, InfoAttribute> Info { get; }
+    internal FrozenDictionary<Type, InfoAttribute> TypeInfo { get; }
+
+    internal IEnumerable<InfoAttribute> Info { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
 }

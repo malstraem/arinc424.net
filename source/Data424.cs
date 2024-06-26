@@ -42,6 +42,22 @@ public class Data424
 
     public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
+    public List<Heliport> Heliports { get; set; } = [];
+
+    public List<HeliportArrival> HeliportArrivals { get; set; } = [];
+
+    public List<HeliportApproach> HeliportApproaches { get; set; } = [];
+
+    public List<HeliportDeparture> HeliportDepartures { get; set; } = [];
+
+    public List<HeliportCommunications> HeliportCommunications { get; set; } = [];
+
+    public List<HelicopterSatellitePoint> HelicopterSatellitePoints { get; set; } = [];
+
+    public List<HeliportArrivalAltitudes> HeliportArrivalAltitudes { get; set; } = [];
+
+    public List<HeliportMinimumAltitudes> HeliportMinimumAltitudes { get; set; } = [];
+
     public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
 
     public List<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; } = [];

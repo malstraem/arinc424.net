@@ -1,6 +1,6 @@
 namespace Arinc424.Airspace;
 
-public class FlightRegionPoint : BoundaryPoint
+public class RegionPoint : BoundaryPoint
 {
     /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
     [Field(21, 24)]

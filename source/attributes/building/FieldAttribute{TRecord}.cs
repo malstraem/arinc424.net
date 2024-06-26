@@ -12,7 +12,6 @@ internal class FieldAttribute(int start, int end) : RangeAttribute(start, end)
 
 /// <summary>
 /// Specifies the target field range for <typeparamref name="TRecord"/> within an ARINC-424 string.
-/// Used by sequence or base types to define different ranges.
 /// </summary>
 /// <inheritdoc/>
 /// <typeparam name="TRecord">Target record type in which the field is defined.</typeparam>

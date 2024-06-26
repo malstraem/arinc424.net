@@ -34,7 +34,10 @@ internal class ForeignKey(int length, ReadOnlyMemory<Range> ranges, ReadOnlyMemo
             var except = excepts[exceptIndex];
 
             if (except is not null && except.Types.Contains(type))
+            {
+                exceptIndex++;
                 continue;
+            }
 
             for (int i = range.Start.Value; i < range.End.Value; i++)
             {

@@ -4,14 +4,25 @@ using Arinc424.Diagnostics;
 namespace Arinc424.Attributes;
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-internal abstract class RecordAttribute(Type type) : InfoAttribute(type, type.GetProperties())
+internal class RecordAttribute<TRecord>() : InfoAttribute<TRecord> where TRecord : Record424, new()
 {
-    internal abstract Record424 Build(string @string, Queue<Diagnostic> diagnostics);
-}
+    internal override IEnumerable<Build> Build(Queue<string> strings)
+    {
+        Queue<Diagnostic> diagnostics = [];
 
-internal sealed class RecordAttribute<TRecord>() : RecordAttribute(typeof(TRecord)) where TRecord : Record424, new()
-{
-    private readonly BuildInfo<TRecord> info = new(typeof(TRecord).GetProperties());
+        Queue<Build<TRecord>> builds = new(strings.Count);
 
-    internal override Record424 Build(string @string, Queue<Diagnostic> diagnostics) => RecordBuilder<TRecord>.Build(@string, info, diagnostics);
+        while (strings.TryDequeue(out string? @string))
+        {
+            var build = new Build<TRecord>(RecordBuilder<TRecord>.Build(@string, info, diagnostics));
+
+            if (diagnostics.Count > 0)
+            {
+                build.Diagnostics = diagnostics;
+                diagnostics = [];
+            }
+            builds.Enqueue(build);
+        }
+        return builds;
+    }
 }

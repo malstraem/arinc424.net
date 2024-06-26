@@ -5,5 +5,5 @@ namespace Arinc424;
 /// </summary>
 public interface IIdentity
 {
-    string Identifier { get; }
+    string Identifier { get; set; }
 }

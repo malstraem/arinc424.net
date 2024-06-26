@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Concurrent;
 
 using Arinc424.Building;
-using Arinc424.Diagnostics;
+using Arinc424.Linking;
 
 namespace Arinc424;
 
@@ -11,9 +12,9 @@ internal partial class Parser424
 
     private readonly Queue<string> skipped = [];
 
-    private readonly Dictionary<Type, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
+    private readonly ConcurrentDictionary<Type, IEnumerable<Build>> builds = [];
 
-    private readonly Dictionary<Type, Queue<Build>> builds = [];
+    private readonly Dictionary<Type, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
 
     private void Process(IEnumerable<string> strings)
     {
@@ -27,89 +28,40 @@ internal partial class Parser424
         // (branching, apparently, will not give any tangible gain)
         bool TryEnqueue(string @string)
         {
-            foreach (var (type, info) in meta.Info)
+            foreach (var info in meta.Info)
             {
-                if (!info.Section.IsMatch(@string))
+                if (!info.IsMatch(@string))
                     continue;
 
-                (info.IsContinuation(@string) ? this.strings[type].Continuation : this.strings[type].Primary).Enqueue(@string);
+                (info.IsContinuation(@string) ? this.strings[info.Type].Continuation : this.strings[info.Type].Primary).Enqueue(@string);
                 return true;
             }
             return false;
         }
     }
 
-    private static void Enqueue(Record424 record, Queue<Build> builds, ref Queue<Diagnostic> diagnostics)
+    private void Build() => Parallel.ForEach(meta.Info, info => builds[info.Type] = info.Build(strings[info.Type].Primary));
+
+    private void Link()
     {
-        if (diagnostics.Count > 0)
-        {
-            builds.Enqueue(new(record, diagnostics));
-            diagnostics = [];
-        }
-        else
-        {
-            builds.Enqueue(new(record, null));
-        }
-    }
+        var unique = new Unique(meta.Info, builds);
 
-    [Obsolete("todo: try parse sequence number")]
-    private void BuildSequences()
-    {
-        _ = Parallel.ForEach(meta.Sequences, attribute =>
-        {
-            var queue = builds[attribute.Type];
-            var primary = strings[attribute.Type].Primary;
+        _ = Parallel.ForEach(meta.Info, info => info.Link(builds[info.Type], unique, meta));
 
-            Queue<string> sequence = [];
-            Queue<Diagnostic> diagnostics = [];
-
-            while (primary.TryDequeue(out string? @string))
-            {
-                sequence.Enqueue(@string);
-
-                int number = int.Parse(@string[attribute.Range]);
-
-                if (!primary.TryPeek(out @string) || int.Parse(@string[attribute.Range]) <= number)
-                    Enqueue(attribute.Build(sequence, diagnostics), queue, ref diagnostics);
-            }
-        });
-    }
-
-    private void Build()
-    {
-        _ = Parallel.ForEach(meta.Records, attribute =>
-        {
-            var queue = builds[attribute.Type];
-            var primary = strings[attribute.Type].Primary;
-
-            Queue<Diagnostic> diagnostics = [];
-
-            while (primary.TryDequeue(out string? @string))
-                Enqueue(attribute.Build(@string, diagnostics), queue, ref diagnostics);
-        });
-        BuildSequences();
-    }
-
-    [Obsolete("placeholder")]
-    private void Postprocess()
-    {
-
+        /*foreach (var info in meta.Info)
+            info.Link(builds[info.Type], unique, meta);*/
     }
 
     internal Parser424()
     {
-        foreach (var (_, type) in meta.Types)
-        {
-            builds[type] = [];
-            strings[type] = ([], []);
-        }
+        foreach (var info in meta.Info)
+            strings[info.Type] = ([], []);
     }
 
     internal Data424 Parse(IEnumerable<string> strings)
     {
         Process(strings);
         Build();
-        Postprocess();
         Link();
 
         var data = new Data424();
@@ -120,8 +72,8 @@ internal partial class Parser424
 
             var list = (IList)property.GetValue(data)!;
 
-            while (builds[type].TryDequeue(out var record))
-                _ = list.Add(record.Record);
+            foreach (var build in builds[type])
+                _ = list.Add(build.Record);
         });
         return data;
     }

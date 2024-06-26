@@ -5,35 +5,40 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Attributes;
 
-[AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-internal abstract class SequenceAttribute : InfoAttribute
-{
-    internal Range Range { get; }
-
-    internal LinksAttribute SubLinks { get; }
-
-    internal SequenceAttribute(Type type, Type subType) : base(type, type.GetProperties())
-    {
-        Range = type.GetCustomAttribute<SequencedAttribute>()!.Range;
-
-        SubLinks = new LinksAttribute(subType, subType.GetProperties());
-    }
-
-    internal abstract Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics);
-
-    internal abstract IEnumerable<Record424> GetSequence(Record424 record);
-}
-
-internal sealed class SequenceAttribute<TRecord, TSub>() : SequenceAttribute(typeof(TRecord), typeof(TSub))
-    where TRecord : Record424<TSub>, new()
+internal sealed class SequenceAttribute<TSequence, TSub>() : RecordAttribute<TSequence>
+    where TSequence : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    private readonly BuildInfo<TRecord> info = new(typeof(TRecord).GetProperties());
+    private readonly BuildInfo<TSub> subInfo = new();
 
-    private readonly BuildInfo<TSub> subInfo = new(typeof(TSub).GetProperties());
+    private readonly Range range = typeof(TSequence).GetCustomAttribute<SequencedAttribute>()!.Range;
 
-    internal override Record424 Build(Queue<string> strings, Queue<Diagnostic> diagnostics)
-        => RecordBuilder<TRecord, TSub>.Build(strings, info, subInfo, diagnostics);
+    [Obsolete("todo: sequence number try parsing")]
+    internal override IEnumerable<Build> Build(Queue<string> strings)
+    {
+        Queue<string> sequence = [];
+        Queue<Diagnostic> diagnostics = [];
 
-    internal override IEnumerable<Record424> GetSequence(Record424 record) => ((TRecord)record).Sequence;
+        Queue<Build<TSequence>> builds = [];
+
+        while (strings.TryDequeue(out string? @string))
+        {
+            sequence.Enqueue(@string);
+
+            int number = int.Parse(@string[range]);
+
+            if (!strings.TryPeek(out @string) || int.Parse(@string[range]) <= number)
+            {
+                var build = new Build<TSequence, TSub>(RecordBuilder<TSequence, TSub>.Build(sequence, info, subInfo, diagnostics));
+
+                if (diagnostics.Count > 0)
+                {
+                    build.Diagnostics = diagnostics;
+                    diagnostics = [];
+                }
+                builds.Enqueue(build);
+            }
+        }
+        return process is not null ? process.Process(builds) : builds;
+    }
 }

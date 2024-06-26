@@ -6,7 +6,7 @@ namespace Arinc424.Navigation;
 /// <remarks>See section 4.1.32.</remarks>
 [Section('D', 'T')]
 [Obsolete("placeholder")]
-public class TacticalSystem : Record424
+public class Tactical : Record424
 {
 
 }

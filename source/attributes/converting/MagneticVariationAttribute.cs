@@ -12,12 +12,12 @@ internal sealed class MagneticVariationAttribute : DecodeAttribute<float>
         var value = @string[1..];
 
         if (!float.TryParse(value, out float degrees))
-            return new($"'{value}' can't be parsed as a float.");
+            return $"'{value}' can't be parsed as a float.";
 
         if (sign is 'W')
             return -degrees;
         else if (sign is not 'E')
-            return new($"Magnetic variation sign '{sign}' is not valid.");
+            return $"Magnetic variation sign '{sign}' is not valid.";
 
         return degrees;
     }

@@ -8,7 +8,7 @@ namespace Arinc424.Airspace;
 /// <remarks>See section 4.1.17.1.</remarks>
 [Section('U', 'F'), Continuous(20), Sequenced(16, 19)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
-public class FlightInfoRegion : Record424<FlightRegionPoint>, IIdentity, IIcao, INamed
+public class FlightInfoRegion : Record424<RegionPoint>, IIdentity, IIcao, INamed
 {
     [Foreign(96, 97)]
     public CruiseTable? CruiseTable { get; set; }
