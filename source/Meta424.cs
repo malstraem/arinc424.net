@@ -29,14 +29,14 @@ Record<EnrouteWaypoint>,
 Record<SpecialActivityArea>,
 
 Sequence<Airway, AirwayPoint>,
-Sequence<AirwayCommunications, AirwayTransmitter>,
+Sequence<AirwayCommunication, AirwayTransmitter>,
 #endregion
 
 #region Heliport
 Record<Heliport>,
-Record<HeliportCommunications>,
-Record<HeliportArrivalAltitudes>,
-Record<HeliportMinimumAltitudes>,
+Record<HeliportCommunication>,
+Record<HeliportArrivalAltitude>,
+Record<HeliportMinimumAltitude>,
 Record<HeliportTerminalWaypoint>,
 Record<HelicopterSatellitePoint>,
 
@@ -52,8 +52,8 @@ Record<Airport>,
 Record<GroundPoint>,
 Record<FlightPlanning>,
 Record<AirportSatellitePoint>,
-Record<AirportArrivalAltitudes>,
-Record<AirportMinimumAltitudes>,
+Record<AirportArrivalAltitude>,
+Record<AirportMinimumAltitude>,
 Record<AirportTerminalWaypoint>,
 
 Record<AirportBeacon>,
@@ -66,7 +66,7 @@ Sequence<AirportArrivalSequence, ArrivalPoint>,
 Sequence<AirportApproachSequence, ApproachPoint>,
 Sequence<AirportDepartureSequence, DeparturePoint>,
 
-Sequence<AirportCommunications, PortTransmitter>,
+Sequence<AirportCommunication, PortTransmitter>,
 #endregion
 
 #region Company Routes

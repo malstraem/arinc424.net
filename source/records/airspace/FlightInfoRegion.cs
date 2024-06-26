@@ -3,7 +3,7 @@ using Arinc424.Tables;
 namespace Arinc424.Airspace;
 
 /// <summary>
-/// <c>FIR/UIR</c> primary record.
+/// <c>FIR/UIR</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.17.1.</remarks>
 [Section('U', 'F'), Continuous(20), Sequenced(16, 19)]

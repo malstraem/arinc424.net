@@ -1,7 +1,7 @@
 namespace Arinc424.Airspace;
 
 /// <summary>
-/// <c>Restrictive Airspace</c> primary record.
+/// <c>Restrictive Airspace</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.18.1.</remarks>
 [Section('U', 'R'), Continuous(25), Sequenced(21, 24)]

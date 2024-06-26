@@ -3,7 +3,7 @@ namespace Arinc424.Airspace;
 using Terms;
 
 /// <summary>
-/// <c>Controlled Airspace</c> primary record.
+/// <c>Controlled Airspace</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.25.1.</remarks>
 [Section('U', 'C'), Continuous(25), Sequenced(21, 24)]

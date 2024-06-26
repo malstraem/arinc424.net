@@ -1,7 +1,7 @@
 namespace Arinc424.Tables;
 
 /// <summary>
-/// <c>Cruising Table</c> record.
+/// <c>Cruising Table</c> record sequence.
 /// </summary>
 /// <remarks>See section 4.1.16.1.</remarks>
 [Section('T', 'C'), Sequenced(9)]

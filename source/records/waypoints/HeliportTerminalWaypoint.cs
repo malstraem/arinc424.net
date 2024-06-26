@@ -1,3 +1,5 @@
+using Arinc424.Ports;
+
 namespace Arinc424.Waypoints;
 
 /// <summary>
@@ -5,8 +7,8 @@ namespace Arinc424.Waypoints;
 /// </summary>
 /// <remarks>See section 4.2.2.1.</remarks>
 [Section('H', 'C', subsectionIndex: 13)]
-[Obsolete("placeholder")]
 public class HeliportTerminalWaypoint : Waypoint
 {
-
+    [Foreign(7, 12)]
+    public Heliport Heliport { get; set; }
 }

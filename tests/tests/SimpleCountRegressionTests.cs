@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Arinc424.Tests;
 
-public class RegressionTests
+public class SimpleCountRegressionTests
 {
 #pragma warning disable xUnit1004
     [Fact(Skip = "manual")]
@@ -19,7 +19,7 @@ public class RegressionTests
             foreach (var property in typeof(Data424).GetProperties().Where(x => x.PropertyType.IsGenericType))
                 counts.Add(property.Name, ((ICollection)property.GetValue(data)!).Count);
 
-            File.WriteAllText($"data/{Path.GetFileName(path)}.json", JsonSerializer.Serialize(counts));
+            File.WriteAllText($"data/regression/{Path.GetFileName(path)}.json", JsonSerializer.Serialize(counts));
         }
     }
 
@@ -29,7 +29,7 @@ public class RegressionTests
     [InlineData("faa-230223")]
     [InlineData("faa-240321")]
     [InlineData("faa-240418")]
-    public void Load(string file)
+    public void CheckRegression(string file)
     {
         var data = Data424.Create(File.ReadAllLines($"data/{file}"));
 

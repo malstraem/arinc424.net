@@ -12,6 +12,6 @@
       <_Parameter1>Arinc424.Bench</_Parameter1>
     </AssemblyAttribute>
 
-    <ProjectReference Include="..\codegen\Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
+    <ProjectReference Include="../codegen/Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
   </ItemGroup>
 </Project>

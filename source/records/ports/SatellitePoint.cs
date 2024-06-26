@@ -2,6 +2,7 @@ using Arinc424.Ports.Terms;
 
 namespace Arinc424.Ports;
 
+[Continuous(27)]
 public abstract class SatellitePoint : PathPoint
 {
     /// <inheritdoc cref="SatelliteService"/>

@@ -3,11 +3,11 @@ using Arinc424.Airspace;
 namespace Arinc424.Comms;
 
 /// <summary>
-/// <c>Enroute Communications</c> primary record.
+/// <c>Enroute Communications</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.23.1.</remarks>
 [Section('E', 'V')]
-public class AirwayCommunications : Communications<AirwayTransmitter>
+public class AirwayCommunication : Communication<AirwayTransmitter>
 {
     [Foreign(7, 10), Obsolete("todo")]
     public FlightInfoRegion FlightInfoRegion { get; set; }

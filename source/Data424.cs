@@ -32,13 +32,13 @@ public class Data424
 
     public List<AirportDeparture> AirportDepartures { get; set; } = [];
 
-    public List<AirportCommunications> AirportCommunications { get; set; } = [];
+    public List<AirportCommunication> AirportCommunications { get; set; } = [];
 
     public List<AirportSatellitePoint> AirportSatellitePoints { get; set; } = [];
 
-    public List<AirportArrivalAltitudes> AirportArrivalAltitudes { get; set; } = [];
+    public List<AirportArrivalAltitude> AirportArrivalAltitudes { get; set; } = [];
 
-    public List<AirportMinimumAltitudes> AirportMinimumAltitudes { get; set; } = [];
+    public List<AirportMinimumAltitude> AirportMinimumAltitudes { get; set; } = [];
 
     public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
@@ -50,13 +50,13 @@ public class Data424
 
     public List<HeliportDeparture> HeliportDepartures { get; set; } = [];
 
-    public List<HeliportCommunications> HeliportCommunications { get; set; } = [];
+    public List<HeliportCommunication> HeliportCommunications { get; set; } = [];
 
     public List<HelicopterSatellitePoint> HelicopterSatellitePoints { get; set; } = [];
 
-    public List<HeliportArrivalAltitudes> HeliportArrivalAltitudes { get; set; } = [];
+    public List<HeliportArrivalAltitude> HeliportArrivalAltitudes { get; set; } = [];
 
-    public List<HeliportMinimumAltitudes> HeliportMinimumAltitudes { get; set; } = [];
+    public List<HeliportMinimumAltitude> HeliportMinimumAltitudes { get; set; } = [];
 
     public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
 
@@ -78,7 +78,7 @@ public class Data424
 
     public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
 
-    public List<AirwayCommunications> AirwayCommunications { get; set; } = [];
+    public List<AirwayCommunication> AirwayCommunications { get; set; } = [];
 
     public List<FlightPlanning> FlightPlannings { get; set; } = [];
 
