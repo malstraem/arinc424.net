@@ -16,12 +16,12 @@ internal class Unique
 
         string key = primaryKey.GetKey(record.Source);
 
-        if (!unique[type].TryAdd(key, record))
-        {
-            build.Diagnostics ??= [];
-            build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, type, key));
-            Debug.WriteLine(build.Diagnostics.Last());
-        }
+        if (unique[type].TryAdd(key, record))
+            return;
+
+        build.Diagnostics ??= [];
+        build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, type, key));
+        Debug.WriteLine(build.Diagnostics.Last());
     }
 
     internal Unique(IEnumerable<InfoAttribute> attributes, IDictionary<Type, IEnumerable<Build>> builds)

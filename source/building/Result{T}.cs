@@ -12,9 +12,9 @@ internal readonly ref struct Result<TType> where TType : notnull
 
     internal readonly string? Problem;
 
-    internal Result(TType value) => Value = value;
+    private Result(TType value) => Value = value;
 
-    internal Result(string problem) => Problem = problem;
+    private Result(string problem) => Problem = problem;
 
     internal bool Invalid => Problem is not null;
 

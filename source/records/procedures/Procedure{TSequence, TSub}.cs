@@ -12,7 +12,7 @@ public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdenti
     ///   <c>Approach Route Identifier (APPROACH IDENT)</c> field for <see cref="AirportApproach"/> and <see cref="HeliportApproach"/>.
     /// </para>
     /// </summary>
-    /// <remarks>See section 5.9 and 5.10.</remarks>
+    /// <remarks>See section 5.9 or 5.10.</remarks>
     [Field(14, 19), Primary, Obsolete("todo: so dirty, linking need to be reworked -_-")]
     public string Identifier { get; set; }
 

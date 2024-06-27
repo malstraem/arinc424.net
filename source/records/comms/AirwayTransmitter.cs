@@ -1,5 +1,9 @@
 namespace Arinc424.Comms;
 
+/// <summary>
+/// Fields of <c>Enroute Communications</c>.
+/// </summary>
+/// <remarks>Used by <see cref="AirwayCommunication"/> like subsequence.</remarks>
 public class AirwayTransmitter : Transmitter
 {
     /// <summary>

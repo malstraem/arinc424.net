@@ -2,6 +2,10 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Procedures;
 
+/// <summary>
+/// Fields of <c>SID</c>.
+/// </summary>
+/// <remarks>Used by <see cref="DepartureSequence"/> like subsequence.</remarks>
 public class DeparturePoint : ProcedurePoint
 {
     /// <inheritdoc cref="DepartureQualifiers"/>

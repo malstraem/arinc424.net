@@ -2,6 +2,10 @@ namespace Arinc424.Comms;
 
 using Terms;
 
+/// <summary>
+/// Fields of <c>Airport Communications</c> and <c>Heliport Communications</c>.
+/// </summary>
+/// <remarks>Used by <see cref="AirportCommunication"/> or <see cref="HeliportCommunication"/> like subsequence.</remarks>
 public class PortTransmitter : Transmitter
 {
     /// <summary>

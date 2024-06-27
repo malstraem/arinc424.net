@@ -1,18 +1,23 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies the index of a character within an ARINC-424 string. Must come before <see cref="CharacterAttribute{TRecord}"/>.
+/// Specifies the index of a character within an <c>ARINC-424</c> string. Must come before <see cref="CharacterAttribute{TRecord}"/>.
 /// </summary>
 /// <inheritdoc/>
 [AttributeUsage(AttributeTargets.Property)]
 internal class CharacterAttribute(int index) : IndexAttribute(index)
 {
+    /// <summary>
+    /// Defines that a record type matches the attribute (from base types).
+    /// </summary>
+    /// <typeparam name="TMatch">Record type to match.</typeparam>
+    /// <remarks><see langword="False"/> is forced cause non target attribute will be come by default.</remarks>
     internal virtual bool IsMatch<TMatch>() where TMatch : Record424 => false;
 }
 
 /// <summary>
-/// Specifies the target character index for <typeparamref name="TRecord"/> within an ARINC-424 string.
-/// Used by sequence or base types to define different indexes.
+/// Specifies the target character index for <typeparamref name="TRecord"/> within an <c>ARINC-424</c> string.
+/// Used to define different indexes.
 /// </summary>
 /// <inheritdoc/>
 /// <typeparam name="TRecord">Target type of record that index is defined.</typeparam>

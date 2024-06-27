@@ -8,7 +8,7 @@ namespace Arinc424.Airspace;
 /// <remarks>See section 4.1.17.1.</remarks>
 [Section('U', 'F'), Continuous(20), Sequenced(16, 19)]
 [DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
-public class FlightInfoRegion : Record424<RegionPoint>, IIdentity, IIcao, INamed
+public class RegionVolume : Record424<RegionPoint>, IIdentity, IIcao, INamed
 {
     [Foreign(96, 97)]
     public CruiseTable? CruiseTable { get; set; }
@@ -27,12 +27,9 @@ public class FlightInfoRegion : Record424<RegionPoint>, IIdentity, IIcao, INamed
     [Field(11, 14)]
     public string Address { get; set; }
 
-    /// <summary>
-    /// <c>FIR/UIR Indicator (IND)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.117.</remarks>
-    [Character(15), Obsolete("todo")]
-    public char Indicator { get; set; }
+    /// <inheritdoc cref="Terms.RegionType"/>
+    [Character(15)]
+    public Terms.RegionType Type { get; set; }
 
     /// <inheritdoc cref="Terms.SpeedReportUnit"/>
     [Character(29)]
@@ -55,11 +52,11 @@ public class FlightInfoRegion : Record424<RegionPoint>, IIdentity, IIcao, INamed
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(86, 90)]
-    public Altitude? UpperLow { get; set; }
+    public Altitude? UpperRegionLow { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(91, 95)]
-    public Altitude? UpperUp { get; set; }
+    public Altitude? UpperRegionUp { get; set; }
 
     /// <summary>
     /// <c>FIR/UIR Name</c> field.

@@ -1,0 +1,32 @@
+namespace Arinc424.Airspace;
+
+using Terms;
+
+/// <summary>
+/// <c>Controlled Airspace</c> primary record sequence.
+/// </summary>
+/// <remarks>See section 4.1.25.1.</remarks>
+[Section('U', 'C')]
+[DebuggerDisplay($"{{{nameof(AreaCode)}}}, {nameof(Name)} - {{{nameof(Name)}}}")]
+public class ControlledVolume : Volume, INamed
+{
+    /// <inheritdoc cref="AirspaceType"/>
+    [Character(9)]
+    public AirspaceType Type { get; set; }
+
+    /// <summary>
+    /// <c>Controlled Airspace Center (ARSP CNTR)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.214.</remarks>
+    [Type(15, 16)]
+    [Foreign(10, 14), ForeignExcept<RegionVolume>(7, 8)]
+    public IIdentity Center { get; set; }
+
+    /// <inheritdoc cref="AirspaceClass"/>
+    [Character(17)]
+    public AirspaceClass Class { get; set; }
+
+    /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
+    [Field(79, 81), NavigationPerformance]
+    public float NavigationPerformance { get; set; }
+}

@@ -16,6 +16,49 @@ public class Data424
 {
     public List<OffrouteAltitude> OffrouteAltitudes { get; set; } = [];
 
+    #region Navaid
+    public List<Tactical> Tacticals { get; set; } = [];
+
+    public List<Nondirectional> Nondirectionals { get; set; } = [];
+
+    public List<Omnidirectional> Omnidirectionals { get; set; } = [];
+    #endregion
+
+    #region Enroute
+    public List<Airway> Airways { get; set; } = [];
+
+    public List<HoldingPattern> HoldingPatterns { get; set; } = [];
+
+    public List<EnrouteWaypoint> EnrouteWaypoints { get; set; } = [];
+
+    public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
+
+    public List<AirwayCommunication> AirwayCommunications { get; set; } = [];
+
+    public List<PreferredRoute> PreferredRoutes { get; set; } = [];
+
+    public List<AirwayMarker> AirwayMarkers { get; set; } = [];
+    #endregion
+
+    #region Heliport
+    public List<Heliport> Heliports { get; set; } = [];
+
+    public List<HeliportArrival> HeliportArrivals { get; set; } = [];
+
+    public List<HeliportApproach> HeliportApproaches { get; set; } = [];
+
+    public List<HeliportDeparture> HeliportDepartures { get; set; } = [];
+
+    public List<HeliportCommunication> HeliportCommunications { get; set; } = [];
+
+    public List<HeliportArrivalAltitude> HeliportArrivalAltitudes { get; set; } = [];
+
+    public List<HeliportMinimumAltitude> HeliportMinimumAltitudes { get; set; } = [];
+
+    public List<HelicopterSatellitePoint> HelicopterSatellitePoints { get; set; } = [];
+    #endregion
+
+    #region Airport
     public List<Gate> Gates { get; set; } = [];
 
     public List<Runway> Runways { get; set; } = [];
@@ -42,22 +85,6 @@ public class Data424
 
     public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
-    public List<Heliport> Heliports { get; set; } = [];
-
-    public List<HeliportArrival> HeliportArrivals { get; set; } = [];
-
-    public List<HeliportApproach> HeliportApproaches { get; set; } = [];
-
-    public List<HeliportDeparture> HeliportDepartures { get; set; } = [];
-
-    public List<HeliportCommunication> HeliportCommunications { get; set; } = [];
-
-    public List<HelicopterSatellitePoint> HelicopterSatellitePoints { get; set; } = [];
-
-    public List<HeliportArrivalAltitude> HeliportArrivalAltitudes { get; set; } = [];
-
-    public List<HeliportMinimumAltitude> HeliportMinimumAltitudes { get; set; } = [];
-
     public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
 
     public List<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; } = [];
@@ -66,29 +93,32 @@ public class Data424
 
     public List<InstrumentLandingMarker> InstrumentLandingMarkers { get; set; } = [];
 
-    public List<Nondirectional> Nondirectionals { get; set; } = [];
-
-    public List<Omnidirectional> Omnidirectionals { get; set; } = [];
-
-    public List<Airway> Airways { get; set; } = [];
-
-    public List<HoldingPattern> HoldingPatterns { get; set; } = [];
-
-    public List<EnrouteWaypoint> EnrouteWaypoints { get; set; } = [];
-
-    public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
-
-    public List<AirwayCommunication> AirwayCommunications { get; set; } = [];
-
     public List<FlightPlanning> FlightPlannings { get; set; } = [];
+    #endregion
 
-    public List<FlightInfoRegion> FlightInfoRegions { get; set; } = [];
+    #region Company Routes
+    public List<Alternate> Alternates { get; set; } = [];
 
-    public List<ControlledAirspace> ControlledAirspaces { get; set; } = [];
+    public List<CompanyRoute> CompanyRoutes { get; set; } = [];
 
-    public List<RestrictiveAirspace> RestrictiveAirspaces { get; set; } = [];
+    public List<HelicopterCompanyRoute> HelicopterCompanyRoutes { get; set; } = [];
+    #endregion
 
+    #region Tables
     public List<CruiseTable> CruisingTables { get; set; } = [];
+
+    public List<CommunicationType> CommunicationTypes { get; set; } = [];
+
+    public List<GeographicalReference> GeographicalReferences { get; set; } = [];
+    #endregion
+
+    #region Airspace
+    public List<RegionVolume> FlightInfoRegions { get; set; } = [];
+
+    public List<ControlledVolume> ControlledAirspaces { get; set; } = [];
+
+    public List<RestrictiveVolume> RestrictiveAirspaces { get; set; } = [];
+    #endregion
 
     public static Data424 Create(IEnumerable<string> strings) => new Parser424().Parse(strings);
 }

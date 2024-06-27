@@ -2,6 +2,10 @@ using Arinc424.Tables.Terms;
 
 namespace Arinc424.Tables;
 
+/// <summary>
+/// Fields of <c>Cruising Table</c>.
+/// </summary>
+/// <remarks>Used by <see cref="CruiseTable"/> like subsequence.</remarks>
 public class CruiseRow : Record424
 {
     /// <summary>

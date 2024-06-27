@@ -68,7 +68,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [Communication Type](api/Arinc424.Tables.CommunicationType.yml) 🚧
 
 # [Airspace](#tab/airspace)
-- [Controlled Airspace](api/Arinc424.Airspace.ControlledAirspace.yml)
-- [FIR/UIR](api/Arinc424.Airspace.FlightInfoRegion.yml)
-- [Restrictive Airspace](api/Arinc424.Airspace.RestrictiveAirspace.yml)
+- [Controlled Airspace](api/Arinc424.Airspace.ControlledVolume.yml) 🚧
+- [FIR/UIR](api/Arinc424.Airspace.RegionVolume.yml) 🚧
+- [Restrictive Airspace](api/Arinc424.Airspace.RestrictiveVolume.yml) 🚧
 ---

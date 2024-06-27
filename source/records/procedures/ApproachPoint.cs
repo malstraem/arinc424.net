@@ -2,6 +2,10 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Procedures;
 
+/// <summary>
+/// Fields of <c>Approach</c>.
+/// </summary>
+/// <remarks>Used by <see cref="ApproachSequence"/> like subsequence.</remarks>
 public class ApproachPoint : ProcedurePoint
 {
     /// <summary>

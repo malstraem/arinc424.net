@@ -6,9 +6,7 @@ using Arinc424.Waypoints.Terms;
 namespace Arinc424.Procedures;
 
 /// <summary>
-/// Fields of <c>Airport and Heliport SID/STAR/Approach</c> primary records.
-/// Used by <see cref="AirportApproachSequence"/>, <see cref="AirportDepartureSequence"/>
-/// and <see cref="AirportArrivalSequence"/> like subsequence.
+/// Fields of <c>Airport</c> and <c>Heliport SID/STAR/Approach</c>.
 /// </summary>
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public abstract class ProcedurePoint : Record424

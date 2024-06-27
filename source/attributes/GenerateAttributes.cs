@@ -24,7 +24,7 @@ internal class MapAttribute(string @string = "") : Attribute
 }
 
 /// <summary>
-/// Specifies that the member starts new array of mapping values within an ARINC-424 string.
+/// Specifies that the member starts new array of mapping values within an <c>ARINC-424</c> string.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field)]
 internal class Offset : Attribute;

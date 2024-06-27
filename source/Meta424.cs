@@ -24,6 +24,7 @@ Record<Omnidirectional>,
 
 #region Enroute
 Record<AirwayMarker>,
+Record<PreferredRoute>,
 Record<HoldingPattern>,
 Record<EnrouteWaypoint>,
 Record<SpecialActivityArea>,
@@ -83,9 +84,9 @@ Sequence<CruiseTable, CruiseRow>,
 #endregion
 
 #region Airspace
-Sequence<FlightInfoRegion, RegionPoint>,
-Sequence<ControlledAirspace, BoundaryPoint>,
-Sequence<RestrictiveAirspace, BoundaryPoint>,
+Sequence<RegionVolume, RegionPoint>,
+Sequence<ControlledVolume, BoundaryPoint>,
+Sequence<RestrictiveVolume, BoundaryPoint>,
 #endregion 
 ]
 #endregion

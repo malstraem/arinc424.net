@@ -5,9 +5,9 @@ using Arinc424.Waypoints.Terms;
 namespace Arinc424.Routing;
 
 /// <summary>
-/// Fields of <c>Enroute Airways</c> primary record. Used by <see cref="Airway"/> like subsequence.
+/// Fields of <c>Enroute Airways</c> primary record.
 /// </summary>
-/// <remarks>See section 4.1.6.1.</remarks>
+/// <remarks>Used by <see cref="Airway"/> like subsequence.</remarks>
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public class AirwayPoint : Record424
 {

@@ -28,7 +28,6 @@ internal class DecodeAttribute<TConverter, TType> : DecodeAttribute<TType>
 
 /// <inheritdoc/>
 /// <typeparam name="TConverter">Associated <see cref="IStringConverter{TType}"/>.</typeparam>
-//[AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Property, AllowMultiple = true)]
 internal sealed class DecodeAttribute<TConverter, TType, TRecord> : DecodeAttribute<TConverter, TType>
     where TConverter : IStringConverter<TType> where TType : notnull where TRecord : Record424
 {

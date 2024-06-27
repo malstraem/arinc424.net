@@ -39,14 +39,23 @@ dotnet_remove_unnecessary_suppression_exclusions = true:warning
 #                                            Naming                                            #
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules #
 #==============================================================================================#
-dotnet_naming_symbols.private.applicable_kinds = field
-dotnet_naming_symbols.private.applicable_accessibilities = private
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private, protected, private_protected, protected_internal
 
-dotnet_naming_style.private.capitalization = camel_case
+dotnet_naming_style.private_fields_case.capitalization = camel_case
 
-dotnet_naming_rule.private.symbols = private
-dotnet_naming_rule.private.style = private
+dotnet_naming_rule.private.symbols = private_fields
+dotnet_naming_rule.private.style = private_fields_case
 dotnet_naming_rule.private.severity = error
+
+dotnet_naming_symbols.public_members.applicable_kinds = field, property
+dotnet_naming_symbols.public_members.applicable_accessibilities = public
+
+dotnet_naming_style.public_members_case.capitalization = pascal_case
+
+dotnet_naming_rule.public.symbols = public_members
+dotnet_naming_rule.public.style = public_members_case
+dotnet_naming_rule.public.severity = error
 
 #==================================================================================#
 #                                       Style                                      #

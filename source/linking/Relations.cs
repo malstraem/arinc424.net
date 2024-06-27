@@ -16,7 +16,7 @@ internal class Relations
 
     private readonly Dictionary<Type, PropertyInfo> many = [];
 
-    private (Relations Relations, PropertyInfo Property)? inner;
+    private readonly (Relations Relations, PropertyInfo Property)? inner;
 
     [Obsolete("todo: linking just works, but so dirty and not guarantee")]
     private void ProcessLinks(Record424 record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics)
@@ -47,7 +47,7 @@ internal class Relations
                 var one = meta.TypeInfo[reference.Type].Relations.one;
                 var many = meta.TypeInfo[reference.Type].Relations.many;
 
-                if (many is not null && many.TryGetValue(type, out var property))
+                if (many.TryGetValue(type, out var property))
                 {
                     object? value = property.GetValue(referenced);
 
@@ -56,7 +56,7 @@ internal class Relations
 
                     _ = ((IList)value!).Add(record);
                 }
-                else if (one is not null && one.TryGetValue(type, out property))
+                else if (one.TryGetValue(type, out property))
                 {
                     property.SetValue(referenced, record);
                 }
@@ -73,15 +73,15 @@ internal class Relations
     {
         ProcessLinks(record, unique, meta, diagnostics);
 
-        if (inner is not null)
-        {
-            var (relations, property) = inner.Value;
+        if (inner is null)
+            return;
 
-            var subs = (IEnumerable<Record424>)property.GetValue(record)!;
+        var (relations, property) = inner.Value;
 
-            foreach (var sub in subs)
-                relations.Link(sub, unique, meta, diagnostics);
-        }
+        var subs = (IEnumerable<Record424>)property.GetValue(record)!;
+
+        foreach (var sub in subs)
+            relations.Link(sub, unique, meta, diagnostics);
     }
 
     internal Relations(Type type)
@@ -94,9 +94,11 @@ internal class Relations
         {
             var foreignAttributes = property.GetCustomAttributes<ForeignAttribute>();
 
-            if (foreignAttributes.Any())
+            var attributes = foreignAttributes as ForeignAttribute[] ?? foreignAttributes.ToArray();
+
+            if (attributes.Length != 0)
             {
-                links.Add(new Link(property, foreignAttributes.ToArray(), property.GetCustomAttribute<TypeAttribute>()));
+                links.Add(new Link(property, [.. attributes], property.GetCustomAttribute<TypeAttribute>()));
             }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {
