@@ -20,5 +20,8 @@ internal readonly ref struct Result<TType> where TType : notnull
 
     public static implicit operator Result<TType>(TType value) => new(value);
 
+    /// <summary>
+    /// Used for fluent converter code cause there is no string to string conversion.
+    /// </summary>
     public static implicit operator Result<TType>(string problem) => new(problem);
 }

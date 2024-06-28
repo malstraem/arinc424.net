@@ -7,6 +7,7 @@ namespace Arinc424.Waypoints;
 /// </summary>
 /// <remarks>See section 4.2.2.1.</remarks>
 [Section('H', 'C', subsectionIndex: 13)]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Heliport)} - {{{nameof(Heliport)}}}")]
 public class HeliportTerminalWaypoint : Waypoint
 {
     [Foreign(7, 12)]

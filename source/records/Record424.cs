@@ -17,10 +17,10 @@ public abstract class Record424
     [Field(2, 4), Validation("\\w{1,3}")]
     public string AreaCode { get; set; }
 
-    /*/// <summary>
+    /// <summary>
     /// <c>File Record Number (FRN)</c> field.
     /// </summary>
     /// <remarks>See section 5.31.</remarks>
-    [Field(124, 128), Decode<NumericConverter>]
-    public int RecordNumber { get; set; }*/
+    [Field(124, 128), Integer]
+    public int RecordNumber { get; set; }
 }

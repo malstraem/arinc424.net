@@ -8,10 +8,5 @@ namespace Arinc424.Bench;
 public class MetaBench
 {
     [Benchmark]
-    public ImmutableArray<Type> GrabTypesInfo()
-    {
-        var meta = new Meta424();
-
-        return meta.Types.Values;
-    }
+    public ImmutableArray<Type> GrabTypesInfo() => new Meta424().Types.Values;
 }

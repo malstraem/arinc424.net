@@ -4,7 +4,7 @@ namespace Arinc424.Navigation;
 
 /// <inheritdoc />
 [Section('P', 'N')]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class AirportBeacon : Nondirectional
 {
     [Foreign(7, 12), Primary]

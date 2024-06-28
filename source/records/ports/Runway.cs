@@ -7,7 +7,7 @@ namespace Arinc424.Ports;
 /// </summary>
 /// <remarks>See section 4.1.10.1.</remarks>
 [Section('P', 'G', subsectionIndex: 13), Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class Runway : Geo, IIdentity, IIcao
 {
     [Foreign(7, 12), Primary]

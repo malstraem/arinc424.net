@@ -1,6 +1,6 @@
 namespace Arinc424.Procedures;
 
-[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdentity, IIcao where TSequence : ProcedureSequence<TSub> where TSub : ProcedurePoint
 {
     /// <summary>

@@ -9,7 +9,7 @@ namespace Arinc424.Ports;
 /// </summary>
 /// <remarks>See section 4.2.1.1.</remarks>
 [Section('H', 'A', subsectionIndex: 13)]
-public class Heliport : Port, IIdentity, IIcao, INamed
+public class Heliport : Port
 {
     [Obsolete("need to be post processed")]
     [Field(17, 21)]
@@ -59,5 +59,4 @@ public class Heliport : Port, IIdentity, IIcao, INamed
     /// Associated MSAs.
     /// </summary>
     public List<HeliportMinimumAltitude>? MinimumAltitudes { get; set; }
-
 }

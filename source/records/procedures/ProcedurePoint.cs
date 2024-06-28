@@ -101,16 +101,18 @@ public abstract class ProcedurePoint : Record424
     /// <c>Center Fix (CENTER FIX)</c> or <c>TAA Sector Identifier</c> field.
     /// </summary>
     /// <remarks>See section 5.144 and 5.272.</remarks>
-    [Type(115, 116)]
+    /*[Type(115, 116)]
     [ForeignExcept<Airport, Omnidirectional, Nondirectional, EnrouteWaypoint>(7, 12)]
-    [Foreign(107, 111), Foreign(113, 114)]
-    public IIdentity? Center { get; set; }
+    [Foreign(107, 111), Foreign(113, 114)]*/
+    [Field(107, 111)]
+    [Obsolete("todo: spec contains error, need more analysis")]
+    public string? Center { get; set; }
 
     /// <summary>
     /// <c>Multiple Code (MULTI CD)</c> or <c>Procedure Turn Indicator</c> character.
     /// </summary>
     /// <remarks>See section 5.130 or 5.271.</remarks>
-    [Character(112), Obsolete("todo")]
+    [Character(112), Obsolete("same")]
     public char CodeTurnIndicator { get; set; }
 
     /// <inheritdoc cref="Terms.Overlay"/>

@@ -27,17 +27,17 @@ public class Data424
     #region Enroute
     public List<Airway> Airways { get; set; } = [];
 
+    public List<AirwayMarker> AirwayMarkers { get; set; } = [];
+
     public List<HoldingPattern> HoldingPatterns { get; set; } = [];
+
+    public List<PreferredRoute> PreferredRoutes { get; set; } = [];
 
     public List<EnrouteWaypoint> EnrouteWaypoints { get; set; } = [];
 
     public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
 
     public List<AirwayCommunication> AirwayCommunications { get; set; } = [];
-
-    public List<PreferredRoute> PreferredRoutes { get; set; } = [];
-
-    public List<AirwayMarker> AirwayMarkers { get; set; } = [];
     #endregion
 
     #region Heliport
@@ -64,6 +64,8 @@ public class Data424
     public List<Runway> Runways { get; set; } = [];
 
     public List<Airport> Airports { get; set; } = [];
+
+    public List<FlightPlan> FlightPlans { get; set; } = [];
 
     public List<GroundPoint> GroundPoints { get; set; } = [];
 
@@ -92,8 +94,6 @@ public class Data424
     public List<InstrumentLandingSystem> InstrumentLandingSystems { get; set; } = [];
 
     public List<InstrumentLandingMarker> InstrumentLandingMarkers { get; set; } = [];
-
-    public List<FlightPlanning> FlightPlannings { get; set; } = [];
     #endregion
 
     #region Company Routes
@@ -113,11 +113,11 @@ public class Data424
     #endregion
 
     #region Airspace
-    public List<RegionVolume> FlightInfoRegions { get; set; } = [];
+    public List<FlightRegion> FlightRegions { get; set; } = [];
 
-    public List<ControlledVolume> ControlledAirspaces { get; set; } = [];
+    public List<ControlledSpace> ControlledSpaces { get; set; } = [];
 
-    public List<RestrictiveVolume> RestrictiveAirspaces { get; set; } = [];
+    public List<RestrictiveSpace> RestrictiveSpaces { get; set; } = [];
     #endregion
 
     public static Data424 Create(IEnumerable<string> strings) => new Parser424().Parse(strings);

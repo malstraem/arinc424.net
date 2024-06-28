@@ -52,7 +52,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [Terminal NDB](api/Arinc424.Navigation.AirportBeacon.yml)
 - [SBAS Path Point](api/Arinc424.Ports.AirportSatellitePoint.yml)
 - [GBAS Path Point](api/Arinc424.Ports.GroundPoint.yml)
-- [Flight Planning](api/Arinc424.Ports.FlightPlanning.yml) 🚧
+- [Flight Planning](api/Arinc424.Ports.FlightPlan.yml) 🚧
 - [MSA](api/Arinc424.Ports.AirportMinimumAltitude.yml)
 - [GLS Station](api/Arinc424.Navigation.GlobalLandingSystem.yml)
 - [Communications](api/Arinc424.Comms.AirportCommunication.yml)
@@ -68,7 +68,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [Communication Type](api/Arinc424.Tables.CommunicationType.yml) 🚧
 
 # [Airspace](#tab/airspace)
-- [Controlled Airspace](api/Arinc424.Airspace.ControlledVolume.yml) 🚧
-- [FIR/UIR](api/Arinc424.Airspace.RegionVolume.yml) 🚧
-- [Restrictive Airspace](api/Arinc424.Airspace.RestrictiveVolume.yml) 🚧
+- [Controlled Airspace](api/Arinc424.Airspace.ControlledSpace.yml) 🚧
+- [FIR/UIR](api/Arinc424.Airspace.FlightRegion.yml) 🚧
+- [Restrictive Airspace](api/Arinc424.Airspace.RestrictiveSpace.yml) 🚧
 ---

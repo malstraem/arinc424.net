@@ -3,7 +3,7 @@ using Arinc424.Ports;
 namespace Arinc424.Navigation;
 
 [Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public abstract class LandingSystem : Geo, IIdentity, IIcao
 {
     [Foreign(7, 12), Primary]

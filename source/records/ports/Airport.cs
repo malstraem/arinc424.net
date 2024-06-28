@@ -13,7 +13,6 @@ using Terms;
 /// </summary>
 /// <remarks>See section 4.1.7.1.</remarks>
 [Section('P', 'A', subsectionIndex: 13)]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, {{{nameof(Name)}}}")]
 public class Airport : Port
 {
     /// <summary>

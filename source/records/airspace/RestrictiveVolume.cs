@@ -1,3 +1,5 @@
+using Arinc424.Processing;
+
 namespace Arinc424.Airspace;
 
 /// <summary>
@@ -5,7 +7,8 @@ namespace Arinc424.Airspace;
 /// </summary>
 /// <remarks>See section 4.1.18.1.</remarks>
 [Section('U', 'R')]
-[DebuggerDisplay($"{{{nameof(IcaoCode)}}}, {{{nameof(Designation)}}}")]
+[Process<RestrictiveSpace, RestrictiveVolume, RestrictiveSpaceConcatenater>]
+[DebuggerDisplay($"{{{nameof(IcaoCode)},nq}}, {{{nameof(Designation)},nq}}")]
 public class RestrictiveVolume : Volume
 {
     /// <inheritdoc cref="Terms.RestrictiveType"/>

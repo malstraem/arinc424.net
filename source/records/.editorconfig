@@ -1,2 +1,4 @@
+# disable nullability warnings for all specification types
+
 [*.cs]
 dotnet_diagnostic.cs8618.severity = none

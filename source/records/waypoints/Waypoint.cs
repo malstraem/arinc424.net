@@ -7,7 +7,7 @@ using Terms;
 /// </summary>
 /// <remarks>See section 4.1.4.1.</remarks>
 [Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class Waypoint : Geo, IIdentity, IIcao, INamed
 {
     /// <include file='Comments.xml' path="doc/member[@name='Fix']/*"/>

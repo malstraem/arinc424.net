@@ -11,8 +11,7 @@ using Arinc424.Routing;
 using Arinc424.Tables;
 using Arinc424.Waypoints;
 
-#region Mappping
-// see specification Table 5-1
+#region Mappping (see specification Table 5-1)
 [assembly:
 Record<OffrouteAltitude>,
 
@@ -35,11 +34,12 @@ Sequence<AirwayCommunication, AirwayTransmitter>,
 
 #region Heliport
 Record<Heliport>,
-Record<HeliportCommunication>,
 Record<HeliportArrivalAltitude>,
 Record<HeliportMinimumAltitude>,
 Record<HeliportTerminalWaypoint>,
 Record<HelicopterSatellitePoint>,
+
+Sequence<HeliportCommunication, PortTransmitter>,
 
 Sequence<HeliportArrivalSequence, ArrivalPoint>,
 Sequence<HeliportApproachSequence, ApproachPoint>,
@@ -50,8 +50,8 @@ Sequence<HeliportDepartureSequence, DeparturePoint>,
 Record<Gate>,
 Record<Runway>,
 Record<Airport>,
+Record<FlightPlan>,
 Record<GroundPoint>,
-Record<FlightPlanning>,
 Record<AirportSatellitePoint>,
 Record<AirportArrivalAltitude>,
 Record<AirportMinimumAltitude>,
@@ -63,11 +63,11 @@ Record<MicrowaveLandingSystem>,
 Record<InstrumentLandingSystem>,
 Record<InstrumentLandingMarker>,
 
+Sequence<AirportCommunication, PortTransmitter>,
+
 Sequence<AirportArrivalSequence, ArrivalPoint>,
 Sequence<AirportApproachSequence, ApproachPoint>,
 Sequence<AirportDepartureSequence, DeparturePoint>,
-
-Sequence<AirportCommunication, PortTransmitter>,
 #endregion
 
 #region Company Routes

@@ -5,7 +5,7 @@ namespace Arinc424.Routing;
 /// </summary>
 /// <remarks>See section 4.1.6.1.</remarks>
 [Section('E', 'R'), Continuous(39), Sequenced(26, 29)]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public class Airway : Record424<AirwayPoint>, IIdentity
 {
     /// <include file='Comments.xml' path="doc/member[@name='Route']/*"/>

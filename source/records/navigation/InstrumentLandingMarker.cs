@@ -9,7 +9,7 @@ using Terms;
 /// </summary>
 /// <remarks>See section 4.1.13.1.</remarks>
 [Section('P', 'M', subsectionIndex: 13), Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class InstrumentLandingMarker : Geo, IIdentity, IIcao
 {
     [Foreign(7, 12)]

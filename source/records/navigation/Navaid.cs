@@ -1,6 +1,6 @@
 namespace Arinc424.Navigation;
 
-[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class Navaid : Geo, IIdentity, IIcao, INamed
 {
     /// <include file='Comments.xml' path="doc/member[@name='Navaid']/*"/>

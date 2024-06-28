@@ -1,6 +1,6 @@
 namespace Arinc424.Procedures;
 
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Type)} - {{{nameof(Type)}}}, {nameof(Transition)} - {{{nameof(Transition)},nq}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Type)} - {{{nameof(Type)}}}, {nameof(Transition)} - {{{nameof(Transition)},nq}}")]
 public abstract class ApproachSequence : ProcedureSequence<ApproachPoint>
 {
     /// <inheritdoc cref="Terms.ApproachType"/>

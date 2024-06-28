@@ -5,7 +5,7 @@ namespace Arinc424.Ports;
 /// </summary>
 /// <remarks>See section 4.1.8.1.</remarks>
 [Section('P', 'B', subsectionIndex: 13), Continuous]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class Gate : Geo, IIdentity, INamed
 {
     [Foreign(7, 12)]

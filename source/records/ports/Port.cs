@@ -3,6 +3,7 @@ using Arinc424.Navigation;
 namespace Arinc424.Ports;
 
 [Continuous]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Name)} - {{{nameof(Name)},nq}}")]
 public abstract class Port : Geo, IIdentity, IIcao, INamed
 {
     /// <summary>

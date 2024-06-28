@@ -3,7 +3,7 @@ namespace Arinc424.Ports;
 using Terms;
 
 [Continuous(27)]
-[DebuggerDisplay($"{{{nameof(Identifier)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class PathPoint : Geo, IIcao, IIdentity
 {
     [Field(11, 12)]
