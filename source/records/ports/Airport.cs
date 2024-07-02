@@ -97,7 +97,7 @@ public class Airport : Port
     /// Associated NDBs.
     /// </summary>
     [Many]
-    public List<AirportBeacon>? Beacons { get; set; }
+    public List<TerminalBeacon>? Beacons { get; set; }
 
     /// <summary>
     /// Associated VHF Navaids.

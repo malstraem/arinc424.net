@@ -22,7 +22,9 @@ public class ControlledVolume : Volume, INamed
     /// </summary>
     /// <remarks>See section 5.214.</remarks>
     [Type(15, 16)]
-    [Foreign(10, 14), ForeignExcept<RegionVolume>(7, 8)]
+    [Foreign(10, 14), ForeignExcept<FlightRegion>(7, 8)]
+
+    [Identifier(10, 14), Icao(7, 8)]
     public IIdentity Center { get; set; }
 
     /// <inheritdoc cref="AirspaceClass"/>

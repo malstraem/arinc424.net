@@ -11,27 +11,27 @@ internal abstract class InfoAttribute() : Attribute
 {
     protected Type type;
 
-    protected Relations relations;
+    protected Primary? primary;
 
-    protected PrimaryKey? primaryKey;
+    protected Relations relations;
 
     protected SectionAttribute section;
 
     protected int? continuationIndex;
 
+    internal abstract IEnumerable<Build> Build(Queue<string> strings);
+
     internal bool IsMatch(string @string) => section.IsMatch(@string);
 
     internal bool IsContinuation(string @string) => continuationIndex is not null && @string[continuationIndex.Value] is not '0' and not '1';
-
-    internal abstract IEnumerable<Build> Build(Queue<string> strings);
 
     internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta) => relations.Link(builds, unique, meta);
 
     internal Type Type => type;
 
-    internal Relations Relations => relations;
+    internal Primary? Primary => primary;
 
-    internal PrimaryKey? PrimaryKey => primaryKey;
+    internal Relations Relations => relations;
 
     internal (char, char) Section => (section.Section, section.Subsection);
 }
@@ -42,15 +42,6 @@ internal abstract class InfoAttribute<TRecord> : InfoAttribute where TRecord : R
 
     protected readonly ProcessAttribute<TRecord>? process;
 
-    private void InitializeByType()
-    {
-        type = process is null ? typeof(TRecord) : process.NewType;
-
-        primaryKey = PrimaryKey.Create(type.GetProperties());
-
-        relations = new(type);
-    }
-
     internal InfoAttribute()
     {
         var type = typeof(TRecord);
@@ -59,8 +50,12 @@ internal abstract class InfoAttribute<TRecord> : InfoAttribute where TRecord : R
         process = type.GetCustomAttribute<ProcessAttribute<TRecord>>();
         continuationIndex = type.GetCustomAttribute<ContinuousAttribute>()?.Index;
 
-        this.type = process is null ? typeof(TRecord) : process.NewType;
+        (this.type, primary) = process is null
+            ? (typeof(TRecord), Primary<TRecord>.Create())
+            : (process.NewType, process.GetPrimary());
 
-        InitializeByType();
+        relations = process is null
+            ? new Relations<TRecord>()
+            : process.GetRelations();
     }
 }

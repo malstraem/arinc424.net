@@ -5,13 +5,12 @@ using Arinc424.Waypoints;
 namespace Arinc424.Ports;
 
 [Continuous(30)]
-public abstract class ArrivalAltitude : Record424, IIcao
+public abstract class ArrivalAltitude : Record424
 {
-    [Field(11, 12)]
-    public string IcaoCode { get; set; }
-
     [Type(27, 28)]
     [ForeignExcept<EnrouteWaypoint, Omnidirectional, Nondirectional>(7, 12), Foreign(20, 26)]
+
+    [Identifier(20, 24), Icao(25, 26), Port(7, 10)]
     public Geo Fix { get; set; }
 
     /// <inheritdoc cref="Terms.FixPosition"/>

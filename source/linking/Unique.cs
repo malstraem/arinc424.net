@@ -10,7 +10,7 @@ internal class Unique
 {
     internal readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
-    private void ProcessPrimaryKey(Build build, Type type, PrimaryKey primaryKey)
+    private void ProcessPrimaryKey(Build build, Type type, Primary primaryKey)
     {
         var record = build.Record;
 
@@ -26,12 +26,12 @@ internal class Unique
 
     internal Unique(IEnumerable<InfoAttribute> attributes, IDictionary<Type, IEnumerable<Build>> builds)
     {
-        foreach (var attribute in attributes.Where(x => x.PrimaryKey is not null))
+        foreach (var attribute in attributes.Where(x => x.Primary is not null))
         {
             unique[attribute.Type] = [];
 
             foreach (var build in builds[attribute.Type])
-                ProcessPrimaryKey(build, attribute.Type, attribute.PrimaryKey!);
+                ProcessPrimaryKey(build, attribute.Type, attribute.Primary!);
         };
     }
 }

@@ -13,6 +13,8 @@ public abstract class ProcedurePoint : Record424
 {
     [Type(37, 38)]
     [ForeignExcept<Airport, EnrouteWaypoint, Omnidirectional, Nondirectional>(7, 12), Foreign(30, 36)]
+
+    [Identifier(30, 34), Icao(35, 36), Port(7, 10)]
     public Geo? Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
@@ -41,6 +43,8 @@ public abstract class ProcedurePoint : Record424
     [Obsolete("TODO abstract navaid instead of geo point")]
     [Type(79, 80)]
     [ForeignExcept<Omnidirectional, Nondirectional>(7, 12), Foreign(51, 56)]
+
+    [Identifier(51, 54), Icao(55, 56), Port(7, 10)]
     public Geo? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>

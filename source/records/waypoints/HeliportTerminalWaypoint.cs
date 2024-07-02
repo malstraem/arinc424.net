@@ -11,5 +11,7 @@ namespace Arinc424.Waypoints;
 public class HeliportTerminalWaypoint : Waypoint
 {
     [Foreign(7, 12)]
+
+    [Identifier(7, 10), Icao(11, 12)]
     public Heliport Heliport { get; set; }
 }

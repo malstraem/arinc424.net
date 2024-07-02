@@ -2,15 +2,21 @@ using System.Reflection;
 
 namespace Arinc424.Linking;
 
-internal class Link(PropertyInfo property, ForeignAttribute[] foreignAttributes, TypeAttribute? typeAttribute)
+internal abstract class Link<TRecord>
 {
-    private readonly ForeignKey foreignKey = ForeignKey.Create(foreignAttributes);
+    internal abstract bool TryGetReference(string @string, Meta424 meta, out Reference? reference);
+}
 
-    private readonly PropertyInfo property = property;
-
+internal class Link<TRecord, TType>(Range foreign, Range? icao, Range? port, PropertyInfo property, TypeAttribute? typeAttribute)
+    : Link<TRecord> where TRecord : Record424 where TType : class
+{
     private readonly TypeAttribute? typeAttribute = typeAttribute;
 
-    internal bool TryGetReference(string @string, Meta424 meta, out Reference? reference)
+    private readonly Foreign foreign = new Foreign<TType>(foreign, icao, port);
+
+    private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+
+    internal override bool TryGetReference(string @string, Meta424 meta, out Reference? reference)
     {
         string key;
 
@@ -20,7 +26,7 @@ internal class Link(PropertyInfo property, ForeignAttribute[] foreignAttributes,
 
         if (typeAttribute is null)
         {
-            if (foreignKey.TryGetKey(@string, type, out key))
+            if (foreign.TryGetKey(@string, meta.TypeInfo[type], out key))
             {
                 reference = new(key, type, property);
                 return true;
@@ -34,7 +40,7 @@ internal class Link(PropertyInfo property, ForeignAttribute[] foreignAttributes,
         if (char.IsWhiteSpace(section) && char.IsWhiteSpace(subsection))
             return false;
 
-        if (meta.Types.TryGetValue((section, subsection), out type) && foreignKey.TryGetKey(@string, type, out key))
+        if (meta.Types.TryGetValue((section, subsection), out type) && foreign.TryGetKey(@string, meta.TypeInfo[type], out key))
         {
             reference = new(key, type, property);
             return true;

@@ -69,7 +69,7 @@ public class Data424
 
     public List<GroundPoint> GroundPoints { get; set; } = [];
 
-    public List<AirportBeacon> AirportBeacons { get; set; } = [];
+    public List<TerminalBeacon> AirportBeacons { get; set; } = [];
 
     public List<AirportArrival> AirportArrivals { get; set; } = [];
 

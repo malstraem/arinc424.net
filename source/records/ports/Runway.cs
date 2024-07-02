@@ -11,7 +11,12 @@ namespace Arinc424.Ports;
 public class Runway : Geo, IIdentity, IIcao
 {
     [Foreign(7, 12), Primary]
+
+    [Identifier(7, 10), Icao(11, 12)]
     public Airport Airport { get; set; }
+
+    [Field(11, 12), Primary]
+    public string IcaoCode { get; set; }
 
     /// <summary>
     /// <c>Runway Identifier (RUNWAY ID)</c> field.
@@ -19,9 +24,6 @@ public class Runway : Geo, IIdentity, IIcao
     /// <remarks>See section 5.46.</remarks>
     [Field(14, 18), Primary]
     public string Identifier { get; set; }
-
-    [Field(11, 12), Primary]
-    public string IcaoCode { get; set; }
 
     /// <summary>
     /// <c>Runway Length (RUNWAY LENGTH)</c> field.

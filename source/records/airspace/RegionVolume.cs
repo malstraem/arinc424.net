@@ -13,6 +13,8 @@ namespace Arinc424.Airspace;
 public class RegionVolume : Record424<RegionPoint>, IIdentity, IIcao, INamed
 {
     [Foreign(96, 97)]
+
+    [Identifier(96, 97)]
     public CruiseTable? CruiseTable { get; set; }
 
     [Field(7, 8)]

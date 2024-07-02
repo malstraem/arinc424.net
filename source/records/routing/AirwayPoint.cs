@@ -13,6 +13,8 @@ public class AirwayPoint : Record424
 {
     [Type(37, 38)]
     [Foreign(30, 36)]
+
+    [Identifier(30, 34), Icao(35, 36)]
     public Geo Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
@@ -37,6 +39,8 @@ public class AirwayPoint : Record424
 
     /// <inheritdoc cref="Tables.CruiseTable"/>
     [Foreign(48, 49)]
+
+    [Identifier(48, 49)]
     public CruiseTable? CruiseTable { get; set; }
 
     /// <summary>
@@ -51,6 +55,8 @@ public class AirwayPoint : Record424
     /// </summary>
     /// <remarks>See section 5.23 and 5.14.</remarks>
     [Foreign(51, 54), Foreign(55, 56)]
+
+    [Identifier(51, 54), Icao(55, 56)]
     public Omnidirectional? RecommendedNavaid { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>

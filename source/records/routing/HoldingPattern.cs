@@ -8,7 +8,7 @@ namespace Arinc424.Routing;
 /// </summary>
 /// <remarks>See section 4.1.5.1.</remarks>
 [Section('E', 'P'), Continuous(39)]
-[DebuggerDisplay($"{nameof(Fix)}  - {{{nameof(Fix)}}}")]
+[DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public class HoldingPattern : Record424, IIcao, INamed
 {
     [Field(11, 12)]
@@ -23,6 +23,8 @@ public class HoldingPattern : Record424, IIcao, INamed
 
     [Type(37, 38)]
     [ForeignExcept<EnrouteWaypoint, Omnidirectional, Nondirectional>(7, 12), Foreign(30, 36)]
+
+    [Identifier(30, 34), Icao(35, 36), Port(7, 10)]
     public Geo Fix { get; set; }
 
     /// <summary>

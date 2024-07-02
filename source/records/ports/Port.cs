@@ -57,6 +57,8 @@ public abstract class Port : Geo, IIdentity, IIcao, INamed
     /// <c>Recommended NAVAID (RECD NAV)</c> field.
     /// </summary>
     [Foreign(65, 68), Foreign(69, 70)]
+
+    [Identifier(65, 68), Icao(69, 70)]
     public Omnidirectional? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>

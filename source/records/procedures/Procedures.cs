@@ -5,6 +5,8 @@ namespace Arinc424.Procedures;
 public class AirportProcedure<TSequence, TSub> : Procedure<TSequence, TSub> where TSequence : ProcedureSequence<TSub> where TSub : ProcedurePoint
 {
     [Foreign(7, 12), Primary]
+
+    [Identifier(7, 10), Icao(11, 12)]
     public Airport Airport { get; set; }
 }
 
@@ -24,6 +26,8 @@ public class AirportDeparture : AirportProcedure<AirportDepartureSequence, Depar
 public class HeliportProcedure<TSequence, TSub> : Procedure<TSequence, TSub> where TSequence : ProcedureSequence<TSub> where TSub : ProcedurePoint
 {
     [Foreign(7, 12), Primary]
+
+    [Identifier(7, 10), Icao(11, 12)]
     public Heliport Heliport { get; set; }
 }
 

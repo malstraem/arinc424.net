@@ -4,11 +4,14 @@ using Arinc424.Waypoints;
 
 namespace Arinc424.Ports;
 
+[Port(7, 10)]
 public abstract class MinimumAltitude : Record424
 {
     [Type(21, 22)]
     [ForeignExcept<Airport, Omnidirectional, Nondirectional, EnrouteWaypoint>(7, 12)]
     [Foreign(14, 20)]
+
+    [Identifier(14, 18), Icao(19, 20), Port(7, 10)]
     public IIdentity Center { get; set; }
 
     [Character(23)]

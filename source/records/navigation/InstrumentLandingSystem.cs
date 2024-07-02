@@ -58,6 +58,8 @@ public class InstrumentLandingSystem : LandingSystem
 
     [Type(109, 110)]
     [Foreign(7, 12), Foreign(103, 108)]
+
+    [Identifier(103, 106), Icao(107, 108), Port(7, 10)]
     public Geo? SupportingFacility { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>

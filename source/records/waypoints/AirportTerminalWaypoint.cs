@@ -8,5 +8,7 @@ namespace Arinc424.Waypoints;
 public class AirportTerminalWaypoint : Waypoint
 {
     [Foreign(7, 12), Primary]
+
+    [Identifier(7, 10), Icao(11, 12)]
     public Airport Airport { get; set; }
 }

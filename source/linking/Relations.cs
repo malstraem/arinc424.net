@@ -6,15 +6,22 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Linking;
 
-internal class Relations
+internal abstract class Relations(Type type)
 {
-    private readonly Type type;
+    protected readonly Type type = type;
 
-    private readonly Link[] links;
+    protected internal readonly Dictionary<Type, PropertyInfo> one = [];
 
-    private readonly Dictionary<Type, PropertyInfo> one = [];
+    protected internal readonly Dictionary<Type, PropertyInfo> many = [];
 
-    private readonly Dictionary<Type, PropertyInfo> many = [];
+    protected internal abstract void Link(Record424 record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics);
+
+    internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
+}
+
+internal class Relations<TRecord> : Relations where TRecord : Record424
+{
+    private readonly Link<TRecord>[] links;
 
     private readonly (Relations Relations, PropertyInfo Property)? inner;
 
@@ -69,7 +76,7 @@ internal class Relations
         }
     }
 
-    private void Link(Record424 record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics)
+    protected internal override void Link(Record424 record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics)
     {
         ProcessLinks(record, unique, meta, diagnostics);
 
@@ -84,21 +91,24 @@ internal class Relations
             relations.Link(sub, unique, meta, diagnostics);
     }
 
-    internal Relations(Type type)
+    public Relations() : base(typeof(TRecord))
     {
-        this.type = type;
-
-        List<Link> links = [];
+        List<Link<TRecord>> links = [];
 
         foreach (var property in type.GetProperties())
         {
-            var foreignAttributes = property.GetCustomAttributes<ForeignAttribute>();
+            var linkAttribute = property.GetCustomAttribute<IdentifierAttribute>();
 
-            var attributes = foreignAttributes as ForeignAttribute[] ?? foreignAttributes.ToArray();
-
-            if (attributes.Length != 0)
+            if (linkAttribute is not null)
             {
-                links.Add(new Link(property, [.. attributes], property.GetCustomAttribute<TypeAttribute>()));
+                var linkType = typeof(Link<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
+
+                var icao = property.GetCustomAttribute<IcaoAttribute>()?.Range;
+                var port = property.GetCustomAttribute<PortAttribute>()?.Range;
+
+                object link = Activator.CreateInstance(linkType, linkAttribute.Range, icao, port, property, property.GetCustomAttribute<TypeAttribute>())!;
+
+                links.Add((Link<TRecord>)link);
             }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {
@@ -110,13 +120,15 @@ internal class Relations
             }
             else if (property.Name == nameof(Record424<Record424>.Sequence))
             {
-                inner = (new Relations(property.PropertyType.GetElementType()!), property);
+                var innerRelationsType = typeof(Relations<>).MakeGenericType(property.PropertyType.GetElementType()!);
+
+                inner = ((Relations)Activator.CreateInstance(innerRelationsType)!, property);
             }
         }
         this.links = [.. links];
     }
 
-    internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)
+    internal override void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)
     {
         foreach (var build in builds)
             Link(build.Record, unique, meta, null);

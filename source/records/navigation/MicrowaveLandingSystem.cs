@@ -100,5 +100,7 @@ public class MicrowaveLandingSystem : LandingSystem
 
     [Type(122, 123)]
     [Foreign(7, 12), Foreign(116, 121)]
+
+    [Identifier(116, 119), Icao(120, 121), Port(7, 10)]
     public Geo? SupportingFacility { get; set; }
 }
