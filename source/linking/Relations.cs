@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Reflection;
 
 using Arinc424.Building;
@@ -11,10 +10,9 @@ internal abstract class Relations(Type type)
     protected readonly Type type = type;
 
     protected internal readonly Dictionary<Type, PropertyInfo> one = [];
-
     protected internal readonly Dictionary<Type, PropertyInfo> many = [];
 
-    protected internal abstract void Link(Record424 record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics);
+    protected internal abstract void Link(IEnumerable<Record424> records, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics);
 
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 }
@@ -26,70 +24,29 @@ internal class Relations<TRecord> : Relations where TRecord : Record424
     private readonly (Relations Relations, PropertyInfo Property)? inner;
 
     [Obsolete("todo: linking just works, but so dirty and not guarantee")]
-    private void ProcessLinks(Record424 record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics)
+    private void Link(TRecord record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics)
     {
         foreach (var link in links)
         {
-            if (!link.TryGetReference(record.Source!, meta, out var reference))
-                continue;
-
-            if (!unique.unique.TryGetValue(reference!.Type, out var uniqueTypes))
-            {
-                // todo: diagnostic log
-                Debug.WriteLine($"Entity type '{reference.Type} not found in unique types"); // TODO: logging path
-                continue;
-            }
-
-            if (!uniqueTypes.TryGetValue(reference.Key, out var referenced))
-            {
-                // todo: diagnostic log
-                Debug.WriteLine($"{reference.Type} entity with key '{reference.Key}' not found"); // TODO: logging path
-                continue;
-            }
-
-            try
-            {
-                reference.Property.SetValue(record, referenced);
-
-                var one = meta.TypeInfo[reference.Type].Relations.one;
-                var many = meta.TypeInfo[reference.Type].Relations.many;
-
-                if (many.TryGetValue(type, out var property))
-                {
-                    object? value = property.GetValue(referenced);
-
-                    if (value is null)
-                        property.SetValue(referenced, value = Activator.CreateInstance(typeof(List<>).MakeGenericType(type)));
-
-                    _ = ((IList)value!).Add(record);
-                }
-                else if (one.TryGetValue(type, out property))
-                {
-                    property.SetValue(referenced, record);
-                }
-            }
-            catch (Exception ex)
-            {
-                // todo: diagnostic log
-                Debug.WriteLine(ex);
-            }
+            link.TryLink(record, unique, meta, out var diagnostic);
         }
-    }
-
-    protected internal override void Link(Record424 record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics)
-    {
-        ProcessLinks(record, unique, meta, diagnostics);
 
         if (inner is null)
             return;
 
         var (relations, property) = inner.Value;
 
-        var subs = (IEnumerable<Record424>)property.GetValue(record)!;
-
-        foreach (var sub in subs)
-            relations.Link(sub, unique, meta, diagnostics);
+        relations.Link((IEnumerable<Record424>)property.GetValue(record)!, unique, meta, diagnostics);
     }
+
+    protected internal override void Link(IEnumerable<Record424> records, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics)
+    {
+        foreach (var record in (IEnumerable<TRecord>)records)
+            Link(record, unique, meta, diagnostics);
+    }
+
+    internal override void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)
+        => Link(((IEnumerable<Build<TRecord>>)builds).Select(x => x.Record), unique, meta, null);
 
     public Relations() : base(typeof(TRecord))
     {
@@ -126,11 +83,5 @@ internal class Relations<TRecord> : Relations where TRecord : Record424
             }
         }
         this.links = [.. links];
-    }
-
-    internal override void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)
-    {
-        foreach (var build in builds)
-            Link(build.Record, unique, meta, null);
     }
 }

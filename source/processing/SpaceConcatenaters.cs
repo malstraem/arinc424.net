@@ -6,7 +6,7 @@ namespace Arinc424.Processing;
 internal abstract class SpaceConcateTrigger
 {
     internal static bool Trigger(Volume current, Volume next)
-        => char.IsWhiteSpace(current.MultipleCode) || char.IsWhiteSpace(next.MultipleCode) || next.MultipleCode < current.MultipleCode;
+        => char.IsWhiteSpace(current.MultipleCode) || char.IsWhiteSpace(next.MultipleCode) || next.MultipleCode <= current.MultipleCode;
 }
 
 internal abstract class ControlledSpaceConcatenater : IProcessor<ControlledSpace, ControlledVolume>
