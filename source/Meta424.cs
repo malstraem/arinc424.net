@@ -1,5 +1,6 @@
 using System.Collections.Frozen;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 using Arinc424;
 using Arinc424.Airspace;
@@ -95,6 +96,8 @@ namespace Arinc424;
 
 internal class Meta424
 {
+    internal FrozenDictionary<(char, char), Type> types;
+
     [Obsolete("todo: supplement versioning (v18 - v23)")]
     internal Meta424()
     {
@@ -106,13 +109,17 @@ internal class Meta424
             types.Add(info.Section, info.Type);
             typeInfo.Add(info.Type, info);
         }
-        Types = types.ToFrozenDictionary();
+        this.types = types.ToFrozenDictionary();
         TypeInfo = typeInfo.ToFrozenDictionary();
     }
 
-    internal FrozenDictionary<(char, char), Type> Types { get; }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool TryGetType(char section, char subsection, out Type? type) => types.TryGetValue((section, subsection), out type);
 
     internal FrozenDictionary<Type, InfoAttribute> TypeInfo { get; }
+
+    //[MethodImpl(MethodImplOptions.AggressiveInlining)]
+    //internal bool TryGetInfo(Type type, out InfoAttribute? info) => typeInfo.TryGetValue(type, out info);
 
     internal IEnumerable<InfoAttribute> Info { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
 }

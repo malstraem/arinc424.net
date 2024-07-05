@@ -8,13 +8,11 @@ using Terms;
 /// <c>Airport and Heliport Localizer Marker</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.13.1.</remarks>
-[Section('P', 'M', subsectionIndex: 13), Continuous]
+[Section('P', 'M', subsectionIndex: 13), Icao(11, 12), Port(7, 10), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public class InstrumentLandingMarker : Geo//, IIdentity
+public class InstrumentLandingMarker : Geo, IIdentity
 {
-    [Foreign(7, 12)]
-
-    [Identifier(7, 10), Icao(11, 12)]
+    [Identifier(7, 10)]
     public Airport Airport { get; set; }
 
     /// <summary>
@@ -32,9 +30,7 @@ public class InstrumentLandingMarker : Geo//, IIdentity
     [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
 
-    [Foreign(7, 12), Foreign(28, 32), Foreign(11, 12)]
-
-    [Identifier(28, 32), Icao(11, 12), Port(7, 10)]
+    [Identifier(28, 32)]
     public Runway Runway { get; set; }
 
     [Field(52, 55), Float(10)]

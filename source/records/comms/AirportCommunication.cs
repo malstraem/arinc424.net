@@ -6,12 +6,13 @@ namespace Arinc424.Comms;
 /// <c>Airport Communications</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.14.1.</remarks>
-[Section('P', 'V', subsectionIndex: 13)]
+[Section('P', 'V', subsectionIndex: 13), Icao(11, 12)]
 [DebuggerDisplay($"{{{nameof(Class)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public class AirportCommunication : Communication<PortTransmitter>
+public class AirportCommunication : Communication<PortTransmitter>, IIcao
 {
-    [Foreign(7, 12)]
-
-    [Identifier(7, 10), Icao(11, 12)]
+    [Identifier(7, 10)]
     public Airport Airport { get; set; }
+
+    [Field(11, 12)]
+    public string IcaoCode { get; set; }
 }

@@ -1,6 +1,6 @@
 namespace Arinc424.Procedures;
 
-[Continuous(39), Sequenced(27, 29)]
+[Sequenced(27, 29), Continuous(39)]
 public abstract class ProcedureSequence<TPoint> : Record424<TPoint>, IIdentity, IIcao where TPoint : ProcedurePoint
 {
     [Field(11, 12)]

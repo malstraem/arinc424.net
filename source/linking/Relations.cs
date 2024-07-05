@@ -17,7 +17,7 @@ internal abstract class Relations(Type type)
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 }
 
-internal class Relations<TRecord> : Relations where TRecord : Record424
+internal sealed class Relations<TRecord> : Relations where TRecord : Record424
 {
     private readonly Link<TRecord>[] links;
 
@@ -52,18 +52,25 @@ internal class Relations<TRecord> : Relations where TRecord : Record424
     {
         List<Link<TRecord>> links = [];
 
+        var port = type.GetCustomAttribute<PortAttribute>()?.Range;
+        var icao = type.GetCustomAttribute<IcaoAttribute>()?.Range;
+
         foreach (var property in type.GetProperties())
         {
-            var linkAttribute = property.GetCustomAttribute<IdentifierAttribute>();
+            var identifier = property.GetCustomAttribute<IdentifierAttribute>();
 
-            if (linkAttribute is not null)
+            if (identifier is not null)
             {
                 var linkType = typeof(Link<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
 
-                var icao = property.GetCustomAttribute<IcaoAttribute>()?.Range;
-                var port = property.GetCustomAttribute<PortAttribute>()?.Range;
+                KeyRanges ranges = new()
+                {
+                    Icao = property.GetCustomAttribute<IcaoAttribute>()?.Range ?? icao,
+                    Port = port,
+                    Identifier = identifier.Range
+                };
 
-                object link = Activator.CreateInstance(linkType, linkAttribute.Range, icao, port, property, property.GetCustomAttribute<TypeAttribute>())!;
+                object link = Activator.CreateInstance(linkType, ranges, property, property.GetCustomAttribute<TypeAttribute>())!;
 
                 links.Add((Link<TRecord>)link);
             }

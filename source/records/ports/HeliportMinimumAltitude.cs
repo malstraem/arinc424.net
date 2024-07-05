@@ -7,8 +7,6 @@ namespace Arinc424.Ports;
 [Section('H', 'S', subsectionIndex: 13)]
 public class HeliportMinimumAltitude : MinimumAltitude
 {
-    [Foreign(7, 12)]
-
-    [Identifier(7, 10), Icao(11, 12)]
+    [Identifier(7, 10)]
     public Heliport Heliport { get; set; }
 }

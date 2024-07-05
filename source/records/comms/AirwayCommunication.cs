@@ -9,7 +9,6 @@ namespace Arinc424.Comms;
 [Section('E', 'V')]
 public class AirwayCommunication : Communication<AirwayTransmitter>
 {
-    [Foreign(7, 10)]
     [Identifier(7, 10)]
     public FlightRegion FlightRegion { get; set; }
 

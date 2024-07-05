@@ -11,9 +11,7 @@ using Terms;
 [Section('D'), Continuous]
 public class Omnidirectional : Navaid
 {
-    //[Foreign(7, 12)]
-
-    //[Identifier(7, 10), Icao(11, 12)]
+    //[Identifier(7, 10), Icao(11, 12)] // need more analysis
     //public Airport? Airport { get; set; }
 
     /// <inheritdoc cref="OmnidirectType"/>

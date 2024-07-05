@@ -1,13 +1,10 @@
-using Arinc424.Navigation;
-using Arinc424.Waypoints;
-
 namespace Arinc424.Routing;
 
 /// <summary>
 /// <c>Holding Pattern</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.5.1.</remarks>
-[Section('E', 'P'), Continuous(39)]
+[Section('E', 'P'), Icao(11, 12), Port(7, 10), Continuous(39)]
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public class HoldingPattern : Record424, IIcao, INamed
 {
@@ -22,9 +19,7 @@ public class HoldingPattern : Record424, IIcao, INamed
     public string? DuplicateIndicator { get; set; }
 
     [Type(37, 38)]
-    [ForeignExcept<EnrouteWaypoint, Omnidirectional, Nondirectional>(7, 12), Foreign(30, 36)]
-
-    [Identifier(30, 34), Icao(35, 36), Port(7, 10)]
+    [Identifier(30, 34), Icao(35, 36)]
     public Geo Fix { get; set; }
 
     /// <summary>

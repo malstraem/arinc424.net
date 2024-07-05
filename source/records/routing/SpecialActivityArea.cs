@@ -11,8 +11,6 @@ using Terms;
 [Section('E', 'S'), Continuous]
 public class SpecialActivityArea : Geo, IIdentity, IIcao, INamed
 {
-    [Foreign(16, 21)]
-
     [Identifier(16, 19), Icao(20, 21)]
     public Airport Airport { get; set; }
 

@@ -1,5 +1,6 @@
 namespace Arinc424.Airspace;
 
+[Identifier(7, 10)]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Name)},nq}}")]
 public class FlightRegion : Record424<RegionVolume>, IIdentity, INamed
 {

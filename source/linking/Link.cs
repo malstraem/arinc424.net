@@ -13,15 +13,16 @@ internal abstract class Link<TRecord>
     internal abstract bool TryGetReference(string @string, Meta424 meta, out Reference? reference);
 }
 
-internal class Link<TRecord, TType>(Range foreign, Range? icao, Range? port, PropertyInfo property, TypeAttribute? typeAttribute)
+internal class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo property, TypeAttribute? typeAttribute)
     : Link<TRecord> where TRecord : Record424 where TType : class
 {
     private readonly TypeAttribute? typeAttribute = typeAttribute;
 
-    private readonly Foreign foreign = new Foreign<TType>(foreign, icao, port);
+    private readonly Foreign<TType> foreign = new(ranges);
 
     private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
+    [Obsolete("todo: diagnostics")]
     internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, out Diagnostic? diagnostic)
     {
         diagnostic = null;
@@ -67,6 +68,7 @@ internal class Link<TRecord, TType>(Range foreign, Range? icao, Range? port, Pro
         return true;
     }
 
+    [Obsolete("todo: diagnostics")]
     internal override bool TryGetReference(string @string, Meta424 meta, out Reference? reference)
     {
         string key;
@@ -77,9 +79,9 @@ internal class Link<TRecord, TType>(Range foreign, Range? icao, Range? port, Pro
 
         if (typeAttribute is null)
         {
-            if (foreign.TryGetKey(@string, meta.TypeInfo[type], out key))
+            if (foreign.TryGetKey(@string, meta.TypeInfo[type].Primary!, out key))
             {
-                reference = new(key, type, property);
+                reference = new(key, type);
                 return true;
             }
             return false;
@@ -91,9 +93,25 @@ internal class Link<TRecord, TType>(Range foreign, Range? icao, Range? port, Pro
         if (char.IsWhiteSpace(section) && char.IsWhiteSpace(subsection))
             return false;
 
-        if (meta.Types.TryGetValue((section, subsection), out type) && foreign.TryGetKey(@string, meta.TypeInfo[type], out key))
+        if (!meta.TryGetType(section, subsection, out type))
         {
-            reference = new(key, type, property);
+            Debug.WriteLine("oops");
+            // todo: diagnostic
+            return false;
+        }
+
+        var primary = meta.TypeInfo[type].Primary;
+
+        if (primary is null)
+        {
+            Debug.WriteLine("oops");
+            // todo: diagnostic
+            return false;
+        }
+
+        if (foreign.TryGetKey(@string, primary, out key))
+        {
+            reference = new(key, type);
             return true;
         }
         return false;

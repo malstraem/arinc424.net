@@ -12,8 +12,6 @@ namespace Arinc424.Routing;
 public class AirwayPoint : Record424
 {
     [Type(37, 38)]
-    [Foreign(30, 36)]
-
     [Identifier(30, 34), Icao(35, 36)]
     public Geo Fix { get; set; }
 
@@ -38,8 +36,6 @@ public class AirwayPoint : Record424
     public Terms.AirwayRestriction Restriction { get; set; }
 
     /// <inheritdoc cref="Tables.CruiseTable"/>
-    [Foreign(48, 49)]
-
     [Identifier(48, 49)]
     public CruiseTable? CruiseTable { get; set; }
 
@@ -50,14 +46,8 @@ public class AirwayPoint : Record424
     [Character(50)]
     public Bool HasRestrictions { get; set; }
 
-    /// <summary>
-    /// <c>Recommended NAVAID (RECD NAV)</c> and <c>ICAO Code (ICAO CODE)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.23 and 5.14.</remarks>
-    [Foreign(51, 54), Foreign(55, 56)]
-
     [Identifier(51, 54), Icao(55, 56)]
-    public Omnidirectional? RecommendedNavaid { get; set; }
+    public Omnidirectional? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(57, 59), NavigationPerformance]

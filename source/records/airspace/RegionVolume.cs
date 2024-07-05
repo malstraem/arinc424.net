@@ -7,21 +7,16 @@ namespace Arinc424.Airspace;
 /// <c>FIR/UIR</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.17.1.</remarks>
-[Section('U', 'F'), Continuous(20), Sequenced(16, 19)]
+[Section('U', 'F'), Identifier(7, 10), Sequenced(16, 19), Continuous(20)]
 [Process<FlightRegion, RegionVolume, FlightRegionConcatanater>]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Name)},nq}}")]
-public class RegionVolume : Record424<RegionPoint>, IIdentity, IIcao, INamed
+public class RegionVolume : Record424<RegionPoint>, IIdentity, INamed
 {
-    [Foreign(96, 97)]
-
     [Identifier(96, 97)]
     public CruiseTable? CruiseTable { get; set; }
 
-    [Field(7, 8)]
-    public string IcaoCode { get; set; }
-
     /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
-    [Field(7, 10), Primary]
+    [Field(7, 10)]
     public string Identifier { get; set; }
 
     /// <summary>

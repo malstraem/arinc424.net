@@ -2,7 +2,7 @@ namespace Arinc424.Ports;
 
 using Terms;
 
-[Continuous(27)]
+[Icao(11, 12), Continuous(27)]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class PathPoint : Geo, IIcao, IIdentity
 {

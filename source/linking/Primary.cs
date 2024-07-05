@@ -2,73 +2,42 @@ using System.Reflection;
 
 namespace Arinc424.Linking;
 
-internal abstract class Primary(Range identifier, Range? icao, Range? port, bool isPortOptional)
+internal abstract class Primary(KeyRanges ranges) : Key(ranges)
 {
-    protected readonly Range identifier = identifier;
-
-    protected readonly Range? icao = icao, port = port;
-
-    protected readonly bool isPortOptional = isPortOptional;
-
-    internal abstract string GetKey(ReadOnlySpan<char> @string);
-
-    internal Range? Icao => icao;
-
-    internal Range? Port => port;
-
-    internal Range Identifier => identifier;
-
-    internal bool IsPortOptional => isPortOptional;
+    internal abstract bool TryGetKey(ReadOnlySpan<char> @string, out string? key);
 }
 
-internal class Primary<TRecord>(Range identifier, Range? icao, Range? port, bool isPortOptional)
-    : Primary(identifier, icao, port, isPortOptional) where TRecord : Record424
+internal sealed class Primary<TRecord>(KeyRanges ranges) : Primary(ranges) where TRecord : Record424
 {
     internal static Primary<TRecord>? Create()
     {
-        Range identifier;
-        Range? icao, port = null;
-
-        bool isPortOptional = false;
-
         var type = typeof(TRecord);
 
-        var property = type.GetProperty(nameof(IIdentity.Identifier));
+        var identifier = type.GetCustomAttribute<IdentifierAttribute>();
 
-        if (property is null)
+        if (identifier is null)
             return null;
 
-        identifier = property.GetCustomAttribute<FieldAttribute>()!.Range;
-
-        icao = type.GetProperty(nameof(IIcao.IcaoCode))?.GetCustomAttribute<FieldAttribute>()!.Range;
-
-        var portProperty = type.GetProperty("Airport") ?? type.GetProperty("Heliport");
-
-        if (portProperty is not null)
+        KeyRanges ranges = new()
         {
-            port = portProperty.GetCustomAttribute<IdentifierAttribute>()!.Range;
+            Port = type.GetCustomAttribute<PortAttribute>()?.Range,
+            Icao = type.GetCustomAttribute<IcaoAttribute>()?.Range,
+            Identifier = identifier.Range
+        };
 
-            var context = new NullabilityInfoContext();
-
-            var info = context.Create(portProperty);
-
-            if (info.ReadState is NullabilityState.Nullable)
-                isPortOptional = true;
-        }
-
-        return new Primary<TRecord>(identifier, icao, port, isPortOptional);
+        return new Primary<TRecord>(ranges);
     }
 
-    internal override string GetKey(ReadOnlySpan<char> @string)
+    internal override bool TryGetKey(ReadOnlySpan<char> @string, out string key)
     {
-        string key = @string[identifier].Trim().ToString();
+        key = @string[ranges.Identifier].Trim().ToString();
 
-        if (icao.HasValue)
-            key += @string[icao.Value].ToString();
+        if (ranges.Icao.HasValue)
+            key += @string[ranges.Icao.Value].ToString();
 
-        if (port.HasValue)
-            key += @string[port.Value].Trim().ToString();
+        if (ranges.Port.HasValue)
+            key += @string[ranges.Port.Value].Trim().ToString();
 
-        return key;
+        return !string.IsNullOrEmpty(key);
     }
 }

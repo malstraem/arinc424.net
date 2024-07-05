@@ -2,7 +2,7 @@ using Arinc424.Navigation;
 
 namespace Arinc424.Ports;
 
-[Continuous]
+[Identifier(7, 10), Icao(11, 12), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Name)} - {{{nameof(Name)},nq}}")]
 public abstract class Port : Geo, IIdentity, IIcao, INamed
 {
@@ -10,10 +10,10 @@ public abstract class Port : Geo, IIdentity, IIcao, INamed
     /// <c>Airport/Heliport Identifier (ARPT/HELI IDENT)</c> field.
     /// </summary>
     /// <remarks>See section 5.6.</remarks>
-    [Field(7, 10), Primary]
+    [Field(7, 10)]
     public string Identifier { get; set; }
 
-    [Field(11, 12), Primary]
+    [Field(11, 12)]
     public string IcaoCode { get; set; }
 
     /// <summary>
@@ -56,8 +56,6 @@ public abstract class Port : Geo, IIdentity, IIcao, INamed
     /// <summary>
     /// <c>Recommended NAVAID (RECD NAV)</c> field.
     /// </summary>
-    [Foreign(65, 68), Foreign(69, 70)]
-
     [Identifier(65, 68), Icao(69, 70)]
     public Omnidirectional? Recommended { get; set; }
 

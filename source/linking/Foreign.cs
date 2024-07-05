@@ -1,35 +1,19 @@
 namespace Arinc424.Linking;
 
-internal abstract class Foreign
+internal sealed class Foreign<TType>(KeyRanges ranges) : Key(ranges) where TType : class
 {
-    internal abstract bool TryGetKey(ReadOnlySpan<char> @string, InfoAttribute info, out string? key);
-}
-
-internal class Foreign<TType>(Range identifier, Range? icao, Range? port) : Foreign where TType : class
-{
-    private readonly Range identifier = identifier;
-
-    private readonly Range? icao = icao, port = port;
-
-    internal override bool TryGetKey(ReadOnlySpan<char> @string, InfoAttribute info, out string? key)
+    internal bool TryGetKey(ReadOnlySpan<char> @string, Key primary, out string key)
     {
-        key = null;
-
-        if (info.Primary is null) // todo: remove
-            return false;
-
-        var primary = info.Primary!;
-
-        key = @string[identifier].Trim().ToString();
+        key = @string[ranges.Identifier].Trim().ToString();
 
         if (string.IsNullOrEmpty(key))
             return false;
 
-        if (primary.Icao.HasValue && icao.HasValue)
-            key += @string[icao.Value].ToString();
+        if (primary.IsIcao && ranges.Icao.HasValue)
+            key += @string[ranges.Icao.Value].ToString();
 
-        if (primary.Port.HasValue && port.HasValue && !primary.IsPortOptional)
-            key += @string[port.Value].Trim().ToString();
+        if (primary.IsPort && ranges.Port.HasValue)
+            key += @string[ranges.Port.Value].Trim().ToString();
 
         return true;
     }

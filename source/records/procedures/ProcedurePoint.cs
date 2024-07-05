@@ -1,6 +1,5 @@
 using Arinc424.Navigation;
 using Arinc424.Ports;
-using Arinc424.Waypoints;
 using Arinc424.Waypoints.Terms;
 
 namespace Arinc424.Procedures;
@@ -8,13 +7,12 @@ namespace Arinc424.Procedures;
 /// <summary>
 /// Fields of <c>Airport</c> and <c>Heliport SID/STAR/Approach</c>.
 /// </summary>
+[Port(7, 10)]
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public abstract class ProcedurePoint : Record424
 {
     [Type(37, 38)]
-    [ForeignExcept<Airport, EnrouteWaypoint, Omnidirectional, Nondirectional>(7, 12), Foreign(30, 36)]
-
-    [Identifier(30, 34), Icao(35, 36), Port(7, 10)]
+    [Identifier(30, 34), Icao(35, 36)]
     public Geo? Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
@@ -40,12 +38,9 @@ public abstract class ProcedurePoint : Record424
     [Character(50)]
     public Bool IsTurnRequired { get; set; }
 
-    [Obsolete("TODO abstract navaid instead of geo point")]
     [Type(79, 80)]
-    [ForeignExcept<Omnidirectional, Nondirectional>(7, 12), Foreign(51, 56)]
-
-    [Identifier(51, 54), Icao(55, 56), Port(7, 10)]
-    public Geo? Recommended { get; set; }
+    [Identifier(51, 54), Icao(55, 56)]
+    public Navaid? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
     [Field(57, 62), Float(1000)]

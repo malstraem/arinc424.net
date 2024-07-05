@@ -1,8 +1,12 @@
 namespace Arinc424.Linking;
 
-internal class Key(int length, ReadOnlyMemory<Range> ranges)
+internal abstract class Key(KeyRanges ranges)
 {
-    protected readonly int length = length;
+    protected KeyRanges ranges = ranges;
 
-    protected readonly ReadOnlyMemory<Range> ranges = ranges;
+    internal KeyRanges Ranges => ranges;
+
+    internal bool IsIcao => ranges.Icao is not null;
+
+    internal bool IsPort => ranges.Port is not null;
 }

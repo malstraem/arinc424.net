@@ -10,11 +10,16 @@ internal class Unique
 {
     internal readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
+    [Obsolete("todo: diagnostics")]
     private void ProcessPrimaryKey(Build build, Type type, Primary primaryKey)
     {
         var record = build.Record;
 
-        string key = primaryKey.GetKey(record.Source);
+        if (!primaryKey.TryGetKey(record.Source, out string? key))
+        {
+            Debug.WriteLine("oops");
+            return;
+        }
 
         if (unique[type].TryAdd(key, record))
             return;
