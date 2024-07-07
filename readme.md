@@ -22,5 +22,4 @@ See [docs](https://malstraem.github.io/arinc424.net) to know how specification i
 - .NET 8
 - `dotnet build`
 
-Project is actively used Roslyn API to generate converters for specification terms to internal types.
-Use a suitable IDE to view the generated code.
+The project actively uses the Roslyn API to generate converters of specification terms to internal types. Use a suitable IDE to view the generated code.
