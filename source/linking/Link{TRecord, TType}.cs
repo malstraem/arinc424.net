@@ -25,8 +25,6 @@ internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo proper
 
     internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        diagnostic = null;
-
         if (!TryGetReference(record, meta, out var reference, out diagnostic))
             return diagnostic is null;
 
@@ -48,7 +46,7 @@ internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo proper
 
         if (referenced is not TType @ref)
         {
-            diagnostic = new LinkDiagnostic(record, $"'{type}' entity with key '{key}' is not a '{nameof(TType)}' type reference.", foreign.Ranges, indexes);
+            diagnostic = new LinkDiagnostic(record, $"'{type}' entity with key '{key}' is not a '{typeof(TType).Name}' type reference.", foreign.Ranges, indexes);
             Debug.WriteLine(diagnostic);
             return false;
         }
