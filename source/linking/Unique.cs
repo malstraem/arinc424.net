@@ -1,3 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+
 using Arinc424.Building;
 using Arinc424.Diagnostics;
 
@@ -39,4 +42,7 @@ internal class Unique
                 ProcessPrimaryKey(build, attribute.Type, attribute.Primary!);
         };
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool TryGetRecords(Type type, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(type, out records);
 }

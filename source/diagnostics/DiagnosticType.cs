@@ -4,7 +4,7 @@ public enum DiagnosticType
 {
     Duplicate,
     Nullability,
+    InvalidLink,
     InvalidType,
     InvalidValue,
-    InvalidReference
 }

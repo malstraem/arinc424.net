@@ -46,10 +46,7 @@ internal partial class Parser424
     {
         var unique = new Unique(meta.Info, builds);
 
-        //_ = Parallel.ForEach(meta.Info, info => info.Link(builds[info.Type], unique, meta));
-
-        foreach (var info in meta.Info)
-            info.Link(builds[info.Type], unique, meta);
+        _ = Parallel.ForEach(meta.Info, info => info.Link(builds[info.Type], unique, meta));
     }
 
     internal Parser424()

@@ -51,8 +51,8 @@ internal abstract class InfoAttribute<TRecord> : InfoAttribute where TRecord : R
         continuationIndex = type.GetCustomAttribute<ContinuousAttribute>()?.Index;
 
         (this.type, primary) = process is null
-            ? (typeof(TRecord), Primary<TRecord>.Create())
-            : (process.NewType, process.GetPrimary());
+            ? (type, Primary.Create(type))
+            : (process.NewType, Primary.Create(process.NewType));
 
         relations = process is null
             ? new Relations<TRecord>()

@@ -1,6 +1,6 @@
 namespace Arinc424.Linking;
 
-internal struct KeyRanges
+public struct KeyRanges
 {
     internal Range? Icao;
 

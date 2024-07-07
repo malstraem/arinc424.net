@@ -40,7 +40,7 @@ public abstract class ProcedurePoint : Record424
 
     [Type(79, 80)]
     [Identifier(51, 54), Icao(55, 56)]
-    public Navaid? Recommended { get; set; }
+    public Geo? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
     [Field(57, 62), Float(1000)]

@@ -9,11 +9,11 @@ internal sealed class Foreign<TType>(KeyRanges ranges) : Key(ranges) where TType
         if (string.IsNullOrEmpty(key))
             return false;
 
-        if (primary.IsIcao && ranges.Icao.HasValue)
-            key += @string[ranges.Icao.Value].ToString();
+        if (primary.IsIcao && IsIcao)
+            key += @string[ranges.Icao!.Value].ToString();
 
-        if (primary.IsPort && ranges.Port.HasValue)
-            key += @string[ranges.Port.Value].Trim().ToString();
+        if (primary.IsPort && IsPort)
+            key += @string[ranges.Port!.Value].Trim().ToString();
 
         return true;
     }

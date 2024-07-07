@@ -1,18 +1,12 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Arinc424.Linking;
 
-internal abstract class Primary(KeyRanges ranges) : Key(ranges)
+internal sealed class Primary(KeyRanges ranges) : Key(ranges)
 {
-    internal abstract bool TryGetKey(ReadOnlySpan<char> @string, out string? key);
-}
-
-internal sealed class Primary<TRecord>(KeyRanges ranges) : Primary(ranges) where TRecord : Record424
-{
-    internal static Primary<TRecord>? Create()
+    internal static Primary? Create(Type type)
     {
-        var type = typeof(TRecord);
-
         var identifier = type.GetCustomAttribute<IdentifierAttribute>();
 
         if (identifier is null)
@@ -25,12 +19,15 @@ internal sealed class Primary<TRecord>(KeyRanges ranges) : Primary(ranges) where
             Identifier = identifier.Range
         };
 
-        return new Primary<TRecord>(ranges);
+        return new Primary(ranges);
     }
 
-    internal override bool TryGetKey(ReadOnlySpan<char> @string, out string key)
+    internal bool TryGetKey(ReadOnlySpan<char> @string, [NotNullWhen(true)] out string? key)
     {
         key = @string[ranges.Identifier].Trim().ToString();
+
+        if (string.IsNullOrEmpty(key))
+            return false;
 
         if (ranges.Icao.HasValue)
             key += @string[ranges.Icao.Value].ToString();
@@ -38,6 +35,6 @@ internal sealed class Primary<TRecord>(KeyRanges ranges) : Primary(ranges) where
         if (ranges.Port.HasValue)
             key += @string[ranges.Port.Value].Trim().ToString();
 
-        return !string.IsNullOrEmpty(key);
+        return true;
     }
 }
