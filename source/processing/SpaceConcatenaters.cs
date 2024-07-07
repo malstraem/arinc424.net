@@ -13,7 +13,7 @@ internal abstract class ControlledSpaceConcatenater : IProcessor<ControlledSpace
 {
     private static ControlledSpace New(ControlledVolume sub) => new() { IcaoCode = sub.IcaoCode, Name = sub.Name };
 
-    public static new IEnumerable<Build<ControlledSpace>> Process(Queue<Build<ControlledVolume>> records)
+    public static IEnumerable<Build<ControlledSpace>> Process(Queue<Build<ControlledVolume>> records)
         => Concatenater<ControlledSpace, ControlledVolume>.Concat(records, New, SpaceConcateTrigger.Trigger);
 }
 
@@ -21,6 +21,6 @@ internal abstract class RestrictiveSpaceConcatenater : IProcessor<RestrictiveSpa
 {
     private static RestrictiveSpace New(RestrictiveVolume sub) => new() { IcaoCode = sub.IcaoCode, Name = sub.Name, Designation = sub.Designation };
 
-    public static new IEnumerable<Build<RestrictiveSpace>> Process(Queue<Build<RestrictiveVolume>> records)
+    public static IEnumerable<Build<RestrictiveSpace>> Process(Queue<Build<RestrictiveVolume>> records)
         => Concatenater<RestrictiveSpace, RestrictiveVolume>.Concat(records, New, SpaceConcateTrigger.Trigger);
 }
