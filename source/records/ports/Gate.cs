@@ -4,12 +4,15 @@ namespace Arinc424.Ports;
 /// <c>Airport Gate</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.8.1.</remarks>
-[Section('P', 'B', subsectionIndex: 13), Continuous]
+[Section('P', 'B', subsectionIndex: 13), Icao(11, 12), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class Gate : Geo, IIdentity, INamed
 {
-    [Foreign(7, 12)]
+    [Identifier(7, 10)]
     public Airport Airport { get; set; }
+
+    [Field(11, 12)]
+    public string IcaoCode { get; set; }
 
     /// <summary>
     /// <c>Gate Identifier (GATE IDENT)</c> field.

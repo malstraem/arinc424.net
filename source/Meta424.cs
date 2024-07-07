@@ -57,7 +57,7 @@ Record<AirportArrivalAltitude>,
 Record<AirportMinimumAltitude>,
 Record<AirportTerminalWaypoint>,
 
-Record<AirportBeacon>,
+Record<TerminalBeacon>,
 Record<GlobalLandingSystem>,
 Record<MicrowaveLandingSystem>,
 Record<InstrumentLandingSystem>,

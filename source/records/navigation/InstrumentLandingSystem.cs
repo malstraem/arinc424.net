@@ -57,7 +57,7 @@ public class InstrumentLandingSystem : LandingSystem
     public string Declination { get; set; }
 
     [Type(109, 110)]
-    [Foreign(7, 12), Foreign(103, 108)]
+    [Identifier(103, 106), Icao(107, 108)]
     public Geo? SupportingFacility { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>

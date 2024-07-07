@@ -9,9 +9,9 @@ namespace Arinc424.Ports;
 [Section('H', 'K', subsectionIndex: 13)]
 public class HeliportArrivalAltitude : ArrivalAltitude
 {
-    [Foreign(7, 12)]
+    [Identifier(7, 10)]
     public Heliport Heliport { get; set; }
 
-    [Foreign(14, 19)]
+    [Identifier(14, 19)]
     public HeliportApproach Approach { get; set; }
 }

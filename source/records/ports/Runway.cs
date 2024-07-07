@@ -6,22 +6,22 @@ namespace Arinc424.Ports;
 /// <c>Runway</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.10.1.</remarks>
-[Section('P', 'G', subsectionIndex: 13), Continuous]
+[Section('P', 'G', subsectionIndex: 13), Identifier(14, 18), Icao(11, 12), Port(7, 10), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class Runway : Geo, IIdentity, IIcao
 {
-    [Foreign(7, 12), Primary]
+    [Identifier(7, 10)]
     public Airport Airport { get; set; }
+
+    [Field(11, 12)]
+    public string IcaoCode { get; set; }
 
     /// <summary>
     /// <c>Runway Identifier (RUNWAY ID)</c> field.
     /// </summary>
     /// <remarks>See section 5.46.</remarks>
-    [Field(14, 18), Primary]
+    [Field(14, 18)]
     public string Identifier { get; set; }
-
-    [Field(11, 12), Primary]
-    public string IcaoCode { get; set; }
 
     /// <summary>
     /// <c>Runway Length (RUNWAY LENGTH)</c> field.

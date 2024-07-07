@@ -9,8 +9,8 @@ namespace Arinc424.Comms;
 [Section('E', 'V')]
 public class AirwayCommunication : Communication<AirwayTransmitter>
 {
-    [Foreign(7, 10), Obsolete("todo")]
-    public RegionVolume FlightInfoRegion { get; set; }
+    [Identifier(7, 10)]
+    public FlightRegion FlightRegion { get; set; }
 
     /// <summary>
     /// <c>FIR/UIR Address (ADDRESS)</c> field.

@@ -7,6 +7,6 @@ namespace Arinc424.Ports;
 [Section('P', 'S', subsectionIndex: 13), Continuous(39)]
 public class AirportMinimumAltitude : MinimumAltitude
 {
-    [Foreign(7, 12)]
+    [Identifier(7, 10)]
     public Airport Airport { get; set; }
 }

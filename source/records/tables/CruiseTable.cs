@@ -4,7 +4,7 @@ namespace Arinc424.Tables;
 /// <c>Cruising Table</c> record sequence.
 /// </summary>
 /// <remarks>See section 4.1.16.1.</remarks>
-[Section('T', 'C'), Sequenced(9)]
+[Section('T', 'C'), Identifier(7, 8), Sequenced(9)]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public class CruiseTable : Record424<CruiseRow>, IIdentity
 {
@@ -12,6 +12,6 @@ public class CruiseTable : Record424<CruiseRow>, IIdentity
     /// <c>Cruise Table Identifier (CRSE TBL IDENT)</c> field.
     /// </summary>
     /// <remarks>See section 5.134.</remarks>
-    [Field(7, 8), Primary]
+    [Field(7, 8)]
     public string Identifier { get; set; }
 }

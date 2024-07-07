@@ -1,3 +1,6 @@
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
+
 using Arinc424.Building;
 using Arinc424.Diagnostics;
 
@@ -10,11 +13,16 @@ internal class Unique
 {
     internal readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
-    private void ProcessPrimaryKey(Build build, Type type, PrimaryKey primaryKey)
+    [Obsolete("todo: diagnostics")]
+    private void ProcessPrimaryKey(Build build, Type type, Primary primaryKey)
     {
         var record = build.Record;
 
-        string key = primaryKey.GetKey(record.Source);
+        if (!primaryKey.TryGetKey(record.Source, out string? key))
+        {
+            Debug.WriteLine("oops");
+            return;
+        }
 
         if (unique[type].TryAdd(key, record))
             return;
@@ -26,12 +34,15 @@ internal class Unique
 
     internal Unique(IEnumerable<InfoAttribute> attributes, IDictionary<Type, IEnumerable<Build>> builds)
     {
-        foreach (var attribute in attributes.Where(x => x.PrimaryKey is not null))
+        foreach (var attribute in attributes.Where(x => x.Primary is not null))
         {
             unique[attribute.Type] = [];
 
             foreach (var build in builds[attribute.Type])
-                ProcessPrimaryKey(build, attribute.Type, attribute.PrimaryKey!);
+                ProcessPrimaryKey(build, attribute.Type, attribute.Primary!);
         };
     }
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool TryGetRecords(Type type, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(type, out records);
 }

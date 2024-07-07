@@ -23,7 +23,7 @@ public class PortTransmitter : Transmitter
     public Sectorization? Sectorization { get; set; }
 
     [Type(81, 82)]
-    [Foreign(75, 80)]
+    [Identifier(75, 78), Icao(79, 80)]
     public Geo? Facility { get; set; }
 
     /// <inheritdoc cref="DistanceLimitation"/>

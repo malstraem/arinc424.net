@@ -1,8 +1,11 @@
 namespace Arinc424.Procedures;
 
-[Continuous(39), Sequenced(27, 29)]
+[Sequenced(27, 29), Continuous(39)]
 public abstract class ProcedureSequence<TPoint> : Record424<TPoint>, IIdentity, IIcao where TPoint : ProcedurePoint
 {
+    [Field(11, 12)]
+    public string IcaoCode { get; set; }
+
     /// <summary>
     /// <para>
     ///   <c>SID/STAR Route Identifier (SID/STAR IDENT)</c> field for <see cref="DepartureSequence"/> and <see cref="ArrivalSequence"/>.
@@ -14,9 +17,6 @@ public abstract class ProcedureSequence<TPoint> : Record424<TPoint>, IIdentity, 
     /// <remarks>See section 5.9 and 5.10.</remarks>
     [Field(14, 19)]
     public string Identifier { get; set; }
-
-    [Field(11, 12)]
-    public string IcaoCode { get; set; }
 
     /// <summary>
     /// <c>Transition Identifier (TRANS IDENT)</c> field.

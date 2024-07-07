@@ -24,10 +24,8 @@ public class SimpleCountRegressionTests
     }
 
     [Theory]
-    [InlineData("case-1")]
-    [InlineData("case-2")]
-    [InlineData("faa-240321")]
-    [InlineData("faa-240418")]
+    [InlineData("unknown")]
+    [InlineData("faa-24.04.18")]
     public void CheckRegression(string file)
     {
         var data = Data424.Create(File.ReadAllLines($"data/{file}"));

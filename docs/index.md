@@ -49,7 +49,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [TAA](api/Arinc424.Ports.AirportArrivalAltitude.yml)
 - [MLS](api/Arinc424.Navigation.MicrowaveLandingSystem.yml)
 - [Localizer Marker](api/Arinc424.Navigation.InstrumentLandingMarker.yml)
-- [Terminal NDB](api/Arinc424.Navigation.AirportBeacon.yml)
+- [Terminal NDB](api/Arinc424.Navigation.TerminalBeacon.yml)
 - [SBAS Path Point](api/Arinc424.Ports.AirportSatellitePoint.yml)
 - [GBAS Path Point](api/Arinc424.Ports.GroundPoint.yml)
 - [Flight Planning](api/Arinc424.Ports.FlightPlan.yml) 🚧

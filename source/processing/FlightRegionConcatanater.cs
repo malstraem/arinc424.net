@@ -11,7 +11,6 @@ internal abstract class FlightRegionConcatanater : IProcessor<FlightRegion, Regi
     {
         Name = sub.Name,
         Address = sub.Address,
-        IcaoCode = sub.IcaoCode,
         Identifier = sub.Identifier
     };
 
