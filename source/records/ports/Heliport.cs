@@ -1,5 +1,6 @@
 using Arinc424.Comms;
 using Arinc424.Procedures;
+using Arinc424.Processing;
 using Arinc424.Waypoints;
 
 namespace Arinc424.Ports;
@@ -9,23 +10,14 @@ namespace Arinc424.Ports;
 /// </summary>
 /// <remarks>See section 4.2.1.1.</remarks>
 [Section('H', 'A', subsectionIndex: 13)]
+[Process<Heliport, Heliport, HelipadConcatenater>]
 public class Heliport : Port
 {
-    [Obsolete("need to be post processed")]
-    [Field(17, 21)]
-    public string PadIdentifier { get; set; }
-
     /// <summary>
-    /// Associated SBAS points.
+    /// Associated Helipads.
     /// </summary>
     [Many]
-    public List<HelicopterSatellitePoint>? SattelitePoints { get; set; }
-
-    /// <summary>
-    /// Associated Approach Procedures.
-    /// </summary>
-    [Many]
-    public List<HeliportApproach>? Approaches { get; set; }
+    public List<Helipad>? Helipads { get; set; }
 
     /// <summary>
     /// Associated STARs.
@@ -34,10 +26,22 @@ public class Heliport : Port
     public List<HeliportArrival>? Arrivals { get; set; }
 
     /// <summary>
+    /// Associated Approach Procedures.
+    /// </summary>
+    [Many]
+    public List<HeliportApproach>? Approaches { get; set; }
+
+    /// <summary>
     /// Associated SIDs.
     /// </summary>
     [Many]
     public List<HeliportDeparture>? Departures { get; set; }
+
+    /// <summary>
+    /// Associated SBAS points.
+    /// </summary>
+    [Many]
+    public List<HelicopterSatellitePoint>? SattelitePoints { get; set; }
 
     /// <summary>
     /// Associated Terminal Waypoints.
@@ -48,15 +52,18 @@ public class Heliport : Port
     /// <summary>
     /// Associated Communications
     /// </summary>
+    [Many]
     public List<HeliportCommunication>? Communications { get; set; }
 
     /// <summary>
     /// Associated TAAs.
     /// </summary>
+    [Many]
     public List<HeliportArrivalAltitude>? ArrivalAltitudes { get; set; }
 
     /// <summary>
     /// Associated MSAs.
     /// </summary>
+    [Many]
     public List<HeliportMinimumAltitude>? MinimumAltitudes { get; set; }
 }

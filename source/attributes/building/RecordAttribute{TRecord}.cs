@@ -23,6 +23,6 @@ internal class RecordAttribute<TRecord>() : InfoAttribute<TRecord> where TRecord
             }
             builds.Enqueue(build);
         }
-        return builds;
+        return process is not null ? process.Process(builds) : builds;
     }
 }
