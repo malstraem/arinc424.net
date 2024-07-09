@@ -1,7 +1,7 @@
 namespace Arinc424.Navigation.Terms;
 
 /// <summary>
-/// Fifth character of <c>NAVAID Class (CLASS)</c> field, specific to <see cref="InstrumentLandingMarker"/>.
+/// Fifth character of <c>NAVAID Class (CLASS)</c> field, specific to <see cref="InstrumentMarker"/>.
 /// </summary>
 /// <remarks>See section 5.35.</remarks>
 [Char, Transform<MarkerCollocationConverter, MarkerCollocation>]

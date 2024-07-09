@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 /// </summary>
 /// <remarks>See section 4.1.11.1.</remarks>
 [Section('P', 'I', subsectionIndex: 13)]
-public class InstrumentLandingSystem : LandingSystem
+public class InstrumentLanding : LandingSystem
 {
     /// <summary>
     /// <c>Localizer Frequency (FREQ)</c> field.

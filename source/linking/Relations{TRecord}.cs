@@ -23,7 +23,7 @@ internal sealed class Relations<TRecord> : Relations where TRecord : Record424
 
     private readonly (Relations Relations, PropertyInfo Property)? inner;
 
-    [Obsolete("todo: linking just works, but so dirty and not guarantee")]
+    [Obsolete("todo: need polish")]
     private void Link(TRecord record, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics)
     {
         foreach (var link in links)
@@ -65,8 +65,8 @@ internal sealed class Relations<TRecord> : Relations where TRecord : Record424
 
                 KeyRanges ranges = new()
                 {
-                    Icao = property.GetCustomAttribute<IcaoAttribute>()?.Range ?? icao,
                     Port = port,
+                    Icao = property.GetCustomAttribute<IcaoAttribute>()?.Range ?? icao,
                     Identifier = identifier.Range
                 };
 

@@ -87,13 +87,13 @@ public class Data424
 
     public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
-    public List<GlobalLandingSystem> GlobalLandingSystems { get; set; } = [];
+    public List<GlobalLanding> GlobalLandingSystems { get; set; } = [];
 
-    public List<MicrowaveLandingSystem> MicrowaveLandingSystems { get; set; } = [];
+    public List<MicrowaveLanding> MicrowaveLandingSystems { get; set; } = [];
 
-    public List<InstrumentLandingSystem> InstrumentLandingSystems { get; set; } = [];
+    public List<InstrumentLanding> InstrumentLandingSystems { get; set; } = [];
 
-    public List<InstrumentLandingMarker> InstrumentLandingMarkers { get; set; } = [];
+    public List<InstrumentMarker> InstrumentLandingMarkers { get; set; } = [];
     #endregion
 
     #region Company Routes

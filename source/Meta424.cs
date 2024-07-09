@@ -58,10 +58,10 @@ Record<AirportMinimumAltitude>,
 Record<AirportTerminalWaypoint>,
 
 Record<TerminalBeacon>,
-Record<GlobalLandingSystem>,
-Record<MicrowaveLandingSystem>,
-Record<InstrumentLandingSystem>,
-Record<InstrumentLandingMarker>,
+Record<GlobalLanding>,
+Record<MicrowaveLanding>,
+Record<InstrumentLanding>,
+Record<InstrumentMarker>,
 
 Sequence<AirportCommunication, PortTransmitter>,
 

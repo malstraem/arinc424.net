@@ -1,4 +1,3 @@
-using Arinc424.Navigation;
 using Arinc424.Ports;
 using Arinc424.Waypoints.Terms;
 
@@ -13,7 +12,7 @@ public abstract class ProcedurePoint : Record424
 {
     [Type(37, 38)]
     [Identifier(30, 34), Icao(35, 36)]
-    public Geo? Fix { get; set; }
+    public Fix? Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
     [Field(40, 43)]
@@ -40,7 +39,7 @@ public abstract class ProcedurePoint : Record424
 
     [Type(79, 80)]
     [Identifier(51, 54), Icao(55, 56)]
-    public Geo? Recommended { get; set; }
+    public Fix? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
     [Field(57, 62), Float(1000)]

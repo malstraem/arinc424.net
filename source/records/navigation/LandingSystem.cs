@@ -4,20 +4,13 @@ namespace Arinc424.Navigation;
 
 [Identifier(14, 17), Icao(11, 12), Port(7, 10), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public abstract class LandingSystem : Geo, IIdentity, IIcao
+public abstract class LandingSystem : Fix, IIcao
 {
     [Identifier(7, 10)]
     public Airport Airport { get; set; }
 
     [Field(11, 12)]
     public string IcaoCode { get; set; }
-
-    /// <summary>
-    /// <c>Localizer/MLS/GLS Identifier (LOC, MLS, GLS IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.44.</remarks>
-    [Field(14, 17)]
-    public string Identifier { get; set; }
 
     /// <inheritdoc cref="Terms.LandingSystemType"/>
     [Character(18)]
@@ -39,6 +32,6 @@ public abstract class LandingSystem : Geo, IIdentity, IIcao
     /// </summary>
     /// <remarks>See section 5.74.</remarks>
     [Field(98, 102), Integer]
-    [Field<MicrowaveLandingSystem>(104, 108)]
+    [Field<MicrowaveLanding>(104, 108)]
     public int Elevation { get; set; }
 }

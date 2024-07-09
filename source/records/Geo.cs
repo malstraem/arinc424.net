@@ -12,7 +12,7 @@ public abstract class Geo : Record424
     [Field<PathPoint>(38, 60)]
     [Field<Transmitter>(93, 111)]
     [Field<RegionPoint>(35, 53)]
-    [Field<GlobalLandingSystem>(56, 74)]
+    [Field<GlobalLanding>(56, 74)]
     [Field<SpecialActivityArea>(24, 42)]
     public Coordinates Coordinates { get; set; }
 }

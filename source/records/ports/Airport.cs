@@ -55,25 +55,25 @@ public class Airport : Port
     /// Associated GLS's.
     /// </summary>
     [Many]
-    public List<GlobalLandingSystem>? GlobalLandingSystems { get; set; }
+    public List<GlobalLanding>? GlobalLandingSystems { get; set; }
 
     /// <summary>
     /// Associated MLS's.
     /// </summary>
     [Many]
-    public List<MicrowaveLandingSystem>? MicrowaveLandingSystems { get; set; }
+    public List<MicrowaveLanding>? MicrowaveLandingSystems { get; set; }
 
     /// <summary>
     /// Associated ILS's.
     /// </summary>
     [Many]
-    public List<InstrumentLandingSystem>? InstrumentLandingSystems { get; set; }
+    public List<InstrumentLanding>? InstrumentLandingSystems { get; set; }
 
     /// <summary>
     /// Associated Localizer Markers.
     /// </summary>
     [Many]
-    public List<InstrumentLandingMarker>? Markers { get; set; }
+    public List<InstrumentMarker>? Markers { get; set; }
 
     /// <summary>
     /// Associated Approach Procedures.

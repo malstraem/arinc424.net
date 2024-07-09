@@ -10,17 +10,10 @@ using Terms;
 /// <remarks>See section 4.1.13.1.</remarks>
 [Section('P', 'M', subsectionIndex: 13), Icao(11, 12), Port(7, 10), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public class InstrumentLandingMarker : Geo, IIdentity
+public class InstrumentMarker : Fix
 {
     [Identifier(7, 10)]
     public Airport Airport { get; set; }
-
-    /// <summary>
-    /// <c>Localizer(LOC IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.44.</remarks>
-    [Field(14, 17)]
-    public string Identifier { get; set; }
 
     /// <inheritdoc cref="MarkerType"/>
     [Field(18, 20)]

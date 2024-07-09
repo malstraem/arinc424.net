@@ -17,7 +17,6 @@ internal abstract class DecodeAttribute<TType> : DecodeAttribute where TType : n
     internal override bool IsMatch<TMatch>() => false;
 }
 
-/// <inheritdoc/>
 /// <typeparam name="TConverter">Associated <see cref="IStringConverter{TType}"/>.</typeparam>
 [AttributeUsage(AttributeTargets.Struct | AttributeTargets.Class | AttributeTargets.Enum | AttributeTargets.Property)]
 internal class DecodeAttribute<TConverter, TType> : DecodeAttribute<TType>

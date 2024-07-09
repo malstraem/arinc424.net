@@ -7,13 +7,6 @@
     <remarks>See section 5.8.</remarks>
   </member>
 
-  <member name="Fix">
-    <summary>
-      <c>Fix Identifier (FIX IDENT)</c> field.
-    </summary>
-    <remarks>See section 5.13.</remarks>
-  </member>
-
   <member name="Theta">
     <summary>
       <c>Theta (THETA)</c> field.
@@ -51,13 +44,6 @@
       <c>Altitude/Minimum Altitude</c> field.
     </summary>
     <remarks>See section 5.30.</remarks>
-  </member>
-
-  <member name="Navaid">
-    <summary>
-      <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field.
-    </summary>
-    <remarks>See section 5.33.</remarks>
   </member>
 
   <member name="Frequency">

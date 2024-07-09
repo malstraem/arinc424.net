@@ -4,7 +4,7 @@ using Terms;
 
 [Icao(11, 12), Continuous(27)]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public abstract class PathPoint : Geo, IIcao, IIdentity
+public abstract class PathPoint : Fix, IIcao
 {
     [Field(11, 12)]
     public string IcaoCode { get; set; }
@@ -26,13 +26,6 @@ public abstract class PathPoint : Geo, IIcao, IIdentity
     /// <remarks>See section 5.256.</remarks>
     [Field(31, 32), Integer]
     public int PathSelector { get; set; }
-
-    /// <summary>
-    /// <c>Reference Path Identifier (REF ID)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.257.</remarks>
-    [Field(33, 36)]
-    public string Identifier { get; set; }
 
     /// <inheritdoc cref="Terms.ApproachPerformance"/>
     [Character(37)]

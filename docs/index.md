@@ -3,13 +3,13 @@
 
 # Overview
 
-While the **`ARINC 424`** specification describes entities (*or records*) with 132-byte fixed-length string, this library creates 
-a database object model at load time via building entities using reflection. Most terms are converted according 
-to the specification into associated enums or numeric values on the fly.
+While the **ARINC 424** specification describes entities (or records) with 132-byte fixed-length string, this library creates a database object model via building entities using reflection and runtime compilation.
+
+Most terms are converted according to the specification into associated enumerations or numeric values ​​on the fly.
 
 In addition, relationships between entities are established after the building stage.
 
-In practice, this allows you to explore and manipulate the tree-like representation of **`ARINC 424`** database.
+In practice, this allows you to explore and manipulate the tree-like representation of **ARINC 424** database.
 
 ## Specification map
 
@@ -45,16 +45,16 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [Terminal Waypoints](api/Arinc424.Waypoints.AirportTerminalWaypoint.yml)
 - [SID](api/Arinc424.Procedures.AirportDeparture.yml)/[STAR](api/Arinc424.Procedures.AirportArrival.yml)/[Approach](api/Arinc424.Procedures.AirportApproach.yml)
 - [Runways](api/Arinc424.Ports.Runway.yml)
-- [Localizer/Glide Slope](api/Arinc424.Navigation.InstrumentLandingSystem.yml)
+- [Localizer/Glide Slope](api/Arinc424.Navigation.InstrumentLanding.yml)
 - [TAA](api/Arinc424.Ports.AirportArrivalAltitude.yml)
-- [MLS](api/Arinc424.Navigation.MicrowaveLandingSystem.yml)
-- [Localizer Marker](api/Arinc424.Navigation.InstrumentLandingMarker.yml)
+- [MLS](api/Arinc424.Navigation.MicrowaveLanding.yml)
+- [Localizer Marker](api/Arinc424.Navigation.InstrumentMarker.yml)
 - [Terminal NDB](api/Arinc424.Navigation.TerminalBeacon.yml)
 - [SBAS Path Point](api/Arinc424.Ports.AirportSatellitePoint.yml)
 - [GBAS Path Point](api/Arinc424.Ports.GroundPoint.yml)
 - [Flight Planning](api/Arinc424.Ports.FlightPlan.yml) 🚧
 - [MSA](api/Arinc424.Ports.AirportMinimumAltitude.yml)
-- [GLS Station](api/Arinc424.Navigation.GlobalLandingSystem.yml)
+- [GLS Station](api/Arinc424.Navigation.GlobalLanding.yml)
 - [Communications](api/Arinc424.Comms.AirportCommunication.yml)
 
 # [Company Routes](#tab/company)

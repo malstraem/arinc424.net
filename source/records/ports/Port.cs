@@ -4,15 +4,8 @@ namespace Arinc424.Ports;
 
 [Identifier(7, 10), Icao(11, 12), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Name)} - {{{nameof(Name)},nq}}")]
-public abstract class Port : Geo, IIdentity, IIcao, INamed
+public abstract class Port : Fix, IIcao, INamed
 {
-    /// <summary>
-    /// <c>Airport/Heliport Identifier (ARPT/HELI IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.6.</remarks>
-    [Field(7, 10)]
-    public string Identifier { get; set; }
-
     [Field(11, 12)]
     public string IcaoCode { get; set; }
 

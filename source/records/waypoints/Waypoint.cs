@@ -8,12 +8,8 @@ using Terms;
 /// <remarks>See section 4.1.4.1.</remarks>
 [Identifier(14, 18), Icao(20, 21), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public abstract class Waypoint : Geo, IIdentity, IIcao, INamed
+public abstract class Waypoint : Fix, IIcao, INamed
 {
-    /// <include file='Comments.xml' path="doc/member[@name='Fix']/*"/>
-    [Field(14, 18)]
-    public string Identifier { get; set; }
-
     [Field(20, 21)]
     public string IcaoCode { get; set; }
 

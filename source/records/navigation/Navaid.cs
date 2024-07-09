@@ -2,12 +2,8 @@ namespace Arinc424.Navigation;
 
 [Identifier(14, 17), Icao(20, 21)]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public abstract class Navaid : Geo, IIdentity, IIcao, INamed
+public abstract class Navaid : Fix, IIcao, INamed
 {
-    /// <include file='Comments.xml' path="doc/member[@name='Navaid']/*"/>
-    [Field(14, 17)]
-    public string Identifier { get; set; }
-
     [Field(20, 21)]
     public string IcaoCode { get; set; }
 
