@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Arinc424;
 using Arinc424.Airspace;
+using Arinc424.Building;
 using Arinc424.Comms;
 using Arinc424.Navigation;
 using Arinc424.Ports;
@@ -96,10 +97,14 @@ namespace Arinc424;
 internal class Meta424
 {
     [Obsolete("todo: supplement versioning (v18 - v23)")]
-    internal Meta424()
+    internal Meta424(Supplement supplement)
     {
+        var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
+
+        Info = attributes.Select(x => x.GetInfo(supplement)).ToArray();
+
         Dictionary<(char, char), Type> types = [];
-        Dictionary<Type, InfoAttribute> typeInfo = [];
+        Dictionary<Type, RecordInfo> typeInfo = [];
 
         foreach (var info in Info)
         {
@@ -112,7 +117,7 @@ internal class Meta424
 
     internal FrozenDictionary<(char, char), Type> Types { get; }
 
-    internal FrozenDictionary<Type, InfoAttribute> TypeInfo { get; }
+    internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; }
 
-    internal IEnumerable<InfoAttribute> Info { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
+    internal RecordInfo[] Info { get; }
 }

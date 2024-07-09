@@ -32,7 +32,7 @@ internal class Unique
         Debug.WriteLine(build.Diagnostics.Last());
     }
 
-    internal Unique(IEnumerable<InfoAttribute> attributes, IDictionary<Type, IEnumerable<Build>> builds)
+    internal Unique(IEnumerable<RecordInfo> attributes, IDictionary<Type, IEnumerable<Build>> builds)
     {
         foreach (var attribute in attributes.Where(x => x.Primary is not null))
         {

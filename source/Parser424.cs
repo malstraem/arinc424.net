@@ -8,7 +8,7 @@ namespace Arinc424;
 
 internal partial class Parser424
 {
-    private readonly Meta424 meta = new();
+    private readonly Meta424 meta;
 
     private readonly Queue<string> skipped = [];
 
@@ -49,8 +49,10 @@ internal partial class Parser424
         _ = Parallel.ForEach(meta.Info, info => info.Link(builds[info.Type], unique, meta));
     }
 
-    internal Parser424()
+    internal Parser424(Supplement supplement)
     {
+        meta = new(supplement);
+
         foreach (var info in meta.Info)
             strings[info.Type] = ([], []);
     }

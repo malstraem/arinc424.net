@@ -8,10 +8,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="../codegen/Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>Arinc424.Bench</_Parameter1>
     </AssemblyAttribute>
-
-    <ProjectReference Include="../codegen/Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Arinc424.Tests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 </Project>

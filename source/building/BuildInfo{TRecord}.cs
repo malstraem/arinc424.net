@@ -54,7 +54,7 @@ internal class BuildInfo<TRecord> where TRecord : Record424
             : new StringAssignment<TRecord>(property, regex, range);
     }
 
-    internal BuildInfo()
+    internal BuildInfo(Supplement supplement)
     {
         List<Assignment<TRecord>> assignments = [];
 

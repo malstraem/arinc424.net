@@ -4,8 +4,8 @@ namespace Arinc424.Attributes;
 /// Specifies the index of a character within an <c>ARINC-424</c> string. Must come before <see cref="CharacterAttribute{TRecord}"/>.
 /// </summary>
 /// <inheritdoc/>
-[AttributeUsage(AttributeTargets.Property)]
-internal class CharacterAttribute(int index) : IndexAttribute(index)
+[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
+internal class CharacterAttribute(int index, Supplement supplement = Supplement.Unknown) : IndexAttribute(index, supplement)
 {
     /// <summary>
     /// Defines that a record type matches the attribute (from base types).
@@ -21,8 +21,8 @@ internal class CharacterAttribute(int index) : IndexAttribute(index)
 /// </summary>
 /// <inheritdoc/>
 /// <typeparam name="TRecord">Target type of record that index is defined.</typeparam>
-[AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-internal class CharacterAttribute<TRecord>(int index) : CharacterAttribute(index) where TRecord : Record424
+internal class CharacterAttribute<TRecord>(int index, Supplement supplement = Supplement.Unknown) : CharacterAttribute(index, supplement)
+    where TRecord : Record424
 {
     internal override bool IsMatch<TMatch>() => typeof(TMatch).IsAssignableTo(typeof(TRecord));
 }

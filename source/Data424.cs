@@ -14,6 +14,8 @@ namespace Arinc424;
 /// </summary>
 public class Data424
 {
+    public static Data424 Create(IEnumerable<string> strings, Supplement supplement = Supplement.Unknown) => new Parser424(supplement).Parse(strings);
+
     public List<OffrouteAltitude> OffrouteAltitudes { get; set; } = [];
 
     #region Navaid
@@ -87,13 +89,13 @@ public class Data424
 
     public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
-    public List<GlobalLanding> GlobalLandingSystems { get; set; } = [];
+    public List<GlobalLanding> GlobalLandings { get; set; } = [];
 
-    public List<MicrowaveLanding> MicrowaveLandingSystems { get; set; } = [];
+    public List<MicrowaveLanding> MicrowaveLandings { get; set; } = [];
 
-    public List<InstrumentLanding> InstrumentLandingSystems { get; set; } = [];
+    public List<InstrumentLanding> InstrumentLandings { get; set; } = [];
 
-    public List<InstrumentMarker> InstrumentLandingMarkers { get; set; } = [];
+    public List<InstrumentMarker> InstrumentMarkers { get; set; } = [];
     #endregion
 
     #region Company Routes
@@ -119,6 +121,4 @@ public class Data424
 
     public List<RestrictiveSpace> RestrictiveSpaces { get; set; } = [];
     #endregion
-
-    public static Data424 Create(IEnumerable<string> strings) => new Parser424().Parse(strings);
 }
