@@ -5,7 +5,7 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Linking;
 
-internal abstract class Link<TRecord>(TypeAttribute? typeAttribute)
+internal abstract class Link<TRecord>(TypeAttribute? typeAttribute) where TRecord : Record424
 {
     protected Type type = typeof(TRecord);
 

@@ -9,11 +9,11 @@ public class AirwayTransmitter : Transmitter
     /// <summary>
     /// <c>Sectorization Narrative</c> field.
     /// </summary>
-    /// <remarks>See section 5.186.</remarks>
-    [Field(68, 92)]
+    /// <remarks>See section 5.186. <c>Remote Name</c> field before supplement 19, see section 5.189.</remarks>
+    [Field(19, 43), Field(68, 92, Supplement.V19)]
     public string? Narrative { get; set; }
 
     /// <inheritdoc cref="Terms.AirwayCommUsages"/>
-    [Field(112, 114)]
+    [Field(57, 59), Field(112, 114, Supplement.V19)]
     public Terms.AirwayCommUsages Usages { get; set; }
 }

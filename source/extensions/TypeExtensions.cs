@@ -10,7 +10,7 @@ internal static class TypeExtensions
 
         foreach (var attribute in attributes)
         {
-            if (supplement is Supplement.Unknown)
+            if (supplement is Supplement.None)
                 yield return attribute;
 
             if (attribute.Supplement <= supplement)

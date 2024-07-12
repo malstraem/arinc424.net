@@ -5,7 +5,7 @@ namespace Arinc424.Attributes;
 /// </summary>
 /// <inheritdoc/>
 [AttributeUsage(AttributeTargets.Class)]
-internal class SequencedAttribute(int start, int end, Supplement supplement = Supplement.Unknown) : RangeAttribute(start, end, supplement)
+internal class SequencedAttribute(int start, int end, Supplement supplement = Supplement.None) : RangeAttribute(start, end, supplement)
 {
     internal SequencedAttribute(int index) : this(index, index) { }
 }

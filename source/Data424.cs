@@ -14,7 +14,7 @@ namespace Arinc424;
 /// </summary>
 public class Data424
 {
-    public static Data424 Create(IEnumerable<string> strings, Supplement supplement = Supplement.Unknown) => new Parser424(supplement).Parse(strings);
+    public static Data424 Create(IEnumerable<string> strings, Supplement supplement = Supplement.None) => new Parser424(supplement).Parse(strings);
 
     public List<OffrouteAltitude> OffrouteAltitudes { get; set; } = [];
 

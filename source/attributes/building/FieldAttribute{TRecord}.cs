@@ -5,7 +5,7 @@ namespace Arinc424.Attributes;
 /// </summary>
 /// <inheritdoc/>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-internal class FieldAttribute(int start, int end, Supplement supplement = Supplement.Unknown) : RangeAttribute(start, end, supplement)
+internal class FieldAttribute(int start, int end, Supplement supplement = Supplement.None) : RangeAttribute(start, end, supplement)
 {
     /// <inheritdoc cref="CharacterAttribute.IsMatch{TMatch}"/>
     internal virtual bool IsMatch<TMatch>() where TMatch : Record424 => false;
@@ -16,7 +16,7 @@ internal class FieldAttribute(int start, int end, Supplement supplement = Supple
 /// </summary>
 /// <inheritdoc/>
 /// <typeparam name="TRecord">Target record type in which the field is defined.</typeparam>
-internal class FieldAttribute<TRecord>(int start, int end, Supplement supplement = Supplement.Unknown) : FieldAttribute(start, end, supplement)
+internal class FieldAttribute<TRecord>(int start, int end, Supplement supplement = Supplement.None) : FieldAttribute(start, end, supplement)
     where TRecord : Record424
 {
     internal override bool IsMatch<TMatch>() => typeof(TMatch).IsAssignableTo(typeof(TRecord));

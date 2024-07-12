@@ -5,4 +5,4 @@ namespace Arinc424.Attributes;
 /// </summary>
 /// <remarks>See section 5.16.</remarks>
 [AttributeUsage(AttributeTargets.Class)]
-internal class ContinuousAttribute(int index = 22, Supplement supplement = Supplement.Unknown) : IndexAttribute(index, supplement);
+internal class ContinuousAttribute(int index = 22, Supplement supplement = Supplement.None) : IndexAttribute(index, supplement);

@@ -62,11 +62,11 @@ internal class BuildInfo<TRecord> where TRecord : Record424
         {
             var regex = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
 
-            if (property.TryCharacterAttribute<TRecord>(out var characterAttribute))
+            if (property.TryCharacterAttribute<TRecord>(supplement, out var characterAttribute))
             {
                 assignments.Add(GetIndexAssignment(property, regex, characterAttribute.Index));
             }
-            else if (property.TryFieldAttribute<TRecord>(out var fieldAttribute))
+            else if (property.TryFieldAttribute<TRecord>(supplement, out var fieldAttribute))
             {
                 assignments.Add(GetRangeAssignment(property, regex, fieldAttribute.Range));
             }
