@@ -114,7 +114,7 @@ public class Airport : Port
     /// <summary>
     /// Associated Communications.
     /// </summary>
-    public List<AirportCommunication>? Communications { get; set; }
+    public List<PortCommunication>? Communications { get; set; }
 
     /// <summary>
     /// Associated TAAs.

@@ -1,5 +1,6 @@
 using System.Reflection;
 
+using Arinc424.Attributes;
 using Arinc424.Building;
 using Arinc424.Diagnostics;
 

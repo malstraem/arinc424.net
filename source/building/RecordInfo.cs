@@ -6,7 +6,7 @@ using Arinc424.Linking;
 namespace Arinc424.Building;
 
 #pragma warning disable CS8618
-internal abstract class RecordInfo()
+internal abstract class RecordInfo
 #pragma warning restore CS8618
 {
     protected Type type;
@@ -27,13 +27,28 @@ internal abstract class RecordInfo()
 
     internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta) => relations.Link(builds, unique, meta);
 
+    internal IEnumerable<RecordInfo> DuplicateBySection()
+    {
+        List<RecordInfo> duplicates = [];
+
+        foreach (var section in type.GetCustomAttributes<SectionAttribute>(false))
+        {
+            var duplicate = (RecordInfo)MemberwiseClone();
+
+            duplicate.section = section;
+
+            duplicates.Add(duplicate);
+        }
+        return duplicates;
+    }
+
     internal Type Type => type;
 
     internal Primary? Primary => primary;
 
     internal Relations Relations => relations;
 
-    internal (char, char) Section => (section.Section, section.Subsection);
+    internal Section Section => section.Section;
 }
 
 internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
@@ -48,7 +63,6 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
 
         info = new(supplement);
 
-        section = type.GetCustomAttribute<SectionAttribute>()!;
         process = type.GetCustomAttribute<ProcessAttribute<TRecord>>();
 
         if (process is not null && supplement < process.Start && supplement > process.End)
@@ -86,7 +100,7 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
     }
 }
 
-internal sealed class RecordInfo<TSequence, TSub>(Range sequenceRange, Supplement supplement) : RecordInfo<TSequence>(supplement)
+internal sealed class RecordInfo<TSequence, TSub>(Supplement supplement, Range sequenceRange) : RecordInfo<TSequence>(supplement)
     where TSequence : Record424<TSub>, new()
     where TSub : Record424, new()
 {

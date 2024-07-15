@@ -11,38 +11,40 @@ namespace Arinc424.Linking;
 /// </summary>
 internal class Unique
 {
-    internal readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
+    internal readonly Dictionary<Section, Dictionary<string, Record424>> unique = [];
 
     [Obsolete("todo: diagnostics")]
-    private void ProcessPrimaryKey(Build build, Type type, Primary primaryKey)
+    private void ProcessPrimaryKey(Build build, RecordInfo info)
     {
         var record = build.Record;
+        var primary = info.Primary!; //garantee by design
 
-        if (!primaryKey.TryGetKey(record.Source, out string? key))
+
+        if (!primary.TryGetKey(record.Source, out string? key))
         {
             Debug.WriteLine("oops");
             return;
         }
 
-        if (unique[type].TryAdd(key, record))
+        if (unique[info.Section].TryAdd(key, record))
             return;
 
         build.Diagnostics ??= [];
-        build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, type, key));
+        build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, info.Type, key));
         Debug.WriteLine(build.Diagnostics.Last());
     }
 
-    internal Unique(IEnumerable<RecordInfo> attributes, IDictionary<Type, IEnumerable<Build>> builds)
+    internal Unique(IEnumerable<RecordInfo> info, IDictionary<Section, IEnumerable<Build>> builds)
     {
-        foreach (var attribute in attributes.Where(x => x.Primary is not null))
+        foreach (var attribute in info.Where(x => x.Primary is not null))
         {
-            unique[attribute.Type] = [];
+            unique[attribute.Section] = [];
 
-            foreach (var build in builds[attribute.Type])
-                ProcessPrimaryKey(build, attribute.Type, attribute.Primary!);
+            foreach (var build in builds[attribute.Section])
+                ProcessPrimaryKey(build, attribute);
         };
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal bool TryGetRecords(Type type, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(type, out records);
+    internal bool TryGetRecords(Section section, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(section, out records);
 }

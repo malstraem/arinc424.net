@@ -28,9 +28,9 @@ internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo proper
         if (!TryGetReference(record, meta, out var reference, out diagnostic))
             return diagnostic is null;
 
-        (string key, var type) = reference.Value;
+        (string key, var type, var section) = reference.Value;
 
-        if (!unique.TryGetRecords(type, out var records))
+        if (!unique.TryGetRecords(section, out var records))
         {
             diagnostic = new LinkDiagnostic(record, $"No records of type '{type}' were found.", foreign.Ranges, indexes);
             Debug.WriteLine(diagnostic);
@@ -70,7 +70,7 @@ internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo proper
         return true;
     }
 
-    internal bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type)? reference, out Diagnostic? diagnostic)
+    internal bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type, Section)? reference, out Diagnostic? diagnostic)
     {
         string key;
 
@@ -83,9 +83,11 @@ internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo proper
 
         if (indexes is null)
         {
-            if (foreign.TryGetKey(@string, meta.TypeInfo[type].Primary! /*garantee by design*/, out key))
+            var info = meta.TypeInfo[type];
+
+            if (foreign.TryGetKey(@string, info.Primary! /*garantee by design*/, out key))
             {
-                reference = (key, type);
+                reference = (key, type, info.Section);
                 return true;
             }
             return false;
@@ -93,15 +95,17 @@ internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo proper
 
         var (index, subindex) = indexes.Value;
 
-        char section = @string[index];
-        char subsection = @string[subindex];
+        char sectionChar = @string[index];
+        char subsectionChar = @string[subindex];
 
-        if (char.IsWhiteSpace(section) && char.IsWhiteSpace(subsection))
+        Section section = new(sectionChar, subsectionChar);
+
+        if (char.IsWhiteSpace(sectionChar) && char.IsWhiteSpace(subsectionChar))
             return false;
 
-        if (!meta.Types.TryGetValue((section, subsection), out type))
+        if (!meta.Types.TryGetValue(section, out type))
         {
-            diagnostic = new LinkDiagnostic(record, $"Section '{section}, {subsection}' does not exist.", foreign.Ranges, indexes);
+            diagnostic = new LinkDiagnostic(record, $"Section '{sectionChar}, {subsectionChar}' does not exist.", foreign.Ranges, indexes);
             Debug.WriteLine(diagnostic);
             return false;
         }
@@ -117,7 +121,7 @@ internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo proper
 
         if (foreign.TryGetKey(@string, primary, out key))
         {
-            reference = (key, type);
+            reference = (key, type, section);
             return true;
         }
         return false;

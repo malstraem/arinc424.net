@@ -53,7 +53,7 @@ public class Heliport : Port
     /// Associated Communications
     /// </summary>
     [Many]
-    public List<HeliportCommunication>? Communications { get; set; }
+    public List<PortCommunication>? Communications { get; set; }
 
     /// <summary>
     /// Associated TAAs.

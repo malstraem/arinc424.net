@@ -6,7 +6,6 @@ namespace Arinc424.Procedures;
 /// <c>Airport STAR</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.9.1.</remarks>
-[Section('P', 'E', subsectionIndex: 13)]
 [Process<AirportArrival, AirportArrivalSequence,
     ProcedureConcatenater<AirportArrival, AirportArrivalSequence, ArrivalPoint>>] // any more elegant way?
 public class AirportArrivalSequence : ArrivalSequence;
@@ -15,7 +14,6 @@ public class AirportArrivalSequence : ArrivalSequence;
 /// <c>Airport Approach</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.9.1.</remarks>
-[Section('P', 'F', subsectionIndex: 13)]
 [Process<AirportApproach, AirportApproachSequence,
     ProcedureConcatenater<AirportApproach, AirportApproachSequence, ApproachPoint>>]
 public class AirportApproachSequence : ApproachSequence;
@@ -24,7 +22,6 @@ public class AirportApproachSequence : ApproachSequence;
 /// <c>Airport SID</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.9.1.</remarks>
-[Section('P', 'D', subsectionIndex: 13)]
 [Process<AirportDeparture, AirportDepartureSequence,
     ProcedureConcatenater<AirportDeparture, AirportDepartureSequence, DeparturePoint>>]
 public class AirportDepartureSequence : DepartureSequence;
@@ -33,7 +30,6 @@ public class AirportDepartureSequence : DepartureSequence;
 /// <c>Heliport STAR</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.2.3.1.</remarks>
-[Section('H', 'E', subsectionIndex: 13)]
 [Process<HeliportArrival, HeliportArrivalSequence,
     ProcedureConcatenater<HeliportArrival, HeliportArrivalSequence, ArrivalPoint>>]
 public class HeliportArrivalSequence : ArrivalSequence;
@@ -42,7 +38,6 @@ public class HeliportArrivalSequence : ArrivalSequence;
 /// <c>Heliport Approach</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.2.3.1.</remarks>
-[Section('H', 'F', subsectionIndex: 13)]
 [Process<HeliportApproach, HeliportApproachSequence,
     ProcedureConcatenater<HeliportApproach, HeliportApproachSequence, ApproachPoint>>]
 public class HeliportApproachSequence : ApproachSequence;
@@ -51,7 +46,6 @@ public class HeliportApproachSequence : ApproachSequence;
 /// <c>Heliport SID</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.2.3.1.</remarks>
-[Section('H', 'D', subsectionIndex: 13)]
 [Process<HeliportDeparture, HeliportDepartureSequence,
     ProcedureConcatenater<HeliportDeparture, HeliportDepartureSequence, DeparturePoint>>]
 public class HeliportDepartureSequence : DepartureSequence;

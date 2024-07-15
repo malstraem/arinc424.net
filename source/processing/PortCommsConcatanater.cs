@@ -4,18 +4,18 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Processing;
 
-internal abstract class PortCommsConcatanater : IProcessor<AirportCommunication, AirportCommunication>
+internal abstract class PortCommsConcatanater : IProcessor<PortCommunication, PortCommunication>
 {
-    public static IEnumerable<Build<AirportCommunication>> Process(Queue<Build<AirportCommunication>> builds)
+    public static IEnumerable<Build<PortCommunication>> Process(Queue<Build<PortCommunication>> builds)
     {
-        Queue<Build<AirportCommunication>> result = new(builds.Count);
+        Queue<Build<PortCommunication>> result = new(builds.Count);
 
         var enumerator = builds.GetEnumerator();
 
         if (!enumerator.MoveNext())
             return result;
 
-        Build<AirportCommunication> next, current;
+        Build<PortCommunication> next, current;
 
         var range = 6..10; // port identifier range
 
@@ -42,7 +42,7 @@ internal abstract class PortCommsConcatanater : IProcessor<AirportCommunication,
         }
         return result;
 
-        PortTransmitter GetTransmitter(Build<AirportCommunication> build)
+        PortTransmitter GetTransmitter(Build<PortCommunication> build)
         {
             var transmitter = RecordBuilder<PortTransmitter>.Build(build.Record.Source!, info, diagnostics);
 

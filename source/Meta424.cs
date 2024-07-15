@@ -40,8 +40,6 @@ Record<HeliportMinimumAltitude>,
 Record<HeliportTerminalWaypoint>,
 Record<HelicopterSatellitePoint>,
 
-Sequence<HeliportCommunication, PortTransmitter>,
-
 Sequence<HeliportArrivalSequence, ArrivalPoint>,
 Sequence<HeliportApproachSequence, ApproachPoint>,
 Sequence<HeliportDepartureSequence, DeparturePoint>,
@@ -64,7 +62,7 @@ Record<MicrowaveLanding>,
 Record<InstrumentLanding>,
 Record<InstrumentMarker>,
 
-Sequence<AirportCommunication, PortTransmitter>,
+Sequence<PortCommunication, PortTransmitter>,
 
 Sequence<AirportArrivalSequence, ArrivalPoint>,
 Sequence<AirportApproachSequence, ApproachPoint>,
@@ -101,21 +99,21 @@ internal class Meta424
     {
         var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
 
-        Info = attributes.Select(x => x.GetInfo(supplement)).ToArray();
+        Info = attributes.SelectMany(x => x.GetInfo(supplement)).ToArray();
 
-        Dictionary<(char, char), Type> types = [];
+        Dictionary<Section, Type> types = [];
         Dictionary<Type, RecordInfo> typeInfo = [];
 
         foreach (var info in Info)
         {
             types.Add(info.Section, info.Type);
-            typeInfo.Add(info.Type, info);
+            _ = typeInfo.TryAdd(info.Type, info);
         }
         Types = types.ToFrozenDictionary();
         TypeInfo = typeInfo.ToFrozenDictionary();
     }
 
-    internal FrozenDictionary<(char, char), Type> Types { get; }
+    internal FrozenDictionary<Section, Type> Types { get; }
 
     internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; }
 
