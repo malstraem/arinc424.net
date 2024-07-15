@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using Arinc424.Building;
 
 namespace Arinc424.Attributes;
@@ -17,5 +19,10 @@ internal sealed class SequenceAttribute<TSequence, TSub> : RecordAttribute<TSequ
     where TSequence : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    internal override RecordInfo GetInfo(Supplement supplement) => new RecordInfo<TSequence, TSub>(supplement);
+    internal override RecordInfo GetInfo(Supplement supplement)
+    {
+        var range = typeof(TSequence).GetCustomAttributes<SequencedAttribute>().BySupplement(supplement)?.Range;
+
+        return range is null ? new RecordInfo<TSequence>(supplement) : new RecordInfo<TSequence, TSub>(range.Value, supplement);
+    }
 }

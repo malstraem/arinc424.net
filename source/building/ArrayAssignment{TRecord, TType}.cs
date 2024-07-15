@@ -1,12 +1,11 @@
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 using Arinc424.Diagnostics;
 
 namespace Arinc424.Building;
 
-internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Regex? regex, Range range, DecodeAttribute<TType> decode, uint count)
-    : RangeAssignment<TRecord>(property, regex, range) where TRecord : Record424 where TType : notnull
+internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Range range, DecodeAttribute<TType> decode, uint count)
+    : RangeAssignment<TRecord>(property, range) where TRecord : Record424 where TType : notnull
 {
     private readonly uint count = count;
 

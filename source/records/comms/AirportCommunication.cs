@@ -1,4 +1,5 @@
 using Arinc424.Ports;
+using Arinc424.Processing;
 
 namespace Arinc424.Comms;
 
@@ -6,13 +7,11 @@ namespace Arinc424.Comms;
 /// <c>Airport Communications</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.14.1.</remarks>
-[Section('P', 'V', subsectionIndex: 13), Icao(11, 12)]
+[Section('P', 'V', subsectionIndex: 13), Icao(11, 12), Continuous(26)]
+[Process<AirportCommunication, AirportCommunication, PortCommsConcatanater>(end: Supplement.V18)]
 [DebuggerDisplay($"{{{nameof(Class)}}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public class AirportCommunication : Communication<PortTransmitter>, IIcao
+public class AirportCommunication : Communication<PortTransmitter>
 {
     [Identifier(7, 10)]
     public Airport Airport { get; set; }
-
-    [Field(11, 12)]
-    public string IcaoCode { get; set; }
 }

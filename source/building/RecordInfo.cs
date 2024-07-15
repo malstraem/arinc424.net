@@ -50,15 +50,19 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
 
         section = type.GetCustomAttribute<SectionAttribute>()!;
         process = type.GetCustomAttribute<ProcessAttribute<TRecord>>();
-        continuationIndex = type.GetCustomAttribute<ContinuousAttribute>()?.Index;
+
+        if (process is not null && supplement < process.Start && supplement > process.End)
+            process = null;
+
+        continuationIndex = type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
 
         (this.type, primary) = process is null
             ? (type, Primary.Create(type))
             : (process.NewType, Primary.Create(process.NewType));
 
         relations = process is null
-            ? new Relations<TRecord>()
-            : process.GetRelations();
+            ? new Relations<TRecord>(supplement)
+            : process.GetRelations(supplement);
     }
 
     internal override IEnumerable<Build> Build(Queue<string> strings)
@@ -82,13 +86,13 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
     }
 }
 
-internal sealed class RecordInfo<TSequence, TSub>(Supplement supplement) : RecordInfo<TSequence>(supplement)
+internal sealed class RecordInfo<TSequence, TSub>(Range sequenceRange, Supplement supplement) : RecordInfo<TSequence>(supplement)
     where TSequence : Record424<TSub>, new()
     where TSub : Record424, new()
 {
     private readonly BuildInfo<TSub> subInfo = new(supplement);
 
-    private readonly Range range = typeof(TSequence).GetCustomAttribute<SequencedAttribute>()!.Range;
+    private readonly Range sequenceRange = sequenceRange;
 
     [Obsolete("todo: sequence number try parsing")]
     internal override IEnumerable<Build> Build(Queue<string> strings)
@@ -102,9 +106,9 @@ internal sealed class RecordInfo<TSequence, TSub>(Supplement supplement) : Recor
         {
             sequence.Enqueue(@string);
 
-            int number = int.Parse(@string[range]);
+            int number = int.Parse(@string[sequenceRange]);
 
-            if (!strings.TryPeek(out @string) || int.Parse(@string[range]) <= number)
+            if (!strings.TryPeek(out @string) || int.Parse(@string[sequenceRange]) <= number)
             {
                 var build = new Build<TSequence, TSub>(RecordBuilder<TSequence, TSub>.Build(sequence, info, subInfo, diagnostics));
 

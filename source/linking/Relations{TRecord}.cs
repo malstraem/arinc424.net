@@ -48,16 +48,16 @@ internal sealed class Relations<TRecord> : Relations where TRecord : Record424
     internal override void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)
         => Link(((IEnumerable<Build<TRecord>>)builds).Select(x => x.Record), unique, meta, null);
 
-    public Relations() : base(typeof(TRecord))
+    public Relations(Supplement supplement) : base(typeof(TRecord))
     {
         List<Link<TRecord>> links = [];
 
-        var port = type.GetCustomAttribute<PortAttribute>()?.Range;
-        var icao = type.GetCustomAttribute<IcaoAttribute>()?.Range;
+        var port = type.GetCustomAttributes<PortAttribute>().BySupplement(supplement)?.Range;
+        var icao = type.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range;
 
         foreach (var property in type.GetProperties())
         {
-            var identifier = property.GetCustomAttribute<IdentifierAttribute>();
+            var identifier = property.GetCustomAttributes<IdentifierAttribute>().BySupplement(supplement);
 
             if (identifier is not null)
             {
@@ -66,11 +66,13 @@ internal sealed class Relations<TRecord> : Relations where TRecord : Record424
                 KeyRanges ranges = new()
                 {
                     Port = port,
-                    Icao = property.GetCustomAttribute<IcaoAttribute>()?.Range ?? icao,
+                    Icao = property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range ?? icao,
                     Identifier = identifier.Range
                 };
 
-                object link = Activator.CreateInstance(linkType, ranges, property, property.GetCustomAttribute<TypeAttribute>())!;
+                var typeAttribute = property.GetCustomAttributes<TypeAttribute>().BySupplement(supplement);
+
+                object link = Activator.CreateInstance(linkType, ranges, property, typeAttribute)!;
 
                 links.Add((Link<TRecord>)link);
             }
@@ -84,9 +86,9 @@ internal sealed class Relations<TRecord> : Relations where TRecord : Record424
             }
             else if (property.Name == nameof(Record424<Record424>.Sequence))
             {
-                var innerRelationsType = typeof(Relations<>).MakeGenericType(property.PropertyType.GetElementType()!);
+                var innerRelationsType = typeof(Relations<>).MakeGenericType(property.PropertyType.GetGenericArguments().First()!);
 
-                inner = ((Relations)Activator.CreateInstance(innerRelationsType)!, property);
+                inner = ((Relations)Activator.CreateInstance(innerRelationsType, supplement)!, property);
             }
         }
         this.links = [.. links];

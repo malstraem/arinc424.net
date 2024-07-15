@@ -8,5 +8,5 @@ namespace Arinc424.Bench;
 public class MetaBench
 {
     [Benchmark]
-    public ImmutableArray<Type> GrabTypesInfo() => new Meta424(Supplement.None).TypeInfo.Keys;
+    public ImmutableArray<Type> GrabTypesInfo() => new Meta424(Supplement.V23).TypeInfo.Keys;
 }

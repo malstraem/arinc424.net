@@ -10,9 +10,12 @@ public abstract class Geo : Record424
 {
     [Field(33, 51)]
     [Field<PathPoint>(38, 60)]
-    [Field<Transmitter>(93, 111)]
     [Field<RegionPoint>(35, 53)]
     [Field<GlobalLanding>(56, 74)]
     [Field<SpecialActivityArea>(24, 42)]
+
+    [Field<PortTransmitter>(33, 51)]
+    [Field<AirwayTransmitter>(63, 81)]
+    [Field<Transmitter>(93, 111, Supplement.V19)]
     public Coordinates Coordinates { get; set; }
 }

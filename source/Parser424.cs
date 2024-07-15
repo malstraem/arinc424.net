@@ -63,6 +63,8 @@ internal partial class Parser424
         Build();
         Link();
 
+        ConcurrentBag<Build> invalid = []; // todo api
+
         var data = new Data424();
 
         _ = Parallel.ForEach(typeof(Data424).GetProperties(), property =>
@@ -72,7 +74,14 @@ internal partial class Parser424
             var list = (IList)property.GetValue(data)!;
 
             foreach (var build in builds[type])
-                _ = list.Add(build.Record);
+            {
+                if (build.Diagnostics is null)
+                {
+                    _ = list.Add(build.Record);
+                    continue;
+                }
+                invalid.Add(build);
+            }
         });
         return data;
     }

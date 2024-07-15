@@ -2,7 +2,6 @@ namespace Arinc424;
 
 public enum Supplement : byte
 {
-    None = 0,
     V18 = 18,
     V19 = 19,
     V20 = 20,

@@ -1,55 +1,42 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-using Arinc424.Attributes;
-
 namespace Arinc424.Building;
 
 internal static class MemberExtensions
 {
-    internal static bool TryCharacterAttribute<TRecord>(this MemberInfo member, Supplement supplement, [NotNullWhen(true)] out CharacterAttribute? character)
+    internal static bool TryAttribute<TRecord, TAttribute>(this MemberInfo member, Supplement supplement, [NotNullWhen(true)] out TAttribute? chosen)
         where TRecord : Record424
+        where TAttribute : SupplementAttribute
     {
-        var attributes = member.GetCustomAttributes<CharacterAttribute>();
+        var attributes = member.GetCustomAttributes<TAttribute>();
 
-        character = attributes.FirstOrDefault();
-
-        foreach (var attribute in attributes)
+        if (!attributes.Any())
         {
-            if (attribute.IsMatch<TRecord>())
-            {
-                character = attribute;
-                break;
-            }
-        }
-        return character is not null;
-    }
-
-    internal static bool TryFieldAttribute<TRecord>(this MemberInfo member, Supplement supplement, [NotNullWhen(true)] out FieldAttribute? field)
-        where TRecord : Record424
-    {
-        var attributes = member.GetCustomAttributes<FieldAttribute>().ToList();
-
-        if (attributes.Count == 0)
-        {
-            field = null;
+            chosen = null;
             return false;
         }
 
-        List<FieldAttribute> fields = [];
+        List<TAttribute> target = [], nontarget = [];
 
         foreach (var attribute in attributes)
         {
             if (attribute.IsMatch<TRecord>())
-                fields.Add(attribute);
+                target.Add(attribute);
+            else if (!attribute.IsTarget)
+                nontarget.Add(attribute);
         }
 
-        var match = fields.Count == 0 ? attributes : fields;
+        chosen = (target.Count != 0 ? target : nontarget).BySupplement(supplement);
 
-        var skipped = match.SkipWhile(x => x.Supplement < supplement).ToArray();
+        return chosen is not null;
+    }
 
-        field = skipped.Length == 0 ? match.FirstOrDefault() : skipped.LastOrDefault();
+    internal static TAttribute? BySupplement<TAttribute>(this IEnumerable<TAttribute> attributes, Supplement supplement)
+        where TAttribute : SupplementAttribute
+    {
+        var drop = attributes.TakeWhile(x => x.Start <= supplement);
 
-        return field is not null;
+        return drop.LastOrDefault();
     }
 }

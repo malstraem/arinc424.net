@@ -6,29 +6,28 @@ namespace Arinc424.Tests;
 public class SimpleCountRegressionTests
 {
 #pragma warning disable xUnit1004
-    [Fact(Skip = "manual")]
+    [Theory(Skip = "manual")]
+    [InlineData("unknown", Supplement.V18)]
+    [InlineData("faa-24.04.18", Supplement.V18)]
 #pragma warning restore xUnit1004
-    public void MakeRegression()
+    public void MakeRegression(string file, Supplement supplement)
     {
-        foreach (string path in Directory.GetFiles("data"))
-        {
-            var data = Data424.Create(File.ReadAllLines(path));
+        var data = Data424.Create(File.ReadAllLines($"data/{file}"), supplement);
 
-            Dictionary<string, int> counts = [];
+        Dictionary<string, int> counts = [];
 
-            foreach (var property in typeof(Data424).GetProperties().Where(x => x.PropertyType.IsGenericType))
-                counts.Add(property.Name, ((ICollection)property.GetValue(data)!).Count);
+        foreach (var property in typeof(Data424).GetProperties().Where(x => x.PropertyType.IsGenericType))
+            counts.Add(property.Name, ((ICollection)property.GetValue(data)!).Count);
 
-            File.WriteAllText($"data/regression/{Path.GetFileName(path)}.json", JsonSerializer.Serialize(counts));
-        }
+        File.WriteAllText($"data/regression/{Path.GetFileName($"data/{file}")}.json", JsonSerializer.Serialize(counts));
     }
 
     [Theory]
-    [InlineData("unknown")]
-    [InlineData("faa-24.04.18")]
-    public void CheckRegression(string file)
+    [InlineData("unknown", Supplement.V18)]
+    [InlineData("faa-24.04.18", Supplement.V18)]
+    public void CheckRegression(string file, Supplement supplement)
     {
-        var data = Data424.Create(File.ReadAllLines($"data/{file}"));
+        var data = Data424.Create(File.ReadAllLines($"data/{file}"), supplement);
 
         var counts = JsonSerializer.Deserialize<Dictionary<string, int>>(File.ReadAllText($"data/regression/{file}.json"))!;
 
