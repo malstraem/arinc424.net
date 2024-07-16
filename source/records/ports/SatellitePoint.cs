@@ -2,8 +2,9 @@ using Arinc424.Ports.Terms;
 
 namespace Arinc424.Ports;
 
-[Continuous(27)]
-public abstract class SatellitePoint : PathPoint
+[Section('P', 'P', subsectionIndex: 13)]
+[Section('H', 'P', subsectionIndex: 13)]
+public class SatellitePoint : PathPoint
 {
     /// <inheritdoc cref="SatelliteService"/>
     [Field(29, 30)]

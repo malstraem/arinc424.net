@@ -1,0 +1,439 @@
+                                        sample data from Supplement 18
+                                        Grid Mora (AS)
+S   AS       N36W120          105168135095143104104116112105122117107139155116111073052046046034030033037035038030027023   000018708
+S   AS       N36W150          010010010010010010010010010010010010010010010010010010010010010010010010010010010022082076   000028508
+S   AS       N37W120          155166129118118117127137131137137165166164167160095075053049041037037037037032031047031033   000038902
+S   AS       N37W150          010010010010010010010010010010010010010010010010010010010010010010010010010010020046057082   000048508
+S   AS       N38W120          148136141143139154121145140139151129167168165147084072053045040041042032028030028031026028   000058708
+S   AS       N38W150          010010010010010010010010010010010010010010010010010010010010010010010010010010046071036127   000068508
+S   AS       N39W120          131111138129131144144124143125119132165168166117086074057049042036031037037032025029030023   000078708
+S   AS       N39W150          010010010010010010010010010010010010010010010010010010010010010010010010010034090098095116   000088508
+S   AS       N40W120          113122121120137128109134141159146120147146166089078059050046046044042031028028027032023024   000098708
+S   AS       N40W150          010010010010010010010010010010010010010010010010010010010010010010010010010054113109128103   000108508
+S   AS       N41W120          109117121127132131123117123121119119134144120091079060056049045041049039040031041026034032   000118708
+S   AS       N41W150          010010010010010010010010010010010010010010010010010010010010010010010010010041113165104122   000128708                          
+                                        Cruising Table (TS)
+S   TCA01                   36001790M  0200002000280002800003000310003100004000UNLTD                                       000358706
+S   TCA02                   18003590M  0100002000290002900004000UNLTD                                                      000348706
+S   TCA11                   36003590M  290000200043000                                                                     000378810
+S   TCA21                   36003590M  280000200042000                                                                     000388810
+S   TCA31                   36001790M  300000200040000                                                                     000398810
+S   TCA32                   18003590M  290000200041000                                                                     000408810
+S   TCAA1                   36001790M  0100002000290002900004000UNLTD                                                      000418706
+S   TCAA2                   18003590M  0200002000280002800003000310003100004000UNLTD                                       000428706
+S   TCBB1                   03002090M  0100002000290002900004000UNLTD                                                      000438810
+S   TCBB2                   21000290M  0200002000280002800003000310003100004000UNLTD                                       000448903
+S   TCC11                   36000890M  0100002000290003300004000UNLTD                                                      000458810
+S   TCC12                   09001790M  0150002000275003000004000UNLTD                                                      000468810
+S   TCC13                   18002690M  0200002000280003100004000UNLTD                                                      000478810
+S   TCC14                   27003590M  0250002000285003200004000UNLTD                                                      000488810
+S   TCCC1                   36001790M  0100002000290002900004000UNLTD                                                      000498810
+S   TCCC2                   18003590M  0200002000280002800003000310003100004000UNLTD                                       000508810
+                                        VHF Navaid (D) (With Simulation and Flight Planning Continuations)
+SUSAD        ACV   K2111020VDTA N40585370W124062570    N40585370W124062570E0170001910  256NASARCATA                        015638502
+SUSAD        ACV   K22 TB030100+040000B100040                                                                              015648502
+SUSAD        ACV   K23PKZSEKZSE                                                                                            015658613
+SUSAD        ACV   K24S    UY                                             E017500191                                       015668502
+SUSAD        AHC   K2110900VDTW N40160466W120090328    N40160466W120090328E0170040080  206NASAMEDEE (HERLONG)              015678811
+SUSAD        AHC   K22PKZOAKZOA                                                                                            015698613
+SUSAD        AHC   K23S    UN                                             E016604008                                       015708201
+SUSAD        ALW   K1111640VDLA N46051360W118172930    N46051360W118172930E0200011501     NASWALLA WALLA                   015718413
+SUSAD        ALW   K12PKZSEKZSE                                                                                            015738613
+SUSAD        ALW   K13S    UY                                             E018401150                                       015748413
+SUSAD        AST   K1111400VDLA N46094270W123524480    N46094270W123524480E0190000101  330NASATORIA                        015758809
+SUSAD        AST   K12PKZSEKZSE                                                                                            015778613
+SUSAD        AST   K13S    UY                                             E019700010                                       015788406
+SUSAD        AVE   K2111710VTH  N35384925W119583948    N35384925W119583948E0160007102  567NASAVENAL                        015798401
+SUSAD        AVE   K22PKZLAKZLA                                                                                            015818613
+SUSAD        AVE   K23S    UY                                             E015000710                                       015828401
+SUSAD        BTG   K1111660VTHA N45445270W122352520    N45445270W122352520E0210002502  451NASBATTLE GROUND                 015998801
+SUSAD        BTG   K12PKZSEKZSE                                                                                            016018801
+SUSAD        BTG   K13S    UY                                             E019300250                                       016028801
+SUSAD        ELN   K1111790VTHA N47012830W120272620    N47012830W120272620E0210017702  451NASELLENSBURG                    016398304
+SUSAD        ELN   K12PKZSEKZSE                                                                                            016418613
+SUSAD        ELN   K13S    UY                                             E019401770                                       016428304
+SUSAD        ENI   K2111230VTHA N39031200W123162310    N39031200W123162310E0160029802  411NASMENDOCINO                     016438807
+SUSAD        ENI   K22PKZOAKZOA                                                                                            016458613
+SUSAD        ENI   K13S    UY                                             E016702980                                       016468409
+SUSAD        EPH   K1111260VTHA N47224100W119252230    N47224100W119252230E0210012502  394NASEPHRATA                       016478411
+SUSAD        EPH   K12PKZSEKZSE                                                                                            016498613
+SUSAD        EPH   K13S    UY                                             E019301250                                       016508411
+SUSAD        MOD   K2111460VDH  N37373880W120572560    N37373880W120572560E0170078602  571NASMODESTO                       017398606
+SUSAD        MOD   K22PKZOAKZOA                                                                                            017418613
+SUSAD        MOD   K13S    UY                                             E015800090                                       017428608
+SUSAD        MVA   K2111510VTHA N38335535W118015484    N38335535W118015484E0170078602  476NASMINA                          017438306
+SUSAD        MVA   K22PKZOAKZOA                                                                                            017458613
+SUSAD        MVA   K13S    UY                                             E015507860                                       017468306
+SUSAD        NUQ   K2111760 TH                     NUQ N37255680W122032320E0170000041  314NASNAVY MOFFETT FIELD            017758806
+SUSAD        NUQ   K22PKZOAKZOA                                                                                            017778806
+SUSAD        NUQ   K13S    UY                                             E0159                                            017788806
+SUSAD        NUW   K1111380 TH                     NUW N48211838W122393600E0200000502  325NASNAVY WHIDBEY ISLAND           017798806
+SUSAD        NUW   K12PKZSEKZSE                                                                                            017818806
+SUSAD        NUW   K13S    UY                                             E0205                                            017828806
+SUSAD        OAK   K2111760VTHA N37433360W122132100    N37433360W122132100E0170000103  477NASOAKLAND                       017838110
+SUSAD        OAK   K22PKZOAKZOA                                                                                            017858613
+SUSAD        OAK   K13S    UY                                             E016000010                                       017868110
+SUSAD        OED   K1111360VTHA N42284710W122544250    N42284710W122544250E0190020802  410NASMEDFORD                       017918411
+SUSAD        OED   K12PKZSEKZSE                                                                                            017938613
+SUSAD        OED   K13S    UY                                             E017902080                                       017948411
+SUSAD        UBG   K1111740VTHA N45211220W122583700    N45211220W122583700E0210014402  493NASNEWBERG                       019078110
+SUSAD        UBG   K12PKZSEKZSE                                                                                            019098613
+SUSAD        UBG   K13S    UY                                             E019101440                                       019108110
+SUSAD        YKM   K1111600VTHA N46341350W120263640    N46341350W120263640E0210009802  525NASYAKIMA                        019158502
+SUSAD        YKM   K12PKZSEKZSE                                                                                            019178613
+SUSAD        YKM   K13S    UY                                             E019200980                                       019188502
+SUSAD KSEAK1 ISZI  K1111170 IT                     ISZIN47260947W122183980     003660  588NASSEATTLE-TACOMA INTL           019588808
+SUSAD KSEAK1 ISZI  K12PKZSEKZSE                                                                                            019598713
+SUSAD KSEAK1 ISZI  K13S    UN  L                                          E020000366                                       019608901
+                                        NDB Navaid (DB) (With Simulation and Flight Planning Continuations)
+SUSADB       ARU   K2102150H MW N41281600W120332500                       E0180           NASALTURAS                       019768110
+SUSADB       ARU   K22S     U21                                                                                            019788110
+SUSADB       ARU   K23PKZSEKZSE                                                                                            019798110
+SUSADB       CAN   K1102740H MW N47243880W122501510                       E0200           NASCARNEY (BREMERTON)            019848308
+SUSADB       CAN   K12S     U21                                                                                            019868308
+SUSADB       CAN   K13PKZSEKZSE                                                                                            019878308
+SUSADB       CC    K2103350HOMW N38024740W122015640                       E0170           NASKANAN                         019888807
+SUSADB       CC    K22S     U21                                                                                            019908807
+SUSADB       CC    K23PKZOAKZOA                                                                                            019918807
+SUSADB       F     K2103140H  W N37415400W123001200                       E0170           NASFARALLON ISLAND               020088110
+SUSADB       F     K22S     U21                                                                                            020108110
+SUSADB       F     K23PKZOAKZOA                                                                                            020118110
+SUSADB       MOG   K2103820H  A N41433840W122285050                       E0200           NASMONTAGUE                      020768110
+SUSADB       MOG   K22S     U21                                                                                            020788110
+SUSADB       MOG   K23PKZSEKZSE                                                                                            020798110
+                                        Enroute Waypoint (EA) (With Flight Planning Continuations)
+SUSAEAENRT   26FLW K21    I D   N36442340W121282270                       E0156     NAS        B     FLW306/D126           021528110
+SUSAEAENRT   26FLW K22PKZOAKZOA                                                                                            021538701
+SUSAEAENRT   ALFOR K11    R F L N44183310W123090510                       E0187     NAS        P     ALFOR                 021648207
+SUSAEAENRT   ALFOR K12PKZSEKZSE                                                                                            021658613
+SUSAEAENRT   ALTAM K21    R Z L N37484410W121444580                       E0160     NAS        P     ALTAM                 021668613
+SUSAEAENRT   ALTAM K22PKZOAKZOA                                                                                            021678701
+SUSAEAENRT   BRINY K21    RF  L N37181740W122393800                       E0159     NAS        P     BRINY                 021668613
+SUSAEAENRT   BRINY K22PKZOAKZOA                                                                                            021678701
+SUSAEAENRT   BTG32 K11    I   L N45345140W121524960                       E0190     NAS        B     BTG089/DLS234         021668613
+SUSAEAENRT   BTG32 K12PKZSEKZSE                                                                                            021678701
+SUSAEAENRT   BTG51 K11    I   L N44522830W122361410                       E0189     NAS        B     BTG160/EUG010         021668613
+SUSAEAENRT   BTG51 K12PKZSEKZSE                                                                                            021678701
+SUSAEAENRT   LOFAL K11    R Z L N47503790W122401980                       E0203     NAS        P     LOFAL                 021668613
+SUSAEAENRT   LOFAL K22PKZOAKZOA                                                                                            021678701
+SUSAEAENRT   MOGNB K21    N   B N41433840W122285050                       E0175     NAS        Q     MONTAGUE              021668613
+SUSAEAENRT   MOGNB K22PKZOAKZOA                                                                                            021678701
+SUSAEAENRT   ODESS K11    R Z H N47081310W117582330                       E0188     NAS        P     ODESS                 021668613
+SUSAEAENRT   ODESS K12PKZSEKZSE                                                                                            021678701
+SUSAEAENRT   SHOEY K21    R Z L N36444462W122075863                       E0157     NAS        P     SHOEY                 021668613
+SUSAEAENRT   SHOEY K22PKZOAKZOA                                                                                            021678701
+                                        Enroute Marker (EM)
+SUSAEM       K101  K10.-.  EL   N46123100W1235751001290                   E0210      NAS     FORT STEVENS                  029988706
+SUSAEM       K104  K10.-.  EL   N43072800W1232054101770                   E0200      NAS     WINSTON                       029998713
+                                        Holding Patterns (EP)
+SUSAEPENRT                 10AVE  K2D 01300R   1518000FL450                                       AVENAL                   030038904
+SUSAEPENRT                 10ODESSK1EA02530R   10     17999                                       ODESS                    030048904
+SUSAEPENRT                 20ALTAMK2EA01770L   100500017999160                                    ALTAM                    030058904
+SUSAEPENRT                 20BTG  K1D 01490R   10     17999                                       BATTLE GROUND            030068904
+SUSAEPENRT                 20OED  K1D 03370R   10     17999                                       MEDFORD                  030078904
+SUSAEPENRT                 20UBG  K1D 00030L   10     17999                                       NEWBERG                  030088904
+SUSAEPENRT                 21BRINYK2EA00570R   10     17999                                       BRINY                    030098904
+SUSAEPENRT                 22BRINYK2EA02370R   10     17999                                       BRINY                    030108904
+SUSAEPENRT                 30EPH  K1D 02460R   10     17999                                       EPHRATA                  030118904
+SUSAEPENRT                 40EPH  K1D 02460R   10     17999                                       EPHRATA                  030128904
+SUSAEPENRT                 40UBG  K1D 00030L   10     17999                                       NEWBERG                  030148904
+SUSAEPENRT                 50MOD  K2D 02440L   10     17999                                       MODESTO                  030158904
+SUSAEPENRT                 50ELW  K1D 02500R   10     17999                                       ELLENBERG                030168904
+SUSAEPKSEAK1               40FINNYK1PC00230R  0500150009000150                                    FINNY                    030178904
+SUSAEPKSEAK1               50FINNYK1PC00230R  0500150009000150                                    FINNY                    030188904
+                                        Enroute Airway (ER)
+SUSAER       C1415       0010F0T  K2D 0V    CB AA                   252012400000 UNKNN     FL450                           030308803
+SUSAER       C1415       0020REDOOK2EA0EEC  CB                      000000002510                                           030318702
+SUSAER       C1416       0010F0T  K2D 0V    CB AA                   305013300000 UNKNN     FL450                           030328704
+SUSAER       C1416       0020DAASHK2EA0EEC  CB                      000000003050                                           030338902
+SUSAER       C1418       0010H0M  K1D 0V    CB AA                   210013800000 UNKNN     FL450                           030348704
+SUSAER       C1418       0020SEDARK1EA0EEC  CB                      000000002100                                           030358110
+SUSAER       C1419       0010F0T  K2D 0V    CB AA                   216013700000 UNKNN     FL450                           030369704
+SUSAER       C1419       0020HEMLOK1EA0EEC  CB                      000000002160                                           030378110
+SUSAER       C1486       0010F0T  K2D 0V    CB AA                   285019600000 UNKNN     FL450                           030388803
+SUSAER       C1486       0020REDOOK2EA0EEC  CB                      000000002850                                           030398803
+SUSAER       J1          0570OAK  K2D 0V C  OH AA                   343014203010 1800022000FL450                           030400000
+SUSAER       J1          0580RBL  K2D 0V    OH AA                   330014603420 1800022000FL450                           030400000
+SUSAER       J1          0590OED  K2D 0V    OH AA                   345019703290 1800022000FL450                           030400000
+SUSAER       J1          0600BTG  K2D 0V    OH AA                   345006503430 1800022000FL450                           030400000
+SUSAER       J1          0610ALDERK1EA0T  H OH AA                   345003703450 1800022000FL450                           030400000
+SUSAER       J1          0620SEA  K1D 0VEC  OH                      000000003450                                           030458207
+SUSAER       J110        0010OAK  K2D 0V C  OH AA                   138007000000 18000     FL450                           030468704
+SUSAER       J110        0030SNS  K2D 0V    OH AA                   064008801380 18000     FL450                           030478704
+SUSAER       J110        0040CZQ  K2D 0V C  OH AA                   086002600670 24000     FL450                           030488704
+SUSAER       J110        0050PINIKK2EA0R    OH AA                   086003400960 24000     FL450                           030498704
+SUSAER       J110        0055MITELK2EA0R    OH AA                   086011700860 24000     FL450                           030508704
+SUSAER       J20         0210PDT  K1D 0V C  OH AA                   290008202750 18000     FL450                           030828704
+SUSAER       J20         0220YKM  K1D 0V    OH AAY                  284005402880 18000     FL450                           030838704
+SUSAER       J20         0225RADDYK1EA0R    OH AAY                  281003902840 18000     FL450                           030848704
+SUSAER       J20         0230SEA  K1D 0VEC  OH                      000000002810                                           030858110
+SUSAER       J3          0010OAK  K2D 0V C  OH AA                   343014200000 18000     FL450                           030868704
+SUSAER       J3          0020RBL  K2D 0V C  OH AAY                  010016303420 18000     FL450                           030878704
+SUSAER       J3          0030LKV  K1D 0V C  OH AAY                  356013400100 18000     FL450                           030888704
+SUSAER       J3          0040IMB  K1D 0V C  OH AA                   006019503550 18000     FL450                           030898704
+SUSAER       V105        0220YERINK2EA0E    OL AA                   299003102990 10000     17999                           031678704
+SUSAER       V105        0230CHIMEK2EA0E    OL AA                   299001502990 10000     17999                           031688704
+SUSAER       V105        0240FMG  K2D 0VEC  OL                      000000002990                                           031698603
+SUSAER       V107        0120CITIEK2EA0R    OL AA                   313002003130 07000     17999                           031708704
+SUSAER       V107        0130PXN  K2D 0V C  OL AA                   296003403130 07000     17999                           031718704
+SUSAER       V107        0140CATHEK2EA0E    OL AA                   296002602960 07000     17999                           031728704
+SUSAER       V107        0150VINCOK2EA0R    OL AA                   294002502960 06000     17999                           031738704
+SUSAER       V107        0160MABRYK2EA0R    OL AA                   294002602960 05500     17999                           031748704
+SUSAER       V107        0170MISONK2EA0T    OL AA                   294002502960 04500     17999                           031758704
+SUSAER       V107        0180IMPLYK2EA0T    OL AA                   294002502960 04500     17999                           031768704
+SUSAER       V107        0190DECOTK2EA0T    OL AA                   294000502940 04500     17999                           031778704
+SUSAER       V107        0200OAK  K2D 0V C  OL AA                   288001602940 05000     17999                           031788704
+SUSAER       V107        0210COMMOK2D 0E    OL AA                   288000802880 05000     17999                           031798704
+SUSAER       V107        0220OMIRAK2D 0T    OL AA                   288001302880 05000     17999                           031808704
+SUSAER       V107        0230PYE  K2D 0V C  OL AA                   289001502880 05000     17999                           031818704
+SUSAER       V107        0240BOARSK2EA0EE   OL                      000000002890                                           031828206
+SUSAER       V108        0050STS  K2D 0V    OL AA                   118002900000 04500     17999                           031838704
+SUSAER       V108        0060SGD  K2D 0V    OL AA                   294002502960 03000     17999                           031848704
+SUSAER       V108        0070CROITK2EA0E    OL AA                   294000502940 03000     17999                           031858704
+SUSAER       V108        0080CCR  K2D 0V    OL AA                   288000802880 03000     17999                           031868704
+SUSAER       V108        0090PITTSK2EA0E    OL AA                   288001302880 03500     17999                           031878902
+SUSAER       V108        0100OAKESK2EA0E    OL AA                   289001502880 02000     17999                           031888902
+SUSAER       V108        0110LODDIK2EA0E    OL AA                   289001502880 02000     17999                           031898704
+SUSAER       V108        0120LIN  K2D 0VEC  OL                      000000002890                                           031908110
+                                        Enroute Airways Restriction (EU)
+SUSAEUJ20   001TC0YKM  K1D SEA  K1D 31JAN9031MAR90CS1707001700                              A0                             031918913
+SUSAEUJ3    001NR1RBL  K2D IMB  K1D 01JAN9031DEC90AVBL ONE WAY RBL TO IMB DURING LAKEVIEW AFB                              031928913
+SUSAEUJ3    001NR2                                MORNING AND EVENING SCRAMBLE ACTIVITY                                    031938913
+                                        Enroute Communications (EV)
+SUSAEVALW    MOSES LAKE                    FSS0012240 V1  R A N47123960W119185640E0193     Y                               039188810
+SUSAEVALW    MOSES LAKE                    FSS0012240 V2                                    WALLA WALLA                    039198810
+SUSAEVALW    MOSES LAKE                    TWE0011500 V1  R A N47123960W119185640E021001177Y          MWH K1D              039208810
+SUSAEVALW    MOSES LAKE                    TWE0011500 V2                                                                   039218810
+SUSAEVKZSEZRFTHE DALLES                    ACC0011965 V1 DGRA N45425000W121055900E0190     Y                               041568810
+SUSAEVKZSEZRFTHE DALLES                    ACC0011965 V2                                     SEATTLE                       041578810
+SUSAEVKZSEZRFYAKIMA                        ACC0012030 V1  GRA N46314000W120304600E0192     Y                               041628810
+SUSAEVKZSEZRFYAKIMA                        ACC0012030 V2                                     SEATTLE                       041638810
+SUSAEVKZSEZRFYAKIMA                        ACC0013260 V1 DGRA N46314000W120304600E0192     Y                               041648810
+SUSAEVKZSEZRFYAKIMA                        ACC0013260 V2                                     SEATTLE                       041658810
+SUSAEVKZSEZRFYAKIMA                        ACC0012030 V1  GRA N46314000W120304600E0192     Y                               041948810
+SUSAEVKZSEZRFYAKIMA                        ACC0012030 V2                                     SEATTLE                       041958810
+SUSAEVKZSEZRFYAKIMA                        ACC0013475 V1  GRA N46314000W120304600E0192     Y                               041968810
+SUSAEVKZSEZRFYAKIMA                        ACC0013475 V2                                     SEATTLE                       041978810
+SUSAEVSEA    THE DALLES                    FSS0012200 V1E R A N45425000W121055900E021003220N           DLS K1D             045168810
+SUSAEVSEA    THE DALLES                    FSS0012200 V2 H  1507002300                       SEATTLE                       045178810
+SUSAEVSEA    THE DALLES                    FSS0012265 V1  R A N45425000W121055900E021003220Y           DLS K1D             045188810
+SUSAEVSEA    THE DALLES                    FSS0012265 V2    1507002300                       SEATTLE                       045198810
+SUSAEVSEA    THE DALLES                    TWE0012265 V1    A N45425000W121055900E021003220N           DLS K1D             045208810
+SUSAEVSEA    THE DALLES                    TWE0012265 V2 N  1507002300                       SEATTLE                       045218810
+SUSAEVSEA    YAKIMA                        TWE0012265 V3    SPRING AND FALL PERIOD ONLY                                    045228810
+SUSAEVSEA    YAKIMA                        FSS0012250 V1  R A N46313300W120315200E0192     Y                               045288810
+SUSAEVSEA    YAKIMA                        FSS0012250 V2                                     SEATTLE                       045298810
+SUSAEVSEA    YAKIMA                        TWE0011600 V1    A N46341350W120263640E021000980N                 YKM K1D       045308810
+SUSAEVSEA    YAKIMA                        TWE0011600 V2                                                                   045318810
+                                        Heliport (HA) (With Flight Planning Continuations)
+SUSAH KKENK1AKAHHELO1110000NASY N47440610W122153300E019300996250SEA K11800018000CU00Y050100  KENMORE AIR TERMINAL           045328807
+SUSAH KKENK1AKAH     2PKZSEKZSE     
+                                        Heliport Communications (HV)
+SUSAH KKENK1VTWR0011990 V0    A N47265700W122182910E019900429Y                         00         KENMORE                  045348810
+SUSAH KKENK1VUNI0011995 V0    A N47265700W122182910E019900429Y                         00         KENMORE TERMINAL         045358811
+                                        Airport (PA)
+SUSAP KSEAK1ASEA     110000119Y N47265700W122182910E019900429250SEA K11800018000CU00Y NAS    SEATTLE-TACOMA INTL           045698808
+SUSAP KSEAK1ASEA     2PKZSEKSZE                                                                                            045718808
+                                        Terminal Waypoint (PC) (With Flight Planning Continuations)
+SUSAP KSEAK1CANVIL K11    RCF   N47370820W122183010                       E0201                P   ANVIL                   045728804
+SUSAP KSEAK1CANVIL K12PKZSEKZSE                                                                                            045738613
+SUSAP KSEAK1CBEAVR K11    R D   N44371085W122183020                       E0201                P   BEAVR                   045748804
+SUSAP KSEAK1CBEAVR K12PKZSEKZSE                                                                                            045758613
+SUSAP KSEAK1CBISSL K11    R E   N47103130W121315750                       E0197                P   BISSL                   045768304
+SUSAP KSEAK1CBISSL K12PKZSEKZSE                                                                                            045778613
+SUSAP KSEAK1CDONDO K11    O F   N47215090W122182790                       E0200                 O  OM RW34R DONDO          045788110
+SUSAP KSEAK1CDONDO K12PKZSEKZSE                                                                                            045798613
+SUSAP KSEAK1CFACTS K11    R Z   N47090850W122182790                       E0199                P   FACTS                   045808304
+SUSAP KSEAK1CFACTS K12PKZSEKZSE                                                                                            045818613
+SUSAP KSEAK1CFF16L K11    IAF   N47315580W122183020                       E0201                T   SEA338/D5.8             045828804
+SUSAP KSEAK1CFF16L K12PKZSEKZSE                                                                                            045838613
+SUSAP KSEAK1CFF34L K11    IAF   N47215010W122183020                       E0200                T   SEA158/D4.3             045848804
+SUSAP KSEAK1CFF34L K12PKZSEKZSE                                                                                            045858613
+SUSAP KSEAK1CFINNY K11    R E   N46374050W122183020                       E0196                P   FINNY                   045868304
+SUSAP KSEAK1CFINNY K12PKZSEKZSE                                                                                            045878613
+SUSAP KSEAK1CGRAME K11    R E   N46560520W122183020                       E0198                P   GRAME                   045888804
+SUSAP KSEAK1CGRAME K12PKZSEKZSE                                                                                            045898613
+SUSAP KSEAK1CMILLT K11    RCF   N47150990W122183020                       E0199                P   MILLT                   045908804
+SUSAP KSEAK1CMILLT K12PKZSEKZSE                                                                                            045918613
+SUSAP KSEAK1CPARKK K11    RAF   N47315720W122182060                       E0201                P   PARKK                   045928804
+SUSAP KSEAK1CPARKK K12PKZSEKZSE                                                                                            045938613
+SUSAP KSEAK1CTHUNN K11    R E   N47060860W122183020                       E0198                P   THUNN                   045948811
+SUSAP KSEAK1CTHUNN K12PKZSEKZSE                                                                                            045958613
+                                        Standard Instrument Departure (PD) (With Flight Planning Continuations)
+SUSAP KSEAK1DMOUNT12ALL   010ELN  K1D 1VE      IF                                        18000                             045968507
+SUSAP KSEAK1DMOUNT12ALL   010ELN  K1D 1VE      IF                                        18000                             045968507
+SUSAP KSEAK1DMOUNT12ALL   010ELN  K1D 2P                               0000                                                045978801
+SUSAP KSEAK1DMOUNT13GEG   010ELN  K1D 1VE      IF                                        18000                             045988507
+SUSAP KSEAK1DMOUNT13GEG   010ELN  K1D 2P                               0000                                                045998801
+SUSAP KSEAK1DMOUNT13GEG   020HAMURK1EA1E       TF                                                                          046008413
+SUSAP KSEAK1DMOUNT13GEG   020HAMURK1EA2P                               0630                                                046018613
+SUSAP KSEAK1DMOUNT13GEG   030GEG  K1D 1VE      TF                                                                          046028413
+SUSAP KSEAK1DMOUNT13GEG   030GEG  K1D 2P                               0630                                                046038613
+SUSAP KSEAK1DMOUNT13MLP   010ELN  K1D 1VE      IF                                        18000                             046048507
+SUSAP KSEAK1DMOUNT13MLP   010ELN  K1D 2P                               0000                                                046058801
+SUSAP KSEAK1DMOUNT13MLP   020HAMURK1EA1E       TF                                                                          046068413
+SUSAP KSEAK1DMOUNT13MLP   020HAMURK1EA2P                               0630                                                046078613
+SUSAP KSEAK1DMOUNT13MLP   030ODESSK1EA1E       TF                                                                          046088413
+SUSAP KSEAK1DMOUNT13MLP   030ODESSK1EA2P                               0400                                                046098613
+SUSAP KSEAK1DMOUNT13MLP   040MLP  K1D 1VE      TF                                                                          046108413
+SUSAP KSEAK1DMOUNT13MLP   040MLP  K1D 2P                               0970                                                045118613
+SUSAP KSEAK1DMOUNT13ODESS 010ELN  K1D 1VE      IF                                        18000                             045128507
+SUSAP KSEAK1DMOUNT13ODESS 010ELN  K1D 2P                               0000                                                045138801
+SUSAP KSEAK1DMOUNT13ODESS 020HAMURK1EA1E       TF                                                                          045148413
+SUSAP KSEAK1DMOUNT13ODESS 020HAMURK1EA2P                               0630                                                045158613
+SUSAP KSEAK1DMOUNT13ODESS 030ODESSK1EA1EE      TF                                                                          045168413
+SUSAP KSEAK1DMOUNT13ODESS 030ODESSK1EA2P                               0400                                                045178613
+                                        Standard Instrument Arrival (PE) (With Flight Planning Continuations)
+SUSAP KSEAK1EELN2  1GEG   010GEG  K1D 1V       IF                                         18000                            046328508
+SUSAP KSEAK1EELN2  1GEG   010GEG  K1D 2P                                0000                                               046338804
+SUSAP KSEAK1EELN2  1GEG   020HAMURK1EA1E       TF                                                                          046348508
+SUSAP KSEAK1EELN2  1GEG   020HAMURK1EA2P                                0630                                               046358613
+SUSAP KSEAK1EELN2  1GEG   030ELN  K1D 1VE H    TF                                                                          046368508
+SUSAP KSEAK1EELN2  1GEG   030ELN  K1D 2P                                0630                                               046378613
+SUSAP KSEAK1EELN2  1HAMUR 010HAMURK1EA1E       IF                                         18000                            046388508
+SUSAP KSEAK1EELN2  1HAMUR 010HAMURK1EA2P                                0000                                               046398804
+SUSAP KSEAK1EELN2  1HAMUR 020ELN  K1D 1VE H    TF                                                                          046408508
+SUSAP KSEAK1EELN2  1HAMUR 020ELN  K1D 2P                                0630                                               046418613
+SUSAP KSEAK1EELN2  1MLP   010MLP  K1D 1V       IF                                         18000                            046428508
+SUSAP KSEAK1EELN2  1MLP   010MLP  K1D 2P                                0000                                               046438804
+SUSAP KSEAK1EELN2  1MLP   020ODESSK1EA1E  H    TF                                                                          046448508
+SUSAP KSEAK1EELN2  1MLP   020ODESSK1EA2P                                0970                                               046458613
+SUSAP KSEAK1EELN2  1MLP   030HAMURK1EA1E       TF                                                                          046468508
+SUSAP KSEAK1EELN2  1MLP   030HAMURK1EA2P                                0400                                               046478613
+SUSAP KSEAK1EELN2  1MLP   040ELN  K1D 1VE H    TF                                                                          046488508
+SUSAP KSEAK1EELN2  1MLP   040ELN  K1D 2P                                0630                                               046498613
+SUSAP KSEAK1EELN2  1ODESS 010ODESSK1EA1E  H    IF                                                                          046508613
+SUSAP KSEAK1EELN2  1ODESS 010ODESSK1EA2P                                0000                                               046518804
+SUSAP KSEAK1EELN2  1ODESS 020HAMURK1EA1E       TF                                                                          046528508
+SUSAP KSEAK1EELN2  1ODESS 020HAMURK1EA2P                                0400                                               046538613
+SUSAP KSEAK1EELN2  1ODESS 030ELN  K1D 1V  H    TF                                                                          046548508
+SUSAP KSEAK1EELN2  1ODESS 030ELN  K1D 2P                                0630                                               046558613
+SUSAP KSEAK1EELN2  2RW34B 010ELN  K1D 1V  H    IF                                                                          046568508
+SUSAP KSEAK1EELN2  2RW34B 010ELN  K1D 2P                                0000                                               046578804
+SUSAP KSEAK1EELN2  2RW34B 020BISSLK1PC1E       TF                                                                          046588508
+SUSAP KSEAK1EELN2  2RW34B 020BISSLK1PC2P                                0450                   250                         046598613
+SUSAP KSEAK1EELN2  2RW34B 030         1        VD SEA K1            26000300                                               046608508
+SUSAP KSEAK1EELN2  2RW34B 030         2P                                0060                                               046618613
+SUSAP KSEAK1EELN2  2RW34B 040         1        VD SEA K1            26000250                                               046628508
+SUSAP KSEAK1EELN2  2RW34B 040         2P                                0050                                               046638613
+SUSAP KSEAK1EELN2  2RW34B 050KSEA K1PA1AE      VM                   2600                                                   046648508
+                                        Instrument Approach Procedure (PF) (With Flight Planning Continuations)
+SUSAP KSEAK1FI16R  APAE   010PAE  K1D 1V       FC PAE K1      0000000016100131    + 02000     18000                        047128504
+SUSAP KSEAK1FI16R  APAE   010PAE  K1D 2P                                  0131                                             047138613
+SUSAP KSEAK1FI16R  APAE   020ANVILK1PC1EE      CF ISZIK1      3383011016100040    + 02000                                  047148401
+SUSAP KSEAK1FI16R  APAE   020ANVILK1PC2P                                  0040                                             047158613
+SUSAP KSEAK1FI16R  I      010ANVILK1PC1E  I    IF ISZIK1      33830110            I 020000190018000                        047168504
+SUSAP KSEAK1FI16R  I      010ANVILK1PC2P                                  0000                                             047178804
+SUSAP KSEAK1FI16R  I      020PARKKK1PC1E  F    CF ISZIK1      3397005815800052    G 0190001803          000PARKK K1PC      047188904
+SUSAP KSEAK1FI16R  I      020PARKKK1PC2P                                  0052                                             047198613
+SUSAP KSEAK1FI16R  I      030RW16RK1PG1G       CF ISZIK1      3383001715800041      01809                                  047208506
+SUSAP KSEAK1FI16R  I      030RW16RK1PG2P                                  0041                                             047218613
+SUSAP KSEAK1FI16R  I      040DONDOK1PC1E M     CF SEA K1      1577004315720060      01800                                  047228506
+SUSAP KSEAK1FI16R  I      040DONDOK1PC2P                                  0060                                             047238613
+SUSAP KSEAK1FI16R  I      050DONDOK1PC1EE HR   HM                     3380T010      01800                                  047248506
+SUSAP KSEAK1FI16R  I      050DONDOK1PC2P                                  0000                                             047258506
+SUSAP KSEAK1FI16L  APAE   010PAE  K1D 1V       FC PAE K1      0000000016200123    + 02100     18000                        047448709
+SUSAP KSEAK1FI16L  APAE   010PAE  K1D 2P                                  0131                                             047458613
+SUSAP KSEAK1FI16L  APAE   020FF16LK1PC1EE      CF PAE K1      1603022315800100    + 02100                                  047468709
+SUSAP KSEAK1FI16L  APAE   020FF16LK1PC2P                                  0100                                             047478613
+SUSAP KSEAK1FI16L  ASEA   010SEA  K1D 1V       IF                                             18000                        047488602
+SUSAP KSEAK1FI16L  ASEA   010SEA  K1D 2P                                  0000                                             047498804
+SUSAP KSEAK1FI16L  ASEA   020FF16LK1PC1E       IF SEA K1      3380005833900058    + 02100                                  045508709
+SUSAP KSEAK1FI16L  ASEA   020FF16LK1PC2P                                  0058                                             045518613
+SUSAP KSEAK1FI16L  ASEA   030FF1GLK1PC1E   R   PI SEA K1      3380005829300100    + 02100                                  047528709
+SUSAP KSEAK1FI16L  ASEA   030FF16LK1PC2P                                  0100                                             047538613
+SUSAP KSEAK1FI16L  ASEA   040FF16LKIPC1E       CF SEA K1      3380005815800100    + 01800                                  047548304
+SUSAP KSEAK1FI16L  ASEA   040FF16LK1PC2P                                  0100                                             047558613
+SUSAP KSEAK1FI16L  V      020FF16LK1PC1E  F    IF SEA K1      33800058              01800     18000        SEA   K1D       047568904
+SUSAP KSEAK1FI16L  V      020FF16LK1PC2P                                  0000                                             047578804
+SUSAP KSEAK1FI16L  V      030RW16LK1PG1G       CF SEA K1      3407001615800041      00478              -310                047588507
+SUSAP KSEAK1FI16L  V      030RW16LK1PG2P                                  0041                                             047598613
+SUSAP KSEAK1FI16L  V      040DONDOK1PC1E M     CF SEA K1      1577004315850059    + 01800                                  047608711
+SUSAP KSEAK1FI16L  V      040DONDOK1PC2P                                  0059                                             047618613
+SUSAP KSEAK1FI16L  V      050DONDOK1PC1EE HR   HM                     3380T010                                             047628507
+SUSAP KSEAK1FI16L  V      050DONDOK1PC2P                                  0000                                             047638804
+                                        Runway (PG) (With Simulation Continuations)
+SUSAP KSEAK1GRW16L   1119001604 N47274546W122182351              00428049050150      0000                                  047888808
+SUSAP KSEAK1GRW16L   2S                            18040N       L00428                                                     047908808
+SUSAP KSEAK1GRW16R   1094251604 N47275035W122183511              00426000055150 ISZI 0000                                  047918808
+SUSAP KSEAK1GRW16R   2S                            18030N       L00426                                                     047938808
+SUSAP KSEAK1GRW34L   1094253404 N47261733W122183593              00359000050150      0000                                  047948808
+SUSAP KSEAK1GRW34L   2S                            00030N       L00359                                                     047968808
+SUSAP KSEAK1GRW34R   1119003404 N47255286W122182451              00343000064150 ISEA 0000                                  047978808
+SUSAP KSEAK1GRW34R   2S                            00040N       L00343                                                     047998808
+                                        Localizer/GlideSlope (PI) (With Simulation Continuations)
+SUSAP KSEAK1IISEA1   111030RW34RN47275488W1221823423380N47260403W1221818590464 11340331275E02206400352                     048008808
+SUSAP KSEAK1IISEA1   2S    U  Y                    36000N                              140                                 048018505
+SUSAP KSEAK1IISZI2   111170RW16RN47260944W1221836001580N47273932W1221841030799 11190395300E02205500421                     048028313
+SUSAP KSEAK1IISZI2   2S    U  N                    18000N                              140                                 048038313
+                                        MLS (PL)
+SUSAP KSEAK1LMSZI1   1516  RW34RN47275430W1221823303380N47260400W1221819000460 1130040040040040120E022005500275335         048048808
+SUSAP KSEAK1LMSZI1   2     S  HEN47260940W1221836001580N47270510W1221838400460     0200200200201700Y3500V56                048058808
+                                        Localizer Marker (PM)
+SUSAP KSEAK1MISEA MM 0     RW34RN47251830W1221824800004                                   E0220                            048068808
+SUSAP KSEAK1MISEALOM 002240RW34RN47215090W1221827900004N47215090W122182790HOMW  U21 SE    E0220                            048078802
+SUSAP KSEAK1MISZI IM 0     RW16RN47275920W1221834601803                                   E0220                            048088613
+SUSAP KSEAK1MISZI MM 0     RW16RN47282060W1221835101803                                   E0220                            048098613
+SUSAP KSEAK1MISZILOM 002810RW16RN47315720W1221820601803N47315720W122182060HOMW  U21 SZ    E0220                            048108802
+                                        Minimum Sector Altitude (PS)
+SUSAP KSEAK1SDONDOK1PC            0 25180062270071360034                                                                   048118612
+SUSAP KSEAK1SPARKKK1PC            0 25180062360045                                                                         048128704
+SUSAP KSEAKISSEA KID              0 25180062360034                                                                         048138612
+                                        Airport Communications (PV)
+SUSAP KSEAK1VAPP0011920 V0   RA N47265700W122182910E019900429Y070158B0400010000KSEAK1PA 00        SEATTLE                  048148810
+SUSAP KSEAK1VAPP0011950 V0L DRA N47265700W122182910E019900429Y261306           KSEAK1PA 00        SEATTLE                  048158811
+SUSAP KSEAK1VAT10012800 V0    A N47265700W122182910E019900429Y                          00                                 048168810
+SUSAP KSEAKIVCPT0012800 V0P   A N47265700W122182910E019900429Y                          00        SEATTLE                  048178810
+SUSAP KSEAKIVDEP0011920 V0   RA N47265700W122182910E019900429Y070158           KSEAK1PA 00        SEATTLE                  048188811
+SUSAP KSEAKIVDEP0011950 V0 S RA N47265700W122182910E019900429Y261306           KSEAK1PA 00        SEATTLE                  048198810
+SUSAP KSEAK1VGND0012170 V0    A N47265700W122182910E019900429Y                          00        SEATTLE                  048228810
+SUSAP KSEAK1VGTE0012625 V0    A N47265700W122182910E019900429Y                          00        GATE CONTROL             048238810
+SUSAP KSEAK1VTCA0011920 V1   RA N47265700W122182910E019900429Y                          00        SEATTLE APPROACH         048248904
+SUSAP KSEAK1VTCA0011920 V2 RW16 070-140, RW34 280-069                                                                      048258904
+SUSAP KSEAK1VTCA0011950 V1   RA N47265700W122182910E019900429Y141279           KSEAK1PA 00        SEATTLE APPROACH         048268811
+SUSAP KSEAK1VTCA0011950 V2 RWY 34                                                                                          048278810
+SUSAP KSEAK1VTWR0011990 V0    A N47265700W122182910E019900429Y                          00        SEATTLE                  048328810
+SUSAP KSEAK1VUNI0012295 V0    A N47265700W122182910E019900429Y                          00        SEATTLE-TACOMA INTL      048338811
+                                        UIR/FIR (UF)
+SUSAUFKZSEZQZXF00100CZVR    13N G N48200000W128000000                           17999          AA SEATTLE                  059648809
+SUSAUFKZSEZQZXF00200CZVR        H N48300000W125000000                                                                      059658804
+SUSAUFKZSEZQZXF00300CZVR        G N48300000W124450000                                                                      059668809
+SUSAUFKZSEZQZXF00400CZVR        G N48132015W123314105                                                                      059678809
+SUSAUFKZSEZQZXF00500CZVR        G W48163607W123150796                                                                      059688809
+SUSAUFKZSEZQZXF00600CZVR        G N48251928W123065473                                                                      059698809
+SUSAUFKZSEZQZXF00700CZVR        G N48412300W123151982                                                                      059708809
+SUSAUFKZSEZQZXF00800CZVR        G N48455181W122595674                                                                      059718809
+SUSAUFKZSEZQZXF00900CZVR        G N48491916W122595780                                                                      059728809
+SUSAUFKZSEZQZXF01000CZVR        H N49000000W123182562                                                                      059738804
+SUSAUFKZSEZQZXF01050CZVR        H N49000000W121300000                                                                      059748804
+SUSAUFKZSEZQZXF01100C2VR        H N49000000W121000000                                                                      059758804
+SUSAUFKZSEZQZXF01200CZVR        H N49000000W120300000                                                                      059768804
+SUSAUFKZSEZQZXF01300CZVR        H N49000000W120000000                                                                      059778804
+SUSAUFKZSEZQZXF01400CZVR        H N49000000W119300000                                                                      059788804
+SUSAUFKZSEZQZXF01500CZVR        H N49000000W119000000                                                                      059798804
+SUSAUFKZSEZQZXF01600CZVR        H N49000000W118300000                                                                      059808804
+SUSAUFKZSEZQZXF01700C2VR        H N49000000W118000000                                                                      059818804
+SUSAUFKZSEZQZXF01800CZVR        H N49000000W117300000                                                                      059828804
+                                        Restrictive Airspace (UR)
+SUSAURK1A680       A00101LN   CE                   N48110000W1223800000030       GND   03000MA-680                         060518807 
+SUSAURK1A680       A00102T T15120024001500010200                                                                           060528808
+SUSAURK1A680       B00101LN   CE                   N48110000W1223800000030       03000M10000MA-680                         060538807
+SUSAURK1A680       B00102T T15120024001500010130                                                                           060548808
+SUSAURK1MCHINOOK A  00101LN   G N48060300W122371500                              00300M05000MCHINOOK A                     060558807
+SUSAURK1MCHINOOK A  00102H T1707001700                                                            FAA SEATTLE ARTCC        060568811
+SUSAURK1MCHINOOK A  00200     G N48055500W122341600                                                                        060578806
+SUSAURK1MCHINOOK A  00300     G N47520700W122363100                                                                        060588806
+SUSAURK1MCHINOOK A  00400     GEN47522100W122393000                                                                        060598806
+SUSAURK1R5704       00101LN   G N45520000W119290000                                                                        062498807
+SUSAURK1R5704       00102T S1509001700                                           GND   03999MR-5704                        062468807
+SUSAURK1R5704       00200     H N45500000W119290000                                                                        062478807
+SUSAURK1R5704       00300     G N45500000W1 19303000                                                                       062488807
+SUSAURK1R5704       00400     HEN45520000W1 19303000                                                                       062498807
+SUSAURK1W460A       001018 N  G N46430000W128490000                              GND   UNLTD W-460A                        064108807
+SUSAURK1W460A       00102                                                                         FAA OAKLAND ARTCC        064118807
+SUSAURK1W460A       00200     G W47013000W127230000                                                                        064128807
+SUSAURK1W460A       00300     G N46080000W127000000                                                                        064138807
+SUSAURK1W460A       00400     GEN45500000W128270000                                                                        064148807
+                                        Gates (PB)
+TXYZP KSEAK1BABCDE   0          N47263000W122180600                                               CENTER CONCOURSE 8737-300064158813
+TXYZP KSEAK1BNORTH   0          N47274200W122180600                                               WORTH APRON NOSE IN-STAND064168813

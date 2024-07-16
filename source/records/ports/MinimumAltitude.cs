@@ -2,9 +2,15 @@ using Arinc424.Ports.Terms;
 
 namespace Arinc424.Ports;
 
-[Icao(11, 12), Port(7, 10)]
-public abstract class MinimumAltitude : Record424
+[Section('P', 'S', subsectionIndex: 13)]
+[Section('H', 'S', subsectionIndex: 13)]
+[Icao(11, 12), Port(7, 10), Continuous(39)]
+public class MinimumAltitude : Record424
 {
+    [Identifier(7, 10)]
+    [Possible<Airport, Heliport>]
+    public Port Port { get; set; }
+
     [Type(21, 22)]
     [Identifier(14, 18), Icao(19, 20)]
     public IIdentity Center { get; set; }

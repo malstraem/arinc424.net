@@ -11,22 +11,20 @@ namespace Arinc424.Linking;
 /// </summary>
 internal class Unique
 {
-    internal readonly Dictionary<Section, Dictionary<string, Record424>> unique = [];
+    internal readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
     [Obsolete("todo: diagnostics")]
     private void ProcessPrimaryKey(Build build, RecordInfo info)
     {
         var record = build.Record;
-        var primary = info.Primary!; //garantee by design
 
-
-        if (!primary.TryGetKey(record.Source, out string? key))
+        if (!info.Primary!.TryGetKey(record.Source, out string? key))
         {
             Debug.WriteLine("oops");
             return;
         }
 
-        if (unique[info.Section].TryAdd(key, record))
+        if (unique[info.Type].TryAdd(key, record))
             return;
 
         build.Diagnostics ??= [];
@@ -38,7 +36,8 @@ internal class Unique
     {
         foreach (var attribute in info.Where(x => x.Primary is not null))
         {
-            unique[attribute.Section] = [];
+            if (!unique.ContainsKey(attribute.Type))
+                unique[attribute.Type] = [];
 
             foreach (var build in builds[attribute.Section])
                 ProcessPrimaryKey(build, attribute);
@@ -46,5 +45,5 @@ internal class Unique
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal bool TryGetRecords(Section section, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(section, out records);
+    internal bool TryGetRecords(Type type, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(type, out records);
 }

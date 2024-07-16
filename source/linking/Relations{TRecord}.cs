@@ -1,6 +1,5 @@
 using System.Reflection;
 
-using Arinc424.Attributes;
 using Arinc424.Building;
 using Arinc424.Diagnostics;
 
@@ -62,7 +61,7 @@ internal sealed class Relations<TRecord> : Relations where TRecord : Record424
 
             if (identifier is not null)
             {
-                var linkType = typeof(Link<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
+                Link<TRecord> link;
 
                 KeyRanges ranges = new()
                 {
@@ -71,11 +70,23 @@ internal sealed class Relations<TRecord> : Relations where TRecord : Record424
                     Identifier = identifier.Range
                 };
 
-                var typeAttribute = property.GetCustomAttributes<TypeAttribute>().BySupplement(supplement);
+                var possible = property.GetCustomAttribute<PossibleAttribute>();
 
-                object link = Activator.CreateInstance(linkType, ranges, property, typeAttribute)!;
+                if (possible is not null)
+                {
+                    var linkType = typeof(PossibleLink<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
 
-                links.Add((Link<TRecord>)link);
+                    link = (Link<TRecord>)Activator.CreateInstance(linkType, ranges, property, possible.Types)!;
+                }
+                else
+                {
+                    var linkType = typeof(Link<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
+
+                    var typeAttribute = property.GetCustomAttributes<TypeAttribute>().BySupplement(supplement);
+
+                    link = (Link<TRecord>)Activator.CreateInstance(linkType, ranges, property, typeAttribute)!;
+                }
+                links.Add(link);
             }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {

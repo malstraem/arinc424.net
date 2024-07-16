@@ -26,35 +26,23 @@ Record<Omnidirectional>,
 Record<AirwayMarker>,
 Record<PreferredRoute>,
 Record<HoldingPattern>,
-Record<EnrouteWaypoint>,
+Record<Waypoint>,
 Record<SpecialActivityArea>,
 
 Sequence<Airway, AirwayPoint>,
 Sequence<AirwayCommunication, AirwayTransmitter>,
 #endregion
 
-#region Heliport
-Record<Heliport>,
-Record<HeliportArrivalAltitude>,
-Record<HeliportMinimumAltitude>,
-Record<HeliportTerminalWaypoint>,
-Record<HelicopterSatellitePoint>,
-
-Sequence<HeliportArrivalSequence, ArrivalPoint>,
-Sequence<HeliportApproachSequence, ApproachPoint>,
-Sequence<HeliportDepartureSequence, DeparturePoint>,
-#endregion
-
-#region Airport
+#region Airport and Heliport
 Record<Gate>,
 Record<Runway>,
 Record<Airport>,
 Record<FlightPlan>,
-Record<GroundPoint>,
-Record<AirportSatellitePoint>,
-Record<AirportArrivalAltitude>,
-Record<AirportMinimumAltitude>,
-Record<AirportTerminalWaypoint>,
+Record<PathPoint>,
+Record<SatellitePoint>,
+Record<ArrivalAltitude>,
+Record<MinimumAltitude>,
+Record<TerminalWaypoint>,
 
 Record<TerminalBeacon>,
 Record<GlobalLanding>,
@@ -64,9 +52,11 @@ Record<InstrumentMarker>,
 
 Sequence<PortCommunication, PortTransmitter>,
 
-Sequence<AirportArrivalSequence, ArrivalPoint>,
-Sequence<AirportApproachSequence, ApproachPoint>,
-Sequence<AirportDepartureSequence, DeparturePoint>,
+Sequence<ArrivalSequence, ArrivalPoint>,
+Sequence<ApproachSequence, ApproachPoint>,
+Sequence<DepartureSequence, DeparturePoint>,
+
+Record<Heliport>,
 #endregion
 
 #region Company Routes
@@ -107,7 +97,8 @@ internal class Meta424
         foreach (var info in Info)
         {
             types.Add(info.Section, info.Type);
-            _ = typeInfo.TryAdd(info.Type, info);
+
+            _ = typeInfo.TryAdd(info.Type, info); // types with multiple sections will be stored once
         }
         Types = types.ToFrozenDictionary();
         TypeInfo = typeInfo.ToFrozenDictionary();

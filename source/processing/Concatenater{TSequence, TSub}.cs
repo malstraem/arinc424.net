@@ -36,7 +36,7 @@ internal abstract class Concatenater<TSequence, TSub> where TSequence : Record42
                 var result = @new(sub);
 
                 result.Source = sub.Source;
-                result.AreaCode = sub.AreaCode;
+                result.Code = sub.Code;
                 result.Sequence = [.. subs];
 
                 sequences.Enqueue(new Build<TSequence, TSub>(result)); // todo: save diagnostics

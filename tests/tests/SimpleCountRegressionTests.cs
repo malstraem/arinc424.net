@@ -9,6 +9,7 @@ public class SimpleCountRegressionTests
     [Theory(Skip = "manual")]
     [InlineData("unknown", Supplement.V18)]
     [InlineData("faa-24.04.18", Supplement.V18)]
+    [InlineData("supplement-18", Supplement.V18)]
 #pragma warning restore xUnit1004
     public void MakeRegression(string file, Supplement supplement)
     {
@@ -25,6 +26,7 @@ public class SimpleCountRegressionTests
     [Theory]
     [InlineData("unknown", Supplement.V18)]
     [InlineData("faa-24.04.18", Supplement.V18)]
+    [InlineData("supplement-18", Supplement.V18)]
     public void CheckRegression(string file, Supplement supplement)
     {
         var data = Data424.Create(File.ReadAllLines($"data/{file}"), supplement);

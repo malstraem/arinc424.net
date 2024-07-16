@@ -7,7 +7,6 @@ namespace Arinc424.Building;
 
 #pragma warning disable CS8618
 internal abstract class RecordInfo
-#pragma warning restore CS8618
 {
     protected Type type;
 
@@ -16,7 +15,7 @@ internal abstract class RecordInfo
     protected Relations relations;
 
     protected SectionAttribute section;
-
+#pragma warning restore CS8618
     protected int? continuationIndex;
 
     internal abstract IEnumerable<Build> Build(Queue<string> strings);

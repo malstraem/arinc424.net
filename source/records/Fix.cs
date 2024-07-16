@@ -11,7 +11,7 @@ public abstract class Fix : Geo, IIdentity
     ///   <c>Airport/Heliport Identifier (ARPT/HELI IDENT)</c> field for <see cref="Airport"/> and <see cref="Heliport"/>. See section 5.6.
     /// </para>
     /// <para>
-    ///   <c>Fix Identifier (FIX IDENT)</c> field for <see cref="AirportTerminalWaypoint"/>, <see cref="HeliportTerminalWaypoint"/>,
+    ///   <c>Fix Identifier (FIX IDENT)</c> field for <see cref="TerminalWaypoint"/>, <see cref="HeliportTerminalWaypoint"/>,
     ///   <see cref="EnrouteWaypoint"/>. See section 5.13.
     /// </para>
     /// <para>

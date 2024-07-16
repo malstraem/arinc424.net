@@ -2,7 +2,7 @@ namespace Arinc424.Linking;
 
 internal sealed class Foreign<TType>(KeyRanges ranges) : Key(ranges) where TType : class
 {
-    internal bool TryGetKey(ReadOnlySpan<char> @string, Key primary, out string key)
+    internal bool TryGetKey(ReadOnlySpan<char> @string, Key primary, out string? key)
     {
         key = @string[ranges.Identifier].Trim().ToString();
 

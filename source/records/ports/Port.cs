@@ -1,4 +1,7 @@
+using Arinc424.Comms;
 using Arinc424.Navigation;
+using Arinc424.Procedures;
+using Arinc424.Waypoints;
 
 namespace Arinc424.Ports;
 
@@ -89,4 +92,61 @@ public abstract class Port : Fix, IIcao, INamed
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
     [Field(94, 123)]
     public string? Name { get; set; }
+
+    /// <summary>
+    /// Associated GBAS points.
+    /// </summary>
+    [Many]
+    public List<PathPoint>? GroundPathPoints { get; set; }
+
+    /// <summary>
+    /// Associated SBAS points.
+    /// </summary>
+    [Many]
+    public List<SatellitePoint>? SattelitePoints { get; set; }
+
+    /// <summary>
+    /// Associated GLS's.
+    /// </summary>
+    [Many]
+    public List<GlobalLanding>? GlobalLandings { get; set; }
+
+    /// <summary>
+    /// Associated STARs.
+    /// </summary>
+    [Many]
+    public List<Arrival>? Arrivals { get; set; }
+
+    /// <summary>
+    /// Associated Approach Procedures.
+    /// </summary>
+    [Many]
+    public List<Approach>? Approaches { get; set; }
+
+    /// <summary>
+    /// Associated SIDs.
+    /// </summary>
+    [Many]
+    public List<Departure>? Departures { get; set; }
+
+    /// <summary>
+    /// Associated Terminal Waypoints.
+    /// </summary>
+    [Many]
+    public List<TerminalWaypoint>? TerminalWaypoints { get; set; }
+
+    /// <summary>
+    /// Associated Communications.
+    /// </summary>
+    public List<PortCommunication>? Communications { get; set; }
+
+    /// <summary>
+    /// Associated TAAs.
+    /// </summary>
+    public List<ArrivalAltitude>? ArrivalAltitudes { get; set; }
+
+    /// <summary>
+    /// Associated MSAs.
+    /// </summary>
+    public List<MinimumAltitude>? MinimumAltitudes { get; set; }
 }

@@ -34,6 +34,9 @@ public class Data424
     [Section('E', 'R')]
     public List<Airway> Airways { get; set; } = [];
 
+    [Section('E', 'A')]
+    public List<Waypoint> EnrouteWaypoints { get; set; } = [];
+
     [Section('E', 'M')]
     public List<AirwayMarker> AirwayMarkers { get; set; } = [];
 
@@ -42,9 +45,6 @@ public class Data424
 
     [Section('E', 'T')]
     public List<PreferredRoute> PreferredRoutes { get; set; } = [];
-
-    [Section('E', 'A')]
-    public List<EnrouteWaypoint> EnrouteWaypoints { get; set; } = [];
 
     [Section('E', 'S')]
     public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
@@ -58,25 +58,25 @@ public class Data424
     public List<Heliport> Heliports { get; set; } = [];
 
     [Section('H', 'E')]
-    public List<HeliportArrival> HeliportArrivals { get; set; } = [];
+    public List<Arrival> HeliportArrivals { get; set; } = [];
 
     [Section('H', 'F')]
-    public List<HeliportApproach> HeliportApproaches { get; set; } = [];
+    public List<Approach> HeliportApproaches { get; set; } = [];
 
     [Section('H', 'D')]
-    public List<HeliportDeparture> HeliportDepartures { get; set; } = [];
+    public List<Departure> HeliportDepartures { get; set; } = [];
 
     [Section('H', 'V')]
     public List<PortCommunication> HeliportCommunications { get; set; } = [];
 
     [Section('H', 'K')]
-    public List<HeliportArrivalAltitude> HeliportArrivalAltitudes { get; set; } = [];
+    public List<ArrivalAltitude> HeliportArrivalAltitudes { get; set; } = [];
 
     [Section('H', 'S')]
-    public List<HeliportMinimumAltitude> HeliportMinimumAltitudes { get; set; } = [];
+    public List<MinimumAltitude> HeliportMinimumAltitudes { get; set; } = [];
 
     [Section('H', 'P')]
-    public List<HelicopterSatellitePoint> HelicopterSatellitePoints { get; set; } = [];
+    public List<SatellitePoint> HelicopterSatellitePoints { get; set; } = [];
     #endregion
 
     #region Airport
@@ -93,34 +93,34 @@ public class Data424
     public List<FlightPlan> FlightPlans { get; set; } = [];
 
     [Section('P', 'Q')]
-    public List<GroundPoint> GroundPoints { get; set; } = [];
+    public List<PathPoint> GroundPathPoints { get; set; } = [];
 
     [Section('P', 'N')]
     public List<TerminalBeacon> TerminalBeacons { get; set; } = [];
 
     [Section('P', 'E')]
-    public List<AirportArrival> AirportArrivals { get; set; } = [];
+    public List<Arrival> AirportArrivals { get; set; } = [];
 
     [Section('P', 'F')]
-    public List<AirportApproach> AirportApproaches { get; set; } = [];
+    public List<Approach> AirportApproaches { get; set; } = [];
 
     [Section('P', 'D')]
-    public List<AirportDeparture> AirportDepartures { get; set; } = [];
+    public List<Departure> AirportDepartures { get; set; } = [];
 
     [Section('P', 'V')]
     public List<PortCommunication> AirportCommunications { get; set; } = [];
 
     [Section('P', 'P')]
-    public List<AirportSatellitePoint> AirportSatellitePoints { get; set; } = [];
+    public List<SatellitePoint> AirportSatellitePoints { get; set; } = [];
 
     [Section('P', 'K')]
-    public List<AirportArrivalAltitude> AirportArrivalAltitudes { get; set; } = [];
+    public List<ArrivalAltitude> AirportArrivalAltitudes { get; set; } = [];
 
     [Section('P', 'S')]
-    public List<AirportMinimumAltitude> AirportMinimumAltitudes { get; set; } = [];
+    public List<MinimumAltitude> AirportMinimumAltitudes { get; set; } = [];
 
     [Section('P', 'C')]
-    public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
+    public List<TerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
     [Section('P', 'T')]
     public List<GlobalLanding> GlobalLandings { get; set; } = [];

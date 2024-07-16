@@ -1,13 +1,22 @@
 namespace Arinc424.Ports;
 
+using Arinc424.Procedures;
+
 using Terms;
 
-[Icao(11, 12), Continuous(27)]
+[Section('P', 'Q', subsectionIndex: 13)]
+[Icao(11, 12), Port(7, 10), Continuous(27)]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public abstract class PathPoint : Fix, IIcao
+public class PathPoint : Fix
 {
-    [Field(11, 12)]
-    public string IcaoCode { get; set; }
+    [Identifier(7, 10)]
+    [Possible<Airport, Heliport>]
+    public Port Port { get; set; }
+
+    [Identifier(14, 19)]
+    public Approach Approach { get; set; }
+
+    public string AsRunway { get; set; }
 
     /// <inheritdoc cref="SatelliteOperationType"/>
     [Field(25, 26)]
