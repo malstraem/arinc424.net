@@ -35,7 +35,12 @@ public class RecordCountRegressionTests
 
         var counts = JsonSerializer.Deserialize<Dictionary<string, int>>(File.ReadAllText($"data/regression/{file}.json"))!;
 
-        foreach (var (propertyName, count) in counts)
-            Assert.Equal(count, ((ICollection)typeof(Data424).GetProperty(propertyName)!.GetValue(data)!).Count);
+        foreach (var (propertyName, expected) in counts)
+        {
+            int count = ((ICollection)typeof(Data424).GetProperty(propertyName)!.GetValue(data)!).Count;
+
+            if (count != expected)
+                Assert.Fail($"'{propertyName}' regression - expected: {expected}, actual: {count}");
+        }
     }
 }
