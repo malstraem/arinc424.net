@@ -1,5 +1,8 @@
 namespace Arinc424.Tests;
 
+/// <summary>
+/// Checks entire runtime compilation integrity supplements.
+/// </summary>
 public class IntegrityTests
 {
     [Fact]
