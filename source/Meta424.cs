@@ -23,10 +23,10 @@ Record<Omnidirectional>,
 #endregion
 
 #region Enroute
+Record<Waypoint>,
 Record<AirwayMarker>,
 Record<PreferredRoute>,
 Record<HoldingPattern>,
-Record<Waypoint>,
 Record<SpecialActivityArea>,
 
 Sequence<Airway, AirwayPoint>,
@@ -45,9 +45,11 @@ Record<MinimumAltitude>,
 Record<TerminalWaypoint>,
 
 Record<TerminalBeacon>,
+
 Record<GlobalLanding>,
 Record<MicrowaveLanding>,
 Record<InstrumentLanding>,
+
 Record<InstrumentMarker>,
 
 Sequence<PortCommunication, PortTransmitter>,
@@ -98,7 +100,8 @@ internal class Meta424
         {
             types.Add(info.Section, info.Type);
 
-            _ = typeInfo.TryAdd(info.Type, info); // types with multiple sections will be stored once
+            // types with multiple sections will be stored once
+            _ = typeInfo.TryAdd(info.Type, info);
         }
         Types = types.ToFrozenDictionary();
         TypeInfo = typeInfo.ToFrozenDictionary();

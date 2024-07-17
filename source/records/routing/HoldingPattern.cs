@@ -20,7 +20,7 @@ public class HoldingPattern : Record424, IIcao, INamed
 
     [Type(37, 38)]
     [Identifier(30, 34), Icao(35, 36)]
-    public Geo Fix { get; set; }
+    public Fix Fix { get; set; }
 
     /// <summary>
     /// <c>Inbound Holding Course (IB HOLD CRS)</c> field.

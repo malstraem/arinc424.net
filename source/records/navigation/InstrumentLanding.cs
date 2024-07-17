@@ -58,7 +58,7 @@ public class InstrumentLanding : LandingSystem
 
     [Type(109, 110)]
     [Identifier(103, 106), Icao(107, 108)]
-    public Geo? SupportingFacility { get; set; }
+    public Fix? SupportingFacility { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>
     [Field(111, 113), Integer]

@@ -20,7 +20,7 @@ public class ArrivalAltitude : Record424
 
     [Type(27, 28)]
     [Identifier(20, 24), Icao(25, 26)]
-    public Geo Fix { get; set; }
+    public Fix Fix { get; set; }
 
     /// <inheritdoc cref="Terms.FixPosition"/>
     [Character(29)]

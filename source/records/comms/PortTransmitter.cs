@@ -5,7 +5,7 @@ using Terms;
 /// <summary>
 /// Fields of <c>Airport Communications</c> and <c>Heliport Communications</c>.
 /// </summary>
-/// <remarks>Used by <see cref="PortCommunication"/> or <see cref="HeliportCommunication"/> like subsequence.</remarks>
+/// <remarks>Used by <see cref="PortCommunication"/> like subsequence.</remarks>
 public class PortTransmitter : Transmitter
 {
     /// <summary>
@@ -25,7 +25,7 @@ public class PortTransmitter : Transmitter
     [Identifier(80, 83), Identifier(75, 78, Supplement.V19)]
     [Icao(84, 85), Icao(79, 80, Supplement.V19)]
     [Type(86, 87), Type(81, 82, Supplement.V19)]
-    public Geo? Facility { get; set; }
+    public Fix? Facility { get; set; }
 
     /// <inheritdoc cref="DistanceLimitation"/>
     [Character(88), Character(90, Supplement.V19)]

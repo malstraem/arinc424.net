@@ -100,5 +100,5 @@ public class MicrowaveLanding : LandingSystem
 
     [Type(122, 123)]
     [Identifier(116, 119), Icao(120, 121)]
-    public Geo? SupportingFacility { get; set; }
+    public Fix? SupportingFacility { get; set; }
 }

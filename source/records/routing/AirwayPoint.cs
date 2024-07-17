@@ -13,7 +13,7 @@ public class AirwayPoint : Record424
 {
     [Type(37, 38)]
     [Identifier(30, 34), Icao(35, 36)]
-    public Geo Fix { get; set; }
+    public Fix Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
     [Field(40, 43)]
