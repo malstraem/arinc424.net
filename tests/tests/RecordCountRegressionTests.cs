@@ -3,8 +3,10 @@ using System.Text.Json;
 
 namespace Arinc424.Tests;
 
-public class SimpleCountRegressionTests
+public class RecordCountRegressionTests
 {
+    private readonly JsonSerializerOptions options = new() { WriteIndented = true };
+
 #pragma warning disable xUnit1004
     [Theory(Skip = "manual")]
     [InlineData("unknown", Supplement.V18)]
@@ -20,7 +22,7 @@ public class SimpleCountRegressionTests
         foreach (var property in typeof(Data424).GetProperties().Where(x => x.PropertyType.IsGenericType))
             counts.Add(property.Name, ((ICollection)property.GetValue(data)!).Count);
 
-        File.WriteAllText($"data/regression/{Path.GetFileName($"data/{file}")}.json", JsonSerializer.Serialize(counts));
+        File.WriteAllText($"data/regression/{Path.GetFileName($"data/{file}")}.json", JsonSerializer.Serialize(counts, options));
     }
 
     [Theory]
