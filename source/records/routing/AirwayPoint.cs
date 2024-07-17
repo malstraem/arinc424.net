@@ -50,7 +50,7 @@ public class AirwayPoint : Record424
     public Omnidirectional? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(57, 59), NavigationPerformance]
+    [Field(57, 59), Performance]
     public float NavigationPerformance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Theta']/*"/>

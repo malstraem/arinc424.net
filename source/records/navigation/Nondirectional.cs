@@ -26,6 +26,6 @@ public class Nondirectional : Navaid
     public NondirectCollocation Collocation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(75, 79), MagneticVariation]
+    [Field(75, 79), Variation]
     public float Variation { get; set; }
 }

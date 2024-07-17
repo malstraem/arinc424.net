@@ -2,6 +2,8 @@ using Arinc424.Airspace.Terms;
 
 namespace Arinc424.Converters;
 
+using static System.Globalization.NumberStyles;
+
 internal abstract class ArcConverter : IStringConverter<Arc>
 {
     public static Result<Arc> Convert(ReadOnlySpan<char> @string)
@@ -21,7 +23,7 @@ internal abstract class ArcConverter : IStringConverter<Arc>
 
         if (sub.IsWhiteSpace())
             distance = null;
-        else if (!float.TryParse(sub, out float value))
+        else if (!float.TryParse(sub, None, null, out float value))
             problem += $"Distance '{sub}' can't be parsed.";
         else
             distance = value / 10;
@@ -32,7 +34,7 @@ internal abstract class ArcConverter : IStringConverter<Arc>
 
         if (sub.IsWhiteSpace())
             bearing = null;
-        else if (!float.TryParse(sub, out float value))
+        else if (!float.TryParse(sub, None, null, out float value))
             problem += $"Bearing '{sub}' can't be parsed.";
         else
             bearing = value / 10;

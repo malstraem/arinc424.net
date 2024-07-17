@@ -34,7 +34,7 @@ public abstract class Port : Fix, IIcao, INamed
     public Bool IsProcedurePublished { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(52, 56), MagneticVariation]
+    [Field(52, 56), Variation]
     public float Variation { get; set; }
 
     /// <summary>

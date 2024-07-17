@@ -95,19 +95,19 @@ public class Runway : Fix, IIcao
     /// Associated GLS.
     /// </summary>
     [One]
-    public GlobalLanding? GlobalLandingSystem { get; set; }
+    public GlobalLanding? GlobalLanding { get; set; }
 
     /// <summary>
     /// Associated MLS.
     /// </summary>
     [One]
-    public MicrowaveLanding? MicrowaveLandingSystem { get; set; }
+    public MicrowaveLanding? MicrowaveLanding { get; set; }
 
     /// <summary>
     /// Associated ILS.
     /// </summary>
     [One]
-    public InstrumentLanding? InstrumentLandingSystem { get; set; }
+    public InstrumentLanding? InstrumentLanding { get; set; }
 
     /// <summary>
     /// Associated ILS Markers.

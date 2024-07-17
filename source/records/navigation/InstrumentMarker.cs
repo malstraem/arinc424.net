@@ -55,7 +55,7 @@ public class InstrumentMarker : Fix
     public string? LocatorIdentifier { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(91, 95), MagneticVariation]
+    [Field(91, 95), Variation]
     public float Variation { get; set; }
 
     /// <summary>

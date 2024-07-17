@@ -23,7 +23,7 @@ public abstract class ProcedurePoint : Record424
     public Turn Turn { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(45, 47), NavigationPerformance]
+    [Field(45, 47), Performance]
     public float NavigationPerformance { get; set; }
 
     /// <inheritdoc cref="Terms.LegType"/>

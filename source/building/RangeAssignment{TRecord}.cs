@@ -55,7 +55,7 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
         var result = decode.Convert(@field);
 
         if (result.Invalid)
-            diagnostics.Enqueue(new ValueDiagnostic(record, result.Problem!, range));
+            diagnostics.Enqueue(new ValueDiagnostic(record, Property, result.Problem!, range));
         else
             set(record, result.Value);
     }

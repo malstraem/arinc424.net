@@ -8,15 +8,8 @@ using Terms;
 /// <remarks>See section 4.1.15.1.</remarks>
 [Section('E', 'M'), Identifier(14, 17), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public class AirwayMarker : Geo, IIdentity, IIcao, INamed
+public class AirwayMarker : Fix, IIcao, INamed
 {
-    /// <summary>
-    /// <c>Marker Ident (MARKER IDENT)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.110.</remarks>
-    [Field(14, 17)]
-    public string Identifier { get; set; }
-
     [Field(20, 21)]
     public string IcaoCode { get; set; }
 
@@ -25,7 +18,7 @@ public class AirwayMarker : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <remarks>See section 5.111.</remarks>
     [Field(23, 26)]
-    public string Code { get; set; }
+    public string MarkerCode { get; set; }
 
     /// <inheritdoc cref="MarkerShape"/>
     [Character(28)]
@@ -42,7 +35,7 @@ public class AirwayMarker : Geo, IIdentity, IIcao, INamed
     public float Bearing { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(75, 79), MagneticVariation]
+    [Field(75, 79), Variation]
     public float Variation { get; set; }
 
     /// <summary>
@@ -50,7 +43,7 @@ public class AirwayMarker : Geo, IIdentity, IIcao, INamed
     /// </summary>
     /// <value>Feet.</value>
     /// <remarks>See section 5.92.</remarks>
-    [Field(88, 93), Integer]
+    [Field(80, 84), Integer]
     public int Elevation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

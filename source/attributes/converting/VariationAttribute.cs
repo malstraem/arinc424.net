@@ -1,6 +1,12 @@
 namespace Arinc424.Attributes;
 
-internal sealed class MagneticVariationAttribute : DecodeAttribute<float>
+using static System.Globalization.NumberStyles;
+
+/// <summary>
+/// Decodes <c>Magnetic Variation</c>.
+/// </summary>
+/// <remarks>See section 5.39.</remarks>
+internal sealed class VariationAttribute : DecodeAttribute<float>
 {
     internal override Result<float> Convert(ReadOnlySpan<char> @string)
     {
@@ -11,7 +17,7 @@ internal sealed class MagneticVariationAttribute : DecodeAttribute<float>
 
         var value = @string[1..];
 
-        if (!float.TryParse(value, out float degrees))
+        if (!float.TryParse(value, None, null, out float degrees))
             return $"'{value}' can't be parsed as a float.";
 
         if (sign is 'W')

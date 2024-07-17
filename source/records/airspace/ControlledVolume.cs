@@ -29,6 +29,6 @@ public class ControlledVolume : Volume
     public AirspaceClass Class { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(79, 81), NavigationPerformance]
+    [Field(79, 81), Performance]
     public float NavigationPerformance { get; set; }
 }

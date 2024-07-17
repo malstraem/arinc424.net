@@ -1,5 +1,4 @@
-                                        sample data from Supplement 18
-                                        Grid Mora (AS)
+                                        Grid MORA (AS)
 S   AS       N36W120          105168135095143104104116112105122117107139155116111073052046046034030033037035038030027023   000018708
 S   AS       N36W150          010010010010010010010010010010010010010010010010010010010010010010010010010010010022082076   000028508
 S   AS       N37W120          155166129118118117127137131137137165166164167160095075053049041037037037037032031047031033   000038902
@@ -122,7 +121,7 @@ SUSAEAENRT   ODESS K11    R Z H N47081310W117582330                       E0188 
 SUSAEAENRT   ODESS K12PKZSEKZSE                                                                                            021678701
 SUSAEAENRT   SHOEY K21    R Z L N36444462W122075863                       E0157     NAS        P     SHOEY                 021668613
 SUSAEAENRT   SHOEY K22PKZOAKZOA                                                                                            021678701
-                                        Enroute Marker (EM)
+                                        Enroute Airway Marker (EM)
 SUSAEM       K101  K10.-.  EL   N46123100W1235751001290                   E0210      NAS     FORT STEVENS                  029988706
 SUSAEM       K104  K10.-.  EL   N43072800W1232054101770                   E0200      NAS     WINSTON                       029998713
                                         Holding Patterns (EP)
@@ -139,67 +138,67 @@ SUSAEPENRT                 40EPH  K1D 02460R   10     17999                     
 SUSAEPENRT                 40UBG  K1D 00030L   10     17999                                       NEWBERG                  030148904
 SUSAEPENRT                 50MOD  K2D 02440L   10     17999                                       MODESTO                  030158904
 SUSAEPENRT                 50ELW  K1D 02500R   10     17999                                       ELLENBERG                030168904
-SUSAEPKSEAK1               40FINNYK1PC00230R  0500150009000150                                    FINNY                    030178904
-SUSAEPKSEAK1               50FINNYK1PC00230R  0500150009000150                                    FINNY                    030188904
+SUSAEPKSEAK1               40FINNYK1PC00230R   500150009000150                                    FINNY                    030178904
+SUSAEPKSEAK1               50FINNYK1PC00230R   500150009000150                                    FINNY                    030188904
                                         Enroute Airway (ER)
-SUSAER       C1415       0010F0T  K2D 0V    CB AA                   252012400000 UNKNN     FL450                           030308803
-SUSAER       C1415       0020REDOOK2EA0EEC  CB                      000000002510                                           030318702
-SUSAER       C1416       0010F0T  K2D 0V    CB AA                   305013300000 UNKNN     FL450                           030328704
-SUSAER       C1416       0020DAASHK2EA0EEC  CB                      000000003050                                           030338902
-SUSAER       C1418       0010H0M  K1D 0V    CB AA                   210013800000 UNKNN     FL450                           030348704
-SUSAER       C1418       0020SEDARK1EA0EEC  CB                      000000002100                                           030358110
-SUSAER       C1419       0010F0T  K2D 0V    CB AA                   216013700000 UNKNN     FL450                           030369704
-SUSAER       C1419       0020HEMLOK1EA0EEC  CB                      000000002160                                           030378110
-SUSAER       C1486       0010F0T  K2D 0V    CB AA                   285019600000 UNKNN     FL450                           030388803
-SUSAER       C1486       0020REDOOK2EA0EEC  CB                      000000002850                                           030398803
-SUSAER       J1          0570OAK  K2D 0V C  OH AA                   343014203010 1800022000FL450                           030400000
-SUSAER       J1          0580RBL  K2D 0V    OH AA                   330014603420 1800022000FL450                           030400000
-SUSAER       J1          0590OED  K2D 0V    OH AA                   345019703290 1800022000FL450                           030400000
-SUSAER       J1          0600BTG  K2D 0V    OH AA                   345006503430 1800022000FL450                           030400000
-SUSAER       J1          0610ALDERK1EA0T  H OH AA                   345003703450 1800022000FL450                           030400000
-SUSAER       J1          0620SEA  K1D 0VEC  OH                      000000003450                                           030458207
-SUSAER       J110        0010OAK  K2D 0V C  OH AA                   138007000000 18000     FL450                           030468704
-SUSAER       J110        0030SNS  K2D 0V    OH AA                   064008801380 18000     FL450                           030478704
-SUSAER       J110        0040CZQ  K2D 0V C  OH AA                   086002600670 24000     FL450                           030488704
-SUSAER       J110        0050PINIKK2EA0R    OH AA                   086003400960 24000     FL450                           030498704
-SUSAER       J110        0055MITELK2EA0R    OH AA                   086011700860 24000     FL450                           030508704
-SUSAER       J20         0210PDT  K1D 0V C  OH AA                   290008202750 18000     FL450                           030828704
-SUSAER       J20         0220YKM  K1D 0V    OH AAY                  284005402880 18000     FL450                           030838704
-SUSAER       J20         0225RADDYK1EA0R    OH AAY                  281003902840 18000     FL450                           030848704
-SUSAER       J20         0230SEA  K1D 0VEC  OH                      000000002810                                           030858110
-SUSAER       J3          0010OAK  K2D 0V C  OH AA                   343014200000 18000     FL450                           030868704
-SUSAER       J3          0020RBL  K2D 0V C  OH AAY                  010016303420 18000     FL450                           030878704
-SUSAER       J3          0030LKV  K1D 0V C  OH AAY                  356013400100 18000     FL450                           030888704
-SUSAER       J3          0040IMB  K1D 0V C  OH AA                   006019503550 18000     FL450                           030898704
-SUSAER       V105        0220YERINK2EA0E    OL AA                   299003102990 10000     17999                           031678704
-SUSAER       V105        0230CHIMEK2EA0E    OL AA                   299001502990 10000     17999                           031688704
-SUSAER       V105        0240FMG  K2D 0VEC  OL                      000000002990                                           031698603
-SUSAER       V107        0120CITIEK2EA0R    OL AA                   313002003130 07000     17999                           031708704
-SUSAER       V107        0130PXN  K2D 0V C  OL AA                   296003403130 07000     17999                           031718704
-SUSAER       V107        0140CATHEK2EA0E    OL AA                   296002602960 07000     17999                           031728704
-SUSAER       V107        0150VINCOK2EA0R    OL AA                   294002502960 06000     17999                           031738704
-SUSAER       V107        0160MABRYK2EA0R    OL AA                   294002602960 05500     17999                           031748704
-SUSAER       V107        0170MISONK2EA0T    OL AA                   294002502960 04500     17999                           031758704
-SUSAER       V107        0180IMPLYK2EA0T    OL AA                   294002502960 04500     17999                           031768704
-SUSAER       V107        0190DECOTK2EA0T    OL AA                   294000502940 04500     17999                           031778704
-SUSAER       V107        0200OAK  K2D 0V C  OL AA                   288001602940 05000     17999                           031788704
-SUSAER       V107        0210COMMOK2D 0E    OL AA                   288000802880 05000     17999                           031798704
-SUSAER       V107        0220OMIRAK2D 0T    OL AA                   288001302880 05000     17999                           031808704
-SUSAER       V107        0230PYE  K2D 0V C  OL AA                   289001502880 05000     17999                           031818704
-SUSAER       V107        0240BOARSK2EA0EE   OL                      000000002890                                           031828206
-SUSAER       V108        0050STS  K2D 0V    OL AA                   118002900000 04500     17999                           031838704
-SUSAER       V108        0060SGD  K2D 0V    OL AA                   294002502960 03000     17999                           031848704
-SUSAER       V108        0070CROITK2EA0E    OL AA                   294000502940 03000     17999                           031858704
-SUSAER       V108        0080CCR  K2D 0V    OL AA                   288000802880 03000     17999                           031868704
-SUSAER       V108        0090PITTSK2EA0E    OL AA                   288001302880 03500     17999                           031878902
-SUSAER       V108        0100OAKESK2EA0E    OL AA                   289001502880 02000     17999                           031888902
-SUSAER       V108        0110LODDIK2EA0E    OL AA                   289001502880 02000     17999                           031898704
-SUSAER       V108        0120LIN  K2D 0VEC  OL                      000000002890                                           031908110
-                                        Enroute Airways Restriction (EU)
+SUSAER       C1415       0010F0T  K2D 0V    CB AA                     252012400000 UNKNN     FL450                         030308803
+SUSAER       C1415       0020REDOOK2EA0EEC  CB                        000000002510                                         030318702
+SUSAER       C1416       0010F0T  K2D 0V    CB AA                     305013300000 UNKNN     FL450                         030328704
+SUSAER       C1416       0020DAASHK2EA0EEC  CB                        000000003050                                         030338902
+SUSAER       C1418       0010H0M  K1D 0V    CB AA                     210013800000 UNKNN     FL450                         030348704
+SUSAER       C1418       0020SEDARK1EA0EEC  CB                        000000002100                                         030358110
+SUSAER       C1419       0010F0T  K2D 0V    CB AA                     216013700000 UNKNN     FL450                         030369704
+SUSAER       C1419       0020HEMLOK1EA0EEC  CB                        000000002160                                         030378110
+SUSAER       C1486       0010F0T  K2D 0V    CB AA                     285019600000 UNKNN     FL450                         030388803
+SUSAER       C1486       0020REDOOK2EA0EEC  CB                        000000002850                                         030398803
+SUSAER       J1          0570OAK  K2D 0V C  OH AA                     343014203010 1800022000FL450                         030400000
+SUSAER       J1          0580RBL  K2D 0V    OH AA                     330014603420 1800022000FL450                         030400000
+SUSAER       J1          0590OED  K2D 0V    OH AA                     345019703290 1800022000FL450                         030400000
+SUSAER       J1          0600BTG  K2D 0V    OH AA                     345006503430 1800022000FL450                         030400000
+SUSAER       J1          0610ALDERK1EA0T  H OH AA                     345003703450 1800022000FL450                         030400000
+SUSAER       J1          0620SEA  K1D 0VEC  OH                        000000003450                                         030458207
+SUSAER       J110        0010OAK  K2D 0V C  OH AA                     138007000000 18000     FL450                         030468704
+SUSAER       J110        0030SNS  K2D 0V    OH AA                     064008801380 18000     FL450                         030478704
+SUSAER       J110        0040CZQ  K2D 0V C  OH AA                     086002600670 24000     FL450                         030488704
+SUSAER       J110        0050PINIKK2EA0R    OH AA                     086003400960 24000     FL450                         030498704
+SUSAER       J110        0055MITELK2EA0R    OH AA                     086011700860 24000     FL450                         030508704
+SUSAER       J20         0210PDT  K1D 0V C  OH AA                     290008202750 18000     FL450                         030828704
+SUSAER       J20         0220YKM  K1D 0V    OH AAY                    284005402880 18000     FL450                         030838704
+SUSAER       J20         0225RADDYK1EA0R    OH AAY                    281003902840 18000     FL450                         030848704
+SUSAER       J20         0230SEA  K1D 0VEC  OH                        000000002810                                         030858110
+SUSAER       J3          0010OAK  K2D 0V C  OH AA                     343014200000 18000     FL450                         030868704
+SUSAER       J3          0020RBL  K2D 0V C  OH AAY                    010016303420 18000     FL450                         030878704
+SUSAER       J3          0030LKV  K1D 0V C  OH AAY                    356013400100 18000     FL450                         030888704
+SUSAER       J3          0040IMB  K1D 0V C  OH AA                     006019503550 18000     FL450                         030898704
+SUSAER       V105        0220YERINK2EA0E    OL AA                     299003102990 10000     17999                         031678704
+SUSAER       V105        0230CHIMEK2EA0E    OL AA                     299001502990 10000     17999                         031688704
+SUSAER       V105        0240FMG  K2D 0VEC  OL                        000000002990                                         031698603
+SUSAER       V107        0120CITIEK2EA0R    OL AA                     313002003130 07000     17999                         031708704
+SUSAER       V107        0130PXN  K2D 0V C  OL AA                     296003403130 07000     17999                         031718704
+SUSAER       V107        0140CATHEK2EA0E    OL AA                     296002602960 07000     17999                         031728704
+SUSAER       V107        0150VINCOK2EA0R    OL AA                     294002502960 06000     17999                         031738704
+SUSAER       V107        0160MABRYK2EA0R    OL AA                     294002602960 05500     17999                         031748704
+SUSAER       V107        0170MISONK2EA0T    OL AA                     294002502960 04500     17999                         031758704
+SUSAER       V107        0180IMPLYK2EA0T    OL AA                     294002502960 04500     17999                         031768704
+SUSAER       V107        0190DECOTK2EA0T    OL AA                     294000502940 04500     17999                         031778704
+SUSAER       V107        0200OAK  K2D 0V C  OL AA                     288001602940 05000     17999                         031788704
+SUSAER       V107        0210COMMOK2D 0E    OL AA                     288000802880 05000     17999                         031798704
+SUSAER       V107        0220OMIRAK2D 0T    OL AA                     288001302880 05000     17999                         031808704
+SUSAER       V107        0230PYE  K2D 0V C  OL AA                     289001502880 05000     17999                         031818704
+SUSAER       V107        0240BOARSK2EA0EE   OL                        000000002890                                         031828206
+SUSAER       V108        0050STS  K2D 0V    OL AA                     118002900000 04500     17999                         031838704
+SUSAER       V108        0060SGD  K2D 0V    OL AA                     294002502960 03000     17999                         031848704
+SUSAER       V108        0070CROITK2EA0E    OL AA                     294000502940 03000     17999                         031858704
+SUSAER       V108        0080CCR  K2D 0V    OL AA                     288000802880 03000     17999                         031868704
+SUSAER       V108        0090PITTSK2EA0E    OL AA                     288001302880 03500     17999                         031878902
+SUSAER       V108        0100OAKESK2EA0E    OL AA                     289001502880 02000     17999                         031888902
+SUSAER       V108        0110LODDIK2EA0E    OL AA                     289001502880 02000     17999                         031898704
+SUSAER       V108        0120LIN  K2D 0VEC  OL                        000000002890                                         031908110
+                                        Enroute Airway Restriction (EU)
 SUSAEUJ20   001TC0YKM  K1D SEA  K1D 31JAN9031MAR90CS1707001700                              A0                             031918913
 SUSAEUJ3    001NR1RBL  K2D IMB  K1D 01JAN9031DEC90AVBL ONE WAY RBL TO IMB DURING LAKEVIEW AFB                              031928913
 SUSAEUJ3    001NR2                                MORNING AND EVENING SCRAMBLE ACTIVITY                                    031938913
-                                        Enroute Communications (EV)
+                                        Enroute Communication (EV)
 SUSAEVALW    MOSES LAKE                    FSS0012240 V1  R A N47123960W119185640E0193     Y                               039188810
 SUSAEVALW    MOSES LAKE                    FSS0012240 V2                                    WALLA WALLA                    039198810
 SUSAEVALW    MOSES LAKE                    TWE0011500 V1  R A N47123960W119185640E021001177Y          MWH K1D              039208810
@@ -228,7 +227,7 @@ SUSAEVSEA    YAKIMA                        TWE0011600 V2                        
                                         Heliport (HA) (With Flight Planning Continuations)
 SUSAH KKENK1AKAHHELO1110000NASY N47440610W122153300E019300996250SEA K11800018000CU00Y050100  KENMORE AIR TERMINAL           045328807
 SUSAH KKENK1AKAH     2PKZSEKZSE     
-                                        Heliport Communications (HV)
+                                        Heliport Communication (HV)
 SUSAH KKENK1VTWR0011990 V0    A N47265700W122182910E019900429Y                         00         KENMORE                  045348810
 SUSAH KKENK1VUNI0011995 V0    A N47265700W122182910E019900429Y                         00         KENMORE TERMINAL         045358811
                                         Airport (PA)
@@ -353,13 +352,13 @@ SUSAP KSEAK1FI16L  V      040DONDOK1PC2P                                  0059  
 SUSAP KSEAK1FI16L  V      050DONDOK1PC1EE HR   HM                     3380T010                                             047628507
 SUSAP KSEAK1FI16L  V      050DONDOK1PC2P                                  0000                                             047638804
                                         Runway (PG) (With Simulation Continuations)
-SUSAP KSEAK1GRW16L   1119001604 N47274546W122182351              00428049050150      0000                                  047888808
+SUSAP KSEAK1GRW16L   1119001604 N47274546W122182351               00428049050150      0000                                 047888808
 SUSAP KSEAK1GRW16L   2S                            18040N       L00428                                                     047908808
-SUSAP KSEAK1GRW16R   1094251604 N47275035W122183511              00426000055150 ISZI 0000                                  047918808
+SUSAP KSEAK1GRW16R   1094251604 N47275035W122183511               00426000055150ISZI  0000                                 047918808
 SUSAP KSEAK1GRW16R   2S                            18030N       L00426                                                     047938808
-SUSAP KSEAK1GRW34L   1094253404 N47261733W122183593              00359000050150      0000                                  047948808
+SUSAP KSEAK1GRW34L   1094253404 N47261733W122183593               00359000050150      0000                                 047948808
 SUSAP KSEAK1GRW34L   2S                            00030N       L00359                                                     047968808
-SUSAP KSEAK1GRW34R   1119003404 N47255286W122182451              00343000064150 ISEA 0000                                  047978808
+SUSAP KSEAK1GRW34R   1119003404 N47255286W122182451               00343000064150ISEA  0000                                 047978808
 SUSAP KSEAK1GRW34R   2S                            00040N       L00343                                                     047998808
                                         Localizer/GlideSlope (PI) (With Simulation Continuations)
 SUSAP KSEAK1IISEA1   111030RW34RN47275488W1221823423380N47260403W1221818590464 11340331275E02206400352                     048008808
@@ -367,7 +366,7 @@ SUSAP KSEAK1IISEA1   2S    U  Y                    36000N                       
 SUSAP KSEAK1IISZI2   111170RW16RN47260944W1221836001580N47273932W1221841030799 11190395300E02205500421                     048028313
 SUSAP KSEAK1IISZI2   2S    U  N                    18000N                              140                                 048038313
                                         MLS (PL)
-SUSAP KSEAK1LMSZI1   1516  RW34RN47275430W1221823303380N47260400W1221819000460 1130040040040040120E022005500275335         048048808
+SUSAP KSEAK1LMSZI1   1516  RW34RN47275430W1221823303380N47260400W1221819000460 1130040040040040120E0220055002753350        048048808
 SUSAP KSEAK1LMSZI1   2     S  HEN47260940W1221836001580N47270510W1221838400460     0200200200201700Y3500V56                048058808
                                         Localizer Marker (PM)
 SUSAP KSEAK1MISEA MM 0     RW34RN47251830W1221824800004                                   E0220                            048068808
@@ -379,7 +378,7 @@ SUSAP KSEAK1MISZILOM 002810RW16RN47315720W1221820601803N47315720W122182060HOMW  
 SUSAP KSEAK1SDONDOK1PC            0 25180062270071360034                                                                   048118612
 SUSAP KSEAK1SPARKKK1PC            0 25180062360045                                                                         048128704
 SUSAP KSEAKISSEA KID              0 25180062360034                                                                         048138612
-                                        Airport Communications (PV)
+                                        Airport Communication (PV)
 SUSAP KSEAK1VAPP0011920 V0   RA N47265700W122182910E019900429Y070158B0400010000KSEAK1PA 00        SEATTLE                  048148810
 SUSAP KSEAK1VAPP0011950 V0L DRA N47265700W122182910E019900429Y261306           KSEAK1PA 00        SEATTLE                  048158811
 SUSAP KSEAK1VAT10012800 V0    A N47265700W122182910E019900429Y                          00                                 048168810
@@ -434,6 +433,6 @@ SUSAURK1W460A       00102                                                       
 SUSAURK1W460A       00200     G W47013000W127230000                                                                        064128807
 SUSAURK1W460A       00300     G N46080000W127000000                                                                        064138807
 SUSAURK1W460A       00400     GEN45500000W128270000                                                                        064148807
-                                        Gates (PB)
+                                        Gate (PB)
 TXYZP KSEAK1BABCDE   0          N47263000W122180600                                               CENTER CONCOURSE 8737-300064158813
 TXYZP KSEAK1BNORTH   0          N47274200W122180600                                               WORTH APRON NOSE IN-STAND064168813

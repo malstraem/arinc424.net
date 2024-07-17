@@ -1,5 +1,7 @@
 namespace Arinc424.Converters;
 
+using static System.Globalization.NumberStyles;
+
 /// <summary>
 /// Converter for <see cref="Frequency"/> since supplement 19.
 /// </summary>
@@ -13,7 +15,7 @@ internal abstract class FrequencyConverterV19 : IStringConverter<Frequency>
 
         var sub = @string[0..7];
 
-        if (float.TryParse(sub, out float value))
+        if (float.TryParse(sub, None, null, out float value))
             transmit = value;
         else if (sub.IsWhiteSpace())
             transmit = null;
@@ -22,7 +24,7 @@ internal abstract class FrequencyConverterV19 : IStringConverter<Frequency>
 
         sub = @string[7..14];
 
-        if (float.TryParse(sub, out value))
+        if (float.TryParse(sub, None, null, out value))
             receive = value;
         else if (sub.IsWhiteSpace())
             receive = null;
@@ -48,7 +50,7 @@ internal abstract class FrequencyConverter : IStringConverter<Frequency>
 
         var sub = @string[0..7];
 
-        if (!float.TryParse(sub, out float value))
+        if (!float.TryParse(sub, None, null, out float value))
             return sub.IsWhiteSpace() ? new Frequency() : $"Frequency '{sub}' can't be parsed.";
 
         char guard = @string[7];
