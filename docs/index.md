@@ -32,30 +32,30 @@ In practice, this allows you to explore and manipulate the tree-like representat
 
 # [Heliport](#tab/heliport)
 - [Pads](api/Arinc424.Ports.Heliport.yml) 🚧
-- [Terminal Waypoints](api/Arinc424.Waypoints.HeliportTerminalWaypoint.yml)
-- [SID](api/Arinc424.Procedures.HeliportDeparture.yml)/[STAR](api/Arinc424.Procedures.HeliportArrival.yml)/[Approach](api/Arinc424.Procedures.HeliportApproach.yml)
-- [TAA](api/Arinc424.Ports.HeliportArrivalAltitude.yml)
-- [MSA](api/Arinc424.Ports.HeliportMinimumAltitude.yml)
-- [SBAS Path Point](api/Arinc424.Ports.HelicopterSatellitePoint.yml) 🚧
-- [Communications](api/Arinc424.Comms.HeliportCommunication.yml)
+- [Terminal Waypoints](api/Arinc424.Waypoints.TerminalWaypoint.yml)
+- [SID](api/Arinc424.Procedures.Departure.yml)/[STAR](api/Arinc424.Procedures.Arrival.yml)/[Approach](api/Arinc424.Procedures.Approach.yml)
+- [TAA](api/Arinc424.Ports.ArrivalAltitude.yml)
+- [MSA](api/Arinc424.Ports.MinimumAltitude.yml)
+- [SBAS Path Point](api/Arinc424.Ports.SatellitePoint.yml) 🚧
+- [Communications](api/Arinc424.Comms.PortCommunication.yml)
 
 # [Airport](#tab/airport)
 - [Reference Points](api/Arinc424.Ports.Airport.yml)
 - [Gates](api/Arinc424.Ports.Gate.yml)
-- [Terminal Waypoints](api/Arinc424.Waypoints.AirportTerminalWaypoint.yml)
-- [SID](api/Arinc424.Procedures.AirportDeparture.yml)/[STAR](api/Arinc424.Procedures.AirportArrival.yml)/[Approach](api/Arinc424.Procedures.AirportApproach.yml)
+- [Terminal Waypoints](api/Arinc424.Waypoints.TerminalWaypoint.yml)
+- [SID](api/Arinc424.Procedures.Departure.yml)/[STAR](api/Arinc424.Procedures.Arrival.yml)/[Approach](api/Arinc424.Procedures.Approach.yml)
 - [Runways](api/Arinc424.Ports.Runway.yml)
 - [Localizer/Glide Slope](api/Arinc424.Navigation.InstrumentLanding.yml)
-- [TAA](api/Arinc424.Ports.AirportArrivalAltitude.yml)
+- [TAA](api/Arinc424.Ports.ArrivalAltitude.yml)
 - [MLS](api/Arinc424.Navigation.MicrowaveLanding.yml)
 - [Localizer Marker](api/Arinc424.Navigation.InstrumentMarker.yml)
 - [Terminal NDB](api/Arinc424.Navigation.TerminalBeacon.yml)
-- [SBAS Path Point](api/Arinc424.Ports.AirportSatellitePoint.yml)
-- [GBAS Path Point](api/Arinc424.Ports.GroundPoint.yml)
+- [SBAS Path Point](api/Arinc424.Ports.SatellitePoint.yml)
+- [GBAS Path Point](api/Arinc424.Ports.GroundPathPoint.yml)
 - [Flight Planning](api/Arinc424.Ports.FlightPlan.yml) 🚧
-- [MSA](api/Arinc424.Ports.AirportMinimumAltitude.yml)
+- [MSA](api/Arinc424.Ports.MinimumAltitude.yml)
 - [GLS Station](api/Arinc424.Navigation.GlobalLanding.yml)
-- [Communications](api/Arinc424.Comms.AirportCommunication.yml)
+- [Communications](api/Arinc424.Comms.PortCommunication.yml)
 
 # [Company Routes](#tab/company)
 - [Company Routes](api/Arinc424.Routing.CompanyRoute.yml) 🚧
