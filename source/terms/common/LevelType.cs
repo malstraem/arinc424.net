@@ -9,7 +9,16 @@ namespace Arinc424;
 public enum LevelType : byte
 {
     Unknown = 0,
+    /// <summary>
+    /// Low Level Airways/Altitudes.
+    /// </summary>
     [Map('L')] Low = 1,
+    /// <summary>
+    /// High Level Airways/Altitudes.
+    /// </summary>
     [Map('H')] High = 1 << 1,
+    /// <summary>
+    /// All Altitudes.
+    /// </summary>
     [Map('B')] All = Low | High
 }

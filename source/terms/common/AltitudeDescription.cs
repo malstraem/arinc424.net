@@ -5,6 +5,7 @@ namespace Arinc424;
 /// </summary>
 /// <remarks>See section 5.29.</remarks>
 [Char, Transform<AltitudeDescriptionConverter, AltitudeDescription>]
+[Description("Altitude Description (ALT DESC)")]
 public enum AltitudeDescription : byte
 {
     Unknown,
@@ -38,6 +39,11 @@ public enum AltitudeDescription : byte
     /// and Glide Slope Intercept Altitude (MSL) in second altitude of FAF Waypoint in Precision Approach Coding with electronic Glide Slope.
     /// </summary>
     [Map('G')] GlideSlope,
+    /// <summary>
+    /// At or above altitude specified in second Altitude field applicable until established inbound on the racetrack pattern.
+    /// Optional at or above altitude specified in first Altitude field applicable at the Fix.
+    /// </summary>
+    [Map('O')] AtAboveOptional,
     /// <summary>
     /// At altitude on the coded vertical angle in the second Altitude field
     /// and at or above altitude specified in first Altitude field on step-down fix waypoints.

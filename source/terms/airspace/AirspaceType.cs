@@ -30,6 +30,14 @@ public enum AirspaceType : byte
     /// </summary>
     [Map('T')] Bravo,
     /// <summary>
+    /// Radio Mandatory Zone (RMZ).
+    /// </summary>
+    [Map('U')] RadioMandatory,
+    /// <summary>
+    /// Radio Mandatory Zone (RMZ).
+    /// </summary>
+    [Map('V')] TransponderMandatory,
+    /// <summary>
     /// Control Zone, ICAO Designation (CTR).
     /// </summary>
     [Map('Z')] ControlZone

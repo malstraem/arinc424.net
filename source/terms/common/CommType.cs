@@ -5,6 +5,7 @@ namespace Arinc424;
 /// </summary>
 /// <remarks>See section 5.101.</remarks>
 [String, Decode<CommTypeConverter, CommType>]
+[Description("Communications Type (COMM TYPE)")]
 public enum CommType : byte
 {
     Unknown,
@@ -72,6 +73,9 @@ public enum CommType : byte
     /// Common Traffic Advisory Frequencies.
     /// </summary>
     [Map("CTF")] CommonTrafficAdvisory,
+    /// <summary>
+    /// Control.
+    /// </summary>
     [Map("CTL")] Control,
     /// <summary>
     /// Departure Control.
@@ -109,6 +113,9 @@ public enum CommType : byte
     /// Helicopter Frequency.
     /// </summary>
     [Map("HEL")] Helicopter,
+    /// <summary>
+    /// Information.
+    /// </summary>
     [Map("INF")] Information,
     /// <summary>
     /// Mandatory Broadcast Zone.
@@ -118,15 +125,33 @@ public enum CommType : byte
     /// Military Frequency.
     /// </summary>
     [Map("MIL")] Military,
+    /// <summary>
+    /// Multicom.
+    /// </summary>
     [Map("MUL")] Multicom,
+    /// <summary>
+    /// Operations.
+    /// </summary>
     [Map("OPS")] Operations,
+    /// <summary>
+    /// Pilot Activated Lighting.
+    /// </summary>
     [Map("PAL")] ActivatedLighting,
+    /// <summary>
+    /// Radio.
+    /// </summary>
     [Map("RDO")] Radio,
+    /// <summary>
+    /// Radar.
+    /// </summary>
     [Map("RDR")] Radar,
     /// <summary>
     /// Remote Flight Service Station (RFSS).
     /// </summary>
     [Map("RFS")] RemoteFlightService,
+    /// <summary>
+    /// Ramp/Taxi Control.
+    /// </summary>
     [Map("RMP")] RampTaxi,
     /// <summary>
     /// Airport Radar Service Area (ARSA).
@@ -140,6 +165,9 @@ public enum CommType : byte
     /// Terminal Control Area (TMA).
     /// </summary>
     [Map("TMA")] TerminalManeuveringArea,
+    /// <summary>
+    /// Terminal.
+    /// </summary>
     [Map("TML")] Terminal,
     /// <summary>
     /// Terminal Radar Service Area (TRSA).
@@ -157,6 +185,12 @@ public enum CommType : byte
     /// Upper Area Control.
     /// </summary>
     [Map("UAC")] UpperArea,
+    /// <summary>
+    /// Unicom.
+    /// </summary>
     [Map("UNI")] Unicom,
+    /// <summary>
+    /// Volmet.
+    /// </summary>
     [Map("VOL")] Volmet
 }

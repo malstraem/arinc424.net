@@ -28,13 +28,5 @@ public enum TimeCode : byte
     /// <summary>
     /// Active times are not specified in source documentation.
     /// </summary>
-    [Map('U')] Unspecified,
-    /// <summary>
-    /// Active times are provided in Time of Operation format and exclude holidays.
-    /// </summary>
-    [Map('S')] InOperationTimeWithoutHolidays,
-    /// <summary>
-    /// Active times are provided in Time of Operation format and include holidays.
-    /// </summary>
-    [Map('T')] InOperationTimeWithHolidays
+    [Map('U')] Unspecified
 }

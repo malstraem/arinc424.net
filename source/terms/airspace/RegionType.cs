@@ -5,6 +5,7 @@ namespace Arinc424.Airspace.Terms;
 /// </summary>
 /// <remarks>See section 5.117.</remarks>
 [Flags, Transform<RegionTypeConverter, RegionType>]
+[Description("FIR/UIR Indicator (IND)")]
 public enum RegionType : byte
 {
     Unknown = 0,

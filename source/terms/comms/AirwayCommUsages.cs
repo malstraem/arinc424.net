@@ -5,6 +5,7 @@ namespace Arinc424.Comms.Terms;
 /// </summary>
 /// <remarks>See section 5.106, Table 5-21.</remarks>
 [String, Flags, Decode<AirwayCommUsagesConverter, AirwayCommUsages>]
+[Description("Service Indicator (SERV IND) - Enroute")]
 public enum AirwayCommUsages : ushort
 {
     Unknown = 0,

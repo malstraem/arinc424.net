@@ -5,6 +5,7 @@ namespace Arinc424.Comms.Terms;
 /// </summary>
 /// <remarks>See section 5.283.</remarks>
 [String, Decode<CommClassConverter, CommClass>]
+[Description("Communications Class")]
 public enum CommClass : byte
 {
     Unknown,

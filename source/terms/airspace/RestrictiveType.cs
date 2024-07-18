@@ -12,6 +12,7 @@ public enum RestrictiveType : byte
     [Map('A')] Alert,
     [Map('C')] Caution,
     [Map('D')] Danger,
+    [Map('L')] LongTerm,
     [Map('M')] MilitaryOperations,
     [Map('N')] NationalSecurity,
     [Map('P')] Prohibited,

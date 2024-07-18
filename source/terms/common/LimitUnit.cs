@@ -10,5 +10,5 @@ public enum LimitUnit : byte
 {
     Unknown,
     [Map('M')] Sea,
-    [Map('G')] Ground
+    [Map('A')] Ground
 }

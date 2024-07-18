@@ -17,7 +17,7 @@ public enum FrequencyUnit : byte
     /// </summary>
     [Map('M')] Medium,
     /// <summary>
-    /// High Frequency (3000 kHz to 30,000 kHz).
+    /// High Frequency (2000 kHz to 30,000 kHz).
     /// </summary>
     [Map('H')] High,
     /// <summary>
