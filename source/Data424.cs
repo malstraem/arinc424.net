@@ -14,111 +14,160 @@ namespace Arinc424;
 /// </summary>
 public class Data424
 {
+    public static Data424 Create(IEnumerable<string> strings, Supplement supplement) => new Parser424(supplement).Parse(strings);
+
+    [Section('A', 'S')]
     public List<OffrouteAltitude> OffrouteAltitudes { get; set; } = [];
 
     #region Navaid
+    [Section('D', 'T')]
     public List<Tactical> Tacticals { get; set; } = [];
 
+    [Section('D', 'B')]
     public List<Nondirectional> Nondirectionals { get; set; } = [];
 
+    [Section('D')]
     public List<Omnidirectional> Omnidirectionals { get; set; } = [];
     #endregion
 
     #region Enroute
+    [Section('E', 'R')]
     public List<Airway> Airways { get; set; } = [];
 
+    [Section('E', 'A')]
+    public List<Waypoint> EnrouteWaypoints { get; set; } = [];
+
+    [Section('E', 'M')]
     public List<AirwayMarker> AirwayMarkers { get; set; } = [];
 
+    [Section('E', 'P')]
     public List<HoldingPattern> HoldingPatterns { get; set; } = [];
 
+    [Section('E', 'T')]
     public List<PreferredRoute> PreferredRoutes { get; set; } = [];
 
-    public List<EnrouteWaypoint> EnrouteWaypoints { get; set; } = [];
-
+    [Section('E', 'S')]
     public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
 
+    [Section('E', 'V')]
     public List<AirwayCommunication> AirwayCommunications { get; set; } = [];
     #endregion
 
     #region Heliport
+    [Section('H', 'A')]
     public List<Heliport> Heliports { get; set; } = [];
 
-    public List<HeliportArrival> HeliportArrivals { get; set; } = [];
+    [Section('H', 'E')]
+    public List<Arrival> HeliportArrivals { get; set; } = [];
 
-    public List<HeliportApproach> HeliportApproaches { get; set; } = [];
+    [Section('H', 'F')]
+    public List<Approach> HeliportApproaches { get; set; } = [];
 
-    public List<HeliportDeparture> HeliportDepartures { get; set; } = [];
+    [Section('H', 'D')]
+    public List<Departure> HeliportDepartures { get; set; } = [];
 
-    public List<HeliportCommunication> HeliportCommunications { get; set; } = [];
+    [Section('H', 'P')]
+    public List<SatellitePoint> HelicopterSatellitePoints { get; set; } = [];
 
-    public List<HeliportArrivalAltitude> HeliportArrivalAltitudes { get; set; } = [];
+    [Section('H', 'K')]
+    public List<ArrivalAltitude> HeliportArrivalAltitudes { get; set; } = [];
 
-    public List<HeliportMinimumAltitude> HeliportMinimumAltitudes { get; set; } = [];
+    [Section('H', 'S')]
+    public List<MinimumAltitude> HeliportMinimumAltitudes { get; set; } = [];
 
-    public List<HelicopterSatellitePoint> HelicopterSatellitePoints { get; set; } = [];
+    [Section('H', 'V')]
+    public List<PortCommunication> HeliportCommunications { get; set; } = [];
+
+    [Section('H', 'C')]
+    public List<TerminalWaypoint> HeliportTerminalWaypoints { get; set; } = [];
     #endregion
 
     #region Airport
+    [Section('P', 'B')]
     public List<Gate> Gates { get; set; } = [];
 
+    [Section('P', 'G')]
     public List<Runway> Runways { get; set; } = [];
 
+    [Section('P', 'A')]
     public List<Airport> Airports { get; set; } = [];
 
+    [Section('P', 'R')]
     public List<FlightPlan> FlightPlans { get; set; } = [];
 
-    public List<GroundPoint> GroundPoints { get; set; } = [];
+    [Section('P', 'E')]
+    public List<Arrival> AirportArrivals { get; set; } = [];
 
-    public List<TerminalBeacon> AirportBeacons { get; set; } = [];
+    [Section('P', 'F')]
+    public List<Approach> AirportApproaches { get; set; } = [];
 
-    public List<AirportArrival> AirportArrivals { get; set; } = [];
+    [Section('P', 'D')]
+    public List<Departure> AirportDepartures { get; set; } = [];
 
-    public List<AirportApproach> AirportApproaches { get; set; } = [];
+    [Section('P', 'N')]
+    public List<TerminalBeacon> TerminalBeacons { get; set; } = [];
 
-    public List<AirportDeparture> AirportDepartures { get; set; } = [];
+    [Section('P', 'Q')]
+    public List<GroundPathPoint> GroundPathPoints { get; set; } = [];
 
-    public List<AirportCommunication> AirportCommunications { get; set; } = [];
+    [Section('P', 'P')]
+    public List<SatellitePoint> AirportSatellitePoints { get; set; } = [];
 
-    public List<AirportSatellitePoint> AirportSatellitePoints { get; set; } = [];
+    [Section('P', 'V')]
+    public List<PortCommunication> AirportCommunications { get; set; } = [];
 
-    public List<AirportArrivalAltitude> AirportArrivalAltitudes { get; set; } = [];
+    [Section('P', 'K')]
+    public List<ArrivalAltitude> AirportArrivalAltitudes { get; set; } = [];
 
-    public List<AirportMinimumAltitude> AirportMinimumAltitudes { get; set; } = [];
+    [Section('P', 'S')]
+    public List<MinimumAltitude> AirportMinimumAltitudes { get; set; } = [];
 
-    public List<AirportTerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
+    [Section('P', 'C')]
+    public List<TerminalWaypoint> AirportTerminalWaypoints { get; set; } = [];
 
-    public List<GlobalLanding> GlobalLandingSystems { get; set; } = [];
+    [Section('P', 'T')]
+    public List<GlobalLanding> GlobalLandings { get; set; } = [];
 
-    public List<MicrowaveLanding> MicrowaveLandingSystems { get; set; } = [];
+    [Section('P', 'L')]
+    public List<MicrowaveLanding> MicrowaveLandings { get; set; } = [];
 
-    public List<InstrumentLanding> InstrumentLandingSystems { get; set; } = [];
+    [Section('P', 'I')]
+    public List<InstrumentLanding> InstrumentLandings { get; set; } = [];
 
-    public List<InstrumentMarker> InstrumentLandingMarkers { get; set; } = [];
+    [Section('P', 'M')]
+    public List<InstrumentMarker> InstrumentMarkers { get; set; } = [];
     #endregion
 
     #region Company Routes
+    [Section('R', 'A')]
     public List<Alternate> Alternates { get; set; } = [];
 
+    [Section('R')]
     public List<CompanyRoute> CompanyRoutes { get; set; } = [];
 
+    [Section('R', 'H')]
     public List<HelicopterCompanyRoute> HelicopterCompanyRoutes { get; set; } = [];
     #endregion
 
     #region Tables
+    [Section('T', 'C')]
     public List<CruiseTable> CruisingTables { get; set; } = [];
 
+    [Section('T', 'V')]
     public List<CommunicationType> CommunicationTypes { get; set; } = [];
 
+    [Section('T', 'G')]
     public List<GeographicalReference> GeographicalReferences { get; set; } = [];
     #endregion
 
     #region Airspace
+    [Section('U', 'F')]
     public List<FlightRegion> FlightRegions { get; set; } = [];
 
+    [Section('U', 'C')]
     public List<ControlledSpace> ControlledSpaces { get; set; } = [];
 
+    [Section('U', 'R')]
     public List<RestrictiveSpace> RestrictiveSpaces { get; set; } = [];
     #endregion
-
-    public static Data424 Create(IEnumerable<string> strings) => new Parser424().Parse(strings);
 }

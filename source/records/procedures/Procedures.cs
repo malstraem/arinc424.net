@@ -2,37 +2,21 @@ using Arinc424.Ports;
 
 namespace Arinc424.Procedures;
 
-public class AirportProcedure<TSequence, TSub> : Procedure<TSequence, TSub> where TSequence : ProcedureSequence<TSub> where TSub : ProcedurePoint
-{
-    [Identifier(7, 10)]
-    public Airport Airport { get; set; }
-}
+[Section('P', 'E', subsectionIndex: 13)]
+[Section('H', 'E', subsectionIndex: 13)]
+public class Arrival : Procedure<ArrivalSequence, ArrivalPoint>;
 
-public class AirportArrival : AirportProcedure<AirportArrivalSequence, ArrivalPoint>;
-
-public class AirportApproach : AirportProcedure<AirportApproachSequence, ApproachPoint>
+[Section('P', 'F', subsectionIndex: 13)]
+[Section('H', 'F', subsectionIndex: 13)]
+public class Approach : Procedure<ApproachSequence, ApproachPoint>
 {
     [One]
-    public GroundPoint? GroundPoint { get; set; }
+    public PathPoint? GroundPathPoint { get; set; }
 
     [One]
-    public AirportSatellitePoint? SatellitePoint { get; set; }
+    public SatellitePoint? SatellitePoint { get; set; }
 }
 
-public class AirportDeparture : AirportProcedure<AirportDepartureSequence, DeparturePoint>;
-
-public class HeliportProcedure<TSequence, TSub> : Procedure<TSequence, TSub> where TSequence : ProcedureSequence<TSub> where TSub : ProcedurePoint
-{
-    [Identifier(7, 10)]
-    public Heliport Heliport { get; set; }
-}
-
-public class HeliportArrival : HeliportProcedure<HeliportArrivalSequence, ArrivalPoint>;
-
-public class HeliportApproach : HeliportProcedure<HeliportApproachSequence, ApproachPoint>
-{
-    [One]
-    public HelicopterSatellitePoint? SatellitePoint { get; set; }
-}
-
-public class HeliportDeparture : HeliportProcedure<HeliportDepartureSequence, DeparturePoint>;
+[Section('P', 'D', subsectionIndex: 13)]
+[Section('H', 'D', subsectionIndex: 13)]
+public class Departure : Procedure<DepartureSequence, DeparturePoint>;

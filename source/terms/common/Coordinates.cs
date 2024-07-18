@@ -7,7 +7,7 @@ namespace Arinc424;
 /// </summary>
 /// <remarks>See section 5.36, 5.37, 5.267, 5.268.</remarks>
 [Decode<CoordinatesConverter, Coordinates>]
-[Decode<HighPrecisionCoordinatesConverter, Coordinates, AirportSatellitePoint>]
+[Decode<HighPrecisionCoordinatesConverter, Coordinates, PathPoint>]
 [DebuggerDisplay($"{{{nameof(Latitude)}}}, {{{nameof(Longitude)}}}")]
 public readonly struct Coordinates(double latitude, double longitude)
 {

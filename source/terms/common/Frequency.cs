@@ -5,6 +5,7 @@ namespace Arinc424;
 /// </summary>
 /// <remarks>See section 5.103.</remarks>
 [Decode<FrequencyConverter, Frequency>]
+[Decode<FrequencyConverterV19, Frequency>(Supplement.V19)]
 [DebuggerDisplay($"{nameof(Receive)} - {{{nameof(Receive)}}}, {nameof(Transmit)} - {{{nameof(Transmit)}}}, {{{nameof(Unit)}}}")]
 public readonly struct Frequency(FrequencyUnit unit, float? transmit, float? receive)
 {

@@ -13,7 +13,7 @@ public class AirwayPoint : Record424
 {
     [Type(37, 38)]
     [Identifier(30, 34), Icao(35, 36)]
-    public Geo Fix { get; set; }
+    public Fix Fix { get; set; }
 
     /// <inheritdoc cref="WaypointDescriptions"/>
     [Field(40, 43)]
@@ -50,8 +50,8 @@ public class AirwayPoint : Record424
     public Omnidirectional? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(57, 59), NavigationPerformance]
-    public float NavigationPerformance { get; set; }
+    [Field(57, 59), Performance]
+    public float Performance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Theta']/*"/>
     [Field(63, 66), Float(10)]

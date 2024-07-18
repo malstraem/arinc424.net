@@ -25,3 +25,13 @@ internal abstract class AltitudeConverter : IStringConverter<Altitude>
             : $"Altitude '{@string}' is defined as feet, but can't be parsed as an integer."
     };
 }
+
+/// <summary>
+/// Converter for <see cref="Comms.Transmitter.Altitude"/> and <see cref="Comms.Transmitter.Altitude2"/> since supplement 19.
+/// </summary>
+internal abstract class CommAltitudeConverter : IStringConverter<Altitude>
+{
+    public static Result<Altitude> Convert(ReadOnlySpan<char> @string) => int.TryParse(@string, out int value)
+        ? new Altitude(value * 100, AltitudeUnit.Feet)
+        : $"Altitude '{@string}' is defined as feet, but can't be parsed as an integer.";
+}

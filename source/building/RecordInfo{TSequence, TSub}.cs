@@ -1,17 +1,14 @@
-using System.Reflection;
-
-using Arinc424.Building;
 using Arinc424.Diagnostics;
 
-namespace Arinc424.Attributes;
+namespace Arinc424.Building;
 
-internal sealed class SequenceAttribute<TSequence, TSub>() : RecordAttribute<TSequence>
+internal sealed class RecordInfo<TSequence, TSub>(Supplement supplement, Range sequenceRange) : RecordInfo<TSequence>(supplement)
     where TSequence : Record424<TSub>, new()
     where TSub : Record424, new()
 {
-    private readonly BuildInfo<TSub> subInfo = new();
+    private readonly BuildInfo<TSub> subInfo = new(supplement);
 
-    private readonly Range range = typeof(TSequence).GetCustomAttribute<SequencedAttribute>()!.Range;
+    private readonly Range sequenceRange = sequenceRange;
 
     [Obsolete("todo: sequence number try parsing")]
     internal override IEnumerable<Build> Build(Queue<string> strings)
@@ -25,9 +22,9 @@ internal sealed class SequenceAttribute<TSequence, TSub>() : RecordAttribute<TSe
         {
             sequence.Enqueue(@string);
 
-            int number = int.Parse(@string[range]);
+            int number = int.Parse(@string[sequenceRange]);
 
-            if (!strings.TryPeek(out @string) || int.Parse(@string[range]) <= number)
+            if (!strings.TryPeek(out @string) || int.Parse(@string[sequenceRange]) <= number)
             {
                 var build = new Build<TSequence, TSub>(RecordBuilder<TSequence, TSub>.Build(sequence, info, subInfo, diagnostics));
 

@@ -5,8 +5,8 @@ namespace Arinc424.Bench;
 [SimpleJob]
 public class LoadBench
 {
-    private readonly string[] world = File.ReadAllLines("data/unknown");
+    private readonly string[] data = File.ReadAllLines("data/unknown");
 
     [Benchmark]
-    public Data424 LoadWorld() => Data424.Create(world);
+    public Data424 LoadWorld() => Data424.Create(data, Supplement.V18);
 }

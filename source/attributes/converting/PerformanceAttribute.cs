@@ -1,6 +1,10 @@
 namespace Arinc424.Attributes;
 
-internal sealed class NavigationPerformanceAttribute : DecodeAttribute<float>
+/// <summary>
+/// Specifies that property value is a <c>Required Navigation Performance</c> and will be parsed.
+/// </summary>
+/// <remarks>See section 5.211.</remarks>
+internal sealed class PerformanceAttribute : DecodeAttribute<float>
 {
     [Obsolete("todo: try parse")]
     internal override Result<float> Convert(ReadOnlySpan<char> @string)

@@ -43,10 +43,10 @@ internal abstract class HelipadConcatenater : IProcessor<Heliport, Heliport>
         static Helipad GetPad(Heliport port) => new Helipad
         {
             Source = port.Source,
-            AreaCode = port.AreaCode,
+            Code = port.Code,
             IcaoCode = port.IcaoCode,
             Identifier = port.Source![16..20].Trim(), //it's Helipad identifer range before supplement 21.
-            RecordNumber = port.RecordNumber,
+            Number = port.Number,
             Heliport = port
         };
     }

@@ -2,6 +2,8 @@ using Arinc424.Ports.Terms;
 
 namespace Arinc424.Converters;
 
+using static System.Globalization.NumberStyles;
+
 internal abstract class ThresholdHeightConverter : IStringConverter<ThresholdHeight>
 {
     public static Result<ThresholdHeight> Convert(ReadOnlySpan<char> @string)
@@ -12,7 +14,7 @@ internal abstract class ThresholdHeightConverter : IStringConverter<ThresholdHei
 
         var height = @string[..6];
 
-        if (!float.TryParse(height, out float value))
+        if (!float.TryParse(height, None, null, out float value))
             problem = $"Height '{height}' can't be parsed as float.";
 
         char @char = @string[6];

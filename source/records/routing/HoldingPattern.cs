@@ -20,7 +20,7 @@ public class HoldingPattern : Record424, IIcao, INamed
 
     [Type(37, 38)]
     [Identifier(30, 34), Icao(35, 36)]
-    public Geo Fix { get; set; }
+    public Fix Fix { get; set; }
 
     /// <summary>
     /// <c>Inbound Holding Course (IB HOLD CRS)</c> field.
@@ -66,8 +66,8 @@ public class HoldingPattern : Record424, IIcao, INamed
     public int Speed { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
-    [Field(63, 65), NavigationPerformance]
-    public float NavigationPerformance { get; set; }
+    [Field(63, 65), Performance]
+    public float Performance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
     [Field(66, 71), Float(1000)]

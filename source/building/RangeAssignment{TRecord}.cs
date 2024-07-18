@@ -1,14 +1,12 @@
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 using Arinc424.Diagnostics;
 
 namespace Arinc424.Building;
 
 [DebuggerDisplay($"{{{nameof(Property)}}} - {{{nameof(range)}}}")]
-internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Regex? regex, Range range)
-    : Assignment<TRecord>(property, regex) where TRecord : Record424
+internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range range) : Assignment<TRecord>(property) where TRecord : Record424
 {
     protected readonly Range range = range;
 
@@ -30,8 +28,8 @@ internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Regex? r
     }
 }
 
-internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Regex? regex, Range range, DecodeAttribute<TType> decode, bool isValueNullable)
-    : RangeAssignment<TRecord>(property, regex, range)
+internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Range range, DecodeAttribute<TType> decode, bool isValueNullable)
+    : RangeAssignment<TRecord>(property, range)
         where TType : notnull
         where TRecord : Record424
 {
@@ -57,14 +55,14 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Re
         var result = decode.Convert(@field);
 
         if (result.Invalid)
-            diagnostics.Enqueue(new ValueDiagnostic(record, result.Problem!, range));
+            diagnostics.Enqueue(new ValueDiagnostic(record, Property, result.Problem!, range));
         else
             set(record, result.Value);
     }
 }
 
-internal sealed class StringAssignment<TRecord>(PropertyInfo property, Regex? regex, Range range)
-    : RangeAssignment<TRecord>(property, regex, range) where TRecord : Record424
+internal sealed class StringAssignment<TRecord>(PropertyInfo property, Range range) : RangeAssignment<TRecord>(property, range)
+    where TRecord : Record424
 {
     private readonly Action<TRecord, string> set = GetCompiledSetter<string>(property, false);
 

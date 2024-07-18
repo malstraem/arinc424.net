@@ -1,7 +1,10 @@
+using Arinc424.Processing;
+
 namespace Arinc424.Procedures;
 
-[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Type)} - {{{nameof(Type)}}}, {nameof(Transition)} - {{{nameof(Transition)},nq}}")]
-public abstract class ArrivalSequence : ProcedureSequence<ArrivalPoint>
+[Process<Arrival, ArrivalSequence,
+    ProcedureConcatenater<Arrival, ArrivalSequence, ArrivalPoint>>] // any more elegant way?
+public class ArrivalSequence : ProcedureSequence<ArrivalPoint>
 {
     /// <inheritdoc cref="Terms.ArrivalType"/>
     [Character(20)]

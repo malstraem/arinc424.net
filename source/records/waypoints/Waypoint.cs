@@ -6,9 +6,10 @@ using Terms;
 /// <c>Waypoint</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.4.1.</remarks>
+[Section('E', 'A')]
 [Identifier(14, 18), Icao(20, 21), Continuous]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public abstract class Waypoint : Fix, IIcao, INamed
+public class Waypoint : Fix, IIcao, INamed
 {
     [Field(20, 21)]
     public string IcaoCode { get; set; }
@@ -22,7 +23,7 @@ public abstract class Waypoint : Fix, IIcao, INamed
     public WaypointUsages Usages { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MagneticVariation']/*"/>
-    [Field(75, 79), MagneticVariation]
+    [Field(75, 79), Variation]
     public float Variation { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Datum']/*"/>

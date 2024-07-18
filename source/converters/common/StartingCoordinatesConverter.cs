@@ -1,5 +1,7 @@
 namespace Arinc424.Converters;
 
+using static System.Globalization.NumberStyles;
+
 /// <summary>
 /// See section 5.141 and 5.142.
 /// </summary>
@@ -9,7 +11,7 @@ internal abstract class StartingCoordinatesConverter : IStringConverter<Coordina
     {
         string? problem = null;
 
-        if (!double.TryParse(@string[1..3], out double latitude))
+        if (!double.TryParse(@string[1..3], None, null, out double latitude))
             problem += $"Latitude '{@string[0..3]}' can't be parsed.";
 
         char sign = @string[0];
@@ -19,7 +21,7 @@ internal abstract class StartingCoordinatesConverter : IStringConverter<Coordina
         else if (sign is not 'N')
             problem += $"Latitude sign '{sign}' is not valid.";
 
-        if (!double.TryParse(@string[4..7], out double longitude))
+        if (!double.TryParse(@string[4..7], None, null, out double longitude))
             problem += $"Longitude '{@string[4..7]}' can't be parsed.";
 
         sign = @string[3];

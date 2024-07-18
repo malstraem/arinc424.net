@@ -14,32 +14,33 @@ internal class Unique
     internal readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
     [Obsolete("todo: diagnostics")]
-    private void ProcessPrimaryKey(Build build, Type type, Primary primaryKey)
+    private void ProcessPrimaryKey(Build build, RecordInfo info)
     {
         var record = build.Record;
 
-        if (!primaryKey.TryGetKey(record.Source, out string? key))
+        if (!info.Primary!.TryGetKey(record.Source, out string? key))
         {
             Debug.WriteLine("oops");
             return;
         }
 
-        if (unique[type].TryAdd(key, record))
+        if (unique[info.Type].TryAdd(key, record))
             return;
 
         build.Diagnostics ??= [];
-        build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, type, key));
+        build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, info.Type, key));
         Debug.WriteLine(build.Diagnostics.Last());
     }
 
-    internal Unique(IEnumerable<InfoAttribute> attributes, IDictionary<Type, IEnumerable<Build>> builds)
+    internal Unique(IEnumerable<RecordInfo> info, IDictionary<Section, IEnumerable<Build>> builds)
     {
-        foreach (var attribute in attributes.Where(x => x.Primary is not null))
+        foreach (var attribute in info.Where(x => x.Primary is not null))
         {
-            unique[attribute.Type] = [];
+            if (!unique.ContainsKey(attribute.Type))
+                unique[attribute.Type] = [];
 
-            foreach (var build in builds[attribute.Type])
-                ProcessPrimaryKey(build, attribute.Type, attribute.Primary!);
+            foreach (var build in builds[attribute.Section])
+                ProcessPrimaryKey(build, attribute);
         };
     }
 

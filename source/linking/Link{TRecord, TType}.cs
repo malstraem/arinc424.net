@@ -5,30 +5,85 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Linking;
 
-internal abstract class Link<TRecord>(TypeAttribute? typeAttribute)
+internal abstract class Link<TRecord> where TRecord : Record424
 {
-    protected Type type = typeof(TRecord);
-
-    protected (int Section, int Subsection)? indexes = typeAttribute is null ? null
-        : (typeAttribute.SectionIndex, typeAttribute.SubsectionIndex);
-
-    internal abstract bool TryLink(TRecord record, Unique unique, Meta424 meta, out Diagnostic? diagnostic);
+    internal abstract bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic);
 }
 
-internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo property, TypeAttribute? typeAttribute) : Link<TRecord>(typeAttribute)
+internal class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo property, TypeAttribute? typeAttribute) : Link<TRecord>
     where TRecord : Record424
     where TType : class
 {
-    private readonly Foreign<TType> foreign = new(ranges);
+    protected readonly Foreign<TType> foreign = new(ranges);
 
-    private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+    protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+
+    private (int Section, int Subsection)? indexes = typeAttribute is null ? null
+        : (typeAttribute.SectionIndex, typeAttribute.SubsectionIndex);
+
+    private bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type, Section)? reference, out Diagnostic? diagnostic)
+    {
+        string key;
+
+        reference = null;
+        diagnostic = null;
+
+        var type = property.PropertyType;
+
+        string @string = record.Source!;
+
+        if (indexes is null)
+        {
+            var info = meta.TypeInfo[type];
+
+            if (foreign.TryGetKey(@string, info.Primary! /*garantee by design*/, out key))
+            {
+                reference = (key, type, info.Section);
+                return true;
+            }
+            return false;
+        }
+
+        var (index, subindex) = indexes.Value;
+
+        char sectionChar = @string[index];
+        char subsectionChar = @string[subindex];
+
+        Section section = new(sectionChar, subsectionChar);
+
+        if (char.IsWhiteSpace(sectionChar) && char.IsWhiteSpace(subsectionChar))
+            return false;
+
+        if (!meta.Types.TryGetValue(section, out type))
+        {
+            diagnostic = new LinkDiagnostic(record, $"Section '{sectionChar}, {subsectionChar}' does not exist.", foreign.Ranges, indexes);
+            Debug.WriteLine(diagnostic);
+            return false;
+        }
+
+        var primary = meta.TypeInfo[type].Primary;
+
+        if (primary is null)
+        {
+            diagnostic = new LinkDiagnostic(record, $"Record type '{type}' does not have unique key.", foreign.Ranges, indexes);
+            Debug.WriteLine(diagnostic);
+            return false;
+        }
+
+        if (foreign.TryGetKey(@string, primary, out key))
+        {
+            reference = (key, type, section);
+            return true;
+        }
+        return false;
+    }
 
     internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
         if (!TryGetReference(record, meta, out var reference, out diagnostic))
             return diagnostic is null;
 
-        (string key, var type) = reference.Value;
+        (string key, var type, var section) = reference.Value;
 
         if (!unique.TryGetRecords(type, out var records))
         {
@@ -68,58 +123,5 @@ internal sealed class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo proper
             property.SetValue(referenced, record);
         }
         return true;
-    }
-
-    internal bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type)? reference, out Diagnostic? diagnostic)
-    {
-        string key;
-
-        reference = null;
-        diagnostic = null;
-
-        var type = property.PropertyType;
-
-        string @string = record.Source!;
-
-        if (indexes is null)
-        {
-            if (foreign.TryGetKey(@string, meta.TypeInfo[type].Primary! /*garantee by design*/, out key))
-            {
-                reference = (key, type);
-                return true;
-            }
-            return false;
-        }
-
-        var (index, subindex) = indexes.Value;
-
-        char section = @string[index];
-        char subsection = @string[subindex];
-
-        if (char.IsWhiteSpace(section) && char.IsWhiteSpace(subsection))
-            return false;
-
-        if (!meta.Types.TryGetValue((section, subsection), out type))
-        {
-            diagnostic = new LinkDiagnostic(record, $"Section '{section}, {subsection}' does not exist.", foreign.Ranges, indexes);
-            Debug.WriteLine(diagnostic);
-            return false;
-        }
-
-        var primary = meta.TypeInfo[type].Primary;
-
-        if (primary is null)
-        {
-            diagnostic = new LinkDiagnostic(record, $"Record type '{type} does not have unique key.", foreign.Ranges, indexes);
-            Debug.WriteLine(diagnostic);
-            return false;
-        }
-
-        if (foreign.TryGetKey(@string, primary, out key))
-        {
-            reference = (key, type);
-            return true;
-        }
-        return false;
     }
 }

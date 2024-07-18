@@ -6,7 +6,6 @@ namespace Arinc424.Airspace;
 /// <c>Restrictive Airspace</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.18.1.</remarks>
-[Section('U', 'R')]
 [Process<RestrictiveSpace, RestrictiveVolume, RestrictiveSpaceConcatenater>]
 [DebuggerDisplay($"{{{nameof(IcaoCode)},nq}}, {{{nameof(Designation)},nq}}")]
 public class RestrictiveVolume : Volume

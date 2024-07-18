@@ -3,6 +3,7 @@ using System.Reflection;
 
 using Arinc424;
 using Arinc424.Airspace;
+using Arinc424.Building;
 using Arinc424.Comms;
 using Arinc424.Navigation;
 using Arinc424.Ports;
@@ -22,52 +23,42 @@ Record<Omnidirectional>,
 #endregion
 
 #region Enroute
+Record<Waypoint>,
 Record<AirwayMarker>,
 Record<PreferredRoute>,
 Record<HoldingPattern>,
-Record<EnrouteWaypoint>,
 Record<SpecialActivityArea>,
 
 Sequence<Airway, AirwayPoint>,
 Sequence<AirwayCommunication, AirwayTransmitter>,
 #endregion
 
-#region Heliport
-Record<Heliport>,
-Record<HeliportArrivalAltitude>,
-Record<HeliportMinimumAltitude>,
-Record<HeliportTerminalWaypoint>,
-Record<HelicopterSatellitePoint>,
-
-Sequence<HeliportCommunication, PortTransmitter>,
-
-Sequence<HeliportArrivalSequence, ArrivalPoint>,
-Sequence<HeliportApproachSequence, ApproachPoint>,
-Sequence<HeliportDepartureSequence, DeparturePoint>,
-#endregion
-
-#region Airport
+#region Airport and Heliport
 Record<Gate>,
 Record<Runway>,
 Record<Airport>,
 Record<FlightPlan>,
-Record<GroundPoint>,
-Record<AirportSatellitePoint>,
-Record<AirportArrivalAltitude>,
-Record<AirportMinimumAltitude>,
-Record<AirportTerminalWaypoint>,
+Record<SatellitePoint>,
+Record<GroundPathPoint>,
+Record<ArrivalAltitude>,
+Record<MinimumAltitude>,
+Record<TerminalWaypoint>,
 
 Record<TerminalBeacon>,
+
 Record<GlobalLanding>,
 Record<MicrowaveLanding>,
 Record<InstrumentLanding>,
+
 Record<InstrumentMarker>,
 
-Sequence<AirportCommunication, PortTransmitter>,
+Sequence<PortCommunication, PortTransmitter>,
 
-Sequence<AirportArrivalSequence, ArrivalPoint>,
-Sequence<AirportApproachSequence, ApproachPoint>,
-Sequence<AirportDepartureSequence, DeparturePoint>,
+Sequence<ArrivalSequence, ArrivalPoint>,
+Sequence<ApproachSequence, ApproachPoint>,
+Sequence<DepartureSequence, DeparturePoint>,
+
+Record<Heliport>,
 #endregion
 
 #region Company Routes
@@ -87,7 +78,7 @@ Sequence<CruiseTable, CruiseRow>,
 Sequence<RegionVolume, RegionPoint>,
 Sequence<ControlledVolume, BoundaryPoint>,
 Sequence<RestrictiveVolume, BoundaryPoint>,
-#endregion 
+#endregion
 ]
 #endregion
 
@@ -96,23 +87,29 @@ namespace Arinc424;
 internal class Meta424
 {
     [Obsolete("todo: supplement versioning (v18 - v23)")]
-    internal Meta424()
+    internal Meta424(Supplement supplement)
     {
-        Dictionary<(char, char), Type> types = [];
-        Dictionary<Type, InfoAttribute> typeInfo = [];
+        var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
+
+        Info = attributes.SelectMany(x => x.GetInfo(supplement)).ToArray();
+
+        Dictionary<Section, Type> types = [];
+        Dictionary<Type, RecordInfo> typeInfo = [];
 
         foreach (var info in Info)
         {
             types.Add(info.Section, info.Type);
-            typeInfo.Add(info.Type, info);
+
+            // types with multiple sections will be stored once
+            _ = typeInfo.TryAdd(info.Type, info);
         }
         Types = types.ToFrozenDictionary();
         TypeInfo = typeInfo.ToFrozenDictionary();
     }
 
-    internal FrozenDictionary<(char, char), Type> Types { get; }
+    internal FrozenDictionary<Section, Type> Types { get; }
 
-    internal FrozenDictionary<Type, InfoAttribute> TypeInfo { get; }
+    internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; }
 
-    internal IEnumerable<InfoAttribute> Info { get; } = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
+    internal RecordInfo[] Info { get; }
 }

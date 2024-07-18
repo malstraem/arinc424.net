@@ -1,74 +1,63 @@
 using System.Reflection;
-using System.Text.RegularExpressions;
 
 namespace Arinc424.Building;
 
 internal class BuildInfo<TRecord> where TRecord : Record424
 {
-    private static IndexAssignment<TRecord> GetIndexAssignment(PropertyInfo property, Regex? regex, int index)
+    private static IndexAssignment<TRecord> GetIndexAssignment(PropertyInfo property, Supplement supplement, int index)
     {
         // prefer transform attached to the property
-        var transform = property.GetCustomAttribute<TransformAttribute>() ?? property.PropertyType.GetCustomAttribute<TransformAttribute>();
+        if (!property.TryAttribute<TRecord, TransformAttribute>(supplement, out var transform))
+            _ = property.PropertyType.TryAttribute<TRecord, TransformAttribute>(supplement, out transform);
 
         return transform is not null
             ? (IndexAssignment<TRecord>)
                 Activator.CreateInstance(typeof(TransformAssignment<,>)
-                    .MakeGenericType(typeof(TRecord), property.PropertyType), property, regex, index, transform)!
+                    .MakeGenericType(typeof(TRecord), property.PropertyType), property, index, transform)!
 
-            : new CharAssignment<TRecord>(property, regex, index)!;
+            : new CharAssignment<TRecord>(property, index)!;
     }
 
-    private static RangeAssignment<TRecord> GetRangeAssignment(PropertyInfo property, Regex? regex, Range range)
+    private static RangeAssignment<TRecord> GetRangeAssignment(PropertyInfo property, Supplement supplement, Range range)
     {
         var (type, isValueNullable) = property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
             ? (property.PropertyType.GetGenericArguments().First(), true) // look inside Nullable<T> if that's the case
             : (property.PropertyType, false);
 
         // prefer decode attached to the property
-        var decodes = property.GetCustomAttributes<DecodeAttribute>();
-
-        if (!decodes.Any())
-            decodes = type.IsArray ? type.GetElementType()!.GetCustomAttributes<DecodeAttribute>() : type.GetCustomAttributes<DecodeAttribute>();
-
-        var decode = decodes.FirstOrDefault();
-
-        foreach (var attribute in decodes)
+        if (!property.TryAttribute<TRecord, DecodeAttribute>(supplement, out var decode))
         {
-            if (attribute.IsMatch<TRecord>())
-            {
-                decode = attribute;
-                break;
-            }
+            var propType = type.IsArray ? type.GetElementType()! : type;
+
+            _ = propType.TryAttribute<TRecord, DecodeAttribute>(supplement, out decode);
         }
 
         return decode is not null
             ? type.IsArray
                 ? (RangeAssignment<TRecord>)
                     Activator.CreateInstance(typeof(ArrayAssignment<,>)
-                        .MakeGenericType(typeof(TRecord), type.GetElementType()!), property, regex, range, decode, property.GetCustomAttribute<CountAttribute>()!.Count)!
+                        .MakeGenericType(typeof(TRecord), type.GetElementType()!), property, range, decode, property.GetCustomAttribute<CountAttribute>()!.Count)!
 
                 : (RangeAssignment<TRecord>)
                     Activator.CreateInstance(typeof(DecodeAssignment<,>)
-                        .MakeGenericType(typeof(TRecord), type), property, regex, range, decode, isValueNullable)!
+                        .MakeGenericType(typeof(TRecord), type), property, range, decode, isValueNullable)!
 
-            : new StringAssignment<TRecord>(property, regex, range);
+            : new StringAssignment<TRecord>(property, range);
     }
 
-    internal BuildInfo()
+    internal BuildInfo(Supplement supplement)
     {
         List<Assignment<TRecord>> assignments = [];
 
         foreach (var property in typeof(TRecord).GetProperties())
         {
-            var regex = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
-
-            if (property.TryCharacterAttribute<TRecord>(out var characterAttribute))
+            if (property.TryAttribute<TRecord, CharacterAttribute>(supplement, out var character))
             {
-                assignments.Add(GetIndexAssignment(property, regex, characterAttribute.Index));
+                assignments.Add(GetIndexAssignment(property, supplement, character.Index));
             }
-            else if (property.TryFieldAttribute<TRecord>(out var fieldAttribute))
+            else if (property.TryAttribute<TRecord, FieldAttribute>(supplement, out var field))
             {
-                assignments.Add(GetRangeAssignment(property, regex, fieldAttribute.Range));
+                assignments.Add(GetRangeAssignment(property, supplement, field.Range));
             }
         }
         Assignments = [.. assignments];

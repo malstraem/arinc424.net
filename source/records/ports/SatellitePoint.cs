@@ -2,9 +2,18 @@ using Arinc424.Ports.Terms;
 
 namespace Arinc424.Ports;
 
-[Continuous(27)]
-public abstract class SatellitePoint : PathPoint
+/// <summary>
+/// <c>SBAS Path Point</c> primary record.
+/// </summary>
+/// <remarks>See section 4.1.28.1 and 4.2.8.1.</remarks>
+[Section('P', 'P', subsectionIndex: 13)]
+[Section('H', 'P', subsectionIndex: 13)]
+public class SatellitePoint : PathPoint
 {
+    /// <inheritdoc cref="SatelliteOperationType"/>
+    [Field(25, 26)]
+    public SatelliteOperationType OperationType { get; set; }
+
     /// <inheritdoc cref="SatelliteService"/>
     [Field(29, 30)]
     public SatelliteService Service { get; set; }

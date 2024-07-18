@@ -1,10 +1,6 @@
 using Arinc424.Navigation;
-using Arinc424.Procedures;
-using Arinc424.Waypoints;
 
 namespace Arinc424.Ports;
-
-using Arinc424.Comms;
 
 using Terms;
 
@@ -40,58 +36,10 @@ public class Airport : Port
     public List<Runway>? Runways { get; set; }
 
     /// <summary>
-    /// Associated GBAS points.
-    /// </summary>
-    [Many]
-    public List<GroundPoint>? GroundPoints { get; set; }
-
-    /// <summary>
-    /// Associated SBAS points.
-    /// </summary>
-    [Many]
-    public List<AirportSatellitePoint>? SattelitePoints { get; set; }
-
-    /// <summary>
-    /// Associated GLS's.
-    /// </summary>
-    [Many]
-    public List<GlobalLanding>? GlobalLandingSystems { get; set; }
-
-    /// <summary>
-    /// Associated MLS's.
-    /// </summary>
-    [Many]
-    public List<MicrowaveLanding>? MicrowaveLandingSystems { get; set; }
-
-    /// <summary>
-    /// Associated ILS's.
-    /// </summary>
-    [Many]
-    public List<InstrumentLanding>? InstrumentLandingSystems { get; set; }
-
-    /// <summary>
     /// Associated Localizer Markers.
     /// </summary>
     [Many]
     public List<InstrumentMarker>? Markers { get; set; }
-
-    /// <summary>
-    /// Associated Approach Procedures.
-    /// </summary>
-    [Many]
-    public List<AirportApproach>? Approaches { get; set; }
-
-    /// <summary>
-    /// Associated STARs.
-    /// </summary>
-    [Many]
-    public List<AirportArrival>? Arrivals { get; set; }
-
-    /// <summary>
-    /// Associated SIDs.
-    /// </summary>
-    [Many]
-    public List<AirportDeparture>? Departures { get; set; }
 
     /// <summary>
     /// Associated NDBs.
@@ -100,29 +48,20 @@ public class Airport : Port
     public List<TerminalBeacon>? Beacons { get; set; }
 
     /// <summary>
+    /// Associated MLS's.
+    /// </summary>
+    [Many]
+    public List<MicrowaveLanding>? MicrowaveLandings { get; set; }
+
+    /// <summary>
+    /// Associated ILS's.
+    /// </summary>
+    [Many]
+    public List<InstrumentLanding>? InstrumentLandings { get; set; }
+
+    /// <summary>
     /// Associated VHF Navaids.
     /// </summary>
     [Many]
     public List<Omnidirectional>? Omnidirectionals { get; set; }
-
-    /// <summary>
-    /// Associated Terminal Waypoints.
-    /// </summary>
-    [Many]
-    public List<AirportTerminalWaypoint>? TerminalWaypoints { get; set; }
-
-    /// <summary>
-    /// Associated Communications.
-    /// </summary>
-    public List<AirportCommunication>? Communications { get; set; }
-
-    /// <summary>
-    /// Associated TAAs.
-    /// </summary>
-    public List<AirportArrivalAltitude>? ArrivalAltitudes { get; set; }
-
-    /// <summary>
-    /// Associated MSAs.
-    /// </summary>
-    public List<AirportMinimumAltitude>? MinimumAltitudes { get; set; }
 }

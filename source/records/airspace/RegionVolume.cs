@@ -7,7 +7,7 @@ namespace Arinc424.Airspace;
 /// <c>FIR/UIR</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.17.1.</remarks>
-[Section('U', 'F'), Identifier(7, 10), Sequenced(16, 19), Continuous(20)]
+[Identifier(7, 10), Sequenced(16, 19), Continuous(20)]
 [Process<FlightRegion, RegionVolume, FlightRegionConcatanater>]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Name)},nq}}")]
 public class RegionVolume : Record424<RegionPoint>, IIdentity, INamed
