@@ -66,8 +66,8 @@ public class Data424
     [Section('H', 'D')]
     public List<Departure> HeliportDepartures { get; set; } = [];
 
-    [Section('H', 'V')]
-    public List<PortCommunication> HeliportCommunications { get; set; } = [];
+    [Section('H', 'P')]
+    public List<SatellitePoint> HelicopterSatellitePoints { get; set; } = [];
 
     [Section('H', 'K')]
     public List<ArrivalAltitude> HeliportArrivalAltitudes { get; set; } = [];
@@ -75,8 +75,11 @@ public class Data424
     [Section('H', 'S')]
     public List<MinimumAltitude> HeliportMinimumAltitudes { get; set; } = [];
 
-    [Section('H', 'P')]
-    public List<SatellitePoint> HelicopterSatellitePoints { get; set; } = [];
+    [Section('H', 'V')]
+    public List<PortCommunication> HeliportCommunications { get; set; } = [];
+
+    [Section('H', 'C')]
+    public List<TerminalWaypoint> HeliportTerminalWaypoints { get; set; } = [];
     #endregion
 
     #region Airport
@@ -92,12 +95,6 @@ public class Data424
     [Section('P', 'R')]
     public List<FlightPlan> FlightPlans { get; set; } = [];
 
-    [Section('P', 'Q')]
-    public List<PathPoint> GroundPathPoints { get; set; } = [];
-
-    [Section('P', 'N')]
-    public List<TerminalBeacon> TerminalBeacons { get; set; } = [];
-
     [Section('P', 'E')]
     public List<Arrival> AirportArrivals { get; set; } = [];
 
@@ -107,11 +104,17 @@ public class Data424
     [Section('P', 'D')]
     public List<Departure> AirportDepartures { get; set; } = [];
 
-    [Section('P', 'V')]
-    public List<PortCommunication> AirportCommunications { get; set; } = [];
+    [Section('P', 'N')]
+    public List<TerminalBeacon> TerminalBeacons { get; set; } = [];
+
+    [Section('P', 'Q')]
+    public List<GroundPathPoint> GroundPathPoints { get; set; } = [];
 
     [Section('P', 'P')]
     public List<SatellitePoint> AirportSatellitePoints { get; set; } = [];
+
+    [Section('P', 'V')]
+    public List<PortCommunication> AirportCommunications { get; set; } = [];
 
     [Section('P', 'K')]
     public List<ArrivalAltitude> AirportArrivalAltitudes { get; set; } = [];

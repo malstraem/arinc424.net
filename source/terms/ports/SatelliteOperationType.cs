@@ -1,7 +1,7 @@
 namespace Arinc424.Ports.Terms;
 
 /// <summary>
-/// <c>Operation Type (OPS TYPE)</c> field, specific for <see cref="AirportSatellitePoint"/>
+/// <c>Operation Type (OPS TYPE)</c> field, specific for <see cref="SatellitePoint"/>.
 /// </summary>
 /// <remarks>See section 5.223.</remarks>
 [String, Decode<SatelliteOperationTypeConverter, SatelliteOperationType>]

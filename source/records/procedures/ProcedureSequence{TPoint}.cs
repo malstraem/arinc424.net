@@ -1,5 +1,9 @@
 namespace Arinc424.Procedures;
 
+/// <summary>
+/// <c>Airport and Heliport SID/STAR/Approach</c> primary record sequence.
+/// </summary>
+/// <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>
 [DebuggerDisplay($"{nameof(Transition)} - {{{nameof(Transition)},nq}}")]
 [Sequenced(27, 29), Continuous(39)]
 public abstract class ProcedureSequence<TPoint> : Record424<TPoint>, IIdentity, IIcao where TPoint : ProcedurePoint

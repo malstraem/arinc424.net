@@ -4,10 +4,9 @@ using Arinc424.Procedures;
 
 using Terms;
 
-[Section('P', 'Q', subsectionIndex: 13)]
 [Icao(11, 12), Port(7, 10), Continuous(27)]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public class PathPoint : Fix
+public abstract class PathPoint : Fix
 {
     [Identifier(7, 10)]
     [Possible<Airport, Heliport>]
@@ -16,11 +15,8 @@ public class PathPoint : Fix
     [Identifier(14, 19)]
     public Approach Approach { get; set; }
 
+    [Field(20, 24), Obsolete("todo")]
     public string AsRunway { get; set; }
-
-    /// <inheritdoc cref="SatelliteOperationType"/>
-    [Field(25, 26)]
-    public SatelliteOperationType Operation { get; set; }
 
     /// <summary>
     /// <c>Route Indicator (RTE IND)</c> character.

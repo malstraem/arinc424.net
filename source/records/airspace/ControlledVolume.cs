@@ -30,5 +30,5 @@ public class ControlledVolume : Volume
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(79, 81), Performance]
-    public float NavigationPerformance { get; set; }
+    public float Performance { get; set; }
 }

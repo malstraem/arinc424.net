@@ -97,7 +97,7 @@ public abstract class Port : Fix, IIcao, INamed
     /// Associated GBAS points.
     /// </summary>
     [Many]
-    public List<PathPoint>? GroundPathPoints { get; set; }
+    public List<GroundPathPoint>? GroundPathPoints { get; set; }
 
     /// <summary>
     /// Associated SBAS points.
@@ -130,23 +130,26 @@ public abstract class Port : Fix, IIcao, INamed
     public List<Departure>? Departures { get; set; }
 
     /// <summary>
-    /// Associated Terminal Waypoints.
-    /// </summary>
-    [Many]
-    public List<TerminalWaypoint>? TerminalWaypoints { get; set; }
-
-    /// <summary>
     /// Associated Communications.
     /// </summary>
+    [Many]
     public List<PortCommunication>? Communications { get; set; }
 
     /// <summary>
     /// Associated TAAs.
     /// </summary>
+    [Many]
     public List<ArrivalAltitude>? ArrivalAltitudes { get; set; }
 
     /// <summary>
     /// Associated MSAs.
     /// </summary>
+    [Many]
     public List<MinimumAltitude>? MinimumAltitudes { get; set; }
+
+    /// <summary>
+    /// Associated Terminal Waypoints.
+    /// </summary>
+    [Many]
+    public List<TerminalWaypoint>? TerminalWaypoints { get; set; }
 }

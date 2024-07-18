@@ -1,10 +1,6 @@
 using Arinc424.Navigation;
-using Arinc424.Procedures;
-using Arinc424.Waypoints;
 
 namespace Arinc424.Ports;
-
-using Arinc424.Comms;
 
 using Terms;
 

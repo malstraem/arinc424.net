@@ -2,6 +2,10 @@ using Arinc424.Ports.Terms;
 
 namespace Arinc424.Ports;
 
+/// <summary>
+/// <c>Airport and Heliport MSA</c> primary record.
+/// </summary>
+/// <remarks>See section 4.1.20.1 and 4.2.4.</remarks>
 [Section('P', 'S', subsectionIndex: 13)]
 [Section('H', 'S', subsectionIndex: 13)]
 [Icao(11, 12), Port(7, 10), Continuous(39)]

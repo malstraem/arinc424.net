@@ -24,7 +24,7 @@ public abstract class ProcedurePoint : Record424
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(45, 47), Performance]
-    public float NavigationPerformance { get; set; }
+    public float Performance { get; set; }
 
     /// <inheritdoc cref="Terms.LegType"/>
     [Field(48, 49)]

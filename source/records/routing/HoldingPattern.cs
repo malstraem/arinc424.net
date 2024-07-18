@@ -67,7 +67,7 @@ public class HoldingPattern : Record424, IIcao, INamed
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(63, 65), Performance]
-    public float NavigationPerformance { get; set; }
+    public float Performance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
     [Field(66, 71), Float(1000)]
