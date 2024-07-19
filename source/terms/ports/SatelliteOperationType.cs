@@ -5,6 +5,7 @@ namespace Arinc424.Ports.Terms;
 /// </summary>
 /// <remarks>See section 5.223.</remarks>
 [String, Decode<SatelliteOperationTypeConverter, SatelliteOperationType>]
+[Description("Operation Type (OPS TYPE) - SBAS")]
 public enum SatelliteOperationType : byte
 {
     Unknown,

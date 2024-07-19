@@ -5,6 +5,7 @@ namespace Arinc424.Navigation.Terms;
 /// </summary>
 /// <remarks>See section 5.35.</remarks>
 [Char, Transform<MarkerCollocationConverter, MarkerCollocation>]
+[Description("NAVAID Class (CLASS) - Collocation")]
 public enum MarkerCollocation : byte
 {
     Unknown,

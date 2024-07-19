@@ -5,6 +5,7 @@ namespace Arinc424.Navigation.Terms;
 /// </summary>
 /// <remarks>See section 5.35.</remarks>
 [Char, Transform<OmnidirectInfoConverter, OmnidirectInfo>]
+[Description("NAVAID Class (CLASS) - Additional Information")]
 public enum OmnidirectInfo : byte
 {
     Unknown,

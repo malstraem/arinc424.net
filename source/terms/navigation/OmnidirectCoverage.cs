@@ -5,6 +5,7 @@ namespace Arinc424.Navigation;
 /// </summary>
 /// <remarks>See section 5.35.</remarks>
 [Char, Transform<OmnidirectCoverageConverter, OmnidirectCoverage>]
+[Description("NAVAID Class (CLASS) - Coverage")]
 public enum OmnidirectCoverage : byte
 {
     Unknown,
@@ -27,5 +28,5 @@ public enum OmnidirectCoverage : byte
     /// <summary>
     /// Full TACAN facility frequency-paired and operating with the same identifier as an ILS Localizer.
     /// </summary>
-    [Map('C')] InstrumentLandingTactical
+    [Map('C')] Tactical
 }

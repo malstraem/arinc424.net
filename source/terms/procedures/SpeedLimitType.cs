@@ -5,6 +5,7 @@ namespace Arinc424.Procedures.Terms;
 /// </summary>
 /// <remarks>See section 5.261.</remarks>
 [Char, Transform<SpeedLimitTypeConverter, SpeedLimitType>]
+[Description("Speed Limit Description (SLD)")]
 public enum SpeedLimitType : byte
 {
     Unknown,

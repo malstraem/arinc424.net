@@ -1,10 +1,11 @@
 namespace Arinc424.Procedures.Terms;
 
 /// <summary>
-/// <c>Route Type (RT TYPE)</c> -> <c>SID Route Type Description</c> character.
+/// <c>Route Type (RT TYPE)</c> -> <c>SID Type</c> character.
 /// </summary>
 /// <remarks>See section 5.7, Table 5-4.</remarks>
 [Char, Transform<DepartureTypeConverter, DepartureType>]
+[Description("Route Type (RT TYPE) - SID Type")]
 public enum DepartureType : byte
 {
     Unknown,

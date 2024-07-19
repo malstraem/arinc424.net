@@ -5,6 +5,7 @@ namespace Arinc424.Routing.Terms;
 /// </summary>
 /// <remarks>See section 5.18.</remarks>
 [Char, Transform<BoundaryCodeConverter, BoundaryCode>]
+[Description("Boundary Code (BDY CODE)")]
 public enum BoundaryCode : byte
 {
     Unknown,

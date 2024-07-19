@@ -28,7 +28,7 @@ public abstract class Fix : Geo, IIdentity
     ///   <c>Marker Identifier (MARKER IDENT)</c> field for <see cref="AirwayMarker"/>. See section 5.110.
     /// </para>
     /// <para>
-    ///   <c>Reference Path Identifier (REF ID)</c> field for <see cref="PathPoint"/> and <see cref="SatellitePoint"/>. See section 5.257.
+    ///   <c>Reference Path Identifier (REF ID)</c> field for <see cref="GroundPoint"/> and <see cref="SatellitePoint"/>. See section 5.257.
     /// </para>
     /// </summary>
     [Field(14, 17)]

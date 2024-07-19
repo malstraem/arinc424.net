@@ -97,7 +97,7 @@ public abstract class Port : Fix, IIcao, INamed
     /// Associated GBAS points.
     /// </summary>
     [Many]
-    public List<GroundPathPoint>? GroundPathPoints { get; set; }
+    public List<GroundPoint>? GroundPoints { get; set; }
 
     /// <summary>
     /// Associated SBAS points.

@@ -5,6 +5,7 @@ namespace Arinc424.Waypoints.Terms;
 /// </summary>
 /// <remarks>See section 5.82.</remarks>
 [String, Flags, Decode<WaypointUsagesConverter, WaypointUsages>]
+[Description("Waypoint Usage")]
 public enum WaypointUsages : byte
 {
     Unknown = 0,

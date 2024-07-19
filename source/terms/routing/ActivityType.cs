@@ -5,6 +5,7 @@ namespace Arinc424.Routing.Terms;
 /// </summary>
 /// <remarks>See section 5.278.</remarks>
 [Char, Transform<ActivityTypeConverter, ActivityType>]
+[Description("Activity Type")]
 public enum ActivityType : byte
 {
     Unknown,

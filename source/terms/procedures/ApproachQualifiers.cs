@@ -1,10 +1,11 @@
 namespace Arinc424.Procedures.Terms;
 
 /// <summary>
-/// <c>Route Type (RT TYPE)</c> -> <c>Approach Qualifier Description</c> field.
+/// <c>Route Type (RT TYPE)</c> -> <c>Approach Qualifiers</c> field.
 /// </summary>
 /// <remarks>See section 5.7, Table 5-8.</remarks>
 [String, Flags, Decode<ApproachQualifiersConverter, ApproachQualifiers>]
+[Description("Route Type (RT TYPE) - Approach Qualifiers")]
 public enum ApproachQualifiers : uint
 {
     Unknown = 0u,

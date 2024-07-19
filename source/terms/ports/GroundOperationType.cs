@@ -1,10 +1,11 @@
 namespace Arinc424.Ports.Terms;
 
 /// <summary>
-/// <c>Operation Type (OPS TYPE)</c> field, specific for <see cref="GroundPathPoint"/>.
+/// <c>Operation Type (OPS TYPE)</c> field, specific for <see cref="GroundPoint"/>.
 /// </summary>
 /// <remarks>See section 5.223.</remarks>
 [String, Decode<GroundOperationTypeConverter, GroundOperationType>]
+[Description("Operation Type (OPS TYPE) - GBAS")]
 public enum GroundOperationType : byte
 {
     Unknown,

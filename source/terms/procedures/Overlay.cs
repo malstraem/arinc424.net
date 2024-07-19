@@ -5,6 +5,7 @@ namespace Arinc424.Procedures.Terms;
 /// </summary>
 /// <remarks>See section 5.222.</remarks>
 [Char, Transform<OverlayConverter, Overlay>]
+[Description("GNSS/FMS Indicator (GNSS/FMS IND)")]
 public enum Overlay : byte
 {
     Unknown,
@@ -48,6 +49,14 @@ public enum Overlay : byte
     /// Stand Alone GPS (GNSS) Procedure.
     /// </summary>
     [Map('P')] Standalone,
+    /// <summary>
+    /// PBN RNP Approach provide as GPS.
+    /// </summary>
+    [Map('G')] ApproachGlobal,
+    /// <summary>
+    /// PBN RNP Approach provide as GPS.
+    /// </summary>
+    [Map('L')] InstrumentPortion,
     /// <summary>
     /// Procedure Overlay authorization not published.
     /// </summary>

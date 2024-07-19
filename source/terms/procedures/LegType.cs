@@ -5,6 +5,7 @@ namespace Arinc424.Procedures.Terms;
 /// </summary>
 /// <remarks>See section 5.21.</remarks>
 [String, Decode<LegTypeConverter, LegType>]
+[Description("Path and Termination (PATH TERM)")]
 public enum LegType : byte
 {
     Unknown,

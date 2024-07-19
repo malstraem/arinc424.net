@@ -5,6 +5,7 @@ namespace Arinc424.Ports.Terms;
 /// </summary>
 /// <remarks>See section 5.255.</remarks>
 [String, Decode<SatelliteServiceConverter, SatelliteService>]
+[Description("SBAS Service Provider Identifier (SBAS ID)")]
 public enum SatelliteService : byte
 {
     Unknown,
@@ -28,4 +29,12 @@ public enum SatelliteService : byte
     /// MSAS.
     /// </summary>
     [Map("02")] Msas,
+    /// <summary>
+    /// GAGAN.
+    /// </summary>
+    [Map("03")] Gagan,
+    /// <summary>
+    /// SDCM.
+    /// </summary>
+    [Map("04")] Sdcm,
 }

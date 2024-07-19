@@ -7,7 +7,7 @@ namespace Arinc424.Ports;
 /// </summary>
 /// <remarks>See section 4.1.35.1.</remarks>
 [Section('P', 'Q', subsectionIndex: 13)]
-public class GroundPathPoint : PathPoint
+public class GroundPoint : PathPoint
 {
     /// <inheritdoc cref="GroundOperationType"/>
     [Field(25, 26)]

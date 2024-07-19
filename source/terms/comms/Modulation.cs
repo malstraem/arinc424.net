@@ -3,7 +3,7 @@ namespace Arinc424.Comms.Terms;
 /// <summary>
 /// <c>Modulation (MODULN)</c> character.
 /// </summary>
-/// <remarks>See section 5.198.</remarks>
+/// <remarks>See section 5.197.</remarks>
 [Char, Transform<ModulationConverter, Modulation>]
 [Description("Modulation (MODULN)")]
 public enum Modulation : byte

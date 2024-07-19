@@ -5,6 +5,7 @@ namespace Arinc424.Routing.Terms;
 /// </summary>
 /// <remarks>See section 5.282.</remarks>
 [String, Flags, Decode<OperatingTimesConverter, OperatingTimes>]
+[Description("Special Activity Area Operating Times")]
 public enum OperatingTimes : ushort
 {
     Unknown = 0,
@@ -13,9 +14,11 @@ public enum OperatingTimes : ushort
     [Map('E')] Weekends = 1 << 2,
     [Map('O')] OtherDays = 1 << 3,
     [Map('U')] DaysUnspecified = 1 << 4,
+
     [Offset, Map('H')] WithHolidays = 1 << 5,
     [Map('X')] WithoutHolidays = 1 << 6,
     [Map('U')] HolidaysUnspecified = 1 << 7,
+
     [Offset, Map('D')] SunriseSunset = 1 << 8,
     [Map('N')] Night = 1 << 9,
     [Map('C')] ContinuousTimes = 1 << 10,

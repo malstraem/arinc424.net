@@ -1,11 +1,12 @@
 namespace Arinc424.Navigation.Terms;
 
 /// <summary>
-/// <c>Figure of Merit (MERIT)</c> character.
+/// <c>Navaid Usable Range</c> character.
 /// </summary>
 /// <remarks>See section 5.149.</remarks>
-[Char, Transform<MeritFigureConverter, MeritFigure>]
-public enum MeritFigure : byte
+[Char, Transform<UsableRangeConverter, UsableRange>]
+[Description("Navaid Usable Range")]
+public enum UsableRange : byte
 {
     Unknown,
     /// <summary>

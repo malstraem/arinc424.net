@@ -58,7 +58,7 @@ internal abstract class {name} : {converter}<{symbol.Name}>
 
         _ = WriteTarget(builder, target).Append(";\n}\n");
 
-        return ($"{name}", builder.ToString());
+        return ($"{name}.gen.cs", builder.ToString());
     }
 
     private void Process(SourceProductionContext context, ImmutableArray<Target> targets)

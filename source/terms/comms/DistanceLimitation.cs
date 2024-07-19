@@ -5,6 +5,7 @@ namespace Arinc424.Comms.Terms;
 /// </summary>
 /// <remarks>See section 5.187.</remarks>
 [Char, Transform<DistanceLimitationConverter, DistanceLimitation>]
+[Description("Distance Description (DIST DESC)")]
 public enum DistanceLimitation : byte
 {
     Unknown,

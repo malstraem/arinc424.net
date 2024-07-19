@@ -51,7 +51,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [Localizer Marker](api/Arinc424.Navigation.InstrumentMarker.yml)
 - [Terminal NDB](api/Arinc424.Navigation.TerminalBeacon.yml)
 - [SBAS Path Point](api/Arinc424.Ports.SatellitePoint.yml)
-- [GBAS Path Point](api/Arinc424.Ports.GroundPathPoint.yml)
+- [GBAS Path Point](api/Arinc424.Ports.GroundPoint.yml)
 - [Flight Planning](api/Arinc424.Ports.FlightPlan.yml) 🚧
 - [MSA](api/Arinc424.Ports.MinimumAltitude.yml)
 - [GLS Station](api/Arinc424.Navigation.GlobalLanding.yml)

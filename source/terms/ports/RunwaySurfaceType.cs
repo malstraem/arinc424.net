@@ -1,13 +1,18 @@
 namespace Arinc424.Ports.Terms;
 
 /// <summary>
-/// <c>Longest Runway Surface Code (LRSC)</c> character.
+/// <c>Surface Code (SC)</c> character.
 /// </summary>
 /// <remarks>See section 5.249.</remarks>
-[Char, Transform<RunwaySurfaceTypeConverter, RunwaySurfaceType>]
-public enum RunwaySurfaceType : byte
+[Char, Transform<SurfaceTypeConverter, SurfaceType>]
+[Description("Surface Code (SC)")]
+public enum SurfaceType : byte
 {
     Unknown,
+    /// <summary>
+    /// Surface material not provided in source.
+    /// </summary>
+    [Map('U')] Unspecified,
     /// <summary>
     /// Hard runway, for example, asphalt or concrete.
     /// </summary>

@@ -5,6 +5,7 @@ namespace Arinc424.Routing.Terms;
 /// </summary>
 /// <remarks>See section 5.113.</remarks>
 [Char, Transform<MarkerPowerConverter, MarkerPower>]
+[Description("High/Low (HIGH/LOW)")]
 public enum MarkerPower : byte
 {
     Unknown,

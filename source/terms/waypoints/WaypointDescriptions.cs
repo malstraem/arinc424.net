@@ -5,7 +5,9 @@ namespace Arinc424.Waypoints.Terms;
 /// </summary>
 /// <remarks>See section 5.17.</remarks>
 [String, Flags, Decode<WaypointDescriptionsConverter, WaypointDescriptions>]
-public enum WaypointDescriptions : uint
+[Description("Waypoint Description Code (DESC CODE)")]
+[Obsolete("maybe split to 4 enums for SID/STAR/Approach and Airway?")]
+public enum WaypointDescriptions : ulong
 {
     Unknown = 0u,
     /// <summary>
@@ -135,5 +137,13 @@ public enum WaypointDescriptions : uint
     /// <summary>
     /// Engine Out SID Missed Approach Disarm Point.
     /// </summary>
-    [Map('N')] EngineOut = 1u << 31
+    [Map('N')] EngineOut = 1u << 31,
+    /// <summary>
+    /// Initial Departure Fix.
+    /// </summary>
+    [Map('P')] InitialDeparture = 1ul << 32,
+    /// <summary>
+    /// Quiet Climb SID Restore Point.
+    /// </summary>
+    [Map('Q')] QuietClimb = 1ul << 33
 }

@@ -19,9 +19,9 @@ public class Airport : Port
     [Field(28, 30), Integer]
     public int LongestRunwayLength { get; set; }
 
-    /// <inheritdoc cref="RunwaySurfaceType"/>
+    /// <inheritdoc cref="SurfaceType"/>
     [Character(32)]
-    public RunwaySurfaceType LongestRunwayType { get; set; }
+    public SurfaceType LongestRunwayType { get; set; }
 
     /// <summary>
     /// Associated gates.

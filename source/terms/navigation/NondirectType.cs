@@ -5,6 +5,7 @@ namespace Arinc424.Navigation.Terms;
 /// </summary>
 /// <remarks>See section 5.35.</remarks>
 [String, Flags, Decode<NondirectTypeConverter, NondirectType>]
+[Description("NAVAID Class (CLASS) - Facility")]
 public enum NondirectType : byte
 {
     Unknown = 0,

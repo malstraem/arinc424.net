@@ -1,10 +1,11 @@
 namespace Arinc424.Procedures.Terms;
 
 /// <summary>
-/// <c>Route Type (RT TYPE)</c> -> <c>SID Qualifier Description</c> field.
+/// <c>Route Type (RT TYPE)</c> -> <c>SID Qualifiers</c> field.
 /// </summary>
 /// <remarks>See section 5.7, Table 5-5.</remarks>
 [String, Flags, Decode<DepartureQualifiersConverter, DepartureQualifiers>]
+[Description("Route Type (RT TYPE) - SID Qualifiers")]
 public enum DepartureQualifiers : ushort
 {
     Unknown = 0,
@@ -21,7 +22,7 @@ public enum DepartureQualifiers : ushort
     /// </summary>
     [Map('R')] Radar = 1 << 2,
     /// <summary>
-    /// Helicopter SID from Runway.
+    /// Helicopter SID from runway.
     /// </summary>
     [Map('H')] Helicopter = 1 << 3,
     /// <summary>

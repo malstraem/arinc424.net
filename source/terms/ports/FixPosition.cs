@@ -1,10 +1,11 @@
 namespace Arinc424.Ports.Terms;
 
 /// <summary>
-/// <c>TAA Sector Indicator</c> character.
+/// <c>Fix Position Indicator</c> character.
 /// </summary>
 /// <remarks>See section 5.272.</remarks>
 [Char, Transform<FixPositionConverter, FixPosition>]
+[Description("Fix Position Indicator")]
 public enum FixPosition : byte
 {
     Unknown,

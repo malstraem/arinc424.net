@@ -54,9 +54,9 @@ public class Omnidirectional : Navaid
     [Field(80, 84), Integer]
     public int EquipmentElevation { get; set; }
 
-    /// <inheritdoc cref="Terms.MeritFigure"/>
+    /// <inheritdoc cref="UsableRange"/>
     [Character(85)]
-    public MeritFigure MeritFigure { get; set; }
+    public UsableRange Range { get; set; }
 
     /// <summary>
     /// <c>ILS/DME Bias</c> field.

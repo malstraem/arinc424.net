@@ -5,14 +5,14 @@ namespace Arinc424.Navigation.Terms;
 /// </summary>
 /// <remarks>See section 5.99.</remarks>
 [String, Flags, Decode<MarkerTypeConverter, MarkerType>]
+[Description("Marker Type (MKR TYPE)")]
 public enum MarkerType : byte
 {
     Unknown = 0,
     /// <summary>
     /// Locator at Marker.
     /// </summary>
-    [Map('L')]
-    Locator = 1,
+    [Map('L')] Locator = 1,
     /// <summary>
     /// Inner Marker.
     /// </summary>

@@ -11,7 +11,7 @@ public class Arrival : Procedure<ArrivalSequence, ArrivalPoint>;
 public class Approach : Procedure<ApproachSequence, ApproachPoint>
 {
     [One]
-    public PathPoint? GroundPathPoint { get; set; }
+    public GroundPoint? GroundPoint { get; set; }
 
     [One]
     public SatellitePoint? SatellitePoint { get; set; }

@@ -5,6 +5,7 @@ namespace Arinc424.Comms.Terms;
 /// </summary>
 /// <remarks>See section 5.106, Table 5-20.</remarks>
 [String, Flags, Decode<PortCommUsagesConverter, PortCommUsages>]
+[Description("Service Indicator (SERV IND) - Airport/Heliport")]
 public enum PortCommUsages : ushort
 {
     Unknown = 0,

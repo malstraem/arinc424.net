@@ -5,7 +5,8 @@ namespace Arinc424.Ports.Terms;
 /// </summary>
 /// <remarks>See section 5.258.</remarks>
 [Char, Flags, Transform<ApproachPerformanceConverter, ApproachPerformance>]
-public enum ApproachPerformance : uint
+[Description("Approach Performance Designator (APD)")]
+public enum ApproachPerformance : byte
 {
     Unknown = 0,
     /// <summary>
