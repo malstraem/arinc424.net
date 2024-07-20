@@ -2,15 +2,18 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="clr-namespace:Arinc424.View.ViewModels"
+             xmlns:vm="clr-namespace:Arinc424.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="Arinc424.View.Views.MainView"
+             x:Class="Arinc424.Views.MainView"
              x:DataType="vm:MainViewModel">
   <Design.DataContext>
-    <!-- This only sets the DataContext for the previewer in an IDE,
-         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  <Grid>
+    <ListBox Name="airports" ItemsSource="{CompiledBinding Path=Airports}" />
+
+    <TextBlock Name="aboba" Width="100" Height="15" DragDrop.AllowDrop="True" HorizontalAlignment="Center" VerticalAlignment="Center"
+               Text="{Binding Greeting}" />
+  </Grid>
 </UserControl>

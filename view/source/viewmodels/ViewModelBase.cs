@@ -1,6 +1,6 @@
 using ReactiveUI;
 
-namespace Arinc424.View.ViewModels;
+namespace Arinc424.ViewModels;
 
 public class ViewModelBase : ReactiveObject
 {

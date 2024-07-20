@@ -13,4 +13,8 @@
 
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\source\Arinc424.csproj" />
+  </ItemGroup>
 </Project>

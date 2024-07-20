@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace Arinc424.View.Views;
+namespace Arinc424.Views;
 
 public partial class MainWindow : Window
 {
