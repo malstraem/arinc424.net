@@ -16,6 +16,7 @@ public abstract class ProcedurePoint : Record424
 
     /// <inheritdoc cref="WaypointDescriptions"/>
     [Field(40, 43)]
+    [Obsolete("maybe split to 4 enums for SID/STAR/Approach and Airway?")]
     public WaypointDescriptions Descriptions { get; set; }
 
     /// <inheritdoc cref="Arinc424.Turn"/>
