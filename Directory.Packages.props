@@ -1,7 +1,8 @@
 <Project>
   <ItemGroup>
-    <PackageVersion Include="Docfx.App" Version="2.77.0" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.2.2" />
 
+    <PackageVersion Include="Docfx.App" Version="2.77.0" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.13.13-nightly.20240601.156" />
 
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
@@ -10,16 +11,15 @@
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.10.0" />
 
     <PackageVersion Include="xunit" Version="2.9.0" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2"
-                    PrivateAssets="all"
-                    IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
 
     <PackageVersion Include="Avalonia" Version="11.0.11" />
-    <PackageVersion Include="Avalonia.Browser" Version="11.0.11" />
     <PackageVersion Include="Avalonia.Desktop" Version="11.0.11" />
     <PackageVersion Include="Avalonia.Diagnostics" Version="11.0.11" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.0.11" />
-    <PackageVersion Include="Avalonia.Themes.Fluent" Version="11.0.11" />
-    <PackageVersion Include="Avalonia.ReactiveUI" Version="11.0.11" />
+
+    <PackageVersion Include="Semi.Avalonia" Version="11.0.7.4" />
+    <PackageVersion Include="Irihi.Ursa" Version="0.3.0-beta20240708" />
+    <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="0.3.0-beta20240708" />
   </ItemGroup>
 </Project>

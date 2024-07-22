@@ -15,7 +15,7 @@ public abstract class Record424
     /// </summary>
     /// <remarks>See section 5.3.</remarks>
     [Field(2, 4), Validation("\\w{1,3}")]
-    public string Code { get; set; }
+    public string? Code { get; set; }
 
     /// <summary>
     /// <c>File Record Number (FRN)</c> field.

@@ -87,7 +87,7 @@ public class Data424
     /// </summary>
     /// <remarks>Section <c>ES</c>.</remarks>
     [Section('E', 'S')]
-    public List<SpecialActivityArea> SpecialActivityAreas { get; set; } = [];
+    public List<SpecialArea> SpecialAreas { get; set; } = [];
 
     /// <summary>
     /// <c>Enroute Airway Communication</c> records.
@@ -131,7 +131,7 @@ public class Data424
     /// </summary>
     /// <remarks>Section <c>HP</c>.</remarks>
     [Section('H', 'P')]
-    public List<SatellitePoint> HelicopterSatellitePoints { get; set; } = [];
+    public List<SatellitePoint> HeliportSatellitePoints { get; set; } = [];
 
     /// <summary>
     /// <c>Heliport TAA</c> records.

@@ -9,7 +9,7 @@ charset = utf-8
 end_of_line = lf
 insert_final_newline = true
 
-[*.{csproj,props,xml,xaml,yml,yaml,json}]
+[*.{csproj,props,xml,xaml,axaml,yml,yaml,json}]
 indent_size = 2
 
 [*.{cs,vb}]

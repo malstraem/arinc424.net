@@ -9,7 +9,7 @@
     <PackageReference Include="xunit" />
     <PackageReference Include="xunit.runner.visualstudio" />
 
-    <ProjectReference Include="../../source/Arinc424.csproj" />
+    <ProjectReference Include="../../source/library/Arinc424.csproj" />
 
     <None Include="../data/**" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

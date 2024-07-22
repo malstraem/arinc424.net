@@ -7,14 +7,16 @@
     <AvaloniaResource Include="assets/**" />
 
     <PackageReference Include="Avalonia" />
-    <PackageReference Include="Avalonia.Themes.Fluent" />
     <PackageReference Include="Avalonia.Fonts.Inter" />
-    <PackageReference Include="Avalonia.ReactiveUI" />
 
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" />
-  </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\source\Arinc424.csproj" />
+    <PackageReference Include="CommunityToolkit.Mvvm" />
+
+    <PackageReference Include="Semi.Avalonia" />
+    <PackageReference Include="Irihi.Ursa" />
+    <PackageReference Include="Irihi.Ursa.Themes.Semi" />
+
+    <ProjectReference Include="../../library/Arinc424.csproj" />
   </ItemGroup>
 </Project>

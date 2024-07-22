@@ -27,7 +27,7 @@ Record<Waypoint>,
 Record<AirwayMarker>,
 Record<PreferredRoute>,
 Record<HoldingPattern>,
-Record<SpecialActivityArea>,
+Record<SpecialArea>,
 
 Sequence<Airway, AirwayPoint>,
 Sequence<AirwayCommunication, AirwayTransmitter>,
