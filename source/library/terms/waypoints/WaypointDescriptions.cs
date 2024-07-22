@@ -6,7 +6,6 @@ namespace Arinc424.Waypoints.Terms;
 /// <remarks>See section 5.17.</remarks>
 [String, Flags, Decode<WaypointDescriptionsConverter, WaypointDescriptions>]
 [Description("Waypoint Description Code (DESC CODE)")]
-[Obsolete("maybe split to 4 enums for SID/STAR/Approach and Airway?")]
 public enum WaypointDescriptions : ulong
 {
     Unknown = 0u,

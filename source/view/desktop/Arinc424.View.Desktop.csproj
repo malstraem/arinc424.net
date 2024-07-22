@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>winexe</OutputType>
+
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Desktop" />
+
+    <ProjectReference Include="../source/Arinc424.View.csproj" />
+  </ItemGroup>
+</Project>

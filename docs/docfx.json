@@ -39,7 +39,7 @@
       "src": [
         {
           "files": [
-            "source/Arinc424.csproj"
+            "source/library/Arinc424.csproj"
           ],
           "src": "../"
         }

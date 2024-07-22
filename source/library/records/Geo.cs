@@ -12,7 +12,7 @@ public abstract class Geo : Record424
     [Field<PathPoint>(38, 60)]
     [Field<RegionPoint>(35, 53)]
     [Field<GlobalLanding>(56, 74)]
-    [Field<SpecialActivityArea>(24, 42)]
+    [Field<SpecialArea>(24, 42)]
 
     [Field<PortTransmitter>(33, 51)]
     [Field<AirwayTransmitter>(63, 81)]

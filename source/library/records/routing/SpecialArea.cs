@@ -9,7 +9,7 @@ using Terms;
 /// </summary>
 /// <remarks>See section 4.1.33.1.</remarks>
 [Section('E', 'S'), Continuous]
-public class SpecialActivityArea : Geo, IIdentity, IIcao, INamed
+public class SpecialArea : Geo, IIdentity, IIcao, INamed
 {
     [Identifier(16, 19), Icao(20, 21)]
     public Airport Airport { get; set; }

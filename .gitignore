@@ -6,5 +6,5 @@ artifacts/
 
 docs/api/**.yml
 
-*.manifest
+.manifest
 *.user

@@ -4,9 +4,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BenchmarkDotNet" Version="0.13.13-nightly.20240601.156" />
+    <PackageReference Include="BenchmarkDotNet" />
 
-    <ProjectReference Include="../../source/Arinc424.csproj" />
+    <ProjectReference Include="../../source/library/Arinc424.csproj" />
 
     <None Include="../data/**" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>

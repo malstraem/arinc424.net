@@ -1,6 +1,7 @@
 <Project>
   <PropertyGroup>
     <Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
+
     <TargetFrameworks>net8.0</TargetFrameworks>
 
     <Nullable>enable</Nullable>
@@ -9,5 +10,7 @@
 
     <IsPackable>false</IsPackable>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
 </Project>

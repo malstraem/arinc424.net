@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>exe</OutputType>
+
+    <RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+
+    <WasmMainJSPath>bundle/main.js</WasmMainJSPath>
+
+    <AppDesignerFolder>properties</AppDesignerFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <WasmExtraFilesToDeploy Include="bundle/**" />
+
+    <PackageReference Include="Avalonia.Browser" />
+
+    <ProjectReference Include="../source/Arinc424.View.csproj" />
+  </ItemGroup>
+</Project>
