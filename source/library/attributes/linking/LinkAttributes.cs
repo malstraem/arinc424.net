@@ -1,11 +1,14 @@
 namespace Arinc424.Attributes;
 
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
-internal class IdentifierAttribute(int left, int right, Supplement start = Supplement.V18) : RangeAttribute(left, right, start);
-
+/// <summary>
+/// Specifies <c>Airport/Heliport</c> identifier range.
+/// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
 internal class PortAttribute(int left, int right, Supplement start = Supplement.V18) : RangeAttribute(left, right, start);
 
+/// <summary>
+/// Specifies <c>ICAO Code</c> range.
+/// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
 internal class IcaoAttribute(int left, int right, Supplement start = Supplement.V18) : RangeAttribute(left, right, start);
 

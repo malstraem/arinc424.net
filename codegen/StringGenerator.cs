@@ -11,30 +11,30 @@ public class StringGenerator() : ConverterGenerator(Constants.StringAttribute)
     {
         _ = base.WriteTarget(builder, target);
 
-        if (target.IsFlags)
+        if (!target.IsFlags)
+            return builder;
+
+        for (int i = 1; i < target.Members.Length; i++)
         {
-            for (int i = 1; i < target.Members.Length; i++)
+            _ = builder.Append("\n    | ");
+
+            var members = target.Members[i];
+
+            var blank = members.FirstOrDefault(x => x.IsBlank);
+
+            if (blank is not null)
             {
-                _ = builder.Append("\n    | ");
+                (string member, _) = blank;
 
-                var members = target.Members[i];
+                _ = builder.Append($"(char.IsWhiteSpace({Constants.String}[{i}]) ? {member} : ");
 
-                var blank = members.FirstOrDefault(x => x.IsBlank);
-
-                if (blank is not null)
-                {
-                    (string member, _) = blank;
-
-                    _ = builder.Append($"(char.IsWhiteSpace({Constants.String}[{i}]) ? {member} : ");
-
-                    members = members.Except([blank]).ToArray();
-                }
-
-                _ = builder.WriteOffset($"{Constants.String}[{i}]").WriteMembers(members, target.Unknown).Append("\n    }");
-
-                if (blank is not null)
-                    _ = builder.Append(')');
+                members = members.Except([blank]).ToArray();
             }
+
+            _ = builder.WriteOffset($"{Constants.String}[{i}]").WriteMembers(members).Append($"\n        _ => {target.Unknown}").Append("\n    }");
+
+            if (blank is not null)
+                _ = builder.Append(')');
         }
         return builder;
     }

@@ -6,5 +6,5 @@ namespace Arinc424.Converters;
 /// <typeparam name="TType">Provided type.</typeparam>
 internal interface ICharConverter<TType> where TType : Enum
 {
-    static abstract TType Convert(char @char);
+    static abstract Result<TType> Convert(char @char);
 }

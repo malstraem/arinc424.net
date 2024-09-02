@@ -10,7 +10,7 @@ internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range ra
 {
     protected readonly Range range = range;
 
-    [Obsolete("todo: maybe replace with emit op codes")]
+    [Obsolete("todo: replace with emit op codes")]
     protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property, bool isValueNullable)
     {
         var record = Expression.Parameter(typeof(TRecord));

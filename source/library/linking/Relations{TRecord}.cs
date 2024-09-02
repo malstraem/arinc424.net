@@ -52,41 +52,13 @@ internal sealed class Relations<TRecord> : Relations where TRecord : Record424
     {
         List<Link<TRecord>> links = [];
 
-        var port = type.GetCustomAttributes<PortAttribute>().BySupplement(supplement)?.Range;
-        var icao = type.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range;
-
         foreach (var property in type.GetProperties())
         {
             var identifier = property.GetCustomAttributes<IdentifierAttribute>().BySupplement(supplement);
 
             if (identifier is not null)
             {
-                Link<TRecord> link;
-
-                KeyRanges ranges = new()
-                {
-                    Port = port,
-                    Icao = property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range ?? icao,
-                    Identifier = identifier.Range
-                };
-
-                var possible = property.GetCustomAttribute<PossibleAttribute>();
-
-                if (possible is not null)
-                {
-                    var linkType = typeof(PossibleLink<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
-
-                    link = (Link<TRecord>)Activator.CreateInstance(linkType, ranges, property, possible.Types)!;
-                }
-                else
-                {
-                    var linkType = typeof(Link<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
-
-                    var typeAttribute = property.GetCustomAttributes<TypeAttribute>().BySupplement(supplement);
-
-                    link = (Link<TRecord>)Activator.CreateInstance(linkType, ranges, property, typeAttribute)!;
-                }
-                links.Add(link);
+                links.Add(identifier.GetLink<TRecord>(property, supplement));
             }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {

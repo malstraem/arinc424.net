@@ -18,6 +18,10 @@ public enum ThresholdType : byte
     /// </summary>
     [Map('R')] AreaNavigation,
     /// <summary>
+    /// TCH Provided in the Runway Record is that of the VGSI for the runway
+    /// </summary>
+    [Map('V')] Visual,
+    /// <summary>
     /// TCH provided in the Runway Record is the default value of 40 or 50 feet.
     /// </summary>
     /// <remarks>See section 5.67.</remarks>

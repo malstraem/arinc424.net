@@ -24,37 +24,51 @@ public abstract class ConverterGenerator(string qualifier) : IIncrementalGenerat
 
         var blank = members.FirstOrDefault(x => x.IsBlank);
 
+        string member;
+
         if (blank is not null)
         {
-            var (member, argument) = blank;
-
-            string check = target.IsChar ? $"char.IsWhiteSpace({Char})" : $"{String}.IsWhiteSpace()";
-
-            _ = builder.Append($"{check} ? {member} : ");
-
             members = members.Except([blank]).ToArray();
+
+            (member, _) = blank;
+        }
+        else
+        {
+            member = target.Unknown;
         }
 
-        return builder.WriteOffset(offset).WriteMembers(members, target.Unknown).Append("\n    }");
+        if (target.IsChar)
+        {
+            //string check = target.IsChar ? $"char.IsWhiteSpace({Char})" : $"{String}.IsWhiteSpace()";
+            string check = $"char.IsWhiteSpace({Char})";
+
+            _ = builder.Append($"{check} ? {member} : ");
+        }
+        return WriteMembers(builder.WriteOffset(offset), members, target.Unknown).Append("\n    }");
     }
+
+    internal virtual StringBuilder WriteMembers(StringBuilder builder, Member[] members, string unknown)
+        => builder.WriteMembers(members).Append($"\n        _ => {unknown}");
 
     private (string name, string text) Generate(Target target)
     {
         var symbol = target.Symbol;
 
-        var (converter, signature, @return) = target.IsChar
-            ? (CharConverter, CharSignature, symbol.Name)
-            : (StringConverter, StringSignature, $"Result<{symbol.Name}>");
+        var (converter, signature) = target.IsChar
+            ? (CharConverter, CharSignature)
+            : (StringConverter, StringSignature);
 
         string name = $"{symbol.Name}Converter";
 
-        var builder = new StringBuilder().Append($@"using {symbol.ContainingNamespace};
-
-namespace Arinc424.Converters;
-
-internal abstract class {name} : {converter}<{symbol.Name}>
-{{
-    public static {@return} Convert({signature}) => ");
+        var builder = new StringBuilder().Append($$"""
+            using {{symbol.ContainingNamespace}};
+            
+            namespace Arinc424.Converters;
+            
+            internal abstract class {{name}} : {{converter}}<{{symbol.Name}}>
+            {
+                public static Result<{{symbol.Name}}> Convert({{signature}}) => 
+            """);
 
         _ = WriteTarget(builder, target).Append(";\n}\n");
 
@@ -71,8 +85,8 @@ internal abstract class {name} : {converter}<{symbol.Name}>
         }
     }
 
-    private static bool HaveAttribute(MemberDeclarationSyntax member, string attributeName) =>
-        member.AttributeLists.Any(x => x.Attributes.Any(x => x.Name.ToString() == attributeName));
+    private static bool HaveAttribute(MemberDeclarationSyntax member, string attributeName)
+        => member.AttributeLists.Any(x => x.Attributes.Any(x => x.Name.ToString() == attributeName));
 
     private static bool TryAttribute(MemberDeclarationSyntax member, string attributeName, out AttributeSyntax? attribute)
     {

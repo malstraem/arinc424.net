@@ -1,8 +1,8 @@
 namespace Arinc424.Linking;
 
-internal abstract class Key(KeyRanges ranges)
+internal abstract class Key(KeyInfo info)
 {
-    protected KeyRanges ranges = ranges;
+    protected KeyInfo info = info;
 
     [Obsolete("todo or remove")]
     protected static ReadOnlySpan<char> Concat(ReadOnlySpan<char> one, ReadOnlySpan<char> other, Span<char> target)
@@ -30,9 +30,9 @@ internal abstract class Key(KeyRanges ranges)
         }
     }
 
-    internal bool IsIcao = ranges.Icao is not null;
+    internal bool IsIcao = info.Icao is not null;
 
-    internal bool IsPort = ranges.Port is not null;
+    internal bool IsPort = info.Port is not null;
 
-    internal KeyRanges Ranges => ranges;
+    internal KeyInfo Info => info;
 }

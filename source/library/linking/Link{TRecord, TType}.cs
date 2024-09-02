@@ -10,21 +10,16 @@ internal abstract class Link<TRecord> where TRecord : Record424
     internal abstract bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic);
 }
 
-internal class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo property, TypeAttribute? typeAttribute) : Link<TRecord>
+internal class Link<TRecord, TType>(KeyInfo ranges, PropertyInfo property) : Link<TRecord>
     where TRecord : Record424
     where TType : class
 {
-    protected readonly Foreign<TType> foreign = new(ranges);
+    protected readonly Foreign foreign = new(ranges);
 
     protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
-    private (int Section, int Subsection)? indexes = typeAttribute is null ? null
-        : (typeAttribute.SectionIndex, typeAttribute.SubsectionIndex);
-
     private bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type, Section)? reference, out Diagnostic? diagnostic)
     {
-        string key;
-
         reference = null;
         diagnostic = null;
 
@@ -32,47 +27,11 @@ internal class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo property, Typ
 
         string @string = record.Source!;
 
-        if (indexes is null)
+        var info = meta.TypeInfo[type];
+
+        if (foreign.TryGetKey(@string, info.Primary! /*garantee by design*/, out string? key))
         {
-            var info = meta.TypeInfo[type];
-
-            if (foreign.TryGetKey(@string, info.Primary! /*garantee by design*/, out key))
-            {
-                reference = (key, type, info.Section);
-                return true;
-            }
-            return false;
-        }
-
-        var (index, subindex) = indexes.Value;
-
-        char sectionChar = @string[index];
-        char subsectionChar = @string[subindex];
-
-        Section section = new(sectionChar, subsectionChar);
-
-        if (char.IsWhiteSpace(sectionChar) && char.IsWhiteSpace(subsectionChar))
-            return false;
-
-        if (!meta.Types.TryGetValue(section, out type))
-        {
-            diagnostic = new LinkDiagnostic(record, $"Section '{sectionChar}, {subsectionChar}' does not exist.", foreign.Ranges, indexes);
-            Debug.WriteLine(diagnostic);
-            return false;
-        }
-
-        var primary = meta.TypeInfo[type].Primary;
-
-        if (primary is null)
-        {
-            diagnostic = new LinkDiagnostic(record, $"Record type '{type}' does not have unique key.", foreign.Ranges, indexes);
-            Debug.WriteLine(diagnostic);
-            return false;
-        }
-
-        if (foreign.TryGetKey(@string, primary, out key))
-        {
-            reference = (key, type, section);
+            reference = (key, type, info.Section);
             return true;
         }
         return false;
@@ -87,21 +46,21 @@ internal class Link<TRecord, TType>(KeyRanges ranges, PropertyInfo property, Typ
 
         if (!unique.TryGetRecords(type, out var records))
         {
-            diagnostic = new LinkDiagnostic(record, $"No records of type '{type}' were found.", foreign.Ranges, indexes);
+            diagnostic = new LinkDiagnostic(record, $"No records of type '{type}' were found.", foreign.Info);
             Debug.WriteLine(diagnostic);
             return false;
         }
 
         if (!records.TryGetValue(key, out var referenced))
         {
-            diagnostic = new LinkDiagnostic(record, $"'{type}' record with key '{key}' was not found.", foreign.Ranges, indexes);
+            diagnostic = new LinkDiagnostic(record, $"'{type}' record with key '{key}' was not found.", foreign.Info);
             Debug.WriteLine(diagnostic);
             return false;
         }
 
         if (referenced is not TType @ref)
         {
-            diagnostic = new LinkDiagnostic(record, $"'{type}' entity with key '{key}' is not a '{typeof(TType).Name}' type reference.", foreign.Ranges, indexes);
+            diagnostic = new LinkDiagnostic(record, $"'{type}' entity with key '{key}' is not a '{typeof(TType).Name}' type reference.", foreign.Info);
             Debug.WriteLine(diagnostic);
             return false;
         }

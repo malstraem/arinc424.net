@@ -1,14 +1,14 @@
-﻿using Arinc424.Airspace.Terms;
+using Arinc424.Airspace.Terms;
 
 namespace Arinc424.Converters;
 
 internal abstract class RegionTypeConverter : ICharConverter<RegionType>
 {
-    public static RegionType Convert(char @char) => @char switch
+    public static Result<RegionType> Convert(char @char) => @char switch
     {
         'F' => RegionType.FlightInfo,
         'U' => RegionType.UpperInfo,
         'B' => RegionType.FlightInfo | RegionType.UpperInfo,
-        _ => RegionType.Unknown
+        _ => $"Char '{@char}' is not valid"
     };
 }

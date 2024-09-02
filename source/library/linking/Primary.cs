@@ -3,7 +3,7 @@ using System.Reflection;
 
 namespace Arinc424.Linking;
 
-internal sealed class Primary(KeyRanges ranges) : Key(ranges)
+internal sealed class Primary(KeyInfo ranges) : Key(ranges)
 {
     internal static Primary? Create(Type type)
     {
@@ -12,7 +12,7 @@ internal sealed class Primary(KeyRanges ranges) : Key(ranges)
         if (identifier is null)
             return null;
 
-        KeyRanges ranges = new()
+        KeyInfo ranges = new()
         {
             Port = type.GetCustomAttribute<PortAttribute>()?.Range,
             Icao = type.GetCustomAttribute<IcaoAttribute>()?.Range,
@@ -24,16 +24,16 @@ internal sealed class Primary(KeyRanges ranges) : Key(ranges)
 
     internal bool TryGetKey(ReadOnlySpan<char> @string, [NotNullWhen(true)] out string? key)
     {
-        key = @string[ranges.Identifier].Trim().ToString();
+        key = @string[info.Identifier].Trim().ToString();
 
         if (string.IsNullOrEmpty(key))
             return false;
 
-        if (ranges.Icao.HasValue)
-            key += @string[ranges.Icao.Value].ToString();
+        if (info.Icao.HasValue)
+            key += @string[info.Icao.Value].ToString();
 
-        if (ranges.Port.HasValue)
-            key += @string[ranges.Port.Value].Trim().ToString();
+        if (info.Port.HasValue)
+            key += @string[info.Port.Value].Trim().ToString();
 
         return true;
     }

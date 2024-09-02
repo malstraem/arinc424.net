@@ -6,11 +6,20 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Linking;
 
-internal class PossibleLink<TRecord, TType>(KeyRanges ranges, PropertyInfo property, Type[] types) : Link<TRecord, TType>(ranges, property, null)
+internal sealed class PossibleLink<TRecord, TType>(KeyInfo ranges, PropertyInfo property, Type[] types) : Link<TRecord, TType>(ranges, property)
     where TRecord : Record424
     where TType : Record424
 {
     private readonly Type[] types = types;
+
+    private bool TryGetReference(TRecord record, RecordInfo info, [NotNullWhen(true)] out string? key, out Diagnostic? diagnostic)
+    {
+        diagnostic = null;
+
+        string @string = record.Source!;
+
+        return foreign.TryGetKey(@string, info.Primary! /*garantee by design*/, out key);
+    }
 
     [Obsolete("todo")]
     internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
@@ -49,14 +58,5 @@ internal class PossibleLink<TRecord, TType>(KeyRanges ranges, PropertyInfo prope
             return true;
         }
         return false; // todo diagnostics
-    }
-
-    internal bool TryGetReference(TRecord record, RecordInfo info, [NotNullWhen(true)] out string? key, out Diagnostic? diagnostic)
-    {
-        diagnostic = null;
-
-        string @string = record.Source!;
-
-        return foreign.TryGetKey(@string, info.Primary! /*garantee by design*/, out key);
     }
 }
