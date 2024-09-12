@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Arinc424;
 
 #pragma warning disable CS8618
@@ -16,6 +18,7 @@ internal readonly ref struct Result<TType> where TType : notnull
 
     private Result(string problem) => Problem = problem;
 
+    [MemberNotNullWhen(true, nameof(Problem))]
     internal bool Invalid => Problem is not null;
 
     public static implicit operator Result<TType>(TType value) => new(value);

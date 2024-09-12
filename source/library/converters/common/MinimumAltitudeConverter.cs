@@ -13,6 +13,6 @@ internal abstract class MinimumAltitudeConverter : IStringConverter<Altitude>
 
         var value = IntConverter.Convert(@string);
 
-        return value.Invalid ? value.Problem! : new Altitude(value.Value * 100, AltitudeUnit.Feet);
+        return value.Invalid ? value.Problem : new Altitude(value.Value * 100, AltitudeUnit.Feet);
     }
 }

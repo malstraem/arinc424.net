@@ -25,8 +25,6 @@ internal partial class Parser424
                 skipped.Enqueue(@string);
         }
 
-        // Checks that one of info matches the string and enqueue the matched to an associated queue.
-        // (branching, apparently, will not give any tangible gain)
         bool TryEnqueue(string @string)
         {
             foreach (var info in meta.Info)

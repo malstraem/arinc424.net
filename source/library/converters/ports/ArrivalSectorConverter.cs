@@ -14,7 +14,7 @@ internal abstract class ArrivalSectorConverter : IStringConverter<ArrivalSector>
         var result = BoolConverter.Convert(@string[13]);
 
         if (result.Invalid)
-            return result.Problem!;
+            return result.Problem;
 
         sector.Value.TurnRequired = result.Value;
 

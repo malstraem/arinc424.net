@@ -12,7 +12,7 @@ internal abstract class FrequencyConverterV19 : IStringConverter<Frequency>
         var result = FrequencyUnitConverter.Convert(@string[14]);
 
         if (result.Invalid)
-            return result.Problem!;
+            return result.Problem;
 
         var unit = result.Value;
 
@@ -52,7 +52,7 @@ internal abstract class FrequencyConverter : IStringConverter<Frequency>
         var result = FrequencyUnitConverter.Convert(@string[8]);
 
         if (result.Invalid)
-            return result.Problem!;
+            return result.Problem;
 
         var unit = result.Value;
 

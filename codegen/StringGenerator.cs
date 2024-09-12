@@ -1,41 +1,26 @@
 using System.Text;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Arinc424.Generators;
 
+using static Constants;
+
 [Generator]
-public class StringGenerator() : ConverterGenerator(Constants.StringAttribute)
+public class StringGenerator : ConverterGenerator
 {
-    internal override StringBuilder WriteTarget(StringBuilder builder, Target target)
+    private protected override string GetOffset(string blank) => $" => {String}.IsWhiteSpace() ? {blank} : {String}";
+
+    private protected override StringBuilder WriteMembers(StringBuilder builder, Member[] members, string _)
+        => builder.WriteMembers(members).Append($"\n        _ => $\"Substring '{{{String}}}' is not valid.\"");
+
+    private protected override bool IsMatch(EnumDeclarationSyntax @enum) => !@enum.HaveAttribute(FlagsAttribute);
+
+    public StringGenerator()
     {
-        _ = base.WriteTarget(builder, target);
-
-        if (!target.IsFlags)
-            return builder;
-
-        for (int i = 1; i < target.Members.Length; i++)
-        {
-            _ = builder.Append("\n    | ");
-
-            var members = target.Members[i];
-
-            var blank = members.FirstOrDefault(x => x.IsBlank);
-
-            if (blank is not null)
-            {
-                (string member, _) = blank;
-
-                _ = builder.Append($"(char.IsWhiteSpace({Constants.String}[{i}]) ? {member} : ");
-
-                members = members.Except([blank]).ToArray();
-            }
-
-            _ = builder.WriteOffset($"{Constants.String}[{i}]").WriteMembers(members).Append($"\n        _ => {target.Unknown}").Append("\n    }");
-
-            if (blank is not null)
-                _ = builder.Append(')');
-        }
-        return builder;
+        @base = StringConverter;
+        args = StringArgs;
+        qualifier = StringAttributeQualifier;
     }
 }
