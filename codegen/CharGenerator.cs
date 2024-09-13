@@ -13,7 +13,7 @@ public class CharGenerator : ConverterGenerator
     private protected override string GetOffset(string blank) => $" => char.IsWhiteSpace({Char}) ? {blank} : {Char}";
 
     private protected override StringBuilder WriteMembers(StringBuilder builder, Member[] members, string _)
-        => builder.WriteMembers(members).Append($"\n        _ => $\"Character '{{{Char}}}' is not valid.\"");
+        => builder.WriteMembers(members).Append($"\n        _ => {Char}");
 
     private protected override bool IsMatch(EnumDeclarationSyntax @enum) => @enum.HaveAttribute(CharAttribute);
 

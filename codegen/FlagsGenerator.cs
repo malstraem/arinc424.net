@@ -18,18 +18,26 @@ public class FlagsGenerator : ConverterGenerator
     {
         _ = builder.Append($@"
     {{
-        string? problem = null;
+        bool valid = true;
 
         var value = {target.Unknown};").Append("\n");
 
         var offsetMembers = ((FlagsTarget)target).GetMembersWithBlank();
 
+        string[] problemVariables = new string[offsetMembers.Length],
+                 charDeclarations = new string[offsetMembers.Length],
+                 problemDeclarations = new string[offsetMembers.Length];
+
         for (int i = 0; i < offsetMembers.Length; i++)
         {
-            _ = builder.Append(@$"
-            char {Char}{i} = {String}[{i}];");
+            problemVariables[i] = $"{Problem}{i}";
+            charDeclarations[i] = $"{Char}{i} = {String}[{i}]";
+            problemDeclarations[i] = $"{problemVariables[i]} = null";
         }
-        _ = builder.Append("\n");
+        _ = builder.Append($@"
+        char {string.Join(", ", charDeclarations)};
+
+        string? {string.Join(", ", problemDeclarations)};").Append("\n");
 
         for (int i = 0; i < offsetMembers.Length; i++)
         {
@@ -48,15 +56,17 @@ public class FlagsGenerator : ConverterGenerator
                 value |= {fullName}; break;");
             }
             _ = builder.Append(@$"
+            case (char)32:
+                value |= {blank}; break;
             default:
-                problem += $""Character '{{{Char}{i}}}' is not valid. ""; break;
+                valid = false;
+                {Problem}{i} = $""Character '{{{Char}{i}}}' is not valid.""; break;
         }}");
         }
         return builder.Append($@"
-        return problem is null ? value : problem.TrimEnd();
+        return valid ? value : string.Join((char)32, {string.Join(", ", problemVariables)});
     }}
-}}
-");
+}}");
     }
 
     private protected override BaseTarget CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _)

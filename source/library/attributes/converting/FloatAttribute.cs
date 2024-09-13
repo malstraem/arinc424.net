@@ -12,5 +12,5 @@ internal sealed class FloatAttribute(float divisor) : DecodeAttribute<float>
 
     internal override Result<float> Convert(ReadOnlySpan<char> @string) => float.TryParse(@string, style, null, out float value)
         ? value / divisor
-        : $"'{@string}' can't be parsed as a float.";
+        : @string;
 }

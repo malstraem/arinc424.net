@@ -8,14 +8,12 @@ internal abstract class ThresholdHeightConverter : IStringConverter<ThresholdHei
 {
     public static Result<ThresholdHeight> Convert(ReadOnlySpan<char> @string)
     {
-        string? problem = null;
+        AltitudeUnit unit;
 
-        var unit = AltitudeUnit.Unknown;
+        var value = @string[..6];
 
-        var height = @string[..6];
-
-        if (!float.TryParse(height, None, null, out float value))
-            problem = $"Height '{height}' can't be parsed as float.";
+        if (!float.TryParse(value, None, null, out float height))
+            return value;
 
         char @char = @string[6];
 
@@ -23,18 +21,18 @@ internal abstract class ThresholdHeightConverter : IStringConverter<ThresholdHei
         {
             unit = AltitudeUnit.Feet;
 
-            value /= 10;
+            height /= 10;
         }
         else if (@char is 'M')
         {
             unit = AltitudeUnit.Meters;
 
-            value /= 100;
+            height /= 100;
         }
         else
         {
-            problem += $"'{@char}' is not valid TCH unit.";
+            return @char;
         }
-        return problem is null ? new ThresholdHeight(value, unit) : problem;
+        return new ThresholdHeight(height, unit);
     }
 }

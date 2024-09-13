@@ -6,33 +6,26 @@ internal abstract class LevelConverter : IStringConverter<Level>
 {
     public static Result<Level> Convert(ReadOnlySpan<char> @string)
     {
-        string? problem = null;
-
-        Altitude from = default, separation = default, to = default;
-
         var altitude = AltitudeConverter.Convert(@string[..5]);
 
         if (altitude.Invalid)
-            problem = altitude.Problem;
-        else
-            from = altitude.Value;
+            return altitude.Bad;
+
+        var from = altitude.Value;
 
         altitude = AltitudeConverter.Convert(@string[5..10]);
 
         if (altitude.Invalid)
-            problem += altitude.Problem;
-        else
-            separation = altitude.Value;
+            return altitude.Bad;
+
+        var separation = altitude.Value;
 
         altitude = AltitudeConverter.Convert(@string[10..15]);
 
         if (altitude.Invalid)
-            problem += altitude.Problem;
-        else
-            to = altitude.Value;
+            return altitude.Bad;
 
-        if (problem is not null)
-            return problem;
+        var to = altitude.Value;
 
         if (from.Unit is AltitudeUnit.Meters)
             from *= 10;

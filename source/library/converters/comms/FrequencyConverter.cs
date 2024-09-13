@@ -12,7 +12,7 @@ internal abstract class FrequencyConverterV19 : IStringConverter<Frequency>
         var result = FrequencyUnitConverter.Convert(@string[14]);
 
         if (result.Invalid)
-            return result.Problem;
+            return result.Bad;
 
         var unit = result.Value;
 
@@ -20,21 +20,21 @@ internal abstract class FrequencyConverterV19 : IStringConverter<Frequency>
 
         var sub = @string[0..7];
 
-        if (float.TryParse(sub, None, null, out float value))
-            transmit = value;
-        else if (sub.IsWhiteSpace())
+        if (sub.IsWhiteSpace())
             transmit = null;
+        else if (float.TryParse(sub, None, null, out float value))
+            transmit = value;
         else
-            return $"Transmit frequency '{sub}' can't be parsed.";
+            return sub;
 
         sub = @string[7..14];
 
-        if (float.TryParse(sub, None, null, out value))
-            receive = value;
-        else if (sub.IsWhiteSpace())
+        if (sub.IsWhiteSpace())
             receive = null;
+        else if (float.TryParse(sub, None, null, out float value))
+            receive = value;
         else
-            return $"Receive frequency '{sub}' can't be parsed.";
+            return sub;
 
         return new Frequency
         (
@@ -52,7 +52,7 @@ internal abstract class FrequencyConverter : IStringConverter<Frequency>
         var result = FrequencyUnitConverter.Convert(@string[8]);
 
         if (result.Invalid)
-            return result.Problem;
+            return result.Bad;
 
         var unit = result.Value;
 
@@ -61,7 +61,7 @@ internal abstract class FrequencyConverter : IStringConverter<Frequency>
         var sub = @string[0..7];
 
         if (!float.TryParse(sub, None, null, out float value))
-            return sub.IsWhiteSpace() ? new Frequency() : $"Frequency '{sub}' can't be parsed.";
+            return sub.IsWhiteSpace() ? new Frequency() : sub;
 
         char guard = @string[7];
 

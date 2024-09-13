@@ -7,6 +7,6 @@ internal abstract class RadarAvailabilityConverter : ICharConverter<Bool>
         'R' => Bool.Yes,
         'N' => Bool.No,
         'U' => Bool.Unspecified,
-        _ => $"Char '{@char}' is not valid"
+        _ => @char
     };
 }

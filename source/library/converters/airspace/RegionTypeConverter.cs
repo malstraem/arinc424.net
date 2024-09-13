@@ -9,6 +9,6 @@ internal abstract class RegionTypeConverter : ICharConverter<RegionType>
         'F' => RegionType.FlightInfo,
         'U' => RegionType.UpperInfo,
         'B' => RegionType.FlightInfo | RegionType.UpperInfo,
-        _ => $"Char '{@char}' is not valid"
+        _ => @char
     };
 }

@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.0" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.1" />
     <PackageVersion Include="Docfx.App" Version="2.77.0" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" PrivateAssets="all" />
