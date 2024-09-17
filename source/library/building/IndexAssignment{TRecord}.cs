@@ -22,12 +22,10 @@ internal sealed class TransformAssignment<TRecord, TType>(PropertyInfo property,
     {
         char @char = @string[index];
 
-        var result = transform.Convert(@char);
-
-        if (result.Invalid)
-            diagnostics.Enqueue(new ValueDiagnostic(record, Property, result.Bad.ToString(), index..index));
+        if (transform.TryConvert(@char, out var value))
+            set(record, value);
         else
-            set(record, result.Value);
+            diagnostics.Enqueue(new ValueDiagnostic(record, Property, @char.ToString(), index..index));
     }
 }
 

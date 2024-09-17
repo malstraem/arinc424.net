@@ -19,7 +19,7 @@ internal abstract class StartingCoordinatesConverter : IStringConverter<Coordina
         if (sign is 'S')
             latitude = -latitude;
         else if (sign is not 'N')
-            return sign;
+            return sub[0..0];
 
         sub = @string[4..7];
 
@@ -31,7 +31,7 @@ internal abstract class StartingCoordinatesConverter : IStringConverter<Coordina
         if (sign is 'W')
             longitude = -longitude;
         else if (sign is not 'E')
-            return sign;
+            return sub[3..3];
 
         return new Coordinates(latitude, longitude);
     }

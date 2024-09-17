@@ -20,19 +20,5 @@ internal readonly ref struct Result<TType> where TType : notnull
 
     public static implicit operator Result<TType>(TType value) => new(value);
 
-    /// <summary>
-    /// Used for fluent converting code.
-    /// </summary>
     public static implicit operator Result<TType>(ReadOnlySpan<char> bad) => new(bad);
-
-    /// <summary>
-    /// Used for fluent converting code.
-    /// </summary>
-    public static implicit operator Result<TType>(char bad)
-    {
-        unsafe
-        {
-            return new Result<TType>(new Span<char>(&bad, 1));
-        }
-    }
 }

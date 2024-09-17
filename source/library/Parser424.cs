@@ -39,7 +39,13 @@ internal partial class Parser424
         }
     }
 
-    private void Build() => Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
+    private void Build()
+    {
+        foreach (var info in meta.Info)
+            builds[info.Section] = info.Build(strings[info.Section].Primary);
+
+        //_ = Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
+    }
 
     private void Link()
     {

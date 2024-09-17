@@ -9,40 +9,42 @@ internal abstract class CoordinatesConverter : IStringConverter<Coordinates>
 {
     public static Result<Coordinates> Convert(ReadOnlySpan<char> @string)
     {
-        string? problem = null;
+        var sub = @string[0..9];
 
-        if (!double.TryParse(@string[1..3], None, null, out double degrees)
-         | !double.TryParse(@string[3..5], None, null, out double minutes)
-         | !double.TryParse(@string[5..9], None, null, out double centiseconds))
+        if (!double.TryParse(sub[1..3], None, null, out double degrees)
+          | !double.TryParse(sub[3..5], None, null, out double minutes)
+          | !double.TryParse(sub[5..9], None, null, out double centiseconds))
         {
-            problem += $"Latitude '{@string[0..9]}' can't be parsed.";
+            return sub;
         }
 
         double latitude = degrees + (minutes / 60) + (centiseconds / 360000);
 
-        char sign = @string[0];
+        char sign = sub[0];
 
         if (sign is 'S')
             latitude = -latitude;
         else if (sign is not 'N')
-            problem += $"Latitude sign '{sign}' is not valid.";
+            return sub[0..0];
 
-        if (!double.TryParse(@string[10..13], None, null, out degrees)
-         | !double.TryParse(@string[13..15], None, null, out minutes)
-         | !double.TryParse(@string[15..19], None, null, out centiseconds))
+        sub = @string[9..19];
+
+        if (!double.TryParse(sub[1..4], None, null, out degrees)
+          | !double.TryParse(sub[4..6], None, null, out minutes)
+          | !double.TryParse(sub[6..10], None, null, out centiseconds))
         {
-            problem += $"Longitude '{@string[9..19]}' can't be parsed.";
+            return sub;
         }
 
         double longitude = degrees + (minutes / 60) + (centiseconds / 360000);
 
-        sign = @string[9];
+        sign = sub[0];
 
         if (sign is 'W')
             longitude = -longitude;
         else if (sign is not 'E')
-            problem += $"Longitude sign '{sign}' is not valid.";
+            return sub[0..0];
 
-        return problem is null ? new Coordinates(latitude, longitude) : problem;
+        return new Coordinates(latitude, longitude);
     }
 }

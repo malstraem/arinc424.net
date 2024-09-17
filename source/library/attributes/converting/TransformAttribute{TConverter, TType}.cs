@@ -9,7 +9,7 @@ internal abstract class TransformAttribute(Supplement start) : SupplementAttribu
 /// <typeparam name="TType">Type in which the value will be transformed from the char.</typeparam>
 internal abstract class TransformAttribute<TType>(Supplement start) : TransformAttribute(start) where TType : Enum
 {
-    internal abstract Result<TType> Convert(char @char);
+    internal abstract bool TryConvert(char @char, out TType value);
 }
 
 /// <inheritdoc/>
@@ -19,5 +19,5 @@ internal sealed class TransformAttribute<TConverter, TType>(Supplement start = S
     where TConverter : ICharConverter<TType>
     where TType : Enum
 {
-    internal override Result<TType> Convert(char @char) => TConverter.Convert(@char);
+    internal override bool TryConvert(char @char, out TType value) => TConverter.TryConvert(@char, out value);
 }

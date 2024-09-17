@@ -10,13 +10,10 @@ using static Constants;
 [Generator]
 public class FlagsGenerator : ConverterGenerator
 {
-    private protected override string GetOffset(string blank) => $"\n{{";
-
-    private protected override StringBuilder WriteMembers(StringBuilder builder, Member[] members, string unknown) => throw new NotImplementedException();
-
     private protected override StringBuilder WriteTarget(StringBuilder builder, BaseTarget target)
     {
         _ = builder.Append($@"
+    public static Result<{target.Symbol.Name}> Convert({StringArg})
     {{
         bool valid = true;
 
@@ -24,20 +21,13 @@ public class FlagsGenerator : ConverterGenerator
 
         var offsetMembers = ((FlagsTarget)target).GetMembersWithBlank();
 
-        string[] problemVariables = new string[offsetMembers.Length],
-                 charDeclarations = new string[offsetMembers.Length],
-                 problemDeclarations = new string[offsetMembers.Length];
+        string[] charDeclarations = new string[offsetMembers.Length];
 
         for (int i = 0; i < offsetMembers.Length; i++)
-        {
-            problemVariables[i] = $"{Problem}{i}";
             charDeclarations[i] = $"{Char}{i} = {String}[{i}]";
-            problemDeclarations[i] = $"{problemVariables[i]} = null";
-        }
-        _ = builder.Append($@"
-        char {string.Join(", ", charDeclarations)};
 
-        string? {string.Join(", ", problemDeclarations)};").Append("\n");
+        _ = builder.Append($@"
+        char {string.Join(", ", charDeclarations)};").Append("\n");
 
         for (int i = 0; i < offsetMembers.Length; i++)
         {
@@ -46,6 +36,10 @@ public class FlagsGenerator : ConverterGenerator
         {{");
 
             var (members, blank) = offsetMembers[i];
+
+            _ = builder.Append(@$"
+            case (char)32:
+                value |= {blank}; break;");
 
             foreach (var member in members)
             {
@@ -56,17 +50,13 @@ public class FlagsGenerator : ConverterGenerator
                 value |= {fullName}; break;");
             }
             _ = builder.Append(@$"
-            case (char)32:
-                value |= {blank}; break;
             default:
-                valid = false;
-                {Problem}{i} = $""Character '{{{Char}{i}}}' is not valid.""; break;
+                valid = false; break;
         }}");
         }
         return builder.Append($@"
-        return valid ? value : string.Join((char)32, {string.Join(", ", problemVariables)});
-    }}
-}}");
+        return valid ? value : {String};
+    }}");
     }
 
     private protected override BaseTarget CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _)
@@ -99,7 +89,6 @@ public class FlagsGenerator : ConverterGenerator
     public FlagsGenerator()
     {
         @base = StringConverter;
-        args = StringArgs;
         qualifier = StringAttributeQualifier;
     }
 }

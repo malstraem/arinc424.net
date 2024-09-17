@@ -12,18 +12,9 @@ using static Constants;
 public abstract class ConverterGenerator : IIncrementalGenerator
 {
 #pragma warning disable CS8618
-    protected string @base, args, qualifier;
+    protected string @base, qualifier;
 #pragma warning restore CS8618
-    private protected abstract string GetOffset(string blank);
-
-    private protected abstract StringBuilder WriteMembers(StringBuilder builder, Member[] members, string unknown);
-
-    private protected virtual StringBuilder WriteTarget(StringBuilder builder, BaseTarget target)
-    {
-        var (members, blank) = ((Target)target).GetMembersWithBlank();
-
-        return WriteMembers(builder.WriteOffset(GetOffset(blank)), members, target.Unknown).Append("\n    };\n}\n");
-    }
+    private protected abstract StringBuilder WriteTarget(StringBuilder builder, BaseTarget target);
 
     private void Process(SourceProductionContext context, ImmutableArray<BaseTarget> targets)
     {
@@ -48,10 +39,9 @@ public abstract class ConverterGenerator : IIncrementalGenerator
 
             internal abstract class {{name}} : {{@base}}<{{symbol.Name}}>
             {
-                public static Result<{{symbol.Name}}> Convert({{args}})
             """);
 
-        return ($"{name}.gen.cs", WriteTarget(builder, target).ToString());
+        return ($"{name}.gen.cs", WriteTarget(builder, target).Append("\n}").ToString());
     }
 
     private protected virtual bool IsMatch(EnumDeclarationSyntax @enum) => true;

@@ -31,7 +31,7 @@ internal abstract class ThresholdHeightConverter : IStringConverter<ThresholdHei
         }
         else
         {
-            return @char;
+            return @string[6..6];
         }
         return new ThresholdHeight(height, unit);
     }

@@ -11,12 +11,10 @@ internal abstract class ArrivalSectorConverter : IStringConverter<ArrivalSector>
         if (sector.Invalid)
             return sector;
 
-        var result = BoolConverter.Convert(@string[13]);
+        if (!BoolConverter.TryConvert(@string[13], out var value))
+            return @string[13..13];
 
-        if (result.Invalid)
-            return result.Bad;
-
-        sector.Value.TurnRequired = result.Value;
+        sector.Value.TurnRequired = value;
 
         return sector;
     }

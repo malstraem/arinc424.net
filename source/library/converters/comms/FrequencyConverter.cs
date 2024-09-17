@@ -9,12 +9,8 @@ internal abstract class FrequencyConverterV19 : IStringConverter<Frequency>
 {
     public static Result<Frequency> Convert(ReadOnlySpan<char> @string)
     {
-        var result = FrequencyUnitConverter.Convert(@string[14]);
-
-        if (result.Invalid)
-            return result.Bad;
-
-        var unit = result.Value;
+        if (!FrequencyUnitConverter.TryConvert(@string[14], out var unit))
+            return @string[14..14];
 
         float? transmit, receive;
 
@@ -49,12 +45,8 @@ internal abstract class FrequencyConverter : IStringConverter<Frequency>
 {
     public static Result<Frequency> Convert(ReadOnlySpan<char> @string)
     {
-        var result = FrequencyUnitConverter.Convert(@string[8]);
-
-        if (result.Invalid)
-            return result.Bad;
-
-        var unit = result.Value;
+        if (!FrequencyUnitConverter.TryConvert(@string[8], out var unit))
+            return @string[8..8];
 
         float? transmit = null, receive = null;
 

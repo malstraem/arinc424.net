@@ -10,17 +10,29 @@ using static Constants;
 [Generator]
 public class StringGenerator : ConverterGenerator
 {
-    private protected override string GetOffset(string blank) => $" => {String}.IsWhiteSpace() ? {blank} : {String}";
+    private protected override StringBuilder WriteTarget(StringBuilder builder, BaseTarget target)
+    {
+        var (members, blank) = ((Target)target).GetMembersWithBlank();
 
-    private protected override StringBuilder WriteMembers(StringBuilder builder, Member[] members, string _)
-        => builder.WriteMembers(members).Append($"\n        _ => $\"Substring '{{{String}}}' is not valid.\"");
+        _ = builder.Append($@"
+    public static Result<{target.Symbol.Name}> Convert({StringArg}) => {String}.IsWhiteSpace() ? {blank} : {String} switch
+    {{");
+
+        foreach (var (name, argument) in members)
+        {
+            _ = builder.Append($@"
+        {argument} => {name},");
+        }
+        return builder.Append($@"
+        _ => {String}
+    }};");
+    }
 
     private protected override bool IsMatch(EnumDeclarationSyntax @enum) => !@enum.HaveAttribute(FlagsAttribute);
 
     public StringGenerator()
     {
         @base = StringConverter;
-        args = StringArgs;
         qualifier = StringAttributeQualifier;
     }
 }
