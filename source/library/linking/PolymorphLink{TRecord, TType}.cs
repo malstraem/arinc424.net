@@ -31,7 +31,7 @@ internal sealed class PolymorphLink<TRecord, TType>(KeyInfo ranges, PropertyInfo
 
         if (!meta.Types.TryGetValue(section, out var type))
         {
-            diagnostic = new LinkDiagnostic(record, $"Section '{sectionChar}, {subsectionChar}' does not exist.", foreign.Info, indexes);
+            diagnostic = new InvalidSection(record, property, index, subindex);
             Debug.WriteLine(diagnostic);
             return false;
         }
@@ -40,11 +40,10 @@ internal sealed class PolymorphLink<TRecord, TType>(KeyInfo ranges, PropertyInfo
 
         if (primary is null)
         {
-            diagnostic = new LinkDiagnostic(record, $"Record type '{type}' does not have unique key.", foreign.Info, indexes);
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoPrimary);
             Debug.WriteLine(diagnostic);
             return false;
         }
-
         if (foreign.TryGetKey(@string, primary, out string? key))
         {
             reference = (key, type, section);
@@ -62,41 +61,26 @@ internal sealed class PolymorphLink<TRecord, TType>(KeyInfo ranges, PropertyInfo
 
         if (!unique.TryGetRecords(type, out var records))
         {
-            diagnostic = new LinkDiagnostic(record, $"No records of type '{type}' were found.", foreign.Info, indexes);
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound);
             Debug.WriteLine(diagnostic);
             return false;
         }
-
         if (!records.TryGetValue(key, out var referenced))
         {
-            diagnostic = new LinkDiagnostic(record, $"'{type}' record with key '{key}' was not found.", foreign.Info, indexes);
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key };
             Debug.WriteLine(diagnostic);
             return false;
         }
-
         if (referenced is not TType @ref)
         {
-            diagnostic = new LinkDiagnostic(record, $"'{type}' entity with key '{key}' is not a '{typeof(TType).Name}' type reference.", foreign.Info, indexes);
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.WrongType) { WrongType = type };
             Debug.WriteLine(diagnostic);
             return false;
         }
-
         set(record, @ref);
 
-        var relations = meta.TypeInfo[type].Relations;
+        meta.TypeInfo[type].Relations.Process(type, referenced, record);
 
-        // todo: compiled one & many relations
-        if (relations.many.TryGetValue(type, out var property))
-        {
-            if (property.GetValue(referenced) is not List<TRecord> value)
-                property.SetValue(referenced, value = []);
-
-            value.Add(record);
-        }
-        else if (relations.one.TryGetValue(type, out property))
-        {
-            property.SetValue(referenced, record);
-        }
         return true;
     }
 }

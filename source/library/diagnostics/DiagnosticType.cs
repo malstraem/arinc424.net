@@ -2,9 +2,10 @@ namespace Arinc424.Diagnostics;
 
 public enum DiagnosticType
 {
+    Null,
     Duplicate,
-    Nullability,
     InvalidLink,
     InvalidType,
     InvalidValue,
+    InvalidSection,
 }

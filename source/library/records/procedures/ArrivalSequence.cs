@@ -2,8 +2,7 @@ using Arinc424.Processing;
 
 namespace Arinc424.Procedures;
 
-[Process<Arrival, ArrivalSequence,
-    ProcedureConcatenater<Arrival, ArrivalSequence, ArrivalPoint>>] // any more elegant way?
+[Wrap<Arrival, ArrivalSequence, IdentifierTrigger<ArrivalSequence>>]
 public class ArrivalSequence : ProcedureSequence<ArrivalPoint>
 {
     /// <inheritdoc cref="Terms.ArrivalType"/>

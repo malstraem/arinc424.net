@@ -8,7 +8,7 @@ namespace Arinc424.Airspace;
 /// </summary>
 /// <remarks>See section 4.1.17.1.</remarks>
 [Identifier(7, 10), Sequenced(16, 19), Continuous(20)]
-[Process<FlightRegion, RegionVolume, FlightRegionConcatanater>]
+[Wrap<FlightRegion, RegionVolume, IdentifierTrigger<RegionVolume>>]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Name)},nq}}")]
 public class RegionVolume : Record424<RegionPoint>, IIdentity, INamed
 {

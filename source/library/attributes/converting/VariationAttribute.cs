@@ -23,7 +23,7 @@ internal sealed class VariationAttribute : DecodeAttribute<float>
         if (sign is 'W')
             return -degrees;
         else if (sign is not 'E')
-            return sign;
+            return @string[0..0];
 
         return degrees;
     }

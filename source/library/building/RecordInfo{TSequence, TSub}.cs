@@ -36,6 +36,6 @@ internal sealed class RecordInfo<TSequence, TSub>(Supplement supplement, Range s
                 builds.Enqueue(build);
             }
         }
-        return process is not null ? process.Process(builds) : builds;
+        return pipeline is not null ? pipeline.Process(builds) : builds;
     }
 }

@@ -1,4 +1,4 @@
-using Arinc424.Ports;
+using Arinc424.Ground;
 using Arinc424.Waypoints.Terms;
 
 namespace Arinc424.Procedures;

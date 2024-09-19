@@ -2,8 +2,7 @@ using Arinc424.Processing;
 
 namespace Arinc424.Procedures;
 
-[Process<Departure, DepartureSequence,
-    ProcedureConcatenater<Departure, DepartureSequence, DeparturePoint>>]
+[Wrap<Departure, DepartureSequence, IdentifierTrigger<DepartureSequence>>]
 public class DepartureSequence : ProcedureSequence<DeparturePoint>
 {
     /// <inheritdoc cref="Terms.DepartureType"/>

@@ -4,7 +4,7 @@ namespace Arinc424;
 
 /// <summary>
 /// Simple result pattern to avoid try-catch. Allows to handle bad values while populating properties
-/// using <see cref="IStringConverter{TType}"/> or <see cref="ICharConverter{TType}"/> implementations.
+/// using <see cref="IStringConverter{TType}"/> implementations.
 /// </summary>
 internal readonly ref struct Result<TType> where TType : notnull
 {

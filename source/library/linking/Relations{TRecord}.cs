@@ -15,6 +15,22 @@ internal abstract class Relations(Type type)
     protected internal abstract void Link(IEnumerable<Record424> records, Unique unique, Meta424 meta, Queue<Diagnostic>? diagnostics);
 
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
+
+    internal void Process<TRecord>(Type type, Record424 self, TRecord referenced) where TRecord : Record424
+    {
+        // todo: compiled one & many relations
+        if (many.TryGetValue(type, out var property))
+        {
+            if (property.GetValue(self) is not List<TRecord> value)
+                property.SetValue(self, value = []);
+
+            value.Add(referenced);
+        }
+        else if (one.TryGetValue(type, out property))
+        {
+            property.SetValue(referenced, referenced);
+        }
+    }
 }
 
 internal sealed class Relations<TRecord> : Relations where TRecord : Record424

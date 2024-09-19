@@ -25,7 +25,7 @@ internal sealed class TransformAssignment<TRecord, TType>(PropertyInfo property,
         if (transform.TryConvert(@char, out var value))
             set(record, value);
         else
-            diagnostics.Enqueue(new ValueDiagnostic(record, Property, @char.ToString(), index..index));
+            diagnostics.Enqueue(new InvalidValue(record, Property, [@char], index..index));
     }
 }
 

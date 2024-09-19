@@ -4,12 +4,11 @@ namespace Arinc424.Airspace;
 /// Space volume with low and up limits.
 /// </summary>
 [Icao(7, 8), Sequenced(21, 24), Continuous(25)]
-public abstract class Volume : Record424<BoundaryPoint>, IIcao, INamed
+public abstract class Volume : Record424<BoundaryPoint>, IIcao, INamed, IMultiple
 {
     [Field(7, 8)]
     public string IcaoCode { get; set; }
 
-    /// <include file='Comments.xml' path="doc/member[@name='MultipleCode']/*"/>
     [Character(20)]
     public char MultipleCode { get; set; }
 

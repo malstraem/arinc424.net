@@ -1,12 +1,12 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies that the value will be transformed by associated converter before assignment using <see cref="CharacterAttribute"/> index.
+/// Specifies that the character will be converted before assignment using <see cref="CharacterAttribute"/> index.
 /// </summary>
 internal abstract class TransformAttribute(Supplement start) : SupplementAttribute(start);
 
 /// <inheritdoc/>
-/// <typeparam name="TType">Type in which the value will be transformed from the char.</typeparam>
+/// <typeparam name="TType">The type to which the character will be converted.</typeparam>
 internal abstract class TransformAttribute<TType>(Supplement start) : TransformAttribute(start) where TType : Enum
 {
     internal abstract bool TryConvert(char @char, out TType value);

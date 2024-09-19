@@ -28,7 +28,7 @@ internal class Unique
             return;
 
         build.Diagnostics ??= [];
-        build.Diagnostics.Enqueue(new DuplicateDiagnostic(record, info.Type, key));
+        build.Diagnostics.Enqueue(new Duplicate(record, info.Type, key));
         Debug.WriteLine(build.Diagnostics.Last());
     }
 

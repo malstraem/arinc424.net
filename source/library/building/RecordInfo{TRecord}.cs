@@ -2,6 +2,7 @@ using System.Reflection;
 
 using Arinc424.Diagnostics;
 using Arinc424.Linking;
+using Arinc424.Processing;
 
 namespace Arinc424.Building;
 
@@ -12,6 +13,7 @@ internal abstract class RecordInfo
 
     protected Primary? primary;
 
+    [Obsolete("todo nullable")]
     protected Relations relations;
 
     protected SectionAttribute section;
@@ -22,7 +24,8 @@ internal abstract class RecordInfo
 
     internal bool IsMatch(string @string) => section.IsMatch(@string);
 
-    internal bool IsContinuation(string @string) => continuationIndex is not null && @string[continuationIndex.Value] is not '0' and not '1';
+    internal bool IsContinuation(string @string) => continuationIndex is not null
+                                                 && @string[continuationIndex.Value] is not '0' and not '1';
 
     internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta) => relations.Link(builds, unique, meta);
 
@@ -54,28 +57,26 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
 {
     protected readonly BuildInfo<TRecord> info;
 
-    protected readonly ProcessAttribute<TRecord>? process;
+    protected readonly IPipeline<TRecord>? pipeline;
 
     internal RecordInfo(Supplement supplement)
     {
-        var type = typeof(TRecord);
-
         info = new(supplement);
 
-        process = type.GetCustomAttribute<ProcessAttribute<TRecord>>();
+        var type = typeof(TRecord);
 
-        if (process is not null && supplement < process.Start && supplement > process.End)
-            process = null;
+        var pipelineAttribute = type.GetCustomAttribute<PipelineAttribute<TRecord>>();
+
+        if (pipelineAttribute is not null && supplement >= pipelineAttribute.Start && supplement <= pipelineAttribute.End)
+            pipeline = pipelineAttribute.GetPipeline(supplement);
 
         continuationIndex = type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
 
-        (this.type, primary) = process is null
-            ? (type, Primary.Create(type))
-            : (process.NewType, Primary.Create(process.NewType));
+        this.type = pipelineAttribute is null ? type : pipelineAttribute.NewType;
 
-        relations = process is null
-            ? new Relations<TRecord>(supplement)
-            : process.GetRelations(supplement);
+        primary = Primary.Create(this.type);
+
+        relations = pipelineAttribute is null ? new Relations<TRecord>(supplement) : pipelineAttribute.GetRelations(supplement);
     }
 
     internal override IEnumerable<Build> Build(Queue<string> strings)
@@ -95,6 +96,6 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
             }
             builds.Enqueue(build);
         }
-        return process is not null ? process.Process(builds) : builds;
+        return pipeline is not null ? pipeline.Process(builds) : builds;
     }
 }

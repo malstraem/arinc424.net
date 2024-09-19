@@ -8,7 +8,7 @@ namespace Arinc424.Comms;
 /// </summary>
 /// <remarks>See section 4.1.23.1.</remarks>
 [Section('E', 'V'), Continuous(56)]
-[Process<AirwayCommunication, AirwayCommunication, AirwayCommConcatanater>]
+[CommWrapBeforeV19<AirwayCommunication, AirwayTransmitter>]
 public class AirwayCommunication : Communication<AirwayTransmitter>
 {
     [Identifier(7, 10)]
@@ -18,9 +18,9 @@ public class AirwayCommunication : Communication<AirwayTransmitter>
     /// <c>FIR/UIR Address (ADDRESS)</c> field.
     /// </summary>
     /// <remarks>See section 5.151.</remarks>
-    [Field(11, 14), Obsolete("todo")]
+    [Field(11, 14)]
     public string Address { get; set; }
 
-    [Character(15), Obsolete("todo")]
+    [Character(15)]
     public char Indicator { get; set; }
 }

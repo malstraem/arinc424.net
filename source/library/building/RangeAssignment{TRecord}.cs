@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -55,7 +56,7 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
         var result = decode.Convert(@field);
 
         if (result.Invalid)
-            diagnostics.Enqueue(new ValueDiagnostic(record, Property, result.Bad.ToString(), range));
+            diagnostics.Enqueue(new InvalidValue(record, Property, result.Bad.ToImmutableArray(), range));
         else
             set(record, result.Value);
     }

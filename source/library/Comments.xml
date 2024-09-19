@@ -114,13 +114,6 @@
     <remarks>See section 5.127.</remarks>
   </member>
 
-  <member name="MultipleCode">
-    <summary>
-      <c>Multiple Code (MULTI CD)</c> character.
-    </summary>
-    <remarks>See section 5.130.</remarks>
-  </member>
-
   <member name="Datum">
     <summary>
       <c>Datum Code (DATUM)</c> field.

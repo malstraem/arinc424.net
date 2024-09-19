@@ -1,4 +1,4 @@
-using Arinc424.Ports.Terms;
+using Arinc424.Ground.Terms;
 
 namespace Arinc424.Converters;
 
