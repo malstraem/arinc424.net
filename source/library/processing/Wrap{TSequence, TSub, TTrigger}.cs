@@ -51,7 +51,7 @@ internal class Wrap<TSequence, TSub, TTrigger>(Supplement supplement) : IPipelin
                 build.Record.Sequence.Add(sub.Record);
 
                 if (sub.Diagnostics is not null)
-                    diagnostics.Enqueue(sub.Diagnostics);
+                    diagnostics.Pump(sub.Diagnostics);
             }
             if (diagnostics.Count != 0)
             {

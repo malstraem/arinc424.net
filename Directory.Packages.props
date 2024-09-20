@@ -1,6 +1,6 @@
 <Project>
   <ItemGroup>
-    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.1" />
+    <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.3.2" />
 
     <PackageVersion Include="Docfx.App" Version="2.77.0" />
 

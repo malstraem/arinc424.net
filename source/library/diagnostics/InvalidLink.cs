@@ -4,12 +4,12 @@ using Arinc424.Linking;
 
 namespace Arinc424.Diagnostics;
 
-public class InvalidLink(Record424 record, PropertyInfo property, KeyInfo ranges, LinkError error)
+public class InvalidLink(Record424 record, PropertyInfo property, LinkInfo info, LinkError error)
     : PropertyDiagnostic(DiagnosticType.InvalidLink, record, property)
 {
     public LinkError Error { get; } = error;
 
-    public KeyInfo Ranges { get; } = ranges;
+    public LinkInfo Info { get; } = info;
 
     public string? Key { get; internal set; }
 

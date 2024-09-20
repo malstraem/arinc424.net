@@ -11,7 +11,7 @@ namespace Arinc424.Linking;
 /// </summary>
 internal class Unique
 {
-    internal readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
+    private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
     [Obsolete("todo: diagnostics")]
     private void ProcessPrimaryKey(Build build, RecordInfo info)

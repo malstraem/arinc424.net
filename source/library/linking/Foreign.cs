@@ -2,7 +2,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Arinc424.Linking;
 
-internal sealed class Foreign(KeyInfo ranges) : Key(ranges)
+internal sealed class Foreign(LinkInfo info) : Key(info)
 {
     internal bool TryGetKey(ReadOnlySpan<char> @string, Key primary, [NotNullWhen(true)] out string? key)
     {

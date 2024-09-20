@@ -14,7 +14,7 @@ internal class IdentifierAttribute(int left, int right, Supplement start = Suppl
         var port = type.GetCustomAttributes<PortAttribute>().BySupplement(supplement)?.Range;
         var icao = type.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range;
 
-        KeyInfo ranges = new()
+        LinkInfo info = new()
         {
             Port = port,
             Icao = property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range ?? icao,
@@ -26,19 +26,19 @@ internal class IdentifierAttribute(int left, int right, Supplement start = Suppl
         if (possible is not null)
         {
             return (Link<TRecord>)Activator
-                .CreateInstance(typeof(PossibleLink<,>)
-                    .MakeGenericType(typeof(TRecord), property.PropertyType), ranges, property, possible.Types)!;
+                .CreateInstance(typeof(Possible<,>)
+                    .MakeGenericType(typeof(TRecord), property.PropertyType), info, property, possible.Types)!;
         }
 
         var typeAttribute = property.GetCustomAttributes<TypeAttribute>().BySupplement(supplement);
 
         return typeAttribute is not null
             ? (Link<TRecord>)Activator
-                .CreateInstance(typeof(PolymorphLink<,>)
-                    .MakeGenericType(typeof(TRecord), property.PropertyType), ranges, property, typeAttribute)!
+                .CreateInstance(typeof(Polymorph<,>)
+                    .MakeGenericType(typeof(TRecord), property.PropertyType), info, property, typeAttribute)!
 
             : (Link<TRecord>)Activator
-                .CreateInstance(typeof(Link<,>)
-                    .MakeGenericType(typeof(TRecord), property.PropertyType), ranges, property)!;
+                .CreateInstance(typeof(Known<,>)
+                    .MakeGenericType(typeof(TRecord), property.PropertyType), info, property)!;
     }
 }

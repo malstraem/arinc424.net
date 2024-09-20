@@ -13,8 +13,7 @@ internal abstract class RecordInfo
 
     protected Primary? primary;
 
-    [Obsolete("todo nullable")]
-    protected Relations relations;
+    protected Relationships? relations;
 
     protected SectionAttribute section;
 #pragma warning restore CS8618
@@ -27,7 +26,7 @@ internal abstract class RecordInfo
     internal bool IsContinuation(string @string) => continuationIndex is not null
                                                  && @string[continuationIndex.Value] is not '0' and not '1';
 
-    internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta) => relations.Link(builds, unique, meta);
+    internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta) => relations?.Link(builds, unique, meta);
 
     internal IEnumerable<RecordInfo> DuplicateBySection()
     {
@@ -48,7 +47,7 @@ internal abstract class RecordInfo
 
     internal Primary? Primary => primary;
 
-    internal Relations Relations => relations;
+    internal Relationships? Relations => relations;
 
     internal Section Section => section.Section;
 }
@@ -63,20 +62,20 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
     {
         info = new(supplement);
 
-        var type = typeof(TRecord);
+        type = typeof(TRecord);
 
-        var pipelineAttribute = type.GetCustomAttribute<PipelineAttribute<TRecord>>();
+        var pipe = type.GetCustomAttribute<PipelineAttribute<TRecord>>();
 
-        if (pipelineAttribute is not null && supplement >= pipelineAttribute.Start && supplement <= pipelineAttribute.End)
-            pipeline = pipelineAttribute.GetPipeline(supplement);
+        if (pipe is not null && supplement >= pipe.Start && supplement <= pipe.End)
+            pipeline = pipe.GetPipeline(supplement);
 
         continuationIndex = type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
 
-        this.type = pipelineAttribute is null ? type : pipelineAttribute.NewType;
+        type = pipe is null ? type : pipe.OutType;
 
-        primary = Primary.Create(this.type);
+        primary = Primary.Create(type);
 
-        relations = pipelineAttribute is null ? new Relations<TRecord>(supplement) : pipelineAttribute.GetRelations(supplement);
+        relations = pipe is null ? Relationships<TRecord>.Create(supplement) : Relationships.Create(pipe.OutType, supplement);
     }
 
     internal override IEnumerable<Build> Build(Queue<string> strings)

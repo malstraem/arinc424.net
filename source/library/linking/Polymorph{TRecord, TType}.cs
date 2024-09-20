@@ -5,8 +5,8 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Linking;
 
-internal sealed class PolymorphLink<TRecord, TType>(KeyInfo ranges, PropertyInfo property, TypeAttribute typeAttribute)
-    : Link<TRecord, TType>(ranges, property)
+internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo property, TypeAttribute typeAttribute)
+    : Known<TRecord, TType>(info, property)
         where TRecord : Record424
         where TType : class
 {
@@ -32,7 +32,6 @@ internal sealed class PolymorphLink<TRecord, TType>(KeyInfo ranges, PropertyInfo
         if (!meta.Types.TryGetValue(section, out var type))
         {
             diagnostic = new InvalidSection(record, property, index, subindex);
-            Debug.WriteLine(diagnostic);
             return false;
         }
 
@@ -41,7 +40,6 @@ internal sealed class PolymorphLink<TRecord, TType>(KeyInfo ranges, PropertyInfo
         if (primary is null)
         {
             diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoPrimary);
-            Debug.WriteLine(diagnostic);
             return false;
         }
         if (foreign.TryGetKey(@string, primary, out string? key))
@@ -62,24 +60,21 @@ internal sealed class PolymorphLink<TRecord, TType>(KeyInfo ranges, PropertyInfo
         if (!unique.TryGetRecords(type, out var records))
         {
             diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound);
-            Debug.WriteLine(diagnostic);
             return false;
         }
         if (!records.TryGetValue(key, out var referenced))
         {
             diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key };
-            Debug.WriteLine(diagnostic);
             return false;
         }
         if (referenced is not TType @ref)
         {
             diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.WrongType) { WrongType = type };
-            Debug.WriteLine(diagnostic);
             return false;
         }
         set(record, @ref);
 
-        meta.TypeInfo[type].Relations.Process(type, referenced, record);
+        meta.TypeInfo[type].Relations?.Process(type, referenced, record);
 
         return true;
     }

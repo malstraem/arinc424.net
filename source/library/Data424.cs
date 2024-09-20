@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using Arinc424.Airspace;
 using Arinc424.Comms;
 using Arinc424.Navigation;
@@ -14,6 +16,16 @@ namespace Arinc424;
 /// </summary>
 public class Data424
 {
+    internal static Dictionary<PropertyInfo, Section> GetProperties()
+    {
+        Dictionary<PropertyInfo, Section> properties = [];
+
+        foreach (var property in typeof(Data424).GetProperties())
+            properties.Add(property, property.GetCustomAttribute<SectionAttribute>()!.Section);
+
+        return properties;
+    }
+
     public static Data424 Create(IEnumerable<string> strings, Supplement supplement) => new Parser424(supplement).Parse(strings);
 
     /// <summary>

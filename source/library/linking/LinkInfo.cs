@@ -1,6 +1,6 @@
 namespace Arinc424.Linking;
 
-public class KeyInfo
+public class LinkInfo
 {
     public Range? Icao;
 

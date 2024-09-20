@@ -1,8 +1,8 @@
 namespace Arinc424.Linking;
 
-internal abstract class Key(KeyInfo info)
+internal abstract class Key(LinkInfo info)
 {
-    protected KeyInfo info = info;
+    protected LinkInfo info = info;
 
     [Obsolete("todo or remove")]
     protected static ReadOnlySpan<char> Concat(ReadOnlySpan<char> one, ReadOnlySpan<char> other, Span<char> target)
@@ -34,5 +34,5 @@ internal abstract class Key(KeyInfo info)
 
     internal bool IsPort = info.Port is not null;
 
-    internal KeyInfo Info => info;
+    internal LinkInfo Info => info;
 }

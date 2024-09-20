@@ -51,7 +51,7 @@ internal class CommWrapBeforeV19<TComm, TTransmitter>(Supplement supplement) : I
             if (diagnostics.Count != 0)
             {
                 current.Diagnostics ??= [];
-                current.Diagnostics.Enqueue(diagnostics);
+                current.Diagnostics.Pump(diagnostics);
             }
             return transmitter;
         };

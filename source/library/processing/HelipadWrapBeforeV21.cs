@@ -5,7 +5,7 @@ namespace Arinc424.Processing;
 
 /// <summary>
 /// <see cref="Helipad"/> record did not exist prior to supplement 21,
-/// so this post process creates <see cref="Heliport"/>'s with associated helipads (only have identifier).
+/// so this pipeline creates <see cref="Heliport"/>'s with associated helipads (only have identifier).
 /// </summary>
 internal class HelipadWrapBeforeV21 : IPipeline<Heliport, Heliport>
 {
