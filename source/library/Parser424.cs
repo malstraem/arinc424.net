@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Concurrent;
-using System.Reflection;
 
 using Arinc424.Building;
 using Arinc424.Linking;
@@ -25,8 +24,6 @@ internal partial class Parser424
                 skipped.Enqueue(@string);
         }
 
-        // Checks that one of info matches the string and enqueue the matched to an associated queue.
-        // (branching, apparently, will not give any tangible gain)
         bool TryEnqueue(string @string)
         {
             foreach (var info in meta.Info)
@@ -41,12 +38,16 @@ internal partial class Parser424
         }
     }
 
-    private void Build() => Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
-
-    private void Link()
+    private void Build()
     {
-        var unique = new Unique(meta.Info, builds);
+        /*foreach (var info in meta.Info)
+            builds[info.Section] = info.Build(strings[info.Section].Primary);*/
 
+        _ = Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
+    }
+
+    private void Link(Unique unique)
+    {
         _ = Parallel.ForEach(meta.Info, info => info.Link(builds[info.Section], unique, meta));
     }
 
@@ -61,16 +62,16 @@ internal partial class Parser424
     internal Data424 Parse(IEnumerable<string> strings)
     {
         Process(strings);
+
         Build();
-        Link();
+
+        Link(new Unique(meta.Info, builds));
 
         ConcurrentBag<Build> invalid = []; // todo api
 
         var data = new Data424();
 
-        var properties = GetDataProperties();
-
-        _ = Parallel.ForEach(properties, property =>
+        _ = Parallel.ForEach(Data424.GetProperties(), property =>
         {
             var type = property.Key.PropertyType.GetGenericArguments().First();
 
@@ -87,15 +88,5 @@ internal partial class Parser424
             }
         });
         return data;
-    }
-
-    internal Dictionary<PropertyInfo, Section> GetDataProperties()
-    {
-        Dictionary<PropertyInfo, Section> properties = [];
-
-        foreach (var property in typeof(Data424).GetProperties())
-            properties.Add(property, property.GetCustomAttribute<SectionAttribute>()!.Section);
-
-        return properties;
     }
 }

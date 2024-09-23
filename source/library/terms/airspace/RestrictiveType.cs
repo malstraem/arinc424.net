@@ -18,5 +18,6 @@ public enum RestrictiveType : byte
     [Map('P')] Prohibited,
     [Map('R')] Restricted,
     [Map('T')] Training,
-    [Map('W')] Warning
+    [Map('W')] Warning,
+    [Map('U')] Unspecified
 }

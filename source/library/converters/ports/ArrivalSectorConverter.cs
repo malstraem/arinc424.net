@@ -1,4 +1,4 @@
-using Arinc424.Ports.Terms;
+using Arinc424.Ground.Terms;
 
 namespace Arinc424.Converters;
 
@@ -11,7 +11,10 @@ internal abstract class ArrivalSectorConverter : IStringConverter<ArrivalSector>
         if (sector.Invalid)
             return sector;
 
-        sector.Value.TurnRequired = BoolConverter.Convert(@string[13]);
+        if (!BoolConverter.TryConvert(@string[13], out var value))
+            return @string[13..13];
+
+        sector.Value.TurnRequired = value;
 
         return sector;
     }

@@ -1,6 +1,6 @@
 namespace Arinc424.Routing;
 
-using Arinc424.Ports;
+using Arinc424.Ground;
 
 using Terms;
 
@@ -26,7 +26,7 @@ public class SpecialArea : Geo, IIdentity, IIcao, INamed
     public string Identifier { get; set; }
 
     [Field(14, 15)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <summary>
     /// <c>Special Activity Area Size</c> field.

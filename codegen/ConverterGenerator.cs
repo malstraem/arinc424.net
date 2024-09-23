@@ -9,59 +9,14 @@ namespace Arinc424.Generators;
 
 using static Constants;
 
-public abstract class ConverterGenerator(string qualifier) : IIncrementalGenerator
+public abstract class ConverterGenerator : IIncrementalGenerator
 {
-    internal virtual StringBuilder WriteTarget(StringBuilder builder, Target target)
-    {
-        var members = target.Members.FirstOrDefault();
+#pragma warning disable CS8618
+    protected string @base, qualifier;
+#pragma warning restore CS8618
+    private protected abstract StringBuilder WriteTarget(StringBuilder builder, BaseTarget target);
 
-        if (members is null)
-            return builder;
-
-        string offset = target.IsChar
-            ? Char
-            : target.IsFlags ? $"{String}[0]" : String;
-
-        var blank = members.FirstOrDefault(x => x.IsBlank);
-
-        if (blank is not null)
-        {
-            var (member, argument) = blank;
-
-            string check = target.IsChar ? $"char.IsWhiteSpace({Char})" : $"{String}.IsWhiteSpace()";
-
-            _ = builder.Append($"{check} ? {member} : ");
-
-            members = members.Except([blank]).ToArray();
-        }
-
-        return builder.WriteOffset(offset).WriteMembers(members, target.Unknown).Append("\n    }");
-    }
-
-    private (string name, string text) Generate(Target target)
-    {
-        var symbol = target.Symbol;
-
-        var (converter, signature, @return) = target.IsChar
-            ? (CharConverter, CharSignature, symbol.Name)
-            : (StringConverter, StringSignature, $"Result<{symbol.Name}>");
-
-        string name = $"{symbol.Name}Converter";
-
-        var builder = new StringBuilder().Append($@"using {symbol.ContainingNamespace};
-
-namespace Arinc424.Converters;
-
-internal abstract class {name} : {converter}<{symbol.Name}>
-{{
-    public static {@return} Convert({signature}) => ");
-
-        _ = WriteTarget(builder, target).Append(";\n}\n");
-
-        return ($"{name}.gen.cs", builder.ToString());
-    }
-
-    private void Process(SourceProductionContext context, ImmutableArray<Target> targets)
+    private void Process(SourceProductionContext context, ImmutableArray<BaseTarget> targets)
     {
         foreach (var target in targets)
         {
@@ -71,47 +26,49 @@ internal abstract class {name} : {converter}<{symbol.Name}>
         }
     }
 
-    private static bool HaveAttribute(MemberDeclarationSyntax member, string attributeName) =>
-        member.AttributeLists.Any(x => x.Attributes.Any(x => x.Name.ToString() == attributeName));
-
-    private static bool TryAttribute(MemberDeclarationSyntax member, string attributeName, out AttributeSyntax? attribute)
+    private (string name, string text) Generate(BaseTarget target)
     {
-        attribute = member.AttributeLists.SelectMany(x => x.Attributes).FirstOrDefault(x => x.Name.ToString() == attributeName);
-        return attribute is not null;
-    }
+        var symbol = target.Symbol;
 
-    private IncrementalValueProvider<ImmutableArray<Target>> CreateProvider(IncrementalGeneratorInitializationContext incrementalContext)
-    {
-        return incrementalContext.SyntaxProvider.ForAttributeWithMetadataName
-        (
-            qualifier,
-            (node, _) => node is EnumDeclarationSyntax,
-            (context, _) =>
+        string name = $"{symbol.Name}Converter";
+
+        var builder = new StringBuilder().Append($$"""
+            using {{symbol.ContainingNamespace}};
+
+            namespace Arinc424.Converters;
+
+            internal abstract class {{name}} : {{@base}}<{{symbol.Name}}>
             {
-                var enumSyntax = (EnumDeclarationSyntax)context.TargetNode;
+            """);
 
-                var symbol = (INamedTypeSymbol)context.TargetSymbol;
-
-                List<Member> members = [];
-                List<Member[]> offsetMembers = [];
-
-                foreach (var member in enumSyntax.Members)
-                {
-                    if (HaveAttribute(member, OffsetAttribute))
-                    {
-                        offsetMembers.Add([.. members]);
-                        members = [];
-                    }
-
-                    if (TryAttribute(member, MapAttribute, out var attribute))
-                        members.Add(new($"{symbol.Name}.{member.Identifier}", attribute!.ArgumentList?.Arguments.First().ToString() ?? string.Empty));
-                }
-                offsetMembers.Add([.. members]);
-
-                return new Target((INamedTypeSymbol)context.TargetSymbol, [.. offsetMembers], qualifier == CharAttribute, HaveAttribute(enumSyntax, FlagsAttribute));
-            }
-        ).Collect();
+        return ($"{name}.gen.cs", WriteTarget(builder, target).Append("\n}").ToString());
     }
+
+    private protected virtual bool IsMatch(EnumDeclarationSyntax @enum) => true;
+
+    private protected virtual BaseTarget CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _)
+    {
+        var enumSyntax = (EnumDeclarationSyntax)context.TargetNode;
+
+        var symbol = (INamedTypeSymbol)context.TargetSymbol;
+
+        List<Member> members = [];
+
+        foreach (var member in enumSyntax.Members)
+        {
+            if (member.TryAttribute(MapAttribute, out var attribute))
+                members.Add(new($"{symbol.Name}.{member.Identifier}", attribute!.ArgumentList?.Arguments.First().ToString() ?? string.Empty));
+        }
+        return new Target((INamedTypeSymbol)context.TargetSymbol, [.. members]);
+    }
+
+    private IncrementalValueProvider<ImmutableArray<BaseTarget>> CreateProvider(IncrementalGeneratorInitializationContext incrementalContext)
+        => incrementalContext.SyntaxProvider
+            .ForAttributeWithMetadataName(
+                qualifier,
+                (node, _) => node is EnumDeclarationSyntax @enum && IsMatch(@enum),
+                CreateTarget
+            ).Collect();
 
     public void Initialize(IncrementalGeneratorInitializationContext context) => context.RegisterSourceOutput(CreateProvider(context), Process);
 }

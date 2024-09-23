@@ -1,10 +1,17 @@
-﻿namespace Arinc424.Generators;
+using System.Diagnostics;
 
-internal class Member(string fullName, string argument)
+namespace Arinc424.Generators;
+
+[DebuggerDisplay($"{{{nameof(name)},nq}}, {{{nameof(argument)},nq}}")]
+internal class Member(string name, string argument)
 {
+    private readonly string name = name;
+
+    private readonly string argument = argument;
+
     internal void Deconstruct(out string member, out string value)
     {
-        member = fullName;
+        member = name;
         value = argument;
     }
 

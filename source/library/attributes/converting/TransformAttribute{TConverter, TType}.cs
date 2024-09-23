@@ -1,23 +1,23 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies that the value will be transformed by associated converter before assignment using <see cref="CharacterAttribute"/> index.
+/// Specifies that the character will be converted before assignment using <see cref="CharacterAttribute"/> index.
 /// </summary>
 internal abstract class TransformAttribute(Supplement start) : SupplementAttribute(start);
 
 /// <inheritdoc/>
-/// <typeparam name="TType">Type in which the value will be transformed from the char.</typeparam>
+/// <typeparam name="TType">The type to which the character will be converted.</typeparam>
 internal abstract class TransformAttribute<TType>(Supplement start) : TransformAttribute(start) where TType : Enum
 {
-    internal abstract TType Convert(char @char);
+    internal abstract bool TryConvert(char @char, out TType value);
 }
 
 /// <inheritdoc/>
 /// <typeparam name="TConverter">Associated <see cref="ICharConverter{TType}"/>.</typeparam>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum, AllowMultiple = true)]
 internal sealed class TransformAttribute<TConverter, TType>(Supplement start = Supplement.V18) : TransformAttribute<TType>(start)
     where TConverter : ICharConverter<TType>
     where TType : Enum
 {
-    internal override TType Convert(char @char) => TConverter.Convert(@char);
+    internal override bool TryConvert(char @char, out TType value) => TConverter.TryConvert(@char, out value);
 }

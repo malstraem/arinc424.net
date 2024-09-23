@@ -3,19 +3,23 @@ using Arinc424.Diagnostics;
 namespace Arinc424.Building;
 
 [DebuggerDisplay($"{{{nameof(Record)}}}")]
-internal abstract class Build(Record424 record)
+public abstract class Build(Record424 record)
 {
-    internal Record424 Record { get; } = record;
+    public Record424 Record { get; } = record;
 
-    internal Queue<Diagnostic>? Diagnostics { get; set; }
+    public Queue<Diagnostic>? Diagnostics { get; set; }
 }
 
-internal class Build<TRecord>(TRecord record) : Build(record) where TRecord : Record424
+public class Build<TRecord>(TRecord record) : Build(record)
+    where TRecord : Record424
 {
-    internal new TRecord Record { get; } = record;
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public new TRecord Record { get; } = record;
 }
 
-internal class Build<TSequence, TSub>(TSequence sequence) : Build<TSequence>(sequence) where TSequence : Record424<TSub> where TSub : Record424
+public class Build<TSequence, TSub>(TSequence sequence) : Build<TSequence>(sequence)
+    where TSequence : Record424<TSub> where TSub : Record424
 {
-    internal new TSequence Record { get; } = sequence;
+    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+    public new TSequence Record { get; } = sequence;
 }

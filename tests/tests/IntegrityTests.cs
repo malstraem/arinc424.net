@@ -1,14 +1,14 @@
 namespace Arinc424.Tests;
 
 /// <summary>
-/// Checks entire runtime compilation integrity supplements.
+/// Checks runtime compilation integrity for all supplements.
 /// </summary>
 public class IntegrityTests
 {
     [Fact]
     public void CheckSupplements()
     {
-        foreach (object value in typeof(Supplement).GetEnumValues())
-            _ = new Meta424((Supplement)value);
+        foreach (var value in Enum.GetValues<Supplement>())
+            _ = new Meta424(value);
     }
 }

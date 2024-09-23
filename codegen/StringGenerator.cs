@@ -1,41 +1,38 @@
 using System.Text;
 
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Arinc424.Generators;
 
+using static Constants;
+
 [Generator]
-public class StringGenerator() : ConverterGenerator(Constants.StringAttribute)
+public class StringGenerator : ConverterGenerator
 {
-    internal override StringBuilder WriteTarget(StringBuilder builder, Target target)
+    private protected override StringBuilder WriteTarget(StringBuilder builder, BaseTarget target)
     {
-        _ = base.WriteTarget(builder, target);
+        var (members, blank) = ((Target)target).GetMembersWithBlank();
 
-        if (target.IsFlags)
+        _ = builder.Append($@"
+    public static Result<{target.Symbol.Name}> Convert({StringArg}) => {String}.IsWhiteSpace() ? {blank} : {String} switch
+    {{");
+
+        foreach (var (name, argument) in members)
         {
-            for (int i = 1; i < target.Members.Length; i++)
-            {
-                _ = builder.Append("\n    | ");
-
-                var members = target.Members[i];
-
-                var blank = members.FirstOrDefault(x => x.IsBlank);
-
-                if (blank is not null)
-                {
-                    (string member, _) = blank;
-
-                    _ = builder.Append($"(char.IsWhiteSpace({Constants.String}[{i}]) ? {member} : ");
-
-                    members = members.Except([blank]).ToArray();
-                }
-
-                _ = builder.WriteOffset($"{Constants.String}[{i}]").WriteMembers(members, target.Unknown).Append("\n    }");
-
-                if (blank is not null)
-                    _ = builder.Append(')');
-            }
+            _ = builder.Append($@"
+        {argument} => {name},");
         }
-        return builder;
+        return builder.Append($@"
+        _ => {String}
+    }};");
+    }
+
+    private protected override bool IsMatch(EnumDeclarationSyntax @enum) => !@enum.HaveAttribute(FlagsAttribute);
+
+    public StringGenerator()
+    {
+        @base = StringConverter;
+        qualifier = StringAttributeQualifier;
     }
 }

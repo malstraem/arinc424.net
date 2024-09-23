@@ -21,7 +21,7 @@ internal class BuildInfo<TRecord> where TRecord : Record424
     private static RangeAssignment<TRecord> GetRangeAssignment(PropertyInfo property, Supplement supplement, Range range)
     {
         var (type, isValueNullable) = property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
-            ? (property.PropertyType.GetGenericArguments().First(), true) // look inside Nullable<T> if that's the case
+            ? (property.PropertyType.GetGenericArguments().First(), true)
             : (property.PropertyType, false);
 
         // prefer decode attached to the property
@@ -31,7 +31,6 @@ internal class BuildInfo<TRecord> where TRecord : Record424
 
             _ = propType.TryAttribute<TRecord, DecodeAttribute>(supplement, out decode);
         }
-
         return decode is not null
             ? type.IsArray
                 ? (RangeAssignment<TRecord>)

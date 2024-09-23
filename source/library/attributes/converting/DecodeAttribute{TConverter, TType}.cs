@@ -1,7 +1,7 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies that the value will be decoded by associated converter before assignment using <see cref="FieldAttribute"/> range.
+/// Specifies that the string will be converted before assignment using <see cref="FieldAttribute"/> range.
 /// </summary>
 internal abstract class DecodeAttribute(Supplement start) : SupplementAttribute(start);
 

@@ -9,7 +9,7 @@
   "HoldingPatterns": 12577,
   "PreferredRoutes": 0,
   "SpecialAreas": 0,
-  "AirwayCommunications": 183,
+  "AirwayCommunications": 170,
   "Heliports": 0,
   "HeliportArrivals": 0,
   "HeliportApproaches": 0,
@@ -36,7 +36,7 @@
   "GlobalLandings": 129,
   "MicrowaveLandings": 0,
   "InstrumentLandings": 1595,
-  "InstrumentMarkers": 445,
+  "InstrumentMarkers": 444,
   "Alternates": 0,
   "CompanyRoutes": 297,
   "HelicopterCompanyRoutes": 0,
@@ -44,6 +44,6 @@
   "CommunicationTypes": 0,
   "GeographicalReferences": 0,
   "FlightRegions": 183,
-  "ControlledSpaces": 2961,
-  "RestrictiveSpaces": 13454
+  "ControlledSpaces": 1468,
+  "RestrictiveSpaces": 11130
 }

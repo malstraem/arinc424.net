@@ -26,23 +26,35 @@ public enum AirwayCommUsages : ushort
     /// </summary>
     [Map('D')] Discrete = 1 << 3,
     /// <summary>
+    /// Air/Air.
+    /// </summary>
+    [Map('R')] AirToAir = 1 << 4,
+    /// <summary>
     /// Mandatory Frequency.
     /// </summary>
-    [Map('M')] Mandatory = 1 << 4,
+    [Map('M')] Mandatory = 1 << 5,
     /// <summary>
     /// Secondary Frequency.
     /// </summary>
-    [Map('S')] Secondary = 1 << 5,
+    [Map('S')] Secondary = 1 << 6,
     /// <summary>
     /// VHF Direction Finding Service (VDF).
     /// </summary>
-    [Offset, Map('D')] DirectionFinding = 1 << 6,
+    [Offset, Map('D')] DirectionFinding = 1 << 7,
+    /// <summary>
+    /// Remote Communications Air to Ground (RCAG).
+    /// </summary>
+    [Map('G')] RemoteAirToGround = 1 << 8,
     /// <summary>
     /// Language other than English.
     /// </summary>
-    [Map('L')] NonEnglish = 1 << 7,
+    [Map('L')] NonEnglish = 1 << 9,
     /// <summary>
     /// Military Use Frequency.
     /// </summary>
-    [Map('M')] Military = 1 << 8
+    [Map('M')] Military = 1 << 10,
+    /// <summary>
+    /// Remote Communications Outlet (RCO).
+    /// </summary>
+    [Map('R')] RemoteOutlet = 1 << 11
 }

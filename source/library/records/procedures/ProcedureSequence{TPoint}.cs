@@ -9,7 +9,7 @@ namespace Arinc424.Procedures;
 public abstract class ProcedureSequence<TPoint> : Record424<TPoint>, IIdentity, IIcao where TPoint : ProcedurePoint
 {
     [Field(11, 12)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <summary>
     /// <para>

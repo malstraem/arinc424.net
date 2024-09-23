@@ -9,28 +9,30 @@ internal abstract class StartingCoordinatesConverter : IStringConverter<Coordina
 {
     public static Result<Coordinates> Convert(ReadOnlySpan<char> @string)
     {
-        string? problem = null;
+        var sub = @string[1..3];
 
-        if (!double.TryParse(@string[1..3], None, null, out double latitude))
-            problem += $"Latitude '{@string[0..3]}' can't be parsed.";
+        if (!double.TryParse(sub, None, null, out double latitude))
+            return sub;
 
         char sign = @string[0];
 
         if (sign is 'S')
             latitude = -latitude;
         else if (sign is not 'N')
-            problem += $"Latitude sign '{sign}' is not valid.";
+            return sub[0..0];
 
-        if (!double.TryParse(@string[4..7], None, null, out double longitude))
-            problem += $"Longitude '{@string[4..7]}' can't be parsed.";
+        sub = @string[4..7];
+
+        if (!double.TryParse(sub, None, null, out double longitude))
+            return sub;
 
         sign = @string[3];
 
         if (sign is 'W')
             longitude = -longitude;
         else if (sign is not 'E')
-            problem += $"Longitude sign '{sign}' is not valid.";
+            return sub[3..3];
 
-        return problem is null ? new Coordinates(latitude, longitude) : problem;
+        return new Coordinates(latitude, longitude);
     }
 }

@@ -12,7 +12,7 @@ using Terms;
 public class Waypoint : Fix, IIcao, INamed
 {
     [Field(20, 21)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <inheritdoc cref="WaypointTypes"/>
     [Field(27, 29)]

@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 public abstract class Navaid : Fix, IIcao, INamed
 {
     [Field(20, 21)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
     [Field(23, 27), Float(10)]
@@ -16,6 +16,9 @@ public abstract class Navaid : Fix, IIcao, INamed
     public string? Datum { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
-    [Field(94, 118), Field<Nondirectional>(94, 123)]
+    [Field(94, 123)]
+    [Field<Omnidirectional>(94, 123)]
+    [Field<Omnidirectional>(94, 122, Supplement.V19)]
+    [Field<Omnidirectional>(94, 118, Supplement.V20)]
     public string? Name { get; set; }
 }

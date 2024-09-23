@@ -7,7 +7,6 @@ namespace Arinc424.Building;
 
 internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord : Record424
 {
-    [Obsolete("maybe need to take out for potential validation logic")]
     internal Regex? Regex { get; } = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
 
     internal PropertyInfo Property { get; } = property;

@@ -2,6 +2,7 @@ using System.Reflection;
 
 using Arinc424.Diagnostics;
 using Arinc424.Linking;
+using Arinc424.Processing;
 
 namespace Arinc424.Building;
 
@@ -12,7 +13,7 @@ internal abstract class RecordInfo
 
     protected Primary? primary;
 
-    protected Relations relations;
+    protected Relationships? relations;
 
     protected SectionAttribute section;
 #pragma warning restore CS8618
@@ -22,9 +23,10 @@ internal abstract class RecordInfo
 
     internal bool IsMatch(string @string) => section.IsMatch(@string);
 
-    internal bool IsContinuation(string @string) => continuationIndex is not null && @string[continuationIndex.Value] is not '0' and not '1';
+    internal bool IsContinuation(string @string) => continuationIndex is not null
+                                                 && @string[continuationIndex.Value] is not '0' and not '1';
 
-    internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta) => relations.Link(builds, unique, meta);
+    internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta) => relations?.Link(builds, unique, meta);
 
     internal IEnumerable<RecordInfo> DuplicateBySection()
     {
@@ -45,7 +47,7 @@ internal abstract class RecordInfo
 
     internal Primary? Primary => primary;
 
-    internal Relations Relations => relations;
+    internal Relationships? Relations => relations;
 
     internal Section Section => section.Section;
 }
@@ -54,28 +56,26 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
 {
     protected readonly BuildInfo<TRecord> info;
 
-    protected readonly ProcessAttribute<TRecord>? process;
+    protected readonly IPipeline<TRecord>? pipeline;
 
     internal RecordInfo(Supplement supplement)
     {
-        var type = typeof(TRecord);
-
         info = new(supplement);
 
-        process = type.GetCustomAttribute<ProcessAttribute<TRecord>>();
+        type = typeof(TRecord);
 
-        if (process is not null && supplement < process.Start && supplement > process.End)
-            process = null;
+        var pipe = type.GetCustomAttribute<PipelineAttribute<TRecord>>();
+
+        if (pipe is not null && supplement >= pipe.Start && supplement <= pipe.End)
+            pipeline = pipe.GetPipeline(supplement);
 
         continuationIndex = type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
 
-        (this.type, primary) = process is null
-            ? (type, Primary.Create(type))
-            : (process.NewType, Primary.Create(process.NewType));
+        type = pipe is null ? type : pipe.OutType;
 
-        relations = process is null
-            ? new Relations<TRecord>(supplement)
-            : process.GetRelations(supplement);
+        primary = Primary.Create(type);
+
+        relations = pipe is null ? Relationships<TRecord>.Create(supplement) : Relationships.Create(pipe.OutType, supplement);
     }
 
     internal override IEnumerable<Build> Build(Queue<string> strings)
@@ -88,13 +88,13 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
         {
             var build = new Build<TRecord>(RecordBuilder<TRecord>.Build(@string, info, diagnostics));
 
-            if (diagnostics.Count > 0)
+            if (diagnostics.Count != 0)
             {
                 build.Diagnostics = diagnostics;
                 diagnostics = [];
             }
             builds.Enqueue(build);
         }
-        return process is not null ? process.Process(builds) : builds;
+        return pipeline is not null ? pipeline.Process(builds) : builds;
     }
 }

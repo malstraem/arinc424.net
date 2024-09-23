@@ -33,17 +33,30 @@ public enum AltitudeDescription : byte
     /// At or above altitude specified in second Altitude field.
     /// Condition is which ever is later, which is operationally equivalent to the condition of not before.
     /// </summary>
-    [Map('D')] AtAboveSecondNotBefore,
+    [Map('D')] NotBeforeAtAboveSecond,
     /// <summary>
     /// Glide Slope Altitude (MSL) At Fix, specified in the first Altitude field on the FAF Waypoint
-    /// and Glide Slope Intercept Altitude (MSL) in second altitude of FAF Waypoint in Precision Approach Coding with electronic Glide Slope.
+    /// and Glide Slope Intercept Altitude (MSL) in second altitude.
     /// </summary>
-    [Map('G')] GlideSlope,
+    [Map('G')] GlideSecondAtFirst,
+    /// <summary>
+    /// Glide Slope Altitude (MSL) At Fix, specified in the first Altitude field on the FAF Waypoint
+    /// and Glide Slope Intercept Altitude (MSL) in second altitude.
+    /// </summary>
+    [Map('H')] GlideSecondAtAboveFirst,
+    /// <summary>
+    /// Glide Slope Intercept Altitude specified in second Altitude field and at altitude specified in first Altitude field.
+    /// </summary>
+    [Map('I')] GlideInterceptSecondAtFirst,
+    /// <summary>
+    /// Glide Slope Intercept Altitude specified in second Altitude field and at or above altitude specified in first Altitude field.
+    /// </summary>
+    [Map('J')] GlideInterceptSecondAtAboveFirst,
     /// <summary>
     /// At or above altitude specified in second Altitude field applicable until established inbound on the racetrack pattern.
     /// Optional at or above altitude specified in first Altitude field applicable at the Fix.
     /// </summary>
-    [Map('O')] AtAboveOptional,
+    [Map('O')] OptionalAtAbove,
     /// <summary>
     /// At altitude on the coded vertical angle in the second Altitude field
     /// and at or above altitude specified in first Altitude field on step-down fix waypoints.

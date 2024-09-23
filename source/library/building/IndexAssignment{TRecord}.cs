@@ -18,7 +18,15 @@ internal sealed class TransformAssignment<TRecord, TType>(PropertyInfo property,
 
     private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
-    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> _) => set(record, transform.Convert(@string[index]));
+    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
+    {
+        char @char = @string[index];
+
+        if (transform.TryConvert(@char, out var value))
+            set(record, value);
+        else
+            diagnostics.Enqueue(new InvalidValue(record, Property, [@char], index..index));
+    }
 }
 
 internal sealed class CharAssignment<TRecord>(PropertyInfo property, int index)

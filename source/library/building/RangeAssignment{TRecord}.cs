@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -10,7 +11,7 @@ internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range ra
 {
     protected readonly Range range = range;
 
-    [Obsolete("todo: maybe replace with emit op codes")]
+    [Obsolete("todo: replace with emit op codes")]
     protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property, bool isValueNullable)
     {
         var record = Expression.Parameter(typeof(TRecord));
@@ -55,7 +56,7 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
         var result = decode.Convert(@field);
 
         if (result.Invalid)
-            diagnostics.Enqueue(new ValueDiagnostic(record, Property, result.Problem!, range));
+            diagnostics.Enqueue(new InvalidValue(record, Property, result.Bad.ToImmutableArray(), range));
         else
             set(record, result.Value);
     }

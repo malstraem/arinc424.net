@@ -1,9 +1,20 @@
 namespace Arinc424.Airspace;
 
 [Section('U', 'R')]
-[DebuggerDisplay($"{{{nameof(IcaoCode)},nq}}, {{{nameof(Designation)},nq}}")]
-public class RestrictiveSpace : Space<RestrictiveVolume>
+[DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Designation)},nq}}")]
+public class RestrictiveSpace : Space<RestrictiveVolume>, INamed
 {
-    /// <inheritdoc cref="RestrictiveVolume.Designation"/>
+    /// <summary>
+    /// <c>Restrictive Airspace Designation</c> field.
+    /// </summary>
+    /// <remarks>See section 5.129.</remarks>
+    [Field(10, 19)]
     public string Designation { get; set; }
+
+    /// <summary>
+    /// <c>Restrictive Airspace Name</c> field.
+    /// </summary>
+    /// <remarks>See section 5.126.</remarks>
+    [Field(94, 123)]
+    public string? Name { get; set; }
 }

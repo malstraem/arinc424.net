@@ -18,12 +18,12 @@ internal sealed class VariationAttribute : DecodeAttribute<float>
         var value = @string[1..];
 
         if (!float.TryParse(value, None, null, out float degrees))
-            return $"'{value}' can't be parsed as a float.";
+            return value;
 
         if (sign is 'W')
             return -degrees;
         else if (sign is not 'E')
-            return $"Magnetic variation sign '{sign}' is not valid.";
+            return @string[0..0];
 
         return degrees;
     }

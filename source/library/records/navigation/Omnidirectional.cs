@@ -1,4 +1,4 @@
-using Arinc424.Ports;
+using Arinc424.Ground;
 
 namespace Arinc424.Navigation;
 
@@ -78,10 +78,10 @@ public class Omnidirectional : Navaid
     /// <c>Route Inappropriate Navaid Indicator</c> character.
     /// </summary>
     /// <remarks>See section 5.297.</remarks>
-    [Character(122)]
+    [Character(122, Supplement.V20)]
     public Bool NotAreaNavigation { get; set; }
 
     /// <inheritdoc cref="Terms.ServiceVolume"/>
-    [Character(123)]
+    [Character(123, Supplement.V19)]
     public ServiceVolume ServiceVolume { get; set; }
 }

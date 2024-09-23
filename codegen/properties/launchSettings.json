@@ -2,7 +2,7 @@
   "profiles": {
     "Arinc424.Generators": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "../source/Arinc424.csproj"
+      "targetProject": "../source/library/Arinc424.csproj"
     }
   }
 }
