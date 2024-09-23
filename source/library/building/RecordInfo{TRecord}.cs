@@ -88,7 +88,7 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
         {
             var build = new Build<TRecord>(RecordBuilder<TRecord>.Build(@string, info, diagnostics));
 
-            if (diagnostics.Count > 0)
+            if (diagnostics.Count != 0)
             {
                 build.Diagnostics = diagnostics;
                 diagnostics = [];

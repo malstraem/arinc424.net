@@ -28,7 +28,7 @@
   "AirportDepartures": 2208,
   "TerminalBeacons": 216,
   "GroundPoints": 0,
-  "AirportSatellitePoints": 4807,
+  "AirportSatellitePoints": 4796,
   "AirportCommunications": 0,
   "AirportArrivalAltitudes": 0,
   "AirportMinimumAltitudes": 5867,
@@ -44,6 +44,6 @@
   "CommunicationTypes": 0,
   "GeographicalReferences": 0,
   "FlightRegions": 0,
-  "ControlledSpaces": 702,
+  "ControlledSpaces": 699,
   "RestrictiveSpaces": 1231
 }

@@ -14,7 +14,7 @@ internal abstract class TransformAttribute<TType>(Supplement start) : TransformA
 
 /// <inheritdoc/>
 /// <typeparam name="TConverter">Associated <see cref="ICharConverter{TType}"/>.</typeparam>
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum)]
+[AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum, AllowMultiple = true)]
 internal sealed class TransformAttribute<TConverter, TType>(Supplement start = Supplement.V18) : TransformAttribute<TType>(start)
     where TConverter : ICharConverter<TType>
     where TType : Enum

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Concurrent;
-using System.Reflection;
 
 using Arinc424.Building;
 using Arinc424.Linking;
@@ -41,10 +40,10 @@ internal partial class Parser424
 
     private void Build()
     {
-        foreach (var info in meta.Info)
-            builds[info.Section] = info.Build(strings[info.Section].Primary);
+        /*foreach (var info in meta.Info)
+            builds[info.Section] = info.Build(strings[info.Section].Primary);*/
 
-        //_ = Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
+        _ = Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
     }
 
     private void Link(Unique unique)

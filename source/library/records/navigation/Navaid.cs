@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 public abstract class Navaid : Fix, IIcao, INamed
 {
     [Field(20, 21)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
     [Field(23, 27), Float(10)]

@@ -4,6 +4,7 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Processing;
 
+[Obsolete("try to generalize 'scanner' logic")]
 internal class CommWrapBeforeV19<TComm, TTransmitter>(Supplement supplement) : IPipeline<TComm, TComm>
     where TComm : Communication<TTransmitter>
     where TTransmitter : Transmitter, new()

@@ -28,7 +28,7 @@ internal sealed class RecordInfo<TSequence, TSub>(Supplement supplement, Range s
             {
                 var build = new Build<TSequence, TSub>(RecordBuilder<TSequence, TSub>.Build(sequence, info, subInfo, diagnostics));
 
-                if (diagnostics.Count > 0)
+                if (diagnostics.Count != 0)
                 {
                     build.Diagnostics = diagnostics;
                     diagnostics = [];

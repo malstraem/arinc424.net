@@ -14,7 +14,7 @@ public class Runway : Fix, IIcao
     public Airport Airport { get; set; }
 
     [Field(11, 12)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <summary>
     /// <c>Runway Length (RUNWAY LENGTH)</c> field.

@@ -7,6 +7,7 @@ namespace Arinc424.Processing;
 /// <see cref="Helipad"/> record did not exist prior to supplement 21,
 /// so this pipeline creates <see cref="Heliport"/>'s with associated helipads (only have identifier).
 /// </summary>
+[Obsolete("try to generalize 'scanner' logic")]
 internal class HelipadWrapBeforeV21 : IPipeline<Heliport, Heliport>
 {
     public IEnumerable<Build<Heliport>> Process(Queue<Build<Heliport>> builds)
@@ -44,7 +45,7 @@ internal class HelipadWrapBeforeV21 : IPipeline<Heliport, Heliport>
         {
             Source = port.Source,
             Code = port.Code,
-            IcaoCode = port.IcaoCode,
+            Icao = port.Icao,
             Identifier = port.Source![16..20].Trim(), //it's Helipad identifer range before supplement 21.
             Number = port.Number,
             Heliport = port

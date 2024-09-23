@@ -9,7 +9,7 @@ namespace Arinc424.Routing;
 public class HoldingPattern : Record424, IIcao, INamed
 {
     [Field(11, 12)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <summary>
     /// <c>Duplicate Indicator (DUP IND)</c> field.

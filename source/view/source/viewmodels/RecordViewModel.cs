@@ -7,7 +7,7 @@ public class RecordViewModel
         Record = record;
 
         if (record is IIcao icao)
-            IcaoCode = icao.IcaoCode;
+            IcaoCode = icao.Icao;
 
         if (record is IIdentity identity)
             Identifier = identity.Identifier;

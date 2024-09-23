@@ -31,7 +31,6 @@ internal class BuildInfo<TRecord> where TRecord : Record424
 
             _ = propType.TryAttribute<TRecord, DecodeAttribute>(supplement, out decode);
         }
-
         return decode is not null
             ? type.IsArray
                 ? (RangeAssignment<TRecord>)

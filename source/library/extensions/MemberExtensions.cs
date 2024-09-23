@@ -26,8 +26,7 @@ internal static class MemberExtensions
             else if (!attribute.IsTarget)
                 nontarget.Add(attribute);
         }
-
-        chosen = (target.Count != 0 ? target : nontarget).BySupplement(supplement);
+        chosen = (target is [] ? nontarget : target).BySupplement(supplement);
 
         return chosen is not null;
     }

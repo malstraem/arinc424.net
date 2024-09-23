@@ -1,11 +1,13 @@
 namespace Arinc424.Procedures.Terms;
 
 /// <summary>
-/// <c>Route Type (RT TYPE)</c> -> <c>Approach Type</c> character.
+/// <c>Route Type (RT TYPE)</c> -> <c>Approach Route Type Description</c> character.
 /// </summary>
-/// <remarks>See section 5.7, Table 5-7.</remarks>
-[Char, Transform<ApproachTypeConverter, ApproachType>]
-[Description("Route Type (RT TYPE) - Approach Type")]
+/// <remarks>See section 5.7, Table 5-8.</remarks>
+[Char]
+[Transform<ApproachTypeBeforeV23, ApproachType>]
+[Transform<ApproachTypeConverter, ApproachType>(Supplement.V23)]
+[Description("Route Type (RT TYPE) - Approach Route Type Description")]
 public enum ApproachType : byte
 {
     Unknown,
@@ -14,9 +16,9 @@ public enum ApproachType : byte
     /// </summary>
     [Map('A')] Transition,
     /// <summary>
-    /// Localizer/Back course Approach.
+    /// Localizer/Back Course Approach.
     /// </summary>
-    [Map('B')] LocalizerBackCourse,
+    [Map('B')] BackCourse,
     /// <summary>
     /// VORDME Approach.
     /// </summary>
@@ -32,7 +34,7 @@ public enum ApproachType : byte
     /// <summary>
     /// Area Navigation (RNAV) Approach with Required Navigation  Performance (RNP) Approach.
     /// </summary>
-    [Map('H')] AreaNavigationPerformance,
+    [Map('H')] Performance,
     /// <summary>
     /// Instrument Landing System (ILS) Approach.
     /// </summary>
@@ -40,7 +42,7 @@ public enum ApproachType : byte
     /// <summary>
     /// GNSS Landing System (GLS) Approach.
     /// </summary>
-    [Map('J')] GlobalNavigationLanding,
+    [Map('J')] GlobalLanding,
     /// <summary>
     /// Localizer Only (LOC) Approach.
     /// </summary>
@@ -60,7 +62,7 @@ public enum ApproachType : byte
     /// <summary>
     /// Non-Directional Beacon + DME (NDB+DME) Approach.
     /// </summary>
-    [Map('Q')] NondirectionalDistanceEquipment,
+    [Map('Q')] NondirectDistanceEquipment,
     /// <summary>
     /// Area Navigation (RNAV) Approach.
     /// </summary>
@@ -76,7 +78,7 @@ public enum ApproachType : byte
     /// <summary>
     /// Simplified Directional Facility (SDF) Approach.
     /// </summary>
-    [Map('U')] SimplifiedDirectionalFacility,
+    [Map('U')] Simplified,
     /// <summary>
     /// VOR Approach.
     /// </summary>
@@ -88,11 +90,15 @@ public enum ApproachType : byte
     /// <summary>
     /// Localizer Directional Aid (LDA) Approach.
     /// </summary>
-    [Map('X')] LocalizerDirectionalAid,
+    [Map('X')] Directional,
     /// <summary>
     /// Microwave Landing System (MLS), Type B and C Approach.
     /// </summary>
-    [Map('Y')] BravoCharlie,
+    BravoCharlie,
+    /// <summary>
+    /// Approach Transition with TF Based Construction of RF  Turns.
+    /// </summary>
+    [Map('Y')] BasedConstruction,
     /// <summary>
     /// Missed Approach.
     /// </summary>

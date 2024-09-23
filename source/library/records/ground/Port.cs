@@ -10,7 +10,7 @@ namespace Arinc424.Ground;
 public abstract class Port : Fix, IIcao, INamed
 {
     [Field(11, 12)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <summary>
     /// <c>ATA/IATA Designator (ATA/IATA)</c> field.

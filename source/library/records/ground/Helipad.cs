@@ -5,5 +5,5 @@ public class Helipad : Fix, IIcao
 {
     public Heliport Heliport { get; set; }
 
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 }

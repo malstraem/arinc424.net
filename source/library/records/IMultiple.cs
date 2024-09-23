@@ -6,5 +6,5 @@ internal interface IMultiple
     /// <c>Multiple Code(MULTI CD)</c> character.
     /// </summary>
     /// <remarks>See section 5.130.</remarks>
-    char MultipleCode { get; set; }
+    char Multiplier { get; set; }
 }

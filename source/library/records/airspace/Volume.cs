@@ -7,10 +7,10 @@ namespace Arinc424.Airspace;
 public abstract class Volume : Record424<BoundaryPoint>, IIcao, INamed, IMultiple
 {
     [Field(7, 8)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     [Character(20)]
-    public char MultipleCode { get; set; }
+    public char Multiplier { get; set; }
 
     /// <inheritdoc cref="Arinc424.LevelType"/>
     [Character(26)]
@@ -47,7 +47,7 @@ public abstract class Volume : Record424<BoundaryPoint>, IIcao, INamed, IMultipl
     /// <c>Controlled Airspace Name (ARSP NAME)</c> for <see cref="ControlledVolume"/> or
     /// <c>Restrictive Airspace Name</c> for <see cref="RestrictiveVolume"/> field.
     /// </summary>
-    /// <remarks>See section 5.126 or 5.216.</remarks>
+    /// <remarks>See section 5.216 or 5.126.</remarks>
     [Field(94, 123)]
     public string? Name { get; set; }
 }

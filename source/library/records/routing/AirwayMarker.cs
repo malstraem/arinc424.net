@@ -11,7 +11,7 @@ using Terms;
 public class AirwayMarker : Fix, IIcao, INamed
 {
     [Field(20, 21)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <summary>
     /// <c>Marker Code (MARKER CODE)</c> field.

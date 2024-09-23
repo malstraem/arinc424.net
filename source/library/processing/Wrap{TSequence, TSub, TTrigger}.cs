@@ -3,6 +3,7 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Processing;
 
+[Obsolete("try to generalize 'scanner' logic")]
 internal class Wrap<TSequence, TSub, TTrigger>(Supplement supplement) : IPipeline<TSequence, TSub>
     where TSequence : Record424<TSub>, new()
     where TSub : Record424

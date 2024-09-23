@@ -10,7 +10,7 @@ public abstract class LandingSystem : Fix, IIcao
     public Airport Airport { get; set; }
 
     [Field(11, 12)]
-    public string IcaoCode { get; set; }
+    public string Icao { get; set; }
 
     /// <inheritdoc cref="Terms.LandingSystemType"/>
     [Character(18)]
