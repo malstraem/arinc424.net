@@ -9,8 +9,11 @@ namespace Arinc424.Comms;
 /// <remarks>See section 4.1.14.1 and 4.2.5.1.</remarks>
 [Section('P', 'V', subsectionIndex: 13)]
 [Section('H', 'V', subsectionIndex: 13)]
+
 [Icao(11, 12), Continuous(26)]
-[CommWrapBeforeV19<PortCommunication, PortTransmitter>(end: Supplement.V18)]
+
+[Pipeline<CommWrapBeforeV19<PortCommunication, PortTransmitter>, PortCommunication>(end: Supplement.V19)]
+
 [DebuggerDisplay($"{{{nameof(Class)}}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class PortCommunication : Communication<PortTransmitter>
 {

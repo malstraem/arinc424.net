@@ -1,4 +1,5 @@
 using Arinc424.Airspace;
+using Arinc424.Airspace.Terms;
 using Arinc424.Processing;
 
 namespace Arinc424.Comms;
@@ -8,7 +9,8 @@ namespace Arinc424.Comms;
 /// </summary>
 /// <remarks>See section 4.1.23.1.</remarks>
 [Section('E', 'V'), Continuous(56)]
-[CommWrapBeforeV19<AirwayCommunication, AirwayTransmitter>]
+
+[Pipeline<CommWrapBeforeV19<AirwayCommunication, AirwayTransmitter>, AirwayCommunication>(end: Supplement.V19)]
 public class AirwayCommunication : Communication<AirwayTransmitter>
 {
     [Identifier(7, 10)]
@@ -21,6 +23,7 @@ public class AirwayCommunication : Communication<AirwayTransmitter>
     [Field(11, 14)]
     public string Address { get; set; }
 
+    /// <inheritdoc cref="RegionType"/>
     [Character(15)]
-    public char Indicator { get; set; }
+    public RegionType Type { get; set; }
 }

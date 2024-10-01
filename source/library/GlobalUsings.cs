@@ -6,4 +6,4 @@ global using Arinc424.Converters;
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Arinc424.Tests"), InternalsVisibleTo("Arinc424.Bench")]
+[assembly: InternalsVisibleTo("Arinc424.Tests"), InternalsVisibleTo("Arinc424.Bench"), InternalsVisibleTo("Arinc424.View")]

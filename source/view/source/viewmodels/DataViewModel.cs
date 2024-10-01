@@ -75,6 +75,7 @@ public partial class DataViewModel : ObservableObject
         ])
     ];
 
+    [Obsolete("hard")]
     public async void Load(string[] paths)
     {
         IsEmpty = false;
@@ -83,7 +84,7 @@ public partial class DataViewModel : ObservableObject
 
         var data = await Task.Run(() =>
         {
-            string[] strings = File.ReadAllLines(paths.First()); // hard
+            string[] strings = File.ReadAllLines(paths.First());
 
             return Data424.Create(strings, Supplement.V18);
         });

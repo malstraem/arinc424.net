@@ -1,4 +1,4 @@
-namespace Arinc424.Linking;
+namespace Arinc424;
 
 public class LinkInfo
 {

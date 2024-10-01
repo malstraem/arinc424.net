@@ -39,18 +39,23 @@ internal partial class Parser424
     }
 
     private void Build()
+#if !NOPARALLEL
+        => Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
+#else
     {
-        /*foreach (var info in meta.Info)
-            builds[info.Section] = info.Build(strings[info.Section].Primary);*/
-
-        _ = Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
+        foreach (var info in meta.Info)
+            builds[info.Section] = info.Build(strings[info.Section].Primary);
     }
-
+#endif
     private void Link(Unique unique)
+#if !NOPARALLEL
+        => Parallel.ForEach(meta.Info, info => info.Link(builds[info.Section], unique, meta));
+#else
     {
-        _ = Parallel.ForEach(meta.Info, info => info.Link(builds[info.Section], unique, meta));
+        foreach (var info in meta.Info)
+            info.Link(builds[info.Section], unique, meta);
     }
-
+#endif
     internal Parser424(Supplement supplement)
     {
         meta = new(supplement);

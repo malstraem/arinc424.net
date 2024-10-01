@@ -9,6 +9,12 @@ namespace Arinc424.Airspace.Terms;
 public enum RegionType : byte
 {
     Unknown = 0,
-    FlightInfo = 1,
-    UpperInfo = 1 << 1
+    /// <summary>
+    /// FIR.
+    /// </summary>
+    Flight = 1,
+    /// <summary>
+    /// UIR.
+    /// </summary>
+    Upper = 1 << 1
 }

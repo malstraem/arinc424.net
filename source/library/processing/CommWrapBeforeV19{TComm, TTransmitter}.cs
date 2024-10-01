@@ -4,57 +4,35 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Processing;
 
-[Obsolete("try to generalize 'scanner' logic")]
-internal class CommWrapBeforeV19<TComm, TTransmitter>(Supplement supplement) : IPipeline<TComm, TComm>
+internal abstract class CommTriggerBeforeV19<TRecord> : ITrigger<TRecord> where TRecord : Record424
+{
+    private static readonly Range range = 6..10;
+
+    public static bool Check(TRecord one, TRecord another) => one.Source![range] != another.Source![range];
+}
+
+internal sealed class CommWrapBeforeV19<TComm, TTransmitter>(Supplement supplement) : Scan<TComm, TComm, CommTriggerBeforeV19<TComm>>
     where TComm : Communication<TTransmitter>
     where TTransmitter : Transmitter, new()
 {
     private readonly BuildInfo<TTransmitter> info = new(supplement);
 
-    public IEnumerable<Build<TComm>> Process(Queue<Build<TComm>> builds)
+    protected override Build<TComm> Build(Queue<Build<TComm>> sources, ref Queue<Diagnostic> diagnostics)
     {
-        Queue<Build<TComm>> result = new(builds.Count);
+        var comm = sources.First();
 
-        var enumerator = builds.GetEnumerator();
+        comm.Record.Sequence = [];
 
-        if (!enumerator.MoveNext())
-            return result;
-
-        Build<TComm> next, current;
-
-        var range = 6..10; // port identifier range
-
-        var diagnostics = new Queue<Diagnostic>();
-
-        result.Enqueue(current = enumerator.Current);
-
-        var transmitters = current.Record.Sequence = [GetTransmitter(current)];
-
-        while (enumerator.MoveNext())
+        while (sources.TryDequeue(out var source))
         {
-            next = enumerator.Current;
-
-            if (current.Record.Source![range] != next.Record.Source![range])
-            {
-                result.Enqueue(current = next);
-                transmitters = current.Record.Sequence = [GetTransmitter(current)];
-                continue;
-            }
-            current = next;
-            transmitters.Add(GetTransmitter(current));
-        }
-        return result;
-
-        TTransmitter GetTransmitter(Build<TComm> build)
-        {
-            var transmitter = RecordBuilder<TTransmitter>.Build(build.Record.Source!, info, diagnostics);
+            comm.Record.Sequence.Add(RecordBuilder<TTransmitter>.Build(source.Record.Source!, info, diagnostics));
 
             if (diagnostics.Count != 0)
             {
-                current.Diagnostics ??= [];
-                current.Diagnostics.Pump(diagnostics);
+                comm.Diagnostics ??= [];
+                comm.Diagnostics.Pump(diagnostics);
             }
-            return transmitter;
-        };
+        }
+        return comm;
     }
 }

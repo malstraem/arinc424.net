@@ -4,6 +4,7 @@
 site/
 artifacts/
 
+tests/data/private/
 docs/api/**.yml
 
 .manifest

@@ -11,11 +11,11 @@ internal abstract class RegionTypeConverter : ICharConverter<RegionType>
             case (char)32:
                 value = RegionType.Unknown; return true;
             case 'F':
-                value = RegionType.FlightInfo; return true;
+                value = RegionType.Flight; return true;
             case 'U':
-                value = RegionType.UpperInfo; return true;
+                value = RegionType.Upper; return true;
             case 'B':
-                value = RegionType.FlightInfo | RegionType.UpperInfo; return true;
+                value = RegionType.Flight | RegionType.Upper; return true;
             default:
                 value = RegionType.Unknown; return false;
         }

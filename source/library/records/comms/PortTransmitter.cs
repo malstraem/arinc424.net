@@ -6,6 +6,7 @@ using Terms;
 /// Fields of <c>Airport Communications</c> and <c>Heliport Communications</c>.
 /// </summary>
 /// <remarks>Used by <see cref="PortCommunication"/> like subsequence.</remarks>
+[DebuggerDisplay($"{{{nameof(CallSign)},nq}}, {nameof(Type)} - {{{nameof(Type)}}}")]
 public class PortTransmitter : Transmitter
 {
     /// <summary>

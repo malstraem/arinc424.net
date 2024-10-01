@@ -2,7 +2,6 @@ namespace Arinc424.Comms;
 
 using Terms;
 
-[DebuggerDisplay($"{{{nameof(CallSign)},nq}}, {nameof(Type)} - {{{nameof(Type)}}}")]
 public abstract class Transmitter : Geo
 {
     /// <inheritdoc cref="CommType"/>

@@ -6,7 +6,8 @@ namespace Arinc424.Airspace;
 /// <c>Restrictive Airspace</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.18.1.</remarks>
-[Wrap<RestrictiveSpace, RestrictiveVolume, MultipleTrigger<RestrictiveVolume>>]
+[Pipeline<MultipleWrap<RestrictiveSpace, RestrictiveVolume>, RestrictiveVolume>]
+
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]
 public class RestrictiveVolume : Volume
 {

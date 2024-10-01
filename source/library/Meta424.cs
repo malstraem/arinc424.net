@@ -107,9 +107,9 @@ internal class Meta424
         TypeInfo = typeInfo.ToFrozenDictionary();
     }
 
+    internal RecordInfo[] Info { get; }
+
     internal FrozenDictionary<Section, Type> Types { get; }
 
     internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; }
-
-    internal RecordInfo[] Info { get; }
 }

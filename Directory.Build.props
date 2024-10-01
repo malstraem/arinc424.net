@@ -2,6 +2,8 @@
   <PropertyGroup>
     <Platforms>AnyCPU;x86;x64;ARM32;ARM64</Platforms>
 
+    <Configurations>Debug;Release;NoParallel</Configurations>
+
     <TargetFrameworks>net8.0</TargetFrameworks>
 
     <Nullable>enable</Nullable>

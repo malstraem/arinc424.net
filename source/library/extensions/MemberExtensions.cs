@@ -33,9 +33,5 @@ internal static class MemberExtensions
 
     internal static TAttribute? BySupplement<TAttribute>(this IEnumerable<TAttribute> attributes, Supplement supplement)
         where TAttribute : SupplementAttribute
-    {
-        var drop = attributes.TakeWhile(x => x.Start <= supplement);
-
-        return drop.LastOrDefault();
-    }
+            => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
 }

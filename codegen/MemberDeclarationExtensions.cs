@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Arinc424.Generators;
 
-internal static class MemberDeclarationSyntaxExtensions
+internal static class MemberDeclarationExtensions
 {
     internal static bool HaveAttribute(this MemberDeclarationSyntax member, string attributeName)
         => member.AttributeLists.Any(x => x.Attributes.Any(x => x.Name.ToString() == attributeName));

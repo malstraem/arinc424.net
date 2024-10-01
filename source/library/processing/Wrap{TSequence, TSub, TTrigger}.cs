@@ -3,63 +3,42 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Processing;
 
-[Obsolete("try to generalize 'scanner' logic")]
-internal class Wrap<TSequence, TSub, TTrigger>(Supplement supplement) : IPipeline<TSequence, TSub>
+internal abstract class Wrap<TSequence, TSub, TTrigger>(Supplement supplement) : Scan<TSequence, TSub, TTrigger>
     where TSequence : Record424<TSub>, new()
     where TSub : Record424
     where TTrigger : ITrigger<TSub>
 {
     private readonly BuildInfo<TSequence> info = new(supplement);
 
-    public IEnumerable<Build<TSequence>> Process(Queue<Build<TSub>> builds)
+    protected override Build<TSequence> Build(Queue<Build<TSub>> subs, ref Queue<Diagnostic> diagnostics)
     {
-        Build<TSub> current, next;
+        var sub = subs.First();
 
-        var enumerator = builds.GetEnumerator();
+        Build<TSequence, TSub> build = new(RecordBuilder<TSequence>.Build(sub.Record.Source!, new TSequence(), info, diagnostics));
 
-        Queue<Build<TSequence>> sequences = [];
+        build.Record.Sequence = [];
 
-        if (!enumerator.MoveNext())
-            return sequences;
-
-        Queue<Build<TSub>> subs = [];
-
-        Queue<Diagnostic> diagnostics = [];
-
-        subs.Enqueue(current = enumerator.Current);
-
-        while (enumerator.MoveNext())
+        while (subs.TryDequeue(out sub))
         {
-            next = enumerator.Current;
+            build.Record.Sequence.Add(sub.Record);
 
-            if (TTrigger.Check(current.Record, next.Record))
-                sequences.Enqueue(Wrap());
-
-            subs.Enqueue(current = next);
+            if (sub.Diagnostics is not null)
+                diagnostics.Pump(sub.Diagnostics);
         }
-        sequences.Enqueue(Wrap());
 
-        return sequences;
-
-        Build<TSequence> Wrap()
+        if (diagnostics.Count != 0)
         {
-            var build = new Build<TSequence, TSub>(RecordBuilder<TSequence>.Build(current.Record.Source!, new TSequence(), info, diagnostics));
-
-            build.Record.Sequence = [];
-
-            while (subs.TryDequeue(out var sub))
-            {
-                build.Record.Sequence.Add(sub.Record);
-
-                if (sub.Diagnostics is not null)
-                    diagnostics.Pump(sub.Diagnostics);
-            }
-            if (diagnostics.Count != 0)
-            {
-                build.Diagnostics = diagnostics;
-                diagnostics = [];
-            }
-            return build;
+            build.Diagnostics = diagnostics;
+            diagnostics = [];
         }
+        return build;
     }
 }
+
+internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub, IdentifierTrigger<TSub>>(supplement)
+    where TSequence : Record424<TSub>, new()
+    where TSub : Record424, IIdentity;
+
+internal sealed class MultipleWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub, MultipleTrigger<TSub>>(supplement)
+    where TSequence : Record424<TSub>, new()
+    where TSub : Record424, IMultiple;
