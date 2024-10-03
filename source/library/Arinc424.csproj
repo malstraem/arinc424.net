@@ -11,7 +11,36 @@
     <DefineConstants>$(DefineConstants);NOPARALLEL</DefineConstants>
   </PropertyGroup>
 
+<!--package -->
+  <PropertyGroup>
+    <IsPackable>true</IsPackable>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+
+    <Deterministic>true</Deterministic>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+
+    <Version>0.1.0-alpha</Version>
+    <PackageId>arinc424</PackageId>
+    <Product>ARINC 424 object model</Product>
+
+    <PackageTags>parser;loader;arinc;arinc424;avionics;database;navigation;aeronautical;aviation-data</PackageTags>
+    <Description>An ARINC 424 model &amp; parser that allows you to explore aeronautical data in an object-oriented way.</Description>
+
+    <RepositoryUrl>https://github.com/malstraem/arinc424.net</RepositoryUrl>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+
+    <Authors>malstraem</Authors>
+    <Copyright>Copyright (c) malstraem and contributors</Copyright>
+  </PropertyGroup>
+
   <ItemGroup>
     <ProjectReference Include="../../codegen/Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
+
+    <None Include="../../docs/package.md" Pack="true" PackagePath="/README.md" Visible="false"/>
   </ItemGroup>
 </Project>

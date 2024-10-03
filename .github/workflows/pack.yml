@@ -1,0 +1,15 @@
+on: workflow_dispatch
+
+name: pack
+jobs:
+  build:
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.x
+      - name: Create Package
+        run: dotnet pack --tl
+      - name: Push to NuGet
+        run: dotnet nuget push artifacts/package/release/*.nupkg -k ${{secrets.NUGET_PUSH_KEY}} --skip-duplicate --source https://api.nuget.org/v3/index.json
+    runs-on: ubuntu-latest

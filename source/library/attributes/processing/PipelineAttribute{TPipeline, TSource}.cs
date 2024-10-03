@@ -11,13 +11,9 @@ internal abstract class PipelineAttribute<TSource>(Type outType, Supplement star
 }
 
 internal sealed class PipelineAttribute<TPipeline, TSource>(Supplement start = Supplement.V18, Supplement end = Supplement.V23)
-    : PipelineAttribute<TSource>
-    (
-        TPipeline.OutType, /* garantee by design */
-        start, end
-    )
-    where TSource : Record424
-    where TPipeline : IPipeline<TSource>
+    : PipelineAttribute<TSource>(TPipeline.OutType, start, end)
+        where TSource : Record424
+        where TPipeline : IPipeline<TSource>
 {
     internal override IPipeline<TSource> GetPipeline(Supplement supplement)
     {
