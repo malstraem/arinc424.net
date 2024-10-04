@@ -5,7 +5,7 @@ public class StructuralRegressionTests
     public void MakeRegression()
     {
         // todo: save entire properties of all entities
-        // light size case and yaml or binary serialization is needed
+        // light size case and json serialization
     }
 
     public void CheckRegression(string file)

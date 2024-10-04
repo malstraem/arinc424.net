@@ -86,7 +86,7 @@ public partial class DataViewModel : ObservableObject
         {
             string[] strings = File.ReadAllLines(paths.First());
 
-            return Data424.Create(strings, Supplement.V18);
+            return Data424.Create(Meta424.Create(Supplement.V18), strings, out string[] _, out var _);
         });
 
         Sections = await Task.Run(() => GetSections(data));

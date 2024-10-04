@@ -23,4 +23,11 @@ public abstract class Record424
     /// <remarks>See section 5.31.</remarks>
     [Field(124, 128), Integer]
     public int Number { get; set; }
+
+    /// <summary>
+    /// <c>Cycle Date</c> field.
+    /// </summary>
+    /// <remarks>See section 5.32</remarks>
+    [Field(129, 132), Integer]
+    public int Date { get; set; }
 }

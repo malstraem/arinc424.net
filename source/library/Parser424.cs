@@ -56,15 +56,15 @@ internal partial class Parser424
             info.Link(builds[info.Section], unique, meta);
     }
 #endif
-    internal Parser424(Supplement supplement)
+    internal Parser424(Meta424 meta)
     {
-        meta = new(supplement);
+        this.meta = meta;
 
         foreach (var info in meta.Info)
             strings[info.Section] = ([], []);
     }
 
-    internal Data424 Parse(IEnumerable<string> strings)
+    internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Build[] invalid)
     {
         Process(strings);
 
@@ -72,26 +72,24 @@ internal partial class Parser424
 
         Link(new Unique(meta.Info, builds));
 
-        ConcurrentBag<Build> invalid = []; // todo api
+        ConcurrentQueue<Build> invalidBuilds = [];
 
         var data = new Data424();
 
-        _ = Parallel.ForEach(Data424.GetProperties(), property =>
+        _ = Parallel.ForEach(Data424.GetProperties(), pair =>
         {
-            var type = property.Key.PropertyType.GetGenericArguments().First();
+            var list = (IList)pair.Key.GetValue(data)!;
 
-            var list = (IList)property.Key.GetValue(data)!;
-
-            foreach (var build in builds[property.Value])
+            foreach (var build in builds[pair.Value])
             {
                 if (build.Diagnostics is null)
-                {
                     _ = list.Add(build.Record);
-                    continue;
-                }
-                invalid.Add(build);
+                else
+                    invalidBuilds.Enqueue(build);
             }
         });
+        skipped = [.. this.skipped];
+        invalid = [.. invalidBuilds];
         return data;
     }
 }

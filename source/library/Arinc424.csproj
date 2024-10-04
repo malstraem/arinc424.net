@@ -31,6 +31,7 @@
     <RepositoryUrl>https://github.com/malstraem/arinc424.net</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
 
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 
@@ -41,6 +42,6 @@
   <ItemGroup>
     <ProjectReference Include="../../codegen/Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
 
-    <None Include="../../docs/package.md" Pack="true" PackagePath="/README.md" Visible="false"/>
+    <None Include="../../docs/package.md" Pack="true" PackagePath="/readme.md" Visible="false"/>
   </ItemGroup>
 </Project>

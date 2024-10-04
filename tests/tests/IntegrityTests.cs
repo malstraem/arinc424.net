@@ -9,6 +9,6 @@ public class IntegrityTests
     public void CheckSupplements()
     {
         foreach (var value in Enum.GetValues<Supplement>())
-            _ = new Meta424(value);
+            _ = Meta424.Create(value);
     }
 }

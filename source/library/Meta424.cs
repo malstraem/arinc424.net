@@ -84,27 +84,40 @@ Sequence<RestrictiveVolume, BoundaryPoint>,
 
 namespace Arinc424;
 
-internal class Meta424
+/// <summary>
+/// Metadata that defines how entities should be created.
+/// </summary>
+public class Meta424
 {
+    private Meta424(RecordInfo[] info, FrozenDictionary<Section, Type> types, FrozenDictionary<Type, RecordInfo> typeInfo)
+    {
+        Info = info;
+        Types = types;
+        TypeInfo = typeInfo;
+    }
+
+    /// <summary>
+    /// Creates metadata using target <paramref name="supplement"/>.
+    /// </summary>
+    /// <returns>Runtime compiled metadata.</returns>
     [Obsolete("todo: supplement versioning (v18 - v23)")]
-    internal Meta424(Supplement supplement)
+    public static Meta424 Create(Supplement supplement)
     {
         var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
 
-        Info = attributes.SelectMany(x => x.GetInfo(supplement)).ToArray();
+        var infos = attributes.SelectMany(x => x.GetInfo(supplement)).ToArray();
 
         Dictionary<Section, Type> types = [];
         Dictionary<Type, RecordInfo> typeInfo = [];
 
-        foreach (var info in Info)
+        foreach (var info in infos)
         {
             types.Add(info.Section, info.Type);
 
             // types with multiple sections will be stored once
             _ = typeInfo.TryAdd(info.Type, info);
         }
-        Types = types.ToFrozenDictionary();
-        TypeInfo = typeInfo.ToFrozenDictionary();
+        return new Meta424(infos, types.ToFrozenDictionary(), typeInfo.ToFrozenDictionary());
     }
 
     internal RecordInfo[] Info { get; }

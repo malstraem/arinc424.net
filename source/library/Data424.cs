@@ -8,6 +8,7 @@ using Arinc424.Procedures;
 using Arinc424.Routing;
 using Arinc424.Tables;
 using Arinc424.Waypoints;
+using Arinc424.Building;
 
 namespace Arinc424;
 
@@ -26,7 +27,8 @@ public class Data424
         return properties;
     }
 
-    public static Data424 Create(IEnumerable<string> strings, Supplement supplement) => new Parser424(supplement).Parse(strings);
+    public static Data424 Create(Meta424 meta, IEnumerable<string> strings, out string[] skipped, out Build[] invalid)
+        => new Parser424(meta).Parse(strings, out skipped, out invalid);
 
     /// <summary>
     /// <c>Grid MORA</c> records.

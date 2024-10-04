@@ -1,11 +1,12 @@
 namespace Arinc424.Diagnostics;
 
-public enum DiagnosticType
+[Flags]
+public enum DiagnosticType : byte
 {
-    Null,
-    Duplicate,
-    InvalidLink,
-    InvalidType,
-    InvalidValue,
-    InvalidSection,
+    Null = 0,
+    Duplicate = 1,
+    InvalidLink = 1 << 1,
+    InvalidType = 1 << 2,
+    InvalidValue = 1 << 3,
+    InvalidSection = 1 << 4,
 }
