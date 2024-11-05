@@ -64,12 +64,12 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
         }
         if (!records.TryGetValue(key, out var referenced))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key };
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key, Type = meta.Types[section] };
             return false;
         }
         if (referenced is not TType @ref)
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.WrongType) { WrongType = type };
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.WrongType) { Type = type };
             return false;
         }
         set(record, @ref);

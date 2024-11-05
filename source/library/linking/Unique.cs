@@ -11,6 +11,8 @@ namespace Arinc424.Linking;
 /// </summary>
 internal class Unique
 {
+    //private class
+
     private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
     [Obsolete("todo: diagnostics")]

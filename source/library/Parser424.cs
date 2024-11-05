@@ -76,6 +76,15 @@ internal partial class Parser424
 
         var data = new Data424();
 
+        foreach (var controlled in data.ControlledSpaces)
+        {
+            foreach (var volume in controlled.Sequence)
+            {
+                if (volume.Center.Identifier.Last() == 'X')
+                    Console.WriteLine(volume.Center.Identifier);
+            }
+        }
+
         _ = Parallel.ForEach(Data424.GetProperties(), pair =>
         {
             var list = (IList)pair.Key.GetValue(data)!;

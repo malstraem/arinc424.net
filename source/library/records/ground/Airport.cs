@@ -36,16 +36,22 @@ public class Airport : Port
     public List<Runway>? Runways { get; set; }
 
     /// <summary>
-    /// Associated Localizer Markers.
-    /// </summary>
-    [Many]
-    public List<InstrumentMarker>? Markers { get; set; }
-
-    /// <summary>
     /// Associated NDBs.
     /// </summary>
     [Many]
     public List<TerminalBeacon>? Beacons { get; set; }
+
+    /// <summary>
+    /// Associated VHF Navaids.
+    /// </summary>
+    [Many]
+    public List<Omnidirectional>? Omnidirectionals { get; set; }
+
+    /// <summary>
+    /// Associated Localizer Markers.
+    /// </summary>
+    [Many]
+    public List<InstrumentMarker>? Markers { get; set; }
 
     /// <summary>
     /// Associated MLS's.
@@ -58,10 +64,4 @@ public class Airport : Port
     /// </summary>
     [Many]
     public List<InstrumentLanding>? InstrumentLandings { get; set; }
-
-    /// <summary>
-    /// Associated VHF Navaids.
-    /// </summary>
-    [Many]
-    public List<Omnidirectional>? Omnidirectionals { get; set; }
 }

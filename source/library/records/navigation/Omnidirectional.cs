@@ -8,11 +8,11 @@ using Terms;
 /// <c>VHF NAVAID</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.2.1.</remarks>
-[Section('D'), Continuous]
+[Section('D'), /*Port(7, 10) need more analysis */]
 public class Omnidirectional : Navaid
 {
-    //[Identifier(7, 10), Icao(11, 12)] // need more analysis
-    //public Airport? Airport { get; set; }
+    [Identifier(7, 10)]
+    public Airport? Airport { get; set; }
 
     /// <inheritdoc cref="OmnidirectType"/>
     [Field(28, 29)]

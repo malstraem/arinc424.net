@@ -1,6 +1,6 @@
 namespace Arinc424.Navigation;
 
-[Identifier(14, 17), Icao(20, 21)]
+[Continuous, Identifier(14, 17), Icao(20, 21)]
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class Navaid : Fix, IIcao, INamed
 {

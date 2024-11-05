@@ -10,10 +10,6 @@ internal abstract class PossibleAttribute(params Type[] types) : Attribute
 }
 
 /// <inheritdoc />
-internal class PossibleAttribute<T>() : PossibleAttribute(typeof(T))
-    where T : Record424;
-
-/// <inheritdoc />
 internal class PossibleAttribute<T, T2>() : PossibleAttribute(typeof(T), typeof(T2))
     where T : Record424
     where T2 : Record424;
