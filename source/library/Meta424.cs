@@ -29,8 +29,8 @@ Record<PreferredRoute>,
 Record<HoldingPattern>,
 Record<SpecialArea>,
 
-Sequence<Airway, AirwayPoint>,
-Sequence<AirwayCommunication, AirwayTransmitter>,
+Record<Airway>,
+Record<AirwayCommunication>,
 #endregion
 
 #region Airport and Heliport
@@ -52,11 +52,11 @@ Record<InstrumentLanding>,
 
 Record<InstrumentMarker>,
 
-Sequence<PortCommunication, PortTransmitter>,
+Record<PortCommunication>,
 
-Sequence<ArrivalSequence, ArrivalPoint>,
-Sequence<ApproachSequence, ApproachPoint>,
-Sequence<DepartureSequence, DeparturePoint>,
+Record<Arrival>,
+Record<Approach>,
+Record<Departure>,
 
 Record<Heliport>,
 #endregion
@@ -71,13 +71,13 @@ Record<HelicopterCompanyRoute>,
 Record<CommunicationType>,
 Record<GeographicalReference>,
 
-Sequence<CruiseTable, CruiseRow>,
+Record<CruiseTable>,
 #endregion
 
 #region Airspace
-Sequence<RegionVolume, RegionPoint>,
-Sequence<ControlledVolume, BoundaryPoint>,
-Sequence<RestrictiveVolume, BoundaryPoint>,
+Record<FlightRegion>,
+Record<ControlledSpace>,
+Record<RestrictiveSpace>,
 #endregion
 ]
 #endregion
@@ -100,7 +100,6 @@ public class Meta424
     /// Creates metadata using target <paramref name="supplement"/>.
     /// </summary>
     /// <returns>Runtime compiled metadata.</returns>
-    [Obsolete("todo: supplement versioning (v18 - v23)")]
     public static Meta424 Create(Supplement supplement)
     {
         var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();

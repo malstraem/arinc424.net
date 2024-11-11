@@ -34,4 +34,14 @@ internal static class MemberExtensions
     internal static TAttribute? BySupplement<TAttribute>(this IEnumerable<TAttribute> attributes, Supplement supplement)
         where TAttribute : SupplementAttribute
             => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
+
+    internal static Type Untie(this Type type)
+    {
+        var property = type.GetProperty(nameof(Record424<Record424>.Sequence));
+
+        if (property is null)
+            return type;
+
+        return property.PropertyType.GetGenericArguments().First().Untie();
+    }
 }

@@ -20,7 +20,7 @@ internal sealed class Possible<TRecord, TType>(LinkInfo info, PropertyInfo prope
             var info = meta.TypeInfo[type];
 
             if (unique.TryGetRecords(info.Type, out var records)
-               && foreign.TryGetKey(record.Source!, info.Primary! /*garantee by design*/, out string? key)
+               && foreign.TryGetKey(record.Source!, info.Primary! /*guarantee by design*/, out string? key)
                && records.TryGetValue(key, out var referenced))
             {
                 set(record, (TType)referenced);

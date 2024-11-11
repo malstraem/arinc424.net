@@ -17,7 +17,7 @@ public class Build<TRecord>(TRecord record) : Build(record) where TRecord : Reco
 }
 
 public class Build<TSequence, TSub>(TSequence sequence) : Build<TSequence>(sequence)
- where TSequence : Record424<TSub> where TSub : Record424
+    where TSequence : Record424<TSub> where TSub : Record424
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     public new TSequence Record { get; } = sequence;

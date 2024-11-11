@@ -1,6 +1,11 @@
+using Arinc424.Processing;
+
 namespace Arinc424.Airspace;
 
 [Section('U', 'R')]
+[Pipeline<Sequence<RestrictiveVolume, BoundaryPoint>, BoundaryPoint>]
+[Pipeline<MultipleWrap<RestrictiveSpace, RestrictiveVolume>, RestrictiveVolume>]
+
 [DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Designation)},nq}}")]
 public class RestrictiveSpace : Space<RestrictiveVolume>, INamed
 {

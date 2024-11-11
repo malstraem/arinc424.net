@@ -1,7 +1,7 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies that the record is described by a sequence of strings and defines the range of the sequence number field.
+/// Specifies that the record is described by a sequence of strings and defines the range of <c>Sequence Number (SEQ NR)</c> field.
 /// </summary>
 /// <inheritdoc/>
 [AttributeUsage(AttributeTargets.Class)]

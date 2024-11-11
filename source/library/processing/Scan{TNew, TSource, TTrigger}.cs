@@ -8,9 +8,13 @@ internal abstract class Scan<TNew, TSource, TTrigger> : IPipeline<TNew, TSource>
     where TSource : Record424
     where TTrigger : ITrigger<TSource>
 {
+    /// <summary>
+    /// Creates an instance of <typeparamref name="TNew"/> saving diagnostics.
+    /// </summary>
+    /// <remarks>All overrides should dequeue <paramref name="sources"/>.</remarks>
     protected abstract Build<TNew> Build(Queue<Build<TSource>> sources, ref Queue<Diagnostic> diagnostics);
 
-    public IEnumerable<Build<TNew>> Process(Queue<Build<TSource>> builds)
+    public Queue<Build<TNew>> Process(Queue<Build<TSource>> builds)
     {
         Build<TSource> next, current;
 

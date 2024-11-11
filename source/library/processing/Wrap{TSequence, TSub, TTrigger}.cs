@@ -12,13 +12,11 @@ internal abstract class Wrap<TSequence, TSub, TTrigger>(Supplement supplement) :
 
     protected override Build<TSequence> Build(Queue<Build<TSub>> subs, ref Queue<Diagnostic> diagnostics)
     {
-        var sub = subs.First();
-
-        Build<TSequence, TSub> build = new(RecordBuilder<TSequence>.Build(sub.Record.Source!, new TSequence(), info, diagnostics));
+        Build<TSequence, TSub> build = new(RecordBuilder<TSequence>.Build(subs.First().Record.Source!, new TSequence(), info, diagnostics));
 
         build.Record.Sequence = [];
 
-        while (subs.TryDequeue(out sub))
+        while (subs.TryDequeue(out var sub))
         {
             build.Record.Sequence.Add(sub.Record);
 

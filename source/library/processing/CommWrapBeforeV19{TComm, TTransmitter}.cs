@@ -11,21 +11,23 @@ internal abstract class CommTriggerBeforeV19<TRecord> : ITrigger<TRecord> where 
     public static bool Check(TRecord one, TRecord another) => one.Source![range] != another.Source![range];
 }
 
-internal sealed class CommWrapBeforeV19<TComm, TTransmitter>(Supplement supplement) : Scan<TComm, TComm, CommTriggerBeforeV19<TComm>>
-    where TComm : Communication<TTransmitter>
-    where TTransmitter : Transmitter, new()
+internal sealed class CommWrapBeforeV19<TComm, TTransmitter>(Supplement supplement) : Scan<TComm, TTransmitter, CommTriggerBeforeV19<TTransmitter>>
+    where TComm : Communication<TTransmitter>, new()
+    where TTransmitter : Transmitter
 {
-    private readonly BuildInfo<TTransmitter> info = new(supplement);
+    private readonly BuildInfo<TComm> info = new(supplement);
 
-    protected override Build<TComm> Build(Queue<Build<TComm>> sources, ref Queue<Diagnostic> diagnostics)
+    protected override Build<TComm> Build(Queue<Build<TTransmitter>> sources, ref Queue<Diagnostic> diagnostics)
     {
         var comm = sources.First();
 
-        comm.Record.Sequence = [];
+        Build<TComm> build = new(RecordBuilder<TComm>.Build(comm.Record.Source!, info, diagnostics));
+
+        build.Record.Sequence = [];
 
         while (sources.TryDequeue(out var source))
         {
-            comm.Record.Sequence.Add(RecordBuilder<TTransmitter>.Build(source.Record.Source!, info, diagnostics));
+            build.Record.Sequence.Add(source.Record);
 
             if (diagnostics.Count != 0)
             {
@@ -33,6 +35,6 @@ internal sealed class CommWrapBeforeV19<TComm, TTransmitter>(Supplement suppleme
                 comm.Diagnostics.Pump(diagnostics);
             }
         }
-        return comm;
+        return build;
     }
 }

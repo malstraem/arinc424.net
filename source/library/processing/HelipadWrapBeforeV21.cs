@@ -16,13 +16,13 @@ internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport, Identifier
     private readonly Range range = 16..21;
 
     [Obsolete("todo: use build info")]
-    protected override Build<Heliport> Build(Queue<Build<Heliport>> sources, ref Queue<Diagnostic> _)
+    protected override Build<Heliport> Build(Queue<Build<Heliport>> builds, ref Queue<Diagnostic> _)
     {
-        var result = sources.First();
+        var build = builds.First();
 
-        var helipads = result.Record.Helipads = [];
+        var helipads = build.Record.Helipads = [];
 
-        while (sources.TryDequeue(out var source))
+        while (builds.TryDequeue(out var source))
         {
             var port = source.Record;
 
@@ -36,6 +36,6 @@ internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport, Identifier
                 Heliport = port
             });
         }
-        return result;
+        return build;
     }
 }

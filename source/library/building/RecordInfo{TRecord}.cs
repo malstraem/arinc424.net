@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 using Arinc424.Diagnostics;
 using Arinc424.Linking;
@@ -6,9 +7,12 @@ using Arinc424.Processing;
 
 namespace Arinc424.Building;
 
-#pragma warning disable CS8618
+/// <summary>
+/// Info about how an entity should be created and processed.
+/// </summary>
 internal abstract class RecordInfo
 {
+#pragma warning disable CS8618
     protected Type type;
 
     protected Primary? primary;
@@ -16,10 +20,42 @@ internal abstract class RecordInfo
     protected Relationships? relations;
 
     protected SectionAttribute section;
-#pragma warning restore CS8618
-    protected int? continuationIndex;
 
-    internal abstract IEnumerable<Build> Build(Queue<string> strings);
+    protected IPipeline[] pipelines;
+
+    protected int? continuationIndex;
+#pragma warning restore CS8618
+    [Obsolete("todo")]
+    internal static RecordInfo Create<TRecord>(Supplement supplement) where TRecord : Record424, new()
+    {
+        var type = typeof(TRecord).Untie();
+
+        var constructor = typeof(RecordInfo<>)
+            .MakeGenericType(type)
+                .GetConstructor([typeof(Supplement)]);
+
+        var info = (RecordInfo)constructor!.Invoke([supplement]);
+
+        info.type = typeof(TRecord);
+
+        List<IPipeline> pipes = [];
+
+        foreach (var pipe in info.type.GetCustomAttributes<PipelineAttribute>())
+        {
+            if (supplement >= pipe.Start && supplement <= pipe.End)
+                pipes.Add(pipe.GetPipeline(supplement));
+        }
+        info.pipelines = [.. pipes];
+        info.continuationIndex = info.type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
+
+        info.primary = Primary.Create(info.type);
+
+        info.relations = Relationships<TRecord>.Create(supplement);
+
+        return info;
+    }
+
+    internal abstract Queue<Build> Build(Queue<string> strings);
 
     internal bool IsMatch(string @string) => section.IsMatch(@string);
 
@@ -32,7 +68,7 @@ internal abstract class RecordInfo
     {
         List<RecordInfo> duplicates = [];
 
-        foreach (var section in type.GetCustomAttributes<SectionAttribute>(false))
+        foreach (var section in type.GetCustomAttributes<SectionAttribute>(false)) // take only top level attributes
         {
             var duplicate = (RecordInfo)MemberwiseClone();
 
@@ -49,36 +85,16 @@ internal abstract class RecordInfo
 
     internal Relationships? Relations => relations;
 
+    internal IPipeline[] Pipelines => pipelines;
+
     internal Section Section => section.Section;
 }
 
-internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
+internal sealed class RecordInfo<TRecord>(Supplement supplement) : RecordInfo where TRecord : Record424, new()
 {
-    protected readonly BuildInfo<TRecord> info;
+    private readonly BuildInfo<TRecord> info = new(supplement);
 
-    protected readonly IPipeline<TRecord>? pipeline;
-
-    internal RecordInfo(Supplement supplement)
-    {
-        info = new(supplement);
-
-        type = typeof(TRecord);
-
-        var pipe = type.GetCustomAttribute<PipelineAttribute<TRecord>>();
-
-        if (pipe is not null && supplement >= pipe.Start && supplement <= pipe.End)
-            pipeline = pipe.GetPipeline(supplement);
-
-        continuationIndex = type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
-
-        type = pipe is null ? type : pipe.OutType;
-
-        primary = Primary.Create(type);
-
-        relations = pipe is null ? Relationships<TRecord>.Create(supplement) : Relationships.Create(pipe.OutType, supplement);
-    }
-
-    internal override IEnumerable<Build> Build(Queue<string> strings)
+    internal override Queue<Build> Build(Queue<string> strings)
     {
         Queue<Diagnostic> diagnostics = [];
 
@@ -95,6 +111,6 @@ internal class RecordInfo<TRecord> : RecordInfo where TRecord : Record424, new()
             }
             builds.Enqueue(build);
         }
-        return pipeline is not null ? pipeline.Process(builds) : builds;
+        return Unsafe.As<Queue<Build>>(builds);
     }
 }

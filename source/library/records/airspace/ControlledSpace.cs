@@ -1,6 +1,11 @@
+using Arinc424.Processing;
+
 namespace Arinc424.Airspace;
 
 [Section('U', 'C')]
+[Pipeline<Sequence<ControlledVolume, BoundaryPoint>, BoundaryPoint>]
+[Pipeline<MultipleWrap<ControlledSpace, ControlledVolume>, ControlledVolume>]
+
 [DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Name)},nq}}")]
 public class ControlledSpace : Space<ControlledVolume>, INamed
 {

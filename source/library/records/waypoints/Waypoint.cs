@@ -8,6 +8,7 @@ using Terms;
 /// <remarks>See section 4.1.4.1.</remarks>
 [Section('E', 'A')]
 [Identifier(14, 18), Icao(20, 21), Continuous]
+
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public class Waypoint : Fix, IIcao, INamed
 {

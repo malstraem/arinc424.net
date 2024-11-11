@@ -3,7 +3,7 @@ namespace Arinc424.Airspace;
 /// <summary>
 /// Space volume with low and up limits.
 /// </summary>
-[Icao(7, 8), Sequenced(21, 24), Continuous(25)]
+[Icao(7, 8), Sequenced(21, 24)]
 public abstract class Volume : Record424<BoundaryPoint>, IIcao, INamed, IMultiple
 {
     [Field(7, 8)]

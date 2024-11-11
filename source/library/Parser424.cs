@@ -6,13 +6,13 @@ using Arinc424.Linking;
 
 namespace Arinc424;
 
-internal partial class Parser424
+internal class Parser424
 {
     private readonly Meta424 meta;
 
     private readonly Queue<string> skipped = [];
 
-    private readonly ConcurrentDictionary<Section, IEnumerable<Build>> builds = [];
+    private readonly ConcurrentDictionary<Section, Queue<Build>> builds = [];
 
     private readonly Dictionary<Section, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
 
@@ -56,6 +56,20 @@ internal partial class Parser424
             info.Link(builds[info.Section], unique, meta);
     }
 #endif
+    private void Postprocess()
+    {
+        foreach (var info in meta.Info)
+        {
+            var builds = this.builds[info.Section];
+
+            foreach (var pipeline in info.Pipelines)
+                builds = pipeline.Process(builds);
+
+            this.builds[info.Section] = builds;
+        }
+    }
+
+
     internal Parser424(Meta424 meta)
     {
         this.meta = meta;
@@ -67,23 +81,13 @@ internal partial class Parser424
     internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Build[] invalid)
     {
         Process(strings);
-
         Build();
-
+        Postprocess();
         Link(new Unique(meta.Info, builds));
 
         ConcurrentQueue<Build> invalidBuilds = [];
 
         var data = new Data424();
-
-        foreach (var controlled in data.ControlledSpaces)
-        {
-            foreach (var volume in controlled.Sequence)
-            {
-                if (volume.Center.Identifier.Last() == 'X')
-                    Console.WriteLine(volume.Center.Identifier);
-            }
-        }
 
         _ = Parallel.ForEach(Data424.GetProperties(), pair =>
         {
