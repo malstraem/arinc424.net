@@ -3,8 +3,8 @@ using Arinc424.Processing;
 namespace Arinc424.Airspace;
 
 [Section('U', 'F'), Identifier(7, 10)]
-[Pipeline<Sequence<RegionVolume, RegionPoint>, RegionPoint>]
-[Pipeline<IdentityWrap<FlightRegion, RegionVolume>, RegionVolume>]
+[Pipeline<Sequence<RegionVolume, RegionPoint>>]
+[Pipeline<IdentityWrap<FlightRegion, RegionVolume>>]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Name)},nq}}")]
 public class FlightRegion : Record424<RegionVolume>, IIdentity, INamed

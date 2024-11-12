@@ -31,17 +31,27 @@ internal static class MemberExtensions
         return chosen is not null;
     }
 
-    internal static TAttribute? BySupplement<TAttribute>(this IEnumerable<TAttribute> attributes, Supplement supplement)
-        where TAttribute : SupplementAttribute
-            => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
+    internal static TAttribute? BySupplement<TAttribute>(this IEnumerable<TAttribute> attributes, Supplement supplement) where TAttribute : SupplementAttribute
+        => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
 
-    internal static Type Untie(this Type type)
+    internal static Stack<Type> GetComposition(this Type type)
     {
-        var property = type.GetProperty(nameof(Record424<Record424>.Sequence));
+        Stack<Type> types = [];
 
-        if (property is null)
-            return type;
+        Fill(type, types);
 
-        return property.PropertyType.GetGenericArguments().First().Untie();
+        return types;
+
+        static void Fill(Type type, Stack<Type> types)
+        {
+            types.Push(type);
+
+            var property = type.GetProperty(nameof(Record424<Record424>.Sequence));
+
+            if (property is null)
+                return;
+
+            Fill(property.PropertyType.GetGenericArguments().First(), types);
+        }
     }
 }

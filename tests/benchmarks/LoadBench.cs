@@ -10,5 +10,5 @@ public class LoadBench
     private readonly Meta424 meta = Meta424.Create(Supplement.V18);
 
     [Benchmark]
-    public Data424 LoadWorld() => Data424.Create(meta, strings, out string[] _, out var _);
+    public Data424 LoadWorld() => Data424.Create(meta, strings, out var _, out var _);
 }

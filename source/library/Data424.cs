@@ -27,7 +27,7 @@ public class Data424
         return properties;
     }
 
-    public static Data424 Create(Meta424 meta, IEnumerable<string> strings, out string[] skipped, out Build[] invalid)
+    public static Data424 Create(Meta424 meta, IEnumerable<string> strings, out Queue<string> skipped, out Queue<Build> invalid)
         => new Parser424(meta).Parse(strings, out skipped, out invalid);
 
     /// <summary>

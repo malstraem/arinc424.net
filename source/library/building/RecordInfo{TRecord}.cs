@@ -7,50 +7,57 @@ using Arinc424.Processing;
 
 namespace Arinc424.Building;
 
-/// <summary>
-/// Info about how an entity should be created and processed.
-/// </summary>
-internal abstract class RecordInfo
-{
 #pragma warning disable CS8618
-    protected Type type;
-
-    protected Primary? primary;
-
-    protected Relationships? relations;
-
-    protected SectionAttribute section;
-
-    protected IPipeline[] pipelines;
-
-    protected int? continuationIndex;
+/// <summary>
+/// How an entity should be created and processed.
+/// </summary>
+internal abstract class RecordInfo(Type type, Supplement supplement)
 #pragma warning restore CS8618
+{
+    private SectionAttribute section;
+
+    private int? continuationIndex;
+
     [Obsolete("todo")]
     internal static RecordInfo Create<TRecord>(Supplement supplement) where TRecord : Record424, new()
     {
-        var type = typeof(TRecord).Untie();
+        var type = typeof(TRecord);
 
         var constructor = typeof(RecordInfo<>)
-            .MakeGenericType(type)
-                .GetConstructor([typeof(Supplement)]);
+            .MakeGenericType(type.GetComposition().First())
+                .GetConstructor([typeof(Type), typeof(Supplement)]);
 
-        var info = (RecordInfo)constructor!.Invoke([supplement]);
+        List<(Type, Type, IPipeline)> pipelines = [];
 
-        info.type = typeof(TRecord);
-
-        List<IPipeline> pipes = [];
-
-        foreach (var pipe in info.type.GetCustomAttributes<PipelineAttribute>())
+        foreach (var pipe in type.GetCustomAttributes<PipelineAttribute>())
         {
             if (supplement >= pipe.Start && supplement <= pipe.End)
-                pipes.Add(pipe.GetPipeline(supplement));
+                pipelines.Add((pipe.SourceType, pipe.OutType, pipe.GetPipeline(supplement)));
         }
-        info.pipelines = [.. pipes];
-        info.continuationIndex = info.type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
 
-        info.primary = Primary.Create(info.type);
+        List<(Type, Relationships)> relations = [];
 
-        info.relations = Relationships<TRecord>.Create(supplement);
+        foreach (var (sourceType, _, _) in pipelines)
+        {
+            var relationships = Relationships.Create(sourceType, supplement);
+
+            if (relationships is not null)
+                relations.Add((sourceType, relationships));
+        }
+
+        var info = (RecordInfo)constructor!.Invoke([type.GetComposition().First(), supplement]);
+
+        info.Relations = Relationships.Create(type, supplement);
+
+        if (relations.Count != 0)
+            info.CompositionRelations = [.. relations];
+
+        if (pipelines.Count != 0)
+            info.CompositionPipelines = [.. pipelines];
+
+        info.continuationIndex = type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
+
+        info.TopLevelType = type;
 
         return info;
     }
@@ -62,13 +69,16 @@ internal abstract class RecordInfo
     internal bool IsContinuation(string @string) => continuationIndex is not null
                                                  && @string[continuationIndex.Value] is not '0' and not '1';
 
-    internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta) => relations?.Link(builds, unique, meta);
+    internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)
+    {
+        //=> Relations?.Link(builds, unique, meta);
+    }
 
     internal IEnumerable<RecordInfo> DuplicateBySection()
     {
         List<RecordInfo> duplicates = [];
 
-        foreach (var section in type.GetCustomAttributes<SectionAttribute>(false)) // take only top level attributes
+        foreach (var section in TopLevelType.GetCustomAttributes<SectionAttribute>(false)) // take only top level attributes
         {
             var duplicate = (RecordInfo)MemberwiseClone();
 
@@ -79,18 +89,26 @@ internal abstract class RecordInfo
         return duplicates;
     }
 
-    internal Type Type => type;
+    internal Type Type { get; } = type;
 
-    internal Primary? Primary => primary;
+    internal Type TopLevelType { get; private set; } = type;
 
-    internal Relationships? Relations => relations;
+    internal Relationships? Relations { get; private set; }
 
-    internal IPipeline[] Pipelines => pipelines;
+    internal Primary? Primary { get; } = Primary.Create(type);
+
+    /// <summary>
+    /// Pipelines for bare and composition types including top level.
+    /// </summary>
+    internal (Type, Type, IPipeline)[]? CompositionPipelines { get; private set; }
+
+    internal (Type, Relationships)[]? CompositionRelations { get; private set; }
 
     internal Section Section => section.Section;
 }
 
-internal sealed class RecordInfo<TRecord>(Supplement supplement) : RecordInfo where TRecord : Record424, new()
+internal sealed class RecordInfo<TRecord>(Type type, Supplement supplement) : RecordInfo(type, supplement)
+    where TRecord : Record424, new()
 {
     private readonly BuildInfo<TRecord> info = new(supplement);
 

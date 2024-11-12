@@ -12,7 +12,7 @@ internal class FieldAttribute(int left, int right, Supplement start = Supplement
 /// </summary>
 /// <inheritdoc/>
 /// <typeparam name="TRecord">Target record type in which the field is defined.</typeparam>
-internal class FieldAttribute<TRecord>(int left, int right, Supplement start = Supplement.V18) : FieldAttribute(left, right, start)
+internal sealed class FieldAttribute<TRecord>(int left, int right, Supplement start = Supplement.V18) : FieldAttribute(left, right, start)
     where TRecord : Record424
 {
     internal override bool IsMatch<TMatch>() => typeof(TMatch).IsAssignableTo(typeof(TRecord));

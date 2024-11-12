@@ -16,7 +16,6 @@ internal static class Constants
 
     internal const string Char = "@char";
     internal const string String = "@string";
-    internal const string Problem = "problem";
 
     internal const string CharArg = "char @char";
     internal const string StringArg = "ReadOnlySpan<char> @string";
