@@ -89,39 +89,43 @@ namespace Arinc424;
 /// </summary>
 public class Meta424
 {
-    private Meta424(RecordInfo[] info, FrozenDictionary<Section, Type> types, FrozenDictionary<Type, RecordInfo> typeInfo)
-    {
-        Info = info;
-        Types = types;
-        TypeInfo = typeInfo;
-    }
-
+#pragma warning disable CS8618
+    private Meta424() { }
+#pragma warning restore CS8618
     /// <summary>
     /// Creates metadata using target <paramref name="supplement"/>.
     /// </summary>
     /// <returns>Runtime compiled metadata.</returns>
     public static Meta424 Create(Supplement supplement)
     {
-        var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
-
-        var infos = attributes.SelectMany(x => x.GetInfo(supplement)).ToArray();
-
         Dictionary<Section, Type> types = [];
         Dictionary<Type, RecordInfo> typeInfo = [];
+        Dictionary<SectionAttribute, RecordInfo> info = [];
 
-        foreach (var info in infos)
+        var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
+
+        foreach (var attribute in attributes.Select(x => x.GetInfo(supplement)))
         {
-            types.Add(info.Section, info.Type);
+            foreach (var section in attribute.Sections)
+            {
+                info.Add(section, attribute);
+                types.Add(section.Value, attribute.Type);
+            }
 
             // types with multiple sections will be stored once
-            _ = typeInfo.TryAdd(info.Type, info);
+            _ = typeInfo.TryAdd(attribute.Type, attribute);
         }
-        return new Meta424(infos, types.ToFrozenDictionary(), typeInfo.ToFrozenDictionary());
+        return new Meta424()
+        {
+            Info = info.ToFrozenDictionary(),
+            Types = types.ToFrozenDictionary(),
+            TypeInfo = typeInfo.ToFrozenDictionary()
+        };
     }
 
-    internal RecordInfo[] Info { get; }
+    internal FrozenDictionary<Section, Type> Types { get; init; }
 
-    internal FrozenDictionary<Section, Type> Types { get; }
+    internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; init; }
 
-    internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; }
+    internal FrozenDictionary<SectionAttribute, RecordInfo> Info { get; init; }
 }

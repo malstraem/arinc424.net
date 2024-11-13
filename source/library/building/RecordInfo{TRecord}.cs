@@ -14,8 +14,6 @@ namespace Arinc424.Building;
 internal abstract class RecordInfo(Type type, Supplement supplement)
 #pragma warning restore CS8618
 {
-    private SectionAttribute section;
-
     private int? continuationIndex;
 
     [Obsolete("todo")]
@@ -57,14 +55,12 @@ internal abstract class RecordInfo(Type type, Supplement supplement)
 
         info.continuationIndex = type.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
 
-        info.TopLevelType = type;
+        info.Sections = type.GetCustomAttributes<SectionAttribute>(false).ToArray(); // take only top level attributes;
 
         return info;
     }
 
     internal abstract Queue<Build> Build(Queue<string> strings);
-
-    internal bool IsMatch(string @string) => section.IsMatch(@string);
 
     internal bool IsContinuation(string @string) => continuationIndex is not null
                                                  && @string[continuationIndex.Value] is not '0' and not '1';
@@ -74,28 +70,13 @@ internal abstract class RecordInfo(Type type, Supplement supplement)
         //=> Relations?.Link(builds, unique, meta);
     }
 
-    internal IEnumerable<RecordInfo> DuplicateBySection()
-    {
-        List<RecordInfo> duplicates = [];
-
-        foreach (var section in TopLevelType.GetCustomAttributes<SectionAttribute>(false)) // take only top level attributes
-        {
-            var duplicate = (RecordInfo)MemberwiseClone();
-
-            duplicate.section = section;
-
-            duplicates.Add(duplicate);
-        }
-        return duplicates;
-    }
-
     internal Type Type { get; } = type;
 
-    internal Type TopLevelType { get; private set; } = type;
-
-    internal Relationships? Relations { get; private set; }
+    //internal Type TopLevelType { get; private set; } = type;
 
     internal Primary? Primary { get; } = Primary.Create(type);
+
+    internal Relationships? Relations { get; private set; }
 
     /// <summary>
     /// Pipelines for bare and composition types including top level.
@@ -104,7 +85,7 @@ internal abstract class RecordInfo(Type type, Supplement supplement)
 
     internal (Type, Relationships)[]? CompositionRelations { get; private set; }
 
-    internal Section Section => section.Section;
+    internal SectionAttribute[] Sections { get; private set; }
 }
 
 internal sealed class RecordInfo<TRecord>(Type type, Supplement supplement) : RecordInfo(type, supplement)

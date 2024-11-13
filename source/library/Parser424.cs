@@ -24,12 +24,12 @@ internal class Parser424
 
         bool TryEnqueue(string @string)
         {
-            foreach (var info in meta.Info)
+            foreach (var (section, info) in meta.Info)
             {
-                if (!info.IsMatch(@string))
+                if (!section.IsMatch(@string))
                     continue;
 
-                (info.IsContinuation(@string) ? this.strings[info.Section].Continuation : this.strings[info.Section].Primary).Enqueue(@string);
+                (info.IsContinuation(@string) ? this.strings[section.Value].Continuation : this.strings[section.Value].Primary).Enqueue(@string);
                 return true;
             }
             return false;
@@ -38,14 +38,19 @@ internal class Parser424
 
     private void Build()
 #if !NOPARALLEL
-        => Parallel.ForEach(meta.Info, info => builds[info.Section][info.Type] = info.Build(strings[info.Section].Primary));
+        => Parallel.ForEach(meta.Info, x =>
+        {
+            var (section, info) = (x.Key, x.Value);
+
+            builds[section.Value][info.Type] = info.Build(strings[section.Value].Primary);
+        });
 #else
     {
         foreach (var info in meta.Info)
             builds[info.Section] = info.Build(strings[info.Section].Primary);
     }
 #endif
-    private void Link(Unique unique)
+    /*private void Link(Unique unique)
 #if !NOPARALLEL
         => Parallel.ForEach(meta.Info, info => info.Link(builds[info.Section][info.Type], unique, meta));
 #else
@@ -53,21 +58,17 @@ internal class Parser424
         foreach (var info in meta.Info)
             info.Link(builds[info.Section], unique, meta);
     }
-#endif
+#endif*/
     private void Postprocess()
     {
-        foreach (var info in meta.Info)
+        foreach (var (section, info) in meta.Info)
         {
             if (info.CompositionPipelines is not null)
             {
-                var builds = this.builds[info.Section];
+                var builds = this.builds[section.Value];
 
                 foreach (var (sourceType, outType, pipeline) in info.CompositionPipelines)
-                {
                     builds[outType] = pipeline.Process(builds[sourceType]);
-                }
-
-                //this.builds[info.Section] = builds;
             }
         }
     }
@@ -76,10 +77,10 @@ internal class Parser424
     {
         this.meta = meta;
 
-        foreach (var info in meta.Info)
+        foreach (var (section, _) in meta.Info)
         {
-            builds[info.Section] = [];
-            strings[info.Section] = ([], []);
+            builds[section.Value] = [];
+            strings[section.Value] = ([], []);
         }
     }
 
@@ -95,18 +96,18 @@ internal class Parser424
 
         var data = new Data424();
 
-        /*foreach (var (property, section) in Data424.GetProperties())
+        foreach (var (property, section) in Data424.GetProperties())
         {
-            var list = (IList)property.GetValue(data)!;
+            var list = (System.Collections.IList)property.GetValue(data)!;
 
-            foreach (var build in builds[section])
+            foreach (var build in builds[section].Values.Last())
             {
                 if (build.Diagnostics is null)
                     _ = list.Add(build.Record);
                 else
                     invalid.Enqueue(build);
             }
-        }*/
+        }
         return data;
     }
 }

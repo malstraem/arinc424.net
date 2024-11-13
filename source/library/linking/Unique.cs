@@ -34,7 +34,7 @@ internal class Unique
         Debug.WriteLine(build.Diagnostics.Last());
     }
 
-    internal Unique(IEnumerable<RecordInfo> info, IDictionary<Section, Queue<Build>> builds)
+    /*internal Unique(IEnumerable<RecordInfo> info, IDictionary<Section, Queue<Build>> builds)
     {
         foreach (var attribute in info.Where(x => x.Primary is not null))
         {
@@ -44,7 +44,7 @@ internal class Unique
             foreach (var build in builds[attribute.Section])
                 ProcessPrimaryKey(build, attribute);
         };
-    }
+    }*/
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool TryGetRecords(Type type, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(type, out records);

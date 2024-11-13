@@ -4,11 +4,11 @@ namespace Arinc424.Attributes;
 
 internal abstract class InfoAttribute : Attribute
 {
-    internal abstract IEnumerable<RecordInfo> GetInfo(Supplement supplement);
+    internal abstract RecordInfo GetInfo(Supplement supplement);
 }
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
 internal sealed class RecordAttribute<TRecord> : InfoAttribute where TRecord : Record424, new()
 {
-    internal override IEnumerable<RecordInfo> GetInfo(Supplement supplement) => RecordInfo.Create<TRecord>(supplement).DuplicateBySection();
+    internal override RecordInfo GetInfo(Supplement supplement) => RecordInfo.Create<TRecord>(supplement);
 }

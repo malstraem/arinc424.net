@@ -22,7 +22,7 @@ public class Data424
         Dictionary<PropertyInfo, Section> properties = [];
 
         foreach (var property in typeof(Data424).GetProperties())
-            properties.Add(property, property.GetCustomAttribute<SectionAttribute>()!.Section);
+            properties.Add(property, property.GetCustomAttribute<SectionAttribute>()!.Value);
 
         return properties;
     }
