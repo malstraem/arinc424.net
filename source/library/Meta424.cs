@@ -109,11 +109,11 @@ public class Meta424
             foreach (var section in attribute.Sections)
             {
                 info.Add(section, attribute);
-                types.Add(section.Value, attribute.Type);
+                types.Add(section.Value, attribute.TopLevel);
             }
 
             // types with multiple sections will be stored once
-            _ = typeInfo.TryAdd(attribute.Type, attribute);
+            _ = typeInfo.TryAdd(attribute.TopLevel, attribute);
         }
         return new Meta424()
         {

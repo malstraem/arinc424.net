@@ -7,12 +7,12 @@ internal class Parser424
 {
     private readonly Meta424 meta;
 
+    private readonly Dictionary<Section, Queue<string>> records = [];
+
     /// <summary>
     /// Storage for entity builds. Covers bare types and compositions.
     /// </summary>
-    private readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
-
-    private readonly Dictionary<Section, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
+    internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
 
     private void Process(IEnumerable<string> strings, Queue<string> skipped)
     {
@@ -26,11 +26,11 @@ internal class Parser424
         {
             foreach (var (section, info) in meta.Info)
             {
-                if (!section.IsMatch(@string))
-                    continue;
-
-                (info.IsContinuation(@string) ? this.strings[section.Value].Continuation : this.strings[section.Value].Primary).Enqueue(@string);
-                return true;
+                if (section.IsMatch(@string))
+                {
+                    records[section.Value].Enqueue(@string);
+                    return true;
+                }
             }
             return false;
         }
@@ -42,7 +42,7 @@ internal class Parser424
         {
             var (section, info) = (x.Key, x.Value);
 
-            builds[section.Value][info.Type] = info.Build(strings[section.Value].Primary);
+            builds[section.Value][info.LowLevel] = info.Build(records[section.Value]);
         });
 #else
     {
@@ -50,15 +50,29 @@ internal class Parser424
             builds[info.Section] = info.Build(strings[info.Section].Primary);
     }
 #endif
-    /*private void Link(Unique unique)
+    private void Link(Unique unique)
 #if !NOPARALLEL
-        => Parallel.ForEach(meta.Info, info => info.Link(builds[info.Section][info.Type], unique, meta));
+        => Parallel.ForEach(meta.Info, x =>
+        {
+            var (section, info) = (x.Key, x.Value);
+
+            if (info.CompositionRelations is null)
+                return;
+
+            foreach (var (type, realtions) in info.CompositionRelations)
+                realtions.Link(builds[section.Value][type], unique, meta);
+        });
 #else
     {
-        foreach (var info in meta.Info)
-            info.Link(builds[info.Section], unique, meta);
+        foreach (var (section, info) in meta.Info)
+        {
+            foreach (var (type, realtions) in info.CompositionRelations)
+            {
+                realtions.Link(builds[section.Value][type], unique, meta);
+            }
+        }
     }
-#endif*/
+#endif
     private void Postprocess()
     {
         foreach (var (section, info) in meta.Info)
@@ -80,7 +94,7 @@ internal class Parser424
         foreach (var (section, _) in meta.Info)
         {
             builds[section.Value] = [];
-            strings[section.Value] = ([], []);
+            records[section.Value] = [];
         }
     }
 
@@ -92,7 +106,7 @@ internal class Parser424
         Process(strings, skipped);
         Build();
         Postprocess();
-        //Link(new Unique(meta.Info, builds));
+        Link(new Unique(meta, this));
 
         var data = new Data424();
 

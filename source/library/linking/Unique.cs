@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
@@ -11,8 +12,6 @@ namespace Arinc424.Linking;
 /// </summary>
 internal class Unique
 {
-    //private class
-
     private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
     [Obsolete("todo: diagnostics")]
@@ -26,25 +25,29 @@ internal class Unique
             return;
         }
 
-        if (unique[info.Type].TryAdd(key, record))
+        if (unique[info.TopLevel].TryAdd(key, record))
             return;
 
         build.Diagnostics ??= [];
-        build.Diagnostics.Enqueue(new Duplicate(record, info.Type, key));
-        Debug.WriteLine(build.Diagnostics.Last());
+        build.Diagnostics.Enqueue(new Duplicate(record, info.TopLevel, key));
     }
 
-    /*internal Unique(IEnumerable<RecordInfo> info, IDictionary<Section, Queue<Build>> builds)
+    internal Unique(Meta424 meta, Parser424 parser)
     {
-        foreach (var attribute in info.Where(x => x.Primary is not null))
+        foreach (var (section, info) in meta.Info)
         {
-            if (!unique.ContainsKey(attribute.Type))
-                unique[attribute.Type] = [];
+            if (info.Primary is null)
+                continue;
 
-            foreach (var build in builds[attribute.Section])
-                ProcessPrimaryKey(build, attribute);
+            if (!unique.ContainsKey(info.TopLevel))
+                unique[info.TopLevel] = [];
+
+            foreach (var build in parser.builds[section.Value][info.TopLevel])
+            {
+                ProcessPrimaryKey(build, info);
+            }
         };
-    }*/
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool TryGetRecords(Type type, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(type, out records);

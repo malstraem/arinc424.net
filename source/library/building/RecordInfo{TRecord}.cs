@@ -11,7 +11,7 @@ namespace Arinc424.Building;
 /// <summary>
 /// How an entity should be created and processed.
 /// </summary>
-internal abstract class RecordInfo(Type type, Supplement supplement)
+internal abstract class RecordInfo(Type type)
 #pragma warning restore CS8618
 {
     private int? continuationIndex;
@@ -43,9 +43,12 @@ internal abstract class RecordInfo(Type type, Supplement supplement)
                 relations.Add((sourceType, relationships));
         }
 
-        var info = (RecordInfo)constructor!.Invoke([type.GetComposition().First(), supplement]);
+        var info = (RecordInfo)constructor!.Invoke([type, supplement]);
 
         info.Relations = Relationships.Create(type, supplement);
+
+        if (info.Relations is not null)
+            relations.Add((type, info.Relations));
 
         if (relations.Count != 0)
             info.CompositionRelations = [.. relations];
@@ -62,17 +65,11 @@ internal abstract class RecordInfo(Type type, Supplement supplement)
 
     internal abstract Queue<Build> Build(Queue<string> strings);
 
-    internal bool IsContinuation(string @string) => continuationIndex is not null
-                                                 && @string[continuationIndex.Value] is not '0' and not '1';
+    internal bool IsContinuation(string @string) => continuationIndex is not null && @string[continuationIndex.Value] is not '0' and not '1';
 
-    internal void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)
-    {
-        //=> Relations?.Link(builds, unique, meta);
-    }
+    internal Type TopLevel { get; } = type;
 
-    internal Type Type { get; } = type;
-
-    //internal Type TopLevelType { get; private set; } = type;
+    internal Type LowLevel { get; } = type.GetComposition().First();
 
     internal Primary? Primary { get; } = Primary.Create(type);
 
@@ -88,8 +85,7 @@ internal abstract class RecordInfo(Type type, Supplement supplement)
     internal SectionAttribute[] Sections { get; private set; }
 }
 
-internal sealed class RecordInfo<TRecord>(Type type, Supplement supplement) : RecordInfo(type, supplement)
-    where TRecord : Record424, new()
+internal sealed class RecordInfo<TRecord>(Type type, Supplement supplement) : RecordInfo(type) where TRecord : Record424, new()
 {
     private readonly BuildInfo<TRecord> info = new(supplement);
 
@@ -101,6 +97,9 @@ internal sealed class RecordInfo<TRecord>(Type type, Supplement supplement) : Re
 
         while (strings.TryDequeue(out string? @string))
         {
+            if (IsContinuation(@string))
+                continue;
+
             var build = new Build<TRecord>(RecordBuilder<TRecord>.Build(@string, info, diagnostics));
 
             if (diagnostics.Count != 0)
