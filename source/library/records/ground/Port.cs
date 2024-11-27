@@ -6,6 +6,7 @@ using Arinc424.Waypoints;
 namespace Arinc424.Ground;
 
 [Identifier(7, 10), Icao(11, 12), Continuous]
+
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Name)} - {{{nameof(Name)},nq}}")]
 public abstract class Port : Fix, IIcao, INamed
 {

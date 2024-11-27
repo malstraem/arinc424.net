@@ -4,6 +4,7 @@ namespace Arinc424.Navigation;
 
 /// <inheritdoc />
 [Section('P', 'N'), Port(7, 10)]
+
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class TerminalBeacon : Nondirectional
 {

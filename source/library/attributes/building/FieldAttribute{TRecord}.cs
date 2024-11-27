@@ -1,7 +1,7 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies the range of a field within an <c>ARINC-424</c> string. Must come before <see cref="FieldAttribute{TRecord}"/>.
+/// Specifies the range of a field within an <c>ARINC-424</c> string. Comes before <see cref="FieldAttribute{TRecord}"/>.
 /// </summary>
 /// <inheritdoc/>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]

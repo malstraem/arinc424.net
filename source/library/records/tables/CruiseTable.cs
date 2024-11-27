@@ -6,7 +6,8 @@ namespace Arinc424.Tables;
 /// <c>Cruising Table</c> record sequence.
 /// </summary>
 /// <remarks>See section 4.1.16.1.</remarks>
-[Section('T', 'C'), Identifier(7, 8), Sequenced(9)]
+[Section('T', 'C'), Identifier(7, 8)]
+
 [Pipeline<Sequence<CruiseTable, CruiseRow>>]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]

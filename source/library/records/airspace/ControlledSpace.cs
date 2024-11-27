@@ -3,7 +3,7 @@ using Arinc424.Processing;
 namespace Arinc424.Airspace;
 
 [Section('U', 'C')]
-[Pipeline<Sequence<ControlledVolume, BoundaryPoint>>]
+
 [Pipeline<MultipleWrap<ControlledSpace, ControlledVolume>>]
 
 [DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Name)},nq}}")]

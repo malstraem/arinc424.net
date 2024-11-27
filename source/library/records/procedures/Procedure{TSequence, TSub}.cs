@@ -2,7 +2,7 @@ using Arinc424.Ground;
 
 namespace Arinc424.Procedures;
 
-[Identifier(14, 19), Icao(11, 12), Port(7, 10), Continuous(39)]
+[Port(7, 10), Icao(11, 12), Identifier(14, 19), Continuous(39)]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Port)}}}")]
 public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdentity, IIcao

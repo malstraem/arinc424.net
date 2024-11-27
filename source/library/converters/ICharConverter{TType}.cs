@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 namespace Arinc424.Converters;
 
 /// <summary>
@@ -8,6 +6,5 @@ namespace Arinc424.Converters;
 /// <typeparam name="TType">Converted type.</typeparam>
 internal interface ICharConverter<TType> where TType : Enum
 {
-    [SkipLocalsInit]
     static abstract bool TryConvert(char @char, out TType value);
 }

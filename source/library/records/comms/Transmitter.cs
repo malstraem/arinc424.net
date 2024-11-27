@@ -2,8 +2,11 @@ namespace Arinc424.Comms;
 
 using Terms;
 
-public abstract class Transmitter : Geo
+public abstract class Transmitter : Geo, ISequenced
 {
+    [Field(20, 21, Supplement.V19), Integer]
+    public int SeqNumber { get; set; }
+
     /// <inheritdoc cref="CommType"/>
     [Field<AirwayTransmitter>(44, 46)]
     [Field<PortTransmitter>(14, 16)]

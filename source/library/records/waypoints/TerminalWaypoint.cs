@@ -7,6 +7,7 @@ namespace Arinc424.Waypoints;
 /// </summary>
 /// <remarks>See section 4.1.4.1 and 4.2.2.1.</remarks>
 [Section('P', 'C', subsectionIndex: 13), Section('H', 'C', subsectionIndex: 13)]
+
 [Port(7, 10)]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]

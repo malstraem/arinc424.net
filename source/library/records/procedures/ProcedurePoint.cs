@@ -7,9 +7,13 @@ namespace Arinc424.Procedures;
 /// Fields of <c>Airport</c> and <c>Heliport SID/STAR/Approach</c>.
 /// </summary>
 [Port(7, 10)]
+
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
-public abstract class ProcedurePoint : Record424
+public abstract class ProcedurePoint : Record424, ISequenced
 {
+    [Field(27, 29), Integer]
+    public int SeqNumber { get; set; }
+
     [Type(37, 38)]
     [Identifier(30, 34), Icao(35, 36)]
     public Fix? Fix { get; set; }
@@ -104,14 +108,15 @@ public abstract class ProcedurePoint : Record424
     [ForeignExcept<Airport, Omnidirectional, Nondirectional, EnrouteWaypoint>(7, 12)]
     [Foreign(107, 111), Foreign(113, 114)]*/
     [Field(107, 111)]
-    [Obsolete("todo: spec contains error, need more analysis")]
+    [Obsolete("todo: need more analysis")]
     public string? Center { get; set; }
 
     /// <summary>
     /// <c>Multiple Code (MULTI CD)</c> or <c>Procedure Turn Indicator</c> character.
     /// </summary>
     /// <remarks>See section 5.130 or 5.271.</remarks>
-    [Character(112), Obsolete("same")]
+    [Character(112)]
+    [Obsolete("same")]
     public char CodeTurnIndicator { get; set; }
 
     /// <inheritdoc cref="Terms.Overlay"/>

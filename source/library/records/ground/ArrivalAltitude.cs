@@ -7,8 +7,8 @@ namespace Arinc424.Ground;
 /// <c>Airport and Heliport TAA</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.31.1 and 4.2.6.1.</remarks>
-[Section('P', 'K', subsectionIndex: 13)]
-[Section('H', 'K', subsectionIndex: 13)]
+[Section('P', 'K', subsectionIndex: 13), Section('H', 'K', subsectionIndex: 13)]
+
 [Icao(11, 12), Port(7, 10), Continuous(30)]
 public class ArrivalAltitude : Record424
 {

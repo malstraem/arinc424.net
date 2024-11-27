@@ -6,15 +6,12 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Linking;
 
-internal abstract class Relationships
+internal abstract class Relationships(Type type)
 {
 #pragma warning disable CS8618
-    protected internal FrozenDictionary<Type, PropertyInfo> one;
-    protected internal FrozenDictionary<Type, PropertyInfo> many;
+    protected FrozenDictionary<Type, PropertyInfo> one;
+    protected FrozenDictionary<Type, PropertyInfo> many;
 #pragma warning restore CS8618
-
-    protected internal abstract void Link(IEnumerable<Record424> records, Unique unique, Meta424 meta, Queue<Diagnostic> diagnostics);
-
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 
     internal void Process<TRecord>(Type type, Record424 self, TRecord referenced) where TRecord : Record424
@@ -38,13 +35,14 @@ internal abstract class Relationships
             .MakeGenericType(type)!
                 .GetMethod(nameof(Create), BindingFlags.NonPublic | BindingFlags.Static, [typeof(Supplement)])!
                     .Invoke(null, [supplement])!;
+
+    internal Type Type { get; } = type;
 }
 
-internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationships where TRecord : Record424
+internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationships(typeof(TRecord)) where TRecord : Record424
 {
     private readonly Link<TRecord>[] links = links;
 
-    [Obsolete("todo: need polish")]
     private void Link(TRecord record, Unique unique, Meta424 meta, Queue<Diagnostic> diagnostics)
     {
         foreach (var link in links)
@@ -52,12 +50,6 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
             if (!link.TryLink(record, unique, meta, out var diagnostic))
                 diagnostics.Enqueue(diagnostic);
         }
-    }
-
-    protected internal override void Link(IEnumerable<Record424> records, Unique unique, Meta424 meta, Queue<Diagnostic> diagnostics)
-    {
-        foreach (var record in (IEnumerable<TRecord>)records)
-            Link(record, unique, meta, diagnostics);
     }
 
     internal override void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)

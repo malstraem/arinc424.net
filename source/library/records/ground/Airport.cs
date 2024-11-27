@@ -54,13 +54,13 @@ public class Airport : Port
     public List<InstrumentMarker>? Markers { get; set; }
 
     /// <summary>
-    /// Associated MLS's.
+    /// Associated MLS.
     /// </summary>
     [Many]
     public List<MicrowaveLanding>? MicrowaveLandings { get; set; }
 
     /// <summary>
-    /// Associated ILS's.
+    /// Associated ILS.
     /// </summary>
     [Many]
     public List<InstrumentLanding>? InstrumentLandings { get; set; }

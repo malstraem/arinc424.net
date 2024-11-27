@@ -1,4 +1,3 @@
-using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
@@ -25,11 +24,11 @@ internal class Unique
             return;
         }
 
-        if (unique[info.TopLevel].TryAdd(key, record))
+        if (unique[info.Composition.Top].TryAdd(key, record))
             return;
 
         build.Diagnostics ??= [];
-        build.Diagnostics.Enqueue(new Duplicate(record, info.TopLevel, key));
+        build.Diagnostics.Enqueue(new Duplicate(record, info.Composition.Top, key));
     }
 
     internal Unique(Meta424 meta, Parser424 parser)
@@ -39,10 +38,10 @@ internal class Unique
             if (info.Primary is null)
                 continue;
 
-            if (!unique.ContainsKey(info.TopLevel))
-                unique[info.TopLevel] = [];
+            if (!unique.ContainsKey(info.Composition.Top))
+                unique[info.Composition.Top] = [];
 
-            foreach (var build in parser.builds[section.Value][info.TopLevel])
+            foreach (var build in parser.builds[section][info.Composition.Top])
             {
                 ProcessPrimaryKey(build, info);
             }

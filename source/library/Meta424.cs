@@ -89,18 +89,16 @@ namespace Arinc424;
 /// </summary>
 public class Meta424
 {
-#pragma warning disable CS8618
-    private Meta424() { }
-#pragma warning restore CS8618
     /// <summary>
     /// Creates metadata using target <paramref name="supplement"/>.
     /// </summary>
     /// <returns>Runtime compiled metadata.</returns>
     public static Meta424 Create(Supplement supplement)
     {
+        List<SectionAttribute> sections = [];
         Dictionary<Section, Type> types = [];
         Dictionary<Type, RecordInfo> typeInfo = [];
-        Dictionary<SectionAttribute, RecordInfo> info = [];
+        Dictionary<Section, RecordInfo> info = [];
 
         var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
 
@@ -108,24 +106,28 @@ public class Meta424
         {
             foreach (var section in attribute.Sections)
             {
-                info.Add(section, attribute);
-                types.Add(section.Value, attribute.TopLevel);
+                info.Add(section.Value, attribute);
+                types.Add(section.Value, attribute.Composition.Top);
+                sections.Add(section);
             }
-
             // types with multiple sections will be stored once
-            _ = typeInfo.TryAdd(attribute.TopLevel, attribute);
+            _ = typeInfo.TryAdd(attribute.Composition.Top, attribute);
         }
         return new Meta424()
         {
             Info = info.ToFrozenDictionary(),
             Types = types.ToFrozenDictionary(),
-            TypeInfo = typeInfo.ToFrozenDictionary()
+            TypeInfo = typeInfo.ToFrozenDictionary(),
+            Sections = [.. sections]
         };
     }
+#pragma warning disable CS8618
+    internal SectionAttribute[] Sections { get; init; }
 
     internal FrozenDictionary<Section, Type> Types { get; init; }
 
-    internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; init; }
+    internal FrozenDictionary<Section, RecordInfo> Info { get; init; }
 
-    internal FrozenDictionary<SectionAttribute, RecordInfo> Info { get; init; }
+    internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; init; }
+#pragma warning restore CS8618
 }

@@ -1,4 +1,5 @@
 using Arinc424.Navigation;
+using Arinc424.Processing;
 using Arinc424.Tables;
 using Arinc424.Waypoints.Terms;
 
@@ -8,9 +9,14 @@ namespace Arinc424.Routing;
 /// Fields of <c>Enroute Airways</c> primary record.
 /// </summary>
 /// <remarks>Used by <see cref="Airway"/> like subsequence.</remarks>
+[Pipeline<AirwayPointSorting>]
+
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
-public class AirwayPoint : Record424
+public class AirwayPoint : Record424, ISequenced
 {
+    [Field(26, 29), Integer]
+    public int SeqNumber { get; set; }
+
     [Type(37, 38)]
     [Identifier(30, 34), Icao(35, 36)]
     public Fix Fix { get; set; }

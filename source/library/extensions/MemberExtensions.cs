@@ -1,6 +1,10 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
+using Arinc424.Building;
+using Arinc424.Linking;
+using Arinc424.Processing;
+
 namespace Arinc424;
 
 internal static class MemberExtensions
@@ -31,27 +35,41 @@ internal static class MemberExtensions
         return chosen is not null;
     }
 
-    internal static TAttribute? BySupplement<TAttribute>(this IEnumerable<TAttribute> attributes, Supplement supplement) where TAttribute : SupplementAttribute
-        => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
+    internal static TAttribute? BySupplement<TAttribute>(this IEnumerable<TAttribute> attributes, Supplement supplement)
+        where TAttribute : SupplementAttribute
+            => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
 
-    internal static Stack<Type> GetComposition(this Type type)
+    internal static Composition GetComposition(this Type type, Supplement supplement)
     {
         Stack<Type> types = [];
+        Stack<IPipeline> pipelines = [];
+        Stack<Relationships> relations = [];
 
-        Fill(type, types);
+        Fill(type, supplement);
 
-        return types;
+        return new Composition([.. types]) { Pipelines = [.. pipelines], Relations = [.. relations] };
 
-        static void Fill(Type type, Stack<Type> types)
+        void Fill(Type type, Supplement supplement)
         {
             types.Push(type);
+
+            foreach (var pipe in type.GetCustomAttributes<PipelineAttribute>())
+            {
+                if (supplement >= pipe.Start && supplement <= pipe.End)
+                    pipelines.Push(pipe.GetPipeline(supplement));
+            }
+
+            var relationships = Relationships.Create(type, supplement);
+
+            if (relationships is not null)
+                relations.Push(relationships);
 
             var property = type.GetProperty(nameof(Record424<Record424>.Sequence));
 
             if (property is null)
                 return;
 
-            Fill(property.PropertyType.GetGenericArguments().First(), types);
+            Fill(property.PropertyType.GetGenericArguments().First(), supplement);
         }
     }
 }

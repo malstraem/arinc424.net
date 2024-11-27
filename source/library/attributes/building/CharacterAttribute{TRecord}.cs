@@ -1,7 +1,7 @@
 namespace Arinc424.Attributes;
 
 /// <summary>
-/// Specifies the index of a character within an <c>ARINC-424</c> string. Come before <see cref="CharacterAttribute{TRecord}"/>.
+/// Specifies the index of a character within an <c>ARINC-424</c> string. Comes before <see cref="CharacterAttribute{TRecord}"/>.
 /// </summary>
 /// <inheritdoc/>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]

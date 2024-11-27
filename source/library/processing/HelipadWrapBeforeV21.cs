@@ -8,8 +8,10 @@ namespace Arinc424.Processing;
 /// <see cref="Helipad"/> record did not exist prior to supplement 21, so this pipeline creates <see cref="Heliport">heliports</see>
 /// with associated helipads (only have identifier).
 /// </summary>
-internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport, IdentifierTrigger<Heliport>>
+internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport>
 {
+    protected override bool Trigger(Heliport current, Heliport next) => current.Source![range] != next.Source![range];
+
     /// <summary>
     /// Helipad identifer range before supplement 21.
     /// </summary>
