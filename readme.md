@@ -1,8 +1,8 @@
 > [!NOTE]
 > *work in progress and target on ver. 23 of the specification (with backward compatibility to 18)*  
-  
-*any reviews and PRs are welcome, nuget package will be released once the API is stabilized*  
-  
+*any reviews and PRs are welcome, nuget package will be released once the API is stabilized*
+
+> [!WARNING]
 *if you see any issues testing the library on real world data, please report it*
 
 # Overview
