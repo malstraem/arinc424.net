@@ -47,7 +47,7 @@ internal class Parser424
 #else
     {
         foreach (var (section, info) in meta.Info)
-            builds[section.Value][info.LowLevel] = info.Build(records[section.Value]);
+            builds[section][info.Composition.Low] = info.Build(records[section]);
     }
 #endif
     private void Link(Unique unique)
@@ -63,8 +63,8 @@ internal class Parser424
     {
         foreach (var (section, info) in meta.Info)
         {
-            foreach (var (type, realtions) in info.CompositionRelations)
-                realtions.Link(builds[section.Value][type], unique, meta);
+            foreach (var realtions in info.Composition.Relations)
+                realtions.Link(builds[section][realtions.Type], unique, meta);
         }
     }
 #endif
@@ -83,13 +83,10 @@ internal class Parser424
     {
         foreach (var (section, info) in meta.Info)
         {
-            if (info.CompositionPipelines is null)
-                return;
+            var builds = this.builds[section];
 
-            var builds = this.builds[section.Value];
-
-            foreach (var (sourceType, outType, pipeline) in info.CompositionPipelines)
-                builds[outType] = pipeline.Process(builds[sourceType]);
+            foreach (var pipeline in info.Composition.Pipelines)
+                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
         }
     }
 #endif

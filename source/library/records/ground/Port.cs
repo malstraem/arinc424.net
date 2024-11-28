@@ -107,7 +107,7 @@ public abstract class Port : Fix, IIcao, INamed
     public List<SatellitePoint>? SattelitePoints { get; set; }
 
     /// <summary>
-    /// Associated GLS's.
+    /// Associated GLSs.
     /// </summary>
     [Many]
     public List<GlobalLanding>? GlobalLandings { get; set; }

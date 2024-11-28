@@ -10,14 +10,13 @@ namespace Arinc424.Processing;
 /// </summary>
 internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport>
 {
+    /// <summary>
+    /// Heliport identifer range.
+    /// </summary>
+    private readonly Range range = 7..10;
+
     protected override bool Trigger(Heliport current, Heliport next) => current.Source![range] != next.Source![range];
 
-    /// <summary>
-    /// Helipad identifer range before supplement 21.
-    /// </summary>
-    private readonly Range range = 16..21;
-
-    [Obsolete("todo: use build info")]
     protected override Build<Heliport> Build(Queue<Build<Heliport>> builds, ref Queue<Diagnostic> _)
     {
         var build = builds.First();

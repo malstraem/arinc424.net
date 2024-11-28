@@ -24,6 +24,7 @@ internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wra
     protected override bool Trigger(TSub current, TSub next) => current.Source![range] != next.Source![range];
 }
 
+[Obsolete("most likely it needs to be done differently")]
 internal sealed class MultipleWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub>(supplement)
     where TSequence : Record424<TSub>, new()
     where TSub : Record424, IMultiple

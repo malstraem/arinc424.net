@@ -8,7 +8,7 @@ namespace Arinc424.Tables;
 /// <remarks>See section 4.1.16.1.</remarks>
 [Section('T', 'C'), Identifier(7, 8)]
 
-[Pipeline<Sequence<CruiseTable, CruiseRow>>]
+[Pipeline<IdentityWrap<CruiseTable, CruiseRow>>]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public class CruiseTable : Record424<CruiseRow>, IIdentity
