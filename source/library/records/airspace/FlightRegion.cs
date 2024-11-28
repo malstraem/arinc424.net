@@ -1,18 +1,29 @@
+using Arinc424.Processing;
+
 namespace Arinc424.Airspace;
 
 [Section('U', 'F'), Identifier(7, 10)]
+
+[Pipeline<IdentityWrap<FlightRegion, RegionVolume>>]
+
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Name)},nq}}")]
 public class FlightRegion : Record424<RegionVolume>, IIdentity, INamed
 {
-    /// <inheritdoc cref="RegionVolume.Identifier"/>
+    /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
     [Field(7, 10)]
     public string Identifier { get; set; }
 
-    /// <inheritdoc cref="RegionVolume.Address"/>
+    /// <summary>
+    /// <c>FIR/UIR Address (ADDRESS)</c> field.
+    /// </summary>
+    /// <remarks>See section 5.151.</remarks>
     [Field(11, 14)]
     public string Address { get; set; }
 
-    /// <inheritdoc cref="RegionVolume.Name"/>
+    /// <summary>
+    /// <c>FIR/UIR Name</c> field.
+    /// </summary>
+    /// <remarks>See section 5.125.</remarks>
     [Field(99, 123)]
     public string? Name { get; set; }
 }

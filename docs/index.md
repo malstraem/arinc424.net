@@ -40,7 +40,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [Helipad](api/Arinc424.Ground.Helipad.yml)
 - [TAA](api/Arinc424.Ground.ArrivalAltitude.yml)
 - [MSA](api/Arinc424.Ground.MinimumAltitude.yml)
-- [SBAS Path Point](api/Arinc424.Ground.SatellitePoint.yml) 🚧
+- [SBAS Path Point](api/Arinc424.Ground.SatellitePoint.yml)
 - [Communication](api/Arinc424.Comms.PortCommunication.yml)
 
 # [Airport](#tab/airport)
@@ -76,8 +76,8 @@ In practice, this allows you to explore and manipulate the tree-like representat
 
 # [Airspace](#tab/airspace)
 
-- [Controlled Airspace](api/Arinc424.Airspace.ControlledSpace.yml) 🚧
-- [FIR/UIR](api/Arinc424.Airspace.FlightRegion.yml) 🚧
-- [Restrictive Airspace](api/Arinc424.Airspace.RestrictiveSpace.yml) 🚧
+- [Controlled Airspace](api/Arinc424.Airspace.ControlledSpace.yml)
+- [FIR/UIR](api/Arinc424.Airspace.FlightRegion.yml)
+- [Restrictive Airspace](api/Arinc424.Airspace.RestrictiveSpace.yml)
 
 ---

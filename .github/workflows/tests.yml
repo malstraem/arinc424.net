@@ -11,7 +11,9 @@ jobs:
     - uses: actions/checkout@v4
     - uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.x
-    - run: dotnet build -c release --tl
+        dotnet-version: |
+          8.x
+          9.x
+    - run: dotnet build -c release
     - run: dotnet test -c release --no-build
     runs-on: ubuntu-latest

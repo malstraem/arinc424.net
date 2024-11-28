@@ -2,27 +2,24 @@ using Arinc424.Processing;
 
 namespace Arinc424.Attributes;
 
-internal abstract class PipelineAttribute<TSource>(Type outType, Supplement start, Supplement end) : SupplementAttribute(start, end)
-    where TSource : Record424
+internal abstract class PipelineAttribute(Supplement start, Supplement end) : SupplementAttribute(start, end)
 {
-    internal abstract IPipeline<TSource> GetPipeline(Supplement supplement);
-
-    internal Type OutType { get; } = outType;
+    internal abstract IPipeline GetPipeline(Supplement supplement);
 }
 
-internal sealed class PipelineAttribute<TPipeline, TSource>(Supplement start = Supplement.V18, Supplement end = Supplement.V23)
-    : PipelineAttribute<TSource>(TPipeline.OutType, start, end)
-        where TSource : Record424
-        where TPipeline : IPipeline<TSource>
+[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+internal sealed class PipelineAttribute<TPipeline>(Supplement start = Supplement.V18, Supplement end = Supplement.V23)
+    : PipelineAttribute(start, end)
+        where TPipeline : IPipeline
 {
-    internal override IPipeline<TSource> GetPipeline(Supplement supplement)
+    internal override IPipeline GetPipeline(Supplement supplement)
     {
         var type = typeof(TPipeline);
 
         var constructor = type.GetConstructor([typeof(Supplement)]);
 
-        /* garantee by design */
-        return (IPipeline<TSource>)
+        /* guarantee by design */
+        return (IPipeline)
                 (constructor is null
                     ? type.GetConstructor([])!.Invoke(null)
                     : constructor.Invoke([supplement]));

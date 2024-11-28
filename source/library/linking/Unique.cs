@@ -24,23 +24,27 @@ internal class Unique
             return;
         }
 
-        if (unique[info.Type].TryAdd(key, record))
+        if (unique[info.Composition.Top].TryAdd(key, record))
             return;
 
         build.Diagnostics ??= [];
-        build.Diagnostics.Enqueue(new Duplicate(record, info.Type, key));
-        Debug.WriteLine(build.Diagnostics.Last());
+        build.Diagnostics.Enqueue(new Duplicate(record, info.Composition.Top, key));
     }
 
-    internal Unique(IEnumerable<RecordInfo> info, IDictionary<Section, IEnumerable<Build>> builds)
+    internal Unique(Meta424 meta, Parser424 parser)
     {
-        foreach (var attribute in info.Where(x => x.Primary is not null))
+        foreach (var (section, info) in meta.Info)
         {
-            if (!unique.ContainsKey(attribute.Type))
-                unique[attribute.Type] = [];
+            if (info.Primary is null)
+                continue;
 
-            foreach (var build in builds[attribute.Section])
-                ProcessPrimaryKey(build, attribute);
+            if (!unique.ContainsKey(info.Composition.Top))
+                unique[info.Composition.Top] = [];
+
+            foreach (var build in parser.builds[section][info.Composition.Top])
+            {
+                ProcessPrimaryKey(build, info);
+            }
         };
     }
 

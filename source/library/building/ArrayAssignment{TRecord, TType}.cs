@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Reflection;
 
 using Arinc424.Diagnostics;
@@ -13,10 +14,11 @@ internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Ran
 
     private readonly Action<TRecord, TType[]> set = GetCompiledSetter<TType[]>(property, false);
 
-    [Obsolete("todo")]
-    private TType[] GetArray(Range range, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
+    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
-        List<TType> list = [];
+        List<TType> values = [];
+
+        var range = this.range;
 
         int length = range.End.Value - range.Start.Value;
 
@@ -27,13 +29,15 @@ internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Ran
             if (@field.IsWhiteSpace())
                 break;
 
-            // todo: process error
-            list.Add(decode.Convert(@field).Value);
+            var result = decode.Convert(@field);
+
+            if (result.Invalid)
+                diagnostics.Enqueue(new InvalidValue(record, Property, result.Bad.ToImmutableArray(), range));
+            else
+                values.Add(result.Value);
 
             range = new(range.Start.Value + length, range.End.Value + length);
         }
-        return [.. list];
+        set(record, [.. values]);
     }
-
-    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics) => set(record, GetArray(range, @string, diagnostics));
 }

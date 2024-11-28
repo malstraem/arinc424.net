@@ -1,44 +1,35 @@
+using System.Reflection;
+
 using Arinc424.Building;
 using Arinc424.Diagnostics;
 
 namespace Arinc424.Processing;
 
-internal abstract class Wrap<TSequence, TSub, TTrigger>(Supplement supplement) : Scan<TSequence, TSub, TTrigger>
+internal abstract class Wrap<TSequence, TSub>(Supplement supplement) : Scan<TSequence, TSub>
     where TSequence : Record424<TSub>, new()
     where TSub : Record424
-    where TTrigger : ITrigger<TSub>
 {
     private readonly BuildInfo<TSequence> info = new(supplement);
 
     protected override Build<TSequence> Build(Queue<Build<TSub>> subs, ref Queue<Diagnostic> diagnostics)
-    {
-        var sub = subs.First();
-
-        Build<TSequence, TSub> build = new(RecordBuilder<TSequence>.Build(sub.Record.Source!, new TSequence(), info, diagnostics));
-
-        build.Record.Sequence = [];
-
-        while (subs.TryDequeue(out sub))
-        {
-            build.Record.Sequence.Add(sub.Record);
-
-            if (sub.Diagnostics is not null)
-                diagnostics.Pump(sub.Diagnostics);
-        }
-
-        if (diagnostics.Count != 0)
-        {
-            build.Diagnostics = diagnostics;
-            diagnostics = [];
-        }
-        return build;
-    }
+        => RecordBuilder<TSequence, TSub>.Build(subs, info, ref diagnostics);
 }
 
-internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub, IdentifierTrigger<TSub>>(supplement)
-    where TSequence : Record424<TSub>, new()
-    where TSub : Record424, IIdentity;
+internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub>(supplement)
+    where TSequence : Record424<TSub>, IIdentity, new()
+    where TSub : Record424
+{
+    private readonly Range range = typeof(TSequence).GetCustomAttribute<IdentifierAttribute>()!.Range;
 
-internal sealed class MultipleWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub, MultipleTrigger<TSub>>(supplement)
+    protected override bool Trigger(TSub current, TSub next) => current.Source![range] != next.Source![range];
+}
+
+[Obsolete("most likely it needs to be done differently")]
+internal sealed class MultipleWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub>(supplement)
     where TSequence : Record424<TSub>, new()
-    where TSub : Record424, IMultiple;
+    where TSub : Record424, IMultiple
+{
+    protected override bool Trigger(TSub current, TSub next) => char.IsWhiteSpace(current.Multiplier)
+                                                             || char.IsWhiteSpace(next.Multiplier)
+                                                             || next.Multiplier <= current.Multiplier;
+}

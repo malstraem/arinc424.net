@@ -5,6 +5,9 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Building;
 
+/// <summary>
+/// Assignment operation to set <see cref="Record424"/> property.
+/// </summary>
 internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord : Record424
 {
     internal Regex? Regex { get; } = property.GetCustomAttribute<ValidationAttribute>()?.Regex;

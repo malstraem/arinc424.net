@@ -10,7 +10,7 @@ public enum AircraftTypes : ushort
 {
     Unknown = 0,
     /// <summary>
-    /// Aircraft Category/Type not provided .
+    /// Aircraft Category/Type not provided.
     /// </summary>
     [Map] Unspecified = 1,
     /// <summary>

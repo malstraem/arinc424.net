@@ -22,12 +22,12 @@ public class Data424
         Dictionary<PropertyInfo, Section> properties = [];
 
         foreach (var property in typeof(Data424).GetProperties())
-            properties.Add(property, property.GetCustomAttribute<SectionAttribute>()!.Section);
+            properties.Add(property, property.GetCustomAttribute<SectionAttribute>()!.Value);
 
         return properties;
     }
 
-    public static Data424 Create(Meta424 meta, IEnumerable<string> strings, out string[] skipped, out Build[] invalid)
+    public static Data424 Create(Meta424 meta, IEnumerable<string> strings, out Queue<string> skipped, out Queue<Build> invalid)
         => new Parser424(meta).Parse(strings, out skipped, out invalid);
 
     /// <summary>

@@ -8,21 +8,22 @@ namespace Arinc424.Processing;
 /// <see cref="Helipad"/> record did not exist prior to supplement 21, so this pipeline creates <see cref="Heliport">heliports</see>
 /// with associated helipads (only have identifier).
 /// </summary>
-internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport, IdentifierTrigger<Heliport>>
+internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport>
 {
     /// <summary>
-    /// Helipad identifer range before supplement 21.
+    /// Heliport identifer range.
     /// </summary>
-    private readonly Range range = 16..21;
+    private readonly Range range = 7..10;
 
-    [Obsolete("todo: use build info")]
-    protected override Build<Heliport> Build(Queue<Build<Heliport>> sources, ref Queue<Diagnostic> _)
+    protected override bool Trigger(Heliport current, Heliport next) => current.Source![range] != next.Source![range];
+
+    protected override Build<Heliport> Build(Queue<Build<Heliport>> builds, ref Queue<Diagnostic> _)
     {
-        var result = sources.First();
+        var build = builds.First();
 
-        var helipads = result.Record.Helipads = [];
+        var helipads = build.Record.Helipads = [];
 
-        while (sources.TryDequeue(out var source))
+        while (builds.TryDequeue(out var source))
         {
             var port = source.Record;
 
@@ -36,6 +37,6 @@ internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport, Identifier
                 Heliport = port
             });
         }
-        return result;
+        return build;
     }
 }

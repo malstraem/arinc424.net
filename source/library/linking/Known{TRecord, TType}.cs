@@ -11,9 +11,7 @@ internal abstract class Link<TRecord> where TRecord : Record424
     internal abstract bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic);
 }
 
-internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Link<TRecord>
-    where TRecord : Record424
-    where TType : class
+internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Link<TRecord> where TRecord : Record424 where TType : class
 {
     protected readonly Foreign foreign = new(info);
 
@@ -27,7 +25,7 @@ internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Lin
 
         var type = property.PropertyType;
 
-        if (!foreign.TryGetKey(record.Source!, meta.TypeInfo[property.PropertyType].Primary! /*garantee by design*/, out string? key))
+        if (!foreign.TryGetKey(record.Source!, meta.TypeInfo[property.PropertyType].Primary! /* guarantee by design */, out string? key))
             return true;
 
         if (!unique.TryGetRecords(type, out var records))
@@ -40,7 +38,8 @@ internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Lin
             diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key };
             return false;
         }
-        set(record, Unsafe.As<TType>(referenced)); /*garantee by design*/
+        // guarantee by design
+        set(record, Unsafe.As<TType>(referenced));
 
         meta.TypeInfo[type].Relations?.Process(type, referenced, record);
 

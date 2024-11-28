@@ -2,8 +2,8 @@
   "OffrouteAltitudes": 238,
   "Tacticals": 0,
   "Nondirectionals": 507,
-  "Omnidirectionals": 2080,
-  "Airways": 1530,
+  "Omnidirectionals": 2079,
+  "Airways": 1474,
   "EnrouteWaypoints": 31022,
   "AirwayMarkers": 0,
   "HoldingPatterns": 0,
@@ -24,7 +24,7 @@
   "Airports": 13346,
   "FlightPlans": 0,
   "AirportArrivals": 1825,
-  "AirportApproaches": 10326,
+  "AirportApproaches": 10325,
   "AirportDepartures": 2208,
   "TerminalBeacons": 216,
   "GroundPoints": 0,
@@ -44,6 +44,6 @@
   "CommunicationTypes": 0,
   "GeographicalReferences": 0,
   "FlightRegions": 0,
-  "ControlledSpaces": 699,
+  "ControlledSpaces": 702,
   "RestrictiveSpaces": 1231
 }

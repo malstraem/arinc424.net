@@ -5,6 +5,7 @@ using Arinc424.Procedures;
 using Terms;
 
 [Icao(11, 12), Port(7, 10), Continuous(27)]
+
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class PathPoint : Fix
 {

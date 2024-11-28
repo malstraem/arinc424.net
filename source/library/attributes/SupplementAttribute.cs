@@ -1,5 +1,8 @@
 namespace Arinc424.Attributes;
 
+/// <summary>
+/// A base attribute that can be versioned.
+/// </summary>
 internal abstract class SupplementAttribute(Supplement start, Supplement end = Supplement.V23) : Attribute
 {
     internal Supplement Start { get; } = start;

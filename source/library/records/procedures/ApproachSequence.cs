@@ -2,7 +2,7 @@ using Arinc424.Processing;
 
 namespace Arinc424.Procedures;
 
-[Pipeline<IdentityWrap<Approach, ApproachSequence>, ApproachSequence>]
+[Pipeline<Sequence<ApproachSequence, ApproachPoint>>]
 public class ApproachSequence : ProcedureSequence<ApproachPoint>
 {
     /// <inheritdoc cref="Terms.ApproachType"/>

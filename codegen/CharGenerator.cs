@@ -33,8 +33,8 @@ public class CharGenerator : ConverterGenerator
         return builder.Append(@$"
             default:
                 value = {target.Unknown}; return false;
-        }}").Append($@"
-    }}");
+        }}").Append(@"
+    }");
     }
 
     private protected override bool IsMatch(EnumDeclarationSyntax @enum) => @enum.HaveAttribute(CharAttribute);

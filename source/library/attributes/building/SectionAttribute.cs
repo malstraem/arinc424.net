@@ -8,7 +8,7 @@ namespace Arinc424.Attributes;
 internal class SectionAttribute(char section, char subsection = (char)32, int sectionIndex = 5, int subsectionIndex = 6)
     : TypeAttribute(sectionIndex, subsectionIndex)
 {
-    internal readonly Section Section = new(section, subsection);
+    internal Section Value { get; } = new(section, subsection);
 
-    internal bool IsMatch(string @string) => @string[SectionIndex] == Section.Char && @string[SubsectionIndex] == Section.Subchar;
+    internal bool IsMatch(string @string) => @string[SectionIndex] == Value.Char && @string[SubsectionIndex] == Value.Subchar;
 }

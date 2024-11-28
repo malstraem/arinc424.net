@@ -6,8 +6,11 @@ namespace Arinc424.Tables;
 /// Fields of <c>Cruising Table</c>.
 /// </summary>
 /// <remarks>Used by <see cref="CruiseTable"/> like subsequence.</remarks>
-public class CruiseRow : Record424
+public class CruiseRow : Record424, ISequenced
 {
+    [Field(9, 9), Integer]
+    public int SeqNumber { get; set; }
+
     /// <summary>
     /// <c>Course FROM</c> field.
     /// </summary>
@@ -32,5 +35,5 @@ public class CruiseRow : Record424
     public CourseType CourseType { get; set; }
 
     [Field(40, 54), Count(4)]
-    public Level[] LevelRanges { get; set; }
+    public Level[] Levels { get; set; }
 }

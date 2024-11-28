@@ -13,5 +13,5 @@ public class InvalidLink(Record424 record, PropertyInfo property, LinkInfo info,
 
     public string? Key { get; internal set; }
 
-    public Type? WrongType { get; internal set; }
+    public Type? Type { get; internal set; }
 }

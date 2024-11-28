@@ -1,22 +1,20 @@
-using System.Collections;
-using System.Collections.Concurrent;
-
 using Arinc424.Building;
 using Arinc424.Linking;
 
 namespace Arinc424;
 
-internal partial class Parser424
+internal class Parser424
 {
     private readonly Meta424 meta;
 
-    private readonly Queue<string> skipped = [];
+    private readonly Dictionary<Section, Queue<string>> records = [];
 
-    private readonly ConcurrentDictionary<Section, IEnumerable<Build>> builds = [];
+    /// <summary>
+    /// Storage for entity builds. Covers bare types and compositions.
+    /// </summary>
+    internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
 
-    private readonly Dictionary<Section, (Queue<string> Primary, Queue<string> Continuation)> strings = [];
-
-    private void Process(IEnumerable<string> strings)
+    private void Process(IEnumerable<string> strings, Queue<string> skipped)
     {
         foreach (string @string in strings)
         {
@@ -26,13 +24,13 @@ internal partial class Parser424
 
         bool TryEnqueue(string @string)
         {
-            foreach (var info in meta.Info)
+            foreach (var section in meta.Sections)
             {
-                if (!info.IsMatch(@string))
-                    continue;
-
-                (info.IsContinuation(@string) ? this.strings[info.Section].Continuation : this.strings[info.Section].Primary).Enqueue(@string);
-                return true;
+                if (section.IsMatch(@string))
+                {
+                    records[section.Value].Enqueue(@string);
+                    return true;
+                }
             }
             return false;
         }
@@ -40,56 +38,93 @@ internal partial class Parser424
 
     private void Build()
 #if !NOPARALLEL
-        => Parallel.ForEach(meta.Info, info => builds[info.Section] = info.Build(strings[info.Section].Primary));
+    => Parallel.ForEach(meta.Info, x =>
+    {
+        var (section, info) = (x.Key, x.Value);
+
+        builds[section][info.Composition.Low] = info.Build(records[section]);
+    });
 #else
     {
-        foreach (var info in meta.Info)
-            builds[info.Section] = info.Build(strings[info.Section].Primary);
+        foreach (var (section, info) in meta.Info)
+            builds[section][info.Composition.Low] = info.Build(records[section]);
     }
 #endif
     private void Link(Unique unique)
 #if !NOPARALLEL
-        => Parallel.ForEach(meta.Info, info => info.Link(builds[info.Section], unique, meta));
+    => Parallel.ForEach(meta.Info, x =>
+    {
+        var (section, info) = (x.Key, x.Value);
+
+        foreach (var realtions in info.Composition.Relations)
+            realtions.Link(builds[section][realtions.Type], unique, meta);
+    });
 #else
     {
-        foreach (var info in meta.Info)
-            info.Link(builds[info.Section], unique, meta);
+        foreach (var (section, info) in meta.Info)
+        {
+            foreach (var realtions in info.Composition.Relations)
+                realtions.Link(builds[section][realtions.Type], unique, meta);
+        }
+    }
+#endif
+    private void Postprocess()
+#if !NOPARALLEL
+    => Parallel.ForEach(meta.Info, x =>
+    {
+        var (section, info) = (x.Key, x.Value);
+
+        var builds = this.builds[section];
+
+        foreach (var pipeline in info.Composition.Pipelines)
+            builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
+    });
+#else
+    {
+        foreach (var (section, info) in meta.Info)
+        {
+            var builds = this.builds[section];
+
+            foreach (var pipeline in info.Composition.Pipelines)
+                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
+        }
     }
 #endif
     internal Parser424(Meta424 meta)
     {
         this.meta = meta;
 
-        foreach (var info in meta.Info)
-            strings[info.Section] = ([], []);
+        foreach (var (section, _) in meta.Info)
+        {
+            builds[section] = [];
+            records[section] = [];
+        }
     }
 
-    internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Build[] invalid)
+    internal Data424 Parse(IEnumerable<string> strings, out Queue<string> skipped, out Queue<Build> invalid)
     {
-        Process(strings);
+        skipped = [];
+        invalid = [];
 
+        Process(strings, skipped);
         Build();
-
-        Link(new Unique(meta.Info, builds));
-
-        ConcurrentQueue<Build> invalidBuilds = [];
+        Postprocess();
+        Link(new Unique(meta, this));
 
         var data = new Data424();
 
-        _ = Parallel.ForEach(Data424.GetProperties(), pair =>
+        foreach (var (property, section) in Data424.GetProperties())
         {
-            var list = (IList)pair.Key.GetValue(data)!;
+            var list = (System.Collections.IList)property.GetValue(data)!;
 
-            foreach (var build in builds[pair.Value])
+            foreach (var build in builds[section].Values.Last())
             {
                 if (build.Diagnostics is null)
                     _ = list.Add(build.Record);
                 else
-                    invalidBuilds.Enqueue(build);
+                    invalid.Enqueue(build);
             }
-        });
-        skipped = [.. this.skipped];
-        invalid = [.. invalidBuilds];
+        }
         return data;
     }
 }

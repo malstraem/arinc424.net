@@ -1,13 +1,14 @@
 using Arinc424.Ground;
+using Arinc424.Processing;
 
 namespace Arinc424.Procedures;
 
-[Section('P', 'E', subsectionIndex: 13)]
-[Section('H', 'E', subsectionIndex: 13)]
+[Section('P', 'E', subsectionIndex: 13), Section('H', 'E', subsectionIndex: 13)]
+[Pipeline<IdentityWrap<Arrival, ArrivalSequence>>]
 public class Arrival : Procedure<ArrivalSequence, ArrivalPoint>;
 
-[Section('P', 'F', subsectionIndex: 13)]
-[Section('H', 'F', subsectionIndex: 13)]
+[Section('P', 'F', subsectionIndex: 13), Section('H', 'F', subsectionIndex: 13)]
+[Pipeline<IdentityWrap<Approach, ApproachSequence>>]
 public class Approach : Procedure<ApproachSequence, ApproachPoint>
 {
     [One]
@@ -17,6 +18,6 @@ public class Approach : Procedure<ApproachSequence, ApproachPoint>
     public SatellitePoint? SatellitePoint { get; set; }
 }
 
-[Section('P', 'D', subsectionIndex: 13)]
-[Section('H', 'D', subsectionIndex: 13)]
+[Section('P', 'D', subsectionIndex: 13), Section('H', 'D', subsectionIndex: 13)]
+[Pipeline<IdentityWrap<Departure, DepartureSequence>>]
 public class Departure : Procedure<DepartureSequence, DeparturePoint>;
