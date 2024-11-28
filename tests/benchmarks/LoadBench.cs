@@ -11,9 +11,9 @@ public class LoadBench
 
     private readonly Meta424 meta = Meta424.Create(Supplement.V18);
 
-    [Benchmark]
-    public Data424 LoadWorld() => Data424.Create(meta, strings, out var _, out var _);
+    [Benchmark(Description = "Create (unknown data 100 mb)")]
+    public Data424 Create() => Data424.Create(meta, strings, out var _, out var _);
 
-    [Benchmark]
-    public Meta424 GrabTypesInfo() => Meta424.Create(Supplement.V23);
+    [Benchmark(Description = "Compile metadata")]
+    public Meta424 CreateMeta() => Meta424.Create(Supplement.V23);
 }

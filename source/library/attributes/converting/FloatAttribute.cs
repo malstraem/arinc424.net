@@ -4,7 +4,7 @@ using static System.Globalization.NumberStyles;
 
 /// <summary>
 /// Specifies that property value is a <see langword="float"/> with point suppressed
-/// and will be converted and divided by <paramref name="divisor"/> value.
+/// and will be parsed and divided by <paramref name="divisor"/> value.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property)]
 internal sealed class FloatAttribute(float divisor) : DecodeAttribute<float>

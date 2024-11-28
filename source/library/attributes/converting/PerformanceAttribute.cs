@@ -6,13 +6,9 @@ namespace Arinc424.Attributes;
 /// <remarks>See section 5.211.</remarks>
 internal sealed class PerformanceAttribute : DecodeAttribute<float>
 {
-    [Obsolete("todo: try parse")]
-    internal override Result<float> Convert(ReadOnlySpan<char> @string)
-    {
-        float value = float.Parse(@string[..2]);
-
-        int exp = @string[2] - '0';
-
-        return exp != 0 ? value / 10 * exp : value;
-    }
+    internal override Result<float> Convert(ReadOnlySpan<char> @string) => !float.TryParse(@string[..2], out float value)
+        ? @string
+        : !int.TryParse(@string[2..3], out int exp)
+            ? @string
+            : exp == 0 ? value : value / MathF.Pow(10, exp);
 }

@@ -3,7 +3,7 @@ namespace Arinc424.Attributes;
 using static System.Globalization.NumberStyles;
 
 /// <summary>
-/// Decodes <c>Magnetic Variation</c>.
+/// Specifies that property value is a <c>Magnetic Variation</c> and will be parsed.
 /// </summary>
 /// <remarks>See section 5.39.</remarks>
 internal sealed class VariationAttribute : DecodeAttribute<float>

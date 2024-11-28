@@ -4,6 +4,9 @@ using Arinc424.Linking;
 
 namespace Arinc424.Attributes;
 
+/// <summary>
+/// Specifies <see cref="IIdentity.Identifier"/> range for linking.
+/// </summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
 internal class IdentifierAttribute(int left, int right, Supplement start = Supplement.V18) : RangeAttribute(left, right, start)
 {

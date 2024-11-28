@@ -100,7 +100,7 @@ public class Meta424
         Dictionary<Type, RecordInfo> typeInfo = [];
         Dictionary<Section, RecordInfo> info = [];
 
-        var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<InfoAttribute>();
+        var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
 
         foreach (var attribute in attributes.Select(x => x.GetInfo(supplement)))
         {
