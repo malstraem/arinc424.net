@@ -6,7 +6,7 @@ using Terms;
 /// <c>NDB Navaid</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.3.1.</remarks>
-[Section('D', 'B')]
+[Section('D', 'B'), Icao(20, 21)]
 public class Nondirectional : Navaid
 {
     /// <inheritdoc cref="NondirectType"/>

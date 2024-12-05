@@ -9,10 +9,11 @@ namespace Arinc424;
 public abstract class Geo : Record424
 {
     [Field(33, 51)]
+    [Field<Tactical>(56, 74)]
     [Field<PathPoint>(38, 60)]
     [Field<RegionPoint>(35, 53)]
-    [Field<GlobalLanding>(56, 74)]
     [Field<SpecialArea>(24, 42)]
+    [Field<GlobalLanding>(56, 74)]
 
     [Field<PortTransmitter>(33, 51)]
     [Field<AirwayTransmitter>(63, 81)]

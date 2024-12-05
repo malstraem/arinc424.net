@@ -1,11 +1,12 @@
 namespace Arinc424.Navigation;
 
-[Continuous, Identifier(14, 17), Icao(20, 21)]
+[Identifier(14, 17), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class Navaid : Fix, IIcao, INamed
 {
     [Field(20, 21)]
+    [Field<Tactical>(11, 12)]
     public string Icao { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>

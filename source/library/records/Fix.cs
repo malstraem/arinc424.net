@@ -15,7 +15,8 @@ public abstract class Fix : Geo, IIdentity
     ///   <c>Fix Identifier (FIX IDENT)</c> field for <see cref="TerminalWaypoint"/> and <see cref="Waypoint"/>. See section 5.13.
     /// </para>
     /// <para>
-    ///   <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field for <see cref="Omnidirectional"/> and <see cref="Nondirectional"/>. See section 5.33.
+    ///   <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field for <see cref="Omnidirectional"/>,
+    ///   <see cref="Nondirectional"/> and <see cref="Tactical"/>. See section 5.33.
     /// </para>
     /// <para>
     ///   <c>Localizer/MLS/GLS Identifier (LOC, MLS, GLS IDENT)</c> field for <see cref="InstrumentLanding"/>, <see cref="InstrumentMarker"/>,

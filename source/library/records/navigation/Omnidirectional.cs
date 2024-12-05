@@ -8,7 +8,7 @@ using Terms;
 /// <c>VHF NAVAID</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.2.1.</remarks>
-[Section('D'), /*Port(7, 10) need more analysis */]
+[Section('D'), /*Port(7, 10) need more analysis */ Icao(20, 21)]
 public class Omnidirectional : Navaid
 {
     [Identifier(7, 10)]
