@@ -13,9 +13,9 @@ public abstract class LandingSystem : Fix, IIcao
     [Field(11, 12)]
     public string Icao { get; set; }
 
-    /// <inheritdoc cref="Terms.LandingSystemType"/>
+    /// <inheritdoc cref="Terms.LandingType"/>
     [Character(18)]
-    public Terms.LandingSystemType Type { get; set; }
+    public Terms.LandingType Type { get; set; }
 
     [Identifier(28, 32)]
     public Runway Runway { get; set; }
