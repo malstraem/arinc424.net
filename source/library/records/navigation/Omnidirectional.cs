@@ -8,7 +8,7 @@ using Terms;
 /// <c>VHF NAVAID</c> primary record.
 /// </summary>
 /// <remarks>See section 4.1.2.1.</remarks>
-[Section('D'), /*Port(7, 10) need more analysis */]
+[Section('D'), /*Port(7, 10) need more analysis */ Icao(20, 21)]
 public class Omnidirectional : Navaid
 {
     [Identifier(7, 10)]
@@ -40,12 +40,9 @@ public class Omnidirectional : Navaid
     [Field(56, 74)]
     public Coordinates? EquipmentCoordinates { get; set; }
 
-    /// <summary>
-    /// <c>Station Declination (STN DEC)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.66.</remarks>
-    [Field(75, 79), Obsolete("todo")]
-    public string? StationDeclination { get; set; }
+    /// <inheritdoc cref="Terms.Declination"/>
+    [Field(75, 79)]
+    public Declination Declination { get; set; }
 
     /// <summary>
     /// <c>DME Elevation (DME ELEV)</c> field.

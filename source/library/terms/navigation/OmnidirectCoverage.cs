@@ -1,4 +1,4 @@
-namespace Arinc424.Navigation;
+namespace Arinc424.Navigation.Terms;
 
 /// <summary>
 /// Third character of <c>NAVAID Class (CLASS)</c> field, specific to <see cref="Omnidirectional"/>.
