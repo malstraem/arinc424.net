@@ -89,6 +89,9 @@ namespace Arinc424;
 /// </summary>
 public class Meta424
 {
+#pragma warning disable CS8618
+    private Meta424() { }
+#pragma warning restore CS8618
     /// <summary>
     /// Creates metadata using target <paramref name="supplement"/>.
     /// </summary>
@@ -121,7 +124,7 @@ public class Meta424
             Sections = [.. sections]
         };
     }
-#pragma warning disable CS8618
+
     internal SectionAttribute[] Sections { get; init; }
 
     internal FrozenDictionary<Section, Type> Types { get; init; }
@@ -129,5 +132,4 @@ public class Meta424
     internal FrozenDictionary<Section, RecordInfo> Info { get; init; }
 
     internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; init; }
-#pragma warning restore CS8618
 }

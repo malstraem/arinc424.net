@@ -3,7 +3,7 @@ using Arinc424.Procedures.Terms;
 namespace Arinc424.Procedures;
 
 /// <summary>
-/// Fields of <c>SID</c>.
+/// Fields of <c>Airport</c> and <c>Heliport SID</c>.
 /// </summary>
 /// <remarks>Used by <see cref="DepartureSequence"/> like subsequence.</remarks>
 public class DeparturePoint : ProcedurePoint

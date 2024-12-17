@@ -6,9 +6,7 @@ namespace Arinc424.Ground;
 /// <c>Heliport</c> primary record.
 /// </summary>
 /// <remarks>See section 4.2.1.1.</remarks>
-[Section('H', 'A', subsectionIndex: 13)]
-
-[Pipeline<HelipadWrapBeforeV21>(end: Supplement.V21)]
+[Section('H', 'A', subsectionIndex: 13), Pipeline<HelipadWrapBeforeV21>(end: Supplement.V21)]
 
 [Obsolete("todo")]
 public class Heliport : Port

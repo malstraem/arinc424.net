@@ -7,9 +7,7 @@ namespace Arinc424.Airspace;
 /// <c>FIR/UIR</c> primary record sequence.
 /// </summary>
 /// <remarks>See section 4.1.17.1.</remarks>
-[Continuous(20)]
-
-[Pipeline<Sequence<RegionVolume, RegionPoint>>]
+[Continuous(20), Pipeline<Sequence<RegionVolume, RegionPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]
 public class RegionVolume : Record424<RegionPoint>

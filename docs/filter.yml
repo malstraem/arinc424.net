@@ -5,3 +5,5 @@ apiRules:
 - exclude:
     uidRegex: ^System\.ValueType
     type: Type
+- exclude:
+    uidRegex: .+#ctor

@@ -3,7 +3,7 @@ using Arinc424.Procedures.Terms;
 namespace Arinc424.Procedures;
 
 /// <summary>
-/// Fields of <c>STAR</c>.
+/// Fields of <c>Airport</c> and <c>Heliport STAR</c>.
 /// </summary>
 /// <remarks>Used by <see cref="ArrivalSequence"/> like subsequence.</remarks>
 public class ArrivalPoint : ProcedurePoint
