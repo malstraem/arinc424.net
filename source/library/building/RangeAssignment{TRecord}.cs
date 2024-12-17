@@ -6,7 +6,7 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Building;
 
-[DebuggerDisplay($"{{{nameof(Property)}}} - {{{nameof(range)}}}")]
+[DebuggerDisplay($"{{{nameof(property)}}} - {{{nameof(range)}}}")]
 internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range range) : Assignment<TRecord>(property) where TRecord : Record424
 {
     protected readonly Range range = range;
@@ -44,19 +44,14 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
 
         if (@field.IsWhiteSpace())
         {
-            // todo: process nullability by provided conditional settings
-
-            /*if (NullabilityInfo.WriteState is NullabilityState.NotNull)
-            {
-                diagnostic = new NullDiagnostic(record, $"Property {Property} does not allow blank values.", range);
-                return false;
-            }*/
+            if (NullabilityInfo?.WriteState is NullabilityState.NotNull)
+                diagnostics.Enqueue(new Nullability(record, property, range));
             return;
         }
         var result = decode.Convert(@field);
 
         if (result.Invalid)
-            diagnostics.Enqueue(new InvalidValue(record, Property, result.Bad.ToImmutableArray(), range));
+            diagnostics.Enqueue(new InvalidValue(record, property, result.Bad.ToImmutableArray(), range));
         else
             set(record, result.Value);
     }
@@ -69,19 +64,14 @@ internal sealed class StringAssignment<TRecord>(PropertyInfo property, Range ran
 
     internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
-        var @field = @string[range];
+        var @field = @string[range].Trim();
 
-        if (@field.IsWhiteSpace())
+        if (@field.IsEmpty)
         {
-            // todo: process nullability by provided conditional settings
-
-            /*if (NullabilityInfo.WriteState is NullabilityState.NotNull)
-            {
-                diagnostic = new NullDiagnostic(record, $"Property {Property} does not allow blank values.", range);
-                return false;
-            }*/
+            if (NullabilityInfo?.WriteState is NullabilityState.NotNull)
+                diagnostics.Enqueue(new Nullability(record, property, range));
             return;
         }
-        set(record, @field.Trim().ToString());
+        set(record, @field.ToString());
     }
 }

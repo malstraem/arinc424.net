@@ -9,7 +9,7 @@ namespace Arinc424.Routing;
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public class HoldingPattern : Record424, IIcao, INamed
 {
-    [Field(11, 12)]
+    [Field(35, 36)]
     public string Icao { get; set; }
 
     /// <summary>

@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <RootNamespace>Arinc424</RootNamespace>
-
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -21,7 +19,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
-    <Version>0.1.0-alpha</Version>
+    <Version>0.1.1-alpha</Version>
     <PackageId>arinc424</PackageId>
     <Product>ARINC 424 object model</Product>
 

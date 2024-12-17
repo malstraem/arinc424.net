@@ -14,6 +14,14 @@ jobs:
         dotnet-version: |
           8.x
           9.x
-    - run: dotnet build -c release
-    - run: dotnet test -c release --no-build
+    - name: Build & Test
+      run: |
+        dotnet build -c release --tl
+        dotnet test -c release --no-build
+    - uses: actions/upload-artifact@v4
+      with:
+        path: |
+          docs
+          artifacts/bin/Arinc424
+          artifacts/bin/Arinc424.Docs
     runs-on: ubuntu-latest

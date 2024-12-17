@@ -1,7 +1,5 @@
 using System.Reflection;
 
-using Arinc424.Linking;
-
 namespace Arinc424.Diagnostics;
 
 public class InvalidLink(Record424 record, PropertyInfo property, LinkInfo info, LinkError error)

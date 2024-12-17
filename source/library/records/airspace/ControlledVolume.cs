@@ -10,7 +10,7 @@ using Terms;
 /// <remarks>See section 4.1.25.1.</remarks>
 [Pipeline<Sequence<ControlledVolume, BoundaryPoint>>]
 
-[DebuggerDisplay($"{nameof(Name)} - {{{nameof(Name)},nq}}, {nameof(Type)} - {{{nameof(Type)}}}")]
+[DebuggerDisplay($"{nameof(Class)} - {{{nameof(Class)},nq}}, {nameof(Type)} - {{{nameof(Type)}}}")]
 public class ControlledVolume : Volume
 {
     /// <inheritdoc cref="AirspaceType"/>

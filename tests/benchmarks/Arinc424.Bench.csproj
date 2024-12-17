@@ -8,6 +8,6 @@
 
     <ProjectReference Include="../../source/library/Arinc424.csproj" />
 
-    <None Include="../data/**" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="../data/unknown" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>winexe</OutputType>
+    <TargetFrameworks>net9.0</TargetFrameworks>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
 
     <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
 

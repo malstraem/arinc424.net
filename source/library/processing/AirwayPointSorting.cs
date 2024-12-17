@@ -9,14 +9,17 @@ namespace Arinc424.Processing;
 /// </summary>
 internal class AirwayPointSorting : IPipeline<AirwayPoint, AirwayPoint>
 {
-    private readonly Range identifierRange = 13..18;
+    /// <summary>
+    /// Airway identifier range.
+    /// </summary>
+    private readonly Range range = 13..18;
 
     public Queue<Build<AirwayPoint>> Process(Queue<Build<AirwayPoint>> builds)
     {
         if (builds.Count == 0)
             return builds;
 
-        var sorted = builds.OrderBy(x => x.Record.Source![identifierRange]);
+        var sorted = builds.OrderBy(x => x.Record.Source![range]);
 
         return new Queue<Build<AirwayPoint>>(sorted);
     }

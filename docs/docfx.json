@@ -35,12 +35,9 @@
       "dest": "api/",
       "enumSortOrder": "declaringOrder",
       "namespaceLayout": "nested",
-      "noRestore": true,
       "src": [
         {
-          "files": [
-            "source/library/Arinc424.csproj"
-          ],
+          "files": [ "artifacts/bin/Arinc424/release_net9.0/Arinc424.dll" ],
           "src": "../"
         }
       ]

@@ -6,12 +6,12 @@ internal abstract class RadarAvailabilityConverter : ICharConverter<Bool>
     {
         switch (@char)
         {
-            case (char)32:
-                value = Bool.Unspecified; return true;
             case 'R':
                 value = Bool.Yes; return true;
             case 'N':
                 value = Bool.No; return true;
+            case 'U' or (char)32:
+                value = Bool.Unspecified; return true;
             default:
                 value = Bool.Unknown; return false;
         }

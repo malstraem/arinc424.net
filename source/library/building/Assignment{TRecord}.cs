@@ -10,11 +10,11 @@ namespace Arinc424.Building;
 /// </summary>
 internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord : Record424
 {
+    protected PropertyInfo property = property;
+
     internal Regex? Regex { get; } = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
 
-    internal PropertyInfo Property { get; } = property;
-
-    internal NullabilityInfo NullabilityInfo { get; } = new NullabilityInfoContext().Create(property);
+    internal NullabilityInfo? NullabilityInfo { get; } = property.PropertyType.IsClass ? new NullabilityInfoContext().Create(property) : null;
 
     internal abstract void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
 }

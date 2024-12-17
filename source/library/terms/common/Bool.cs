@@ -7,7 +7,7 @@ namespace Arinc424;
 public enum Bool : byte
 {
     Unknown,
-    [Map] Unspecified,
     [Map('Y')] Yes,
-    [Map('N')] No
+    [Map('N')] No,
+    [Map('U')] Unspecified
 }

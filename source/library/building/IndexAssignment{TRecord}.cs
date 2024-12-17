@@ -4,7 +4,7 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Building;
 
-[DebuggerDisplay($"{{{nameof(Property)}}} - {{{nameof(index)}}}")]
+[DebuggerDisplay($"{{{nameof(property)}}} - {{{nameof(index)}}}")]
 internal abstract class IndexAssignment<TRecord>(PropertyInfo property, int index)
     : Assignment<TRecord>(property) where TRecord : Record424
 {
@@ -25,7 +25,7 @@ internal sealed class TransformAssignment<TRecord, TType>(PropertyInfo property,
         if (transform.TryConvert(@char, out var value))
             set(record, value);
         else
-            diagnostics.Enqueue(new InvalidValue(record, Property, [@char], index..index));
+            diagnostics.Enqueue(new InvalidValue(record, property, [@char], index..index));
     }
 }
 

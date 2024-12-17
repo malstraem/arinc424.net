@@ -7,9 +7,7 @@ While the **ARINC 424** specification describes entities (or records) with 132-b
 
 Most terms are converted according to the specification into associated enumerations or numeric values ​​on the fly.
 
-In addition, relationships between entities are established after the building stage.
-
-In practice, this allows you to explore and manipulate the tree-like representation of **ARINC 424** database.
+In addition, relationships between entities are established after the building stage. In practice, this allows you to explore and manipulate the tree-like representation of **ARINC 424** database.
 
 ## Specification map
 
@@ -19,7 +17,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 
 - [VHF Navaid](api/Arinc424.Navigation.Omnidirectional.yml)
 - [NDB Navaid](api/Arinc424.Navigation.Nondirectional.yml)
-- [TACAN](api/Arinc424.Navigation.Tactical.yml) 🚧
+- [TACAN](api/Arinc424.Navigation.Tactical.yml)
 
 # [Enroute](#tab/enroute)
 
@@ -76,8 +74,8 @@ In practice, this allows you to explore and manipulate the tree-like representat
 
 # [Airspace](#tab/airspace)
 
-- [Controlled Airspace](api/Arinc424.Airspace.ControlledSpace.yml)
+- [Controlled](api/Arinc424.Airspace.ControlledSpace.yml)
 - [FIR/UIR](api/Arinc424.Airspace.FlightRegion.yml)
-- [Restrictive Airspace](api/Arinc424.Airspace.RestrictiveSpace.yml)
+- [Restrictive](api/Arinc424.Airspace.RestrictiveSpace.yml)
 
 ---

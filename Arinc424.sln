@@ -29,6 +29,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Arinc424.View.Desktop", "so
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "view", "view", "{215A2243-3232-4A54-86DE-4C376EB34DE0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{FB533D15-1C67-4DE0-AD33-7C42B5A22493}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\docs.yml = .github\workflows\docs.yml
+		.github\workflows\pack.yml = .github\workflows\pack.yml
+		.github\workflows\tests.yml = .github\workflows\tests.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -247,6 +254,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{989FABB9-3676-4746-AE8C-F14369DCDCBA} = {215A2243-3232-4A54-86DE-4C376EB34DE0}
 		{8236EEB2-1AA0-4DF8-9596-1C21D50E9462} = {215A2243-3232-4A54-86DE-4C376EB34DE0}
+		{FB533D15-1C67-4DE0-AD33-7C42B5A22493} = {1D87B9E7-6D26-4F2E-9015-504EA5B60AF3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F25034B4-EEAF-411A-B0D5-9F307674AB8B}

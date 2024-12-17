@@ -13,7 +13,7 @@ internal abstract class Scan<TOut, TSource> : IPipeline<TOut, TSource> where TOu
     /// <remarks>All overrides should dequeue <paramref name="sources"/>.</remarks>
     protected abstract Build<TOut> Build(Queue<Build<TSource>> sources, ref Queue<Diagnostic> diagnostics);
 
-    public Queue<Build<TOut>> Process(Queue<Build<TSource>> builds)
+    public virtual Queue<Build<TOut>> Process(Queue<Build<TSource>> builds)
     {
         Build<TSource> next, current;
 

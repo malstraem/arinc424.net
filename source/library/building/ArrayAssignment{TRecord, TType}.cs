@@ -32,7 +32,7 @@ internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Ran
             var result = decode.Convert(@field);
 
             if (result.Invalid)
-                diagnostics.Enqueue(new InvalidValue(record, Property, result.Bad.ToImmutableArray(), range));
+                diagnostics.Enqueue(new InvalidValue(record, property, result.Bad.ToImmutableArray(), range));
             else
                 values.Add(result.Value);
 

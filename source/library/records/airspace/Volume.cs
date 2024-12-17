@@ -4,7 +4,7 @@ namespace Arinc424.Airspace;
 /// Space volume with low and up limits.
 /// </summary>
 [Icao(7, 8)]
-public abstract class Volume : Record424<BoundaryPoint>, INamed, IMultiple
+public abstract class Volume : Record424<BoundaryPoint>, IMultiple
 {
     [Character(20)]
     public char Multiplier { get; set; }
@@ -39,12 +39,4 @@ public abstract class Volume : Record424<BoundaryPoint>, INamed, IMultiple
     /// <inheritdoc cref="LimitUnit"/>s>
     [Character(93)]
     public LimitUnit UpUnit { get; set; }
-
-    /// <summary>
-    /// <c>Controlled Airspace Name (ARSP NAME)</c> for <see cref="ControlledVolume"/> or
-    /// <c>Restrictive Airspace Name</c> for <see cref="RestrictiveVolume"/> field.
-    /// </summary>
-    /// <remarks>See section 5.216 and 5.126.</remarks>
-    [Field(94, 123)]
-    public string? Name { get; set; }
 }

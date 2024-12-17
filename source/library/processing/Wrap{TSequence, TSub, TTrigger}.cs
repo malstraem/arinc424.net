@@ -1,5 +1,6 @@
 using System.Reflection;
 
+using Arinc424.Airspace;
 using Arinc424.Building;
 using Arinc424.Diagnostics;
 
@@ -15,6 +16,13 @@ internal abstract class Wrap<TSequence, TSub>(Supplement supplement) : Scan<TSeq
         => RecordBuilder<TSequence, TSub>.Build(subs, info, ref diagnostics);
 }
 
+internal sealed class Sequence<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub>(supplement)
+    where TSequence : Record424<TSub>, new()
+    where TSub : Record424, ISequenced
+{
+    protected override bool Trigger(TSub current, TSub next) => next.SeqNumber <= current.SeqNumber;
+}
+
 internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub>(supplement)
     where TSequence : Record424<TSub>, IIdentity, new()
     where TSub : Record424
@@ -24,12 +32,12 @@ internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wra
     protected override bool Trigger(TSub current, TSub next) => current.Source![range] != next.Source![range];
 }
 
-[Obsolete("most likely it needs to be done differently")]
-internal sealed class MultipleWrap<TSequence, TSub>(Supplement supplement) : Wrap<TSequence, TSub>(supplement)
-    where TSequence : Record424<TSub>, new()
-    where TSub : Record424, IMultiple
+internal sealed class RestrictiveWrap(Supplement supplement) : Wrap<RestrictiveSpace, RestrictiveVolume>(supplement)
 {
-    protected override bool Trigger(TSub current, TSub next) => char.IsWhiteSpace(current.Multiplier)
-                                                             || char.IsWhiteSpace(next.Multiplier)
-                                                             || next.Multiplier <= current.Multiplier;
+    /// <summary>
+    /// Range including <see cref="IIcao.Icao"/>, <see cref="RestrictiveVolume.Type"/> and <see cref="RestrictiveSpace.Identifier"/>.
+    /// </summary>
+    private readonly Range range = 6..19;
+
+    protected override bool Trigger(RestrictiveVolume current, RestrictiveVolume next) => current.Source![range] != next.Source![range];
 }
