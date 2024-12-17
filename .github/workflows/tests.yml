@@ -20,6 +20,7 @@ jobs:
         dotnet test -c release --no-build
     - uses: actions/upload-artifact@v4
       with:
+        name: build
         path: |
           docs
           artifacts/bin/Arinc424

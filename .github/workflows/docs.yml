@@ -19,6 +19,10 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - uses: actions/download-artifact@v4
+        with:
+          name: build
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.x
@@ -26,11 +30,8 @@ jobs:
         run: |
           cd docs
           dotnet run -f net9.0
-      - name: Upload Pages
-        uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: site
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
     runs-on: ubuntu-latest
