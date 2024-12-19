@@ -1,5 +1,4 @@
 using System.Collections.Immutable;
-using System.Linq.Expressions;
 using System.Reflection;
 
 using Arinc424.Diagnostics;
@@ -10,33 +9,16 @@ namespace Arinc424.Building;
 internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range range) : Assignment<TRecord>(property) where TRecord : Record424
 {
     protected readonly Range range = range;
-
-    [Obsolete("todo: replace with emit op codes")]
-    protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property, bool isValueNullable)
-    {
-        var record = Expression.Parameter(typeof(TRecord));
-
-        var value = Expression.Parameter(typeof(TType), property.Name);
-
-        var setter = Expression.Property(record, property.Name);
-
-        Expression rightExpression = value;
-
-        if (isValueNullable)
-            rightExpression = Expression.New(property.PropertyType.GetConstructor([typeof(TType)])!, value);
-
-        return Expression.Lambda<Action<TRecord, TType>>(Expression.Assign(setter, rightExpression), record, value).Compile();
-    }
 }
 
-internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Range range, DecodeAttribute<TType> decode, bool isValueNullable)
+internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Range range, DecodeAttribute<TType> decode)
     : RangeAssignment<TRecord>(property, range)
         where TType : notnull
         where TRecord : Record424
 {
     private readonly DecodeAttribute<TType> decode = decode;
 
-    private readonly Action<TRecord, TType> set = GetCompiledSetter<TType>(property, isValueNullable);
+    private readonly Action<TRecord, TType> set = GetCompiledSetter<TType>(property, Nullable.GetUnderlyingType(property.PropertyType) is not null);
 
     internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {

@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 
 using Arinc424.Diagnostics;
@@ -17,4 +18,26 @@ internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord
     internal NullabilityInfo? NullabilityInfo { get; } = property.PropertyType.IsClass ? new NullabilityInfoContext().Create(property) : null;
 
     internal abstract void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
+
+    protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property, bool isValueNullable)
+    {
+        var method = new DynamicMethod(Guid.NewGuid().ToString(), null, [typeof(TRecord), typeof(TType)]);
+
+        var gen = method.GetILGenerator();
+
+        gen.Emit(OpCodes.Ldarg_0);
+        gen.Emit(OpCodes.Ldarg_1);
+
+        if (isValueNullable)
+        {
+            var con = property.PropertyType.GetConstructor([typeof(TType)]);
+            gen.Emit(OpCodes.Newobj, con);
+        }
+
+        gen.EmitCall(OpCodes.Callvirt, property.GetSetMethod()!, null);
+
+        gen.Emit(OpCodes.Ret);
+
+        return method.CreateDelegate<Action<TRecord, TType>>();
+    }
 }

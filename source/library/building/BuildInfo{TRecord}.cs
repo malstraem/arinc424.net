@@ -20,9 +20,7 @@ internal class BuildInfo<TRecord> where TRecord : Record424
 
     private static RangeAssignment<TRecord> GetRangeAssignment(PropertyInfo property, Supplement supplement, Range range)
     {
-        var (type, isValueNullable) = property.PropertyType.IsGenericType && property.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>)
-            ? (property.PropertyType.GetGenericArguments().First(), true)
-            : (property.PropertyType, false);
+        var type = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
 
         // prefer decode attached to the property
         if (!property.TryAttribute<TRecord, DecodeAttribute>(supplement, out var decode))
@@ -39,7 +37,7 @@ internal class BuildInfo<TRecord> where TRecord : Record424
 
                 : (RangeAssignment<TRecord>)
                     Activator.CreateInstance(typeof(DecodeAssignment<,>)
-                        .MakeGenericType(typeof(TRecord), type), property, range, decode, isValueNullable)!
+                        .MakeGenericType(typeof(TRecord), type), property, range, decode)!
 
             : new StringAssignment<TRecord>(property, range);
     }

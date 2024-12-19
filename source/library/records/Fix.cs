@@ -5,6 +5,9 @@ using Arinc424.Waypoints;
 
 namespace Arinc424;
 
+/// <summary>
+/// Base fix with an identifier used as a navigation point.
+/// </summary>
 public abstract class Fix : Geo, IIdentity
 {
     /// <summary>

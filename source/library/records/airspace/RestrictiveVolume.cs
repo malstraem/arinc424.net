@@ -5,7 +5,7 @@ namespace Arinc424.Airspace;
 /// <summary>
 /// <c>Restrictive Airspace</c> primary record sequence.
 /// </summary>
-/// <remarks>See section 4.1.18.1.</remarks>
+/// <remarks>Used by <see cref="RestrictiveSpace"/> like subsequence.</remarks>
 [Pipeline<Sequence<RestrictiveVolume, BoundaryPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]

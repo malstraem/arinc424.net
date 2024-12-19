@@ -5,7 +5,7 @@ namespace Arinc424.Procedures;
 /// <summary>
 /// <c>Airport and Heliport Approach</c> primary record sequence.
 /// </summary>
-/// <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>
+/// <remarks>Used by <see cref="Approach"/> like subsequence.</remarks>
 [Pipeline<Sequence<ApproachSequence, ApproachPoint>>]
 public class ApproachSequence : ProcedureSequence<ApproachPoint>
 {

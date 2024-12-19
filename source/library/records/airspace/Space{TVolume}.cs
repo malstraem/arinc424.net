@@ -1,5 +1,8 @@
 namespace Arinc424.Airspace;
 
+/// <summary>
+/// Base space properties.
+/// </summary>
 [Continuous(25)]
 public abstract class Space<TVolume> : Record424<TVolume>, IIcao, INamed where TVolume : Volume
 {

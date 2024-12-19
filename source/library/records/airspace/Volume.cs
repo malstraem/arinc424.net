@@ -7,7 +7,7 @@ namespace Arinc424.Airspace;
 public abstract class Volume : Record424<BoundaryPoint>, IMultiple
 {
     [Character(20)]
-    public char Multiplier { get; set; }
+    public char? Multiplier { get; set; }
 
     /// <inheritdoc cref="Arinc424.LevelType"/>
     [Character(26)]

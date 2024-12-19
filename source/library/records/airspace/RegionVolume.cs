@@ -6,7 +6,7 @@ namespace Arinc424.Airspace;
 /// <summary>
 /// <c>FIR/UIR</c> primary record sequence.
 /// </summary>
-/// <remarks>See section 4.1.17.1.</remarks>
+/// <remarks>Used by <see cref="FlightRegion"/> like subsequence.</remarks>
 [Continuous(20), Pipeline<Sequence<RegionVolume, RegionPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]

@@ -32,7 +32,7 @@ internal sealed class TransformAssignment<TRecord, TType>(PropertyInfo property,
 internal sealed class CharAssignment<TRecord>(PropertyInfo property, int index)
     : IndexAssignment<TRecord>(property, index) where TRecord : Record424
 {
-    private readonly Action<TRecord, char> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, char>>();
+    private readonly Action<TRecord, char> set = GetCompiledSetter<char>(property, Nullable.GetUnderlyingType(property.PropertyType) is not null);
 
     internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> _) => set(record, @string[index]);
 }
