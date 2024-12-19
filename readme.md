@@ -1,9 +1,9 @@
-> [!NOTE]
-> *work in progress and target on ver. 23 of the specification (with backward compatibility to 18)*  
-*any reviews and PRs are welcome, nuget package will be released once the API is stabilized*
+[![NuGet](https://img.shields.io/nuget/v/arinc424.svg)](https://www.nuget.org/packages/arinc424)
 
 > [!WARNING]
-*if you see any issues testing the library on real world data, please report it*
+*work in progress and target on ver. 23 of the specification (with backward compatibility to 18)*  
+*if you see any issues testing the library on real world data, please report it*  
+*any reviews and PRs are welcome*
 
 # Overview
 
