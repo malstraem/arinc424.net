@@ -9,7 +9,7 @@
 
 This is a long-term research and proof of concept to provide a model and reader for the globally used **`ARINC 424`** aircraft navigation data using metaprogramming.
 
-While the **`ARINC 424`** specification describes entities (*or records in terms*) with 132-byte fixed-length strings, this library creates
+While the **`ARINC 424`** specification describes entities with 132-byte fixed-length strings, this library creates
 a database object model via building entities using reflection and runtime compilation.
 
 Most terms are converted according to the specification into associated enumerations or numeric values ​​on the fly.
@@ -29,7 +29,7 @@ and entities created based on [supplement](https://malstraem.github.io/arinc424.
 var meta = Meta424.Create(Supplement.V20);
 ```
 
-And you can try to get navigation [data](https://malstraem.github.io/arinc424.net/api/Arinc424.Data424.html) from the strings 
+So you can try to get navigation [data](https://malstraem.github.io/arinc424.net/api/Arinc424.Data424.html) from the strings 
 leaving [builds](https://malstraem.github.io/arinc424.net/api/Arinc424.Building.Build.html) with diagnostics 
 (bad coded fields, missing links, etc) and skipped strings that don't match entity types.
 

@@ -9,7 +9,6 @@
     <DefineConstants>$(DefineConstants);NOPARALLEL</DefineConstants>
   </PropertyGroup>
 
-<!--package -->
   <PropertyGroup>
     <IsPackable>true</IsPackable>
     <IncludeSymbols>true</IncludeSymbols>
@@ -19,7 +18,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
-    <Version>0.1.1-alpha</Version>
+    <Version>0.1.2</Version>
     <PackageId>arinc424</PackageId>
     <Product>ARINC 424 object model</Product>
 
@@ -40,6 +39,6 @@
   <ItemGroup>
     <ProjectReference Include="../../codegen/Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
 
-    <None Include="../../docs/package.md" Pack="true" PackagePath="/readme.md" Visible="false"/>
+    <None Include="../../docs/package.md" Pack="true" PackagePath="/readme.md" Visible="false" />
   </ItemGroup>
 </Project>

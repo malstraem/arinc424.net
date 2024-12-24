@@ -74,7 +74,7 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
         }
         set(record, @ref);
 
-        meta.TypeInfo[type].Relations?.Process(type, referenced, record);
+        meta.TypeInfo[type].Relations?.Process(referenced, record);
 
         return true;
     }

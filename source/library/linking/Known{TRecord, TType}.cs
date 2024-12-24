@@ -25,7 +25,7 @@ internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Lin
 
         var type = property.PropertyType;
 
-        if (!foreign.TryGetKey(record.Source!, meta.TypeInfo[property.PropertyType].Primary! /* guarantee by design */, out string? key))
+        if (!foreign.TryGetKey(record.Source!, meta.TypeInfo[type].Primary! /* guarantee by design */, out string? key))
             return true;
 
         if (!unique.TryGetRecords(type, out var records))
@@ -41,7 +41,7 @@ internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Lin
         // guarantee by design
         set(record, Unsafe.As<TType>(referenced));
 
-        meta.TypeInfo[type].Relations?.Process(type, referenced, record);
+        meta.TypeInfo[type].Relations?.Process(referenced, record);
 
         return true;
     }

@@ -14,8 +14,10 @@ internal abstract class Relationships(Type type)
 #pragma warning restore CS8618
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 
-    internal void Process<TRecord>(Type type, Record424 self, TRecord referenced) where TRecord : Record424
+    internal void Process<TRecord>(Record424 self, TRecord referenced) where TRecord : Record424
     {
+        var type = typeof(TRecord);
+
         // todo: compiled one & many relations
         if (many.TryGetValue(type, out var property))
         {
@@ -26,7 +28,7 @@ internal abstract class Relationships(Type type)
         }
         else if (one.TryGetValue(type, out property))
         {
-            property.SetValue(referenced, referenced);
+            property.SetValue(self, referenced);
         }
     }
 

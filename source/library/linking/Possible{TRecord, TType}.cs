@@ -24,7 +24,7 @@ internal sealed class Possible<TRecord, TType>(LinkInfo info, PropertyInfo prope
              && records.TryGetValue(key, out var referenced))
             {
                 set(record, (TType)referenced);
-                meta.TypeInfo[type].Relations!.Process(type, referenced, record);
+                meta.TypeInfo[type].Relations!.Process(referenced, record);
                 return true;
             }
         }
