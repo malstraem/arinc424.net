@@ -104,7 +104,7 @@ public abstract class Port : Fix, IIcao, INamed
     /// Associated SBAS points.
     /// </summary>
     [Many]
-    public List<SatellitePoint>? SattelitePoints { get; set; }
+    public List<SatellitePoint>? SatellitePoints { get; set; }
 
     /// <summary>
     /// Associated GLSs.
