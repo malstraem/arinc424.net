@@ -19,7 +19,7 @@ internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord
 
     internal abstract void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
 
-    protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property, bool isValueNullable)
+    protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property)
     {
         var method = new DynamicMethod(Guid.NewGuid().ToString(), null, [typeof(TRecord), typeof(TType)]);
 
@@ -28,11 +28,8 @@ internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord
         gen.Emit(OpCodes.Ldarg_0);
         gen.Emit(OpCodes.Ldarg_1);
 
-        if (isValueNullable)
-        {
-            var con = property.PropertyType.GetConstructor([typeof(TType)]);
-            gen.Emit(OpCodes.Newobj, con);
-        }
+        if (Nullable.GetUnderlyingType(property.PropertyType) is not null)
+            gen.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor([typeof(TType)])!);
 
         gen.EmitCall(OpCodes.Callvirt, property.GetSetMethod()!, null);
 

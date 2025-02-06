@@ -11,7 +11,7 @@ namespace Arinc424.Ground;
 [Icao(11, 12), Port(7, 10), Identifier(14, 18), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public class Runway : Fix, IIcao
+public class RunwayThreshold : Fix, IIcao
 {
     [Identifier(7, 10)]
     public Airport Airport { get; set; }
@@ -53,7 +53,7 @@ public class Runway : Fix, IIcao
     /// <value>Feet.</value>
     /// <remarks>See section 5.68.</remarks>
     [Field(67, 71), Integer]
-    public int ThresholdElevation { get; set; }
+    public int Elevation { get; set; }
 
     /// <summary>
     /// <c>Threshold Displacement Distance (DSPLCD THR)</c> field.
@@ -61,7 +61,7 @@ public class Runway : Fix, IIcao
     /// <value>Feet.</value>
     /// <remarks>See section 5.69.</remarks>
     [Field(72, 75), Integer]
-    public int ThresholdDistance { get; set; }
+    public int Distance { get; set; }
 
     /// <summary>
     /// <c>Runway Width (WIDTH)</c> field.
@@ -73,7 +73,7 @@ public class Runway : Fix, IIcao
 
     /// <inheritdoc cref="Terms.ThresholdType"/>
     [Character(81)]
-    public Terms.ThresholdType ThresholdType { get; set; }
+    public Terms.ThresholdType Type { get; set; }
 
     /// <summary>
     /// <c>Stopway</c> field.
@@ -85,7 +85,7 @@ public class Runway : Fix, IIcao
 
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>
     [Field(96, 98), Integer]
-    public int ThresholdHeight { get; set; }
+    public int Height { get; set; }
 
     /// <summary>
     /// <c>Runway Description (RUNWAY DESCRIPTION)</c> field.

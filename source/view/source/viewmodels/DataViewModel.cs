@@ -51,7 +51,7 @@ public partial class DataViewModel : ObservableObject
         [
             data.Airports.GetViewModel("Reference Point"),
             data.Gates.GetViewModel("Gate"),
-            data.Runways.GetViewModel("Runway"),
+            data.Thresholds.GetViewModel("Thresholds"),
             data.AirportTerminalWaypoints.GetViewModel("Terminal Waypoint"),
             data.AirportDepartures.GetViewModel("SID"),
             data.AirportArrivals.GetViewModel("STAR"),

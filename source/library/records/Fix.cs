@@ -26,7 +26,7 @@ public abstract class Fix : Geo, IIdentity
     ///   <see cref="MicrowaveLanding"/> and <see cref="GlobalLanding"/>. See section 5.44.
     /// </para>
     /// <para>
-    ///   <c>Runway Identifier (RUNWAY ID)</c> field for <see cref="Runway"/>. See section 5.46.
+    ///   <c>Runway Identifier (RUNWAY ID)</c> field for <see cref="RunwayThreshold"/>. See section 5.46.
     /// </para>
     /// <para>
     ///   <c>Marker Identifier (MARKER IDENT)</c> field for <see cref="AirwayMarker"/>. See section 5.110.
@@ -37,7 +37,7 @@ public abstract class Fix : Geo, IIdentity
     /// </summary>
     [Field(14, 17)]
     [Field<Port>(7, 10)]
-    [Field<Runway>(14, 18)]
+    [Field<RunwayThreshold>(14, 18)]
     [Field<Waypoint>(14, 18)]
     [Field<PathPoint>(33, 36)]
     public string Identifier { get; set; }

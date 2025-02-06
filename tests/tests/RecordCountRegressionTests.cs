@@ -5,12 +5,10 @@ namespace Arinc424.Tests;
 
 public class RecordCountRegressionTests
 {
-#pragma warning disable xUnit1004
-    [Theory(Skip = "manual")]
-    [InlineData("unknown", Supplement.V18)]
-    [InlineData("faa-24.04.18", Supplement.V18)]
-    [InlineData("supplement-18", Supplement.V18)]
-#pragma warning restore xUnit1004
+    [Test, Skip("manual")]
+    [Arguments("unknown", Supplement.V18)]
+    [Arguments("faa-24.04.18", Supplement.V18)]
+    [Arguments("supplement-18", Supplement.V18)]
     public void MakeRegression(string file, Supplement supplement)
     {
         var data = Data424.Create(Meta424.Create(supplement), File.ReadAllLines($"data/{file}"), out var _, out var _);
@@ -25,10 +23,10 @@ public class RecordCountRegressionTests
         File.WriteAllText($"data/regression/{Path.GetFileName($"data/{file}")}.json", JsonSerializer.Serialize(counts, options));
     }
 
-    [Theory]
-    [InlineData("unknown", Supplement.V18)]
-    [InlineData("faa-24.04.18", Supplement.V18)]
-    [InlineData("supplement-18", Supplement.V18)]
+    [Test]
+    [Arguments("unknown", Supplement.V18)]
+    [Arguments("faa-24.04.18", Supplement.V18)]
+    [Arguments("supplement-18", Supplement.V18)]
     public void CheckRegression(string file, Supplement supplement)
     {
         var data = Data424.Create(Meta424.Create(supplement), File.ReadAllLines($"data/{file}"), out var _, out var _);

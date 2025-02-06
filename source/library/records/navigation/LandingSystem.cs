@@ -18,7 +18,7 @@ public abstract class LandingSystem : Fix, IIcao
     public Terms.LandingType Type { get; set; }
 
     [Identifier(28, 32)]
-    public Runway Runway { get; set; }
+    public RunwayThreshold Threshold { get; set; }
 
     /// <summary>
     /// <c>Localizer Bearing (LOC BRG)</c> and <c>MLS Azimuth Bearing (MLS AZ BRG)</c> field.

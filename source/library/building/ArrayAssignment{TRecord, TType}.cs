@@ -12,7 +12,7 @@ internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Ran
 
     private readonly DecodeAttribute<TType> decode = decode;
 
-    private readonly Action<TRecord, TType[]> set = GetCompiledSetter<TType[]>(property, false);
+    private readonly Action<TRecord, TType[]> set = GetCompiledSetter<TType[]>(property);
 
     internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {

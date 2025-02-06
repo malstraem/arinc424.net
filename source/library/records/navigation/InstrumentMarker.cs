@@ -25,7 +25,7 @@ public class InstrumentMarker : Fix
     public float Frequency { get; set; }
 
     [Identifier(28, 32)]
-    public Runway Runway { get; set; }
+    public RunwayThreshold Threshold { get; set; }
 
     [Field(52, 55), Float(10)]
     public float Bearing { get; set; }

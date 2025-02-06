@@ -2,24 +2,22 @@
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
-
-    <PackageVersion Include="xunit" Version="2.9.2" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.0" />
-
-    <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
 
     <PackageVersion Include="Docfx.App" Version="2.78.2" />
+
+    <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
 
     <PackageVersion Include="Avalonia" Version="11.2.3" />
     <PackageVersion Include="Avalonia.Desktop" Version="11.2.3" />
     <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.3" />
     <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.3" />
 
-    <PackageVersion Include="Semi.Avalonia" Version="11.2.1.2" />
-    <PackageVersion Include="Irihi.Ursa" Version="1.6.2" />
-    <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.6.2" />
+    <PackageVersion Include="Semi.Avalonia" Version="11.2.1.4" />
+    <PackageVersion Include="Irihi.Ursa" Version="1.8.0" />
+    <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.8.0" />
 
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+
+    <PackageVersion Include="TUnit" Version="0.10.28" />
   </ItemGroup>
 </Project>

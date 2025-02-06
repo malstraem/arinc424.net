@@ -5,7 +5,7 @@ namespace Arinc424.Tests;
 /// </summary>
 public class IntegrityTests
 {
-    [Fact]
+    [Test]
     public void CheckSupplements()
     {
         foreach (var value in Enum.GetValues<Supplement>())

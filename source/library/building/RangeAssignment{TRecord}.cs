@@ -18,7 +18,7 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
 {
     private readonly DecodeAttribute<TType> decode = decode;
 
-    private readonly Action<TRecord, TType> set = GetCompiledSetter<TType>(property, Nullable.GetUnderlyingType(property.PropertyType) is not null);
+    private readonly Action<TRecord, TType> set = GetCompiledSetter<TType>(property);
 
     internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
@@ -42,7 +42,7 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
 internal sealed class StringAssignment<TRecord>(PropertyInfo property, Range range) : RangeAssignment<TRecord>(property, range)
     where TRecord : Record424
 {
-    private readonly Action<TRecord, string> set = GetCompiledSetter<string>(property, false);
+    private readonly Action<TRecord, string> set = GetCompiledSetter<string>(property);
 
     internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {

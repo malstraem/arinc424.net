@@ -33,7 +33,7 @@ public class Airport : Port
     /// Associated runways.
     /// </summary>
     [Many]
-    public List<Runway>? Runways { get; set; }
+    public List<RunwayThreshold>? Thresholds { get; set; }
 
     /// <summary>
     /// Associated NDBs.

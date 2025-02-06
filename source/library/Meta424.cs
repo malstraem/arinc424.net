@@ -35,7 +35,7 @@ Record<AirwayCommunication>,
 
 #region Airport and Heliport
 Record<Gate>,
-Record<Runway>,
+Record<RunwayThreshold>,
 Record<Airport>,
 Record<FlightPlan>,
 Record<SatellitePoint>,
