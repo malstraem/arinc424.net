@@ -8,11 +8,8 @@ namespace Arinc424.Ground;
 [Identifier(7, 10), Icao(11, 12), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Name)} - {{{nameof(Name)},nq}}")]
-public abstract class Port : Fix, IIcao, INamed
+public abstract class Port : Fix, INamed
 {
-    [Field(11, 12)]
-    public string Icao { get; set; }
-
     /// <summary>
     /// <c>ATA/IATA Designator (ATA/IATA)</c> field.
     /// </summary>

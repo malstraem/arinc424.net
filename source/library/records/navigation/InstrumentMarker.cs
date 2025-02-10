@@ -4,10 +4,10 @@ namespace Arinc424.Navigation;
 
 using Terms;
 
-/// <summary>
-/// <c>Airport and Heliport Localizer Marker</c> primary record.
-/// </summary>
-/// <remarks>See section 4.1.13.1.</remarks>
+/**<summary>
+  <c>Airport and Heliport Localizer Marker</c> primary record.
+</summary>
+<remarks>See section 4.1.13.1.</remarks>*/
 [Section('P', 'M', subsectionIndex: 13), Icao(11, 12), Port(7, 10), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
@@ -15,6 +15,9 @@ public class InstrumentMarker : Fix
 {
     [Identifier(7, 10)]
     public Airport Airport { get; set; }
+
+    [Identifier(14, 17)]
+    public InstrumentLanding InstrumentLanding { get; set; }
 
     /// <inheritdoc cref="MarkerType"/>
     [Field(18, 20)]
@@ -59,11 +62,11 @@ public class InstrumentMarker : Fix
     [Field(91, 95), Variation]
     public float Variation { get; set; }
 
-    /// <summary>
-    /// <c>Facility Elevation (FAC ELEV)</c> field.
-    /// </summary>
-    /// <value>Feet.</value>
-    /// <remarks>See section 5.92.</remarks>
+    /**<summary>
+      <c>Facility Elevation (FAC ELEV)</c> field.
+    </summary>
+    <value>Feet.</value>
+    <remarks>See section 5.92.</remarks>*/
     [Field(98, 102), Integer]
     public int Elevation { get; set; }
 }

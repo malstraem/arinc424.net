@@ -3,12 +3,8 @@ namespace Arinc424.Navigation;
 [Identifier(14, 17), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public abstract class Navaid : Fix, IIcao, INamed
+public abstract class Navaid : Fix, INamed
 {
-    [Field(20, 21)]
-    [Field<Tactical>(11, 12)]
-    public string Icao { get; set; }
-
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
     [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
@@ -20,7 +16,7 @@ public abstract class Navaid : Fix, IIcao, INamed
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
     [Field(94, 123)]
     [Field<Omnidirectional>(94, 123)]
-    [Field<Omnidirectional>(94, 122, Supplement.V19)]
-    [Field<Omnidirectional>(94, 118, Supplement.V20)]
+    [Field<Omnidirectional>(94, 122, Start = Supplement.V19)]
+    [Field<Omnidirectional>(94, 118, Start = Supplement.V20)]
     public string? Name { get; set; }
 }

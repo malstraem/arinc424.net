@@ -1,8 +1,6 @@
 namespace Arinc424;
 
-/// <summary>
-/// Version in terms of the <c>ARINC 424</c> specification.
-/// </summary>
+/// <summary>Version in terms of the <c>ARINC 424</c> specification.</summary>
 public enum Supplement : byte
 {
     V18 = 18,

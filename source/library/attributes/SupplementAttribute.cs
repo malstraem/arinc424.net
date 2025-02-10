@@ -1,20 +1,18 @@
 namespace Arinc424.Attributes;
 
-/// <summary>
-/// A base attribute that can be versioned.
-/// </summary>
-internal abstract class SupplementAttribute(Supplement start, Supplement end = Supplement.V23) : Attribute
+/// <summary>A base attribute that can be versioned.</summary>
+internal abstract class SupplementAttribute : Attribute
 {
-    internal Supplement Start { get; } = start;
+    public Supplement Start { get; set; } = Supplement.V18;
 
-    internal Supplement End { get; } = end;
+    public Supplement End { get; set; } = Supplement.V23;
 
     internal virtual bool IsTarget => false;
 
-    /// <summary>
-    /// Defines that a type matches the attribute.
-    /// </summary>
-    /// <typeparam name="TMatch">Type to match.</typeparam>
-    /// <remarks><see langword="False"/> is forced cause non target attribute will be come by default.</remarks>
+    /**<summary>
+    Defines that a type matches the attribute.
+    </summary>
+    <typeparam name="TMatch">Type to match.</typeparam>
+    <remarks><see langword="false"/> is forced cause non target attribute will be come by default.</remarks>*/
     internal virtual bool IsMatch<TMatch>() where TMatch : Record424 => false;
 }

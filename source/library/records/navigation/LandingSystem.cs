@@ -5,13 +5,10 @@ namespace Arinc424.Navigation;
 [Identifier(14, 17), Icao(11, 12), Port(7, 10), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
-public abstract class LandingSystem : Fix, IIcao
+public abstract class LandingSystem : Fix
 {
     [Identifier(7, 10)]
     public Airport Airport { get; set; }
-
-    [Field(11, 12)]
-    public string Icao { get; set; }
 
     /// <inheritdoc cref="Terms.LandingType"/>
     [Character(18)]

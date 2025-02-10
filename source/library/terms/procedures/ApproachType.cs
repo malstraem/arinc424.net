@@ -1,12 +1,12 @@
 namespace Arinc424.Procedures.Terms;
 
-/// <summary>
-/// <c>Route Type (RT TYPE)</c> -> <c>Approach Route Type Description</c> character.
-/// </summary>
-/// <remarks>See section 5.7, Table 5-8.</remarks>
+/**<summary>
+  <c>Route Type (RT TYPE)</c> -> <c>Approach Route Type Description</c> character.
+</summary>
+<remarks>See section 5.7, Table 5-8.</remarks>*/
 [Char]
 [Transform<ApproachTypeBeforeV23, ApproachType>]
-[Transform<ApproachTypeConverter, ApproachType>(Supplement.V23)]
+[Transform<ApproachTypeConverter, ApproachType>(Start = Supplement.V23)]
 [Description("Route Type (RT TYPE) - Approach Route Type Description")]
 public enum ApproachType : byte
 {

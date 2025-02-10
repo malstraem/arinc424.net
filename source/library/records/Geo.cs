@@ -17,6 +17,6 @@ public abstract class Geo : Record424
 
     [Field<PortTransmitter>(33, 51)]
     [Field<AirwayTransmitter>(63, 81)]
-    [Field<Transmitter>(93, 111, Supplement.V19)]
+    [Field<Transmitter>(93, 111, Start = Supplement.V19)]
     public Coordinates Coordinates { get; set; }
 }

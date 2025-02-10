@@ -63,4 +63,8 @@ public class InstrumentLanding : LandingSystem
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>
     [Field(111, 113), Integer]
     public int ThresholdHeight { get; set; }
+
+    /// <summary>Associated ILS Markers.</summary>
+    [Many]
+    public List<InstrumentMarker>? Markers { get; set; }
 }

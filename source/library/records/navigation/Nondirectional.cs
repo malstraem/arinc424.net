@@ -2,10 +2,10 @@ namespace Arinc424.Navigation;
 
 using Terms;
 
-/// <summary>
-/// <c>NDB Navaid</c> primary record.
-/// </summary>
-/// <remarks>See section 4.1.3.1.</remarks>
+/**<summary>
+  <c>NDB Navaid</c> primary record.
+</summary>
+<remarks>See section 4.1.3.1.</remarks>*/
 [Section('D', 'B'), Icao(20, 21)]
 public class Nondirectional : Navaid
 {

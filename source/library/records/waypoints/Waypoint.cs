@@ -11,11 +11,8 @@ using Terms;
 [Identifier(14, 18), Icao(20, 21), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public class Waypoint : Fix, IIcao, INamed
+public class Waypoint : Fix, INamed
 {
-    [Field(20, 21)]
-    public string Icao { get; set; }
-
     /// <inheritdoc cref="WaypointTypes"/>
     [Field(27, 29)]
     public WaypointTypes Types { get; set; }

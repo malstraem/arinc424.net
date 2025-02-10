@@ -9,11 +9,8 @@ using Terms;
 [Section('E', 'M'), Identifier(14, 17), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
-public class AirwayMarker : Fix, IIcao, INamed
+public class AirwayMarker : Fix, INamed
 {
-    [Field(20, 21)]
-    public string Icao { get; set; }
-
     /// <summary>
     /// <c>Marker Code (MARKER CODE)</c> field.
     /// </summary>
