@@ -9,5 +9,5 @@ public interface IIcao
     /// <c>ICAO Code (ICAO CODE)</c> field.
     /// </summary>
     /// <remarks>See section 5.14.</remarks>
-    string Icao { get; set; }
+    Icao Icao { get; set; }
 }

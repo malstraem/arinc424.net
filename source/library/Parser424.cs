@@ -9,9 +9,7 @@ internal class Parser424
 
     private readonly Dictionary<Section, Queue<string>> records = [];
 
-    /// <summary>
-    /// Storage for entity builds. Covers bare types and compositions.
-    /// </summary>
+    /// <summary>Storage for entity builds. Covers bare types and compositions.</summary>
     protected internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
 
     private void Process(IEnumerable<string> strings, Queue<string> skipped)

@@ -5,15 +5,16 @@ using Arinc424.Waypoints;
 
 namespace Arinc424;
 
-/// <summary>Base object with an identifier used as a navigation point.</summary>
+/// <summary>Base object with an identifier that can be used as a navigation point.</summary>
 public abstract class Fix : Geo, IIcao, IIdentity
 {
     [Field(11, 12)]
     [Field<Waypoint>(20, 21)]
+    [Field<SpecialArea>(14, 15)]
     [Field<AirwayMarker>(20, 21)]
     [Field<Nondirectional>(20, 21)]
     [Field<Omnidirectional>(20, 21)]
-    public string Icao { get; set; }
+    public Icao Icao { get; set; }
 
     /**<summary>
     <para>
@@ -42,12 +43,16 @@ public abstract class Fix : Geo, IIcao, IIdentity
     <para>
       <c>Reference Path Identifier (REF ID)</c> field for <see cref="GroundPoint"/> and <see cref="SatellitePoint"/>. See section 5.257.
     </para>
+    <para>
+      <c>Activity Identifier</c> field for <see cref="SpecialArea"/>. See section 5.279.
+    </para>
     </summary>*/
     [Field(14, 17)]
     [Field<Port>(7, 10)]
     [Field<Gate>(14, 18)]
     [Field<Waypoint>(14, 18)]
     [Field<PathPoint>(33, 36)]
+    [Field<SpecialArea>(8, 13)]
     [Field<RunwayThreshold>(14, 18)]
     public string Identifier { get; set; }
 }
