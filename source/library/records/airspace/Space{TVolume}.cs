@@ -8,8 +8,8 @@ public abstract class Space<TVolume> : Record424<TVolume>, IIcao, INamed where T
     public Icao Icao { get; set; }
 
     /**<summary>
-      <c>Restrictive Airspace Name</c> for <see cref="RestrictiveSpace"/> and
-      <c>Controlled Airspace Name (ARSP NAME)</c> for <see cref="ControlledSpace"/> field.
+    <c>Restrictive Airspace Name</c> for <see cref="RestrictiveSpace"/> and
+    <c>Controlled Airspace Name (ARSP NAME)</c> for <see cref="ControlledSpace"/> field.
     </summary>
     <remarks>See section 5.126 and 5.216.</remarks>*/
     [Field(94, 123)]

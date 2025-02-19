@@ -3,9 +3,7 @@ using Arinc424.Waypoints.Terms;
 
 namespace Arinc424.Procedures;
 
-/// <summary>
-/// Fields of <c>Airport</c> and <c>Heliport SID/STAR/Approach</c>.
-/// </summary>
+/// <summary>Fields of <c>SID/STAR/Approach</c>.</summary>
 [Port(7, 10)]
 
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
@@ -35,9 +33,7 @@ public abstract class ProcedurePoint : Record424, ISequenced
     [Field(48, 49)]
     public Terms.LegType LegType { get; set; }
 
-    /// <summary>
-    /// <c>Turn Direction Valid (TDV)</c> character.
-    /// </summary>
+    /// <summary><c>Turn Direction Valid (TDV)</c> character.</summary>
     /// <remarks>See section 5.22.</remarks>
     [Character(50)]
     public Bool IsTurnRequired { get; set; }
@@ -62,10 +58,10 @@ public abstract class ProcedurePoint : Record424, ISequenced
     [Field(71, 74)]
     public Course Course { get; set; }
 
-    /// <summary>
-    /// <c>Route Distance From, Holding Distance/Time (RTE DIST FROM, HOLD DIST/TIME)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.27.</remarks>
+    /**<summary>
+    <c>Route Distance From, Holding Distance/Time (RTE DIST FROM, HOLD DIST/TIME)</c> field.
+    </summary>
+    <remarks>See section 5.27.</remarks>*/
     [Field(75, 78)]
     public string? DistanceTiming { get; set; }
 
@@ -77,11 +73,11 @@ public abstract class ProcedurePoint : Record424, ISequenced
     [Character(83)]
     public AltitudeDescription AltitudeDescription { get; set; }
 
-    /// <summary>
-    /// <c>ATC Indicator (ATC)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.81.</remarks>
-    [Character(84)]
+    /**<summary>
+    <c>ATC Indicator (ATC)</c> character.
+    </summary>
+    <remarks>See section 5.81.</remarks>*/
+    [Character(84), Obsolete("bool")]
     public char AtcIndicator { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>

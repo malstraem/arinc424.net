@@ -3,7 +3,7 @@ namespace Arinc424.Routing;
 using Terms;
 
 /**<summary>
-  <c>Airways Marker</c> primary record.
+<c>Airways Marker</c> primary record.
 </summary>
 <remarks>See section 4.1.15.1.</remarks>*/
 [Section('E', 'M'), Identifier(14, 17), Continuous]
@@ -12,7 +12,7 @@ using Terms;
 public class AirwayMarker : Fix, INamed
 {
     /**<summary>
-      <c>Marker Code (MARKER CODE)</c> field.
+    <c>Marker Code (MARKER CODE)</c> field.
     </summary>
     <remarks>See section 5.111.</remarks>*/
     [Field(23, 26)]
@@ -26,7 +26,7 @@ public class AirwayMarker : Fix, INamed
     [Character(29)]
     public MarkerPower Power { get; set; }
 
-    /// <summary><c>Minor Axis Bearing (MINOR AXIS TRUE BRG)</c> field.</summary>
+    /// <include file='Comments.xml' path="doc/member[@name='MinorAxis']/*"/>
     [Field(52, 55), Float(10)]
     public float Bearing { get; set; }
 
@@ -34,11 +34,7 @@ public class AirwayMarker : Fix, INamed
     [Field(75, 79), Variation]
     public float Variation { get; set; }
 
-    /**<summary>
-      <c>Facility Elevation (FAC ELEV)</c> field.
-    </summary>
-    <value>Feet.</value>
-    <remarks>See section 5.92.</remarks>*/
+    /// <include file='Comments.xml' path="doc/member[@name='FacElev']/*"/>
     [Field(80, 84), Integer]
     public int Elevation { get; set; }
 

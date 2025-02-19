@@ -17,18 +17,22 @@ public abstract class LandingSystem : Fix
     [Identifier(28, 32)]
     public RunwayThreshold Threshold { get; set; }
 
-    /// <summary>
-    /// <c>Localizer Bearing (LOC BRG)</c> and <c>MLS Azimuth Bearing (MLS AZ BRG)</c> field.
-    /// </summary>
-    /// <value>Degrees and tenths of a degree.</value>
-    /// <remarks>See section 5.47 and 5.167.</remarks>
+    /**<summary>
+    <para>
+      <c>Localizer Bearing (LOC BRG)</c> field for <see cref="InstrumentLanding"/> and <see cref="GlobalLanding"/>.
+    </para>
+    <para>
+      <c>MLS Azimuth Bearing (MLS AZ BRG)</c> field for <see cref="MicrowaveLanding"/>.
+    </para>
+    </summary>
+    <remarks>See section 5.47 and 5.167.</remarks>*/
     [Field(52, 55)]
     public Course Bearing { get; set; }
 
-    /// <summary>
-    /// <c>Component Elevation</c> field.
-    /// </summary>
-    /// <remarks>See section 5.74.</remarks>
+    /**<summary>
+    <c>Component Elevation</c> field.
+    </summary>
+    <remarks>See section 5.74.</remarks>*/
     [Field(98, 102), Integer]
     [Field<MicrowaveLanding>(104, 108)]
     public int Elevation { get; set; }

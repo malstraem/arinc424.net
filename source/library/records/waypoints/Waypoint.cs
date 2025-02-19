@@ -2,10 +2,10 @@ namespace Arinc424.Waypoints;
 
 using Terms;
 
-/// <summary>
-/// <c>Waypoint</c> primary record.
-/// </summary>
-/// <remarks>See section 4.1.4.1.</remarks>
+/**<summary>
+<c>Waypoint</c> primary record.
+</summary>
+<remarks>See section 4.1.4.1.</remarks>*/
 [Section('E', 'A')]
 
 [Identifier(14, 18), Icao(20, 21), Continuous]
@@ -33,9 +33,7 @@ public class Waypoint : Fix, INamed
     [Field(96, 98)]
     public WaypointNameFormats NameFormats { get; set; }
 
-    /// <summary>
-    /// <c>Waypoint Name (NAME)</c> field.
-    /// </summary>
+    /// <summary><c>Waypoint Name (NAME)</c> field.</summary>
     /// <remarks>See section 5.43.</remarks>
     [Field(99, 123)]
     public string? Name { get; set; }

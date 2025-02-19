@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 using Terms;
 
 /**<summary>
-  <c>VHF NAVAID</c> primary record.
+<c>VHF NAVAID</c> primary record.
 </summary>
 <remarks>See section 4.1.2.1.</remarks>*/
 [Section('D'), /*Port(7, 10) need more analysis */ Icao(20, 21)]
@@ -31,7 +31,7 @@ public class Omnidirectional : Navaid
     public OmnidirectCollocation Collocation { get; set; }
 
     /**<summary>
-      <c>DME Identifier (DME IDENT)</c> field.
+    <c>DME Identifier (DME IDENT)</c> field.
     </summary>
     <remarks>See section 5.38.</remarks>*/
     [Field(52, 55)]
@@ -45,7 +45,7 @@ public class Omnidirectional : Navaid
     public Declination Declination { get; set; }
 
     /**<summary>
-      <c>DME Elevation (DME ELEV)</c> field.
+    <c>DME Elevation (DME ELEV)</c> field.
     </summary>
     <remarks>See section 5.40.</remarks>*/
     [Field(80, 84), Integer]
@@ -56,15 +56,15 @@ public class Omnidirectional : Navaid
     public UsableRange Range { get; set; }
 
     /**<summary>
-      <c>ILS/DME Bias</c> field.
+    <c>ILS/DME Bias</c> field.
     </summary>
-    <value>Nautical miles and tenths of mile.</value>
+    <value>Nautical miles.</value>
     <remarks>See section 5.90.</remarks>*/
     [Field(86, 87), Float(10)]
     public float EquipmentOffset { get; set; }
 
     /**<summary>
-      <c>Frequency Protection Distance (FREQ PRD)</c> field.
+    <c>Frequency Protection Distance (FREQ PRD)</c> field.
     </summary>
     <value>Nautical miles.</value>
     <remarks>See section 5.150.</remarks>*/
@@ -72,7 +72,7 @@ public class Omnidirectional : Navaid
     public int ProtectionDistance { get; set; }
 
     /**<summary>
-      <c>Route Inappropriate Navaid Indicator</c> character.
+    <c>Route Inappropriate Navaid Indicator</c> character.
     </summary>
     <remarks>See section 5.297.</remarks>*/
     [Character(122, Start = Supplement.V20)]

@@ -47,9 +47,9 @@ public abstract class Transmitter : Geo, ISequenced
     public AltitudeDescription AltitudeDescription { get; set; }
 
     /**<summary>
-      <c>Communication Altitude (COMM ALTITUDE)</c> field.
+    <c>Communication Altitude (COMM ALTITUDE)</c> field.
     </summary>
-    <value>Hundredth of feet.</value>
+    <value>Feet.</value>
     <remarks>See section 5.184.</remarks>*/
     [Field(70, 74), Field(84, 86, Start = Supplement.V19)]
     [Field<AirwayTransmitter>(94, 98)]

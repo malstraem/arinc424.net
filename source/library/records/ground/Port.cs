@@ -10,24 +10,24 @@ namespace Arinc424.Ground;
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Name)} - {{{nameof(Name)},nq}}")]
 public abstract class Port : Fix, INamed
 {
-    /// <summary>
-    /// <c>ATA/IATA Designator (ATA/IATA)</c> field.
-    /// </summary>
-    /// <remarks>See section 5.107.</remarks>
+    /**<summary>
+    <c>ATA/IATA Designator (ATA/IATA)</c> field.
+    </summary>
+    <remarks>See section 5.107.</remarks>*/
     [Field(14, 16)]
     public string? Designator { get; set; }
 
-    /// <summary>
-    /// <c>Speed Limit Altitude</c> field.
-    /// </summary>
-    /// <remarks>See section 5.73.</remarks>
+    /**<summary>
+    <c>Speed Limit Altitude</c> field.
+    </summary>
+    <remarks>See section 5.73.</remarks>*/
     [Field(23, 27)]
     public Altitude Limit { get; set; }
 
-    /// <summary>
-    /// <c>IFR Capability (IFR)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.108.</remarks>
+    /**<summary>
+    <c>IFR Capability (IFR)</c> character.
+    </summary>
+    <remarks>See section 5.108.</remarks>*/
     [Character(31)]
     public Bool IsProcedurePublished { get; set; }
 
@@ -35,11 +35,11 @@ public abstract class Port : Fix, INamed
     [Field(52, 56), Variation]
     public float Variation { get; set; }
 
-    /// <summary>
-    /// <c>Airport/Heliport Elevation (ELEV)</c> field.
-    /// </summary>
-    /// <value>Feet.</value>
-    /// <remarks>See section 5.55.</remarks>
+    /**<summary>
+    <c>Airport/Heliport Elevation (ELEV)</c> field.
+    </summary>
+    <value>Feet.</value>
+    <remarks>See section 5.55.</remarks>*/
     [Field(57, 61), Integer]
     public int Elevation { get; set; }
 
@@ -47,35 +47,31 @@ public abstract class Port : Fix, INamed
     [Field(62, 64), Integer]
     public int SpeedLimit { get; set; }
 
-    /// <summary>
-    /// <c>Recommended NAVAID (RECD NAV)</c> field.
-    /// </summary>
+    /// <summary><c>Recommended NAVAID (RECD NAV)</c> field.</summary>
     [Identifier(65, 68), Icao(69, 70)]
     public Omnidirectional? Recommended { get; set; }
 
-    /// <include file='Comments.xml' path="doc/member[@name='TransitionAltitude']/*"/>
+    /// <include file='Comments.xml' path="doc/member[@name='Transition']/*"/>
     [Field(71, 75), Integer]
-    public int TransitionAltitude { get; set; }
+    public int? TransitionAltitude { get; set; }
 
-    /// <include file='Comments.xml' path="doc/member[@name='TransitionLevel']/*"/>
+    /// <include file='Comments.xml' path="doc/member[@name='Transition']/*"/>
     [Field(76, 80), Integer]
-    public int TransitionLevel { get; set; }
+    public int? TransitionLevel { get; set; }
 
     /// <inheritdoc cref="Arinc424.Privacy"/>
     [Character(81)]
     public Privacy Privacy { get; set; }
 
-    /// <summary>
-    /// <c>Time Zone</c> field.
-    /// </summary>
+    /// <summary><c>Time Zone</c> field.</summary>
     /// <remarks>See section 5.178.</remarks>
     [Field(82, 84)]
     public string? TimeZone { get; set; }
 
-    /// <summary>
-    /// <c>Daylight Time Indicator (DAY TIME)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.179.</remarks>
+    /**<summary>
+    <c>Daylight Time Indicator (DAY TIME)</c> character.
+    </summary>
+    <remarks>See section 5.179.</remarks>*/
     [Character(85)]
     public Bool IsDaylightTime { get; set; }
 
@@ -91,63 +87,43 @@ public abstract class Port : Fix, INamed
     [Field(94, 123)]
     public string? Name { get; set; }
 
-    /// <summary>
-    /// Associated GBAS points.
-    /// </summary>
+    /// <summary>Associated GBAS points.</summary>
     [Many]
     public List<GroundPoint>? GroundPoints { get; set; }
 
-    /// <summary>
-    /// Associated SBAS points.
-    /// </summary>
+    /// <summary>Associated SBAS points.</summary>
     [Many]
     public List<SatellitePoint>? SatellitePoints { get; set; }
 
-    /// <summary>
-    /// Associated GLSs.
-    /// </summary>
+    /// <summary>Associated GLSs.</summary>
     [Many]
     public List<GlobalLanding>? GlobalLandings { get; set; }
 
-    /// <summary>
-    /// Associated STARs.
-    /// </summary>
+    /// <summary>Associated STARs.</summary>
     [Many]
     public List<Arrival>? Arrivals { get; set; }
 
-    /// <summary>
-    /// Associated Approach Procedures.
-    /// </summary>
+    /// <summary>Associated Approach Procedures.</summary>
     [Many]
     public List<Approach>? Approaches { get; set; }
 
-    /// <summary>
-    /// Associated SIDs.
-    /// </summary>
+    /// <summary>Associated SIDs.</summary>
     [Many]
     public List<Departure>? Departures { get; set; }
 
-    /// <summary>
-    /// Associated Communications.
-    /// </summary>
+    /// <summary>Associated Communications.</summary>
     [Many]
     public List<PortCommunication>? Communications { get; set; }
 
-    /// <summary>
-    /// Associated TAAs.
-    /// </summary>
+    /// <summary>Associated TAAs.</summary>
     [Many]
     public List<ArrivalAltitude>? ArrivalAltitudes { get; set; }
 
-    /// <summary>
-    /// Associated MSAs.
-    /// </summary>
+    /// <summary>Associated MSAs.</summary>
     [Many]
     public List<MinimumAltitude>? MinimumAltitudes { get; set; }
 
-    /// <summary>
-    /// Associated Terminal Waypoints.
-    /// </summary>
+    /// <summary>Associated Terminal Waypoints.</summary>
     [Many]
     public List<TerminalWaypoint>? TerminalWaypoints { get; set; }
 }

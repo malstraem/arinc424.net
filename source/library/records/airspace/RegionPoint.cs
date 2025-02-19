@@ -1,9 +1,9 @@
 namespace Arinc424.Airspace;
 
-/// <summary>
-/// Fields of <c>FIR/UIR</c>.
-/// </summary>
-/// <remarks>Used by <see cref="RegionVolume"/> like subsequence.</remarks>
+/**<summary>
+Fields of <c>FIR/UIR</c>.
+</summary>
+<remarks>Used by <see cref="RegionVolume"/> like subsequence.</remarks>*/
 public class RegionPoint : BoundaryPoint
 {
     /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>

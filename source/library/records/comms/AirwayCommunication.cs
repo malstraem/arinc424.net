@@ -2,8 +2,10 @@ namespace Arinc424.Comms;
 
 using Processing;
 
-/// <summary><c>Enroute Communications</c> primary record sequence.</summary>
-/// <remarks>See section 4.1.23.1.</remarks>
+/**<summary>
+<c>Enroute Communications</c> primary record sequence.
+</summary>
+<remarks>See section 4.1.23.1.</remarks>*/
 [Section('E', 'V'), Continuous(56)]
 
 [Pipeline<Sequence<AirwayCommunication, AirwayTransmitter>>(Start = Supplement.V19)]

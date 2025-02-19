@@ -2,10 +2,10 @@ using Arinc424.Processing;
 
 namespace Arinc424.Procedures;
 
-/// <summary>
-/// <c>Airport and Heliport Approach</c> primary record sequence.
-/// </summary>
-/// <remarks>Used by <see cref="Approach"/> like subsequence.</remarks>
+/**<summary>
+<c>Airport and Heliport Approach</c> primary record sequence.
+</summary>
+<remarks>Used by <see cref="Approach"/> like subsequence.</remarks>*/
 [Pipeline<Sequence<ApproachSequence, ApproachPoint>>]
 public class ApproachSequence : ProcedureSequence<ApproachPoint>
 {

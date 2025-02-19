@@ -5,10 +5,10 @@ using Arinc424.Waypoints.Terms;
 
 namespace Arinc424.Routing;
 
-/// <summary>
-/// Fields of <c>Enroute Airways</c> primary record.
-/// </summary>
-/// <remarks>Used by <see cref="Airway"/> like subsequence.</remarks>
+/**<summary>
+Fields of <c>Enroute Airways</c> primary record.
+</summary>
+<remarks>Used by <see cref="Airway"/> like subsequence.</remarks>*/
 [Pipeline<AirwayPointSorting>]
 
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
@@ -45,9 +45,7 @@ public class AirwayPoint : Record424, ISequenced
     [Identifier(48, 49)]
     public CruiseTable? CruiseTable { get; set; }
 
-    /// <summary>
-    /// <c>EU Indicator (EU IND)</c> character.
-    /// </summary>
+    /// <summary><c>EU Indicator (EU IND)</c> character.</summary>
     /// <remarks>See section 5.164.</remarks>
     [Character(50)]
     public Bool HasRestrictions { get; set; }
@@ -71,11 +69,11 @@ public class AirwayPoint : Record424, ISequenced
     [Field(71, 74)]
     public Course Out { get; set; }
 
-    /// <summary>
-    /// <c>Route Distance From (RTE DIST FROM)</c> field.
-    /// </summary>
-    /// <value>Nautical miles and tenths of mile.</value>
-    /// <remarks>See section 5.27.</remarks>
+    /**<summary>
+    <c>Route Distance From (RTE DIST FROM)</c> field.
+    </summary>
+    <value>Nautical miles.</value>
+    <remarks>See section 5.27.</remarks>*/
     [Field(75, 78), Float(10)]
     public float DistanceFrom { get; set; }
 
@@ -95,11 +93,11 @@ public class AirwayPoint : Record424, ISequenced
     [Field(94, 98)]
     public Altitude Maximum { get; set; }
 
-    /// <summary>
-    /// <c>Fixed Radius Transition Indicator (FIXED RAD IND)</c> field.
-    /// </summary>
-    /// <value>Nautical miles and tenths of mile.</value>
-    /// <remarks>See section 5.254</remarks>
+    /**<summary>
+    <c>Fixed Radius Transition Indicator (FIXED RAD IND)</c> field.
+    </summary>
+    <value>Nautical miles.</value>
+    <remarks>See section 5.254</remarks>*/
     [Field(99, 101), Float(10)]
     public float FixRadius { get; set; }
 
