@@ -18,7 +18,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
-    <Version>0.1.4</Version>
+    <Version>0.1.5</Version>
     <PackageId>arinc424</PackageId>
     <Product>ARINC 424 object model</Product>
 

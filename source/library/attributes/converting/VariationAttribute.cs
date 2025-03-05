@@ -2,10 +2,10 @@ namespace Arinc424.Attributes;
 
 using static System.Globalization.NumberStyles;
 
-/// <summary>
-/// Specifies that property value is a <c>Magnetic Variation</c> and will be parsed.
-/// </summary>
-/// <remarks>See section 5.39.</remarks>
+/** <summary>
+Specifies that property value is a <c>Magnetic Variation</c> and will be parsed.
+</summary>
+<remarks>See section 5.39.</remarks>*/
 internal sealed class VariationAttribute : DecodeAttribute<float>
 {
     internal override Result<float> Convert(ReadOnlySpan<char> @string)
@@ -21,10 +21,10 @@ internal sealed class VariationAttribute : DecodeAttribute<float>
             return value;
 
         if (sign is 'W')
-            return -degrees;
+            degrees = -degrees;
         else if (sign is not 'E')
             return @string[0..0];
 
-        return degrees;
+        return degrees / 10;
     }
 }
