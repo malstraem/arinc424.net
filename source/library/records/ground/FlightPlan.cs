@@ -1,11 +1,11 @@
 namespace Arinc424.Ground;
 
-/// <summary>
-/// <c>Flight Planning</c> primary record.
-/// </summary>
-/// <remarks>See section 4.1.27.1.</remarks>
+/**<summary>
+<c>Flight Planning</c> primary record.
+</summary>
+<remarks>See section 4.1.27.1.</remarks>*/
 [Obsolete("todo")]
-[Section('P', 'R', subsectionIndex: 13), ContinuousAttribute(70)]
+[Section('P', 'R', subIndex: 13), Continuous(70)]
 public class FlightPlan : Record424
 {
     [Field(7, 10)]

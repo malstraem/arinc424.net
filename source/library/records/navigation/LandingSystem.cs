@@ -2,7 +2,7 @@ using Arinc424.Ground;
 
 namespace Arinc424.Navigation;
 
-[Identifier(14, 17), Icao(11, 12), Port(7, 10), ContinuousAttribute]
+[Identifier(14, 17), Icao(11, 12), Port(7, 10), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public abstract class LandingSystem : Fix

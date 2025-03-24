@@ -4,7 +4,7 @@ namespace Arinc424.Routing;
 <c>Holding Pattern</c> primary record.
 </summary>
 <remarks>See section 4.1.5.1.</remarks>*/
-[Section('E', 'P'), Icao(11, 12), Port(7, 10), ContinuousAttribute(39)]
+[Section('E', 'P'), Icao(11, 12), Port(7, 10), Continuous(39)]
 
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public class HoldingPattern : Record424, IIcao, INamed

@@ -84,18 +84,18 @@ Record<RestrictiveSpace>,
 
 namespace Arinc424;
 
-/// <summary>
-/// Metadata that defines how entities should be created.
-/// </summary>
+/**<summary>
+Metadata that defines how entities should be created.
+</summary>*/
 public class Meta424
 {
 #pragma warning disable CS8618
     private Meta424() { }
 #pragma warning restore CS8618
-    /// <summary>
-    /// Creates metadata using target <paramref name="supplement"/>.
-    /// </summary>
-    /// <returns>Runtime compiled metadata.</returns>
+    /**<summary>
+    Creates metadata using target <paramref name="supplement"/>.
+    </summary>
+    <returns>Runtime compiled metadata.</returns>*/
     public static Meta424 Create(Supplement supplement)
     {
         List<SectionAttribute> sections = [];

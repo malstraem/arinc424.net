@@ -7,7 +7,7 @@ namespace Arinc424.Procedures;
 Multiple <c>Airport and Heliport STAR</c> primary record sequences under same identifier.
 </summary>
 <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>*/
-[Section('P', 'E', subsectionIndex: 13), Section('H', 'E', subsectionIndex: 13)]
+[Section('P', 'E', subIndex: 13), Section('H', 'E', subIndex: 13)]
 
 [Pipeline<IdentityWrap<Arrival, ArrivalSequence>>]
 public class Arrival : Procedure<ArrivalSequence, ArrivalPoint>;
@@ -16,7 +16,7 @@ public class Arrival : Procedure<ArrivalSequence, ArrivalPoint>;
 Multiple <c>Airport and Heliport Approach</c> primary record sequences under same identifier.
 </summary>
 <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>*/
-[Section('P', 'F', subsectionIndex: 13), Section('H', 'F', subsectionIndex: 13)]
+[Section('P', 'F', subIndex: 13), Section('H', 'F', subIndex: 13)]
 
 [Pipeline<IdentityWrap<Approach, ApproachSequence>>]
 public class Approach : Procedure<ApproachSequence, ApproachPoint>
@@ -32,7 +32,7 @@ public class Approach : Procedure<ApproachSequence, ApproachPoint>
 Multiple <c>Airport and Heliport SID</c> primary record sequences under same identifier.
 </summary>
 <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>*/
-[Section('P', 'D', subsectionIndex: 13), Section('H', 'D', subsectionIndex: 13)]
+[Section('P', 'D', subIndex: 13), Section('H', 'D', subIndex: 13)]
 
 [Pipeline<IdentityWrap<Departure, DepartureSequence>>]
 public class Departure : Procedure<DepartureSequence, DeparturePoint>;

@@ -1,6 +1,8 @@
 namespace Arinc424.Attributes;
 
-/// <summary>A base attribute that can be versioned.</summary>
+/**<summary>
+A base attribute that can be versioned.
+</summary>*/
 internal abstract class SupplementAttribute : Attribute
 {
     public Supplement Start { get; set; } = Supplement.V18;

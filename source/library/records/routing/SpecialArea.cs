@@ -8,7 +8,7 @@ using Terms;
 <c>Special Activity Area</c> primary record.
 </summary>
 <remarks>See section 4.1.33.1.</remarks>*/
-[Section('E', 'S'), ContinuousAttribute]
+[Section('E', 'S'), Continuous]
 public class SpecialArea : Fix, IIdentity, INamed
 {
     [Identifier(16, 19), Icao(20, 21)]

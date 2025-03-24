@@ -1,9 +1,9 @@
 namespace Arinc424;
 
-/// <summary>
-/// <c>Grid MORA</c> primary record.
-/// </summary>
-/// <remarks>See section 4.1.19.1.</remarks>
+/**<summary>
+<c>Grid MORA</c> primary record.
+</summary>
+<remarks>See section 4.1.19.1.</remarks>*/
 [Section('A', 'S')]
 public class OffrouteAltitude : Record424
 {

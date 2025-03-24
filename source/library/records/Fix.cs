@@ -5,7 +5,9 @@ using Arinc424.Waypoints;
 
 namespace Arinc424;
 
-/// <summary>Base object with an identifier that can be used as a navigation point.</summary>
+/**<summary>
+Base object with an identifier that can be used as a navigation point.
+</summary>*/
 public abstract class Fix : Geo, IIcao, IIdentity
 {
     [Field(11, 12)]

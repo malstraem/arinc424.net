@@ -8,7 +8,7 @@ using Terms;
 <c>Airport and Heliport Localizer Marker</c> primary record.
 </summary>
 <remarks>See section 4.1.13.1.</remarks>*/
-[Section('P', 'M', subsectionIndex: 13), Icao(11, 12), Port(7, 10), ContinuousAttribute]
+[Section('P', 'M', subIndex: 13), Icao(11, 12), Port(7, 10), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class InstrumentMarker : Fix

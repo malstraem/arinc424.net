@@ -4,7 +4,7 @@ namespace Arinc424.Navigation;
 <c>Airport and Heliport MLS (Azimuth, Elevation and Back Azimuth)</c> primary record.
 </summary>
 <remarks>See section 4.1.22.1.</remarks>*/
-[Section('P', 'L', subsectionIndex: 13)]
+[Section('P', 'L', subIndex: 13)]
 public class MicrowaveLanding : LandingSystem
 {
     /// <summary><c>Channel</c> field.</summary>

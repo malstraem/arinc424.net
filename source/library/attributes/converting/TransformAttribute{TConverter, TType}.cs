@@ -21,6 +21,5 @@ internal sealed class TransformAttribute<TConverter, TType> : TransformAttribute
     where TConverter : ICharConverter<TType>
     where TType : Enum
 {
-    internal override bool TryConvert(char @char, out TType value)
-        => TConverter.TryConvert(@char, out value);
+    internal override bool TryConvert(char @char, out TType value) => TConverter.TryConvert(@char, out value);
 }

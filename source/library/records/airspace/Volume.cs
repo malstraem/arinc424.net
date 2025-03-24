@@ -1,6 +1,8 @@
 namespace Arinc424.Airspace;
 
-/// <summary>Space volume with low and up limits.</summary>
+/**<summary>
+Space volume with low and up limits.
+</summary>*/
 [Icao(7, 8)]
 public abstract class Volume : Record424<BoundaryPoint>, IMultiple
 {

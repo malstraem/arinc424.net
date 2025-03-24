@@ -1,7 +1,7 @@
 namespace Arinc424.Airspace;
 
 /// <summary>Base space properties.</summary>
-[ContinuousAttribute(25)]
+[Continuous(25)]
 public abstract class Space<TVolume> : Record424<TVolume>, IIcao, INamed where TVolume : Volume
 {
     [Field(7, 8)]

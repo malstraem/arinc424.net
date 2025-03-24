@@ -3,7 +3,9 @@ using Arinc424.Waypoints.Terms;
 
 namespace Arinc424.Procedures;
 
-/// <summary>Fields of <c>SID/STAR/Approach</c>.</summary>
+/**<summary>
+Fields of <c>SID/STAR/Approach</c>.
+</summary>*/
 [Port(7, 10)]
 
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
