@@ -3,7 +3,7 @@ using Arinc424.Navigation;
 namespace Arinc424.Ground;
 
 /**<summary>
-  <c>Runway</c> primary record.
+<c>Runway</c> primary record.
 </summary>
 <remarks>See section 4.1.10.1.</remarks>*/
 [Section('P', 'G', subsectionIndex: 13)]
@@ -17,7 +17,7 @@ public class RunwayThreshold : Fix
     public Airport Airport { get; set; }
 
     /**<summary>
-      <c>Runway Length (RUNWAY LENGTH)</c> field.
+    <c>Runway Length (RUNWAY LENGTH)</c> field.
     </summary>
     <value>Feet.</value>
     <remarks>See section 5.57.</remarks>*/
@@ -25,17 +25,17 @@ public class RunwayThreshold : Fix
     public int Length { get; set; }
 
     /**<summary>
-      <c>Runway Magnetic Bearing (RWY BRG)</c> field.
+    <c>Runway Bearing (RWY BRG)</c> field.
     </summary>
-    <value>Degrees and tenths of a degree.</value>
+    <value>Degrees.</value>
     <remarks>See section 5.58.</remarks>*/
     [Field(28, 31)]
     public Course Bearing { get; set; }
 
     /**<summary>
-      <c>Runway Gradient (RWY GRAD)</c> field.
+    <c>Runway Gradient (RWY GRAD)</c> field.
     </summary>
-    <value>Degrees and thousands of degrees.</value>
+    <value>Degrees.</value>
     <remarks>See section 5.212.</remarks>*/
     [Field(52, 56), Float(1000)]
     [Obsolete("todo")]
@@ -46,7 +46,7 @@ public class RunwayThreshold : Fix
     public float EllipsoidalHeight { get; set; }
 
     /**<summary>
-      <c>Landing Threshold Elevation (LANDING THRES ELEV)</c> field.
+    <c>Landing Threshold Elevation (LANDING THRES ELEV)</c> field.
     </summary>
     <value>Feet.</value>
     <remarks>See section 5.68.</remarks>*/
@@ -54,7 +54,7 @@ public class RunwayThreshold : Fix
     public int Elevation { get; set; }
 
     /**<summary>
-      <c>Threshold Displacement Distance (DSPLCD THR)</c> field.
+    <c>Threshold Displacement Distance (DSPLCD THR)</c> field.
     </summary>
     <value>Feet.</value>
     <remarks>See section 5.69.</remarks>*/
@@ -74,7 +74,7 @@ public class RunwayThreshold : Fix
     public Terms.ThresholdType Type { get; set; }
 
     /**<summary>
-      <c>Stopway</c> field.
+    <c>Stopway</c> field.
     </summary>
     <value>Feet.</value>
     <remarks>See section 5.79.</remarks>*/
@@ -86,7 +86,7 @@ public class RunwayThreshold : Fix
     public int Height { get; set; }
 
     /**<summary>
-      <c>Runway Description (RUNWAY DESCRIPTION)</c> field.
+    <c>Runway Description (RUNWAY DESCRIPTION)</c> field.
     </summary>
     <remarks>See section 5.59.</remarks>*/
     [Field(102, 123)]

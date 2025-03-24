@@ -3,10 +3,10 @@ using Arinc424.Tables;
 
 namespace Arinc424.Airspace;
 
-/// <summary>
-/// <c>FIR/UIR</c> primary record sequence.
-/// </summary>
-/// <remarks>Used by <see cref="FlightRegion"/> like subsequence.</remarks>
+/**<summary>
+<c>FIR/UIR</c> primary record sequence.
+</summary>
+<remarks>Used by <see cref="FlightRegion"/> like subsequence.</remarks>*/
 [Continuous(20), Pipeline<Sequence<RegionVolume, RegionPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]
@@ -27,10 +27,10 @@ public class RegionVolume : Record424<RegionPoint>
     [Character(30)]
     public Terms.AltitudeReportUnit AltitudeReportUnit { get; set; }
 
-    /// <summary>
-    /// <c>FIR/UIR Entry Report (ENTRY)</c> character.
-    /// </summary>
-    /// <remarks>See section 5.124.</remarks>
+    /**<summary>
+    <c>FIR/UIR Entry Report (ENTRY)</c> character.
+    </summary>
+    <remarks>See section 5.124.</remarks>*/
     [Character(31)]
     public Bool IsEntryReport { get; set; }
 

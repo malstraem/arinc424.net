@@ -5,7 +5,7 @@ using Arinc424.Ground;
 using Terms;
 
 /**<summary>
-  <c>Special Activity Area</c> primary record.
+<c>Special Activity Area</c> primary record.
 </summary>
 <remarks>See section 4.1.33.1.</remarks>*/
 [Section('E', 'S'), Continuous]
@@ -19,9 +19,9 @@ public class SpecialArea : Fix, IIdentity, INamed
     public ActivityType Type { get; set; }
 
     /**<summary>
-      <c>Special Activity Area Size</c> field.
+    <c>Special Activity Area Size</c> field.
     </summary>
-    <value>Nautical miles and tenths of mile.</value>
+    <value>Nautical miles.</value>
     <remarks>See section 5.280.</remarks>*/
     [Field(43, 45), Float(10)]
     public float Size { get; set; }
@@ -34,10 +34,8 @@ public class SpecialArea : Fix, IIdentity, INamed
     [Character(52)]
     public LimitUnit UpUnit { get; set; }
 
-    /**<summary>
-      <c>Special Activity Area Volume</c> character.
-    </summary>
-    <remarks>See section 5.281.</remarks>*/
+    /// <summary><c>Special Activity Area Volume</c> character.</summary>
+    /// <remarks>See section 5.281.</remarks>
     [Character(53)]
     public char Volume { get; set; }
 
@@ -49,10 +47,8 @@ public class SpecialArea : Fix, IIdentity, INamed
     [Character(57)]
     public Privacy Privacy { get; set; }
 
-    /**<summary>
-      <c>Controlling Agency</c> field.
-    </summary>
-    <remarks>See section 5.140.</remarks>*/
+    /// <summary><c>Controlling Agency</c> field.</summary>
+    /// <remarks>See section 5.140.</remarks>
     [Field(59, 83)]
     public string? ControllingAgency { get; set; }
 
@@ -64,10 +60,8 @@ public class SpecialArea : Fix, IIdentity, INamed
     [Field(87, 93)]
     public Frequency Frequency { get; set; }
 
-    /**<summary>
-      <c>Restrictive Airspace Name</c> field.
-    </summary>
-    <remarks>See section 5.126.</remarks>*/
+    /// <summary><c>Restrictive Airspace Name</c> field.</summary>
+    /// <remarks>See section 5.126.</remarks>
     [Field(94, 123)]
     public string? Name { get; set; }
 }

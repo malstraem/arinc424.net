@@ -4,10 +4,10 @@ namespace Arinc424.Navigation;
 
 using Terms;
 
-/// <summary>
-/// <c>TACAN-Only NAVAID</c> primary record.
-/// </summary>
-/// <remarks>See section 4.1.32.1.</remarks>
+/**<summary>
+<c>TACAN-Only NAVAID</c> primary record.
+</summary>
+<remarks>See section 4.1.32.1.</remarks>*/
 [Section('D', 'T'), Port(7, 10), Icao(11, 12)]
 public class Tactical : Navaid
 {

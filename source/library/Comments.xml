@@ -11,7 +11,7 @@
     <summary>
       <c>Theta (THETA)</c> field.
     </summary>
-    <value>Degrees and tenths of degree.</value>
+    <value>Degrees.</value>
     <remarks>See section 5.24.</remarks>
   </member>
 
@@ -19,7 +19,7 @@
     <summary>
       <c>Rho (RHO)</c> field.
     </summary>
-    <value>Nautical miles and tenths of mile.</value>
+    <value>Nautical miles.</value>
     <remarks>See section 5.25.</remarks>
   </member>
 
@@ -27,7 +27,6 @@
     <summary>
       <c>Outbound Magnetic Course (OB MAG CRS)</c> field.
     </summary>
-    <value>Degrees and tenths of degree.</value>
     <remarks>See section 5.26.</remarks>
   </member>
 
@@ -35,7 +34,6 @@
     <summary>
       <c>Inbound Magnetic Course (IB MAG CRS)</c> field.
     </summary>
-    <value>Degrees and tenths of degree.</value>
     <remarks>See section 5.28.</remarks>
   </member>
 
@@ -50,7 +48,7 @@
     <summary>
       <c>VOR/NDB Frequency (VOR/NDB FREQ)</c> field.
     </summary>
-    <value>Kilohertz and tenths of kilohertz</value>
+    <value>Kilohertz.</value>
     <remarks>See section 5.34.</remarks>
   </member>
 
@@ -58,15 +56,15 @@
     <summary>
       <c>Magnetic Variation (MAG VAR, D MAG VAR)</c> field.
     </summary>
-    <value>Degrees and tenths of degree.</value>
+    <value>Degrees.</value>
     <remarks>See section 5.39.</remarks>
   </member>
 
-  <member name="TransitionAltitude">
+  <member name="Transition">
     <summary>
       <c>Transition Altitude/Level (TRANS ALTITUDE/LEVEL)</c> field.
     </summary>
-    <value>Feet or flight level.</value>
+    <value>Feet.</value>
     <remarks>See section 5.53.</remarks>
   </member>
 
@@ -91,6 +89,22 @@
     </summary>
    <value>Knots.</value>
    <remarks>See section 5.72.</remarks>
+  </member>
+
+  <member name="FacElev">
+    <summary>
+      <c>Facility Elevation (FAC ELEV)</c> field.
+    </summary>
+    <value>Feet.</value>
+    <remarks>See section 5.92.</remarks>
+  </member>
+
+  <member name="MinorAxis">
+    <summary>
+      <c>Minor Axis Bearing (MINOR AXIS TRUE BRG)</c> field.
+    </summary>
+    <value>Degrees.</value>
+    <remarks>See section 5.100.</remarks>
   </member>
 
   <member name="FIR">
@@ -125,7 +139,7 @@
     <summary>
       <c>ARC Radius (ARC RAD)</c> field.
     </summary>
-    <value>Nautical miles and thousands of mile.</value>
+    <value>Nautical miles.</value>
     <remarks>See section 5.204.</remarks>
   </member>
 
@@ -140,7 +154,7 @@
     <summary>
       <c>Ellipsoidal Height</c> field.
     </summary>
-    <value>Meters and tenths of meter.</value>
+    <value>Meters and tenths of a meter.</value>
     <remarks>See section 5.225.</remarks>
   </member>
 
