@@ -13,9 +13,9 @@ internal abstract class TransformAttribute<TType> : TransformAttribute where TTy
     internal abstract bool TryConvert(char @char, out TType value);
 }
 
-/// <inheritdoc/>
-/// <typeparam name="TConverter">Associated <see cref="ICharConverter{TType}"/>.</typeparam>
-/// <typeparam name="TType"><inheritdoc/></typeparam>
+/**<inheritdoc/>
+<typeparam name="TConverter">Associated <see cref="ICharConverter{TType}"/>.</typeparam>
+<typeparam name="TType"><inheritdoc/></typeparam>*/
 [AttributeUsage(AttributeTargets.Property | AttributeTargets.Enum, AllowMultiple = true)]
 internal sealed class TransformAttribute<TConverter, TType> : TransformAttribute<TType>
     where TConverter : ICharConverter<TType>

@@ -2,9 +2,7 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Building;
 
-/// <summary>
-/// Proxy to hold bad coded record with diagnostics.
-/// </summary>
+/// <summary>Proxy to hold bad coded record with diagnostics.</summary>
 [DebuggerDisplay($"{{{nameof(Record)}}}")]
 public abstract class Build
 {

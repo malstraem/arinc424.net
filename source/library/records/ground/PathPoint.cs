@@ -7,7 +7,7 @@ using Terms;
 /**<summary>
 Fields of <c>GBAS Path Point</c> and <c>SBAS Path Point</c>.
 </summary>*/
-[Icao(11, 12), Port(7, 10), Continuous(27)]
+[Icao(11, 12), Port(7, 10), ContinuousAttribute(27)]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class PathPoint : Fix

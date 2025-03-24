@@ -34,9 +34,10 @@ internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wra
 
 internal sealed class RestrictiveWrap(Supplement supplement) : Wrap<RestrictiveSpace, RestrictiveVolume>(supplement)
 {
-    /// <summary>
-    /// Range including <see cref="IIcao.Icao"/>, <see cref="RestrictiveVolume.Type"/> and <see cref="RestrictiveSpace.Identifier"/>.
-    /// </summary>
+    /**<summary>
+    Range including <see cref="IIcao.Icao"/>, <see cref="RestrictiveVolume.Type"/>
+    and <see cref="RestrictiveSpace.Identifier"/>.
+    </summary>*/
     private readonly Range range = 6..19;
 
     protected override bool Trigger(RestrictiveVolume current, RestrictiveVolume next) => current.Source![range] != next.Source![range];

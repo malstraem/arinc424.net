@@ -1,6 +1,6 @@
 namespace Arinc424.Comms;
 
-[Continuous(Start = Supplement.V19)]
+[ContinuousAttribute(Start = Supplement.V19)]
 public abstract class Communication<TTransmitter> : Record424<TTransmitter> where TTransmitter : Transmitter
 {
     /// <inheritdoc cref="Terms.CommClass"/>

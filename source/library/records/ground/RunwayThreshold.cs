@@ -8,7 +8,7 @@ namespace Arinc424.Ground;
 <remarks>See section 4.1.10.1.</remarks>*/
 [Section('P', 'G', subsectionIndex: 13)]
 
-[Icao(11, 12), Port(7, 10), Identifier(14, 18), Continuous]
+[Icao(11, 12), Port(7, 10), Identifier(14, 18), ContinuousAttribute]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class RunwayThreshold : Fix

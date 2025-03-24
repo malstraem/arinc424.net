@@ -7,10 +7,10 @@ internal abstract class Scan<TOut, TSource> : IPipeline<TOut, TSource> where TOu
 {
     protected abstract bool Trigger(TSource current, TSource next);
 
-    /// <summary>
-    /// Creates an instance of <typeparamref name="TOut"/> saving diagnostics.
-    /// </summary>
-    /// <remarks>All overrides should dequeue <paramref name="sources"/>.</remarks>
+    /**<summary>
+    Creates an instance of <typeparamref name="TOut"/> saving diagnostics.
+    </summary>
+    <remarks>All overrides should dequeue <paramref name="sources"/>.</remarks>*/
     protected abstract Build<TOut> Build(Queue<Build<TSource>> sources, ref Queue<Diagnostic> diagnostics);
 
     public virtual Queue<Build<TOut>> Process(Queue<Build<TSource>> builds)

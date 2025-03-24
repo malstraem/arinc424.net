@@ -9,7 +9,7 @@ namespace Arinc424.Comms;
 <remarks>See section 4.1.14.1 and 4.2.5.1.</remarks>*/
 [Section('P', 'V', subsectionIndex: 13), Section('H', 'V', subsectionIndex: 13)]
 
-[Icao(11, 12), Continuous(26)]
+[Icao(11, 12), ContinuousAttribute(26)]
 
 [Pipeline<Sequence<PortCommunication, PortTransmitter>>(Start = Supplement.V19)]
 [Pipeline<CommWrapBeforeV19<PortCommunication, PortTransmitter>>(End = Supplement.V19)]

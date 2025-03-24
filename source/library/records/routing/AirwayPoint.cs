@@ -112,4 +112,7 @@ public class AirwayPoint : Record424, ISequenced
     /// <include file='Comments.xml' path="doc/member[@name='RvsmMaximum']/*"/>
     [Field(108, 110), Integer]
     public int MaxLevel { get; set; }
+
+    [Continue]
+    public AirwayNotes[]? Notes { get; set; }
 }

@@ -32,17 +32,21 @@ internal static class RecordBuilder<TSequence, TSub> where TSequence : Record424
 {
     internal static Build<TSequence, TSub> Build(Queue<Build<TSub>> subs, BuildInfo<TSequence> info, ref Queue<Diagnostic> diagnostics)
     {
+        int i = 0;
+
         var sub = subs.First();
 
-        TSequence record = new() { Source = sub.Record.Source! };
+        TSequence record = new()
+        {
+            Source = sub.Record.Source!,
+            Sequence = new TSub[subs.Count]
+        };
 
         Build<TSequence, TSub> build = new(record);
 
-        var sequence = build.Record.Sequence = [];
-
         while (subs.TryDequeue(out sub))
         {
-            sequence.Add(sub.Record);
+            record.Sequence[i] = sub.Record; i++;
 
             if (sub.Diagnostics is not null)
                 diagnostics.Pump(sub.Diagnostics);

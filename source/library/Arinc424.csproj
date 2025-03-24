@@ -18,7 +18,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
 
-    <Version>0.1.5</Version>
+    <Version>0.1.6</Version>
     <PackageId>arinc424</PackageId>
     <Product>ARINC 424 object model</Product>
 
@@ -40,5 +40,7 @@
     <ProjectReference Include="../../codegen/Arinc424.Generators.csproj" OutputItemType="analyzer" ReferenceOutputAssembly="false" />
 
     <None Include="../../docs/package.md" Pack="true" PackagePath="/readme.md" Visible="false" />
+
+    <InternalsVisibleTo Include="Arinc424.Tests;Arinc424.Bench;Arinc424.View" />
   </ItemGroup>
 </Project>

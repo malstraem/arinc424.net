@@ -2,10 +2,10 @@ namespace Arinc424;
 
 #pragma warning disable CS8618
 
-/// <summary>
-/// Simple result pattern to avoid try-catch. Allows to handle bad values while populating properties
-/// using <see cref="IStringConverter{TType}"/> implementations.
-/// </summary>
+/**<summary>
+Simple result pattern to avoid try-catch. Allows to handle bad values
+while populating properties using <see cref="IStringConverter{TType}"/> implementations.
+</summary>*/
 internal readonly ref struct Result<TType> where TType : notnull
 {
     internal readonly TType Value;

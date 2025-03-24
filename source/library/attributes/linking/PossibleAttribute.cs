@@ -1,8 +1,8 @@
 namespace Arinc424.Attributes;
 
-/// <summary>
-/// Specifies the possible types of related entities that are likely to be found.
-/// </summary>
+/**<summary>
+Specifies the possible types of related entities that are likely to be found.
+</summary>*/
 [AttributeUsage(AttributeTargets.Property)]
 internal abstract class PossibleAttribute(params Type[] types) : Attribute
 {

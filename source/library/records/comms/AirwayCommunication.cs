@@ -6,7 +6,7 @@ using Processing;
 <c>Enroute Communications</c> primary record sequence.
 </summary>
 <remarks>See section 4.1.23.1.</remarks>*/
-[Section('E', 'V'), Continuous(56)]
+[Section('E', 'V'), ContinuousAttribute(56)]
 
 [Pipeline<Sequence<AirwayCommunication, AirwayTransmitter>>(Start = Supplement.V19)]
 [Pipeline<CommWrapBeforeV19<AirwayCommunication, AirwayTransmitter>>(End = Supplement.V19)]

@@ -6,9 +6,7 @@ namespace Arinc424.Processing;
 
 internal class ControlledConcatenate(Supplement supplement) : IPipeline<ControlledSpace, ControlledVolume>
 {
-    /// <summary>
-    /// <see cref="Space{TVolume}.Name"/> range.
-    /// </summary>
+    /// <summary><see cref="Space{TVolume}.Name"/> range.</summary>
     private readonly Range range = 93..123;
 
     private readonly BuildInfo<ControlledSpace> info = new(supplement);
