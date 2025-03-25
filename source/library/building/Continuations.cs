@@ -6,11 +6,11 @@ namespace Arinc424.Building;
 
 internal class Continuations
 {
-    private int continuationIndex;
+    private int index;
 #pragma warning disable CS8618
     private Dictionary<ContinuationAttribute, Queue<string>> continuations;
 
-    private FrozenDictionary<ContinuationAttribute, RecordInfo> info;
+    private FrozenDictionary<ContinuationAttribute, ContinuationInfo> info;
 
     private FrozenDictionary<ContinuationAttribute, PropertyInfo> properties;
 #pragma warning restore CS8618
@@ -21,7 +21,7 @@ internal class Continuations
         if (continuous is null)
             return null;
 
-        Dictionary<ContinuationAttribute, RecordInfo> info = [];
+        Dictionary<ContinuationAttribute, ContinuationInfo> info = [];
         Dictionary<ContinuationAttribute, PropertyInfo> properties = [];
 
         Dictionary<ContinuationAttribute, Queue<string>> continuations = [];
@@ -33,7 +33,7 @@ internal class Continuations
 
             var continuation = property.PropertyType.GetElementType()!.GetCustomAttribute<ContinuationAttribute>()!;
 
-            info[continuation] = RecordInfo.Create((properties[continuation] = property).PropertyType.GetElementType()!, supplement);
+            info[continuation] = ContinuationInfo.Create((properties[continuation] = property).PropertyType.GetElementType()!, supplement);
 
             continuations[continuation] = [];
         }
@@ -42,7 +42,7 @@ internal class Continuations
             info = info.ToFrozenDictionary(),
             properties = properties.ToFrozenDictionary(),
             continuations = continuations,
-            continuationIndex = continuous.Index
+            index = continuous.Index
         };
     }
 
@@ -60,9 +60,9 @@ internal class Continuations
         return false;
     }
 
-    internal bool TryProcess(string @string)
+    internal bool TryHold(string @string)
     {
-        if (@string[continuationIndex] <= '1')
+        if (@string[index] <= '1')
             return false;
 
         if (TryMatch(@string, out var continuation))
@@ -71,7 +71,7 @@ internal class Continuations
         return true;
     }
 
-    internal void Set(Record424 record)
+    internal void Process(Record424 record)
     {
         foreach (var (continuation, @strings) in continuations)
         {

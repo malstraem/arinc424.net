@@ -6,8 +6,10 @@ using Arinc424.Linking;
 
 namespace Arinc424.Building;
 
-/// <summary>How an entity should be created and processed.</summary>
-internal abstract class RecordInfo(Composition composition, Continuations? continuations, SectionAttribute[] sections)
+/**<summary>
+How an entity (primary record) should be created and processed.
+</summary>*/
+internal abstract class RecordInfo(Composition composition, SectionAttribute[] sections)
 {
     internal static RecordInfo Create(Type type, Supplement supplement)
     {
@@ -22,9 +24,7 @@ internal abstract class RecordInfo(Composition composition, Continuations? conti
 
         var secitons = type.GetCustomAttributes<SectionAttribute>(false).ToArray(); // take only top level attributes
 
-        var info = (RecordInfo)constructor.Invoke([supplement, composition, continuations, secitons]);
-
-        return info;
+        return (RecordInfo)constructor.Invoke([supplement, composition, continuations, secitons]);
     }
 
     internal static RecordInfo Create<TRecord>(Supplement supplement) where TRecord : Record424, new() => Create(typeof(TRecord), supplement);
@@ -35,17 +35,17 @@ internal abstract class RecordInfo(Composition composition, Continuations? conti
 
     internal Composition Composition { get; } = composition;
 
-    internal Continuations? Continuations { get; } = continuations;
-
     internal Relationships? Relations { get; } = composition.Relations.FirstOrDefault(x => x.Type == composition.Top);
 
     internal SectionAttribute[] Sections { get; } = sections;
 }
 
 internal sealed class RecordInfo<TRecord>(Supplement supplement, Composition composition, Continuations? continuations, SectionAttribute[] sections)
-    : RecordInfo(composition, continuations, sections) where TRecord : Record424, new()
+    : RecordInfo(composition, sections) where TRecord : Record424, new()
 {
     private readonly BuildInfo<TRecord> info = new(supplement);
+
+    private readonly Continuations? continuations = continuations;
 
     internal override Queue<Build> Build(Queue<string> strings)
     {
@@ -66,12 +66,12 @@ internal sealed class RecordInfo<TRecord>(Supplement supplement, Composition com
 
         while (strings.TryDequeue(out @string))
         {
-            if (Continuations is not null && Continuations.TryProcess(@string))
+            if (continuations is not null && continuations.TryHold(@string))
                 continue;
 
             Build(@string);
 
-            Continuations?.Set(build.Record);
+            continuations?.Process(build.Record);
         }
         return Unsafe.As<Queue<Build>>(builds);
 

@@ -4,16 +4,16 @@ namespace Arinc424;
 Base continuation record with notes.
 </summary>
 <remarks>See section 5.91.</remarks>*/
-[Continuation]
-public class Notes : Record424
+public abstract class BaseContinuation : Record424
 {
     [Field(24, 92)]
-    public string Note { get; set; }
+    [Field<AirwayContinuation>(41, 109)]
+    public string? Notes { get; set; }
 }
 
+/**<summary>
+<c>Enroute Airways</c> continuation record.
+</summary>
+<remarks>See section 4.1.6.2.</remarks>*/
 [Continuation(40)]
-public class AirwayNotes : Record424
-{
-    [Field(41, 109)]
-    public string Note { get; set; }
-}
+public class AirwayContinuation : BaseContinuation;

@@ -114,5 +114,5 @@ public class AirwayPoint : Record424, ISequenced
     public int MaxLevel { get; set; }
 
     [Continue]
-    public AirwayNotes[]? Notes { get; set; }
+    public AirwayContinuation[]? Notes { get; set; }
 }

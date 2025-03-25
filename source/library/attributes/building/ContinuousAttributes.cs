@@ -14,7 +14,7 @@ Specifies the index of <c>Continuation Record Number (CONT NR)</c> within an <c>
 internal class ContinuousAttribute(int index = 22) : IndexAttribute(index);
 
 /**<summary>
-Specifies index and character <c>Application Type</c> to define continuation record type.
+Specifies <c>Application Type</c> index and character to define continuation record type. Default is 23 and 'A'.
 </summary>
 <remarks>See section 5.91.</remarks>*/
 [AttributeUsage(AttributeTargets.Class)]
