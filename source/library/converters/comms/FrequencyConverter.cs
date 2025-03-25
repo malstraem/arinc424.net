@@ -2,9 +2,7 @@ namespace Arinc424.Converters;
 
 using static System.Globalization.NumberStyles;
 
-/// <summary>
-/// Converter for <see cref="Frequency"/> since supplement 19.
-/// </summary>
+/// <summary>Converter for <see cref="Frequency"/> since supplement 19.</summary>
 internal abstract class FrequencyConverterV19 : IStringConverter<Frequency>
 {
     public static Result<Frequency> Convert(ReadOnlySpan<char> @string)

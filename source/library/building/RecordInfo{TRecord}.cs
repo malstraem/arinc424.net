@@ -6,27 +6,28 @@ using Arinc424.Linking;
 
 namespace Arinc424.Building;
 
-/// <summary>
-/// How an entity should be created and processed.
-/// </summary>
+/**<summary>
+How an entity (primary record) should be created and processed.
+</summary>*/
 internal abstract class RecordInfo(Composition composition, SectionAttribute[] sections)
 {
-    internal static RecordInfo Create<TRecord>(Supplement supplement) where TRecord : Record424, new()
+    internal static RecordInfo Create(Type type, Supplement supplement)
     {
-        var type = typeof(TRecord);
-
         var composition = type.GetComposition(supplement);
 
+        var continuations = Continuations.Create(composition, supplement);
+
+        // take only low level composition type
         var constructor = typeof(RecordInfo<>)
             .MakeGenericType(composition.Low)
-                .GetConstructor([typeof(Supplement), typeof(Composition), typeof(SectionAttribute[])]);
+                .GetConstructor([typeof(Supplement), typeof(Composition), typeof(Continuations), typeof(SectionAttribute[])])!;
 
         var secitons = type.GetCustomAttributes<SectionAttribute>(false).ToArray(); // take only top level attributes
 
-        var info = (RecordInfo)constructor!.Invoke([supplement, composition, secitons]);
-
-        return info;
+        return (RecordInfo)constructor.Invoke([supplement, composition, continuations, secitons]);
     }
+
+    internal static RecordInfo Create<TRecord>(Supplement supplement) where TRecord : Record424, new() => Create(typeof(TRecord), supplement);
 
     internal abstract Queue<Build> Build(Queue<string> strings);
 
@@ -39,12 +40,12 @@ internal abstract class RecordInfo(Composition composition, SectionAttribute[] s
     internal SectionAttribute[] Sections { get; } = sections;
 }
 
-internal sealed class RecordInfo<TRecord>(Supplement supplement, Composition composition, SectionAttribute[] sections)
+internal sealed class RecordInfo<TRecord>(Supplement supplement, Composition composition, Continuations? continuations, SectionAttribute[] sections)
     : RecordInfo(composition, sections) where TRecord : Record424, new()
 {
-    private readonly int? continuationIndex = composition.Top.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement)?.Index;
-
     private readonly BuildInfo<TRecord> info = new(supplement);
+
+    private readonly Continuations? continuations = continuations;
 
     internal override Queue<Build> Build(Queue<string> strings)
     {
@@ -52,13 +53,32 @@ internal sealed class RecordInfo<TRecord>(Supplement supplement, Composition com
 
         Queue<Build<TRecord>> builds = new(strings.Count);
 
-        while (strings.TryDequeue(out string? @string))
+        Build<TRecord> build;
+
+        if (strings.TryDequeue(out string? @string))
         {
-            if (continuationIndex is not null && @string[continuationIndex.Value] is not '0' and not '1')
+            Build(@string);
+        }
+        else
+        {
+            return Unsafe.As<Queue<Build>>(builds);
+        }
+
+        while (strings.TryDequeue(out @string))
+        {
+            if (continuations is not null && continuations.TryHold(@string))
                 continue;
 
-            builds.Enqueue(RecordBuilder<TRecord>.Build(@string, info, ref diagnostics));
+            Build(@string);
+
+            continuations?.Process(build.Record);
         }
         return Unsafe.As<Queue<Build>>(builds);
+
+        void Build(string @string)
+        {
+            build = RecordBuilder<TRecord>.Build(@string, info, ref diagnostics);
+            builds.Enqueue(build);
+        }
     }
 }

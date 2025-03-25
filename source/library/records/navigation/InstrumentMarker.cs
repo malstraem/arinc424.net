@@ -5,10 +5,10 @@ namespace Arinc424.Navigation;
 using Terms;
 
 /**<summary>
-  <c>Airport and Heliport Localizer Marker</c> primary record.
+<c>Airport and Heliport Localizer Marker</c> primary record.
 </summary>
 <remarks>See section 4.1.13.1.</remarks>*/
-[Section('P', 'M', subsectionIndex: 13), Icao(11, 12), Port(7, 10), Continuous]
+[Section('P', 'M', subIndex: 13), Icao(11, 12), Port(7, 10), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
 public class InstrumentMarker : Fix
@@ -30,6 +30,7 @@ public class InstrumentMarker : Fix
     [Identifier(28, 32)]
     public RunwayThreshold Threshold { get; set; }
 
+    /// <include file='Comments.xml' path="doc/member[@name='MinorAxis']/*"/>
     [Field(52, 55), Float(10)]
     public float Bearing { get; set; }
 
@@ -55,6 +56,10 @@ public class InstrumentMarker : Fix
     [Field(80, 84), Obsolete("need more section 5.93 analysis")]
     public string? Facility { get; set; }
 
+    /**<summary>
+    <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field.
+    </summary>
+    <remarks>See section 5.33.</remarks>*/
     [Field(85, 88)]
     public string? LocatorIdentifier { get; set; }
 
@@ -62,11 +67,7 @@ public class InstrumentMarker : Fix
     [Field(91, 95), Variation]
     public float Variation { get; set; }
 
-    /**<summary>
-      <c>Facility Elevation (FAC ELEV)</c> field.
-    </summary>
-    <value>Feet.</value>
-    <remarks>See section 5.92.</remarks>*/
+    /// <include file='Comments.xml' path="doc/member[@name='FacElev']/*"/>
     [Field(98, 102), Integer]
     public int Elevation { get; set; }
 }

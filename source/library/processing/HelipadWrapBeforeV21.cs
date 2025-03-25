@@ -4,15 +4,13 @@ using Arinc424.Ground;
 
 namespace Arinc424.Processing;
 
-/// <summary>
-/// <see cref="Helipad"/> record did not exist prior to supplement 21, so this pipeline creates <see cref="Heliport">heliports</see>
-/// with associated helipads (only have identifier).
-/// </summary>
+/**<summary>
+<see cref="Helipad"/> record did not exist prior to supplement 21, so this pipeline creates <see cref="Heliport">heliports</see>
+with associated helipads (only have identifier).
+</summary>*/
 internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport>
 {
-    /// <summary>
-    /// Heliport identifer range.
-    /// </summary>
+    /// <summary>Heliport identifer range.</summary>
     private readonly Range range = 7..10;
 
     protected override bool Trigger(Heliport current, Heliport next) => current.Source![range] != next.Source![range];

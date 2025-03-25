@@ -13,7 +13,7 @@ internal abstract class DecodeAttribute<TType> : DecodeAttribute where TType : n
     internal abstract Result<TType> Convert(ReadOnlySpan<char> @string);
 }
 
-/** <inheritdoc/>
+/**<inheritdoc/>
 <typeparam name="TConverter">Associated <see cref="IStringConverter{TType}"/>.</typeparam>
 <typeparam name="TType"><inheritdoc/></typeparam>*/
 [AttributeUsage(AttributeTargets.Struct

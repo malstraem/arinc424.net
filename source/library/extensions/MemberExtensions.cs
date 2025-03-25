@@ -69,7 +69,7 @@ internal static class MemberExtensions
             if (property is null)
                 return;
 
-            Fill(property.PropertyType.GetGenericArguments().First(), supplement);
+            Fill(property.PropertyType.GetElementType()!, supplement);
         }
     }
 }

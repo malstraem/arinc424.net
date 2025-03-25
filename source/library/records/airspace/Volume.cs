@@ -1,8 +1,8 @@
 namespace Arinc424.Airspace;
 
-/// <summary>
-/// Space volume with low and up limits.
-/// </summary>
+/**<summary>
+Space volume with low and up limits.
+</summary>*/
 [Icao(7, 8)]
 public abstract class Volume : Record424<BoundaryPoint>, IMultiple
 {
@@ -17,9 +17,7 @@ public abstract class Volume : Record424<BoundaryPoint>, IMultiple
     [Character(27)]
     public TimeCode TimeCode { get; set; }
 
-    /// <summary>
-    /// <c>NOTAM</c> character.
-    /// </summary>
+    /// <summary><c>NOTAM</c> character.</summary>
     /// <remarks>See section 5.132.</remarks>
     [Character(28)]
     public char Notam { get; set; }

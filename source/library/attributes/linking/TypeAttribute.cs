@@ -1,6 +1,8 @@
 namespace Arinc424.Attributes;
 
-/// <summary>Specifies indexes of section and subsection code to define related entity type.</summary>
+/**<summary>
+Specifies indexes of section and subsection code to define related entity type.
+</summary>*/
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 internal class TypeAttribute(int sectionIndex, int subsectionIndex) : SupplementAttribute
 {

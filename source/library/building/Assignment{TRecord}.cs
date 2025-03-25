@@ -6,9 +6,9 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Building;
 
-/// <summary>
-/// Assignment operation to set <see cref="Record424"/> property.
-/// </summary>
+/**<summary>
+Assignment operation to set <see cref="Record424"/> property.
+</summary>*/
 internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord : Record424
 {
     protected PropertyInfo property = property;

@@ -7,7 +7,7 @@ namespace Arinc424.Comms;
 <c>Airport and Heliport Communications</c> primary record sequence.
 </summary>
 <remarks>See section 4.1.14.1 and 4.2.5.1.</remarks>*/
-[Section('P', 'V', subsectionIndex: 13), Section('H', 'V', subsectionIndex: 13)]
+[Section('P', 'V', subIndex: 13), Section('H', 'V', subIndex: 13)]
 
 [Icao(11, 12), Continuous(26)]
 

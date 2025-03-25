@@ -6,9 +6,9 @@ using Arinc424.Diagnostics;
 
 namespace Arinc424.Linking;
 
-/// <summary>
-/// Container with records that have unique keys.
-/// </summary>
+/**<summary>
+Container with records that have unique keys.
+</summary>*/
 internal class Unique
 {
     private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
