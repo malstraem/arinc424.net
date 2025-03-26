@@ -66,12 +66,12 @@ internal sealed class RecordInfo<TRecord>(Supplement supplement, Composition com
 
         while (strings.TryDequeue(out @string))
         {
-            if (continuations is not null && continuations.TryHold(@string))
+            if (continuations is null || !continuations.TryHold(@string))
+            {
+                Build(@string);
                 continue;
-
-            Build(@string);
-
-            continuations?.Process(build.Record);
+            }
+            continuations.Process(build.Record);
         }
         return Unsafe.As<Queue<Build>>(builds);
 
