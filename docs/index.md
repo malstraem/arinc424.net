@@ -49,7 +49,7 @@ In practice, this allows you to explore and manipulate the tree-like representat
 - [Gates](api/Arinc424.Ground.Gate.yml)
 - [Terminal Waypoint](api/Arinc424.Waypoints.TerminalWaypoint.yml)
 - [SID](api/Arinc424.Procedures.Departure.yml)/[STAR](api/Arinc424.Procedures.Arrival.yml)/[Approach](api/Arinc424.Procedures.Approach.yml)
-- [Runways](api/Arinc424.Ground.Runway.yml)
+- [Runways](api/Arinc424.Ground.RunwayThreshold.yml)
 - [Localizer/Glide Slope](api/Arinc424.Navigation.InstrumentLanding.yml)
 - [TAA](api/Arinc424.Ground.ArrivalAltitude.yml)
 - [MLS](api/Arinc424.Navigation.MicrowaveLanding.yml)

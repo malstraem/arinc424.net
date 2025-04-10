@@ -24,5 +24,4 @@ jobs:
         path: |
           docs
           artifacts/bin/Arinc424
-          artifacts/bin/Arinc424.Docs
     runs-on: ubuntu-latest
