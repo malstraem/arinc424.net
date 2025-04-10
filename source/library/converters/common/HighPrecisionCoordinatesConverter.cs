@@ -2,9 +2,9 @@ namespace Arinc424.Converters;
 
 using static System.Globalization.NumberStyles;
 
-/// <summary>
-/// See section 5.267 and 5.268.
-/// </summary>
+/**<summary>
+See section 5.267 and 5.268.
+</summary>*/
 internal abstract class HighPrecisionCoordinatesConverter : IStringConverter<Coordinates>
 {
     public static Result<Coordinates> Convert(ReadOnlySpan<char> @string)

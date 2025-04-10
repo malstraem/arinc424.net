@@ -1,9 +1,9 @@
 namespace Arinc424.Airspace.Terms;
 
-/// <summary>
-/// <c>Restrictive Airspace Type (REST TYPE)</c> character.
-/// </summary>
-/// <remarks>See section 5.128.</remarks>
+/**<summary>
+<c>Restrictive Airspace Type (REST TYPE)</c> character.
+</summary>
+<remarks>See section 5.128.</remarks>*/
 [Char, Transform<RestrictiveTypeConverter, RestrictiveType>]
 [Description("Restrictive Airspace Type (REST TYPE)")]
 public enum RestrictiveType : byte

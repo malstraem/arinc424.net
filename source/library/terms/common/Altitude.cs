@@ -1,13 +1,14 @@
 namespace Arinc424;
 
-/// <summary>
-/// Various altitudes according to the specification.
-/// </summary>
+/**<summary>
+Various altitudes according to the specification.
+</summary>*/
 [Decode<AltitudeConverter, Altitude>]
+[Decode<ThresholdHeightConverter, Altitude, Ground.PathPoint>]
 [DebuggerDisplay($"{{{nameof(Value)}}}, {{{nameof(Unit)}}}")]
-public readonly struct Altitude(int value, AltitudeUnit unit)
+public readonly struct Altitude(float value, AltitudeUnit unit)
 {
-    public int Value { get; } = value;
+    public float Value { get; } = value;
 
     public AltitudeUnit Unit { get; } = unit;
 

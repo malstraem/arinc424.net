@@ -2,7 +2,9 @@ using Arinc424.Procedures.Terms;
 
 namespace Arinc424.Converters;
 
-/// <summary>Supplement 23 introduce breaking changes by replacing the meaning of 'Y'.</summary>
+/**<summary>
+Supplement 23 introduce breaking changes by replacing the meaning of 'Y'.
+</summary>*/
 internal class ApproachTypeBeforeV23 : ICharConverter<ApproachType>
 {
     public static bool TryConvert(char @char, out ApproachType value)

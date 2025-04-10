@@ -2,9 +2,9 @@ namespace Arinc424.Converters;
 
 using static System.Globalization.NumberStyles;
 
-/// <summary>
-/// See section 5.141 and 5.142.
-/// </summary>
+/**<summary>
+See section 5.141 and 5.142.
+</summary>*/
 internal abstract class StartingCoordinatesConverter : IStringConverter<Coordinates>
 {
     public static Result<Coordinates> Convert(ReadOnlySpan<char> @string)

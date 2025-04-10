@@ -1,40 +1,41 @@
 namespace Arinc424.Navigation.Terms;
 
-/// <summary>
-/// First two characters of <c>NAVAID Class (CLASS)</c> field, specific to <see cref="Nondirectional"/>.
-/// </summary>
-/// <remarks>See section 5.35.</remarks>
+/**<summary>
+First two characters of <c>NAVAID Class (CLASS)</c> field,
+specific to <see cref="Nondirectional"/>.
+</summary>
+<remarks>See section 5.35.</remarks>*/
 [String, Flags, Decode<NondirectTypeConverter, NondirectType>]
 [Description("NAVAID Class (CLASS) - Facility")]
 public enum NondirectType : byte
 {
     Unknown = 0,
-    /// <summary>
-    /// NDB.
-    /// </summary>
+    /**<summary>
+    NDB.
+    </summary>*/
     [Map('H')] Nondirect = 1,
-    /// <summary>
-    /// H-SAB, providing automatic transcribed weather service.
-    /// </summary>
+    /**<summary>
+    H-SAB, providing automatic transcribed weather service.
+    </summary>*/
     [Map('S')] WithWeather = 1 << 1,
-    /// <summary>
-    /// Marine Beacon.
-    /// </summary>
+    /**<summary>
+    Marine Beacon.
+    </summary>*/
     [Map('M')] Marine = 1 << 2,
-    /// <summary>
-    /// Inner Marker.
-    /// </summary>
+    /**<summary>
+    Inner Marker.
+    </summary>*/
     [Offset, Map('I')] Inner = 1 << 3,
-    /// <summary>
-    /// Middle Marker.
-    /// </summary>
+    /**<summary>
+    Middle Marker.
+    </summary>*/
     [Map('M')] Middle = 1 << 4,
-    /// <summary>
-    /// Outer Marker.
-    /// </summary>
+    /**<summary>
+    Outer Marker.
+    </summary>*/
     [Map('O')] Outer = 1 << 5,
-    /// <summary>
-    /// Back Marker.
-    /// </summary>
+    /**<summary>
+    Back Marker.
+    </summary>*/
     [Map('C')] Back = 1 << 6
 }

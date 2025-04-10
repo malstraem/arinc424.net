@@ -1,9 +1,9 @@
 namespace Arinc424.Converters;
 
-/// <summary>
-/// Converter for <c>Minimum Off-route Altitude</c>.
-/// </summary>
-/// <remarks>See section 5.143.</remarks>
+/**<summary>
+Converter for <c>Minimum Off-route Altitude</c>.
+</summary>
+<remarks>See section 5.143.</remarks>*/
 internal abstract class MinimumAltitudeConverter : IStringConverter<Altitude>
 {
     public static Result<Altitude> Convert(ReadOnlySpan<char> @string)

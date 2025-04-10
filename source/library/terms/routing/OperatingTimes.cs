@@ -1,9 +1,9 @@
 namespace Arinc424.Routing.Terms;
 
-/// <summary>
-/// <c>Special Activity Area Operating Times</c> field.
-/// </summary>
-/// <remarks>See section 5.282.</remarks>
+/**<summary>
+<c>Special Activity Area Operating Times</c> field.
+</summary>
+<remarks>See section 5.282.</remarks>*/
 [String, Flags, Decode<OperatingTimesConverter, OperatingTimes>]
 [Description("Special Activity Area Operating Times")]
 public enum OperatingTimes : ushort

@@ -1,12 +1,11 @@
-using Arinc424.Ground.Terms;
-
 namespace Arinc424.Converters;
 
 using static System.Globalization.NumberStyles;
 
-internal abstract class ThresholdHeightConverter : IStringConverter<ThresholdHeight>
+/// <inheritdoc cref="Ground.PathPoint.ThresholdHeight"/>
+internal abstract class ThresholdHeightConverter : IStringConverter<Altitude>
 {
-    public static Result<ThresholdHeight> Convert(ReadOnlySpan<char> @string)
+    public static Result<Altitude> Convert(ReadOnlySpan<char> @string)
     {
         AltitudeUnit unit;
 
@@ -33,6 +32,6 @@ internal abstract class ThresholdHeightConverter : IStringConverter<ThresholdHei
         {
             return @string[6..6];
         }
-        return new ThresholdHeight(height, unit);
+        return new Altitude(height, unit);
     }
 }

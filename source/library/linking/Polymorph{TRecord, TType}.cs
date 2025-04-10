@@ -10,7 +10,7 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
         where TRecord : Record424
         where TType : class
 {
-    private (int Section, int Subsection) indexes = (typeAttribute.SectionIndex, typeAttribute.SubsectionIndex);
+    private readonly TypeAttribute typeAttribute = typeAttribute;
 
     private bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type, Section)? reference, out Diagnostic? diagnostic)
     {
@@ -19,14 +19,11 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
 
         string @string = record.Source!;
 
-        var (index, subindex) = indexes;
+        var (index, subindex) = typeAttribute;
 
-        char sectionChar = @string[index];
-        char subsectionChar = @string[subindex];
+        Section section = new(@string[index], @string[subindex]);
 
-        Section section = new(sectionChar, subsectionChar);
-
-        if (char.IsWhiteSpace(sectionChar) && char.IsWhiteSpace(subsectionChar))
+        if (section.IsWhiteSpace())
             return false;
 
         if (!meta.Types.TryGetValue(section, out var type))
@@ -34,7 +31,6 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
             diagnostic = new InvalidSection(record, property, index, subindex);
             return false;
         }
-
         var primary = meta.TypeInfo[type].Primary;
 
         if (primary is null)
@@ -42,6 +38,7 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
             diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoPrimary);
             return false;
         }
+
         if (foreign.TryGetKey(@string, primary, out string? key))
         {
             reference = (key, type, section);

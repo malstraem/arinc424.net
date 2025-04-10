@@ -72,9 +72,12 @@ public abstract class PathPoint : Fix
     [Field(99, 102), Integer]
     public int LengthOffset { get; set; }
 
-    /// <inheritdoc cref="Terms.ThresholdHeight"/>
+    /**<summary>
+    <c>Path Point TCH</c> and <c>TCH Units Indicator</c> fields.
+    </summary>
+    <remarks>See section 5.265 and 5.266.</remarks>*/
     [Field(103, 109)]
-    public ThresholdHeight ThresholdHeight { get; set; }
+    public Altitude ThresholdHeight { get; set; }
 
     /**<summary>
     <c>Final Approach Segment Data CRC Remainder (FAS CRC)</c> field.

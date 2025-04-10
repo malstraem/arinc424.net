@@ -1,9 +1,9 @@
 namespace Arinc424.Routing.Terms;
 
-/// <summary>
-/// <c>Boundary Code (BDY CODE)</c> character.
-/// </summary>
-/// <remarks>See section 5.18.</remarks>
+/**<summary>
+<c>Boundary Code (BDY CODE)</c> character.
+</summary>
+<remarks>See section 5.18.</remarks>*/
 [Char, Transform<BoundaryCodeConverter, BoundaryCode>]
 [Description("Boundary Code (BDY CODE)")]
 public enum BoundaryCode : byte

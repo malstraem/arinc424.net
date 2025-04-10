@@ -1,9 +1,9 @@
 namespace Arinc424.Airspace.Terms;
 
-/// <summary>
-/// <c>Controlled Airspace Classification (ARSP CLASS)</c> character.
-/// </summary>
-/// <remarks>See section 5.215.</remarks>
+/**<summary>
+<c>Controlled Airspace Classification (ARSP CLASS)</c> character.
+</summary>
+<remarks>See section 5.215.</remarks>*/
 [Char, Transform<AirspaceClassConverter, AirspaceClass>]
 [Description("Controlled Airspace Classification (ARSP CLASS)")]
 public enum AirspaceClass : byte

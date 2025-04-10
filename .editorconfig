@@ -39,23 +39,31 @@ dotnet_remove_unnecessary_suppression_exclusions = true:warning
 #                                            Naming                                            #
 # https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/style-rules/naming-rules #
 #==============================================================================================#
-dotnet_naming_symbols.private_fields.applicable_kinds = field
-dotnet_naming_symbols.private_fields.applicable_accessibilities = private, protected, private_protected, protected_internal
-
-dotnet_naming_style.private_fields_case.capitalization = camel_case
-
-dotnet_naming_rule.private.symbols = private_fields
-dotnet_naming_rule.private.style = private_fields_case
-dotnet_naming_rule.private.severity = error
-
-dotnet_naming_symbols.public_members.applicable_kinds = field, property
+dotnet_naming_symbols.public_members.applicable_kinds = field
 dotnet_naming_symbols.public_members.applicable_accessibilities = public
 
 dotnet_naming_style.public_members_case.capitalization = pascal_case
 
-dotnet_naming_rule.public.symbols = public_members
 dotnet_naming_rule.public.style = public_members_case
+dotnet_naming_rule.public.symbols = public_members
 dotnet_naming_rule.public.severity = error
+
+dotnet_naming_symbols.private_members.applicable_kinds = field, parameter, local
+dotnet_naming_symbols.private_members.applicable_accessibilities = private, protected, private_protected, protected_internal
+
+dotnet_naming_style.private_members_case.capitalization = camel_case
+
+dotnet_naming_rule.private.symbols = private_members
+dotnet_naming_rule.private.style = private_members_case
+dotnet_naming_rule.private.severity = error
+
+dotnet_naming_symbols.consts.applicable_kinds = *
+dotnet_naming_symbols.consts.applicable_accessibilities = *
+dotnet_naming_symbols.consts.required_modifiers = const
+
+dotnet_naming_rule.consts.symbols = consts
+dotnet_naming_rule.consts.style = public_members_case
+dotnet_naming_rule.consts.severity = error
 
 #==================================================================================#
 #                                       Style                                      #
@@ -147,6 +155,7 @@ csharp_prefer_braces = when_multiline:warning
 csharp_prefer_static_local_function = true:warning
 csharp_prefer_simple_using_statement = true:warning
 csharp_prefer_simple_default_expression = true:warning
+csharp_prefer_system_threading_lock = true:warning
 
 #===========================================================================================================#
 #                                               C# formatting                                               #

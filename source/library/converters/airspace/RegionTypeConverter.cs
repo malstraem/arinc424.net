@@ -1,5 +1,3 @@
-using System.Runtime.CompilerServices;
-
 using Arinc424.Airspace.Terms;
 
 namespace Arinc424.Converters;

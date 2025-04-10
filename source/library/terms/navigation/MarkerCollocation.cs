@@ -1,9 +1,10 @@
 namespace Arinc424.Navigation.Terms;
 
-/// <summary>
-/// Fifth character of <c>NAVAID Class (CLASS)</c> field, specific to <see cref="InstrumentMarker"/>.
-/// </summary>
-/// <remarks>See section 5.35.</remarks>
+/**<summary>
+Fifth character of <c>NAVAID Class (CLASS)</c> field
+specific to <see cref="InstrumentMarker"/>.
+</summary>
+<remarks>See section 5.35.</remarks>*/
 [Char, Transform<MarkerCollocationConverter, MarkerCollocation>]
 [Description("NAVAID Class (CLASS) - Collocation")]
 public enum MarkerCollocation : byte
@@ -11,12 +12,12 @@ public enum MarkerCollocation : byte
     Unknown,
     /// <inheritdoc cref="NondirectCollocation.BeatFrequencyOscillator"/>
     [Map('B')] BeatFrequencyOscillator,
-    /// <summary>
-    /// The latitude/longitude position of the Locator and Marker are identical.
-    /// </summary>
+    /**<summary>
+    The latitude/longitude position of the Locator and Marker are identical.
+    </summary>*/
     [Map('A')] Collocated,
-    /// <summary>
-    /// The latitude/longitude position of Locator and Marker are not identical.
-    /// </summary>
+    /**<summary>
+    The latitude/longitude position of Locator and Marker are not identical.
+    </summary>*/
     [Map('N')] Non
 }

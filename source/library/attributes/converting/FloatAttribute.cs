@@ -9,9 +9,9 @@ and will be parsed and divided by <paramref name="divisor"/> value.
 [AttributeUsage(AttributeTargets.Property)]
 internal sealed class FloatAttribute(float divisor) : DecodeAttribute<float>
 {
-    private const System.Globalization.NumberStyles style = None | AllowLeadingSign | AllowLeadingWhite;
+    private const System.Globalization.NumberStyles Style = None | AllowLeadingSign | AllowLeadingWhite;
 
-    internal override Result<float> Convert(ReadOnlySpan<char> @string) => float.TryParse(@string, style, null, out float value)
+    internal override Result<float> Convert(ReadOnlySpan<char> @string) => float.TryParse(@string, Style, null, out float value)
         ? value / divisor
         : @string;
 }

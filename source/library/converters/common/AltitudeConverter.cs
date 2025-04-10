@@ -26,9 +26,9 @@ internal abstract class AltitudeConverter : IStringConverter<Altitude>
     };
 }
 
-/// <summary>
-/// Converter for <see cref="Comms.Transmitter.Altitude"/> and <see cref="Comms.Transmitter.Altitude2"/> since supplement 19.
-/// </summary>
+/**<summary>
+Converter for <see cref="Comms.Transmitter.Altitude"/> and <see cref="Comms.Transmitter.Altitude2"/> since supplement 19.
+</summary>*/
 internal abstract class CommAltitudeConverter : IStringConverter<Altitude>
 {
     public static Result<Altitude> Convert(ReadOnlySpan<char> @string) => int.TryParse(@string, out int value)

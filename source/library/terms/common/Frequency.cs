@@ -1,7 +1,7 @@
 namespace Arinc424;
 
 /**<summary>
-  <c>Communications Frequency (COMM FREQ)</c> field.
+<c>Communications Frequency (COMM FREQ)</c> field.
 </summary>
 <remarks>See section 5.103.</remarks>*/
 [Decode<FrequencyConverter, Frequency>]
