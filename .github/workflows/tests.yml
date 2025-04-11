@@ -16,7 +16,7 @@ jobs:
           9.x
     - name: Build & Test
       run: |
-        dotnet build -c release --tl
+        dotnet build -c release
         dotnet test -c release --no-build
     - uses: actions/upload-artifact@v4
       with:
