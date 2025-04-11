@@ -29,7 +29,7 @@ jobs:
           dotnet-version: 9.x
       - name: Generate Pages
         run: |
-          dotnet tool install docfx
+          dotnet tool install -g docfx
           docfx docs/docfx.json
       - uses: actions/upload-pages-artifact@v3
         with:
