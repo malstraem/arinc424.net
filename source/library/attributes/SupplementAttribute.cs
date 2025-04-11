@@ -15,6 +15,6 @@ internal abstract class SupplementAttribute : Attribute
     Defines that a type matches the attribute.
     </summary>
     <typeparam name="TMatch">Type to match.</typeparam>
-    <remarks><see langword="false"/> is forced cause non target attribute will be come by default.</remarks>*/
+    <remarks><see langword="false"/> is forced by default cause non target attribute will be come first.</remarks>*/
     internal virtual bool IsMatch<TMatch>() where TMatch : Record424 => false;
 }

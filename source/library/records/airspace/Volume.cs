@@ -30,11 +30,11 @@ public abstract class Volume : Record424<BoundaryPoint>, IMultiple
     [Character(87)]
     public LimitUnit LowUnit { get; set; }
 
-    /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>>
+    /// <include file='Comments.xml' path="doc/member[@name='Limit']/*"/>
     [Field(88, 92)]
     public Altitude Up { get; set; }
 
-    /// <inheritdoc cref="LimitUnit"/>s>
+    /// <inheritdoc cref="LimitUnit"/>
     [Character(93)]
     public LimitUnit UpUnit { get; set; }
 }

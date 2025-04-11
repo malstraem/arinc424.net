@@ -1,9 +1,8 @@
 using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Jobs;
 
 namespace Arinc424.Bench;
 
-[SimpleJob(RuntimeMoniker.Net90)]
+[InProcess]
 public class LoadBench
 {
     private readonly string[] strings = File.ReadAllLines("data/unknown");

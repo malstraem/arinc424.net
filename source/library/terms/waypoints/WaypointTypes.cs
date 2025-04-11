@@ -16,27 +16,27 @@ public enum WaypointTypes : ulong
     /**<summary>
     Combined Named Intersection and/or named DME Fix and RNAV Waypoint.
     </summary>*/
-    [Map('C')] CombinedIntersection = 1ul << 1,
+    [Map('C')] Combined = 1ul << 1,
     /**<summary>
     Unnamed, Charted Intersection and/or Unnamed DME Fix.
     </summary>*/
-    [Map('I')] ChartedIntersection = 1ul << 2,
+    [Map('I')] Charted = 1ul << 2,
     /**<summary>
     Middle or Inner Marker as Waypoint.
     </summary>*/
-    [Map('M')] MiddleInnerMarker = 1ul << 3,
+    [Map('M')] MiddleInner = 1ul << 3,
     /**<summary>
     NDB or Terminal NDB Navaid as Waypoint.
     </summary>*/
-    [Map('N')] NondirectionalBeacon = 1ul << 4,
+    [Map('N')] Nondirect = 1ul << 4,
     /**<summary>
     Outer or Back Marker as Waypoint.
     </summary>*/
-    [Map('O')] OuterBackMarker = 1ul << 5,
+    [Map('O')] OuterBack = 1ul << 5,
     /**<summary>
     Named Intersection and/or Named DME Fix.
     </summary>*/
-    [Map('R')] NamedDmeIntersection = 1ul << 6,
+    [Map('R')] IntersectionEquipment = 1ul << 6,
     /**<summary>
     Uncharted Airway Intersection.
     </summary>*/
@@ -44,7 +44,7 @@ public enum WaypointTypes : ulong
     /**<summary>
     VFR Waypoint.
     </summary>*/
-    [Map('V')] VisualFlightRule = 1ul << 8,
+    [Map('V')] Visual = 1ul << 8,
     /**<summary>
     RNAV Waypoint.
     </summary>*/
@@ -52,47 +52,47 @@ public enum WaypointTypes : ulong
     /**<summary>
     Final Approach Fix.
     </summary>*/
-    [Offset, Map('A')] FinalApproach = 1ul << 10,
+    [Offset, Map('A')] Final = 1ul << 10,
     /**<summary>
     Initial Approach Fix and Final Approach Fix.
     </summary>*/
-    [Map('B')] InitialFinalApproach = 1ul << 11,
+    [Map('B')] InitialFinal = 1ul << 11,
     /**<summary>
     Final Approach Course Fix.
     </summary>*/
-    [Map('C')] FinalCourseApproach = 1ul << 12,
+    [Map('C')] FinalCourse = 1ul << 12,
     /**<summary>
     Intermediate Approach Fix.
     </summary>*/
-    [Map('D')] IntermediateApproach = 1ul << 13,
+    [Map('D')] Intermediate = 1ul << 13,
     /**<summary>
     Off-Route Intersection and/or Off Route DME Fix.
     </summary>*/
-    [Map('F')] OffRouteIntersection = 1ul << 14,
+    [Map('F')] OffRoute = 1ul << 14,
     /**<summary>
     Off-Route intersection in the FAA National Reference System.
     </summary>*/
-    [Map('E')] OffRouteIntersectionFaa = OffRouteIntersection,
+    [Map('E')] OffRouteFaa = OffRoute,
     /**<summary>
     Initial Approach Fix.
     </summary>*/
-    [Map('I')] InitialApproach = 1ul << 15,
+    [Map('I')] Initial = 1ul << 15,
     /**<summary>
     Final Approach Course Fix and Initial Approach Fix.
     </summary>*/
-    [Map('K')] FinalCourseInitialApproach = 1ul << 16,
+    [Map('K')] FinalCourseInitial = 1ul << 16,
     /**<summary>
     Final Approach Course Fix and Intermediate Approach Fix.
     </summary>*/
-    [Map('L')] FinalCourseIntermediateApproach = 1ul << 17,
+    [Map('L')] FinalCourseIntermediate = 1ul << 17,
     /**<summary>
     Missed Approach Fix.
     </summary>*/
-    [Map('M')] MissedApproach = 1ul << 18,
+    [Map('M')] Missed = 1ul << 18,
     /**<summary>
     Initial Approach Fix and Missed Approach Fix.
     </summary>*/
-    [Map('N')] InitialMissedApproach = 1ul << 19,
+    [Map('N')] InitialMissed = 1ul << 19,
     /**<summary>
     Oceanic Gateway Fix.
     </summary>*/
@@ -140,6 +140,5 @@ public enum WaypointTypes : ulong
     /**<summary>
     Source Provided Enroute Waypoint.
     </summary>*/
-    [Map('G')] Enroute = 1ul << 31,
-    Off = 1ul << 32
+    [Map('G')] Enroute = 1ul << 31
 }

@@ -1,0 +1,46 @@
+<Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="NoParallel" />
+    <BuildType Name="Release" />
+
+    <Platform Name="AnyCPU" />
+  </Configurations>
+
+  <Folder Name="/_solution/">
+    <File Path=".editorconfig" />
+    <File Path=".gitattributes" />
+    <File Path=".gitignore" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="license" />
+    <File Path="readme.md" />
+  </Folder>
+
+  <Folder Name="/_solution/.github/">
+    <File Path=".github/workflows/docs.yml" />
+    <File Path=".github/workflows/pack.yml" />
+    <File Path=".github/workflows/tests.yml" />
+  </Folder>
+
+  <Folder Name="/view/">
+    <Project Path="source/view/desktop/Arinc424.View.Desktop.csproj">
+      <BuildType Solution="NoParallel|*" Project="Debug" />
+      <Build Solution="NoParallel|*" Project="false" />
+    </Project>
+
+    <Project Path="source/view/source/Arinc424.View.csproj">
+      <BuildType Solution="NoParallel|*" Project="Debug" />
+      <Build Solution="NoParallel|*" Project="false" />
+    </Project>
+  </Folder>
+
+  <Project Path="codegen/Arinc424.Generators.csproj" />
+  <Project Path="source/library/Arinc424.csproj" />
+  <Project Path="tests/tests/Arinc424.Tests.csproj" />
+
+  <Project Path="tests/benchmarks/Arinc424.Bench.csproj">
+    <Build Solution="Debug|*" Project="false" />
+    <Build Solution="NoParallel|*" Project="false" />
+  </Project>
+</Solution>
