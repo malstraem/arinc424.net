@@ -13,5 +13,5 @@ public class Heliport : Port
 {
     /// <summary>Associated Helipads.</summary>
     [Many]
-    public List<Helipad>? Helipads { get; set; }
+    public Helipad[]? Helipads { get; set; }
 }

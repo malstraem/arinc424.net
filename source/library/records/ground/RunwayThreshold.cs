@@ -93,18 +93,18 @@ public class RunwayThreshold : Fix
     public string? Description { get; set; }
 
     /// <summary>Associated GLS.</summary>
-    [One]
-    public GlobalLanding? GlobalLanding { get; set; }
+    [Many]
+    public GlobalLanding[]? GlobalLanding { get; set; }
 
     /// <summary>Associated MLS.</summary>
-    [One]
-    public MicrowaveLanding? MicrowaveLanding { get; set; }
+    [Many]
+    public MicrowaveLanding[]? MicrowaveLanding { get; set; }
 
     /// <summary>Associated ILS.</summary>
-    [One]
-    public InstrumentLanding? InstrumentLanding { get; set; }
+    [Many]
+    public InstrumentLanding[]? InstrumentLanding { get; set; }
 
     /// <summary>Associated ILS Markers.</summary>
     [Many]
-    public List<InstrumentMarker>? Markers { get; set; }
+    public InstrumentMarker[]? Markers { get; set; }
 }

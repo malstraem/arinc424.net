@@ -1,3 +1,5 @@
+using System.Reflection;
+
 using Arinc424.Building;
 using Arinc424.Linking;
 
@@ -12,13 +14,16 @@ internal class Parser424
     /// <summary>Storage for entity builds. Covers bare types and compositions.</summary>
     protected internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
 
-    private void Process(IEnumerable<string> strings, Queue<string> skipped)
+    private Queue<string> Process(IEnumerable<string> strings)
     {
+        Queue<string> skipped = [];
+
         foreach (string @string in strings)
         {
             if (!TryEnqueue(@string))
                 skipped.Enqueue(@string);
         }
+        return skipped;
 
         bool TryEnqueue(string @string)
         {
@@ -48,37 +53,39 @@ internal class Parser424
             builds[section][info.Composition.Low] = info.Build(records[section]);
     }
 #endif
-    private void Link(Unique unique)
+    private void Link()
+    {
+        Unique unique = new(meta, this);
 #if !NOPARALLEL
-    => Parallel.ForEach(meta.Info, x =>
-    {
-        var (section, info) = (x.Key, x.Value);
+        Parallel.ForEach(meta.Info, x =>
+        {
+            var (section, info) = (x.Key, x.Value);
 
-        foreach (var realtions in info.Composition.Relations)
-            realtions.Link(builds[section][realtions.Type], unique, meta);
-    });
+            foreach (var realtions in info.Composition.Relations)
+                realtions.Link(builds[section][realtions.Type], unique, meta);
+        });
 #else
-    {
         foreach (var (section, info) in meta.Info)
         {
             foreach (var realtions in info.Composition.Relations)
                 realtions.Link(builds[section][realtions.Type], unique, meta);
         }
-    }
 #endif
-    private void Postprocess()
+    }
+
+    private void PostProcess()
+    {
 #if !NOPARALLEL
-    => Parallel.ForEach(meta.Info, x =>
-    {
-        var (section, info) = (x.Key, x.Value);
+        Parallel.ForEach(meta.Info, x =>
+        {
+            var (section, info) = (x.Key, x.Value);
 
-        var builds = this.builds[section];
+            var builds = this.builds[section];
 
-        foreach (var pipeline in info.Composition.Pipelines)
-            builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
-    });
+            foreach (var pipeline in info.Composition.Pipelines)
+                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
+        });
 #else
-    {
         foreach (var (section, info) in meta.Info)
         {
             var builds = this.builds[section];
@@ -86,8 +93,26 @@ internal class Parser424
             foreach (var pipeline in info.Composition.Pipelines)
                 builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
         }
-    }
 #endif
+    }
+
+    private Data424 GetData(out Queue<Build> invalid)
+    {
+        invalid = [];
+
+        Data424 data = new();
+
+        var method = typeof(Parser424).GetMethod("Process", BindingFlags.NonPublic | BindingFlags.Static);
+
+        foreach (var (property, section) in Data424.GetProperties())
+        {
+            var biba = method!.MakeGenericMethod([property.PropertyType.GetElementType()!]);
+
+            property.SetValue(data, biba.Invoke(null, [builds[section].Values.Last(), invalid]));
+        }
+        return data;
+    }
+
     internal Parser424(Meta424 meta)
     {
         this.meta = meta;
@@ -99,30 +124,28 @@ internal class Parser424
         }
     }
 
+    internal static TRecord[] Process<TRecord>(Queue<Build<TRecord>> builds, Queue<Build> invalid) where TRecord : Record424
+    {
+        Queue<TRecord> valid = [];
+
+        foreach (var build in builds)
+        {
+            if (build.Diagnostics is null)
+                valid.Enqueue(build.Record);
+            else
+                invalid.Enqueue(build);
+        }
+        return [.. valid];
+    }
+
     internal Data424 Parse(IEnumerable<string> strings, out Queue<string> skipped, out Queue<Build> invalid)
     {
-        skipped = [];
-        invalid = [];
+        skipped = Process(strings);
 
-        Process(strings, skipped);
         Build();
-        Postprocess();
-        Link(new Unique(meta, this));
+        PostProcess();
+        Link();
 
-        var data = new Data424();
-
-        foreach (var (property, section) in Data424.GetProperties())
-        {
-            var list = (System.Collections.IList)property.GetValue(data)!;
-
-            foreach (var build in builds[section].Values.Last())
-            {
-                if (build.Diagnostics is null)
-                    _ = list.Add(build.Record);
-                else
-                    invalid.Enqueue(build);
-            }
-        }
-        return data;
+        return GetData(out invalid);
     }
 }

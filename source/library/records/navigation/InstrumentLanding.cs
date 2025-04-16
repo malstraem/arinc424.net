@@ -66,5 +66,5 @@ public class InstrumentLanding : LandingSystem
 
     /// <summary>Associated ILS Markers.</summary>
     [Many]
-    public List<InstrumentMarker>? Markers { get; set; }
+    public InstrumentMarker[]? Markers { get; set; }
 }

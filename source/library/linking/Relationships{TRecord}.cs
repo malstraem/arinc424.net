@@ -9,8 +9,7 @@ namespace Arinc424.Linking;
 internal abstract class Relationships(Type type)
 {
 #pragma warning disable CS8618
-    protected FrozenDictionary<Type, PropertyInfo> one;
-    protected FrozenDictionary<Type, PropertyInfo> many;
+    protected FrozenDictionary<Type, PropertyInfo> one, many;
 #pragma warning restore CS8618
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 
@@ -74,8 +73,7 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
     {
         List<Link<TRecord>> links = [];
 
-        List<KeyValuePair<Type, PropertyInfo>> one = [];
-        List<KeyValuePair<Type, PropertyInfo>> many = [];
+        Dictionary<Type, PropertyInfo> one = [], many = [];
 
         foreach (var property in typeof(TRecord).GetProperties())
         {
@@ -87,17 +85,17 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
             }
             else if (property.GetCustomAttribute<OneAttribute>() is not null)
             {
-                one.Add(new(property.PropertyType, property));
+                one[property.PropertyType] = property;
             }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {
-                many.Add(new(property.PropertyType.GetGenericArguments().First(), property));
+                many[property.PropertyType.GetElementType()!] = property;
             }
         }
-        return links is [] && one is [] && many is [] ? null : (Relationships)new Relationships<TRecord>([.. links])
+        return links is [] && one.Count == 0 && many.Count == 0 ? null : new Relationships<TRecord>([.. links])
         {
             one = one.ToFrozenDictionary(),
-            many = many.ToFrozenDictionary(),
+            many = many.ToFrozenDictionary()
         };
     }
 }

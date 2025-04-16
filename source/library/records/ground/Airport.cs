@@ -25,29 +25,29 @@ public class Airport : Port
 
     /// <summary>Associated gates.</summary>
     [Many]
-    public List<Gate>? Gates { get; set; }
+    public Gate[]? Gates { get; set; }
 
     /// <summary>Associated runways.</summary>
     [Many]
-    public List<RunwayThreshold>? Thresholds { get; set; }
+    public RunwayThreshold[]? Thresholds { get; set; }
 
     /// <summary>Associated NDBs.</summary>
     [Many]
-    public List<TerminalBeacon>? Beacons { get; set; }
+    public TerminalBeacon[]? Beacons { get; set; }
 
     /// <summary>Associated VHF Navaids.</summary>
     [Many]
-    public List<Omnidirectional>? Omnidirectionals { get; set; }
+    public Omnidirectional[]? Omnidirectionals { get; set; }
 
     /// <summary>Associated Localizer Markers.</summary>
     [Many]
-    public List<InstrumentMarker>? Markers { get; set; }
+    public InstrumentMarker[]? Markers { get; set; }
 
     /// <summary>Associated MLS.</summary>
     [Many]
-    public List<MicrowaveLanding>? MicrowaveLandings { get; set; }
+    public MicrowaveLanding[]? MicrowaveLandings { get; set; }
 
     /// <summary>Associated ILS.</summary>
     [Many]
-    public List<InstrumentLanding>? InstrumentLandings { get; set; }
+    public InstrumentLanding[]? InstrumentLandings { get; set; }
 }

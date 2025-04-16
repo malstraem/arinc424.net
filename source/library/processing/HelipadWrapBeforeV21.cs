@@ -19,13 +19,13 @@ internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport>
     {
         var build = builds.First();
 
-        var helipads = build.Record.Helipads = [];
+        Queue<Helipad> helipads = [];
 
         while (builds.TryDequeue(out var source))
         {
             var port = source.Record;
 
-            helipads.Add(new Helipad
+            helipads.Enqueue(new Helipad
             {
                 Source = port.Source,
                 Code = port.Code,
@@ -35,6 +35,7 @@ internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport>
                 Heliport = port
             });
         }
+        build.Record.Helipads = [.. helipads];
         return build;
     }
 }

@@ -89,41 +89,41 @@ public abstract class Port : Fix, INamed
 
     /// <summary>Associated GBAS points.</summary>
     [Many]
-    public List<GroundPoint>? GroundPoints { get; set; }
+    public GroundPoint[]? GroundPoints { get; set; }
 
     /// <summary>Associated SBAS points.</summary>
     [Many]
-    public List<SatellitePoint>? SatellitePoints { get; set; }
+    public SatellitePoint[]? SatellitePoints { get; set; }
 
     /// <summary>Associated GLSs.</summary>
     [Many]
-    public List<GlobalLanding>? GlobalLandings { get; set; }
+    public GlobalLanding[]? GlobalLandings { get; set; }
 
     /// <summary>Associated STARs.</summary>
     [Many]
-    public List<Arrival>? Arrivals { get; set; }
+    public Arrival[]? Arrivals { get; set; }
 
     /// <summary>Associated Approach Procedures.</summary>
     [Many]
-    public List<Approach>? Approaches { get; set; }
+    public Approach[]? Approaches { get; set; }
 
     /// <summary>Associated SIDs.</summary>
     [Many]
-    public List<Departure>? Departures { get; set; }
+    public Departure[]? Departures { get; set; }
 
     /// <summary>Associated Communications.</summary>
     [Many]
-    public List<PortCommunication>? Communications { get; set; }
+    public PortCommunication[]? Communications { get; set; }
 
     /// <summary>Associated TAAs.</summary>
     [Many]
-    public List<ArrivalAltitude>? ArrivalAltitudes { get; set; }
+    public ArrivalAltitude[]? ArrivalAltitudes { get; set; }
 
     /// <summary>Associated MSAs.</summary>
     [Many]
-    public List<MinimumAltitude>? MinimumAltitudes { get; set; }
+    public MinimumAltitude[]? MinimumAltitudes { get; set; }
 
     /// <summary>Associated Terminal Waypoints.</summary>
     [Many]
-    public List<TerminalWaypoint>? TerminalWaypoints { get; set; }
+    public TerminalWaypoint[]? Waypoints { get; set; }
 }

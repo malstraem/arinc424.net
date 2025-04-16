@@ -2,15 +2,15 @@
   <ItemGroup>
     <PackageVersion Include="Microsoft.CodeAnalysis.Analyzers" Version="3.11.0" />
     <PackageVersion Include="Microsoft.CodeAnalysis.CSharp" Version="4.13.0" />
-    <PackageVersion Include="Avalonia" Version="11.2.6" />
-    <PackageVersion Include="Avalonia.Desktop" Version="11.2.6" />
-    <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.6" />
-    <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.6" />
+    <PackageVersion Include="Avalonia" Version="11.2.7" />
+    <PackageVersion Include="Avalonia.Desktop" Version="11.2.7" />
+    <PackageVersion Include="Avalonia.Diagnostics" Version="11.2.7" />
+    <PackageVersion Include="Avalonia.Fonts.Inter" Version="11.2.7" />
     <PackageVersion Include="Semi.Avalonia" Version="11.2.1.6" />
     <PackageVersion Include="Irihi.Ursa" Version="1.10.0" />
     <PackageVersion Include="Irihi.Ursa.Themes.Semi" Version="1.10.0" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageVersion Include="TUnit" Version="0.19.64" />
+    <PackageVersion Include="TUnit" Version="0.19.74" />
     <PackageVersion Include="Docfx.App" Version="2.78.3" />
     <PackageVersion Include="BenchmarkDotNet" Version="0.14.0" />
   </ItemGroup>
