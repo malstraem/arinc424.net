@@ -92,15 +92,15 @@ public class RunwayThreshold : Fix
     [Field(102, 123)]
     public string? Description { get; set; }
 
-    /// <summary>Associated GLS.</summary>
+    /// <summary>Associated GLSs.</summary>
     [Many]
     public GlobalLanding[]? GlobalLanding { get; set; }
 
-    /// <summary>Associated MLS.</summary>
+    /// <summary>Associated MLSs.</summary>
     [Many]
     public MicrowaveLanding[]? MicrowaveLanding { get; set; }
 
-    /// <summary>Associated ILS.</summary>
+    /// <summary>Associated ILSs.</summary>
     [Many]
     public InstrumentLanding[]? InstrumentLanding { get; set; }
 

@@ -9,7 +9,7 @@ namespace Arinc424.Linking;
 internal abstract class Relationships(Type type)
 {
 #pragma warning disable CS8618
-    protected FrozenDictionary<Type, PropertyInfo> one, many;
+    protected FrozenDictionary<Type, PropertyInfo> many;
 #pragma warning restore CS8618
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 
@@ -24,10 +24,6 @@ internal abstract class Relationships(Type type)
                 property.SetValue(self, value = []);
 
             value.Add(referenced);
-        }
-        else if (one.TryGetValue(type, out property))
-        {
-            property.SetValue(self, referenced);
         }
     }
 
@@ -44,11 +40,11 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
 {
     private readonly Link<TRecord>[] links = links;
 
-    private void Link(TRecord record, Unique unique, Meta424 meta, Queue<Diagnostic> diagnostics)
+    private void Link(TRecord record, Unique unique, Queue<Diagnostic> diagnostics)
     {
         foreach (var link in links)
         {
-            if (!link.TryLink(record, unique, meta, out var diagnostic))
+            if (!link.TryLink(record, unique, out var diagnostic))
                 diagnostics.Enqueue(diagnostic);
         }
     }
@@ -59,7 +55,7 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
 
         foreach (var build in (IEnumerable<Build<TRecord>>)builds)
         {
-            Link(build.Record, unique, meta, diagnostics);
+            Link(build.Record, unique, diagnostics);
 
             if (diagnostics.Count != 0)
             {
@@ -83,10 +79,6 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
             {
                 links.Add(identifier.GetLink<TRecord>(property, supplement));
             }
-            else if (property.GetCustomAttribute<OneAttribute>() is not null)
-            {
-                one[property.PropertyType] = property;
-            }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {
                 many[property.PropertyType.GetElementType()!] = property;
@@ -94,7 +86,6 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
         }
         return links is [] && one.Count == 0 && many.Count == 0 ? null : new Relationships<TRecord>([.. links])
         {
-            one = one.ToFrozenDictionary(),
             many = many.ToFrozenDictionary()
         };
     }

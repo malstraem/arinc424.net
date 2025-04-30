@@ -21,11 +21,11 @@ Multiple <c>Airport and Heliport Approach</c> primary record sequences under sam
 [Pipeline<IdentityWrap<Approach, ApproachSequence>>]
 public class Approach : Procedure<ApproachSequence, ApproachPoint>
 {
-    [One]
-    public GroundPoint? GroundPoint { get; set; }
+    [Many]
+    public GroundPoint[]? GroundPoints { get; set; }
 
-    [One]
-    public SatellitePoint? SatellitePoint { get; set; }
+    [Many]
+    public SatellitePoint[]? SatellitePoints { get; set; }
 }
 
 /**<summary>

@@ -8,7 +8,7 @@ namespace Arinc424.Linking;
 
 internal abstract class Link<TRecord> where TRecord : Record424
 {
-    internal abstract bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic);
+    internal abstract bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic);
 }
 
 internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Link<TRecord> where TRecord : Record424 where TType : class
@@ -19,13 +19,13 @@ internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Lin
 
     protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
-    internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
+    internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
         diagnostic = null;
 
         var type = property.PropertyType;
 
-        if (!foreign.TryGetKey(record.Source!, meta.TypeInfo[type].Primary! /* guarantee by design */, out string? key))
+        if (!foreign.TryGetKey(record.Source!, unique.meta.TypeInfo[type].Primary! /* guarantee by design */, out string? key))
             return true;
 
         if (!unique.TryGetRecords(type, out var records))

@@ -7,12 +7,12 @@ namespace Arinc424;
 
 internal class Parser424
 {
-    private readonly Meta424 meta;
-
     private readonly Dictionary<Section, Queue<string>> records = [];
 
+    internal readonly Meta424 meta;
+
     /// <summary>Storage for entity builds. Covers bare types and compositions.</summary>
-    protected internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
+    internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
 
     private Queue<string> Process(IEnumerable<string> strings)
     {
@@ -55,7 +55,7 @@ internal class Parser424
 #endif
     private void Link()
     {
-        Unique unique = new(meta, this);
+        Unique unique = new(this);
 #if !NOPARALLEL
         Parallel.ForEach(meta.Info, x =>
         {

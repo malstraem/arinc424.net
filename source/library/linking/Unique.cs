@@ -13,6 +13,8 @@ internal class Unique
 {
     private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
+    internal readonly Meta424 meta;
+
     [Obsolete("todo: diagnostics")]
     private void ProcessPrimaryKey(Build build, RecordInfo info)
     {
@@ -31,9 +33,11 @@ internal class Unique
         build.Diagnostics.Enqueue(new Duplicate(record, info.Composition.Top, key));
     }
 
-    internal Unique(Meta424 meta, Parser424 parser)
+    internal Unique(Parser424 parser)
     {
-        foreach (var (section, info) in meta.Info)
+        meta = parser.meta;
+
+        foreach (var (section, info) in parser.meta.Info)
         {
             if (info.Primary is null)
                 continue;
@@ -42,10 +46,8 @@ internal class Unique
                 unique[info.Composition.Top] = [];
 
             foreach (var build in parser.builds[section][info.Composition.Top])
-            {
                 ProcessPrimaryKey(build, info);
-            }
-        };
+        }
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
