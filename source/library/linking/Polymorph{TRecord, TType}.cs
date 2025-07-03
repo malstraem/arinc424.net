@@ -47,9 +47,9 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
         return false;
     }
 
-    internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
+    internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        if (!TryGetReference(record, meta, out var reference, out diagnostic))
+        if (!TryGetReference(record, unique.meta, out var reference, out diagnostic))
             return diagnostic is null;
 
         (string key, var type, var section) = reference.Value;
@@ -61,17 +61,24 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
         }
         if (!records.TryGetValue(key, out var referenced))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key, Type = meta.Types[section] };
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound)
+            {
+                Key = key,
+                Type = unique.meta.Types[section]
+            };
             return false;
         }
         if (referenced is not TType @ref)
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.WrongType) { Type = type };
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.WrongType)
+            {
+                Type = type
+            };
             return false;
         }
         set(record, @ref);
 
-        meta.TypeInfo[type].Relations?.Process(referenced, record);
+        unique.meta.TypeInfo[type].Relations?.Process(referenced, record);
 
         return true;
     }

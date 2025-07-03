@@ -11,20 +11,20 @@ internal sealed class Possible<TRecord, TType>(LinkInfo info, PropertyInfo prope
 {
     private readonly Type[] types = types;
 
-    internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
+    internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
         diagnostic = null;
 
         foreach (var type in types)
         {
-            var info = meta.TypeInfo[type];
+            var info = unique.meta.TypeInfo[type];
 
             if (unique.TryGetRecords(info.Composition.Top, out var records)
              && foreign.TryGetKey(record.Source!, info.Primary! /*guarantee by design*/, out string? key)
              && records.TryGetValue(key, out var referenced))
             {
                 set(record, (TType)referenced);
-                meta.TypeInfo[type].Relations!.Process(referenced, record);
+                unique.meta.TypeInfo[type].Relations!.Process(referenced, record);
                 return true;
             }
         }

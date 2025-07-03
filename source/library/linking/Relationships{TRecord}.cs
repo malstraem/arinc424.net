@@ -18,12 +18,17 @@ internal abstract class Relationships(Type type)
         var type = typeof(TRecord);
 
         // todo: compiled one & many relations
-        if (many.TryGetValue(type, out var property))
-        {
-            if (property.GetValue(self) is not List<TRecord> value)
-                property.SetValue(self, value = []);
+        if (!many.TryGetValue(type, out var property))
+            return;
 
-            value.Add(referenced);
+        if (property.GetValue(self) is not TRecord[] value)
+        {
+            property.SetValue(self, value = [referenced]);
+        }
+        else
+        {
+            Array.Resize(ref value, value.Length + 1);
+            value[^1] = referenced;
         }
     }
 

@@ -41,7 +41,7 @@ internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Lin
         // guarantee by design
         set(record, Unsafe.As<TType>(referenced));
 
-        meta.TypeInfo[type].Relations?.Process(referenced, record);
+        unique.meta.TypeInfo[type].Relations?.Process(referenced, record);
 
         return true;
     }

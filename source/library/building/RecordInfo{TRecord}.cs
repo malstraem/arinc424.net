@@ -22,9 +22,9 @@ internal abstract class RecordInfo(Composition composition, SectionAttribute[] s
             .MakeGenericType(composition.Low)
                 .GetConstructor([typeof(Supplement), typeof(Composition), typeof(Continuations), typeof(SectionAttribute[])])!;
 
-        var secitons = type.GetCustomAttributes<SectionAttribute>(false).ToArray(); // take only top level attributes
+        var sections = type.GetCustomAttributes<SectionAttribute>(false).ToArray(); // take only top level attributes
 
-        return (RecordInfo)constructor.Invoke([supplement, composition, continuations, secitons]);
+        return (RecordInfo)constructor.Invoke([supplement, composition, continuations, sections]);
     }
 
     internal static RecordInfo Create<TRecord>(Supplement supplement) where TRecord : Record424, new() => Create(typeof(TRecord), supplement);
