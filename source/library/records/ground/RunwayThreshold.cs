@@ -8,13 +8,13 @@ namespace Arinc424.Ground;
 <remarks>See section 4.1.10.1.</remarks>*/
 [Section('P', 'G', subIndex: 13)]
 
-[Icao(11, 12), Port(7, 10), Identifier(14, 18), Continuous]
+[Port(7, 10), Icao(11, 12), Identifier(14, 18), Continuous]
 
-[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class RunwayThreshold : Fix
 {
     [Identifier(7, 10)]
-    public Airport Airport { get; set; }
+    public Port Port { get; set; }
 
     /**<summary>
     <c>Runway Length (RUNWAY LENGTH)</c> field.
@@ -94,15 +94,15 @@ public class RunwayThreshold : Fix
 
     /// <summary>Associated GLSs.</summary>
     [Many]
-    public GlobalLanding[]? GlobalLanding { get; set; }
+    public GlobalLanding[]? GlobalLandings { get; set; }
 
     /// <summary>Associated MLSs.</summary>
     [Many]
-    public MicrowaveLanding[]? MicrowaveLanding { get; set; }
+    public MicrowaveLanding[]? MicrowaveLandings { get; set; }
 
     /// <summary>Associated ILSs.</summary>
     [Many]
-    public InstrumentLanding[]? InstrumentLanding { get; set; }
+    public InstrumentLanding[]? InstrumentLandings { get; set; }
 
     /// <summary>Associated ILS Markers.</summary>
     [Many]

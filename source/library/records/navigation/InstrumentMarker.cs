@@ -8,13 +8,13 @@ using Terms;
 <c>Airport and Heliport Localizer Marker</c> primary record.
 </summary>
 <remarks>See section 4.1.13.1.</remarks>*/
-[Section('P', 'M', subIndex: 13), Icao(11, 12), Port(7, 10), Continuous]
+[Section('P', 'M', subIndex: 13), Port(7, 10), Icao(11, 12), Continuous]
 
-[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class InstrumentMarker : Fix
 {
     [Identifier(7, 10)]
-    public Airport Airport { get; set; }
+    public Port Port { get; set; }
 
     [Identifier(14, 17)]
     public InstrumentLanding InstrumentLanding { get; set; }

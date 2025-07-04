@@ -12,7 +12,7 @@ using Terms;
 public class SpecialArea : Fix, IIdentity, INamed
 {
     [Identifier(16, 19), Icao(20, 21)]
-    public Airport Airport { get; set; }
+    public Port Port { get; set; }
 
     /// <inheritdoc cref="ActivityType"/>
     [Character(7)]

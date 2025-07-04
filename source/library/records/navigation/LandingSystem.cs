@@ -2,13 +2,13 @@ using Arinc424.Ground;
 
 namespace Arinc424.Navigation;
 
-[Identifier(14, 17), Icao(11, 12), Port(7, 10), Continuous]
+[Port(7, 10), Icao(11, 12), Identifier(14, 17), Continuous]
 
-[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Airport)} - {{{nameof(Airport)}}}")]
+[DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public abstract class LandingSystem : Fix
 {
     [Identifier(7, 10)]
-    public Airport Airport { get; set; }
+    public Port Port { get; set; }
 
     /// <inheritdoc cref="Terms.LandingType"/>
     [Character(18)]

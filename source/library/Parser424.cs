@@ -14,7 +14,7 @@ internal class Parser424
     /// <summary>Storage for entity builds. Covers bare types and compositions.</summary>
     internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
 
-    private Queue<string> Process(IEnumerable<string> strings)
+    private string[] Process(IEnumerable<string> strings)
     {
         Queue<string> skipped = [];
 
@@ -23,10 +23,13 @@ internal class Parser424
             if (!TryEnqueue(@string))
                 skipped.Enqueue(@string);
         }
-        return skipped;
+        return [.. skipped];
 
         bool TryEnqueue(string @string)
         {
+            if (@string.Length < 132)
+                return false;
+
             foreach (var section in meta.Sections)
             {
                 if (section.IsMatch(@string))
@@ -61,14 +64,14 @@ internal class Parser424
         {
             var (section, info) = (x.Key, x.Value);
 
-            foreach (var realtions in info.Composition.Relations)
-                realtions.Link(builds[section][realtions.Type], unique, meta);
+            foreach (var relations in info.Composition.Relations)
+                relations.Link(builds[section][relations.Type], unique, meta);
         });
 #else
         foreach (var (section, info) in meta.Info)
         {
-            foreach (var realtions in info.Composition.Relations)
-                realtions.Link(builds[section][realtions.Type], unique, meta);
+            foreach (var relations in info.Composition.Relations)
+                relations.Link(builds[section][relations.Type], unique, meta);
         }
 #endif
     }
@@ -138,7 +141,7 @@ internal class Parser424
         return [.. valid];
     }
 
-    internal Data424 Parse(IEnumerable<string> strings, out Queue<string> skipped, out Queue<Build> invalid)
+    internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Queue<Build> invalid)
     {
         skipped = Process(strings);
 

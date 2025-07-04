@@ -12,7 +12,7 @@ using Terms;
 public class Tactical : Navaid
 {
     [Identifier(7, 10)]
-    public Airport Airport { get; set; }
+    public Port Port { get; set; }
 
     /// <inheritdoc cref="OmnidirectType"/>
     [Field(28, 29)]

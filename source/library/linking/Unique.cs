@@ -1,22 +1,26 @@
+using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
-using Arinc424.Building;
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Linking;
+
+using Ground;
+using Building;
+using Diagnostics;
 
 /**<summary>
 Container with records that have unique keys.
 </summary>*/
 internal class Unique
 {
-    private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
+    private FrozenDictionary<string, Record424> ports;
+
+    private FrozenDictionary<Type, FrozenDictionary<string, Record424>> unique;
 
     internal readonly Meta424 meta;
 
     [Obsolete("todo: diagnostics")]
-    private void ProcessPrimaryKey(Build build, RecordInfo info)
+    private void Process(Build build, RecordInfo info, Dictionary<string, Record424> records)
     {
         var record = build.Record;
 
@@ -26,30 +30,53 @@ internal class Unique
             return;
         }
 
-        if (unique[info.Composition.Top].TryAdd(key, record))
+        if (records.TryAdd(key, record))
             return;
 
         build.Diagnostics ??= [];
         build.Diagnostics.Enqueue(new Duplicate(record, info.Composition.Top, key));
     }
 
-    internal Unique(Parser424 parser)
+    private void Fill(Parser424 parser)
     {
-        meta = parser.meta;
+        RecordInfo airport = meta.TypeInfo[typeof(Airport)],
+                   heliport = meta.TypeInfo[typeof(Heliport)];
+
+        Dictionary<string, Record424> ports = [];
+        Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
         foreach (var (section, info) in parser.meta.Info)
         {
             if (info.Primary is null)
                 continue;
 
-            if (!unique.ContainsKey(info.Composition.Top))
-                unique[info.Composition.Top] = [];
+            if (info == airport || info == heliport)
+            {
+                foreach (var build in parser.builds[section][info.Composition.Top])
+                    Process(build, info, ports);
 
-            foreach (var build in parser.builds[section][info.Composition.Top])
-                ProcessPrimaryKey(build, info);
+                continue;
+            }
+
+            var top = info.Composition.Top;
+
+            if (!unique.TryGetValue(top, out var records))
+                unique[top] = records = [];
+
+            foreach (var build in parser.builds[section][top])
+                Process(build, info, records);
         }
+        this.unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary())).ToFrozenDictionary();
+    }
+
+    internal Unique(Parser424 parser)
+    {
+        meta = parser.meta;
+
+        Fill(parser);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal bool TryGetRecords(Type type, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(type, out records);
+    internal bool TryGetRecords(Type type, [NotNullWhen(true)] out FrozenDictionary<string, Record424>? records)
+        => unique.TryGetValue(type, out records);
 }

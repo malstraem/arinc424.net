@@ -1,10 +1,10 @@
 using System.Collections.Frozen;
 using System.Reflection;
 
-using Arinc424.Building;
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Linking;
+
+using Diagnostics;
+using Building;
 
 internal abstract class Relationships(Type type)
 {
@@ -29,6 +29,7 @@ internal abstract class Relationships(Type type)
         {
             Array.Resize(ref value, value.Length + 1);
             value[^1] = referenced;
+            property.SetValue(self, value);
         }
     }
 

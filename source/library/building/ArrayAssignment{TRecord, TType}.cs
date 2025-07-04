@@ -16,28 +16,33 @@ internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Ran
 
     internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
-        List<TType> values = [];
-
         var range = this.range;
 
-        int length = range.End.Value - range.Start.Value;
-
+        int arrayLength = 0, fieldLength = range.End.Value - range.Start.Value;
         for (int i = 0; i < count; i++)
         {
-            var @field = @string[range];
-
-            if (@field.IsWhiteSpace())
+            if (@string[range].IsWhiteSpace())
                 break;
+            arrayLength++;
+            range = new(range.Start.Value + fieldLength, range.End.Value + fieldLength);
+        }
+        range = this.range;
+
+        var values = new TType[arrayLength];
+
+        for (int i = 0; i < arrayLength; i++)
+        {
+            var @field = @string[range];
 
             var result = decode.Convert(@field);
 
             if (result.Invalid)
                 diagnostics.Enqueue(new InvalidValue(record, property, result.Bad.ToImmutableArray(), range));
             else
-                values.Add(result.Value);
+                values[i] = result.Value;
 
-            range = new(range.Start.Value + length, range.End.Value + length);
+            range = new(range.Start.Value + fieldLength, range.End.Value + fieldLength);
         }
-        set(record, [.. values]);
+        set(record, values);
     }
 }
