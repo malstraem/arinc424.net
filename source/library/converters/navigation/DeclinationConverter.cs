@@ -1,7 +1,6 @@
-
-using Arinc424.Navigation.Terms;
-
 namespace Arinc424.Converters;
+
+using Navigation.Terms;
 
 internal abstract class DeclinationConverter : IStringConverter<Declination>
 {

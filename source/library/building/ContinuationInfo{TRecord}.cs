@@ -1,8 +1,8 @@
 using System.Runtime.CompilerServices;
 
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Building;
+
+using Diagnostics;
 
 /**<summary>
 How an entity (continuation record) should be created and processed.

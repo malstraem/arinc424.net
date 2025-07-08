@@ -1,6 +1,6 @@
-using Arinc424.Processing;
-
 namespace Arinc424.Tables;
+
+using Processing;
 
 /**<summary>
 <c>Cruising Table</c> record sequence.

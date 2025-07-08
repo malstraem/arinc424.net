@@ -1,6 +1,6 @@
-using Arinc424.Airspace.Terms;
-
 namespace Arinc424.Converters;
+
+using Airspace.Terms;
 
 internal abstract class RegionTypeConverter : ICharConverter<RegionType>
 {

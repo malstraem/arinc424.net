@@ -1,5 +1,3 @@
-using Arinc424.Procedures.Terms;
-
 namespace Arinc424.Procedures;
 
 /**<summary>
@@ -16,7 +14,7 @@ public class ApproachPoint : ProcedurePoint
     [Field(103, 106), Float(100)]
     public float VerticalAngle { get; set; }
 
-    /// <inheritdoc cref="ApproachQualifiers"/>
+    /// <inheritdoc cref="Terms.ApproachQualifiers"/>
     [Field(119, 120)]
-    public ApproachQualifiers Qualifiers { get; set; }
+    public Terms.ApproachQualifiers Qualifiers { get; set; }
 }

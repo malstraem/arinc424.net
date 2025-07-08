@@ -1,5 +1,3 @@
-using Arinc424.Ground;
-
 namespace Arinc424.Procedures;
 
 /**<summary>
@@ -13,7 +11,7 @@ public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdenti
     where TSub : ProcedurePoint
 {
     [Identifier(7, 10)]
-    public Port Port { get; set; }
+    public Ground.Port Port { get; set; }
 
     [Field(11, 12)]
     public Icao Icao { get; set; }

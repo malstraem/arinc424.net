@@ -1,5 +1,3 @@
-using Arinc424.Tables.Terms;
-
 namespace Arinc424.Tables;
 
 /**<summary>
@@ -33,5 +31,5 @@ public class CruiseRow : Record424, ISequenced
     public CourseType CourseType { get; set; }
 
     [Field(40, 54), Count(4)]
-    public Level[] Levels { get; set; }
+    public Terms.Level[] Levels { get; set; }
 }

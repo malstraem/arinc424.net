@@ -1,7 +1,5 @@
 namespace Arinc424.Routing;
 
-using Terms;
-
 /**<summary>
 <c>Airways Marker</c> primary record.
 </summary>
@@ -18,13 +16,13 @@ public class AirwayMarker : Fix, INamed
     [Field(23, 26)]
     public string MarkerCode { get; set; }
 
-    /// <inheritdoc cref="MarkerShape"/>
+    /// <inheritdoc cref="Terms.MarkerShape"/>
     [Character(28)]
-    public MarkerShape Shape { get; set; }
+    public Terms.MarkerShape Shape { get; set; }
 
-    /// <inheritdoc cref="MarkerPower"/>
+    /// <inheritdoc cref="Terms.MarkerPower"/>
     [Character(29)]
-    public MarkerPower Power { get; set; }
+    public Terms.MarkerPower Power { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MinorAxis']/*"/>
     [Field(52, 55), Float(10)]

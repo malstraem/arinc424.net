@@ -1,5 +1,3 @@
-using Arinc424.Ground.Terms;
-
 namespace Arinc424.Ground;
 
 /**<summary>
@@ -22,7 +20,7 @@ public class MinimumAltitude : Record424, IMultiple
     public char? Multiplier { get; set; }
 
     [Field(43, 53), Count(7)]
-    public Sector[] Sectors { get; set; }
+    public Terms.Sector[] Sectors { get; set; }
 
     /// <inheritdoc cref="Arinc424.CourseType"/>
     [Character(120)]

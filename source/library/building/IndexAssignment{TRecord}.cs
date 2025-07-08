@@ -1,8 +1,8 @@
 using System.Reflection;
 
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Building;
+
+using Diagnostics;
 
 [DebuggerDisplay($"{{{nameof(property)}}} - {{{nameof(index)}}}")]
 internal abstract class IndexAssignment<TRecord>(PropertyInfo property, int index)

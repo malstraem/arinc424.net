@@ -1,10 +1,10 @@
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-using Arinc424.Diagnostics;
-using Arinc424.Linking;
-
 namespace Arinc424.Building;
+
+using Linking;
+using Diagnostics;
 
 /**<summary>
 How an entity (primary record) should be created and processed.

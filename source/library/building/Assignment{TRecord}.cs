@@ -2,9 +2,9 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Text.RegularExpressions;
 
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Building;
+
+using Diagnostics;
 
 /**<summary>
 Assignment operation to set <see cref="Record424"/> property.

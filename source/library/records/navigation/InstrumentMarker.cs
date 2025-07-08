@@ -1,8 +1,4 @@
-using Arinc424.Ground;
-
 namespace Arinc424.Navigation;
-
-using Terms;
 
 /**<summary>
 <c>Airport and Heliport Localizer Marker</c> primary record.
@@ -14,21 +10,21 @@ using Terms;
 public class InstrumentMarker : Fix
 {
     [Identifier(7, 10)]
-    public Port Port { get; set; }
+    public Ground.Port Port { get; set; }
 
     [Identifier(14, 17)]
     public InstrumentLanding Landing { get; set; }
 
-    /// <inheritdoc cref="MarkerType"/>
+    /// <inheritdoc cref="Terms.MarkerType"/>
     [Field(18, 20)]
-    public MarkerType Type { get; set; }
+    public Terms.MarkerType Type { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
     [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
 
     [Identifier(28, 32)]
-    public RunwayThreshold Threshold { get; set; }
+    public Ground.RunwayThreshold Threshold { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MinorAxis']/*"/>
     [Field(52, 55), Float(10)]
@@ -37,21 +33,21 @@ public class InstrumentMarker : Fix
     [Field(56, 74)]
     public Coordinates LocatorCoordinates { get; set; }
 
-    /// <inheritdoc cref="NondirectType"/>
+    /// <inheritdoc cref="Terms.NondirectType"/>
     [Field(75, 76)]
-    public NondirectType NavaidType { get; set; }
+    public Terms.NondirectType NavaidType { get; set; }
 
-    /// <inheritdoc cref="NondirectCoverage"/>
+    /// <inheritdoc cref="Terms.NondirectCoverage"/>
     [Character(77)]
-    public NondirectCoverage Coverage { get; set; }
+    public Terms.NondirectCoverage Coverage { get; set; }
 
-    /// <inheritdoc cref="NondirectInfo"/>
+    /// <inheritdoc cref="Terms.NondirectInfo"/>
     [Character(78)]
-    public NondirectInfo Info { get; set; }
+    public Terms.NondirectInfo Info { get; set; }
 
-    /// <inheritdoc cref="MarkerCollocation"/>
+    /// <inheritdoc cref="Terms.MarkerCollocation"/>
     [Character(79)]
-    public MarkerCollocation Collocation { get; set; }
+    public Terms.MarkerCollocation Collocation { get; set; }
 
     [Field(80, 84), Obsolete("need more section 5.93 analysis")]
     public string? Facility { get; set; }

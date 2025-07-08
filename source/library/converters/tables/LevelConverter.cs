@@ -1,6 +1,6 @@
-using Arinc424.Tables.Terms;
-
 namespace Arinc424.Converters;
+
+using Tables.Terms;
 
 internal abstract class LevelConverter : IStringConverter<Level>
 {

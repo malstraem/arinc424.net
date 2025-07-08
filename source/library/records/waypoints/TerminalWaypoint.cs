@@ -1,5 +1,3 @@
-using Arinc424.Ground;
-
 namespace Arinc424.Waypoints;
 
 /**<summary>
@@ -12,5 +10,5 @@ namespace Arinc424.Waypoints;
 public class TerminalWaypoint : Waypoint
 {
     [Identifier(7, 10), Icao(11, 12)]
-    public Port Port { get; set; }
+    public Ground.Port Port { get; set; }
 }

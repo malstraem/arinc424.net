@@ -1,7 +1,6 @@
-using Arinc424.Ground;
-using Arinc424.Processing;
-
 namespace Arinc424.Comms;
+
+using Processing;
 
 /**<summary>
 <c>Airport and Heliport Communications</c> primary record sequence.
@@ -18,5 +17,5 @@ namespace Arinc424.Comms;
 public class PortCommunication : Communication<PortTransmitter>
 {
     [Identifier(7, 10)]
-    public Port Port { get; set; }
+    public Ground.Port Port { get; set; }
 }

@@ -1,6 +1,6 @@
-namespace Arinc424.Attributes;
-
 using static System.Globalization.NumberStyles;
+
+namespace Arinc424.Attributes;
 
 /**<summary>
 Specifies that property value is a <see langword="float"/> with point suppressed

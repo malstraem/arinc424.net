@@ -1,7 +1,7 @@
-using Arinc424.Linking;
-using Arinc424.Processing;
-
 namespace Arinc424.Building;
+
+using Processing;
+using Linking;
 
 internal class Composition(Type[] types)
 {

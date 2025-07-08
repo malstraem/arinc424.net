@@ -1,9 +1,6 @@
-using Arinc424.Navigation;
-using Arinc424.Processing;
-using Arinc424.Tables;
-using Arinc424.Waypoints.Terms;
-
 namespace Arinc424.Routing;
+
+using Processing;
 
 /**<summary>
 Fields of <c>Enroute Airways</c> primary record.
@@ -21,9 +18,9 @@ public class AirwayPoint : Record424, ISequenced
     [Identifier(30, 34), Icao(35, 36)]
     public Fix Fix { get; set; }
 
-    /// <inheritdoc cref="WaypointDescriptions"/>
+    /// <inheritdoc cref="Waypoints.Terms.WaypointDescriptions"/>
     [Field(40, 43)]
-    public WaypointDescriptions Descriptions { get; set; }
+    public Waypoints.Terms.WaypointDescriptions Descriptions { get; set; }
 
     /// <inheritdoc cref="Terms.BoundaryCode"/>
     [Character(44)]
@@ -43,7 +40,7 @@ public class AirwayPoint : Record424, ISequenced
 
     /// <inheritdoc cref="Tables.CruiseTable"/>
     [Identifier(48, 49)]
-    public CruiseTable? CruiseTable { get; set; }
+    public Tables.CruiseTable? CruiseTable { get; set; }
 
     /// <summary><c>EU Indicator (EU IND)</c> character.</summary>
     /// <remarks>See section 5.164.</remarks>
@@ -51,7 +48,7 @@ public class AirwayPoint : Record424, ISequenced
     public Bool HasRestrictions { get; set; }
 
     [Identifier(51, 54), Icao(55, 56)]
-    public Omnidirect? Recommended { get; set; }
+    public Navigation.Omnidirect? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(57, 59), Performance]

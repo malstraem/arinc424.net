@@ -1,8 +1,8 @@
-using Arinc424.Airspace.Terms;
+using static System.Globalization.NumberStyles;
 
 namespace Arinc424.Converters;
 
-using static System.Globalization.NumberStyles;
+using Airspace.Terms;
 
 internal abstract class ArcConverter : IStringConverter<Arc>
 {

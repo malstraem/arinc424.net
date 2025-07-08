@@ -1,7 +1,6 @@
-using Arinc424.Processing;
-using Arinc424.Tables;
-
 namespace Arinc424.Airspace;
+
+using Processing;
 
 /**<summary>
 <c>FIR/UIR</c> primary record sequence.
@@ -13,7 +12,7 @@ namespace Arinc424.Airspace;
 public class RegionVolume : Record424<RegionPoint>
 {
     [Identifier(96, 97)]
-    public CruiseTable? CruiseTable { get; set; }
+    public Tables.CruiseTable? CruiseTable { get; set; }
 
     /// <inheritdoc cref="Terms.RegionType"/>
     [Character(15)]

@@ -1,6 +1,3 @@
-using Arinc424.Ground;
-using Arinc424.Waypoints.Terms;
-
 namespace Arinc424.Procedures;
 
 /**<summary>
@@ -18,10 +15,10 @@ public abstract class ProcedurePoint : Record424, ISequenced
     [Identifier(30, 34), Icao(35, 36)]
     public Fix? Fix { get; set; }
 
-    /// <inheritdoc cref="WaypointDescriptions"/>
+    /// <inheritdoc cref="Waypoints.Terms.WaypointDescriptions"/>
     [Field(40, 43)]
     [Obsolete("maybe split to 4 enums for SID/STAR/Approach and Airway?")]
-    public WaypointDescriptions Descriptions { get; set; }
+    public Waypoints.Terms.WaypointDescriptions Descriptions { get; set; }
 
     /// <inheritdoc cref="Arinc424.Turn"/>
     [Character(44)]

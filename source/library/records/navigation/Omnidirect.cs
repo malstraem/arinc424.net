@@ -1,8 +1,4 @@
-using Arinc424.Ground;
-
 namespace Arinc424.Navigation;
-
-using Terms;
 
 /**<summary>
 <c>VHF NAVAID</c> primary record.
@@ -12,23 +8,23 @@ using Terms;
 public class Omnidirect : Navaid
 {
     [Identifier(7, 10)]
-    public Port? Port { get; set; }
+    public Ground.Port? Port { get; set; }
 
-    /// <inheritdoc cref="OmnidirectType"/>
+    /// <inheritdoc cref="Terms.OmnidirectType"/>
     [Field(28, 29)]
-    public OmnidirectType Type { get; set; }
+    public Terms.OmnidirectType Type { get; set; }
 
-    /// <inheritdoc cref="OmnidirectCoverage"/>
+    /// <inheritdoc cref="Terms.OmnidirectCoverage"/>
     [Character(30)]
-    public OmnidirectCoverage Coverage { get; set; }
+    public Terms.OmnidirectCoverage Coverage { get; set; }
 
-    /// <inheritdoc cref="OmnidirectInfo"/>
+    /// <inheritdoc cref="Terms.OmnidirectInfo"/>
     [Character(31)]
-    public OmnidirectInfo Info { get; set; }
+    public Terms.OmnidirectInfo Info { get; set; }
 
-    /// <inheritdoc cref="OmnidirectCollocation"/>
+    /// <inheritdoc cref="Terms.OmnidirectCollocation"/>
     [Character(32)]
-    public OmnidirectCollocation Collocation { get; set; }
+    public Terms.OmnidirectCollocation Collocation { get; set; }
 
     /**<summary>
     <c>DME Identifier (DME IDENT)</c> field.
@@ -42,7 +38,7 @@ public class Omnidirect : Navaid
 
     /// <inheritdoc cref="Terms.Declination"/>
     [Field(75, 79)]
-    public Declination Declination { get; set; }
+    public Terms.Declination Declination { get; set; }
 
     /**<summary>
     <c>DME Elevation (DME ELEV)</c> field.
@@ -51,9 +47,9 @@ public class Omnidirect : Navaid
     [Field(80, 84), Integer]
     public int EquipmentElevation { get; set; }
 
-    /// <inheritdoc cref="UsableRange"/>
+    /// <inheritdoc cref="Terms.UsableRange"/>
     [Character(85)]
-    public UsableRange Range { get; set; }
+    public Terms.UsableRange Range { get; set; }
 
     /**<summary>
     <c>ILS/DME Bias</c> field.
@@ -80,5 +76,5 @@ public class Omnidirect : Navaid
 
     /// <inheritdoc cref="Terms.ServiceVolume"/>
     [Character(123, Start = Supplement.V19)]
-    public ServiceVolume ServiceVolume { get; set; }
+    public Terms.ServiceVolume ServiceVolume { get; set; }
 }

@@ -1,6 +1,6 @@
-using Arinc424.Processing;
-
 namespace Arinc424.Procedures;
+
+using Processing;
 
 /**<summary>
 <c>Airport and Heliport SID</c> primary record sequence.

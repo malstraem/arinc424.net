@@ -1,7 +1,6 @@
-using Arinc424.Ground.Terms;
-using Arinc424.Procedures;
-
 namespace Arinc424.Ground;
+
+using Procedures;
 
 /**<summary>
 <c>Airport and Heliport TAA</c> primary record.
@@ -24,11 +23,11 @@ public class ArrivalAltitude : Record424
 
     /// <inheritdoc cref="Terms.FixPosition"/>
     [Character(29)]
-    public FixPosition FixPosition { get; set; }
+    public Terms.FixPosition FixPosition { get; set; }
 
     [Field(33, 46), Count(6)]
-    [Decode<ArrivalSectorConverter, ArrivalSector>]
-    public ArrivalSector[] Sectors { get; set; }
+    [Decode<ArrivalSectorConverter, Terms.ArrivalSector>]
+    public Terms.ArrivalSector[] Sectors { get; set; }
 
     /// <inheritdoc cref="Arinc424.CourseType"/>
     [Character(120)]

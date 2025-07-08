@@ -1,6 +1,6 @@
-using Arinc424.Processing;
-
 namespace Arinc424.Airspace;
+
+using Processing;
 
 /**<summary>
 Multiple <c>Controlled Airspace</c> primary record sequences.

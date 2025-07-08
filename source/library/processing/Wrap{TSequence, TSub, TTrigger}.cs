@@ -1,10 +1,10 @@
 using System.Reflection;
 
-using Arinc424.Airspace;
-using Arinc424.Building;
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Processing;
+
+using Building;
+using Airspace;
+using Diagnostics;
 
 internal abstract class Wrap<TSequence, TSub>(Supplement supplement) : Scan<TSequence, TSub>
     where TSequence : Record424<TSub>, new()

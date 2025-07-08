@@ -1,11 +1,11 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-using Arinc424.Building;
-using Arinc424.Linking;
-using Arinc424.Processing;
-
 namespace Arinc424;
+
+using Building;
+using Processing;
+using Linking;
 
 internal static class MemberExtensions
 {

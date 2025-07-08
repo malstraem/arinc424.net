@@ -1,9 +1,9 @@
-using Arinc424.Navigation;
-using Arinc424.Ground;
-using Arinc424.Routing;
-using Arinc424.Waypoints;
-
 namespace Arinc424;
+
+using Ground;
+using Routing;
+using Waypoints;
+using Navigation;
 
 /**<summary>
 Base object with an identifier that can be used as a navigation point.

@@ -1,6 +1,6 @@
-using Arinc424.Building;
-
 namespace Arinc424.Attributes;
+
+using Building;
 
 internal abstract class RecordAttribute : Attribute
 {

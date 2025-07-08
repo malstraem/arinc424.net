@@ -1,5 +1,3 @@
-using Arinc424.Ground;
-
 namespace Arinc424.Navigation;
 
 [Port(7, 10), Icao(11, 12), Identifier(14, 17), Continuous]
@@ -8,14 +6,14 @@ namespace Arinc424.Navigation;
 public abstract class LandingSystem : Fix
 {
     [Identifier(7, 10)]
-    public Port Port { get; set; }
+    public Ground.Port Port { get; set; }
 
     /// <inheritdoc cref="Terms.LandingType"/>
     [Character(18)]
     public Terms.LandingType Type { get; set; }
 
     [Identifier(28, 32)]
-    public RunwayThreshold Threshold { get; set; }
+    public Ground.RunwayThreshold Threshold { get; set; }
 
     /**<summary>
     <para>

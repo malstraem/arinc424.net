@@ -1,8 +1,6 @@
-using Arinc424.Navigation;
-
 namespace Arinc424.Ground;
 
-using Terms;
+using Navigation;
 
 /**<summary>
 <c>Airport</c> primary record.
@@ -19,9 +17,9 @@ public class Airport : Port
     [Field(28, 30), Integer]
     public int LongestRunwayLength { get; set; }
 
-    /// <inheritdoc cref="SurfaceType"/>
+    /// <inheritdoc cref="Terms.SurfaceType"/>
     [Character(32)]
-    public SurfaceType LongestRunwayType { get; set; }
+    public Terms.SurfaceType LongestRunwayType { get; set; }
 
     /// <summary>Associated gates.</summary>
     [Many]

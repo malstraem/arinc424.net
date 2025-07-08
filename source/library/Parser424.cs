@@ -1,9 +1,9 @@
 using System.Reflection;
 
-using Arinc424.Building;
-using Arinc424.Linking;
-
 namespace Arinc424;
+
+using Linking;
+using Building;
 
 internal class Parser424
 {

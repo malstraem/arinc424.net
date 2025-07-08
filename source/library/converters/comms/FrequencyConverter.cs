@@ -1,6 +1,6 @@
-namespace Arinc424.Converters;
-
 using static System.Globalization.NumberStyles;
+
+namespace Arinc424.Converters;
 
 /// <summary>Converter for <see cref="Frequency"/> since supplement 19.</summary>
 internal abstract class FrequencyConverterV19 : IStringConverter<Frequency>

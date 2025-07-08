@@ -1,5 +1,3 @@
-using Arinc424.Ground;
-
 namespace Arinc424.Navigation;
 
 /// <inheritdoc />
@@ -9,5 +7,5 @@ namespace Arinc424.Navigation;
 public class TerminalBeacon : Nondirect
 {
     [Identifier(7, 10)]
-    public Port Port { get; set; }
+    public Ground.Port Port { get; set; }
 }

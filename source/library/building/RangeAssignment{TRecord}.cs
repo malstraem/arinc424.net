@@ -1,9 +1,9 @@
 using System.Collections.Immutable;
 using System.Reflection;
 
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Building;
+
+using Diagnostics;
 
 [DebuggerDisplay($"{{{nameof(property)}}} - {{{nameof(range)}}}")]
 internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range range) : Assignment<TRecord>(property) where TRecord : Record424

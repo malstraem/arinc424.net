@@ -1,8 +1,8 @@
-using Arinc424.Building;
-using Arinc424.Diagnostics;
-using Arinc424.Ground;
-
 namespace Arinc424.Processing;
+
+using Ground;
+using Building;
+using Diagnostics;
 
 /**<summary>
 <see cref="Helipad"/> record did not exist prior to supplement 21, so this pipeline creates <see cref="Heliport">heliports</see>

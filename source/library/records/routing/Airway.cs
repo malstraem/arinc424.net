@@ -1,6 +1,6 @@
-using Arinc424.Processing;
-
 namespace Arinc424.Routing;
+
+using Processing;
 
 /**<summary>
 <c>Enroute Airways</c> primary record sequence.

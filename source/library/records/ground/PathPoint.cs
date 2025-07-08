@@ -1,8 +1,6 @@
 namespace Arinc424.Ground;
 
-using Arinc424.Procedures;
-
-using Terms;
+using Procedures;
 
 /**<summary>
 Fields of <c>GBAS Path Point</c> and <c>SBAS Path Point</c>.
@@ -37,7 +35,7 @@ public abstract class PathPoint : Fix
 
     /// <inheritdoc cref="Terms.ApproachPerformance"/>
     [Character(37)]
-    public ApproachPerformance ApproachPerformance { get; set; }
+    public Terms.ApproachPerformance ApproachPerformance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='EllipsoidalHeight']/*"/>
     [Field(61, 66), Float(10)]

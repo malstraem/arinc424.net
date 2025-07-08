@@ -1,6 +1,6 @@
-namespace Arinc424.Converters;
-
 using static System.Globalization.NumberStyles;
+
+namespace Arinc424.Converters;
 
 /**<summary>
 See section 5.36 and 5.37.

@@ -1,6 +1,6 @@
-using Arinc424.Processing;
-
 namespace Arinc424.Ground;
+
+using Processing;
 
 /**<summary>
 <c>Heliport</c> primary record.

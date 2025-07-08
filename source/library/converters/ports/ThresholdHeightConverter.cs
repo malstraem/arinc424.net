@@ -1,6 +1,6 @@
-namespace Arinc424.Converters;
-
 using static System.Globalization.NumberStyles;
+
+namespace Arinc424.Converters;
 
 /// <inheritdoc cref="Ground.PathPoint.ThresholdHeight"/>
 internal abstract class ThresholdHeightConverter : IStringConverter<Altitude>

@@ -1,8 +1,8 @@
 using System.Runtime.CompilerServices;
 
-using Arinc424.Building;
-
 namespace Arinc424.Processing;
+
+using Building;
 
 internal interface IPipeline
 {

@@ -1,6 +1,6 @@
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Building;
+
+using Diagnostics;
 
 /**<summary>
 Proxy to hold bad coded record with diagnostics.

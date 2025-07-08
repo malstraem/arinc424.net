@@ -1,6 +1,6 @@
-using Arinc424.Processing;
-
 namespace Arinc424.Attributes;
+
+using Processing;
 
 internal abstract class PipelineAttribute : SupplementAttribute
 {

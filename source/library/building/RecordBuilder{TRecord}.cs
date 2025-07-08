@@ -1,6 +1,6 @@
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Building;
+
+using Diagnostics;
 
 internal static class RecordBuilder<TRecord> where TRecord : Record424, new()
 {

@@ -1,9 +1,9 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Linking;
+
+using Diagnostics;
 
 internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo property, TypeAttribute typeAttribute)
     : Known<TRecord, TType>(info, property)

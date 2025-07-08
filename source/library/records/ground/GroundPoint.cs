@@ -1,5 +1,3 @@
-using Arinc424.Ground.Terms;
-
 namespace Arinc424.Ground;
 
 /**<summary>
@@ -9,7 +7,7 @@ namespace Arinc424.Ground;
 [Section('P', 'Q', subIndex: 13)]
 public class GroundPoint : PathPoint
 {
-    /// <inheritdoc cref="GroundOperationType"/>
+    /// <inheritdoc cref="Terms.GroundOperationType"/>
     [Field(25, 26)]
-    public GroundOperationType OperationType { get; set; }
+    public Terms.GroundOperationType OperationType { get; set; }
 }
