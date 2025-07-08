@@ -12,6 +12,5 @@ namespace Arinc424.Waypoints;
 public class TerminalWaypoint : Waypoint
 {
     [Identifier(7, 10), Icao(11, 12)]
-    [Possible<Airport, Heliport>]
     public Port Port { get; set; }
 }

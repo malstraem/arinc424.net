@@ -7,13 +7,12 @@ using Terms;
 /**<summary>
 Fields of <c>GBAS Path Point</c> and <c>SBAS Path Point</c>.
 </summary>*/
-[Icao(11, 12), Identifier(33, 36), Port(7, 10), Continuous(27)]
+[Port(7, 10), Icao(11, 12), Identifier(33, 36), Continuous(27)]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class PathPoint : Fix
 {
     [Identifier(7, 10)]
-    [Possible<Airport, Heliport>]
     public Port Port { get; set; }
 
     [Identifier(14, 19)]

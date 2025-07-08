@@ -17,7 +17,7 @@ public class InstrumentMarker : Fix
     public Port Port { get; set; }
 
     [Identifier(14, 17)]
-    public InstrumentLanding InstrumentLanding { get; set; }
+    public InstrumentLanding Landing { get; set; }
 
     /// <inheritdoc cref="MarkerType"/>
     [Field(18, 20)]

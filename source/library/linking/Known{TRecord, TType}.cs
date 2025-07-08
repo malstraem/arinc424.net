@@ -2,9 +2,9 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Linking;
+
+using Diagnostics;
 
 internal abstract class Link<TRecord> where TRecord : Record424
 {
@@ -38,8 +38,7 @@ internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Lin
             diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key };
             return false;
         }
-        // guarantee by design
-        set(record, Unsafe.As<TType>(referenced));
+        set(record, Unsafe.As<TType>(referenced)); /* guarantee by design */
 
         unique.meta.TypeInfo[type].Relations?.Process(referenced, record);
 

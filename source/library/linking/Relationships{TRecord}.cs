@@ -75,7 +75,7 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
     {
         List<Link<TRecord>> links = [];
 
-        Dictionary<Type, PropertyInfo> one = [], many = [];
+        Dictionary<Type, PropertyInfo> many = [];
 
         foreach (var property in typeof(TRecord).GetProperties())
         {
@@ -90,7 +90,7 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
                 many[property.PropertyType.GetElementType()!] = property;
             }
         }
-        return links is [] && one.Count == 0 && many.Count == 0 ? null : new Relationships<TRecord>([.. links])
+        return links.Count == 0 && many.Count == 0 ? null : new Relationships<TRecord>([.. links])
         {
             many = many.ToFrozenDictionary()
         };

@@ -2,7 +2,7 @@ namespace Arinc424.Navigation.Terms;
 
 /**<summary>
 Fourth character of <c>NAVAID Class (CLASS)</c> field,
-specific to <see cref="Omnidirectional"/>.
+specific to <see cref="Omnidirect"/>.
 </summary>
 <remarks>See section 5.35.</remarks>*/
 [Char, Transform<OmnidirectInfoConverter, OmnidirectInfo>]

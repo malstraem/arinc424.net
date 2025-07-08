@@ -37,7 +37,7 @@ public class Airport : Port
 
     /// <summary>Associated VHF Navaids.</summary>
     [Many]
-    public Omnidirectional[]? Omnidirectionals { get; set; }
+    public Omnidirect[]? Omnidirectionals { get; set; }
 
     /// <summary>Associated Localizer Markers.</summary>
     [Many]

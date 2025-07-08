@@ -15,8 +15,8 @@ public abstract class Navaid : Fix, INamed
 
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
     [Field(94, 123)]
-    [Field<Omnidirectional>(94, 123)]
-    [Field<Omnidirectional>(94, 122, Start = Supplement.V19)]
-    [Field<Omnidirectional>(94, 118, Start = Supplement.V20)]
+    [Field<Omnidirect>(94, 123)]
+    [Field<Omnidirect>(94, 122, Start = Supplement.V19)]
+    [Field<Omnidirect>(94, 118, Start = Supplement.V20)]
     public string? Name { get; set; }
 }

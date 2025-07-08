@@ -7,7 +7,7 @@ using Terms;
 </summary>
 <remarks>See section 4.1.3.1.</remarks>*/
 [Section('D', 'B'), Icao(20, 21)]
-public class Nondirectional : Navaid
+public class Nondirect : Navaid
 {
     /// <inheritdoc cref="NondirectType"/>
     [Field(28, 29)]

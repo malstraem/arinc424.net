@@ -18,6 +18,5 @@ namespace Arinc424.Comms;
 public class PortCommunication : Communication<PortTransmitter>
 {
     [Identifier(7, 10)]
-    [Possible<Airport, Heliport>]
     public Port Port { get; set; }
 }

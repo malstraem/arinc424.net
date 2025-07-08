@@ -13,7 +13,6 @@ public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdenti
     where TSub : ProcedurePoint
 {
     [Identifier(7, 10)]
-    [Possible<Airport, Heliport>]
     public Port Port { get; set; }
 
     [Field(11, 12)]

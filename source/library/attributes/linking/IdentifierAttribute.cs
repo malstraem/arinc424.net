@@ -1,8 +1,8 @@
 using System.Reflection;
 
-using Arinc424.Linking;
-
 namespace Arinc424.Attributes;
+
+using Linking;
 
 /// <summary>Specifies <see cref="IIdentity.Identifier"/> range for linking.</summary>
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
@@ -22,13 +22,11 @@ internal class IdentifierAttribute(int left, int right) : RangeAttribute(left, r
             Identifier = Range
         };
 
-        var possible = property.GetCustomAttribute<PossibleAttribute>();
-
-        if (possible is not null)
+        if (property.PropertyType == typeof(Ground.Port))
         {
             return (Link<TRecord>)Activator
-                .CreateInstance(typeof(Possible<,>)
-                    .MakeGenericType(typeof(TRecord), property.PropertyType), info, property, possible.Types)!;
+                .CreateInstance(typeof(Port<>)
+                    .MakeGenericType(typeof(TRecord)), info, property)!;
         }
 
         var typeAttribute = property.GetCustomAttributes<TypeAttribute>().BySupplement(supplement);

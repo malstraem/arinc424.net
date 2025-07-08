@@ -1,9 +1,9 @@
-using Arinc424.Comms;
-using Arinc424.Navigation;
-using Arinc424.Procedures;
-using Arinc424.Waypoints;
-
 namespace Arinc424.Ground;
+
+using Comms;
+using Waypoints;
+using Navigation;
+using Procedures;
 
 [Identifier(7, 10), Icao(11, 12), Continuous]
 
@@ -49,7 +49,7 @@ public abstract class Port : Fix, INamed
 
     /// <summary><c>Recommended NAVAID (RECD NAV)</c> field.</summary>
     [Identifier(65, 68), Icao(69, 70)]
-    public Omnidirectional? Recommended { get; set; }
+    public Omnidirect? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Transition']/*"/>
     [Field(71, 75), Integer]
@@ -94,10 +94,6 @@ public abstract class Port : Fix, INamed
     /// <summary>Associated SBAS points.</summary>
     [Many]
     public SatellitePoint[]? SatellitePoints { get; set; }
-
-    /// <summary>Associated GLSs.</summary>
-    [Many]
-    public GlobalLanding[]? GlobalLandings { get; set; }
 
     /// <summary>Associated STARs.</summary>
     [Many]

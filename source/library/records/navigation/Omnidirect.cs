@@ -9,7 +9,7 @@ using Terms;
 </summary>
 <remarks>See section 4.1.2.1.</remarks>*/
 [Section('D'), /*Port(7, 10) need more analysis */ Icao(20, 21)]
-public class Omnidirectional : Navaid
+public class Omnidirect : Navaid
 {
     [Identifier(7, 10)]
     public Port? Port { get; set; }

@@ -51,7 +51,7 @@ public class AirwayPoint : Record424, ISequenced
     public Bool HasRestrictions { get; set; }
 
     [Identifier(51, 54), Icao(55, 56)]
-    public Omnidirectional? Recommended { get; set; }
+    public Omnidirect? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>
     [Field(57, 59), Performance]

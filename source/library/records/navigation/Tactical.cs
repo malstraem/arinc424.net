@@ -30,7 +30,7 @@ public class Tactical : Navaid
     [Character(32)]
     public OmnidirectCollocation Collocation { get; set; }
 
-    /// <inheritdoc cref="Omnidirectional.EquipmentIdentifier"/>
+    /// <inheritdoc cref="Omnidirect.EquipmentIdentifier"/>
     [Field(52, 55)]
     public string TacanIdentifier { get; set; }
 
@@ -38,7 +38,7 @@ public class Tactical : Navaid
     [Field(75, 79)]
     public Declination Declination { get; set; }
 
-    /// <inheritdoc cref="Omnidirectional.EquipmentElevation"/>
+    /// <inheritdoc cref="Omnidirect.EquipmentElevation"/>
     [Field(80, 84), Integer]
     public int Elevation { get; set; }
 
@@ -46,7 +46,7 @@ public class Tactical : Navaid
     [Character(85)]
     public UsableRange Range { get; set; }
 
-    /// <inheritdoc cref="Omnidirectional.ProtectionDistance"/>
+    /// <inheritdoc cref="Omnidirect.ProtectionDistance"/>
     [Field(88, 90), Integer]
     public int ProtectionDistance { get; set; }
 }

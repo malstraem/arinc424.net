@@ -37,7 +37,7 @@ internal class Unique
         build.Diagnostics.Enqueue(new Duplicate(record, info.Composition.Top, key));
     }
 
-    private void Fill(Parser424 parser)
+    private void Fill(Dictionary<Section, Dictionary<Type, Queue<Build>>> builds)
     {
         RecordInfo airport = meta.TypeInfo[typeof(Airport)],
                    heliport = meta.TypeInfo[typeof(Heliport)];
@@ -45,14 +45,14 @@ internal class Unique
         Dictionary<string, Record424> ports = [];
         Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
-        foreach (var (section, info) in parser.meta.Info)
+        foreach (var (section, info) in meta.Info)
         {
             if (info.Primary is null)
                 continue;
 
             if (info == airport || info == heliport)
             {
-                foreach (var build in parser.builds[section][info.Composition.Top])
+                foreach (var build in builds[section][info.Composition.Top])
                     Process(build, info, ports);
 
                 continue;
@@ -63,9 +63,10 @@ internal class Unique
             if (!unique.TryGetValue(top, out var records))
                 unique[top] = records = [];
 
-            foreach (var build in parser.builds[section][top])
+            foreach (var build in builds[section][top])
                 Process(build, info, records);
         }
+        this.ports = ports.ToFrozenDictionary();
         this.unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary())).ToFrozenDictionary();
     }
 
@@ -73,10 +74,14 @@ internal class Unique
     {
         meta = parser.meta;
 
-        Fill(parser);
+        Fill(parser.builds);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool TryGetRecords(Type type, [NotNullWhen(true)] out FrozenDictionary<string, Record424>? records)
         => unique.TryGetValue(type, out records);
+
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool TryGetPort(string key, [NotNullWhen(true)] out Record424? port)
+        => ports.TryGetValue(key, out port);
 }

@@ -18,8 +18,8 @@ Record<OffrouteAltitude>,
 
 #region Navaid
 Record<Tactical>,
-Record<Nondirectional>,
-Record<Omnidirectional>,
+Record<Nondirect>,
+Record<Omnidirect>,
 #endregion
 
 #region Enroute

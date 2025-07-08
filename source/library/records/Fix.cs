@@ -14,8 +14,8 @@ public abstract class Fix : Geo, IIcao, IIdentity
     [Field<Waypoint>(20, 21)]
     [Field<SpecialArea>(14, 15)]
     [Field<AirwayMarker>(20, 21)]
-    [Field<Nondirectional>(20, 21)]
-    [Field<Omnidirectional>(20, 21)]
+    [Field<Nondirect>(20, 21)]
+    [Field<Omnidirect>(20, 21)]
     public Icao Icao { get; set; }
 
     /**<summary>
@@ -26,8 +26,8 @@ public abstract class Fix : Geo, IIcao, IIdentity
       <c>Fix Identifier (FIX IDENT)</c> field for <see cref="TerminalWaypoint"/> and <see cref="Waypoint"/>. See section 5.13.
     </para>
     <para>
-      <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field for <see cref="Omnidirectional"/>,
-      <see cref="Nondirectional"/> and <see cref="Tactical"/>. See section 5.33.
+      <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field for <see cref="Omnidirect"/>,
+      <see cref="Nondirect"/> and <see cref="Tactical"/>. See section 5.33.
     </para>
     <para>
       <c>Localizer/MLS/GLS Identifier (LOC, MLS, GLS IDENT)</c> field for <see cref="InstrumentLanding"/>, <see cref="InstrumentMarker"/>,

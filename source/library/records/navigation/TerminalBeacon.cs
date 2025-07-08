@@ -6,7 +6,7 @@ namespace Arinc424.Navigation;
 [Section('P', 'N'), Port(7, 10)]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
-public class TerminalBeacon : Nondirectional
+public class TerminalBeacon : Nondirect
 {
     [Identifier(7, 10)]
     public Port Port { get; set; }

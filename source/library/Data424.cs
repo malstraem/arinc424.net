@@ -1,16 +1,16 @@
 using System.Reflection;
 
-using Arinc424.Airspace;
-using Arinc424.Comms;
-using Arinc424.Navigation;
-using Arinc424.Ground;
-using Arinc424.Procedures;
-using Arinc424.Routing;
-using Arinc424.Tables;
-using Arinc424.Waypoints;
-using Arinc424.Building;
-
 namespace Arinc424;
+
+using Comms;
+using Ground;
+using Tables;
+using Routing;
+using Building;
+using Airspace;
+using Waypoints;
+using Procedures;
+using Navigation;
 
 /**<summary>
 Container that represents <c>ARINC 424</c> database.
@@ -50,14 +50,14 @@ public class Data424
     </summary>
     <remarks>Section <c>DB</c>.</remarks>*/
     [Section('D', 'B')]
-    public Nondirectional[] Nondirectionals { get; set; } = [];
+    public Nondirect[] Nondirectionals { get; set; } = [];
 
     /**<summary>
     <c>VHF Navaid</c> records.
     </summary>
     <remarks>Section <c>D</c>.</remarks>*/
     [Section('D')]
-    public Omnidirectional[] Omnidirectionals { get; set; } = [];
+    public Omnidirect[] Omnidirectionals { get; set; } = [];
     #endregion
 
     #region Enroute
