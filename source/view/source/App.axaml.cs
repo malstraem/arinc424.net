@@ -17,7 +17,7 @@ public partial class App : Application
         if (files is null)
             return;
 
-        ViewModel.Load(files.Select(x => x.Path.AbsolutePath).ToArray());
+        ViewModel.Load(files.Select(x => x.Path.LocalPath).ToArray());
     }
 
     public override void Initialize() => AvaloniaXamlLoader.Load(this);

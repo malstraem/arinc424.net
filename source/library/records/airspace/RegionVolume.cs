@@ -6,7 +6,7 @@ using Processing;
 <c>FIR/UIR</c> primary record sequence.
 </summary>
 <remarks>Used by <see cref="FlightRegion"/> like subsequence.</remarks>*/
-[Continuous(20), Pipeline<Sequence<RegionVolume, RegionPoint>>]
+[Pipeline<Sequence<RegionVolume, RegionPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]
 public class RegionVolume : Record424<RegionPoint>
