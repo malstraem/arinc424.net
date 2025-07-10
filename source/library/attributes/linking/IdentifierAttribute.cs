@@ -8,26 +8,15 @@ using Linking;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
 internal class IdentifierAttribute(int left, int right) : RangeAttribute(left, right)
 {
-    internal virtual Link<TRecord> GetLink<TRecord>(PropertyInfo property, Supplement supplement) where TRecord : Record424
+    internal Link<TRecord> GetLink<TRecord>(PropertyInfo property, IcaoAttribute? icao, PortAttribute? port, Supplement supplement)
+        where TRecord : Record424
     {
-        var type = typeof(TRecord);
-
-        var port = type.GetCustomAttributes<PortAttribute>().BySupplement(supplement)?.Range;
-        var icao = type.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range;
-
         LinkInfo info = new()
         {
-            Port = port,
-            Icao = property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range ?? icao,
+            Port = port?.Range,
+            Icao = property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range ?? icao?.Range,
             Identifier = Range
         };
-
-        if (property.PropertyType == typeof(Ground.Port))
-        {
-            return (Link<TRecord>)Activator
-                .CreateInstance(typeof(Port<>)
-                    .MakeGenericType(typeof(TRecord)), info, property)!;
-        }
 
         var typeAttribute = property.GetCustomAttributes<TypeAttribute>().BySupplement(supplement);
 

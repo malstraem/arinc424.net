@@ -9,6 +9,6 @@ namespace Arinc424.Waypoints;
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class TerminalWaypoint : Waypoint
 {
-    [Identifier(7, 10), Icao(11, 12)]
+    [Icao(11, 12)]
     public Ground.Port Port { get; set; }
 }

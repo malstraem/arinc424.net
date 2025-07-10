@@ -9,7 +9,6 @@ namespace Arinc424.Ground;
 [Port(7, 10), Icao(11, 12), Continuous(39)]
 public class MinimumAltitude : Record424, IMultiple
 {
-    [Identifier(7, 10)]
     public Port Port { get; set; }
 
     [Type(21, 22)]

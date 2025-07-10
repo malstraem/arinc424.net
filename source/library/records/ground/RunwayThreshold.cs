@@ -13,7 +13,6 @@ namespace Arinc424.Ground;
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class RunwayThreshold : Fix
 {
-    [Identifier(7, 10)]
     public Port Port { get; set; }
 
     /**<summary>

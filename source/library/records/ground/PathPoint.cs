@@ -10,7 +10,6 @@ Fields of <c>GBAS Path Point</c> and <c>SBAS Path Point</c>.
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class PathPoint : Fix
 {
-    [Identifier(7, 10)]
     public Port Port { get; set; }
 
     [Identifier(14, 19)]

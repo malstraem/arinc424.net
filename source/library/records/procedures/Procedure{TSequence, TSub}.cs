@@ -10,7 +10,6 @@ public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdenti
     where TSequence : ProcedureSequence<TSub>
     where TSub : ProcedurePoint
 {
-    [Identifier(7, 10)]
     public Ground.Port Port { get; set; }
 
     [Field(11, 12)]

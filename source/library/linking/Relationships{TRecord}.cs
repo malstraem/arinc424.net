@@ -73,17 +73,28 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
 
     internal static Relationships? Create(Supplement supplement)
     {
+        var type = typeof(TRecord);
+
+        var port = type.GetCustomAttribute<PortAttribute>();
+        var icao = type.GetCustomAttribute<IcaoAttribute>();
+
         List<Link<TRecord>> links = [];
 
         Dictionary<Type, PropertyInfo> many = [];
 
-        foreach (var property in typeof(TRecord).GetProperties())
+        foreach (var property in type.GetProperties())
         {
+            if (property.PropertyType == typeof(Ground.Port))
+            {
+                links.Add(port!.GetLink<TRecord>(property, icao!, supplement));
+                continue;
+            }
+
             var identifier = property.GetCustomAttributes<IdentifierAttribute>().BySupplement(supplement);
 
             if (identifier is not null)
             {
-                links.Add(identifier.GetLink<TRecord>(property, supplement));
+                links.Add(identifier.GetLink<TRecord>(property, icao, port, supplement));
             }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {

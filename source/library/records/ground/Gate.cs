@@ -4,12 +4,13 @@ namespace Arinc424.Ground;
 <c>Airport Gate</c> primary record.
 </summary>
 <remarks>See section 4.1.8.1.</remarks>*/
-[Section('P', 'B', subIndex: 13), Icao(11, 12), Continuous]
+[Section('P', 'B', subIndex: 13)]
+
+[Port(7, 10), Icao(11, 12), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class Gate : Fix, INamed
 {
-    [Identifier(7, 10)]
     public Port Port { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>

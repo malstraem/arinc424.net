@@ -6,17 +6,19 @@ namespace Arinc424.Linking;
 
 using Diagnostics;
 
-internal abstract class Link<TRecord> where TRecord : Record424
-{
-    internal abstract bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic);
-}
-
-internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Link<TRecord> where TRecord : Record424 where TType : class
+internal abstract class Link<TRecord>(LinkInfo info, PropertyInfo property) where TRecord : Record424
 {
     protected readonly Foreign foreign = new(info);
 
     protected readonly PropertyInfo property = property;
 
+    internal abstract bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic);
+}
+
+internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Link<TRecord>(info, property)
+    where TRecord : Record424
+    where TType : class
+{
     protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
     internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)

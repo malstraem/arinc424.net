@@ -4,10 +4,9 @@ namespace Arinc424.Navigation;
 <c>VHF NAVAID</c> primary record.
 </summary>
 <remarks>See section 4.1.2.1.</remarks>*/
-[Section('D'), /*Port(7, 10) need more analysis */ Icao(20, 21)]
+[Section('D'), Port(7, 10), Icao(20, 21)]
 public class Omnidirect : Navaid
 {
-    [Identifier(7, 10)]
     public Ground.Port? Port { get; set; }
 
     /// <inheritdoc cref="Terms.OmnidirectType"/>

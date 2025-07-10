@@ -5,7 +5,6 @@ namespace Arinc424.Navigation;
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public abstract class LandingSystem : Fix
 {
-    [Identifier(7, 10)]
     public Ground.Port Port { get; set; }
 
     /// <inheritdoc cref="Terms.LandingType"/>
