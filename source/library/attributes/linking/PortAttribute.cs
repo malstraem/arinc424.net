@@ -13,7 +13,7 @@ internal class PortAttribute(int left, int right) : RangeAttribute(left, right)
     internal Link<TRecord> GetLink<TRecord>(PropertyInfo property, IcaoAttribute icao, Supplement supplement)
         where TRecord : Record424
     {
-        LinkInfo info = new()
+        KeyInfo info = new()
         {
             Icao = property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement)?.Range ?? icao.Range,
             Identifier = Range
@@ -21,6 +21,6 @@ internal class PortAttribute(int left, int right) : RangeAttribute(left, right)
 
         return (Link<TRecord>)Activator
             .CreateInstance(typeof(Port<>)
-                .MakeGenericType(typeof(TRecord)), info, property)!;
+                .MakeGenericType(typeof(TRecord)), new Foreign(info), property)!;
     }
 }

@@ -3,7 +3,7 @@ namespace Arinc424.Procedures;
 /**<summary>
 Fields of <c>Airport</c> and <c>Heliport SID/STAR/Approach</c>.
 </summary>*/
-[Port(7, 10), Icao(11, 12), Identifier(14, 19), Continuous(39)]
+[Port(7, 10), Icao(11, 12), Known(14, 19), Continuous(39)]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Port)}}}")]
 public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdentity, IIcao

@@ -12,7 +12,7 @@ public class MinimumAltitude : Record424, IMultiple
     public Port Port { get; set; }
 
     [Type(21, 22)]
-    [Identifier(14, 18), Icao(19, 20)]
+    [Known(14, 18), Icao(19, 20)]
     public IIdentity Center { get; set; }
 
     [Character(23)]

@@ -50,14 +50,6 @@ internal class Unique
             if (info.Primary is null)
                 continue;
 
-            if (info == airport || info == heliport)
-            {
-                foreach (var build in builds[section][info.Composition.Top])
-                    Process(build, info, ports);
-
-                continue;
-            }
-
             var top = info.Composition.Top;
 
             if (!unique.TryGetValue(top, out var records))
@@ -65,6 +57,12 @@ internal class Unique
 
             foreach (var build in builds[section][top])
                 Process(build, info, records);
+
+            if (info == airport || info == heliport)
+            {
+                foreach (var build in builds[section][info.Composition.Top])
+                    Process(build, info, ports);
+            }
         }
         this.ports = ports.ToFrozenDictionary();
         this.unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary())).ToFrozenDictionary();

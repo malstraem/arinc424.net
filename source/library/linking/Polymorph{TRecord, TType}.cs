@@ -5,12 +5,17 @@ namespace Arinc424.Linking;
 
 using Diagnostics;
 
-internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo property, TypeAttribute typeAttribute)
-    : Known<TRecord, TType>(info, property)
+internal sealed class Polymorph<TRecord, TForeign, TType>(TForeign foreign, PropertyInfo property, TypeAttribute typeAttribute)
+    : Link<TRecord>(property)
         where TRecord : Record424
+        where TForeign : IPolymorphForeign<TForeign>
         where TType : class
 {
+    private readonly TForeign foreign = foreign;
+
     private readonly TypeAttribute typeAttribute = typeAttribute;
+
+    private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
     private bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type, Section)? reference, out Diagnostic? diagnostic)
     {
@@ -39,7 +44,7 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
             return false;
         }
 
-        if (foreign.TryGetKey(@string, primary, out string? key))
+        if (foreign.TryGetKey(@string, type, primary, out string? key))
         {
             reference = (key, type, section);
             return true;
@@ -56,7 +61,7 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
 
         if (!unique.TryGetRecords(type, out var records))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound);
+            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound) { Type = type };
             return false;
         }
         if (!records.TryGetValue(key, out var referenced))
@@ -64,7 +69,7 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
             diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound)
             {
                 Key = key,
-                Type = unique.meta.Types[section]
+                Type = type
             };
             return false;
         }
@@ -77,9 +82,6 @@ internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo prop
             return false;
         }
         set(record, @ref);
-
-        unique.meta.TypeInfo[type].Relations?.Process(referenced, record);
-
         return true;
     }
 }

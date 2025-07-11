@@ -1,12 +1,17 @@
 namespace Arinc424.Linking;
 
-internal abstract class Key(LinkInfo info)
+internal interface IKey
 {
-    protected LinkInfo info = info;
+    KeyInfo Info { get; }
+}
+
+internal abstract class Key(KeyInfo info) : IKey
+{
+    protected KeyInfo info = info;
 
     internal bool IsIcao = info.Icao is not null;
 
     internal bool IsPort = info.Port is not null;
 
-    internal LinkInfo Info => info;
+    public KeyInfo Info => info;
 }

@@ -27,7 +27,7 @@ internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wra
     where TSequence : Record424<TSub>, IIdentity, new()
     where TSub : Record424
 {
-    private readonly Range range = typeof(TSequence).GetCustomAttribute<IdentifierAttribute>()!.Range;
+    private readonly Range range = typeof(TSequence).GetCustomAttribute<KnownAttribute>()!.Range;
 
     protected override bool Trigger(TSub current, TSub next) => current.Source![range] != next.Source![range];
 }

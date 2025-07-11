@@ -9,10 +9,10 @@ namespace Arinc424.Navigation;
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class InstrumentMarker : Fix
 {
-    [Identifier(7, 10)]
+    [Known(7, 10)]
     public Ground.Port Port { get; set; }
 
-    [Identifier(14, 17)]
+    [Known(14, 17)]
     public InstrumentLanding Landing { get; set; }
 
     /// <inheritdoc cref="Terms.MarkerType"/>
@@ -23,7 +23,7 @@ public class InstrumentMarker : Fix
     [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
 
-    [Identifier(28, 32)]
+    [Known(28, 32)]
     public Ground.RunwayThreshold Threshold { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MinorAxis']/*"/>

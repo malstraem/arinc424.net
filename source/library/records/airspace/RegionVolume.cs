@@ -11,7 +11,7 @@ using Processing;
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]
 public class RegionVolume : Record424<RegionPoint>
 {
-    [Identifier(96, 97)]
+    [Known(96, 97)]
     public Tables.CruiseTable? CruiseTable { get; set; }
 
     /// <inheritdoc cref="Terms.RegionType"/>

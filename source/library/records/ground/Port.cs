@@ -5,7 +5,7 @@ using Waypoints;
 using Navigation;
 using Procedures;
 
-[Identifier(7, 10), Icao(11, 12), Continuous]
+[Known(7, 10), Icao(11, 12), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Name)} - {{{nameof(Name)},nq}}")]
 public abstract class Port : Fix, INamed
@@ -48,7 +48,7 @@ public abstract class Port : Fix, INamed
     public int SpeedLimit { get; set; }
 
     /// <summary><c>Recommended NAVAID (RECD NAV)</c> field.</summary>
-    [Identifier(65, 68), Icao(69, 70)]
+    [Known(65, 68), Icao(69, 70)]
     public Omnidirect? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Transition']/*"/>

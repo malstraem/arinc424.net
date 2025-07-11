@@ -15,7 +15,7 @@ public class AirwayPoint : Record424, ISequenced
     public int SeqNumber { get; set; }
 
     [Type(37, 38)]
-    [Identifier(30, 34), Icao(35, 36)]
+    [Known(30, 34), Icao(35, 36)]
     public Fix Fix { get; set; }
 
     /// <inheritdoc cref="Waypoints.Terms.WaypointDescriptions"/>
@@ -39,7 +39,7 @@ public class AirwayPoint : Record424, ISequenced
     public Terms.AirwayRestriction Restriction { get; set; }
 
     /// <inheritdoc cref="Tables.CruiseTable"/>
-    [Identifier(48, 49)]
+    [Known(48, 49)]
     public Tables.CruiseTable? CruiseTable { get; set; }
 
     /// <summary><c>EU Indicator (EU IND)</c> character.</summary>
@@ -47,7 +47,7 @@ public class AirwayPoint : Record424, ISequenced
     [Character(50)]
     public Bool HasRestrictions { get; set; }
 
-    [Identifier(51, 54), Icao(55, 56)]
+    [Known(51, 54), Icao(55, 56)]
     public Navigation.Omnidirect? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='RNP']/*"/>

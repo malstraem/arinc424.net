@@ -6,19 +6,13 @@ namespace Arinc424.Linking;
 
 using Diagnostics;
 
-internal abstract class Link<TRecord>(LinkInfo info, PropertyInfo property) where TRecord : Record424
-{
-    protected readonly Foreign foreign = new(info);
-
-    protected readonly PropertyInfo property = property;
-
-    internal abstract bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic);
-}
-
-internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Link<TRecord>(info, property)
+internal class Known<TRecord, TForeign, TType>(TForeign foreign, PropertyInfo property) : Link<TRecord>(property)
     where TRecord : Record424
+    where TForeign : IForeign<TForeign>
     where TType : class
 {
+    protected readonly TForeign foreign = foreign;
+
     protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
     internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
@@ -41,9 +35,6 @@ internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Lin
             return false;
         }
         set(record, Unsafe.As<TType>(referenced)); /* guarantee by design */
-
-        unique.meta.TypeInfo[type].Relations?.Process(referenced, record);
-
         return true;
     }
 }

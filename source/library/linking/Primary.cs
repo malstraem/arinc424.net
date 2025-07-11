@@ -3,16 +3,16 @@ using System.Reflection;
 
 namespace Arinc424.Linking;
 
-internal sealed class Primary(LinkInfo info) : Key(info)
+internal sealed class Primary(KeyInfo info) : Key(info)
 {
     internal static Primary? Create(Type type)
     {
-        var identifier = type.GetCustomAttribute<IdentifierAttribute>();
+        var identifier = type.GetCustomAttribute<KnownAttribute>();
 
         if (identifier is null)
             return null;
 
-        LinkInfo info = new()
+        KeyInfo info = new()
         {
             Port = type.GetCustomAttribute<PortAttribute>()?.Range,
             Icao = type.GetCustomAttribute<IcaoAttribute>()?.Range,
@@ -32,7 +32,7 @@ internal sealed class Primary(LinkInfo info) : Key(info)
             key += @string[info.Icao.Value].ToString();
 
         if (info.Port.HasValue)
-            key += @string[info.Port.Value].Trim().ToString();
+            key += @string[info.Port!.Value].Trim().ToString();
 
         return true;
     }

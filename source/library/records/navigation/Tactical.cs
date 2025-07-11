@@ -7,7 +7,7 @@ namespace Arinc424.Navigation;
 [Section('D', 'T'), Port(7, 10), Icao(11, 12)]
 public class Tactical : Navaid
 {
-    [Identifier(7, 10)]
+    [Known(7, 10)]
     public Ground.Port Port { get; set; }
 
     /// <inheritdoc cref="Terms.OmnidirectType"/>

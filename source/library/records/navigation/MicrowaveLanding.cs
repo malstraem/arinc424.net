@@ -99,6 +99,6 @@ public class MicrowaveLanding : LandingSystem
     public float MinimumGlideAngle { get; set; }
 
     [Type(122, 123)]
-    [Identifier(116, 119), Icao(120, 121)]
+    [Known(116, 119), Icao(120, 121)]
     public Fix? SupportingFacility { get; set; }
 }

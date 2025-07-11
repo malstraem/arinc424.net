@@ -1,6 +1,7 @@
 namespace Arinc424.Ground;
 
 using Procedures;
+using Linking;
 
 /**<summary>
 <c>Airport and Heliport TAA</c> primary record.
@@ -13,11 +14,11 @@ public class ArrivalAltitude : Record424
 {
     public Port Port { get; set; }
 
-    [Identifier(14, 19)]
+    [Known(14, 19)]
     public Approach Approach { get; set; }
 
     [Type(27, 28)]
-    [Identifier(20, 24), Icao(25, 26)]
+    [Polymorph<AltitudeCenterForeign>(20, 24), Icao(25, 26)]
     public Fix Fix { get; set; }
 
     /// <inheritdoc cref="Terms.FixPosition"/>

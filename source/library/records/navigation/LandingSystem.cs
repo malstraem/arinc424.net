@@ -1,6 +1,6 @@
 namespace Arinc424.Navigation;
 
-[Port(7, 10), Icao(11, 12), Identifier(14, 17), Continuous]
+[Port(7, 10), Icao(11, 12), Known(14, 17), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public abstract class LandingSystem : Fix
@@ -11,7 +11,7 @@ public abstract class LandingSystem : Fix
     [Character(18)]
     public Terms.LandingType Type { get; set; }
 
-    [Identifier(28, 32)]
+    [Known(28, 32)]
     public Ground.RunwayThreshold Threshold { get; set; }
 
     /**<summary>

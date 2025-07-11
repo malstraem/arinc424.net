@@ -21,7 +21,7 @@ public class PortTransmitter : Transmitter
     [Field(63, 68), Field(69, 74, Start = Supplement.V19)]
     public Sectorization? Sectorization { get; set; }
 
-    [Identifier(80, 83), Identifier(75, 78, Start = Supplement.V19)]
+    [Known(80, 83), Known(75, 78, Start = Supplement.V19)]
     [Icao(84, 85), Icao(79, 80, Start = Supplement.V19)]
     [Type(86, 87), Type(81, 82, Start = Supplement.V19)]
     public Fix? Facility { get; set; }

@@ -13,26 +13,6 @@ internal abstract class Relationships(Type type)
 #pragma warning restore CS8618
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 
-    internal void Process<TRecord>(Record424 self, TRecord referenced) where TRecord : Record424
-    {
-        var type = typeof(TRecord);
-
-        // todo: compiled one & many relations
-        if (!many.TryGetValue(type, out var property))
-            return;
-
-        if (property.GetValue(self) is not TRecord[] value)
-        {
-            property.SetValue(self, value = [referenced]);
-        }
-        else
-        {
-            Array.Resize(ref value, value.Length + 1);
-            value[^1] = referenced;
-            property.SetValue(self, value);
-        }
-    }
-
     internal static Relationships? Create(Type type, Supplement supplement)
         => (Relationships)typeof(Relationships<>)
             .MakeGenericType(type)!
@@ -59,7 +39,7 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
     {
         Queue<Diagnostic> diagnostics = [];
 
-        foreach (var build in (IEnumerable<Build<TRecord>>)builds)
+        foreach (var build in (IEnumerable<Build<TRecord>>)builds) /* guarantee by design */
         {
             Link(build.Record, unique, diagnostics);
 
@@ -90,7 +70,7 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
                 continue;
             }
 
-            var identifier = property.GetCustomAttributes<IdentifierAttribute>().BySupplement(supplement);
+            var identifier = property.GetCustomAttributes<KnownAttribute>().BySupplement(supplement);
 
             if (identifier is not null)
             {

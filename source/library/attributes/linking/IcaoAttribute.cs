@@ -1,7 +1,7 @@
 namespace Arinc424.Attributes;
 
 /**<summary>
-Specifies <c>ICAO Code</c> range.
+Specifies <see cref="Icao"/> range.
 </summary>*/
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
 internal class IcaoAttribute(int left, int right) : RangeAttribute(left, right);

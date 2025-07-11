@@ -12,7 +12,7 @@ public abstract class ProcedurePoint : Record424, ISequenced
     public int SeqNumber { get; set; }
 
     [Type(37, 38)]
-    [Identifier(30, 34), Icao(35, 36)]
+    [Known(30, 34), Icao(35, 36)]
     public Fix? Fix { get; set; }
 
     /// <inheritdoc cref="Waypoints.Terms.WaypointDescriptions"/>
@@ -38,7 +38,7 @@ public abstract class ProcedurePoint : Record424, ISequenced
     public Bool IsTurnRequired { get; set; }
 
     [Type(79, 80)]
-    [Identifier(51, 54), Icao(55, 56)]
+    [Known(51, 54), Icao(55, 56)]
     public Fix? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>
