@@ -1,6 +1,6 @@
 namespace Arinc424.Navigation;
 
-[Port(7, 10), Icao(11, 12), Known(14, 17), Continuous]
+[Port(7, 10), Icao(11, 12), Id(14, 17), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public abstract class LandingSystem : Fix

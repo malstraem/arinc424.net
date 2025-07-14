@@ -2,21 +2,25 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Arinc424.Linking;
 
-internal class Foreign(KeyInfo info) : Key(info), IForeign<Foreign>
+internal class Foreign : IForeign
 {
-    public static Foreign Create(KeyInfo info) => new(info);
-
-    public bool TryGetKey(ReadOnlySpan<char> @string, Key primary, [NotNullWhen(true)] out string? key)
+    public static bool TryGetKey
+    (
+        ReadOnlySpan<char> @string,
+        in KeyInfo info,
+        in KeyInfo primary,
+        [NotNullWhen(true)] out string? key
+    )
     {
-        key = @string[info.Identifier].Trim().ToString();
+        key = @string[info.Id].Trim().ToString();
 
         if (string.IsNullOrEmpty(key))
             return false;
 
-        if (IsIcao && primary.IsIcao)
+        if (info.IsIcao && primary.IsIcao)
             key += @string[info.Icao!.Value].ToString();
 
-        if (IsPort && primary.IsPort)
+        if (info.IsPort && primary.IsPort)
             key += @string[info.Port!.Value].Trim().ToString();
 
         return true;

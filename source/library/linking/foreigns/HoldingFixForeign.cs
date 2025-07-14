@@ -2,15 +2,20 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Arinc424.Linking;
 
-internal class HoldingFixForeign(KeyInfo info) : Key(info), IPolymorphForeign<HoldingFixForeign>
+internal class HoldingFixForeign : IPolymorphForeign
 {
     private static readonly Range range = 10..12;
 
-    public static HoldingFixForeign Create(KeyInfo info) => new(info);
-
-    public bool TryGetKey(ReadOnlySpan<char> @string, Type type, Key primary, [NotNullWhen(true)] out string? key)
+    public static bool TryGetKey
+    (
+        ReadOnlySpan<char> @string,
+        in KeyInfo info,
+        in KeyInfo primary,
+        Type type,
+        [NotNullWhen(true)] out string? key
+    )
     {
-        key = @string[info.Identifier].Trim().ToString();
+        key = @string[info.Id].Trim().ToString();
 
         if (string.IsNullOrEmpty(key))
             return false;

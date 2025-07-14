@@ -3,26 +3,26 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Building;
 
-using Linking;
 using Diagnostics;
 
 /**<summary>
 How an entity (primary record) should be created and processed.
 </summary>*/
-internal abstract class RecordInfo(Composition composition, SectionAttribute[] sections)
+internal abstract class RecordInfo(Supplement supplement, Composition composition, SectionAttribute[] sections)
 {
-    internal static RecordInfo Create(Type type, Supplement supplement)
+    private static RecordInfo Create(Type type, Supplement supplement)
     {
         var composition = type.GetComposition(supplement);
 
         var continuations = Continuations.Create(composition, supplement);
 
+        // take only top level section attributes
+        var sections = type.GetCustomAttributes<SectionAttribute>(false).ToArray();
+
         // take only low level composition type
         var constructor = typeof(RecordInfo<>)
             .MakeGenericType(composition.Low)
                 .GetConstructor([typeof(Supplement), typeof(Composition), typeof(Continuations), typeof(SectionAttribute[])])!;
-
-        var sections = type.GetCustomAttributes<SectionAttribute>(false).ToArray(); // take only top level attributes
 
         return (RecordInfo)constructor.Invoke([supplement, composition, continuations, sections]);
     }
@@ -31,17 +31,25 @@ internal abstract class RecordInfo(Composition composition, SectionAttribute[] s
 
     internal abstract Queue<Build> Build(Queue<string> strings);
 
-    internal Primary? Primary { get; } = Primary.Create(composition.Top);
+    internal KeyInfo? Primary { get; } = composition.Top.GetCustomAttributes<IdAttribute>().BySupplement(supplement)?.GetInfo
+    (
+        composition.Top.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement),
+        composition.Top.GetCustomAttributes<PortAttribute>().BySupplement(supplement)
+    );
 
     internal Composition Composition { get; } = composition;
-
-    internal Relationships? Relations { get; } = composition.Relations.FirstOrDefault(x => x.Type == composition.Top);
 
     internal SectionAttribute[] Sections { get; } = sections;
 }
 
-internal sealed class RecordInfo<TRecord>(Supplement supplement, Composition composition, Continuations? continuations, SectionAttribute[] sections)
-    : RecordInfo(composition, sections) where TRecord : Record424, new()
+internal sealed class RecordInfo<TRecord>
+(
+    Supplement supplement,
+    Composition composition,
+    Continuations? continuations,
+    SectionAttribute[] sections
+)
+    : RecordInfo(supplement, composition, sections) where TRecord : Record424, new()
 {
     private readonly BuildInfo<TRecord> info = new(supplement);
 

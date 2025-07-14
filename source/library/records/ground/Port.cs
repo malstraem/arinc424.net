@@ -5,7 +5,7 @@ using Waypoints;
 using Navigation;
 using Procedures;
 
-[Known(7, 10), Icao(11, 12), Continuous]
+[Id(7, 10), Icao(11, 12), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Name)} - {{{nameof(Name)},nq}}")]
 public abstract class Port : Fix, INamed

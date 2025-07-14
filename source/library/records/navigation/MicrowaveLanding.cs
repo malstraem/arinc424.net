@@ -98,7 +98,6 @@ public class MicrowaveLanding : LandingSystem
     [Field(113, 115), Float(100)]
     public float MinimumGlideAngle { get; set; }
 
-    [Type(122, 123)]
-    [Known(116, 119), Icao(120, 121)]
+    [Polymorph(116, 119), Icao(120, 121), Type(122, 123)]
     public Fix? SupportingFacility { get; set; }
 }

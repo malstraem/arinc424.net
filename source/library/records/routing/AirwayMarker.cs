@@ -4,7 +4,7 @@ namespace Arinc424.Routing;
 <c>Airways Marker</c> primary record.
 </summary>
 <remarks>See section 4.1.15.1.</remarks>*/
-[Section('E', 'M'), Known(14, 17), Continuous]
+[Section('E', 'M'), Id(14, 17), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public class AirwayMarker : Fix, INamed

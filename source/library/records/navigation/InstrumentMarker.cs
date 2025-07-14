@@ -9,7 +9,6 @@ namespace Arinc424.Navigation;
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class InstrumentMarker : Fix
 {
-    [Known(7, 10)]
     public Ground.Port Port { get; set; }
 
     [Known(14, 17)]

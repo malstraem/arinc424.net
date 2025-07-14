@@ -55,8 +55,8 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
     {
         var type = typeof(TRecord);
 
-        var port = type.GetCustomAttribute<PortAttribute>();
-        var icao = type.GetCustomAttribute<IcaoAttribute>();
+        var port = type.GetCustomAttributes<PortAttribute>().BySupplement(supplement);
+        var icao = type.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement);
 
         List<Link<TRecord>> links = [];
 
@@ -66,15 +66,15 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
         {
             if (property.PropertyType == typeof(Ground.Port))
             {
-                links.Add(port!.GetLink<TRecord>(property, icao!, supplement));
+                links.Add(port!.GetLink<TRecord>(property, supplement, icao!, null));
                 continue;
             }
 
-            var identifier = property.GetCustomAttributes<KnownAttribute>().BySupplement(supplement);
+            var link = property.GetCustomAttributes<LinkAttribute>().BySupplement(supplement);
 
-            if (identifier is not null)
+            if (link is not null)
             {
-                links.Add(identifier.GetLink<TRecord>(property, icao, port, supplement));
+                links.Add(link.GetLink<TRecord>(property, supplement, icao, port));
             }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {

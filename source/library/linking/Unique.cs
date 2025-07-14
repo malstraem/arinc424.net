@@ -24,7 +24,7 @@ internal class Unique
     {
         var record = build.Record;
 
-        if (!info.Primary!.TryGetKey(record.Source, out string? key))
+        if (!info.Primary!.Value.TryGetKey(record.Source, out string? key))
         {
             Debug.WriteLine("oops");
             return;

@@ -1,6 +1,6 @@
 namespace Arinc424.Navigation;
 
-[Known(14, 17), Continuous]
+[Id(14, 17), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class Navaid : Fix, INamed

@@ -5,14 +5,12 @@ namespace Arinc424.Linking;
 
 using Diagnostics;
 
-internal sealed class Polymorph<TRecord, TForeign, TType>(TForeign foreign, PropertyInfo property, TypeAttribute typeAttribute)
-    : Link<TRecord>(property)
+internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property, TypeAttribute typeAttribute, in KeyInfo info)
+    : Link<TRecord>(property, in info)
         where TRecord : Record424
-        where TForeign : IPolymorphForeign<TForeign>
+        where TForeign : IPolymorphForeign
         where TType : class
 {
-    private readonly TForeign foreign = foreign;
-
     private readonly TypeAttribute typeAttribute = typeAttribute;
 
     private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
@@ -40,11 +38,11 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(TForeign foreign, Prop
 
         if (primary is null)
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoPrimary);
+            diagnostic = new InvalidLink(record, property, in info, LinkError.NoPrimary);
             return false;
         }
 
-        if (foreign.TryGetKey(@string, type, primary, out string? key))
+        if (TForeign.TryGetKey(@string, in info, primary.Value, type, out string? key))
         {
             reference = (key, type, section);
             return true;
@@ -61,12 +59,12 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(TForeign foreign, Prop
 
         if (!unique.TryGetRecords(type, out var records))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound) { Type = type };
+            diagnostic = new InvalidLink(record, property, in info, LinkError.NoOneFound) { Type = type };
             return false;
         }
         if (!records.TryGetValue(key, out var referenced))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound)
+            diagnostic = new InvalidLink(record, property, in info, LinkError.KeyNotFound)
             {
                 Key = key,
                 Type = type
@@ -75,7 +73,7 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(TForeign foreign, Prop
         }
         if (referenced is not TType @ref)
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.WrongType)
+            diagnostic = new InvalidLink(record, property, in info, LinkError.WrongType)
             {
                 Type = type
             };

@@ -19,7 +19,7 @@ public class ControlledVolume : Volume
     <c>Controlled Airspace Center (ARSP CNTR)</c> field.
     </summary>
     <remarks>See section 5.214.</remarks>*/
-    [Known(10, 14), Type(15, 16)]
+    [Polymorph(10, 14), Type(15, 16)]
     public IIdentity Center { get; set; }
 
     /// <inheritdoc cref="Terms.AirspaceClass"/>

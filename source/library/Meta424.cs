@@ -101,24 +101,24 @@ public class Meta424
         List<SectionAttribute> sections = [];
         Dictionary<Section, Type> types = [];
         Dictionary<Type, RecordInfo> typeInfo = [];
-        Dictionary<Section, RecordInfo> info = [];
+        Dictionary<Section, RecordInfo> sectionInfo = [];
 
         var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
 
-        foreach (var attribute in attributes.Select(x => x.GetInfo(supplement)))
+        foreach (var info in attributes.Select(x => x.GetInfo(supplement)))
         {
-            foreach (var section in attribute.Sections)
+            foreach (var section in info.Sections)
             {
-                info.Add(section.Value, attribute);
-                types.Add(section.Value, attribute.Composition.Top);
+                types.Add(section.Value, info.Composition.Top);
                 sections.Add(section);
+                sectionInfo.Add(section.Value, info);
             }
             // types with multiple sections will be stored once
-            _ = typeInfo.TryAdd(attribute.Composition.Top, attribute);
+            _ = typeInfo.TryAdd(info.Composition.Top, info);
         }
         return new Meta424()
         {
-            Info = info.ToFrozenDictionary(),
+            Info = sectionInfo.ToFrozenDictionary(),
             Types = types.ToFrozenDictionary(),
             TypeInfo = typeInfo.ToFrozenDictionary(),
             Sections = [.. sections]

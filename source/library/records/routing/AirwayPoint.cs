@@ -14,8 +14,7 @@ public class AirwayPoint : Record424, ISequenced
     [Field(26, 29), Integer]
     public int SeqNumber { get; set; }
 
-    [Type(37, 38)]
-    [Known(30, 34), Icao(35, 36)]
+    [Polymorph(30, 34), Icao(35, 36), Type(37, 38)]
     public Fix Fix { get; set; }
 
     /// <inheritdoc cref="Waypoints.Terms.WaypointDescriptions"/>

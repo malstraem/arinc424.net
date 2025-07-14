@@ -6,7 +6,7 @@ using Processing;
 Multiple <c>FIR/UIR</c> primary record sequences.
 </summary>
 <remarks>See section 4.1.17.1.</remarks>*/
-[Section('U', 'F'), Known(7, 10), Continuous(20)]
+[Section('U', 'F'), Id(7, 10), Continuous(20)]
 
 [Pipeline<IdentityWrap<FlightRegion, RegionVolume>>]
 

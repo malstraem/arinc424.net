@@ -5,16 +5,17 @@ namespace Arinc424.Linking;
 
 using Diagnostics;
 
-internal sealed class Port<TRecord>(Foreign foreign, PropertyInfo property) : Known<TRecord, Foreign, Ground.Port>(foreign, property)
+internal sealed class Port<TRecord>(PropertyInfo property, in KeyInfo primary, in KeyInfo info)
+    : Known<TRecord, Foreign, Ground.Port>(property, in info)
     where TRecord : Record424
 {
-    private static readonly Primary primary = Primary.Create(typeof(Ground.Port))!;
+    private readonly KeyInfo primary = primary;
 
     internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
         diagnostic = null;
 
-        if (!foreign.TryGetKey(record.Source, primary, out string? key))
+        if (!Foreign.TryGetKey(record.Source, in info, in primary, out string? key))
             return true;
 
         if (unique.TryGetPort(key, out var port))
@@ -22,7 +23,7 @@ internal sealed class Port<TRecord>(Foreign foreign, PropertyInfo property) : Kn
             set(record, (Ground.Port)port); /* guarantee by design */
             return true;
         }
-        diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound);
+        diagnostic = new InvalidLink(record, property, in info, LinkError.NoOneFound);
         return false;
     }
 }

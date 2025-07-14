@@ -6,13 +6,11 @@ namespace Arinc424.Linking;
 
 using Diagnostics;
 
-internal class Known<TRecord, TForeign, TType>(TForeign foreign, PropertyInfo property) : Link<TRecord>(property)
+internal class Known<TRecord, TForeign, TType>(PropertyInfo property, in KeyInfo info) : Link<TRecord>(property, in info)
     where TRecord : Record424
-    where TForeign : IForeign<TForeign>
+    where TForeign : IForeign
     where TType : class
 {
-    protected readonly TForeign foreign = foreign;
-
     protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
     internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
@@ -21,17 +19,19 @@ internal class Known<TRecord, TForeign, TType>(TForeign foreign, PropertyInfo pr
 
         var type = property.PropertyType;
 
-        if (!foreign.TryGetKey(record.Source!, unique.meta.TypeInfo[type].Primary! /* guarantee by design */, out string? key))
+        var primary = unique.meta.TypeInfo[type].Primary!.Value; /* guarantee by design */
+
+        if (!TForeign.TryGetKey(record.Source!, in info, in primary, out string? key))
             return true;
 
         if (!unique.TryGetRecords(type, out var records))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound);
+            diagnostic = new InvalidLink(record, property, in info, LinkError.NoOneFound);
             return false;
         }
         if (!records.TryGetValue(key, out var referenced))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key };
+            diagnostic = new InvalidLink(record, property, in info, LinkError.KeyNotFound) { Key = key };
             return false;
         }
         set(record, Unsafe.As<TType>(referenced)); /* guarantee by design */

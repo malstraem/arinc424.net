@@ -6,7 +6,7 @@ using Processing;
 <c>Cruising Table</c> record sequence.
 </summary>
 <remarks>See section 4.1.16.1.</remarks>*/
-[Section('T', 'C'), Known(7, 8)]
+[Section('T', 'C'), Id(7, 8)]
 
 [Pipeline<IdentityWrap<CruiseTable, CruiseRow>>]
 

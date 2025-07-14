@@ -14,7 +14,7 @@ internal sealed class PipelineAttribute<TPipeline> : PipelineAttribute where TPi
     {
         var type = typeof(TPipeline);
 
-        var constructor = type.GetConstructor([typeof(Supplement)]);
+        var constructor = typeof(TPipeline).GetConstructor([typeof(Supplement)]);
 
         /* guarantee by design */
         return (IPipeline)
