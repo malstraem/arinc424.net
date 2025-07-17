@@ -33,7 +33,7 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
         var result = decode.Convert(@field);
 
         if (result.Invalid)
-            diagnostics.Enqueue(new InvalidValue(record, property, result.Bad.ToImmutableArray(), range));
+            diagnostics.Enqueue(new BadValue(record, property, result.Bad.ToImmutableArray(), range));
         else
             set(record, result.Value);
     }

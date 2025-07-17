@@ -11,5 +11,15 @@ internal abstract class Link<TRecord>(PropertyInfo property, in KeyInfo info) wh
 
     protected readonly PropertyInfo property = property;
 
+    protected BadLink BadLink(TRecord record, Type type, LinkError error, string? key = null) => new()
+    {
+        Info = info,
+        Property = property,
+        Key = key,
+        Type = type,
+        Error = error,
+        Record = record
+    };
+
     internal abstract bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic);
 }

@@ -4,6 +4,5 @@ public enum LinkError
 {
     WrongType,
     NoPrimary,
-    NoOneFound,
     KeyNotFound
 }

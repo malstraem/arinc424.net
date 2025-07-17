@@ -24,7 +24,9 @@ internal class Unique
     {
         var record = build.Record;
 
-        if (!info.Primary!.Value.TryGetKey(record.Source, out string? key))
+        var primary = info.Primary!.Value;
+
+        if (!primary.TryGetKey(record.Source, out string? key))
         {
             Debug.WriteLine("oops");
             return;
@@ -34,7 +36,13 @@ internal class Unique
             return;
 
         build.Diagnostics ??= [];
-        build.Diagnostics.Enqueue(new Duplicate(record, info.Composition.Top, key));
+        build.Diagnostics.Enqueue(new Duplicate
+        {
+            Record = record,
+            Type = info.Composition.Top,
+            Key = key,
+            Info = primary
+        });
     }
 
     private void Fill(Dictionary<Section, Dictionary<Type, Queue<Build>>> builds)

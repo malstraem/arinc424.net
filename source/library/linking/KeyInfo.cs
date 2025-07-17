@@ -24,6 +24,41 @@ public readonly struct KeyInfo(Range id, Range? icao, Range? port)
         return true;
     }
 
+    internal bool TryGetKey
+    (
+        ReadOnlySpan<char> @string,
+        ref readonly KeyInfo primary,
+        [NotNullWhen(true)] out string? key
+    )
+    {
+        key = @string[Id].Trim().ToString();
+
+        if (string.IsNullOrEmpty(key))
+            return false;
+
+        if (IsIcao && primary.IsIcao)
+            key += @string[Icao!.Value].ToString();
+
+        if (IsPort && primary.IsPort)
+            key += @string[Port!.Value].Trim().ToString();
+
+        return true;
+    }
+
+    internal string GetKeyWithoutPort
+    (
+        ReadOnlySpan<char> @string,
+        ref readonly KeyInfo primary,
+        [NotNullWhen(true)] out string? key)
+    {
+        key = @string[Id].Trim().ToString();
+
+        if (IsIcao && primary.IsIcao)
+            key += @string[Icao!.Value].ToString();
+
+        return key;
+    }
+
     internal bool IsIcao => Icao.HasValue;
 
     internal bool IsPort => Port.HasValue;

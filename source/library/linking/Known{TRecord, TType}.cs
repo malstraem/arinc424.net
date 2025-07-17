@@ -15,8 +15,6 @@ internal class Known<TRecord, TForeign, TType>(PropertyInfo property, in KeyInfo
 
     internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        diagnostic = null;
-
         var type = property.PropertyType;
 
         var primary = unique.meta.TypeInfo[type].Primary!.Value; /* guarantee by design */
@@ -24,17 +22,14 @@ internal class Known<TRecord, TForeign, TType>(PropertyInfo property, in KeyInfo
         if (!TForeign.TryGetKey(record.Source!, in info, in primary, out string? key))
             return true;
 
-        if (!unique.TryGetRecords(type, out var records))
+        if (unique.TryGetRecords(type, out var records)
+         && records.TryGetValue(key, out var referenced))
         {
-            diagnostic = new InvalidLink(record, property, in info, LinkError.NoOneFound);
-            return false;
+            set(record, Unsafe.As<TType>(referenced)); /* guarantee by design */
+            diagnostic = null;
+            return true;
         }
-        if (!records.TryGetValue(key, out var referenced))
-        {
-            diagnostic = new InvalidLink(record, property, in info, LinkError.KeyNotFound) { Key = key };
-            return false;
-        }
-        set(record, Unsafe.As<TType>(referenced)); /* guarantee by design */
-        return true;
+        diagnostic = BadLink(record, type, LinkError.KeyNotFound);
+        return false;
     }
 }

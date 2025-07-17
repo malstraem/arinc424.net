@@ -10,5 +10,5 @@ internal class SectionAttribute(char section, char subsection = (char)32, int in
 {
     internal Section Value { get; } = new(section, subsection);
 
-    internal bool IsMatch(string @string) => @string[sectionIndex] == Value.Char && @string[subsectionIndex] == Value.Subchar;
+    internal bool IsMatch(string @string) => @string[index] == Value.Char && @string[subIndex] == Value.Subchar;
 }

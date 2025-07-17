@@ -23,7 +23,7 @@ internal sealed class Port<TRecord>(PropertyInfo property, in KeyInfo primary, i
             set(record, (Ground.Port)port); /* guarantee by design */
             return true;
         }
-        diagnostic = new InvalidLink(record, property, in info, LinkError.NoOneFound);
+        diagnostic = new BadLink(record, property, in info, LinkError.NoOneFound);
         return false;
     }
 }

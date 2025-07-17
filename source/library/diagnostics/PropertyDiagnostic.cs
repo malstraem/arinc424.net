@@ -2,7 +2,7 @@ using System.Reflection;
 
 namespace Arinc424.Diagnostics;
 
-public abstract class PropertyDiagnostic(DiagnosticType type, Record424 record, PropertyInfo property) : Diagnostic(type, record)
+public abstract record PropertyDiagnostic : Diagnostic
 {
-    public PropertyInfo Property { get; } = property;
+    public required PropertyInfo Property { get; init; }
 }

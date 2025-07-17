@@ -4,17 +4,17 @@ namespace Arinc424.Attributes;
 Specifies indexes of section and subsection code to define related entity type.
 </summary>*/
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-internal class TypeAttribute(int sectionIndex, int subsectionIndex) : SupplementAttribute
+internal class TypeAttribute(int index, int subIndex) : SupplementAttribute
 {
     /// <summary>Index of the section character.</summary>
-    protected int sectionIndex = sectionIndex - 1;
+    protected int index = index - 1;
 
     /// <summary>Index of the subsection character.</summary>
-    protected int subsectionIndex = subsectionIndex - 1;
+    protected int subIndex = subIndex - 1;
 
     internal void Deconstruct(out int index, out int subIndex)
     {
-        index = sectionIndex;
-        subIndex = subsectionIndex;
+        index = this.index;
+        subIndex = this.subIndex;
     }
 }

@@ -1,9 +1,6 @@
-using System.Reflection;
-
 namespace Arinc424.Diagnostics;
 
-public abstract class RangeDiagnostic(DiagnosticType type, Record424 record, PropertyInfo property, Range range)
-    : PropertyDiagnostic(type, record, property)
+public abstract record RangeDiagnostic : PropertyDiagnostic
 {
-    public Range Range { get; } = range;
+    public required Range Range { get; init; }
 }

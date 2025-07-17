@@ -3,9 +3,11 @@ using System.Reflection;
 
 namespace Arinc424.Linking;
 
+using System.Runtime.CompilerServices;
+
 using Diagnostics;
 
-internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property, TypeAttribute typeAttribute, in KeyInfo info)
+internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property, TypeAttribute typeAttribute, ref readonly KeyInfo info)
     : Link<TRecord>(property, in info)
         where TRecord : Record424
         where TForeign : IPolymorphForeign
@@ -15,9 +17,24 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
 
     private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
-    private bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type, Section)? reference, out Diagnostic? diagnostic)
+    private BadSection BadSection(TRecord record, Section section, int index, int subIndex) => new()
     {
-        reference = null;
+        Property = property,
+        Section = section,
+        Record = record,
+        Index = index,
+        SubIndex = subIndex
+    };
+
+    private bool TryGetType
+    (
+        TRecord record,
+        Meta424 meta,
+        [NotNullWhen(true)] out (Type, Section, KeyInfo)? typeInfo,
+        out Diagnostic? diagnostic
+    )
+    {
+        typeInfo = null;
         diagnostic = null;
 
         string @string = record.Source!;
@@ -31,55 +48,77 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
 
         if (!meta.Types.TryGetValue(section, out var type))
         {
-            diagnostic = new InvalidSection(record, property, index, subindex);
+            diagnostic = BadSection(record, section, index, subindex);
             return false;
         }
+
         var primary = meta.TypeInfo[type].Primary;
 
         if (primary is null)
         {
-            diagnostic = new InvalidLink(record, property, in info, LinkError.NoPrimary);
+            diagnostic = BadLink(record, type, LinkError.NoPrimary);
+            return false;
+        }
+        typeInfo = (type, section, primary.Value);
+        return true;
+    }
+
+    private bool TryGetReference
+    (
+        TRecord record,
+        Unique unique,
+        Type type,
+        ref readonly KeyInfo primary,
+        [NotNullWhen(true)] out TType? reference,
+        [NotNullWhen(false)] out Diagnostic? diagnostic
+    )
+    {
+        if (!info.TryGetKey(record.Source, in primary, out string? key))
+        {
+            reference = null;
+            diagnostic = null; // todo
             return false;
         }
 
-        if (TForeign.TryGetKey(@string, in info, primary.Value, type, out string? key))
+        if (!unique.TryGetRecords(type, out var records))
         {
-            reference = (key, type, section);
-            return true;
+            diagnostic = BadLink(record, type, LinkError.KeyNotFound, key);
+            reference = null;
+            return false;
         }
-        return false;
+
+        if (!records.TryGetValue(key, out var @ref)
+         && !records.TryGetValue(info.GetKeyWithoutPort(record.Source, in primary, out key), out @ref))
+        {
+            diagnostic = BadLink(record, type, LinkError.KeyNotFound, key);
+            reference = null;
+            return false;
+        }
+
+        if (@ref is not TType)
+        {
+            diagnostic = BadLink(record, type, LinkError.WrongType);
+            reference = null;
+            return false;
+        }
+        reference = Unsafe.As<TType>(@ref);
+        diagnostic = null;
+        return true;
     }
 
     internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        if (!TryGetReference(record, unique.meta, out var reference, out diagnostic))
-            return diagnostic is null;
+        if (!TryGetType(record, unique.meta, out var typeInfo, out diagnostic))
+        {
+            return false; // todo
+        }
 
-        (string key, var type, var section) = reference.Value;
+        var (type, section, primary) = typeInfo.Value;
 
-        if (!unique.TryGetRecords(type, out var records))
-        {
-            diagnostic = new InvalidLink(record, property, in info, LinkError.NoOneFound) { Type = type };
-            return false;
-        }
-        if (!records.TryGetValue(key, out var referenced))
-        {
-            diagnostic = new InvalidLink(record, property, in info, LinkError.KeyNotFound)
-            {
-                Key = key,
-                Type = type
-            };
-            return false;
-        }
-        if (referenced is not TType @ref)
-        {
-            diagnostic = new InvalidLink(record, property, in info, LinkError.WrongType)
-            {
-                Type = type
-            };
-            return false;
-        }
-        set(record, @ref);
+        if (!TryGetReference(record, unique, type, in primary, out var reference, out diagnostic))
+            return diagnostic is null; // todo
+
+        set(record, reference);
         return true;
     }
 }
