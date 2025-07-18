@@ -19,9 +19,11 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
 
     private BadSection BadSection(TRecord record, Section section, int index, int subIndex) => new()
     {
+        Error = LinkError.BadSection,
+        Info = info,
         Property = property,
-        Section = section,
         Record = record,
+        Section = section,
         Index = index,
         SubIndex = subIndex
     };
@@ -30,25 +32,15 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
     (
         TRecord record,
         Meta424 meta,
-        [NotNullWhen(true)] out (Type, Section, KeyInfo)? typeInfo,
-        out Diagnostic? diagnostic
+        Section section,
+        [NotNullWhen(true)] out (Type, KeyInfo)? typeInfo,
+        [NotNullWhen(false)] out Diagnostic? diagnostic
     )
     {
-        typeInfo = null;
-        diagnostic = null;
-
-        string @string = record.Source!;
-
-        var (index, subindex) = typeAttribute;
-
-        Section section = new(@string[index], @string[subindex]);
-
-        if (section.IsWhiteSpace())
-            return false;
-
         if (!meta.Types.TryGetValue(section, out var type))
         {
-            diagnostic = BadSection(record, section, index, subindex);
+            diagnostic = BadSection(record, section, 0, 0); //todo indices
+            typeInfo = null;
             return false;
         }
 
@@ -56,10 +48,12 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
 
         if (primary is null)
         {
-            diagnostic = BadLink(record, type, LinkError.NoPrimary);
+            diagnostic = BadSection(record, section, 0, 0); //todo indices
+            typeInfo = null;
             return false;
         }
-        typeInfo = (type, section, primary.Value);
+        typeInfo = (type, primary.Value);
+        diagnostic = null;
         return true;
     }
 
@@ -76,13 +70,13 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
         if (!info.TryGetKey(record.Source, in primary, out string? key))
         {
             reference = null;
-            diagnostic = null; // todo
+            diagnostic = BadLink(LinkError.Null, record, type);
             return false;
         }
 
         if (!unique.TryGetRecords(type, out var records))
         {
-            diagnostic = BadLink(record, type, LinkError.KeyNotFound, key);
+            diagnostic = BadLink(LinkError.KeyNotFound, record, type, key);
             reference = null;
             return false;
         }
@@ -90,14 +84,14 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
         if (!records.TryGetValue(key, out var @ref)
          && !records.TryGetValue(info.GetKeyWithoutPort(record.Source, in primary, out key), out @ref))
         {
-            diagnostic = BadLink(record, type, LinkError.KeyNotFound, key);
+            diagnostic = BadLink(LinkError.KeyNotFound, record, type, key);
             reference = null;
             return false;
         }
 
         if (@ref is not TType)
         {
-            diagnostic = BadLink(record, type, LinkError.WrongType);
+            diagnostic = BadLink(LinkError.WrongType, record, type);
             reference = null;
             return false;
         }
@@ -108,12 +102,30 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
 
     internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        if (!TryGetType(record, unique.meta, out var typeInfo, out diagnostic))
+        ReadOnlySpan<char> source = record.Source!;
+
+        var (index, subindex) = typeAttribute;
+
+        Section section = new(source[index], source[subindex]);
+
+        if (section.IsWhiteSpace())
         {
-            return false; // todo
+            if (source[info.Id].IsEmpty && nullState == NullabilityState.NotNull)
+            {
+                diagnostic = BadLink(LinkError.Null, record);
+                return false;
+            }
+            else
+            {
+                diagnostic = BadSection(record, section, 0, 0); //todo
+                return false;
+            }
         }
 
-        var (type, section, primary) = typeInfo.Value;
+        if (!TryGetType(record, unique.meta, section, out var typeInfo, out diagnostic))
+            return false;
+
+        var (type, primary) = typeInfo.Value;
 
         if (!TryGetReference(record, unique, type, in primary, out var reference, out diagnostic))
             return diagnostic is null; // todo

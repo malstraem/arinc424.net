@@ -1,6 +1,6 @@
 namespace Arinc424.Diagnostics;
 
-public record BadSection : PropertyDiagnostic
+public record BadSection : BadLink
 {
     public required Section Section { get; init; }
 

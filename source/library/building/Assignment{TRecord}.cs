@@ -13,11 +13,9 @@ internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord
 {
     protected PropertyInfo property = property;
 
-    internal Regex? Regex { get; } = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
-
-    internal NullabilityInfo? NullabilityInfo { get; } = property.PropertyType.IsClass ? new NullabilityInfoContext().Create(property) : null;
-
-    internal abstract void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
+    protected NullabilityState? nullState { get; } = property.PropertyType.IsClass
+        ? new NullabilityInfoContext().Create(property).ReadState
+        : NullabilityState.Unknown;
 
     protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property)
     {
@@ -37,4 +35,8 @@ internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord
 
         return method.CreateDelegate<Action<TRecord, TType>>();
     }
+
+    internal abstract void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
+
+    internal Regex? Regex { get; } = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
 }

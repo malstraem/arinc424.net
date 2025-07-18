@@ -6,7 +6,9 @@ namespace Arinc424.Building;
 using Diagnostics;
 
 [DebuggerDisplay($"{{{nameof(property)}}} - {{{nameof(range)}}}")]
-internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range range) : Assignment<TRecord>(property) where TRecord : Record424
+internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range range)
+    : Assignment<TRecord>(property)
+        where TRecord : Record424
 {
     protected readonly Range range = range;
 }
@@ -26,21 +28,37 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
 
         if (@field.IsWhiteSpace())
         {
-            if (NullabilityInfo?.WriteState is NullabilityState.NotNull)
-                diagnostics.Enqueue(new Nullability(record, property, range));
+            if (nullState == NullabilityState.NotNull)
+            {
+                diagnostics.Enqueue(new Null()
+                {
+                    Range = range,
+                    Record = record,
+                    Property = property
+                });
+            }
             return;
         }
         var result = decode.Convert(@field);
 
-        if (result.Invalid)
-            diagnostics.Enqueue(new BadValue(record, property, result.Bad.ToImmutableArray(), range));
-        else
+        if (!result.Invalid)
+        {
             set(record, result.Value);
+            return;
+        }
+        diagnostics.Enqueue(new BadValue
+        {
+            Range = range,
+            Record = record,
+            Property = property,
+            Value = result.Bad.ToImmutableArray()
+        });
     }
 }
 
-internal sealed class StringAssignment<TRecord>(PropertyInfo property, Range range) : RangeAssignment<TRecord>(property, range)
-    where TRecord : Record424
+internal sealed class StringAssignment<TRecord>(PropertyInfo property, Range range)
+    : RangeAssignment<TRecord>(property, range)
+        where TRecord : Record424
 {
     private readonly Action<TRecord, string> set = GetCompiledSetter<string>(property);
 
@@ -50,8 +68,15 @@ internal sealed class StringAssignment<TRecord>(PropertyInfo property, Range ran
 
         if (@field.IsEmpty)
         {
-            if (NullabilityInfo?.WriteState is NullabilityState.NotNull)
-                diagnostics.Enqueue(new Nullability(record, property, range));
+            if (nullState == NullabilityState.NotNull)
+            {
+                diagnostics.Enqueue(new Null()
+                {
+                    Range = range,
+                    Record = record,
+                    Property = property
+                });
+            }
             return;
         }
         set(record, @field.ToString());

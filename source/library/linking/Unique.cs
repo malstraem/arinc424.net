@@ -32,16 +32,19 @@ internal class Unique
             return;
         }
 
-        if (records.TryAdd(key, record))
+        if (!records.TryGetValue(key, out var collision))
+        {
+            records[key] = record;
             return;
-
+        }
         build.Diagnostics ??= [];
         build.Diagnostics.Enqueue(new Duplicate
         {
-            Record = record,
-            Type = info.Composition.Top,
             Key = key,
-            Info = primary
+            Type = info.Composition.Top,
+            Info = primary,
+            Record = record,
+            Collision = collision
         });
     }
 

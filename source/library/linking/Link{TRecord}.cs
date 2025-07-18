@@ -11,7 +11,9 @@ internal abstract class Link<TRecord>(PropertyInfo property, in KeyInfo info) wh
 
     protected readonly PropertyInfo property = property;
 
-    protected BadLink BadLink(TRecord record, Type type, LinkError error, string? key = null) => new()
+    protected readonly NullabilityState nullState = new NullabilityInfoContext().Create(property).ReadState;
+
+    protected BadLink BadLink(LinkError error, TRecord record, Type? type = null, string? key = null) => new()
     {
         Info = info,
         Property = property,

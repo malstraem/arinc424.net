@@ -6,7 +6,8 @@ namespace Arinc424.Building;
 using Diagnostics;
 
 internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Range range, DecodeAttribute<TType> decode, uint count)
-    : RangeAssignment<TRecord>(property, range) where TRecord : Record424 where TType : notnull
+    : RangeAssignment<TRecord>(property, range)
+    where TRecord : Record424 where TType : notnull
 {
     private readonly uint count = count;
 
@@ -19,10 +20,12 @@ internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Ran
         var range = this.range;
 
         int arrayLength = 0, fieldLength = range.End.Value - range.Start.Value;
+
         for (int i = 0; i < count; i++)
         {
             if (@string[range].IsWhiteSpace())
                 break;
+
             arrayLength++;
             range = new(range.Start.Value + fieldLength, range.End.Value + fieldLength);
         }
@@ -37,10 +40,19 @@ internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Ran
             var result = decode.Convert(@field);
 
             if (result.Invalid)
-                diagnostics.Enqueue(new BadValue(record, property, result.Bad.ToImmutableArray(), range));
+            {
+                diagnostics.Enqueue(new BadValue()
+                {
+                    Range = range,
+                    Record = record,
+                    Property = property,
+                    Value = result.Bad.ToImmutableArray()
+                });
+            }
             else
+            {
                 values[i] = result.Value;
-
+            }
             range = new(range.Start.Value + fieldLength, range.End.Value + fieldLength);
         }
         set(record, values);

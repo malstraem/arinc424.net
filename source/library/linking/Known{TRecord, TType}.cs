@@ -19,8 +19,16 @@ internal class Known<TRecord, TForeign, TType>(PropertyInfo property, in KeyInfo
 
         var primary = unique.meta.TypeInfo[type].Primary!.Value; /* guarantee by design */
 
-        if (!TForeign.TryGetKey(record.Source!, in info, in primary, out string? key))
+        if (!info.TryGetKey(record.Source!, in primary, out string? key))
+        {
+            if (nullState is NullabilityState.NotNull)
+            {
+                diagnostic = BadLink(LinkError.Null, record, type);
+                return false;
+            }
+            diagnostic = null;
             return true;
+        }
 
         if (unique.TryGetRecords(type, out var records)
          && records.TryGetValue(key, out var referenced))
@@ -29,7 +37,7 @@ internal class Known<TRecord, TForeign, TType>(PropertyInfo property, in KeyInfo
             diagnostic = null;
             return true;
         }
-        diagnostic = BadLink(record, type, LinkError.KeyNotFound);
+        diagnostic = BadLink(LinkError.KeyNotFound, record, type);
         return false;
     }
 }

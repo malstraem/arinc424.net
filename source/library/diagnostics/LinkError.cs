@@ -1,8 +1,9 @@
 namespace Arinc424.Diagnostics;
 
-public enum LinkError
+public enum LinkError : byte
 {
+    Null,
+    BadSection,
     WrongType,
-    NoPrimary,
-    KeyNotFound
+    KeyNotFound,
 }

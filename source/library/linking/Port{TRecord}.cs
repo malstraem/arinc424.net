@@ -7,7 +7,7 @@ using Diagnostics;
 
 internal sealed class Port<TRecord>(PropertyInfo property, in KeyInfo primary, in KeyInfo info)
     : Known<TRecord, Foreign, Ground.Port>(property, in info)
-    where TRecord : Record424
+        where TRecord : Record424
 {
     private readonly KeyInfo primary = primary;
 
@@ -23,7 +23,7 @@ internal sealed class Port<TRecord>(PropertyInfo property, in KeyInfo primary, i
             set(record, (Ground.Port)port); /* guarantee by design */
             return true;
         }
-        diagnostic = new BadLink(record, property, in info, LinkError.NoOneFound);
+        diagnostic = BadLink(LinkError.KeyNotFound, record);
         return false;
     }
 }

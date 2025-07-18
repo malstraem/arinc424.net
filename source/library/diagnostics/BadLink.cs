@@ -6,7 +6,7 @@ public record BadLink : PropertyDiagnostic
 
     public required LinkError Error { get; init; }
 
-    public required Type Type { get; set; }
+    public Type? Type { get; set; }
 
     public string? Key { get; init; }
 }
