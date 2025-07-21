@@ -56,6 +56,29 @@ internal class Parser424
             builds[section][info.Composition.Low] = info.Build(records[section]);
     }
 #endif
+    private void Process()
+    {
+#if !NOPARALLEL
+        Parallel.ForEach(meta.Info, x =>
+        {
+            var (section, info) = (x.Key, x.Value);
+
+            var builds = this.builds[section];
+
+            foreach (var pipeline in info.Composition.Pipelines)
+                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
+        });
+#else
+        foreach (var (section, info) in meta.Info)
+        {
+            var builds = this.builds[section];
+
+            foreach (var pipeline in info.Composition.Pipelines)
+                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
+        }
+#endif
+    }
+
     private void Link()
     {
         Unique unique = new(this);
@@ -76,29 +99,6 @@ internal class Parser424
 #endif
     }
 
-    private void PostProcess()
-    {
-#if !NOPARALLEL
-        Parallel.ForEach(meta.Info, x =>
-        {
-            var (section, info) = (x.Key, x.Value);
-
-            var builds = this.builds[section];
-
-            foreach (var pipeline in info.Composition.Pipelines)
-                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
-        });
-#else
-        foreach (var (section, info) in meta.Info)
-        {
-            var builds = this.builds[section];
-
-            foreach (var pipeline in info.Composition.Pipelines)
-                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
-        }
-#endif
-    }
-
     private Data424 GetData(out Queue<Build> invalid)
     {
         invalid = [];
@@ -109,9 +109,9 @@ internal class Parser424
 
         foreach (var (property, section) in Data424.GetProperties())
         {
-            var biba = method!.MakeGenericMethod([property.PropertyType.GetElementType()!]);
+            var process = method!.MakeGenericMethod([property.PropertyType.GetElementType()!]);
 
-            property.SetValue(data, biba.Invoke(null, [builds[section].Values.Last(), invalid]));
+            property.SetValue(data, process.Invoke(null, [builds[section].Values.Last(), invalid]));
         }
         return data;
     }
@@ -146,7 +146,7 @@ internal class Parser424
         skipped = Process(strings);
 
         Build();
-        PostProcess();
+        Process();
         Link();
 
         return GetData(out invalid);

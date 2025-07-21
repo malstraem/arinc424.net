@@ -1,7 +1,5 @@
 namespace Arinc424.Ground;
 
-using Linking;
-
 /**<summary>
 <c>Airport and Heliport MSA</c> primary record.
 </summary>
@@ -13,7 +11,7 @@ public class MinimumAltitude : Record424, IMultiple
 {
     public Port Port { get; set; }
 
-    [Polymorph<AltitudeCenterForeign>(14, 18), Icao(19, 20), Type(21, 22)]
+    [Polymorph(14, 18), Icao(19, 20), Type(21, 22)]
     public IIdentity Center { get; set; }
 
     [Character(23)]

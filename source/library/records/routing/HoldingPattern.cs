@@ -1,7 +1,5 @@
 namespace Arinc424.Routing;
 
-using Linking;
-
 /**<summary>
 <c>Holding Pattern</c> primary record.
 </summary>
@@ -20,7 +18,7 @@ public class HoldingPattern : Record424, IIcao, INamed
     public string? DuplicateIndicator { get; set; }
 
     [Type(37, 38)]
-    [Polymorph<HoldingFixForeign>(30, 34), Icao(35, 36)]
+    [Polymorph(30, 34), Icao(35, 36)]
     public Fix Fix { get; set; }
 
     /// <summary><c>Inbound Holding Course (IB HOLD CRS)</c> field.</summary>

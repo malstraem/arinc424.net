@@ -6,9 +6,8 @@ namespace Arinc424.Linking;
 
 using Diagnostics;
 
-internal class Known<TRecord, TForeign, TType>(PropertyInfo property, in KeyInfo info) : Link<TRecord>(property, in info)
+internal class Known<TRecord, TType>(PropertyInfo property, in KeyInfo info) : Link<TRecord>(property, in info)
     where TRecord : Record424
-    where TForeign : IForeign
     where TType : class
 {
     protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
@@ -21,7 +20,7 @@ internal class Known<TRecord, TForeign, TType>(PropertyInfo property, in KeyInfo
 
         if (!info.TryGetKey(record.Source!, in primary, out string? key))
         {
-            if (nullState is NullabilityState.NotNull)
+            if (nullState == NullabilityState.NotNull)
             {
                 diagnostic = BadLink(LinkError.Null, record, type);
                 return false;

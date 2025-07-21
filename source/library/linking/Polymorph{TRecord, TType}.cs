@@ -1,16 +1,14 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-using System.Runtime.CompilerServices;
-
 using Diagnostics;
 
-internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property, TypeAttribute typeAttribute, ref readonly KeyInfo info)
+internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttribute typeAttribute, ref readonly KeyInfo info)
     : Link<TRecord>(property, in info)
         where TRecord : Record424
-        where TForeign : IPolymorphForeign
         where TType : class
 {
     private readonly TypeAttribute typeAttribute = typeAttribute;
@@ -110,15 +108,18 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
 
         if (section.IsWhiteSpace())
         {
-            if (source[info.Id].IsEmpty && nullState == NullabilityState.NotNull)
+            if (source[info.Id].IsWhiteSpace())
             {
-                diagnostic = BadLink(LinkError.Null, record);
-                return false;
-            }
-            else
-            {
-                diagnostic = BadSection(record, section, 0, 0); //todo
-                return false;
+                if (nullState == NullabilityState.NotNull)
+                {
+                    diagnostic = BadLink(LinkError.Null, record);
+                    return false;
+                }
+                else
+                {
+                    diagnostic = null;
+                    return true;
+                }
             }
         }
 
@@ -127,10 +128,11 @@ internal sealed class Polymorph<TRecord, TForeign, TType>(PropertyInfo property,
 
         var (type, primary) = typeInfo.Value;
 
-        if (!TryGetReference(record, unique, type, in primary, out var reference, out diagnostic))
-            return diagnostic is null; // todo
-
-        set(record, reference);
-        return true;
+        if (TryGetReference(record, unique, type, in primary, out var reference, out diagnostic))
+        {
+            set(record, reference);
+            return true;
+        }
+        return false;
     }
 }

@@ -6,7 +6,7 @@ using Linking;
 
 /// <summary>Specifies <see cref="IIdentity.Identifier"/> range for polymorph link.</summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-internal class PolymorphAttribute<TForeign>(int left, int right) : LinkAttribute(left, right) where TForeign : IPolymorphForeign
+internal class PolymorphAttribute(int left, int right) : LinkAttribute(left, right)
 {
     internal override Link<TRecord> GetLink<TRecord>
     (
@@ -22,11 +22,8 @@ internal class PolymorphAttribute<TForeign>(int left, int right) : LinkAttribute
 
         var info = GetInfo(property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement) ?? icao, port);
 
-        var type = typeof(Polymorph<,,>).MakeGenericType(typeof(TRecord), typeof(TForeign), property.PropertyType);
+        var type = typeof(Polymorph<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
 
         return (Link<TRecord>)Activator.CreateInstance(type, property, typeAttribute, info)!;
     }
 }
-
-/// <inheritdoc cref="KnownAttribute{TForeign}"/>
-internal class PolymorphAttribute(int left, int right) : PolymorphAttribute<PolymorphForeign>(left, right);

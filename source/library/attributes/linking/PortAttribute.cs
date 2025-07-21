@@ -24,16 +24,8 @@ internal class PortAttribute(int left, int right) : LinkAttribute(left, right)
 
         var info = GetInfo(property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement) ?? icao!, null);
 
-        var portType = typeof(Ground.Port);
-
-        var primary = portType.GetCustomAttribute<IdAttribute>()?.GetInfo
-        (
-            portType.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement),
-            portType.GetCustomAttributes<PortAttribute>().BySupplement(supplement)
-        );
-
         var type = typeof(Port<>).MakeGenericType(typeof(TRecord));
 
-        return (Link<TRecord>)Activator.CreateInstance(type, property, primary, info)!;
+        return (Link<TRecord>)Activator.CreateInstance(type, property, info)!;
     }
 }
