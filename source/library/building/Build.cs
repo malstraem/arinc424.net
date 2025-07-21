@@ -6,27 +6,31 @@ using Diagnostics;
 Proxy to hold bad coded record with diagnostics.
 </summary>*/
 [DebuggerDisplay($"{{{nameof(Record)}}}")]
-public abstract class Build
+public abstract class Build(Record424 record)
 {
-    internal Build(Record424 record) => Record = record;
-
-    public Record424 Record { get; }
+    public Record424 Record { get; } = record;
 
     public Queue<Diagnostic>? Diagnostics { get; set; }
 }
 
 /// <exclude />
-public class Build<TRecord>(TRecord record) : Build(record) where TRecord : Record424
+internal class Build<TRecord>(TRecord record) : Build(record) where TRecord : Record424
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public new TRecord Record { get; } = record;
+    internal new TRecord Record { get; } = record;
+}
+
+internal interface ISequentBuild
+{
+    Build[] Builds { get; }
 }
 
 /// <exclude />
-public class Build<TSequence, TSub>(TSequence sequence) : Build<TSequence>(sequence)
+internal class Build<TSequence, TSub>(TSequence sequence, Build<TSub>[] builds) : Build<TSequence>(sequence), ISequentBuild
     where TSequence : Record424<TSub>
     where TSub : Record424
 {
-    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-    public new TSequence Record { get; } = sequence;
+    public Build<TSub>[] Builds { get; } = builds;
+
+    Build[] ISequentBuild.Builds => Builds;
 }

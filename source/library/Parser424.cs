@@ -4,6 +4,7 @@ namespace Arinc424;
 
 using Linking;
 using Building;
+using Arinc424.Diagnostics;
 
 internal class Parser424
 {
@@ -127,18 +128,35 @@ internal class Parser424
         }
     }
 
-    internal static TRecord[] Process<TRecord>(Queue<Build<TRecord>> builds, Queue<Build> invalid) where TRecord : Record424
+    internal static TRecord[] Process<TRecord>(Queue<Build<TRecord>> builds, Dictionary<Record424, Diagnostic[]> diagnostics)
+        where TRecord : Record424
     {
-        Queue<TRecord> valid = [];
+        Queue<TRecord> records = [];
 
-        foreach (var build in builds)
+        /*foreach (var build in builds)
         {
             if (build.Diagnostics is null)
                 valid.Enqueue(build.Record);
             else
                 invalid.Enqueue(build);
+        }*/
+
+        while (builds.TryDequeue(out var build))
+        {
+            records.Enqueue(build.Record);
+
+            if (build is ISequentBuild sequent)
+            {
+                foreach (var b in sequent.Builds)
+                {
+
+                }
+            }
+
+            if (build.Diagnostics is not null)
+                diagnostics.Add(build.Record, [.. build.Diagnostics]);
         }
-        return [.. valid];
+        return [.. records];
     }
 
     internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Queue<Build> invalid)
