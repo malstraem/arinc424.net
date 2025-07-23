@@ -66,7 +66,7 @@ public class RunwayThreshold : Fix
     </summary>
     <value>Feet.</value>
     <remarks>See section 5.109.</remarks>*/
-    [Field(77, 80), Integer]
+    [Field(78, 80), Field(77, 80, Start = Supplement.V23), Integer]
     public int Width { get; set; }
 
     /// <inheritdoc cref="Terms.ThresholdType"/>
@@ -82,7 +82,7 @@ public class RunwayThreshold : Fix
     public int Stopway { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>
-    [Field(96, 98), Integer]
+    [Field(76, 77), Field(96, 98, Start = Supplement.V20), Integer]
     public int Height { get; set; }
 
     /**<summary>
