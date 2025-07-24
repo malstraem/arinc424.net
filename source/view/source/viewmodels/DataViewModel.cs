@@ -32,7 +32,7 @@ public partial class DataViewModel : ObservableObject
             data.HoldingPatterns.GetViewModel("Holding Pattern"),
             data.Airways.GetViewModel("Airway"),
             data.SpecialAreas.GetViewModel("Special Area"),
-            data.PreferredRoutes.GetViewModel("Preffered Route"),
+            data.PreferredRoutes.GetViewModel("Preferred Route"),
             data.AirwayCommunications.GetViewModel("Communication")
         ]),
         new("Heliport",
