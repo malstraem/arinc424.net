@@ -4,7 +4,7 @@ namespace Arinc424;
 
 using Linking;
 using Building;
-using Arinc424.Diagnostics;
+using Diagnostics;
 
 internal class Parser424
 {
@@ -100,11 +100,45 @@ internal class Parser424
 #endif
     }
 
+    private void LinkBack<TOne, TMany>(IEnumerable<Build<TOne>> one, IEnumerable<Build<TMany>> many)
+        where TOne : Record424
+        where TMany : Record424
+    {
+        Dictionary<TOne, Queue<TMany>> buffer = [];
+
+        var forward = typeof(TOne).GetProperties().First(x => x.PropertyType == typeof(TMany[]));
+        var backward = typeof(TMany).GetProperties().First(x => x.PropertyType == typeof(TOne));
+
+        var get = backward.GetGetMethod()!.CreateDelegate<Func<TMany, TOne>>();
+        var set = forward.GetSetMethod()!.CreateDelegate<Action<TOne, TMany[]>>();
+
+        foreach (var @object in many)
+        {
+            var related = get(@object.Record);
+
+            if (related is null)
+                continue;
+
+            if (!buffer.TryGetValue(related, out var restored))
+                restored = buffer[related] = [];
+
+            restored.Enqueue(@object.Record);
+        }
+
+        foreach (var @object in one)
+        {
+            if (buffer.TryGetValue(@object.Record, out var related))
+                set(@object.Record, [.. related]);
+        }
+    }
+
     private Data424 GetData(out Queue<Build> invalid)
     {
         invalid = [];
 
         Data424 data = new();
+
+        Dictionary<Record424, Diagnostic[]> diagnostics = [];
 
         var method = typeof(Parser424).GetMethod("Process", BindingFlags.NonPublic | BindingFlags.Static);
 
@@ -112,7 +146,7 @@ internal class Parser424
         {
             var process = method!.MakeGenericMethod([property.PropertyType.GetElementType()!]);
 
-            property.SetValue(data, process.Invoke(null, [builds[section].Values.Last(), invalid]));
+            property.SetValue(data, process.Invoke(null, [builds[section].Values.Last(), diagnostics]));
         }
         return data;
     }
@@ -128,35 +162,38 @@ internal class Parser424
         }
     }
 
-    internal static TRecord[] Process<TRecord>(Queue<Build<TRecord>> builds, Dictionary<Record424, Diagnostic[]> diagnostics)
+    internal static TRecord[] Process<TRecord>(Queue<Build<TRecord>> builds, Dictionary<Record424, Diagnostic[]> invalid)
         where TRecord : Record424
     {
         Queue<TRecord> records = [];
 
-        /*foreach (var build in builds)
-        {
-            if (build.Diagnostics is null)
-                valid.Enqueue(build.Record);
-            else
-                invalid.Enqueue(build);
-        }*/
+        Queue<Diagnostic> diagnostics = [];
 
         while (builds.TryDequeue(out var build))
         {
             records.Enqueue(build.Record);
 
-            if (build is ISequentBuild sequent)
+            Hold(build);
+
+            if (diagnostics.Count > 0)
             {
-                foreach (var b in sequent.Builds)
-                {
-
-                }
+                invalid.Add(build.Record, [.. diagnostics]);
+                diagnostics.Clear();
             }
-
-            if (build.Diagnostics is not null)
-                diagnostics.Add(build.Record, [.. build.Diagnostics]);
         }
         return [.. records];
+
+        void Hold(Build build)
+        {
+            if (build.Diagnostics is not null)
+                diagnostics.Pump(build.Diagnostics);
+
+            if (build is ISequentBuild sequent)
+            {
+                foreach (var sequence in sequent.Builds)
+                    Hold(sequence);
+            }
+        }
     }
 
     internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Queue<Build> invalid)

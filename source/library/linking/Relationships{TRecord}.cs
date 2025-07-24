@@ -22,18 +22,10 @@ internal abstract class Relationships(Type type)
     internal Type Type { get; } = type;
 }
 
-internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationships(typeof(TRecord)) where TRecord : Record424
+internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationships(typeof(TRecord))
+    where TRecord : Record424
 {
     private readonly Link<TRecord>[] links = links;
-
-    private void Link(TRecord record, Unique unique, Queue<Diagnostic> diagnostics)
-    {
-        foreach (var link in links)
-        {
-            if (!link.TryLink(record, unique, out var diagnostic))
-                diagnostics.Enqueue(diagnostic);
-        }
-    }
 
     internal override void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta)
     {
@@ -41,7 +33,11 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
 
         foreach (var build in (IEnumerable<Build<TRecord>>)builds) /* guarantee by design */
         {
-            Link(build.Record, unique, diagnostics);
+            foreach (var link in links)
+            {
+                if (!link.TryLink(build.Record, unique, out var diagnostic))
+                    diagnostics.Enqueue(diagnostic);
+            }
 
             if (diagnostics.Count != 0)
             {
