@@ -1,6 +1,7 @@
-using Arinc424.View;
+namespace Arinc424.ViewModel;
 
-namespace Arinc424.ViewModels;
+using View;
+using Model;
 
 public partial class DataViewModel : ObservableObject
 {
@@ -8,16 +9,16 @@ public partial class DataViewModel : ObservableObject
     private bool isLoading;
 
     [ObservableProperty]
-    private SectionViewModel? selected;
+    private SectionModel? selected;
 
     [ObservableProperty]
-    private IEnumerable<SectionViewModel>? sections;
+    private IEnumerable<SectionModel>? sections;
 
     [ObservableProperty]
     private bool isEmpty = true;
 
     [Obsolete("todo and add i18n resources")]
-    private static IEnumerable<SectionViewModel> GetSections(Data424 data) =>
+    private static IEnumerable<SectionModel> GetSections(Data424 data) =>
     [
         new("Navaid",
         [

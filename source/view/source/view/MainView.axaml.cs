@@ -1,8 +1,6 @@
-using Arinc424.View;
-
 using Avalonia.Controls;
 
-namespace Arinc424.Views;
+namespace Arinc424.View;
 
 public partial class MainView : UserControl
 {

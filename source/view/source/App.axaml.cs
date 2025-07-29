@@ -3,8 +3,8 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Input;
 
-using Arinc424.Views;
-using Arinc424.ViewModels;
+using Arinc424.View;
+using Arinc424.ViewModel;
 
 namespace Arinc424.View;
 

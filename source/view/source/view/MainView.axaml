@@ -1,9 +1,10 @@
-<UserControl x:Class="Arinc424.Views.MainView"
+<UserControl x:Class="Arinc424.View.MainView"
              xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:vm="using:Arinc424.ViewModels"
+             xmlns:vm="using:Arinc424.ViewModel"
+             xmlns:m="using:Arinc424.Model"
 
              xmlns:u="https://irihi.tech/ursa"
 
@@ -23,8 +24,8 @@
       </TabControl.ItemTemplate>
 
       <TabControl.ContentTemplate>
-        <DataTemplate x:DataType="vm:SectionViewModel">
-          <TabControl ItemsSource="{Binding Subsections, Mode=TwoWay}">
+        <DataTemplate x:DataType="m:SectionModel">
+          <TabControl ItemsSource="{Binding VewModels, Mode=TwoWay}">
             <TabControl.ItemTemplate>
               <DataTemplate>
                 <TextBlock Theme="{DynamicResource TitleTextBlock}" Classes="H7" Text="{Binding Name}"/>
@@ -32,11 +33,11 @@
             </TabControl.ItemTemplate>
 
             <TabControl.ContentTemplate>
-              <DataTemplate x:DataType="vm:SubsectionViewModel">
+              <DataTemplate x:DataType="vm:ObjectsViewModel">
                 <Grid ColumnDefinitions="*,3,4*" >
                   <ListBox Grid.Column="0" ItemsSource="{Binding Records, Mode=OneWay}" SelectedItem="{Binding Selected, Mode=OneWayToSource}">
                     <ItemsControl.ItemTemplate>
-                      <DataTemplate x:DataType="vm:RecordViewModel">
+                      <DataTemplate x:DataType="m:RecordModel">
                         <Grid ColumnDefinitions="*,auto" Margin="15,0,15,0">
                           <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
                             <TextBlock FontSize="12" ToolTip.Tip="Identifier"
@@ -58,20 +59,40 @@
 
                   <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
 
-                  <ScrollViewer Grid.Column="2" AllowAutoHide="True">
-                    <ItemsControl Background="{DynamicResource SemiColorBackground1}"
-                                  ItemsSource="{Binding SelectedProperties, Mode=OneWay}">
-                      <ItemsControl.ItemTemplate>
-                        <DataTemplate x:DataType="vm:PropertyViewModel">
-                          <StackPanel Margin="10">
-                            <TextBlock Text="{Binding Name}" Margin="0,0,0,0" />
+                  <Grid Grid.Column="2" RowDefinitions="100, *">
+                    <ListBox Grid.Row="0" Background="{DynamicResource SemiColorBackground1}"
+                                  ItemsSource="{Binding SelectedViewModel.Ranges, Mode=OneWay}">
+                      <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                      </ListBox.ItemsPanel>
 
-                            <TextBlock Classes="Secondary" FontSize="12" Text="{Binding Value}" />
+                      <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="m:RangeModel">
+                          <StackPanel Margin="10">
+                            <TextBlock Text="{Binding Chars}" Margin="0,0,0,0" />
+
                           </StackPanel>
                         </DataTemplate>
-                      </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                  </ScrollViewer>
+                      </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <ScrollViewer Grid.Row="1" AllowAutoHide="True">
+                      <ItemsControl Background="{DynamicResource SemiColorBackground1}"
+                                    ItemsSource="{Binding SelectedViewModel.Properties, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                          <DataTemplate x:DataType="m:PropertyModel">
+                            <StackPanel Margin="10">
+                              <TextBlock Text="{Binding Name}" Margin="0,0,0,0" />
+
+                              <TextBlock Classes="Secondary" FontSize="12" Text="{Binding Value}" />
+                            </StackPanel>
+                          </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+                    </ScrollViewer>
+                  </Grid>
                 </Grid>
               </DataTemplate>
             </TabControl.ContentTemplate>
