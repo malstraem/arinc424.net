@@ -39,6 +39,8 @@
 
     <None Include="../../docs/package.md" Pack="true" PackagePath="/readme.md" Visible="false" />
 
+    <None Include="linking\BackLink{TOne,TMany}.cs" />
+
     <InternalsVisibleTo Include="Arinc424.Tests;Arinc424.Bench;Arinc424.View" />
   </ItemGroup>
 </Project>

@@ -1,9 +1,8 @@
+using System.Runtime.CompilerServices;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Arinc424.Linking;
-
-using System.Runtime.CompilerServices;
 
 using Diagnostics;
 

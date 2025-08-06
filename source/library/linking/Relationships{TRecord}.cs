@@ -10,7 +10,9 @@ internal abstract class Relationships(Type type)
 {
 #pragma warning disable CS8618
     protected FrozenDictionary<Type, PropertyInfo> many;
+    protected BackLink[] backLinks;
 #pragma warning restore CS8618
+
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 
     internal static Relationships? Create(Type type, Supplement supplement)
@@ -58,6 +60,8 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
 
         Dictionary<Type, PropertyInfo> many = [];
 
+        List<BackLink> backLinks = [];
+
         foreach (var property in type.GetProperties())
         {
             if (property.PropertyType == typeof(Ground.Port))
@@ -75,11 +79,13 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {
                 many[property.PropertyType.GetElementType()!] = property;
+                backLinks.Add(BackLink.Create(property));
             }
         }
-        return links.Count == 0 && many.Count == 0 ? null : new Relationships<TRecord>([.. links])
+        return links.Count == 0 && backLinks.Count == 0 ? null : new Relationships<TRecord>([.. links])
         {
-            many = many.ToFrozenDictionary()
+            many = many.ToFrozenDictionary(),
+            backLinks = [.. backLinks]
         };
     }
 }

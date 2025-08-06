@@ -59,21 +59,18 @@
 
                   <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
 
-                  <Grid Grid.Column="2" RowDefinitions="100, *">
-                    <ListBox Grid.Row="0" Background="{DynamicResource SemiColorBackground1}"
-                                  ItemsSource="{Binding SelectedViewModel.Ranges, Mode=OneWay}">
+                  <Grid Grid.Column="2" RowDefinitions="auto, *">
+                    <ListBox Grid.Row="0" Background="{DynamicResource SemiColorBackground}"
+                             ItemsSource="{Binding SelectedViewModel.Ranges, Mode=OneWay}">
                       <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
-                          <StackPanel Orientation="Horizontal"/>
+                          <WrapPanel Orientation="Horizontal"/>
                         </ItemsPanelTemplate>
                       </ListBox.ItemsPanel>
 
                       <ListBox.ItemTemplate>
                         <DataTemplate x:DataType="m:RangeModel">
-                          <StackPanel Margin="10">
-                            <TextBlock Text="{Binding Chars}" Margin="0,0,0,0" />
-
-                          </StackPanel>
+                          <TextBlock Text="{Binding Chars}" Margin="0,0,0,0" />
                         </DataTemplate>
                       </ListBox.ItemTemplate>
                     </ListBox>
