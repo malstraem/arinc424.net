@@ -87,39 +87,67 @@ public abstract class Port : Fix, INamed
     [Field(94, 123)]
     public string? Name { get; set; }
 
+    /// <summary>Associated GLSs.</summary>
+    [Many(nameof(Landing.Port))]
+    public GlobalLanding[]? GlobalLandings { get; set; }
+
+    /// <summary>Associated MLSs.</summary>
+    [Many(nameof(Landing.Port))]
+    public MicrowaveLanding[]? MicrowaveLandings { get; set; }
+
+    /// <summary>Associated ILSs.</summary>
+    [Many(nameof(Landing.Port))]
+    public InstrumentLanding[]? InstrumentLandings { get; set; }
+
+    /// <summary>Associated ILS Markers.</summary>
+    [Many(nameof(InstrumentMarker.Port))]
+    public InstrumentMarker[]? Markers { get; set; }
+
     /// <summary>Associated GBAS points.</summary>
-    [Many]
+    [Many(nameof(PathPoint.Port))]
     public GroundPoint[]? GroundPoints { get; set; }
 
     /// <summary>Associated SBAS points.</summary>
-    [Many]
+    [Many(nameof(PathPoint.Port))]
     public SatellitePoint[]? SatellitePoints { get; set; }
 
     /// <summary>Associated STARs.</summary>
-    [Many]
+    [Many(nameof(Arrival.Port))]
     public Arrival[]? Arrivals { get; set; }
 
     /// <summary>Associated Approach Procedures.</summary>
-    [Many]
+    [Many(nameof(Approach.Port))]
     public Approach[]? Approaches { get; set; }
 
     /// <summary>Associated SIDs.</summary>
-    [Many]
+    [Many(nameof(Departure.Port))]
     public Departure[]? Departures { get; set; }
 
     /// <summary>Associated Communications.</summary>
-    [Many]
+    [Many(nameof(PortCommunication.Port))]
     public PortCommunication[]? Communications { get; set; }
 
     /// <summary>Associated TAAs.</summary>
-    [Many]
+    [Many(nameof(ArrivalAltitude.Port))]
     public ArrivalAltitude[]? ArrivalAltitudes { get; set; }
 
     /// <summary>Associated MSAs.</summary>
-    [Many]
+    [Many(nameof(MinimumAltitude.Port))]
     public MinimumAltitude[]? MinimumAltitudes { get; set; }
 
+    /// <summary>Associated VHF Navaids.</summary>
+    [Many(nameof(Omnidirect.Port))]
+    public Omnidirect[]? Omnidirects { get; set; }
+
+    /// <summary>Associated NDBs.</summary>
+    [Many(nameof(TerminalBeacon.Port))]
+    public TerminalBeacon[]? Beacons { get; set; }
+
     /// <summary>Associated Terminal Waypoints.</summary>
-    [Many]
+    [Many(nameof(TerminalWaypoint.Port))]
     public TerminalWaypoint[]? Waypoints { get; set; }
+
+    /// <summary>Associated Helipads.</summary>
+    [Many(nameof(Pad.Port))]
+    public Pad[]? Pads { get; set; }
 }

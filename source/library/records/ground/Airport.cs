@@ -1,7 +1,5 @@
 namespace Arinc424.Ground;
 
-using Navigation;
-
 /**<summary>
 <c>Airport</c> primary record.
 </summary>
@@ -22,30 +20,10 @@ public class Airport : Port
     public Terms.SurfaceType LongestRunwayType { get; set; }
 
     /// <summary>Associated gates.</summary>
-    [Many]
+    [Many(nameof(Gate.Port))]
     public Gate[]? Gates { get; set; }
 
     /// <summary>Associated runways.</summary>
-    [Many]
-    public RunwayThreshold[]? Thresholds { get; set; }
-
-    /// <summary>Associated NDBs.</summary>
-    [Many]
-    public TerminalBeacon[]? Beacons { get; set; }
-
-    /// <summary>Associated VHF Navaids.</summary>
-    [Many]
-    public Omnidirect[]? Omnidirectionals { get; set; }
-
-    /// <summary>Associated Localizer Markers.</summary>
-    [Many]
-    public InstrumentMarker[]? Markers { get; set; }
-
-    /// <summary>Associated MLS.</summary>
-    [Many]
-    public MicrowaveLanding[]? MicrowaveLandings { get; set; }
-
-    /// <summary>Associated ILS.</summary>
-    [Many]
-    public InstrumentLanding[]? InstrumentLandings { get; set; }
+    [Many(nameof(Threshold.Port))]
+    public Threshold[]? Thresholds { get; set; }
 }

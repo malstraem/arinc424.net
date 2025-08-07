@@ -11,7 +11,7 @@ namespace Arinc424.Ground;
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class Gate : Fix, INamed
 {
-    public Port Port { get; set; }
+    public Airport Port { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Name']/*"/>
     [Field(99, 123)]

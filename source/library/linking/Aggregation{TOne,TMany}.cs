@@ -4,37 +4,43 @@ namespace Arinc424.Linking;
 
 using Building;
 
-internal abstract class BackLink(PropertyInfo property)
+internal abstract class Aggregation(PropertyInfo property)
 {
     protected PropertyInfo property = property;
 
     internal Type Type { get; } = property.PropertyType.GetElementType()!;
 
-    internal abstract void Link(IEnumerable<Build> one, IEnumerable<Build> many);
+    internal abstract void Aggregate(IEnumerable<Build> one, IEnumerable<Build> many);
 
-    internal static BackLink Create(PropertyInfo property)
+    internal static Aggregation Create(PropertyInfo property)
     {
-        var type = typeof(BackLink<,>).MakeGenericType(property.DeclaringType!, property.PropertyType.GetElementType()!);
+        var attr = property.GetCustomAttribute<ManyAttribute>();
 
-        return (BackLink)Activator.CreateInstance(type, property)!;
+        Type one = property.DeclaringType!, many = property.PropertyType.GetElementType()!;
+
+        var back = many.GetProperty(attr!.Property);
+
+        if (property.DeclaringType! != back!.PropertyType && one.IsSubclassOf(back.PropertyType))
+        {
+            one = back.PropertyType!;
+        }
+
+        var type = typeof(Aggregation<,>).MakeGenericType(one, many);
+
+        return (Aggregation)Activator.CreateInstance(type, property, back)!;
     }
 }
 
-internal sealed class BackLink<TOne, TMany>(PropertyInfo property) : BackLink(property)
+internal sealed class Aggregation<TOne, TMany>(PropertyInfo property, PropertyInfo back) : Aggregation(property)
     where TOne : Record424
     where TMany : Record424
 {
-    private static bool IsTargetProperty(PropertyInfo x) => (x.PropertyType == typeof(TOne)
-        || x.PropertyType == typeof(Ground.Port)) && x.GetCustomAttribute<LinkAttribute>() is not null;
-
-    private readonly Func<TMany, TOne> get =
-        typeof(TMany).GetProperties().First(IsTargetProperty)
-            .GetGetMethod()!.CreateDelegate<Func<TMany, TOne>>();
+    private readonly Func<TMany, TOne> get = back.GetGetMethod()!.CreateDelegate<Func<TMany, TOne>>();
 
     private readonly Action<TOne, TMany[]> set =
         property.GetSetMethod()!.CreateDelegate<Action<TOne, TMany[]>>();
 
-    internal override void Link(IEnumerable<Build> builds, IEnumerable<Build> others)
+    internal override void Aggregate(IEnumerable<Build> builds, IEnumerable<Build> others)
     {
         var one = (IEnumerable<Build<TOne>>)builds; /* guarantee by design */
         var many = (IEnumerable<Build<TMany>>)others; /* guarantee by design */

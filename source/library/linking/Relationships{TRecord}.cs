@@ -10,7 +10,7 @@ internal abstract class Relationships(Type type)
 {
 #pragma warning disable CS8618
     protected FrozenDictionary<Type, PropertyInfo> many;
-    protected BackLink[] backLinks;
+    protected Aggregation[] aggregations;
 #pragma warning restore CS8618
 
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
@@ -58,9 +58,7 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
 
         List<Link<TRecord>> links = [];
 
-        Dictionary<Type, PropertyInfo> many = [];
-
-        List<BackLink> backLinks = [];
+        List<Aggregation> aggregation = [];
 
         foreach (var property in type.GetProperties())
         {
@@ -78,14 +76,12 @@ internal sealed class Relationships<TRecord>(Link<TRecord>[] links) : Relationsh
             }
             else if (property.GetCustomAttribute<ManyAttribute>() is not null)
             {
-                many[property.PropertyType.GetElementType()!] = property;
-                backLinks.Add(BackLink.Create(property));
+                aggregation.Add(Aggregation.Create(property));
             }
         }
-        return links.Count == 0 && backLinks.Count == 0 ? null : new Relationships<TRecord>([.. links])
+        return links.Count == 0 && aggregation.Count == 0 ? null : new Relationships<TRecord>([.. links])
         {
-            many = many.ToFrozenDictionary(),
-            backLinks = [.. backLinks]
+            aggregations = [.. aggregation]
         };
     }
 }

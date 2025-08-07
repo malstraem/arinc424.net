@@ -1,19 +1,15 @@
-using Arinc424.Navigation;
-
 namespace Arinc424.Ground;
 
 /**<summary>
 <c>Runway</c> primary record.
 </summary>
 <remarks>See section 4.1.10.1.</remarks>*/
-[Section('P', 'G', subIndex: 13)]
-
-[Port(7, 10), Icao(11, 12), Id(14, 18), Continuous]
+[Section('P', 'G', subIndex: 13), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
-public class RunwayThreshold : Fix
+public class Threshold : Touch
 {
-    public Port Port { get; set; }
+    public Airport Port { get; set; }
 
     /**<summary>
     <c>Runway Length (RUNWAY LENGTH)</c> field.
@@ -90,20 +86,4 @@ public class RunwayThreshold : Fix
     <remarks>See section 5.59.</remarks>*/
     [Field(102, 123)]
     public string? Description { get; set; }
-
-    /// <summary>Associated GLSs.</summary>
-    [Many]
-    public GlobalLanding[]? GlobalLandings { get; set; }
-
-    /// <summary>Associated MLSs.</summary>
-    [Many]
-    public MicrowaveLanding[]? MicrowaveLandings { get; set; }
-
-    /// <summary>Associated ILSs.</summary>
-    [Many]
-    public InstrumentLanding[]? InstrumentLandings { get; set; }
-
-    /// <summary>Associated ILS Markers.</summary>
-    [Many]
-    public InstrumentMarker[]? Markers { get; set; }
 }

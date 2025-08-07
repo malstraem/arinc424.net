@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 </summary>
 <remarks>See section 4.1.22.1.</remarks>*/
 [Section('P', 'L', subIndex: 13)]
-public class MicrowaveLanding : LandingSystem
+public class MicrowaveLanding : Landing
 {
     /// <summary><c>Channel</c> field.</summary>
     /// <remarks>See section 5.166.</remarks>

@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 </summary>
 <remarks>See section 4.1.11.1.</remarks>*/
 [Section('P', 'I', subIndex: 13)]
-public class InstrumentLanding : LandingSystem
+public class InstrumentLanding : Landing
 {
     /**<summary>
     <c>Localizer Frequency (FREQ)</c> field.
@@ -64,6 +64,6 @@ public class InstrumentLanding : LandingSystem
     public int ThresholdHeight { get; set; }
 
     /// <summary>Associated ILS Markers.</summary>
-    [Many]
+    [Many(nameof(InstrumentMarker.Landing))]
     public InstrumentMarker[]? Markers { get; set; }
 }

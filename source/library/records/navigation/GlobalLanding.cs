@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 </summary>
 <remarks>See section 4.1.29.1.</remarks>*/
 [Section('P', 'T', subIndex: 13)]
-public class GlobalLanding : LandingSystem
+public class GlobalLanding : Landing
 {
     /// <summary><c>GLS Channel</c> field.</summary>
     /// <remarks>See section 5.244.</remarks>

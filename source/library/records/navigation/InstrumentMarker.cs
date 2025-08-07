@@ -14,6 +14,9 @@ public class InstrumentMarker : Fix
     [Known(14, 17)]
     public InstrumentLanding Landing { get; set; }
 
+    [Known(28, 32)]
+    public Ground.Touch Touch { get; set; }
+
     /// <inheritdoc cref="Terms.MarkerType"/>
     [Field(18, 20)]
     public Terms.MarkerType Type { get; set; }
@@ -21,9 +24,6 @@ public class InstrumentMarker : Fix
     /// <include file='Comments.xml' path="doc/member[@name='Frequency']/*"/>
     [Field(23, 27), Float(10)]
     public float Frequency { get; set; }
-
-    [Known(28, 32)]
-    public Ground.RunwayThreshold Threshold { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='MinorAxis']/*"/>
     [Field(52, 55), Float(10)]

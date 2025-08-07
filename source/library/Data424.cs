@@ -189,7 +189,7 @@ public class Data424
     </summary>
     <remarks>Section <c>PG</c>.</remarks>*/
     [Section('P', 'G')]
-    public RunwayThreshold[] Thresholds { get; set; } = [];
+    public Threshold[] Thresholds { get; set; } = [];
 
     /**<summary>
     <c>Airport</c> records.

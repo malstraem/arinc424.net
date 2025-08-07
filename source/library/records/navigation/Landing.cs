@@ -3,16 +3,16 @@ namespace Arinc424.Navigation;
 [Port(7, 10), Icao(11, 12), Id(14, 17), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
-public abstract class LandingSystem : Fix
+public abstract class Landing : Fix
 {
     public Ground.Port Port { get; set; }
+
+    [Known(28, 32)]
+    public Ground.Touch Touch { get; set; }
 
     /// <inheritdoc cref="Terms.LandingType"/>
     [Character(18)]
     public Terms.LandingType Type { get; set; }
-
-    [Known(28, 32)]
-    public Ground.RunwayThreshold Threshold { get; set; }
 
     /**<summary>
     <para>

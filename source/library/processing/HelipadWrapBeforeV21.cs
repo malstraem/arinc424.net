@@ -5,12 +5,12 @@ using Building;
 using Diagnostics;
 
 /**<summary>
-<see cref="Helipad"/> record did not exist prior to supplement 21, so this pipeline creates <see cref="Heliport">heliports</see>
+<see cref="Pad"/> record did not exist prior to supplement 21, so this pipeline creates <see cref="Heliport">heliports</see>
 with associated helipads (only have identifier).
 </summary>*/
-internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport>
+internal sealed class PadWrapBeforeV21 : Scan<Heliport, Heliport>
 {
-    /// <summary>Heliport identifer range.</summary>
+    /// <summary>Heliport identifier range.</summary>
     private readonly Range range = 7..10;
 
     protected override bool Trigger(Heliport current, Heliport next) => current.Source![range] != next.Source![range];
@@ -19,23 +19,23 @@ internal sealed class HelipadWrapBeforeV21 : Scan<Heliport, Heliport>
     {
         var build = builds.First();
 
-        Queue<Helipad> helipads = [];
+        Queue<Pad> pads = [];
 
         while (builds.TryDequeue(out var source))
         {
             var port = source.Record;
 
-            helipads.Enqueue(new Helipad
+            pads.Enqueue(new Pad
             {
                 Source = port.Source,
                 Code = port.Code,
                 Icao = port.Icao,
                 Identifier = port.Source![range].Trim(),
                 Number = port.Number,
-                Heliport = port
+                Port = port
             });
         }
-        build.Record.Helipads = [.. helipads];
+        build.Record.Pads = [.. pads];
         return build;
     }
 }

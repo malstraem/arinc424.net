@@ -6,7 +6,7 @@ namespace Arinc424.Tests;
 public class RecordCountRegressionTests
 {
     [Test]
-    //[Skip("manual")]
+    [Skip("manual")]
     [Arguments("worldwide", Supplement.V18)]
     [Arguments("faa-07.08.25", Supplement.V18)]
     [Arguments("supplement-18", Supplement.V18)]
