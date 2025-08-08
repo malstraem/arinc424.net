@@ -24,22 +24,24 @@ Record<Omnidirect>,
 
 #region Enroute
 Record<Waypoint>,
-Record<AirwayMarker>,
-Record<PreferredRoute>,
-Record<HoldingPattern>,
 Record<SpecialArea>,
+Record<AirwayMarker>,
+Record<HoldingPattern>,
+Record<PreferredRoute>,
 
 Record<Airway>,
 Record<AirwayCommunication>,
 #endregion
 
 #region Airport and Heliport
+Record<Pad>,
 Record<Gate>,
-Record<Threshold>,
 Record<Airport>,
+Record<Heliport>,
+Record<Threshold>,
 Record<FlightPlan>,
-Record<SatellitePoint>,
 Record<GroundPoint>,
+Record<SatellitePoint>,
 Record<ArrivalAltitude>,
 Record<MinimumAltitude>,
 Record<TerminalWaypoint>,
@@ -57,8 +59,6 @@ Record<PortCommunication>,
 Record<Arrival>,
 Record<Approach>,
 Record<Departure>,
-
-Record<Heliport>,
 #endregion
 
 #region Company Routes
@@ -68,16 +68,15 @@ Record<HelicopterCompanyRoute>,
 #endregion
 
 #region Tables
+Record<CruiseTable>,
 Record<CommunicationType>,
 Record<GeographicalReference>,
-
-Record<CruiseTable>,
 #endregion
 
 #region Airspace
 Record<FlightRegion>,
 Record<ControlledSpace>,
-Record<RestrictiveSpace>,
+Record<RestrictiveSpace>
 #endregion
 ]
 #endregion

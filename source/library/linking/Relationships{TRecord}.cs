@@ -1,4 +1,3 @@
-using System.Collections.Frozen;
 using System.Reflection;
 
 namespace Arinc424.Linking;
@@ -9,10 +8,8 @@ using Building;
 internal abstract class Relationships(Type type)
 {
 #pragma warning disable CS8618
-    protected FrozenDictionary<Type, PropertyInfo> many;
     protected Aggregation[] aggregations;
 #pragma warning restore CS8618
-
     internal abstract void Link(IEnumerable<Build> builds, Unique unique, Meta424 meta);
 
     internal static Relationships? Create(Type type, Supplement supplement)
