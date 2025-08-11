@@ -3,7 +3,6 @@ using System.Reflection;
 namespace Arinc424.Linking;
 
 using Diagnostics;
-using Building;
 
 internal abstract class Relationships(Type type)
 {

@@ -2,8 +2,6 @@ using System.Reflection;
 
 namespace Arinc424.Linking;
 
-using Building;
-
 internal abstract class Aggregation(PropertyInfo property)
 {
     protected PropertyInfo property = property;

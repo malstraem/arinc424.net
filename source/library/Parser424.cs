@@ -3,7 +3,6 @@ using System.Reflection;
 namespace Arinc424;
 
 using Linking;
-using Building;
 using Diagnostics;
 
 internal class Parser424
@@ -12,8 +11,10 @@ internal class Parser424
 
     internal readonly Meta424 meta;
 
+    internal readonly Builds middle = [];
+
     /// <summary>Storage for entity builds. Covers bare types and compositions.</summary>
-    internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
+    internal readonly Dictionary<Section, Builds> builds = [];
 
     private string[] Process(IEnumerable<string> strings)
     {
@@ -44,19 +45,31 @@ internal class Parser424
     }
 
     private void Build()
+    {
 #if !NOPARALLEL
-    => Parallel.ForEach(meta.Info, x =>
-    {
-        var (section, info) = (x.Key, x.Value);
+        Parallel.ForEach(meta.Info, x =>
+        {
+            var (section, info) = (x.Key, x.Value);
 
-        builds[section][info.Composition.Low] = info.Build(records[section]);
-    });
+            builds[section][info.Composition.Low] = info.Build(records[section]);
+        });
 #else
-    {
         foreach (var (section, info) in meta.Info)
             builds[section][info.Composition.Low] = info.Build(records[section]);
-    }
 #endif
+        foreach (var (type, info) in meta.MiddleInfo)
+        {
+            Queue<Build> middles = [];
+
+            foreach (var section in info.Item2)
+            {
+                foreach (var build in builds[section][meta.Info[section].Composition.Top])
+                    middles.Enqueue(build);
+            }
+            middle[type] = middles;
+        }
+    }
+
     private void Process()
     {
 #if !NOPARALLEL
@@ -98,38 +111,6 @@ internal class Parser424
                 relations.Link(builds[section][relations.Type], unique, meta);
         }
 #endif
-    }
-
-    private void LinkBack<TOne, TMany>(IEnumerable<Build<TOne>> one, IEnumerable<Build<TMany>> many)
-        where TOne : Record424
-        where TMany : Record424
-    {
-        Dictionary<TOne, Queue<TMany>> buffer = [];
-
-        var forward = typeof(TOne).GetProperties().First(x => x.PropertyType == typeof(TMany[]));
-        var backward = typeof(TMany).GetProperties().First(x => x.PropertyType == typeof(TOne));
-
-        var get = backward.GetGetMethod()!.CreateDelegate<Func<TMany, TOne>>();
-        var set = forward.GetSetMethod()!.CreateDelegate<Action<TOne, TMany[]>>();
-
-        foreach (var @object in many)
-        {
-            var related = get(@object.Record);
-
-            if (related is null)
-                continue;
-
-            if (!buffer.TryGetValue(related, out var restored))
-                restored = buffer[related] = [];
-
-            restored.Enqueue(@object.Record);
-        }
-
-        foreach (var @object in one)
-        {
-            if (buffer.TryGetValue(@object.Record, out var related))
-                set(@object.Record, [.. related]);
-        }
     }
 
     private Data424 GetData(out Queue<Build> invalid)

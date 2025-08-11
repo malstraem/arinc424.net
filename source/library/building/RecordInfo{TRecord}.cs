@@ -31,11 +31,11 @@ internal abstract class RecordInfo(Supplement supplement, Composition compositio
 
     internal abstract Queue<Build> Build(Queue<string> strings);
 
-    internal KeyInfo? Primary { get; } = composition.Top.GetCustomAttributes<IdAttribute>().BySupplement(supplement)?.GetInfo
+/*    internal KeyInfo? Primary { get; } = composition.Top.GetCustomAttributes<IdAttribute>().BySupplement(supplement)?.GetInfo
     (
         composition.Top.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement),
         composition.Top.GetCustomAttributes<PortAttribute>().BySupplement(supplement)
-    );
+    );*/
 
     internal Composition Composition { get; } = composition;
 

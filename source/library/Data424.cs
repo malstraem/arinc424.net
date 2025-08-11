@@ -6,7 +6,6 @@ using Comms;
 using Ground;
 using Tables;
 using Routing;
-using Building;
 using Airspace;
 using Waypoints;
 using Procedures;
@@ -183,6 +182,13 @@ public class Data424
     <remarks>Section <c>PB</c>.</remarks>*/
     [Section('P', 'B')]
     public Gate[] Gates { get; set; } = [];
+
+    /**<summary>
+    <c>Pad</c> records.
+    </summary>
+    <remarks>Section <c>PH</c>.</remarks>*/
+    [Section('P', 'H')]
+    public Pad[] AirportPads { get; set; } = [];
 
     /**<summary>
     <c>Runway</c> records.

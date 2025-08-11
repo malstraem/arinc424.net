@@ -38,38 +38,4 @@ internal static class MemberExtensions
     internal static TAttribute? BySupplement<TAttribute>(this IEnumerable<TAttribute> attributes, Supplement supplement)
         where TAttribute : SupplementAttribute
             => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
-
-    internal static Composition GetComposition(this Type type, Supplement supplement)
-    {
-        Stack<Type> types = [];
-        Stack<IPipeline> pipelines = [];
-        Stack<Relationships> relations = [];
-
-        Fill(type, supplement);
-
-        return new Composition([.. types]) { Pipelines = [.. pipelines], Relations = [.. relations] };
-
-        void Fill(Type type, Supplement supplement)
-        {
-            types.Push(type);
-
-            foreach (var pipe in type.GetCustomAttributes<PipelineAttribute>())
-            {
-                if (supplement >= pipe.Start && supplement <= pipe.End)
-                    pipelines.Push(pipe.GetPipeline(supplement));
-            }
-
-            var relationships = Relationships.Create(type, supplement);
-
-            if (relationships is not null)
-                relations.Push(relationships);
-
-            var property = type.GetProperty(nameof(Record424<Record424>.Sequence));
-
-            if (property is null)
-                return;
-
-            Fill(property.PropertyType.GetElementType()!, supplement);
-        }
-    }
 }

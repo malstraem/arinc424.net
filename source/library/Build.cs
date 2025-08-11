@@ -1,4 +1,4 @@
-namespace Arinc424.Building;
+namespace Arinc424;
 
 using Diagnostics;
 

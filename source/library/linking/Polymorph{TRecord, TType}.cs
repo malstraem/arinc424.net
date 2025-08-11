@@ -42,15 +42,13 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
             return false;
         }
 
-        var primary = meta.TypeInfo[type].Primary;
-
-        if (primary is null)
+        if (!meta.KeyInfo.TryGetValue(type, out var primary))
         {
             diagnostic = BadSection(record, section, 0, 0); //todo indices
             typeInfo = null;
             return false;
         }
-        typeInfo = (type, primary.Value);
+        typeInfo = (type, primary);
         diagnostic = null;
         return true;
     }

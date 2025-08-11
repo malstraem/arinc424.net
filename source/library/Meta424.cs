@@ -11,6 +11,7 @@ using Arinc424.Procedures;
 using Arinc424.Routing;
 using Arinc424.Tables;
 using Arinc424.Waypoints;
+using Arinc424.Linking;
 
 #region Mappping (see specification Table 5-1)
 [assembly:
@@ -76,7 +77,7 @@ Record<GeographicalReference>,
 #region Airspace
 Record<FlightRegion>,
 Record<ControlledSpace>,
-Record<RestrictiveSpace>
+Record<RestrictiveSpace>,
 #endregion
 ]
 #endregion
@@ -101,6 +102,7 @@ public class Meta424
         Dictionary<Section, Type> types = [];
         Dictionary<Type, RecordInfo> typeInfo = [];
         Dictionary<Section, RecordInfo> sectionInfo = [];
+        Dictionary<Type, KeyInfo> keyInfo = [];
 
         var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
 
@@ -114,13 +116,38 @@ public class Meta424
             }
             // types with multiple sections will be stored once
             _ = typeInfo.TryAdd(info.Composition.Top, info);
+
+            if (info.Composition.Top.TryKeyInfo(supplement, out var primary))
+                keyInfo[info.Composition.Top] = primary.Value;
         }
+
+        List<Type> middleTypes = [typeof(Port), typeof(Touch)];
+
+        Dictionary<Type, (Relationships, Section[])> middle = [];
+
+        foreach (var middleType in middleTypes)
+        {
+            List<Section> middleSections = [];
+
+            if (middleType.TryKeyInfo(supplement, out var key))
+                keyInfo[middleType] = key.Value;
+
+            foreach (var (type, info) in typeInfo)
+            {
+                if (type.IsSubclassOf(middleType))
+                    middleSections.AddRange(info.Sections.Select(x => x.Value));
+            }
+            middle[middleType] = (Relationships.Create(middleType, supplement)!, [.. middleSections]);
+        }
+
         return new Meta424()
         {
             Info = sectionInfo.ToFrozenDictionary(),
             Types = types.ToFrozenDictionary(),
             TypeInfo = typeInfo.ToFrozenDictionary(),
-            Sections = [.. sections]
+            Sections = [.. sections],
+            MiddleInfo = middle.ToFrozenDictionary(),
+            KeyInfo = keyInfo.ToFrozenDictionary(),
         };
     }
 
@@ -131,4 +158,8 @@ public class Meta424
     internal FrozenDictionary<Section, RecordInfo> Info { get; init; }
 
     internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; init; }
+
+    internal FrozenDictionary<Type, (Relationships, Section[])> MiddleInfo { get; init; }
+
+    internal FrozenDictionary<Type, KeyInfo> KeyInfo { get; init; }
 }

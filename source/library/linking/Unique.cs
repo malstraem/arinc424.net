@@ -4,8 +4,6 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-using Ground;
-using Building;
 using Diagnostics;
 
 /**<summary>
@@ -13,18 +11,14 @@ Container with records that have unique keys.
 </summary>*/
 internal class Unique
 {
-    private FrozenDictionary<string, Record424> ports;
-
     private FrozenDictionary<Type, FrozenDictionary<string, Record424>> unique;
 
     internal readonly Meta424 meta;
 
     [Obsolete("todo: diagnostics")]
-    private void Process(Build build, RecordInfo info, Dictionary<string, Record424> records)
+    private void Process(Build build, Type type, in KeyInfo primary, Dictionary<string, Record424> records)
     {
         var record = build.Record;
-
-        var primary = info.Primary!.Value;
 
         if (!primary.TryGetKey(record.Source, out string? key))
         {
@@ -41,41 +35,42 @@ internal class Unique
         build.Diagnostics.Enqueue(new Duplicate
         {
             Key = key,
-            Type = info.Composition.Top,
+            Type = type,
             Info = primary,
             Record = record,
             Collision = collision
         });
     }
 
-    private void Fill(Dictionary<Section, Dictionary<Type, Queue<Build>>> builds)
+    private void Fill(Parser424 parser)
     {
-        RecordInfo airport = meta.TypeInfo[typeof(Airport)],
-                   heliport = meta.TypeInfo[typeof(Heliport)];
-
-        Dictionary<string, Record424> ports = [];
         Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
         foreach (var (section, info) in meta.Info)
         {
-            if (info.Primary is null)
-                continue;
-
             var top = info.Composition.Top;
+
+            if (!meta.KeyInfo.TryGetValue(top, out var primary))
+                continue;
 
             if (!unique.TryGetValue(top, out var records))
                 unique[top] = records = [];
 
-            foreach (var build in builds[section][top])
-                Process(build, info, records);
-
-            if (info == airport || info == heliport)
-            {
-                foreach (var build in builds[section][info.Composition.Top])
-                    Process(build, info, ports);
-            }
+            foreach (var build in parser.builds[section][top])
+                Process(build, top, in primary, records);
         }
-        this.ports = ports.ToFrozenDictionary();
+
+        foreach (var (type, (_, sections)) in meta.MiddleInfo)
+        {
+            Dictionary<string, Record424> middles = [];
+
+            var primary = meta.KeyInfo[type];
+
+            foreach (var build in parser.middle[type])
+                Process(build, type, in primary, middles);
+
+            unique[type] = middles;
+        }
         this.unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary())).ToFrozenDictionary();
     }
 
@@ -83,14 +78,10 @@ internal class Unique
     {
         meta = parser.meta;
 
-        Fill(parser.builds);
+        Fill(parser);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     internal bool TryGetRecords(Type type, [NotNullWhen(true)] out FrozenDictionary<string, Record424>? records)
         => unique.TryGetValue(type, out records);
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal bool TryGetPort(string key, [NotNullWhen(true)] out Record424? port)
-        => ports.TryGetValue(key, out port);
 }

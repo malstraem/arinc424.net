@@ -16,7 +16,7 @@ internal class Known<TRecord, TType>(PropertyInfo property, in KeyInfo info) : L
     {
         var type = property.PropertyType;
 
-        var primary = unique.meta.TypeInfo[type].Primary!.Value; /* guarantee by design */
+        var primary = unique.meta.KeyInfo[type]; /* guarantee by design */
 
         if (!info.TryGetKey(record.Source!, in primary, out string? key))
         {
@@ -36,7 +36,7 @@ internal class Known<TRecord, TType>(PropertyInfo property, in KeyInfo info) : L
             diagnostic = null;
             return true;
         }
-        diagnostic = BadLink(LinkError.KeyNotFound, record, type);
+        diagnostic = BadLink(LinkError.KeyNotFound, record, type, key);
         return false;
     }
 }
