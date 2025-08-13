@@ -66,7 +66,7 @@ internal class Unique
 
             var primary = meta.KeyInfo[type];
 
-            foreach (var build in parser.middle[type])
+            foreach (var build in parser.aggregate[type])
                 Process(build, type, in primary, middles);
 
             unique[type] = middles;

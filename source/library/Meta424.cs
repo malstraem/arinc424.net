@@ -92,6 +92,59 @@ public class Meta424
 #pragma warning disable CS8618
     private Meta424() { }
 #pragma warning restore CS8618
+    private static FrozenDictionary<Type, (Relation, Section[])> GetMiddleInfo
+    (
+        Supplement supplement,
+        Dictionary<Type, RecordInfo> typeInfo,
+        Dictionary<Type, KeyInfo> keyInfo
+    )
+    {
+        HashSet<Type> linkedTypes = [];
+
+        foreach (var (_, recordInfo) in typeInfo)
+        {
+            var relations = recordInfo.Composition.Relations;
+
+            if (relations is null)
+                continue;
+
+            foreach (var link in relations.Last().Links)
+            {
+                if (!link.IsPolymorph)
+                    _ = linkedTypes.Add(link.Type);
+            }
+        }
+
+        HashSet<Type> middleTypes = [];
+
+        foreach (var (type, _) in typeInfo)
+        {
+            foreach (var linkedType in linkedTypes)
+            {
+                if (type.IsSubclassOf(linkedType))
+                    _ = middleTypes.Add(linkedType);
+            }
+        }
+
+        Dictionary<Type, (Relation, Section[])> middle = [];
+
+        foreach (var middleType in middleTypes)
+        {
+            List<Section> middleSections = [];
+
+            if (middleType.TryKeyInfo(supplement, out var key))
+                keyInfo[middleType] = key.Value;
+
+            foreach (var (type, info) in typeInfo)
+            {
+                if (type.IsSubclassOf(middleType))
+                    middleSections.AddRange(info.Sections.Select(x => x.Value));
+            }
+            middle[middleType] = (Relation.Create(middleType, supplement)!, [.. middleSections]);
+        }
+        return middle.ToFrozenDictionary();
+    }
+
     /**<summary>
     Creates metadata using target <paramref name="supplement"/>.
     </summary>
@@ -121,33 +174,16 @@ public class Meta424
                 keyInfo[info.Composition.Top] = primary.Value;
         }
 
-        List<Type> middleTypes = [typeof(Port), typeof(Touch)];
-
-        Dictionary<Type, (Relationships, Section[])> middle = [];
-
-        foreach (var middleType in middleTypes)
-        {
-            List<Section> middleSections = [];
-
-            if (middleType.TryKeyInfo(supplement, out var key))
-                keyInfo[middleType] = key.Value;
-
-            foreach (var (type, info) in typeInfo)
-            {
-                if (type.IsSubclassOf(middleType))
-                    middleSections.AddRange(info.Sections.Select(x => x.Value));
-            }
-            middle[middleType] = (Relationships.Create(middleType, supplement)!, [.. middleSections]);
-        }
+        var middleInfo = GetMiddleInfo(supplement, typeInfo, keyInfo);
 
         return new Meta424()
         {
             Info = sectionInfo.ToFrozenDictionary(),
             Types = types.ToFrozenDictionary(),
+            KeyInfo = keyInfo.ToFrozenDictionary(),
             TypeInfo = typeInfo.ToFrozenDictionary(),
             Sections = [.. sections],
-            MiddleInfo = middle.ToFrozenDictionary(),
-            KeyInfo = keyInfo.ToFrozenDictionary(),
+            MiddleInfo = middleInfo,
         };
     }
 
@@ -159,7 +195,7 @@ public class Meta424
 
     internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; init; }
 
-    internal FrozenDictionary<Type, (Relationships, Section[])> MiddleInfo { get; init; }
+    internal FrozenDictionary<Type, (Relation, Section[])> MiddleInfo { get; init; }
 
     internal FrozenDictionary<Type, KeyInfo> KeyInfo { get; init; }
 }

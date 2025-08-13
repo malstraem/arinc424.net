@@ -8,7 +8,7 @@ using Diagnostics;
 /**<summary>
 How an entity (primary record) should be created and processed.
 </summary>*/
-internal abstract class RecordInfo(Supplement supplement, Composition composition, SectionAttribute[] sections)
+internal abstract class RecordInfo(Composition composition, SectionAttribute[] sections)
 {
     private static RecordInfo Create(Type type, Supplement supplement)
     {
@@ -31,12 +31,6 @@ internal abstract class RecordInfo(Supplement supplement, Composition compositio
 
     internal abstract Queue<Build> Build(Queue<string> strings);
 
-/*    internal KeyInfo? Primary { get; } = composition.Top.GetCustomAttributes<IdAttribute>().BySupplement(supplement)?.GetInfo
-    (
-        composition.Top.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement),
-        composition.Top.GetCustomAttributes<PortAttribute>().BySupplement(supplement)
-    );*/
-
     internal Composition Composition { get; } = composition;
 
     internal SectionAttribute[] Sections { get; } = sections;
@@ -49,7 +43,7 @@ internal sealed class RecordInfo<TRecord>
     Continuations? continuations,
     SectionAttribute[] sections
 )
-    : RecordInfo(supplement, composition, sections) where TRecord : Record424, new()
+    : RecordInfo(composition, sections) where TRecord : Record424, new()
 {
     private readonly BuildInfo<TRecord> info = new(supplement);
 

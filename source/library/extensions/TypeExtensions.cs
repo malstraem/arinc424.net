@@ -5,6 +5,7 @@ namespace Arinc424;
 using Building;
 using Processing;
 using Linking;
+using System.Diagnostics.CodeAnalysis;
 
 internal static class TypeExtensions
 {
@@ -12,11 +13,15 @@ internal static class TypeExtensions
     {
         Stack<Type> types = [];
         Stack<IPipeline> pipelines = [];
-        Stack<Relationships> relations = [];
+        Stack<Relation> relations = [];
 
         Fill(type, supplement);
 
-        return new Composition([.. types]) { Pipelines = [.. pipelines], Relations = [.. relations] };
+        return new Composition([.. types])
+        {
+            Pipelines = pipelines.Count == 0 ? null : [.. pipelines],
+            Relations = relations.Count == 0 ? null : [.. relations]
+        };
 
         void Fill(Type type, Supplement supplement)
         {
@@ -28,7 +33,7 @@ internal static class TypeExtensions
                     pipelines.Push(pipe.GetPipeline(supplement));
             }
 
-            var relationships = Relationships.Create(type, supplement);
+            var relationships = Relation.Create(type, supplement);
 
             if (relationships is not null)
                 relations.Push(relationships);
@@ -42,7 +47,7 @@ internal static class TypeExtensions
         }
     }
 
-    internal static bool TryKeyInfo(this Type type, Supplement supplement, out KeyInfo? info)
+    internal static bool TryKeyInfo(this Type type, Supplement supplement, [NotNullWhen(true)] out KeyInfo? info)
     {
         var id = type.GetCustomAttributes<IdAttribute>().BySupplement(supplement);
 

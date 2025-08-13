@@ -9,5 +9,5 @@ public class GroundPoint : PathPoint
 {
     /// <inheritdoc cref="Terms.GroundOperationType"/>
     [Field(25, 26)]
-    public Terms.GroundOperationType OperationType { get; set; }
+    public string Type { get; set; }
 }

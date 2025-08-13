@@ -7,7 +7,7 @@ namespace Arinc424.Linking;
 using Diagnostics;
 
 internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttribute typeAttribute, ref readonly KeyInfo info)
-    : Link<TRecord>(property, in info)
+    : Link<TRecord>(property, in info, true)
         where TRecord : Record424
         where TType : class
 {

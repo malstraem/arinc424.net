@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
@@ -8,7 +9,7 @@ internal abstract class Aggregation(PropertyInfo property)
 
     internal Type Type { get; } = property.PropertyType.GetElementType()!;
 
-    internal abstract void Aggregate(IEnumerable<Build> one, IEnumerable<Build> many);
+    internal abstract void Aggregate(Queue<Build> one, Queue<Build> many);
 
     internal static Aggregation Create(PropertyInfo property)
     {
@@ -19,9 +20,7 @@ internal abstract class Aggregation(PropertyInfo property)
         var back = many.GetProperty(attr!.Property);
 
         if (property.DeclaringType! != back!.PropertyType && one.IsSubclassOf(back.PropertyType))
-        {
             one = back.PropertyType!;
-        }
 
         var type = typeof(Aggregation<,>).MakeGenericType(one, many);
 
@@ -38,10 +37,13 @@ internal sealed class Aggregation<TOne, TMany>(PropertyInfo property, PropertyIn
     private readonly Action<TOne, TMany[]> set =
         property.GetSetMethod()!.CreateDelegate<Action<TOne, TMany[]>>();
 
-    internal override void Aggregate(IEnumerable<Build> builds, IEnumerable<Build> others)
+    internal override void Aggregate(Queue<Build> builds, Queue<Build> others)
     {
-        var one = (IEnumerable<Build<TOne>>)builds; /* guarantee by design */
-        var many = (IEnumerable<Build<TMany>>)others; /* guarantee by design */
+        if (builds.Count == 0 || others.Count == 0)
+            return;
+
+        var one = Unsafe.As<Queue<Build<TOne>>>(builds); /* guarantee by design */
+        var many = Unsafe.As<Queue<Build<TMany>>>(others); /* guarantee by design */
 
         Dictionary<TOne, Queue<TMany>> buffer = [];
 

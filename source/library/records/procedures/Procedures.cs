@@ -22,10 +22,10 @@ Multiple <c>Airport and Heliport Approach</c> primary record sequences under sam
 public class Approach : Procedure<ApproachSequence, ApproachPoint>
 {
     [Many(nameof(PathPoint.Approach))]
-    public Ground.GroundPoint[]? GroundPoints { get; set; }
+    public GroundPoint[]? GroundPoints { get; set; }
 
     [Many(nameof(PathPoint.Approach))]
-    public Ground.SatellitePoint[]? SatellitePoints { get; set; }
+    public SatellitePoint[]? SatellitePoints { get; set; }
 }
 
 /**<summary>

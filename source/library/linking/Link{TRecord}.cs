@@ -5,7 +5,7 @@ namespace Arinc424.Linking;
 
 using Diagnostics;
 
-internal abstract class Link<TRecord>(PropertyInfo property, in KeyInfo info) where TRecord : Record424
+internal abstract class Link(PropertyInfo property, in KeyInfo info, bool isPolymorph)
 {
     protected readonly KeyInfo info = info;
 
@@ -13,6 +13,15 @@ internal abstract class Link<TRecord>(PropertyInfo property, in KeyInfo info) wh
 
     protected readonly NullabilityState nullState = new NullabilityInfoContext().Create(property).ReadState;
 
+    internal Type Type => property.PropertyType;
+
+    internal bool IsPolymorph { get; } = isPolymorph;
+}
+
+internal abstract class Link<TRecord>(PropertyInfo property, in KeyInfo info, bool isPolymorph = false)
+    : Link(property, in info, isPolymorph)
+    where TRecord : Record424
+{
     protected BadLink BadLink(LinkError error, TRecord record, Type? type = null, string? key = null) => new()
     {
         Info = info,

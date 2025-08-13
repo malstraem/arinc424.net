@@ -9,11 +9,11 @@ public class SatellitePoint : PathPoint
 {
     /// <inheritdoc cref="Terms.SatelliteOperationType"/>
     [Field(25, 26)]
-    public Terms.SatelliteOperationType OperationType { get; set; }
+    public string Type { get; set; }
 
     /// <inheritdoc cref="Terms.SatelliteService"/>
     [Field(29, 30)]
-    public Terms.SatelliteService Service { get; set; }
+    public string Service { get; set; }
 
     /**<summary>
     <c>HAL</c> field.
