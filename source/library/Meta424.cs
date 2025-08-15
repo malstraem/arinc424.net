@@ -92,10 +92,10 @@ public class Meta424
 #pragma warning disable CS8618
     private Meta424() { }
 #pragma warning restore CS8618
-    private static FrozenDictionary<Type, (Relation, Section[])> GetMiddleInfo
+    private static void FillInfo
     (
         Supplement supplement,
-        Dictionary<Type, RecordInfo> typeInfo,
+        Dictionary<Type, BaseInfo> typeInfo,
         Dictionary<Type, KeyInfo> keyInfo
     )
     {
@@ -153,7 +153,7 @@ public class Meta424
     {
         List<SectionAttribute> sections = [];
         Dictionary<Section, Type> types = [];
-        Dictionary<Type, RecordInfo> typeInfo = [];
+        Dictionary<Type, BaseInfo> typeInfo = [];
         Dictionary<Section, RecordInfo> sectionInfo = [];
         Dictionary<Type, KeyInfo> keyInfo = [];
 
@@ -174,7 +174,7 @@ public class Meta424
                 keyInfo[info.Composition.Top] = primary.Value;
         }
 
-        var middleInfo = GetMiddleInfo(supplement, typeInfo, keyInfo);
+        FillInfo(supplement, typeInfo, keyInfo);
 
         return new Meta424()
         {
@@ -182,8 +182,7 @@ public class Meta424
             Types = types.ToFrozenDictionary(),
             KeyInfo = keyInfo.ToFrozenDictionary(),
             TypeInfo = typeInfo.ToFrozenDictionary(),
-            Sections = [.. sections],
-            MiddleInfo = middleInfo,
+            Sections = [.. sections]
         };
     }
 
@@ -193,9 +192,7 @@ public class Meta424
 
     internal FrozenDictionary<Section, RecordInfo> Info { get; init; }
 
-    internal FrozenDictionary<Type, RecordInfo> TypeInfo { get; init; }
-
-    internal FrozenDictionary<Type, (Relation, Section[])> MiddleInfo { get; init; }
+    internal FrozenDictionary<Type, BaseInfo> TypeInfo { get; init; }
 
     internal FrozenDictionary<Type, KeyInfo> KeyInfo { get; init; }
 }

@@ -42,8 +42,9 @@ internal sealed class Aggregation<TOne, TMany>(PropertyInfo property, PropertyIn
         if (builds.Count == 0 || others.Count == 0)
             return;
 
-        var one = Unsafe.As<Queue<Build<TOne>>>(builds); /* guarantee by design */
-        var many = Unsafe.As<Queue<Build<TMany>>>(others); /* guarantee by design */
+        /* guarantee by design */
+        var one = Unsafe.As<Queue<Build<TOne>>>(builds);
+        var many = Unsafe.As<Queue<Build<TMany>>>(others);
 
         Dictionary<TOne, Queue<TMany>> buffer = [];
 

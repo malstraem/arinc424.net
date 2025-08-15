@@ -8,7 +8,7 @@ using Diagnostics;
 /**<summary>
 How an entity (primary record) should be created and processed.
 </summary>*/
-internal abstract class RecordInfo(Composition composition, SectionAttribute[] sections)
+internal abstract class RecordInfo(Composition composition, SectionAttribute[] sections) : BaseInfo(composition, sections)
 {
     private static RecordInfo Create(Type type, Supplement supplement)
     {
@@ -30,10 +30,6 @@ internal abstract class RecordInfo(Composition composition, SectionAttribute[] s
     internal static RecordInfo Create<TRecord>(Supplement supplement) where TRecord : Record424, new() => Create(typeof(TRecord), supplement);
 
     internal abstract Queue<Build> Build(Queue<string> strings);
-
-    internal Composition Composition { get; } = composition;
-
-    internal SectionAttribute[] Sections { get; } = sections;
 }
 
 internal sealed class RecordInfo<TRecord>

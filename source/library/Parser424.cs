@@ -2,11 +2,8 @@ using System.Reflection;
 
 namespace Arinc424;
 
-using System.Linq;
-
-using Diagnostics;
-
 using Linking;
+using Diagnostics;
 
 internal class Parser424
 {
@@ -152,8 +149,7 @@ internal class Parser424
                 relation.Link(builds[section][relation.Type], unique, meta);
         }
 #endif
-        foreach (var relation in relations)
-            relation.Aggregate(aggregate);
+        Parallel.ForEach(relations, x => x.Aggregate(aggregate));
     }
 
     private void Build()

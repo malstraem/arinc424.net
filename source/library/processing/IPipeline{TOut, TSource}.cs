@@ -2,8 +2,6 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Processing;
 
-using Building;
-
 internal interface IPipeline
 {
     Queue<Build> Process(Queue<Build> builds);

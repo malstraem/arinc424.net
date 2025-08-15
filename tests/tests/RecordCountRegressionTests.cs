@@ -28,7 +28,7 @@ public class RecordCountRegressionTests
     [Arguments("worldwide", Supplement.V18)]
     [Arguments("faa-07.08.25", Supplement.V18)]
     [Arguments("supplement-18", Supplement.V18)]
-    [Arguments("private/2502v20 (CAI)", Supplement.V20)]
+    [Arguments("private/B2508Av20 (CAI)", Supplement.V20)]
     [Arguments("private/2409v20 (CAI)", Supplement.V20)]
     public void CheckRegression(string file, Supplement supplement)
     {
