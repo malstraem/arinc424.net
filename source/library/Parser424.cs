@@ -53,103 +53,49 @@ internal class Parser424
         {
             var (section, info) = (x.Key, x.Value);
 
-            var pipelines = info.Composition.Pipelines;
+            var pipes = info.Pipes;
 
-            if (pipelines is null)
+            if (pipes is null)
                 return;
 
             var builds = this.builds[section];
 
-            foreach (var pipeline in pipelines)
-                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
+            foreach (var pipe in pipes)
+                builds[pipe.OutType] = pipe.Process(builds[pipe.SourceType]);
         });
 #else
         foreach (var (section, info) in meta.Info)
         {
-            var pipelines = info.Composition.Pipelines;
+            var pipes = info.Pipes;
 
-            if (pipelines is null)
+            if (pipes is null)
                 continue;
 
             var builds = this.builds[section];
 
-            foreach (var pipeline in info.Composition.Pipelines)
-                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
+            foreach (var pipe in pipes)
+                builds[pipe.OutType] = pipe.Process(builds[pipe.SourceType]);
         }
 #endif
     }
 
     private void Aggregate()
     {
-        /*foreach (var (section, info) in meta.Info)
+        foreach (var (type, info) in meta.Base)
         {
-            var relations = info.Composition.Relations;
+            var aggregate = this.aggregate[type];
 
-            if (relations is null)
-                continue;
-
-            foreach (var relation in relations)
-                relation.Aggregate(builds[section][relation.Type], builds, meta);
-        }*/
-
-        foreach (var (type, info) in meta.TypeInfo)
-        {
-            var sections = info.Sections.Select(x => x.Value);
-
-            foreach (var section in sections)
+            foreach (var section in info.Sections.Select(x => x.Value))
             {
-                var aggregate = this.aggregate[type];
+                var builds = this.builds[section];
 
-                foreach (var build in builds[section][info.Composition.Top])
-                    aggregate.Enqueue(build);
+                foreach (var comp in info.Composition)
+                {
+                    foreach (var build in builds[comp])
+                        aggregate.Enqueue(build);
+                }
             }
         }
-
-        foreach (var (type, info) in meta.MiddleInfo)
-        {
-            foreach (var section in info.Item2)
-            {
-                var aggregate = this.aggregate[type];
-
-                foreach (var build in builds[section][meta.Info[section].Composition.Top])
-                    aggregate.Enqueue(build);
-            }
-        }
-    }
-
-    private void Link()
-    {
-        Unique unique = new(this);
-
-        var relations = meta.Info.SelectMany(x => x.Value.Composition.Relations ?? [])
-                            .Concat(meta.MiddleInfo.Select(x => x.Value.Item1));
-
-#if !NOPARALLEL
-        Parallel.ForEach(meta.Info, x =>
-        {
-            var (section, info) = (x.Key, x.Value);
-
-            var relations = info.Composition.Relations;
-
-            if (relations is null)
-                return;
-
-            foreach (var relation in relations)
-                relation.Link(builds[section][relation.Type], unique, meta);
-        });
-#else
-        foreach (var (section, info) in meta.Info)
-        {
-            var relations = info.Composition.Relations;
-
-            if (relations is null)
-                continue;
-
-            foreach (var relation in relations)
-                relation.Link(builds[section][relation.Type], unique, meta);
-        }
-#endif
-        Parallel.ForEach(relations, x => x.Aggregate(aggregate));
     }
 
     private void Build()
@@ -159,15 +105,38 @@ internal class Parser424
         {
             var (section, info) = (x.Key, x.Value);
 
-            builds[section][info.Composition.Low] = info.Build(records[section]);
+            builds[section][info.Low] = info.Build(records[section]);
         });
 #else
         foreach (var (section, info) in meta.Info)
-            builds[section][info.Composition.Low] = info.Build(records[section]);
+            builds[section][info.Low] = info.Build(records[section]);
 #endif
         Process();
         Aggregate();
-        Link();
+    }
+
+    private void Link()
+    {
+        Unique unique = new(this);
+
+        var relations = meta.Base.Values
+            .Where(x => x.Relations is not null)
+                .SelectMany(x => x.Relations!);
+#if !NOPARALLEL
+        Parallel.ForEach(relations, relation => relation.Link(aggregate[relation.Type], unique, meta));
+        Parallel.ForEach(relations, x => x.Aggregate(aggregate));
+#else
+        foreach (var (section, info) in meta.Info)
+        {
+            var relations = info.Composition.Relations;
+
+            if (relations is null)
+                continue;
+
+            foreach (var relation in relations)
+                relation.Link(builds[section][relation.Type], unique, meta);
+        }
+#endif
     }
 
     private Data424 GetData(out Queue<Build> invalid)
@@ -199,10 +168,7 @@ internal class Parser424
             records[section] = [];
         }
 
-        foreach (var (type, _) in meta.TypeInfo)
-            aggregate[type] = [];
-
-        foreach (var (type, _) in meta.MiddleInfo)
+        foreach (var (type, _) in meta.Base)
             aggregate[type] = [];
     }
 
@@ -243,9 +209,8 @@ internal class Parser424
     internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Queue<Build> invalid)
     {
         skipped = Process(strings);
-
         Build();
-
+        Link();
         return GetData(out invalid);
     }
 }

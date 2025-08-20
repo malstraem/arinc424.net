@@ -7,8 +7,6 @@ internal abstract class Aggregation(PropertyInfo property)
 {
     protected PropertyInfo property = property;
 
-    internal Type Type { get; } = property.PropertyType.GetElementType()!;
-
     internal abstract void Aggregate(Queue<Build> one, Queue<Build> many);
 
     internal static Aggregation Create(PropertyInfo property)
@@ -26,6 +24,8 @@ internal abstract class Aggregation(PropertyInfo property)
 
         return (Aggregation)Activator.CreateInstance(type, property, back)!;
     }
+
+    internal Type Type { get; } = property.PropertyType.GetElementType()!;
 }
 
 internal sealed class Aggregation<TOne, TMany>(PropertyInfo property, PropertyInfo back) : Aggregation(property)

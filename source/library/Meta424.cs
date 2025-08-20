@@ -92,57 +92,64 @@ public class Meta424
 #pragma warning disable CS8618
     private Meta424() { }
 #pragma warning restore CS8618
-    private static void FillInfo
+    /**<summary>
+    Finds info for all base classes in strong type relations.
+    </summary>*/
+    private static void FillBaseInfo
     (
         Supplement supplement,
-        Dictionary<Type, BaseInfo> typeInfo,
-        Dictionary<Type, KeyInfo> keyInfo
+        Dictionary<Type, KeyInfo> keyInfo,
+        Dictionary<Type, BaseInfo> typeInfo
     )
     {
         HashSet<Type> linkedTypes = [];
 
         foreach (var (_, recordInfo) in typeInfo)
         {
-            var relations = recordInfo.Composition.Relations;
-
-            if (relations is null)
+            if (recordInfo.Relations is null)
                 continue;
 
-            foreach (var link in relations.Last().Links)
+            foreach (var link in recordInfo.Relations.SelectMany(x => x.Links))
             {
                 if (!link.IsPolymorph)
                     _ = linkedTypes.Add(link.Type);
             }
         }
 
-        HashSet<Type> middleTypes = [];
+        Dictionary<Type, List<BaseInfo>> inheritance = [];
 
-        foreach (var (type, _) in typeInfo)
+        foreach (var linked in linkedTypes)
         {
-            foreach (var linkedType in linkedTypes)
-            {
-                if (type.IsSubclassOf(linkedType))
-                    _ = middleTypes.Add(linkedType);
-            }
-        }
-
-        Dictionary<Type, (Relation, Section[])> middle = [];
-
-        foreach (var middleType in middleTypes)
-        {
-            List<Section> middleSections = [];
-
-            if (middleType.TryKeyInfo(supplement, out var key))
-                keyInfo[middleType] = key.Value;
-
             foreach (var (type, info) in typeInfo)
             {
-                if (type.IsSubclassOf(middleType))
-                    middleSections.AddRange(info.Sections.Select(x => x.Value));
+                if (type.IsSubclassOf(linked))
+                {
+                    if (!inheritance.TryGetValue(linked, out var inherited))
+                        inheritance[linked] = inherited = [];
+
+                    inherited.Add(info);
+                }
             }
-            middle[middleType] = (Relation.Create(middleType, supplement)!, [.. middleSections]);
         }
-        return middle.ToFrozenDictionary();
+
+        foreach (var (type, inherited) in inheritance)
+        {
+            List<SectionAttribute> sections = [];
+
+            if (type.TryKeyInfo(supplement, out var key))
+                keyInfo[type] = key.Value;
+
+            foreach (var info in inherited)
+                sections.AddRange(info.Sections);
+
+            var composition = type.Decompose(supplement, out var relations, out _);
+
+            if (relations is null)
+                throw new InvalidOperationException();
+            /* never been thrown if integrity tests pass */
+
+            typeInfo[type] = new BaseInfo(composition, [.. sections], relations);
+        }
     }
 
     /**<summary>
@@ -152,36 +159,40 @@ public class Meta424
     public static Meta424 Create(Supplement supplement)
     {
         List<SectionAttribute> sections = [];
-        Dictionary<Section, Type> types = [];
-        Dictionary<Type, BaseInfo> typeInfo = [];
-        Dictionary<Section, RecordInfo> sectionInfo = [];
+
         Dictionary<Type, KeyInfo> keyInfo = [];
+        Dictionary<Type, BaseInfo> linked = [];
+
+        Dictionary<Section, Type> types = [];
+        Dictionary<Section, RecordInfo> info = [];
 
         var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
 
-        foreach (var info in attributes.Select(x => x.GetInfo(supplement)))
+        foreach (var attribute in attributes)
         {
-            foreach (var section in info.Sections)
+            var recordInfo = attribute.GetInfo(supplement);
+
+            foreach (var section in recordInfo.Sections)
             {
-                types.Add(section.Value, info.Composition.Top);
+                info.Add(section.Value, recordInfo);
+                types.Add(section.Value, recordInfo.Top);
                 sections.Add(section);
-                sectionInfo.Add(section.Value, info);
             }
             // types with multiple sections will be stored once
-            _ = typeInfo.TryAdd(info.Composition.Top, info);
+            _ = linked.TryAdd(recordInfo.Top, recordInfo);
 
-            if (info.Composition.Top.TryKeyInfo(supplement, out var primary))
-                keyInfo[info.Composition.Top] = primary.Value;
+            if (recordInfo.Top.TryKeyInfo(supplement, out var primary))
+                keyInfo[recordInfo.Top] = primary.Value;
         }
 
-        FillInfo(supplement, typeInfo, keyInfo);
+        FillBaseInfo(supplement, keyInfo, linked);
 
         return new Meta424()
         {
-            Info = sectionInfo.ToFrozenDictionary(),
+            Info = info.ToFrozenDictionary(),
             Types = types.ToFrozenDictionary(),
-            KeyInfo = keyInfo.ToFrozenDictionary(),
-            TypeInfo = typeInfo.ToFrozenDictionary(),
+            Keys = keyInfo.ToFrozenDictionary(),
+            Base = linked.ToFrozenDictionary(),
             Sections = [.. sections]
         };
     }
@@ -192,7 +203,7 @@ public class Meta424
 
     internal FrozenDictionary<Section, RecordInfo> Info { get; init; }
 
-    internal FrozenDictionary<Type, BaseInfo> TypeInfo { get; init; }
+    internal FrozenDictionary<Type, KeyInfo> Keys { get; init; }
 
-    internal FrozenDictionary<Type, KeyInfo> KeyInfo { get; init; }
+    internal FrozenDictionary<Type, BaseInfo> Base { get; init; }
 }

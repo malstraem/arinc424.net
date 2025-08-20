@@ -1,8 +1,16 @@
 namespace Arinc424.Building;
 
-internal abstract class BaseInfo(Composition composition, SectionAttribute[] sections)
+using Linking;
+
+internal class BaseInfo(Type[] composition, SectionAttribute[] sections, Relation[]? relations)
 {
-    internal Composition Composition { get; } = composition;
+    internal Type Top { get; } = composition.Last();
+
+    internal Type Low { get; } = composition.First();
+
+    internal Type[] Composition { get; } = composition;
+
+    internal Relation[]? Relations { get; } = relations;
 
     internal SectionAttribute[] Sections { get; } = sections;
 }

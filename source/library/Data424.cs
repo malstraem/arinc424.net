@@ -12,7 +12,7 @@ using Procedures;
 using Navigation;
 
 /**<summary>
-Container that represents <c>ARINC 424</c> database.
+<c>ARINC 424</c> database representation.
 </summary>*/
 public class Data424
 {

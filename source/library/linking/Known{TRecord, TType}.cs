@@ -16,7 +16,7 @@ internal class Known<TRecord, TType>(PropertyInfo property, in KeyInfo info) : L
     {
         var type = property.PropertyType;
 
-        var primary = unique.meta.KeyInfo[type]; /* guarantee by design */
+        var primary = unique.meta.Keys[type]; /* guarantee by design */
 
         if (!info.TryGetKey(record.Source!, in primary, out string? key))
         {

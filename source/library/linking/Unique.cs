@@ -46,30 +46,21 @@ internal class Unique
     {
         Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
-        foreach (var (section, info) in meta.Info)
+        foreach (var (type, info) in meta.Base)
         {
-            var top = info.Composition.Top;
-
-            if (!meta.KeyInfo.TryGetValue(top, out var primary))
+            if (!meta.Keys.TryGetValue(type, out var primary))
                 continue;
 
-            if (!unique.TryGetValue(top, out var records))
-                unique[top] = records = [];
+            if (!unique.TryGetValue(type, out var records))
+                unique[type] = records = [];
 
-            foreach (var build in parser.builds[section][top])
-                Process(build, top, in primary, records);
-        }
+            var sections = info.Sections.Select(x => x.Value);
 
-        foreach (var (type, (_, sections)) in meta.MiddleInfo)
-        {
-            Dictionary<string, Record424> middles = [];
-
-            var primary = meta.KeyInfo[type];
-
-            foreach (var build in parser.aggregate[type])
-                Process(build, type, in primary, middles);
-
-            unique[type] = middles;
+            foreach (var section in sections)
+            {
+                foreach (var build in parser.builds[section][type])
+                    Process(build, type, in primary, records);
+            }
         }
         this.unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary())).ToFrozenDictionary();
     }

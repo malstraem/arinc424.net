@@ -1,27 +1,25 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace Arinc424;
 
-using Building;
 using Processing;
 using Linking;
-using System.Diagnostics.CodeAnalysis;
 
 internal static class TypeExtensions
 {
-    internal static Composition GetComposition(this Type type, Supplement supplement)
+    internal static Type[] Decompose(this Type type, Supplement supplement, out Relation[]? relations, out IPipeline[]? pipes)
     {
         Stack<Type> types = [];
-        Stack<IPipeline> pipelines = [];
-        Stack<Relation> relations = [];
+        Stack<Relation> relationStack = [];
+        Stack<IPipeline> pipeStack = [];
 
         Fill(type, supplement);
 
-        return new Composition([.. types])
-        {
-            Pipelines = pipelines.Count == 0 ? null : [.. pipelines],
-            Relations = relations.Count == 0 ? null : [.. relations]
-        };
+        pipes = pipeStack.Count > 0 ? [.. pipeStack] : null;
+        relations = relationStack.Count > 0 ? [.. relationStack] : null;
+
+        return [.. types];
 
         void Fill(Type type, Supplement supplement)
         {
@@ -30,13 +28,13 @@ internal static class TypeExtensions
             foreach (var pipe in type.GetCustomAttributes<PipelineAttribute>())
             {
                 if (supplement >= pipe.Start && supplement <= pipe.End)
-                    pipelines.Push(pipe.GetPipeline(supplement));
+                    pipeStack.Push(pipe.GetPipeline(supplement));
             }
 
-            var relationships = Relation.Create(type, supplement);
+            var relation = Relation.Create(type, supplement);
 
-            if (relationships is not null)
-                relations.Push(relationships);
+            if (relation is not null)
+                relationStack.Push(relation);
 
             var property = type.GetProperty(nameof(Record424<Record424>.Sequence));
 

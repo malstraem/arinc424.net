@@ -10,10 +10,10 @@ internal abstract class Relation(Type type)
     protected Aggregation[] aggregations;
 #pragma warning restore CS8618
     internal static Relation? Create(Type type, Supplement supplement)
-    => (Relation)typeof(Relation<>)
-        .MakeGenericType(type)!
-            .GetMethod(nameof(Create), BindingFlags.NonPublic | BindingFlags.Static, [typeof(Supplement)])!
-                .Invoke(null, [supplement])!;
+        => (Relation)typeof(Relation<>)
+            .MakeGenericType(type)!
+                .GetMethod(nameof(Create), BindingFlags.NonPublic | BindingFlags.Static, [typeof(Supplement)])!
+                    .Invoke(null, [supplement])!;
 
     internal void Aggregate(Builds builds)
     {
