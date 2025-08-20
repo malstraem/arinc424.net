@@ -2,7 +2,7 @@ namespace Arinc424.Building;
 
 using Linking;
 
-internal class BaseInfo(Type[] composition, SectionAttribute[] sections, Relation[]? relations)
+internal class BaseType(Type[] composition, SectionAttribute[] sections, Relation[]? relations)
 {
     internal Type Top { get; } = composition.Last();
 

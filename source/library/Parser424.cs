@@ -3,6 +3,7 @@ using System.Reflection;
 namespace Arinc424;
 
 using Linking;
+using Building;
 using Diagnostics;
 
 internal class Parser424
@@ -22,6 +23,8 @@ internal class Parser424
     {
         Queue<string> skipped = [];
 
+        var sections = meta.Types.Values.SelectMany(x => x.Sections);
+
         foreach (string @string in strings)
         {
             if (!TryEnqueue(@string))
@@ -34,7 +37,7 @@ internal class Parser424
             if (@string.Length < 132)
                 return false;
 
-            foreach (var section in meta.Sections)
+            foreach (var section in sections)
             {
                 if (section.IsMatch(@string))
                 {
@@ -49,7 +52,7 @@ internal class Parser424
     private void Process()
     {
 #if !NOPARALLEL
-        Parallel.ForEach(meta.Info, x =>
+        Parallel.ForEach(meta.Types, x =>
         {
             var (section, info) = (x.Key, x.Value);
 
@@ -81,19 +84,31 @@ internal class Parser424
 
     private void Aggregate()
     {
-        foreach (var (type, info) in meta.Base)
+        var records = meta.Base.Values.Where(x => x is RecordType).ToArray();
+
+        foreach (var section in records.SelectMany(x => x.Sections))
         {
-            var aggregate = this.aggregate[type];
-
-            foreach (var section in info.Sections.Select(x => x.Value))
+            foreach (var (type, builds) in builds[section.Value])
             {
-                var builds = this.builds[section];
+                if (!this.aggregate.TryGetValue(type, out var aggregate))
+                    this.aggregate[type] = aggregate = [];
 
-                foreach (var comp in info.Composition)
-                {
-                    foreach (var build in builds[comp])
-                        aggregate.Enqueue(build);
-                }
+                foreach (var build in builds)
+                    aggregate.Enqueue(build);
+            }
+        }
+
+        var @base = meta.Base.Values.Except(records).ToArray();
+
+        foreach (var info in @base)
+        {
+            if (!this.aggregate.TryGetValue(info.Top, out var aggregate))
+                this.aggregate[info.Top] = aggregate = [];
+
+            foreach (var section in info.Sections)
+            {
+                foreach (var build in builds[section.Value][meta.Types[section.Value].Top])
+                    aggregate.Enqueue(build);
             }
         }
     }
@@ -101,7 +116,7 @@ internal class Parser424
     private void Build()
     {
 #if !NOPARALLEL
-        Parallel.ForEach(meta.Info, x =>
+        Parallel.ForEach(meta.Types, x =>
         {
             var (section, info) = (x.Key, x.Value);
 
@@ -123,7 +138,7 @@ internal class Parser424
             .Where(x => x.Relations is not null)
                 .SelectMany(x => x.Relations!);
 #if !NOPARALLEL
-        Parallel.ForEach(relations, relation => relation.Link(aggregate[relation.Type], unique, meta));
+        Parallel.ForEach(relations, x => x.Link(aggregate[x.Type], unique, meta));
         Parallel.ForEach(relations, x => x.Aggregate(aggregate));
 #else
         foreach (var (section, info) in meta.Info)
@@ -162,14 +177,11 @@ internal class Parser424
     {
         this.meta = meta;
 
-        foreach (var (section, _) in meta.Info)
+        foreach (var (section, _) in meta.Types)
         {
             builds[section] = [];
             records[section] = [];
         }
-
-        foreach (var (type, _) in meta.Base)
-            aggregate[type] = [];
     }
 
     internal static TRecord[] Process<TRecord>(Queue<Build<TRecord>> builds, Dictionary<Record424, Diagnostic[]> invalid)

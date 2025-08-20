@@ -35,7 +35,7 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
         [NotNullWhen(false)] out Diagnostic? diagnostic
     )
     {
-        if (!meta.Types.TryGetValue(section, out var type))
+        if (!meta.TryGetType(section, out var type))
         {
             diagnostic = BadSection(record, section, 0, 0); //todo indices
             typeInfo = null;

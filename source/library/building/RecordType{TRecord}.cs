@@ -10,16 +10,16 @@ using Processing;
 /**<summary>
 How an entity (primary record) should be created and processed.
 </summary>*/
-internal abstract class RecordInfo
+internal abstract class RecordType
 (
     Type[] composition,
     Relation[]? relations,
     SectionAttribute[] sections,
     IPipeline[]? pipes
 )
-    : BaseInfo(composition, sections, relations)
+    : BaseType(composition, sections, relations)
 {
-    private static RecordInfo Create(Type type, Supplement supplement)
+    private static RecordType Create(Type type, Supplement supplement)
     {
         var composition = type.Decompose(supplement, out var relations, out var pipes);
 
@@ -29,7 +29,7 @@ internal abstract class RecordInfo
         var sections = type.GetCustomAttributes<SectionAttribute>(false).ToArray();
 
         // take only low level composition type
-        var constructor = typeof(RecordInfo<>).MakeGenericType(composition.First()).GetConstructor
+        var constructor = typeof(RecordType<>).MakeGenericType(composition.First()).GetConstructor
         ([
             typeof(Supplement),
             typeof(Type[]),
@@ -38,10 +38,11 @@ internal abstract class RecordInfo
             typeof(SectionAttribute[]),
             typeof(IPipeline[])
         ])!;
-        return (RecordInfo)constructor.Invoke([supplement, composition, relations, continuations, sections, pipes]);
+        return (RecordType)constructor
+            .Invoke([supplement, composition, relations, continuations, sections, pipes]);
     }
 
-    internal static RecordInfo Create<TRecord>(Supplement supplement) where TRecord : Record424, new()
+    internal static RecordType Create<TRecord>(Supplement supplement) where TRecord : Record424, new()
         => Create(typeof(TRecord), supplement);
 
     internal abstract Queue<Build> Build(Queue<string> strings);
@@ -49,7 +50,7 @@ internal abstract class RecordInfo
     internal IPipeline[]? Pipes { get; } = pipes;
 }
 
-internal sealed class RecordInfo<TRecord>
+internal sealed class RecordType<TRecord>
 (
     Supplement supplement,
     Type[] composition,
@@ -58,7 +59,7 @@ internal sealed class RecordInfo<TRecord>
     SectionAttribute[] sections,
     IPipeline[]? pipes
 )
-    : RecordInfo(composition, relations, sections, pipes)
+    : RecordType(composition, relations, sections, pipes)
         where TRecord : Record424, new()
 {
     private readonly BuildInfo<TRecord> info = new(supplement);

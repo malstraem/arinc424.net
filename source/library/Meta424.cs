@@ -1,4 +1,6 @@
 using System.Collections.Frozen;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Reflection;
 
 using Arinc424;
@@ -11,7 +13,6 @@ using Arinc424.Procedures;
 using Arinc424.Routing;
 using Arinc424.Tables;
 using Arinc424.Waypoints;
-using Arinc424.Linking;
 
 #region Mappping (see specification Table 5-1)
 [assembly:
@@ -90,6 +91,8 @@ Metadata that defines how entities should be created.
 public class Meta424
 {
 #pragma warning disable CS8618
+    private FrozenDictionary<Section, Type> sections;
+
     private Meta424() { }
 #pragma warning restore CS8618
     /**<summary>
@@ -99,7 +102,7 @@ public class Meta424
     (
         Supplement supplement,
         Dictionary<Type, KeyInfo> keyInfo,
-        Dictionary<Type, BaseInfo> typeInfo
+        Dictionary<Type, BaseType> typeInfo
     )
     {
         HashSet<Type> linkedTypes = [];
@@ -116,7 +119,7 @@ public class Meta424
             }
         }
 
-        Dictionary<Type, List<BaseInfo>> inheritance = [];
+        Dictionary<Type, List<BaseType>> inheritance = [];
 
         foreach (var linked in linkedTypes)
         {
@@ -148,7 +151,7 @@ public class Meta424
                 throw new InvalidOperationException();
             /* never been thrown if integrity tests pass */
 
-            typeInfo[type] = new BaseInfo(composition, [.. sections], relations);
+            typeInfo[type] = new BaseType(composition, [.. sections], relations);
         }
     }
 
@@ -158,52 +161,48 @@ public class Meta424
     <returns>Runtime compiled metadata.</returns>*/
     public static Meta424 Create(Supplement supplement)
     {
-        List<SectionAttribute> sections = [];
-
-        Dictionary<Type, KeyInfo> keyInfo = [];
-        Dictionary<Type, BaseInfo> linked = [];
+        Dictionary<Type, KeyInfo> keys = [];
+        Dictionary<Type, BaseType> @base = [];
 
         Dictionary<Section, Type> types = [];
-        Dictionary<Section, RecordInfo> info = [];
+        Dictionary<Section, RecordType> info = [];
 
         var attributes = Assembly.GetExecutingAssembly().GetCustomAttributes<RecordAttribute>();
 
         foreach (var attribute in attributes)
         {
-            var recordInfo = attribute.GetInfo(supplement);
+            var recordInfo = attribute.GetType(supplement);
 
             foreach (var section in recordInfo.Sections)
             {
                 info.Add(section.Value, recordInfo);
                 types.Add(section.Value, recordInfo.Top);
-                sections.Add(section);
             }
             // types with multiple sections will be stored once
-            _ = linked.TryAdd(recordInfo.Top, recordInfo);
+            _ = @base.TryAdd(recordInfo.Top, recordInfo);
 
             if (recordInfo.Top.TryKeyInfo(supplement, out var primary))
-                keyInfo[recordInfo.Top] = primary.Value;
+                keys[recordInfo.Top] = primary.Value;
         }
 
-        FillBaseInfo(supplement, keyInfo, linked);
+        FillBaseInfo(supplement, keys, @base);
 
         return new Meta424()
         {
-            Info = info.ToFrozenDictionary(),
-            Types = types.ToFrozenDictionary(),
-            Keys = keyInfo.ToFrozenDictionary(),
-            Base = linked.ToFrozenDictionary(),
-            Sections = [.. sections]
+            sections = types.ToFrozenDictionary(),
+            Types = info.ToFrozenDictionary(),
+            Keys = keys.ToFrozenDictionary(),
+            Base = @base.ToFrozenDictionary()
         };
     }
 
-    internal SectionAttribute[] Sections { get; init; }
-
-    internal FrozenDictionary<Section, Type> Types { get; init; }
-
-    internal FrozenDictionary<Section, RecordInfo> Info { get; init; }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    internal bool TryGetType(Section section, [NotNullWhen(true)] out Type? type)
+        => sections.TryGetValue(section, out type);
 
     internal FrozenDictionary<Type, KeyInfo> Keys { get; init; }
 
-    internal FrozenDictionary<Type, BaseInfo> Base { get; init; }
+    internal FrozenDictionary<Type, BaseType> Base { get; init; }
+
+    internal FrozenDictionary<Section, RecordType> Types { get; init; }
 }

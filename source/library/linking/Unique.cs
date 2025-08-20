@@ -54,13 +54,10 @@ internal class Unique
             if (!unique.TryGetValue(type, out var records))
                 unique[type] = records = [];
 
-            var sections = info.Sections.Select(x => x.Value);
+            //var sections = info.Sections.Select(x => x.Value);
 
-            foreach (var section in sections)
-            {
-                foreach (var build in parser.builds[section][type])
-                    Process(build, type, in primary, records);
-            }
+            foreach (var build in parser.aggregate[type])
+                Process(build, type, in primary, records);
         }
         this.unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary())).ToFrozenDictionary();
     }

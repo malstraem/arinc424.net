@@ -3,10 +3,6 @@ using System.Reflection;
 
 namespace Arinc424;
 
-using Building;
-using Processing;
-using Linking;
-
 internal static class MemberExtensions
 {
     internal static bool TryAttribute<TRecord, TAttribute>(this MemberInfo member, Supplement supplement, [NotNullWhen(true)] out TAttribute? chosen)

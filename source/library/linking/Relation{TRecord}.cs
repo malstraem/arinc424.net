@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
@@ -73,7 +74,9 @@ internal sealed class Relation<TRecord>(Link<TRecord>[] links) : Relation(typeof
     {
         Queue<Diagnostic> diagnostics = [];
 
-        foreach (var build in (IEnumerable<Build<TRecord>>)builds) /* guarantee by design */
+        var queue = Unsafe.As<Queue<Build<TRecord>>>(builds); /* guarantee by design */
+
+        foreach (var build in queue)
         {
             foreach (var link in links)
             {

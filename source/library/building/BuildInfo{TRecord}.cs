@@ -2,9 +2,15 @@ using System.Reflection;
 
 namespace Arinc424.Building;
 
-internal class BuildInfo<TRecord> where TRecord : Record424
+internal class BuildInfo<TRecord>
+    where TRecord : Record424
 {
-    private static IndexAssignment<TRecord> GetIndexAssignment(PropertyInfo property, Supplement supplement, int index)
+    private static IndexAssignment<TRecord> GetIndexAssignment
+    (
+        Supplement supplement,
+        PropertyInfo property,
+        int index
+    )
     {
         // prefer transform attached to the property
         if (!property.TryAttribute<TRecord, TransformAttribute>(supplement, out var transform))
@@ -12,9 +18,14 @@ internal class BuildInfo<TRecord> where TRecord : Record424
 
         return transform is not null
             ? (IndexAssignment<TRecord>)
-                Activator.CreateInstance(typeof(TransformAssignment<,>)
-                    .MakeGenericType(typeof(TRecord), property.PropertyType), property, index, transform)!
-
+                Activator.CreateInstance(typeof(TransformAssignment<,>).MakeGenericType
+                (
+                    typeof(TRecord),
+                    property.PropertyType),
+                    property,
+                    index,
+                    transform
+                )!
             : new CharAssignment<TRecord>(property, index)!;
     }
 
@@ -50,7 +61,7 @@ internal class BuildInfo<TRecord> where TRecord : Record424
         {
             if (property.TryAttribute<TRecord, CharacterAttribute>(supplement, out var character))
             {
-                assignments.Add(GetIndexAssignment(property, supplement, character.Index));
+                assignments.Add(GetIndexAssignment(supplement, property, character.Index));
             }
             else if (property.TryAttribute<TRecord, FieldAttribute>(supplement, out var field))
             {
