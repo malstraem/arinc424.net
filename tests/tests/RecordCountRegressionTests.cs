@@ -1,10 +1,25 @@
 using System.Collections;
+using System.Collections.Frozen;
 using System.Text.Json;
 
 namespace Arinc424.Tests;
 
 public class RecordCountRegressionTests
 {
+    private readonly JsonSerializerOptions options = new() { WriteIndented = true };
+
+    private readonly FrozenDictionary<Supplement, Meta424> meta;
+
+    public RecordCountRegressionTests()
+    {
+        Dictionary<Supplement, Meta424> meta = [];
+
+        foreach (var supplement in Enum.GetValues<Supplement>())
+            meta[supplement] = Meta424.Create(supplement);
+
+        this.meta = meta.ToFrozenDictionary();
+    }
+
     [Test]
     [Skip("manual")]
     [Arguments("worldwide", Supplement.V18)]
@@ -12,16 +27,16 @@ public class RecordCountRegressionTests
     [Arguments("supplement-18", Supplement.V18)]
     public void MakeRegression(string file, Supplement supplement)
     {
-        var data = Data424.Create(Meta424.Create(supplement), File.ReadAllLines($"data/{file}"), out var _, out var _);
+        string[] strings = File.ReadAllLines($"{Cases}{file}");
+
+        var data = Data424.Create(meta[supplement], strings, out string[] _, out var _);
 
         Dictionary<string, int> counts = [];
 
         foreach (var property in typeof(Data424).GetProperties().Where(x => x.PropertyType.IsGenericType))
             counts.Add(property.Name, ((ICollection)property.GetValue(data)!).Count);
 
-        JsonSerializerOptions options = new() { WriteIndented = true };
-
-        File.WriteAllText($"data/regression/{Path.GetFileName($"data/{file}")}.json", JsonSerializer.Serialize(counts, options));
+        File.WriteAllText($"{Regressions}{file}.json", JsonSerializer.Serialize(counts, options));
     }
 
     [Test]
@@ -32,9 +47,11 @@ public class RecordCountRegressionTests
     [Arguments("private/2409v20 (CAI)", Supplement.V20)]
     public void CheckRegression(string file, Supplement supplement)
     {
-        var data = Data424.Create(Meta424.Create(supplement), File.ReadAllLines($"data/{file}"), out var _, out var _);
+        string[] strings = File.ReadAllLines($"{Cases}{file}");
 
-        var counts = JsonSerializer.Deserialize<Dictionary<string, int>>(File.ReadAllText($"data/regression/{file}.json"))!;
+        var data = Data424.Create(meta[supplement], strings, out string[] _, out var _);
+
+        var counts = JsonSerializer.Deserialize<Dictionary<string, int>>(File.ReadAllText($"{Regressions}{file}.json"))!;
 
         foreach (var (propertyName, expected) in counts)
         {

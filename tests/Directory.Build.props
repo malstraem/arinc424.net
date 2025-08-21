@@ -1,0 +1,16 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+
+  <ItemGroup>
+    <ProjectReference Include="../../source/library/Arinc424.csproj" />
+
+    <None Include="$(MSBuildThisFileDirectory)data/**/*"
+          LinkBase="data"
+          TargetPath="../../data/%(RecursiveDir)%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+
+    <Compile Include="$(MSBuildThisFileDirectory)Paths.cs" />
+
+    <Using Include="Arinc424.Paths" Static="true"/>
+  </ItemGroup>
+</Project>

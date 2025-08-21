@@ -1,13 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <IsTestProject>true</IsTestProject>
+    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="TUnit" />
 
-    <ProjectReference Include="../../source/library/Arinc424.csproj" />
-
-    <None Include="../data/**" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
+    <Using Include="TUnit.Core" />
+    <Using Include="TUnit.Assertions" />
   </ItemGroup>
 </Project>

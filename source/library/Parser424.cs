@@ -1,10 +1,10 @@
+using System.Collections.Frozen;
 using System.Reflection;
 
 namespace Arinc424;
 
 using Linking;
 using Building;
-using Diagnostics;
 
 internal class Parser424
 {
@@ -23,7 +23,7 @@ internal class Parser424
     {
         Queue<string> skipped = [];
 
-        var sections = meta.Types.Values.SelectMany(x => x.Sections);
+        var sections = meta.Types.Values.SelectMany(x => x.Sections).ToArray();
 
         foreach (string @string in strings)
         {
@@ -136,7 +136,7 @@ internal class Parser424
 
         var relations = meta.Base.Values
             .Where(x => x.Relations is not null)
-                .SelectMany(x => x.Relations!);
+                .SelectMany(x => x.Relations!).ToArray();
 #if !NOPARALLEL
         Parallel.ForEach(relations, x => x.Link(aggregate[x.Type], unique, meta));
         Parallel.ForEach(relations, x => x.Aggregate(aggregate));
@@ -154,10 +154,8 @@ internal class Parser424
 #endif
     }
 
-    private Data424 GetData(out Queue<Build> invalid)
+    private Data424 GetData(out Invalid invalid)
     {
-        invalid = [];
-
         Data424 data = new();
 
         Dictionary<Record424, Diagnostic[]> diagnostics = [];
@@ -170,6 +168,7 @@ internal class Parser424
 
             property.SetValue(data, process.Invoke(null, [builds[section].Values.Last(), diagnostics]));
         }
+        invalid = diagnostics.ToFrozenDictionary();
         return data;
     }
 
@@ -218,7 +217,7 @@ internal class Parser424
         }
     }
 
-    internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Queue<Build> invalid)
+    internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Invalid invalid)
     {
         skipped = Process(strings);
         Build();

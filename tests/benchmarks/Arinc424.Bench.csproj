@@ -7,7 +7,5 @@
     <PackageReference Include="BenchmarkDotNet" />
 
     <ProjectReference Include="../../source/library/Arinc424.csproj" />
-
-    <None Include="../data/worldwide" LinkBase="data" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 </Project>

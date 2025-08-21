@@ -4,7 +4,7 @@
 site/
 artifacts/
 
-tests/data/private/
+tests/data/cases/private/
 docs/api/**.yml
 
 .manifest

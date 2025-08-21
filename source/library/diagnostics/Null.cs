@@ -1,6 +1,6 @@
-namespace Arinc424.Diagnostics;
+namespace Arinc424;
 
 /**<summary>
-Says that the <see cref="RangeDiagnostic.Range"/> bounds contains blank string but should be filled.
+Says that the <see cref="RangeDiagnostic.Range"/> should be filled but blank.
 </summary>*/
 public record Null : RangeDiagnostic;

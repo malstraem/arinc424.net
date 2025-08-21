@@ -4,8 +4,6 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-using Diagnostics;
-
 internal class Known<TRecord, TType>(PropertyInfo property, in KeyInfo info) : Link<TRecord>(property, in info)
     where TRecord : Record424
     where TType : class

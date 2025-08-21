@@ -1,7 +1,5 @@
 namespace Arinc424.Building;
 
-using Diagnostics;
-
 internal static class RecordBuilder<TRecord> where TRecord : Record424, new()
 {
     internal static Build<TRecord> Build(string @string, BuildInfo<TRecord> info, ref Queue<Diagnostic> diagnostics)

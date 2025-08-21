@@ -4,8 +4,6 @@ using System.Text.RegularExpressions;
 
 namespace Arinc424.Building;
 
-using Diagnostics;
-
 /**<summary>
 Assignment operation to set <see cref="Record424"/> property.
 </summary>*/

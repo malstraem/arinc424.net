@@ -3,8 +3,6 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-using Diagnostics;
-
 internal abstract class Relation(Type type)
 {
 #pragma warning disable CS8618
@@ -74,9 +72,7 @@ internal sealed class Relation<TRecord>(Link<TRecord>[] links) : Relation(typeof
     {
         Queue<Diagnostic> diagnostics = [];
 
-        var queue = Unsafe.As<Queue<Build<TRecord>>>(builds); /* guarantee by design */
-
-        foreach (var build in queue)
+        foreach (var build in Unsafe.As<Queue<Build<TRecord>>>(builds)) /* guarantee by design */
         {
             foreach (var link in links)
             {

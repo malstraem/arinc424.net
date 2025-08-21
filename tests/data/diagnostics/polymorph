@@ -1,0 +1,13 @@
+# NDB Navaid
+SCANDB       ADK   PA005300H  W N51521876W176403356                       E0070           NARMOUNT MOFFETT                 003581605
+
+# Airway points that reference NDB as Fix
+
+# Key not found
+SZZZER       A1          0100AD   PADB0N    O                         05503994     08000     17500                         030502405
+
+# Bad section
+SZZZER       B1          0100ADK  PAZZ0N    O                         05503994     08000     17500                         030502405
+
+# Null
+SZZZER       D1          0100     PADB0N    O                         05503994     08000     17500                         030502405

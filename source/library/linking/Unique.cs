@@ -4,8 +4,6 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-using Diagnostics;
-
 /**<summary>
 Container with records that have unique keys.
 </summary>*/
@@ -53,8 +51,6 @@ internal class Unique
 
             if (!unique.TryGetValue(type, out var records))
                 unique[type] = records = [];
-
-            //var sections = info.Sections.Select(x => x.Value);
 
             foreach (var build in parser.aggregate[type])
                 Process(build, type, in primary, records);

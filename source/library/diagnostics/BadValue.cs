@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace Arinc424.Diagnostics;
+namespace Arinc424;
 
 public record BadValue : RangeDiagnostic
 {

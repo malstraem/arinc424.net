@@ -3,8 +3,6 @@ using System.Reflection;
 
 namespace Arinc424.Building;
 
-using Diagnostics;
-
 internal sealed class ArrayAssignment<TRecord, TType>(PropertyInfo property, Range range, DecodeAttribute<TType> decode, uint count)
     : RangeAssignment<TRecord>(property, range)
     where TRecord : Record424 where TType : notnull

@@ -4,7 +4,6 @@ using System.Runtime.CompilerServices;
 namespace Arinc424.Building;
 
 using Linking;
-using Diagnostics;
 using Processing;
 
 /**<summary>

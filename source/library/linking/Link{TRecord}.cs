@@ -3,8 +3,6 @@ using System.Reflection;
 
 namespace Arinc424.Linking;
 
-using Diagnostics;
-
 internal abstract class Link(PropertyInfo property, in KeyInfo info, bool isPolymorph)
 {
     protected readonly KeyInfo info = info;

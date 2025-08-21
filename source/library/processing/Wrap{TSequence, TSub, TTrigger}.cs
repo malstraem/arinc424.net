@@ -4,7 +4,6 @@ namespace Arinc424.Processing;
 
 using Building;
 using Airspace;
-using Diagnostics;
 
 internal abstract class Wrap<TSequence, TSub>(Supplement supplement) : Scan<TSequence, TSub>
     where TSequence : Record424<TSub>, new()

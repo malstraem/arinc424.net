@@ -1,4 +1,4 @@
-namespace Arinc424.Diagnostics;
+namespace Arinc424;
 
 public record BadLink : PropertyDiagnostic
 {
