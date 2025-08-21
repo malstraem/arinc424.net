@@ -2,9 +2,9 @@ using BenchmarkDotNet.Attributes;
 
 namespace Arinc424.Bench;
 
-public class LoadBench
+public class CreateBench
 {
-    private readonly string[] strings = File.ReadAllLines("data/worldwide");
+    private readonly string[] strings = File.ReadAllLines($"{Cases}worldwide");
 
     private readonly Meta424 meta = Meta424.Create(Supplement.V18);
 

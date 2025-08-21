@@ -2,6 +2,6 @@ using BenchmarkDotNet.Running;
 
 using Arinc424.Bench;
 
-BenchmarkRunner.Run<LoadBench>();
+BenchmarkRunner.Run<CreateBench>();
 
 Console.ReadLine();
