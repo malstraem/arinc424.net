@@ -4,8 +4,8 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttribute typeAttribute, ref readonly KeyInfo info)
-    : Link<TRecord>(property, in info, true)
+internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttribute typeAttribute, KeyInfo info)
+    : Link<TRecord>(property, info, true)
         where TRecord : Record424
         where TType : class
 {
@@ -13,122 +13,71 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
 
     private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
-    private BadSection BadSection(TRecord record, Section section, int index, int subIndex) => new()
+    private BadPolymorph Bad
+    (
+        LinkError error, TRecord record, Section section,
+        Type? type = null, string? key = null
+    )
+    => new()
     {
-        Error = LinkError.BadSection,
         Info = info,
         Property = property,
+        Error = error,
         Record = record,
         Section = section,
-        Index = index,
-        SubIndex = subIndex
+        Indices = (typeAttribute.index, typeAttribute.subIndex),
+        Type = type,
+        Key = key
     };
 
-    private bool TryGetType
-    (
-        TRecord record,
-        Meta424 meta,
-        Section section,
-        [NotNullWhen(true)] out (Type, KeyInfo)? typeInfo,
-        [NotNullWhen(false)] out Diagnostic? diagnostic
-    )
+    internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        if (!meta.TryGetType(section, out var type))
+        ReadOnlySpan<char> source = record.Source;
+
+        var section = typeAttribute.GetSection(source);
+
+        if (section.IsWhiteSpace() && source[info.Id].IsWhiteSpace())
         {
-            diagnostic = BadSection(record, section, 0, 0); //todo indices
-            typeInfo = null;
+            if (nullState == NullabilityState.NotNull)
+            {
+                diagnostic = Bad(LinkError.Null, record, section);
+                return false;
+            }
+            else
+            {
+                diagnostic = null;
+                return true;
+            }
+        }
+
+        if (!(unique.meta.TryGetType(section, out var type)
+           && unique.meta.Keys.TryGetValue(type, out var primary)))
+        {
+            diagnostic = Bad(LinkError.WrongType, record, section, type);
             return false;
         }
 
-        if (!meta.Keys.TryGetValue(type, out var primary))
+        if (!info.TryGetKey(source, primary, out string? key))
         {
-            diagnostic = BadSection(record, section, 0, 0); //todo indices
-            typeInfo = null;
-            return false;
-        }
-        typeInfo = (type, primary);
-        diagnostic = null;
-        return true;
-    }
-
-    private bool TryGetReference
-    (
-        TRecord record,
-        Unique unique,
-        Type type,
-        ref readonly KeyInfo primary,
-        [NotNullWhen(true)] out TType? reference,
-        [NotNullWhen(false)] out Diagnostic? diagnostic
-    )
-    {
-        if (!info.TryGetKey(record.Source, in primary, out string? key))
-        {
-            reference = null;
-            diagnostic = BadLink(LinkError.Null, record, type);
+            diagnostic = Bad(LinkError.Null, record, section, type);
             return false;
         }
 
-        if (!unique.TryGetRecords(type, out var records))
+        if (!(unique.TryGetRecords(type, out var records)
+          && (records.TryGetValue(key, out var @ref)
+          || records.TryGetValue(info.GetKeyWithoutPort(source, primary, out key), out @ref))))
         {
-            diagnostic = BadLink(LinkError.KeyNotFound, record, type, key);
-            reference = null;
-            return false;
-        }
-
-        if (!records.TryGetValue(key, out var @ref)
-         && !records.TryGetValue(info.GetKeyWithoutPort(record.Source, in primary, out key), out @ref))
-        {
-            diagnostic = BadLink(LinkError.KeyNotFound, record, type, key);
-            reference = null;
+            diagnostic = Bad(LinkError.KeyNotFound, record, section, type, key);
             return false;
         }
 
         if (@ref is not TType)
         {
-            diagnostic = BadLink(LinkError.WrongType, record, type);
-            reference = null;
+            diagnostic = Bad(LinkError.WrongType, record, section, type, key);
             return false;
         }
-        reference = Unsafe.As<TType>(@ref);
+        set(record, Unsafe.As<TType>(@ref));
         diagnostic = null;
         return true;
-    }
-
-    internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
-    {
-        ReadOnlySpan<char> source = record.Source!;
-
-        var (index, subindex) = typeAttribute;
-
-        Section section = new(source[index], source[subindex]);
-
-        if (section.IsWhiteSpace())
-        {
-            if (source[info.Id].IsWhiteSpace())
-            {
-                if (nullState == NullabilityState.NotNull)
-                {
-                    diagnostic = BadLink(LinkError.Null, record);
-                    return false;
-                }
-                else
-                {
-                    diagnostic = null;
-                    return true;
-                }
-            }
-        }
-
-        if (!TryGetType(record, unique.meta, section, out var typeInfo, out diagnostic))
-            return false;
-
-        var (type, primary) = typeInfo.Value;
-
-        if (TryGetReference(record, unique, type, in primary, out var reference, out diagnostic))
-        {
-            set(record, reference);
-            return true;
-        }
-        return false;
     }
 }

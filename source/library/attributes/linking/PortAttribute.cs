@@ -6,7 +6,8 @@ using Linking;
 
 /**<summary>
 Specifies <c>Airport/Heliport</c> identifier range.
-</summary>*/
+</summary>
+<inheritdoc/>*/
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]
 internal class PortAttribute(int left, int right) : LinkAttribute(left, right)
 {

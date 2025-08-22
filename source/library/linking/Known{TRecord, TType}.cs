@@ -4,11 +4,21 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-internal class Known<TRecord, TType>(PropertyInfo property, in KeyInfo info) : Link<TRecord>(property, in info)
+internal sealed class Known<TRecord, TType>(PropertyInfo property, KeyInfo info) : Link<TRecord>(property, info)
     where TRecord : Record424
     where TType : class
 {
-    protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+    private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+
+    private BadKnown Bad(LinkError error, TRecord record, Type type, string? key = null) => new()
+    {
+        Info = info,
+        Property = property,
+        Key = key,
+        Type = type,
+        Error = error,
+        Record = record
+    };
 
     internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
@@ -16,11 +26,11 @@ internal class Known<TRecord, TType>(PropertyInfo property, in KeyInfo info) : L
 
         var primary = unique.meta.Keys[type]; /* guarantee by design */
 
-        if (!info.TryGetKey(record.Source!, in primary, out string? key))
+        if (!info.TryGetKey(record.Source!, primary, out string? key))
         {
             if (nullState == NullabilityState.NotNull)
             {
-                diagnostic = BadLink(LinkError.Null, record, type);
+                diagnostic = Bad(LinkError.Null, record, type);
                 return false;
             }
             diagnostic = null;
@@ -34,7 +44,7 @@ internal class Known<TRecord, TType>(PropertyInfo property, in KeyInfo info) : L
             diagnostic = null;
             return true;
         }
-        diagnostic = BadLink(LinkError.KeyNotFound, record, type, key);
+        diagnostic = Bad(LinkError.KeyNotFound, record, type, key);
         return false;
     }
 }

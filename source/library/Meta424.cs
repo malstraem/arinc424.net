@@ -16,7 +16,7 @@ using Arinc424.Waypoints;
 
 #region Mappping (see specification Table 5-1)
 [assembly:
-Record<OffrouteAltitude>,
+Record<Offroute>,
 
 #region Navaid
 Record<Tactical>,
@@ -140,7 +140,7 @@ public class Meta424
             List<SectionAttribute> sections = [];
 
             if (type.TryKeyInfo(supplement, out var key))
-                keyInfo[type] = key.Value;
+                keyInfo[type] = key;
 
             foreach (var info in inherited)
                 sections.AddRange(info.Sections);
@@ -182,7 +182,7 @@ public class Meta424
             _ = @base.TryAdd(recordInfo.Top, recordInfo);
 
             if (recordInfo.Top.TryKeyInfo(supplement, out var primary))
-                keys[recordInfo.Top] = primary.Value;
+                keys[recordInfo.Top] = primary;
         }
 
         FillBaseInfo(supplement, keys, @base);

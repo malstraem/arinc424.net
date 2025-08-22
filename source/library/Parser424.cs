@@ -67,7 +67,7 @@ internal class Parser424
                 builds[pipe.OutType] = pipe.Process(builds[pipe.SourceType]);
         });
 #else
-        foreach (var (section, info) in meta.Info)
+        foreach (var (section, info) in meta.Types)
         {
             var pipes = info.Pipes;
 
@@ -123,7 +123,7 @@ internal class Parser424
             builds[section][info.Low] = info.Build(records[section]);
         });
 #else
-        foreach (var (section, info) in meta.Info)
+        foreach (var (section, info) in meta.Types)
             builds[section][info.Low] = info.Build(records[section]);
 #endif
         Process();
@@ -141,16 +141,11 @@ internal class Parser424
         Parallel.ForEach(relations, x => x.Link(aggregate[x.Type], unique, meta));
         Parallel.ForEach(relations, x => x.Aggregate(aggregate));
 #else
-        foreach (var (section, info) in meta.Info)
-        {
-            var relations = info.Composition.Relations;
+        foreach (var relation in relations)
+            relation.Link(aggregate[relation.Type], unique, meta);
 
-            if (relations is null)
-                continue;
-
-            foreach (var relation in relations)
-                relation.Link(builds[section][relation.Type], unique, meta);
-        }
+        foreach (var relation in relations)
+            relation.Aggregate(aggregate);
 #endif
     }
 

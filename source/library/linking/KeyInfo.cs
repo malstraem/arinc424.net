@@ -2,13 +2,13 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Arinc424;
 
-public readonly struct KeyInfo(Range id, Range? icao, Range? port)
+public record KeyInfo(Range Id, Range? Icao, Range? Port)
 {
-    public readonly Range Id = id;
-
-    public readonly Range? Icao = icao, Port = port;
-
-    internal bool TryGetKey(ReadOnlySpan<char> @string, [NotNullWhen(true)] out string? key)
+    internal bool TryGetKey
+    (
+        ReadOnlySpan<char> @string,
+        [NotNullWhen(true)] out string? key
+    )
     {
         key = @string[Id].Trim().ToString();
 
@@ -27,7 +27,7 @@ public readonly struct KeyInfo(Range id, Range? icao, Range? port)
     internal bool TryGetKey
     (
         ReadOnlySpan<char> @string,
-        ref readonly KeyInfo primary,
+        KeyInfo primary,
         [NotNullWhen(true)] out string? key
     )
     {
@@ -48,7 +48,7 @@ public readonly struct KeyInfo(Range id, Range? icao, Range? port)
     internal string GetKeyWithoutPort
     (
         ReadOnlySpan<char> @string,
-        ref readonly KeyInfo primary,
+        KeyInfo primary,
         [NotNullWhen(true)] out string? key)
     {
         key = @string[Id].Trim().ToString();

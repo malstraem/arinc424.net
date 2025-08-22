@@ -1,12 +1,13 @@
 namespace Arinc424;
 
-public readonly struct Section(char section, char subsection)
+/**<summary>
+Character pair that defines entity type of an <c>ARINC424</c> string.
+</summary>*/
+public readonly struct Section(char @char, char sub)
 {
-    internal readonly char Char = section;
+    internal readonly char Char = @char, Sub = sub;
 
-    internal readonly char Subchar = subsection;
+    internal bool IsWhiteSpace() => char.IsWhiteSpace(Char) && char.IsWhiteSpace(Sub);
 
-    internal bool IsWhiteSpace() => char.IsWhiteSpace(Char) && char.IsWhiteSpace(Subchar);
-
-    public override string ToString() => $"{Char}, {Subchar}";
+    public override string ToString() => $"{Char}, {Sub}";
 }

@@ -4,10 +4,12 @@ namespace Arinc424.Attributes;
 
 using Linking;
 
-/// <summary>Specifies <see cref="IIdentity.Identifier"/> range for strong typed link.</summary>
-/// <inheritdoc/>
+/**<summary>
+Specifies <see cref="IIdentity.Identifier"/> range for strong typed link.
+</summary>
+<inheritdoc/>*/
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-internal class KnownAttribute(int left, int right) : LinkAttribute(left, right)
+internal sealed class KnownAttribute(int left, int right) : LinkAttribute(left, right)
 {
     internal override Link<TRecord> GetLink<TRecord>
     (

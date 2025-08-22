@@ -34,7 +34,7 @@ public class Data424
     </summary>
     <remarks>Section <c>AS</c>.</remarks>*/
     [Section('A', 'S')]
-    public OffrouteAltitude[] OffrouteAltitudes { get; set; } = [];
+    public Offroute[] Offroute { get; set; } = [];
 
     #region Navaid
     /**<summary>

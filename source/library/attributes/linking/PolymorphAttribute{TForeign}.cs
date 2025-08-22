@@ -4,7 +4,10 @@ namespace Arinc424.Attributes;
 
 using Linking;
 
-/// <summary>Specifies <see cref="IIdentity.Identifier"/> range for polymorph link.</summary>
+/**<summary>
+Specifies <see cref="IIdentity.Identifier"/> range for polymorph link.
+</summary>
+<inheritdoc/>*/
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 internal class PolymorphAttribute(int left, int right) : LinkAttribute(left, right)
 {

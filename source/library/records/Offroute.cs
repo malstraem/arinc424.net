@@ -5,7 +5,7 @@ namespace Arinc424;
 </summary>
 <remarks>See section 4.1.19.1.</remarks>*/
 [Section('A', 'S')]
-public class OffrouteAltitude : Record424
+public class Offroute : Record424
 {
     [Field(14, 20)]
     [Decode<StartingCoordinatesConverter, Coordinates>]

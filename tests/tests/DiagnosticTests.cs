@@ -28,7 +28,7 @@ public class DiagnosticTests
 
         foreach (var diagnostic in diagnostics)
         {
-            if (diagnostic is BadLink bad && bad.Error is LinkError.KeyNotFound)
+            if (diagnostic is BadKnown bad && bad.Error is LinkError.KeyNotFound)
                 continue;
 
             Assert.Fail("");
