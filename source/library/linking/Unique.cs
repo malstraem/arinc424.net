@@ -13,16 +13,12 @@ internal class Unique
 
     internal readonly Meta424 meta;
 
-    [Obsolete("todo: diagnostics")]
-    private void Process(Build build, Type type, in KeyInfo primary, Dictionary<string, Record424> records)
+    private static void Process(Build build, Type type, KeyInfo primary, Dictionary<string, Record424> records)
     {
         var record = build.Record;
 
         if (!primary.TryGetKey(record.Source, out string? key))
-        {
-            Debug.WriteLine("oops");
             return;
-        }
 
         if (!records.TryGetValue(key, out var collision))
         {
@@ -40,7 +36,7 @@ internal class Unique
         });
     }
 
-    private void Fill(Parser424 parser)
+    private void Fill(Builds builds)
     {
         Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
@@ -52,17 +48,18 @@ internal class Unique
             if (!unique.TryGetValue(type, out var records))
                 unique[type] = records = [];
 
-            foreach (var build in parser.aggregate[type])
-                Process(build, type, in primary, records);
+            foreach (var build in builds[type])
+                Process(build, type, primary, records);
         }
         this.unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary())).ToFrozenDictionary();
     }
-
-    internal Unique(Parser424 parser)
+#pragma warning disable CS8618
+    internal Unique(Builds builds, Meta424 meta)
+#pragma warning restore CS8618
     {
-        meta = parser.meta;
+        this.meta = meta;
 
-        Fill(parser);
+        Fill(builds);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

@@ -1,7 +1,7 @@
 namespace Arinc424;
 
 /**<summary>
-Says that characters in <see cref="BadLink.Info"/> ranges
+Says that characters in <see cref="BadLink.Info"/> ranges and <see cref="Indices"/>
 is invalid polymorph relation.
 </summary>*/
 public sealed record BadPolymorph : BadLink
