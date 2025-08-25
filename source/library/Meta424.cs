@@ -1,14 +1,14 @@
 using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 using Arinc424;
 using Arinc424.Airspace;
 using Arinc424.Building;
 using Arinc424.Comms;
-using Arinc424.Navigation;
 using Arinc424.Ground;
+using Arinc424.Navigation;
 using Arinc424.Procedures;
 using Arinc424.Routing;
 using Arinc424.Tables;
@@ -197,8 +197,15 @@ public class Meta424
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal bool TryGetType(Section section, [NotNullWhen(true)] out Type? type)
-        => sections.TryGetValue(section, out type);
+    internal bool TryType(Section section, [NotNullWhen(true)] out Type? type, [NotNullWhen(true)] out KeyInfo? primary)
+    {
+        if (!sections.TryGetValue(section, out type))
+        {
+            primary = null;
+            return false;
+        }
+        return Keys.TryGetValue(type, out primary);
+    }
 
     internal FrozenDictionary<Type, KeyInfo> Keys { get; init; }
 

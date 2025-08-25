@@ -50,8 +50,7 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
             }
         }
 
-        if (!(unique.meta.TryGetType(section, out var type)
-           && unique.meta.Keys.TryGetValue(type, out var primary)))
+        if (!unique.meta.TryType(section, out var type, out var primary))
         {
             diagnostic = Bad(LinkError.WrongType, record, section, type);
             return false;
