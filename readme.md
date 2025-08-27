@@ -42,6 +42,6 @@ var data = Data424.Create(meta, strings, out var skipped, out var invalid);
 - .NET 9 SDK
 - `dotnet build`
 
-- > [!NOTE]
+> [!NOTE]
 The project actively uses the Roslyn API to generate converters of specification terms to internal types.
 Use a suitable IDE to view the generated code.
