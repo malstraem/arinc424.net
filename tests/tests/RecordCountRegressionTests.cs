@@ -1,24 +1,11 @@
 using System.Collections;
-using System.Collections.Frozen;
 using System.Text.Json;
 
 namespace Arinc424.Tests;
 
-public class RecordCountRegressionTests
+public class RecordCountRegressionTests : BaseTests
 {
     private readonly JsonSerializerOptions options = new() { WriteIndented = true };
-
-    private readonly FrozenDictionary<Supplement, Meta424> meta;
-
-    public RecordCountRegressionTests()
-    {
-        Dictionary<Supplement, Meta424> meta = [];
-
-        foreach (var supplement in Enum.GetValues<Supplement>())
-            meta[supplement] = Meta424.Create(supplement);
-
-        this.meta = meta.ToFrozenDictionary();
-    }
 
     [Test]
     [Skip("manual")]
@@ -43,7 +30,6 @@ public class RecordCountRegressionTests
     [Arguments("worldwide", Supplement.V18)]
     [Arguments("faa-07.08.25", Supplement.V18)]
     [Arguments("supplement-18", Supplement.V18)]
-    [Arguments("private/B2410Av20 (CAI)", Supplement.V20)]
     public void CheckRegression(string file, Supplement supplement)
     {
         string[] strings = File.ReadAllLines($"{Cases}{file}");

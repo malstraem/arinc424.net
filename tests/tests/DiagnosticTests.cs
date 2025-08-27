@@ -1,11 +1,7 @@
-using System.Collections.Frozen;
-
 namespace Arinc424.Tests;
 
-public abstract class DiagnosticTests
+public abstract class DiagnosticTests : BaseTests
 {
-    private readonly FrozenDictionary<Supplement, Meta424> meta;
-
     protected T GetDiagnostic<T>(string file, Supplement supplement)
         where T : Diagnostic
     {
@@ -16,15 +12,5 @@ public abstract class DiagnosticTests
         var (_, diagnostic) = invalid.First();
 
         return (T)diagnostic.First();
-    }
-
-    public DiagnosticTests()
-    {
-        Dictionary<Supplement, Meta424> meta = [];
-
-        foreach (var supplement in Enum.GetValues<Supplement>())
-            meta[supplement] = Meta424.Create(supplement);
-
-        this.meta = meta.ToFrozenDictionary();
     }
 }

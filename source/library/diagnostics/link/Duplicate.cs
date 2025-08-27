@@ -1,9 +1,13 @@
 namespace Arinc424;
 
 /**<summary>
-Says that the <see cref="Diagnostic.Record"/> have primary key that are same as <see cref="Collision"/>.
+Says that the <see cref="Diagnostic.Record"/> have primary key
+that are same as <see cref="Collision"/>.
 </summary>
-<remarks>Any record that has such a diagnostic loses all its potential relations, which go to the 'copy'.</remarks>*/
+<remarks>
+Any record that has such a diagnostic loses all its potential relations,
+which go to the 'copy'.
+</remarks>*/
 public record Duplicate : Diagnostic
 {
     public required KeyInfo Info { get; init; }
