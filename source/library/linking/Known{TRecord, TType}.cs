@@ -20,11 +20,11 @@ internal sealed class Known<TRecord, TType>(PropertyInfo property, KeyInfo info)
         Record = record
     };
 
-    internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
+    internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
         var type = property.PropertyType;
 
-        var primary = unique.meta.Keys[type]; /* guarantee by design */
+        var primary = meta.Keys[type]; /* guarantee by design */
 
         if (!info.TryGetKey(record.Source!, primary, out string? key))
         {

@@ -132,7 +132,7 @@ internal class Parser424
 
     private void Link()
     {
-        Unique unique = new(aggregate, meta);
+        var unique = Unique.Create(aggregate, meta);
 
         var relations = meta.Base.Values
             .Where(x => x.Relations is not null)

@@ -43,6 +43,7 @@ public class RecordCountRegressionTests
     [Arguments("worldwide", Supplement.V18)]
     [Arguments("faa-07.08.25", Supplement.V18)]
     [Arguments("supplement-18", Supplement.V18)]
+    [Arguments("private/B2410Av20 (CAI)", Supplement.V20)]
     public void CheckRegression(string file, Supplement supplement)
     {
         string[] strings = File.ReadAllLines($"{Cases}{file}");

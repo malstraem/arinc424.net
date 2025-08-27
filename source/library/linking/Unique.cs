@@ -10,9 +10,9 @@ Container with records that have unique keys.
 internal class Unique
 {
     private FrozenDictionary<Type, FrozenDictionary<string, Record424>> unique;
-
-    internal readonly Meta424 meta;
-
+#pragma warning disable CS8618
+    private Unique() { }
+#pragma warning restore CS8618
     private static void Process(Build build, Type type, KeyInfo primary, Dictionary<string, Record424> records)
     {
         var record = build.Record;
@@ -36,7 +36,7 @@ internal class Unique
         });
     }
 
-    private void Fill(Builds builds)
+    internal static Unique Create(Builds builds, Meta424 meta)
     {
         Dictionary<Type, Dictionary<string, Record424>> unique = [];
 
@@ -51,15 +51,11 @@ internal class Unique
             foreach (var build in builds[type])
                 Process(build, type, primary, records);
         }
-        this.unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary())).ToFrozenDictionary();
-    }
-#pragma warning disable CS8618
-    internal Unique(Builds builds, Meta424 meta)
-#pragma warning restore CS8618
-    {
-        this.meta = meta;
-
-        Fill(builds);
+        return new Unique()
+        {
+            unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary()))
+                .ToFrozenDictionary()
+        };
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

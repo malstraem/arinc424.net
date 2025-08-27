@@ -20,5 +20,5 @@ internal abstract class Link<TRecord>(PropertyInfo property, KeyInfo info, bool 
     : Link(property, info, isPolymorph)
         where TRecord : Record424
 {
-    internal abstract bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic);
+    internal abstract bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic);
 }

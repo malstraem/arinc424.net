@@ -76,7 +76,7 @@ internal sealed class Relation<TRecord>(Link<TRecord>[] links) : Relation(typeof
         {
             foreach (var link in links)
             {
-                if (!link.TryLink(build.Record, unique, out var diagnostic))
+                if (!link.TryLink(build.Record, unique, meta, out var diagnostic))
                     diagnostics.Enqueue(diagnostic);
             }
 

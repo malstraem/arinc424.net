@@ -30,7 +30,7 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
         Key = key
     };
 
-    internal override bool TryLink(TRecord record, Unique unique, [NotNullWhen(false)] out Diagnostic? diagnostic)
+    internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
         ReadOnlySpan<char> source = record.Source;
 
@@ -50,7 +50,7 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
             }
         }
 
-        if (!unique.meta.TryType(section, out var type, out var primary))
+        if (!meta.TryType(section, out var type, out var primary))
         {
             diagnostic = Bad(LinkError.WrongType, record, section, type);
             return false;
