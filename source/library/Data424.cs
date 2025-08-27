@@ -34,7 +34,7 @@ public class Data424
     </summary>
     <remarks>Section <c>AS</c>.</remarks>*/
     [Section('A', 'S')]
-    public Offroute[] Offroute { get; set; } = [];
+    public Offroute[] Offroutes { get; set; } = [];
 
     #region Navaid
     /**<summary>
@@ -49,14 +49,14 @@ public class Data424
     </summary>
     <remarks>Section <c>DB</c>.</remarks>*/
     [Section('D', 'B')]
-    public Nondirect[] Nondirectionals { get; set; } = [];
+    public Nondirect[] Nondirects { get; set; } = [];
 
     /**<summary>
     <c>VHF Navaid</c> records.
     </summary>
     <remarks>Section <c>D</c>.</remarks>*/
     [Section('D')]
-    public Omnidirect[] Omnidirectionals { get; set; } = [];
+    public Omnidirect[] Omnidirects { get; set; } = [];
     #endregion
 
     #region Enroute

@@ -22,8 +22,8 @@ public partial class DataViewModel : ObservableObject
     [
         new("Navaid",
         [
-            data.Omnidirectionals.GetViewModel("VHF"),
-            data.Nondirectionals.GetViewModel("NDB"),
+            data.Omnidirects.GetViewModel("VHF"),
+            data.Nondirects.GetViewModel("NDB"),
             data.Tacticals.GetViewModel("TACAN")
         ]),
         new("Enroute",
