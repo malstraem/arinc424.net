@@ -1,9 +1,9 @@
-using Arinc424.Navigation;
-using Arinc424.Ground;
-using Arinc424.Routing;
-using Arinc424.Waypoints;
-
 namespace Arinc424;
+
+using Ground;
+using Routing;
+using Waypoints;
+using Navigation;
 
 /**<summary>
 Base object with an identifier that can be used as a navigation point.
@@ -14,8 +14,8 @@ public abstract class Fix : Geo, IIcao, IIdentity
     [Field<Waypoint>(20, 21)]
     [Field<SpecialArea>(14, 15)]
     [Field<AirwayMarker>(20, 21)]
-    [Field<Nondirectional>(20, 21)]
-    [Field<Omnidirectional>(20, 21)]
+    [Field<Nondirect>(20, 21)]
+    [Field<Omnidirect>(20, 21)]
     public Icao Icao { get; set; }
 
     /**<summary>
@@ -26,15 +26,15 @@ public abstract class Fix : Geo, IIcao, IIdentity
       <c>Fix Identifier (FIX IDENT)</c> field for <see cref="TerminalWaypoint"/> and <see cref="Waypoint"/>. See section 5.13.
     </para>
     <para>
-      <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field for <see cref="Omnidirectional"/>,
-      <see cref="Nondirectional"/> and <see cref="Tactical"/>. See section 5.33.
+      <c>VOR/NDB Identifier (VOR IDENT/NDB IDENT)</c> field for <see cref="Omnidirect"/>,
+      <see cref="Nondirect"/> and <see cref="Tactical"/>. See section 5.33.
     </para>
     <para>
       <c>Localizer/MLS/GLS Identifier (LOC, MLS, GLS IDENT)</c> field for <see cref="InstrumentLanding"/>, <see cref="InstrumentMarker"/>,
       <see cref="MicrowaveLanding"/> and <see cref="GlobalLanding"/>. See section 5.44.
     </para>
     <para>
-      <c>Runway Identifier (RUNWAY ID)</c> field for <see cref="RunwayThreshold"/>. See section 5.46.
+      <c>Runway Identifier (RUNWAY ID)</c> field for <see cref="Threshold"/>. See section 5.46.
     </para>
     <para>
       <c>Gate Identifier (GATE IDENT)</c> field for <see cref="Gate"/>. See section 5.56.
@@ -55,6 +55,6 @@ public abstract class Fix : Geo, IIcao, IIdentity
     [Field<Waypoint>(14, 18)]
     [Field<PathPoint>(33, 36)]
     [Field<SpecialArea>(8, 13)]
-    [Field<RunwayThreshold>(14, 18)]
+    [Field<Threshold>(14, 18)]
     public string Identifier { get; set; }
 }

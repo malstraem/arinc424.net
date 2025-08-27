@@ -1,11 +1,9 @@
 using System.Runtime.CompilerServices;
 
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Building;
 
 /**<summary>
-How an entity (сontinuation record) should be created and processed.
+How an entity (continuation record) should be created and processed.
 </summary>*/
 internal abstract class ContinuationInfo
 {

@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 </summary>
 <remarks>See section 4.1.22.1.</remarks>*/
 [Section('P', 'L', subIndex: 13)]
-public class MicrowaveLanding : LandingSystem
+public class MicrowaveLanding : Landing
 {
     /// <summary><c>Channel</c> field.</summary>
     /// <remarks>See section 5.166.</remarks>
@@ -98,7 +98,6 @@ public class MicrowaveLanding : LandingSystem
     [Field(113, 115), Float(100)]
     public float MinimumGlideAngle { get; set; }
 
-    [Type(122, 123)]
-    [Identifier(116, 119), Icao(120, 121)]
+    [Polymorph(116, 119), Icao(120, 121), Type(122, 123)]
     public Fix? SupportingFacility { get; set; }
 }

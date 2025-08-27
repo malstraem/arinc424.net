@@ -1,0 +1,115 @@
+<UserControl x:Class="Arinc424.View.MainView"
+             xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:Arinc424.ViewModel"
+             xmlns:m="using:Arinc424.Model"
+
+             xmlns:u="https://irihi.tech/ursa"
+
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+
+             x:DataType="vm:DataViewModel">
+  <Design.DataContext>
+    <vm:DataViewModel />
+  </Design.DataContext>
+
+  <Grid>
+    <TabControl ItemsSource="{Binding Sections, Mode=TwoWay}">
+      <TabControl.ItemTemplate>
+        <DataTemplate>
+          <TextBlock Margin="5,10,0,0" Theme="{DynamicResource TitleTextBlock}" Classes="H5" Text="{Binding Name}"/>
+        </DataTemplate>
+      </TabControl.ItemTemplate>
+
+      <TabControl.ContentTemplate>
+        <DataTemplate x:DataType="m:SectionModel">
+          <TabControl ItemsSource="{Binding VewModels, Mode=TwoWay}">
+            <TabControl.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Theme="{DynamicResource TitleTextBlock}" Classes="H7" Text="{Binding Name}"/>
+              </DataTemplate>
+            </TabControl.ItemTemplate>
+
+            <TabControl.ContentTemplate>
+              <DataTemplate x:DataType="vm:ObjectsViewModel">
+                <Grid ColumnDefinitions="*,3,4*" >
+                  <ListBox Grid.Column="0" ItemsSource="{Binding Records, Mode=OneWay}" SelectedItem="{Binding Selected, Mode=OneWayToSource}">
+                    <ItemsControl.ItemTemplate>
+                      <DataTemplate x:DataType="m:RecordModel">
+                        <Grid ColumnDefinitions="*,auto" Margin="15,0,15,0">
+                          <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock FontSize="12" ToolTip.Tip="Identifier"
+                                       Text="{Binding Identifier}"
+                                       IsVisible="{Binding Identifier, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+                            <TextBlock Classes="Quaternary" FontSize="10" ToolTip.Tip="Name"
+                                       Text="{Binding Name}"
+                                       IsVisible="{Binding Name, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+                          </StackPanel>
+
+                          <TextBlock Grid.Column="1" Classes="Quaternary" FontSize="12" ToolTip.Tip="File Record Number"
+                                     HorizontalAlignment="Right" VerticalAlignment="Center"
+                                     Text="{Binding Record.Number}" />
+                        </Grid>
+                      </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                  </ListBox>
+
+                  <GridSplitter Grid.Column="1" ResizeDirection="Columns" />
+
+                  <Grid Grid.Column="2" RowDefinitions="auto, *">
+                    <ListBox Grid.Row="0" Background="{DynamicResource SemiColorBackground}"
+                             ItemsSource="{Binding SelectedViewModel.Ranges, Mode=OneWay}">
+                      <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                          <WrapPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                      </ListBox.ItemsPanel>
+
+                      <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="m:RangeModel">
+                          <TextBlock Text="{Binding Chars}" Margin="0,0,0,0" />
+                        </DataTemplate>
+                      </ListBox.ItemTemplate>
+                    </ListBox>
+
+                    <ScrollViewer Grid.Row="1" AllowAutoHide="True">
+                      <ItemsControl Background="{DynamicResource SemiColorBackground1}"
+                                    ItemsSource="{Binding SelectedViewModel.Properties, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                          <DataTemplate x:DataType="m:PropertyModel">
+                            <StackPanel Margin="10">
+                              <TextBlock Text="{Binding Name}" Margin="0,0,0,0" />
+
+                              <TextBlock Classes="Secondary" FontSize="12" Text="{Binding Value}" />
+                            </StackPanel>
+                          </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                      </ItemsControl>
+                    </ScrollViewer>
+                  </Grid>
+                </Grid>
+              </DataTemplate>
+            </TabControl.ContentTemplate>
+          </TabControl>
+        </DataTemplate>
+      </TabControl.ContentTemplate>
+    </TabControl>
+
+    <ProgressBar IsIndeterminate="True" ShowProgressText="False" Width="50" Height="50"
+                 Theme="{DynamicResource ProgressRing}"
+                 IsVisible="{Binding IsLoading, Mode=OneWay}" IsEnabled="{Binding $self.IsVisible}"/>
+
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center"
+                IsVisible="{Binding IsEmpty, Mode=OneWay}">
+      <Button Content="open" Margin="0,0,10,0" />
+
+      <Border BorderThickness="1" CornerRadius="3" Background="Gray" DragDrop.AllowDrop="True">
+        <TextBlock Margin="5,0,5,0" Classes="Secondary" VerticalAlignment="Center"
+                   Text="or drop your data" />
+      </Border>
+    </StackPanel>
+  </Grid>
+</UserControl>

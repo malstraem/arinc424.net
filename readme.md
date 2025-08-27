@@ -29,12 +29,12 @@ and entities created based on [supplement](https://malstraem.github.io/arinc424.
 var meta = Meta424.Create(Supplement.V20);
 ```
 
-So you can try to get navigation [data](https://malstraem.github.io/arinc424.net/api/Arinc424.Data424.html) from the strings 
-leaving [builds](https://malstraem.github.io/arinc424.net/api/Arinc424.Building.Build.html) with diagnostics 
-(bad coded fields, missing links, etc) and skipped strings that don't match entity types.
+So you can get navigation [data](https://malstraem.github.io/arinc424.net/api/Arinc424.Data424.html) from the strings with
+remaining [diagnostics](https://malstraem.github.io/arinc424.net/api/Arinc424.Diagnostic.html) (bad coded fields, miss links, etc)
+and skipped strings that don't match entity types.
 
 ```csharp
-var data = Data424.Create(meta, strings, out var invalid, out var skipped);
+var data = Data424.Create(meta, strings, out var skipped, out var invalid);
 ```
 
 ## Build and prerequisites
@@ -42,4 +42,6 @@ var data = Data424.Create(meta, strings, out var invalid, out var skipped);
 - .NET 9 SDK
 - `dotnet build`
 
-The project actively uses the Roslyn API to generate converters of specification terms to internal types. Use a suitable IDE to view the generated code.
+> [!NOTE]
+The project actively uses the Roslyn API to generate converters of specification terms to internal types.
+Use a suitable IDE to view the generated code.

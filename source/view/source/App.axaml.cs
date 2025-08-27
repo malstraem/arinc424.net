@@ -3,10 +3,9 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Input;
 
-using Arinc424.Views;
-using Arinc424.ViewModels;
-
 namespace Arinc424.View;
+
+using ViewModel;
 
 public partial class App : Application
 {

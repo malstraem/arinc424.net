@@ -2,7 +2,7 @@ namespace Arinc424.Navigation.Terms;
 
 /**<summary>
 First two characters of <c>NAVAID Class (CLASS)</c> field,
-specific to <see cref="Nondirectional"/>.
+specific to <see cref="Navigation.Nondirect"/>.
 </summary>
 <remarks>See section 5.35.</remarks>*/
 [String, Flags, Decode<NondirectTypeConverter, NondirectType>]

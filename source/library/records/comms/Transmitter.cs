@@ -1,7 +1,5 @@
 namespace Arinc424.Comms;
 
-using Terms;
-
 public abstract class Transmitter : Geo, ISequenced
 {
     [Field(20, 21, Start = Supplement.V19), Integer]
@@ -68,11 +66,11 @@ public abstract class Transmitter : Geo, ISequenced
     [Character<AirwayTransmitter>(61)]
     [Character<PortTransmitter>(31)]
     [Character<Transmitter>(115, Start = Supplement.V19)]
-    public Modulation Modulation { get; set; }
+    public Terms.Modulation Modulation { get; set; }
 
     /// <inheritdoc cref="Terms.Emission"/>
     [Character<AirwayTransmitter>(62)]
     [Character<PortTransmitter>(32)]
     [Character<Transmitter>(116, Start = Supplement.V19)]
-    public Emission Emission { get; set; }
+    public Terms.Emission Emission { get; set; }
 }

@@ -1,8 +1,4 @@
-using Arinc424.Ground;
-
 namespace Arinc424.Navigation;
-
-using Terms;
 
 /**<summary>
 <c>TACAN-Only NAVAID</c> primary record.
@@ -11,42 +7,41 @@ using Terms;
 [Section('D', 'T'), Port(7, 10), Icao(11, 12)]
 public class Tactical : Navaid
 {
-    [Identifier(7, 10)]
-    public Airport Airport { get; set; }
+    public Ground.Port Port { get; set; }
 
-    /// <inheritdoc cref="OmnidirectType"/>
+    /// <inheritdoc cref="Terms.OmnidirectType"/>
     [Field(28, 29)]
-    public OmnidirectType Type { get; set; }
+    public Terms.OmnidirectType Type { get; set; }
 
-    /// <inheritdoc cref="OmnidirectCoverage"/>
+    /// <inheritdoc cref="Terms.OmnidirectCoverage"/>
     [Character(30)]
-    public OmnidirectCoverage Coverage { get; set; }
+    public Terms.OmnidirectCoverage Coverage { get; set; }
 
-    /// <inheritdoc cref="OmnidirectInfo"/>
+    /// <inheritdoc cref="Terms.OmnidirectInfo"/>
     [Character(31)]
-    public OmnidirectInfo Info { get; set; }
+    public Terms.OmnidirectInfo Info { get; set; }
 
-    /// <inheritdoc cref="OmnidirectCollocation"/>
+    /// <inheritdoc cref="Terms.OmnidirectCollocation"/>
     [Character(32)]
-    public OmnidirectCollocation Collocation { get; set; }
+    public Terms.OmnidirectCollocation Collocation { get; set; }
 
-    /// <inheritdoc cref="Omnidirectional.EquipmentIdentifier"/>
+    /// <inheritdoc cref="Omnidirect.EquipmentIdentifier"/>
     [Field(52, 55)]
     public string TacanIdentifier { get; set; }
 
     /// <inheritdoc cref="Terms.Declination"/>
     [Field(75, 79)]
-    public Declination Declination { get; set; }
+    public Terms.Declination Declination { get; set; }
 
-    /// <inheritdoc cref="Omnidirectional.EquipmentElevation"/>
+    /// <inheritdoc cref="Omnidirect.EquipmentElevation"/>
     [Field(80, 84), Integer]
     public int Elevation { get; set; }
 
-    /// <inheritdoc cref="UsableRange"/>
+    /// <inheritdoc cref="Terms.UsableRange"/>
     [Character(85)]
-    public UsableRange Range { get; set; }
+    public Terms.UsableRange Range { get; set; }
 
-    /// <inheritdoc cref="Omnidirectional.ProtectionDistance"/>
+    /// <inheritdoc cref="Omnidirect.ProtectionDistance"/>
     [Field(88, 90), Integer]
     public int ProtectionDistance { get; set; }
 }

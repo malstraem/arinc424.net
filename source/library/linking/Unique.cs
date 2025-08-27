@@ -1,8 +1,6 @@
+using System.Collections.Frozen;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-
-using Arinc424.Building;
-using Arinc424.Diagnostics;
 
 namespace Arinc424.Linking;
 
@@ -11,43 +9,56 @@ Container with records that have unique keys.
 </summary>*/
 internal class Unique
 {
-    private readonly Dictionary<Type, Dictionary<string, Record424>> unique = [];
-
-    [Obsolete("todo: diagnostics")]
-    private void ProcessPrimaryKey(Build build, RecordInfo info)
+    private FrozenDictionary<Type, FrozenDictionary<string, Record424>> unique;
+#pragma warning disable CS8618
+    private Unique() { }
+#pragma warning restore CS8618
+    private static void Process(Build build, Type type, KeyInfo primary, Dictionary<string, Record424> records)
     {
         var record = build.Record;
 
-        if (!info.Primary!.TryGetKey(record.Source, out string? key))
+        if (!primary.TryGetKey(record.Source, out string? key))
+            return;
+
+        if (!records.TryGetValue(key, out var collision))
         {
-            Debug.WriteLine("oops");
+            records[key] = record;
             return;
         }
-
-        if (unique[info.Composition.Top].TryAdd(key, record))
-            return;
-
         build.Diagnostics ??= [];
-        build.Diagnostics.Enqueue(new Duplicate(record, info.Composition.Top, key));
+        build.Diagnostics.Enqueue(new Duplicate
+        {
+            Key = key,
+            Type = type,
+            Info = primary,
+            Record = record,
+            Collision = collision
+        });
     }
 
-    internal Unique(Meta424 meta, Parser424 parser)
+    internal static Unique Create(Builds builds, Meta424 meta)
     {
-        foreach (var (section, info) in meta.Info)
+        Dictionary<Type, Dictionary<string, Record424>> unique = [];
+
+        foreach (var (type, info) in meta.Base)
         {
-            if (info.Primary is null)
+            if (!meta.Keys.TryGetValue(type, out var primary))
                 continue;
 
-            if (!unique.ContainsKey(info.Composition.Top))
-                unique[info.Composition.Top] = [];
+            if (!unique.TryGetValue(type, out var records))
+                unique[type] = records = [];
 
-            foreach (var build in parser.builds[section][info.Composition.Top])
-            {
-                ProcessPrimaryKey(build, info);
-            }
+            foreach (var build in builds[type])
+                Process(build, type, primary, records);
+        }
+        return new Unique()
+        {
+            unique = unique.Select(x => KeyValuePair.Create(x.Key, x.Value.ToFrozenDictionary()))
+                .ToFrozenDictionary()
         };
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    internal bool TryGetRecords(Type type, [NotNullWhen(true)] out Dictionary<string, Record424>? records) => unique.TryGetValue(type, out records);
+    internal bool TryGetRecords(Type type, [NotNullWhen(true)] out FrozenDictionary<string, Record424>? records)
+        => unique.TryGetValue(type, out records);
 }

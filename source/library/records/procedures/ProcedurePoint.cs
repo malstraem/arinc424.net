@@ -1,6 +1,3 @@
-using Arinc424.Ground;
-using Arinc424.Waypoints.Terms;
-
 namespace Arinc424.Procedures;
 
 /**<summary>
@@ -14,14 +11,13 @@ public abstract class ProcedurePoint : Record424, ISequenced
     [Field(27, 29), Integer]
     public int SeqNumber { get; set; }
 
-    [Type(37, 38)]
-    [Identifier(30, 34), Icao(35, 36)]
+    [Polymorph(30, 34), Icao(35, 36), Type(37, 38)]
     public Fix? Fix { get; set; }
 
-    /// <inheritdoc cref="WaypointDescriptions"/>
+    /// <inheritdoc cref="Waypoints.Terms.WaypointDescriptions"/>
     [Field(40, 43)]
     [Obsolete("maybe split to 4 enums for SID/STAR/Approach and Airway?")]
-    public WaypointDescriptions Descriptions { get; set; }
+    public Waypoints.Terms.WaypointDescriptions Descriptions { get; set; }
 
     /// <inheritdoc cref="Arinc424.Turn"/>
     [Character(44)]
@@ -40,8 +36,7 @@ public abstract class ProcedurePoint : Record424, ISequenced
     [Character(50)]
     public Bool IsTurnRequired { get; set; }
 
-    [Type(79, 80)]
-    [Identifier(51, 54), Icao(55, 56)]
+    [Polymorph(51, 54), Icao(55, 56), Type(79, 80)]
     public Fix? Recommended { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='ArcRadius']/*"/>

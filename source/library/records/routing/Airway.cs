@@ -1,12 +1,12 @@
-using Arinc424.Processing;
-
 namespace Arinc424.Routing;
+
+using Processing;
 
 /**<summary>
 <c>Enroute Airways</c> primary record sequence.
 </summary>
 <remarks>See section 4.1.6.1.</remarks>*/
-[Section('E', 'R'), Identifier(14, 18), Continuous(39)]
+[Section('E', 'R'), Id(14, 18), Continuous(39)]
 
 [Pipeline<IdentityWrap<Airway, AirwayPoint>>]
 

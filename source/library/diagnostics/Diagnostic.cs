@@ -1,8 +1,6 @@
-namespace Arinc424.Diagnostics;
+namespace Arinc424;
 
-public abstract class Diagnostic(DiagnosticType type, Record424 record)
+public abstract record Diagnostic
 {
-    public Record424 Record { get; } = record;
-
-    public DiagnosticType DiagnosticType { get; } = type;
+    public required Record424 Record { get; init; }
 }

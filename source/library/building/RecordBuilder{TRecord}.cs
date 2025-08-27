@@ -1,5 +1,3 @@
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Building;
 
 internal static class RecordBuilder<TRecord> where TRecord : Record424, new()
@@ -32,8 +30,6 @@ internal static class RecordBuilder<TSequence, TSub> where TSequence : Record424
 {
     internal static Build<TSequence, TSub> Build(Queue<Build<TSub>> subs, BuildInfo<TSequence> info, ref Queue<Diagnostic> diagnostics)
     {
-        int i = 0;
-
         var sub = subs.First();
 
         TSequence record = new()
@@ -42,15 +38,20 @@ internal static class RecordBuilder<TSequence, TSub> where TSequence : Record424
             Sequence = new TSub[subs.Count]
         };
 
-        Build<TSequence, TSub> build = new(record);
+        var builds = new Build<TSub>[subs.Count];
 
+        int i = 0;
         while (subs.TryDequeue(out sub))
         {
-            record.Sequence[i] = sub.Record; i++;
+            record.Sequence[i] = sub.Record;
+            builds[i] = sub;
+            i++;
 
             if (sub.Diagnostics is not null)
                 diagnostics.Pump(sub.Diagnostics);
         }
+        Build<TSequence, TSub> build = new(record, builds);
+
         RecordBuilder<TSequence>.Build(build, info, ref diagnostics);
 
         return build;

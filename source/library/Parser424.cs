@@ -1,28 +1,43 @@
-using Arinc424.Building;
-using Arinc424.Linking;
+using System.Collections.Frozen;
+using System.Reflection;
 
 namespace Arinc424;
 
+using Linking;
+using Building;
+
 internal class Parser424
 {
-    private readonly Meta424 meta;
-
     private readonly Dictionary<Section, Queue<string>> records = [];
 
-    /// <summary>Storage for entity builds. Covers bare types and compositions.</summary>
-    protected internal readonly Dictionary<Section, Dictionary<Type, Queue<Build>>> builds = [];
+    internal readonly Meta424 meta;
 
-    private void Process(IEnumerable<string> strings, Queue<string> skipped)
+    internal readonly Builds aggregate = [];
+
+    /**<summary>
+    Storage for entity builds. Covers bare types and compositions.
+    </summary>*/
+    internal readonly Dictionary<Section, Builds> builds = [];
+
+    private string[] Process(IEnumerable<string> strings)
     {
+        Queue<string> skipped = [];
+
+        var sections = meta.Types.Values.SelectMany(x => x.Sections).ToArray();
+
         foreach (string @string in strings)
         {
             if (!TryEnqueue(@string))
                 skipped.Enqueue(@string);
         }
+        return [.. skipped];
 
         bool TryEnqueue(string @string)
         {
-            foreach (var section in meta.Sections)
+            if (@string.Length < 132)
+                return false;
+
+            foreach (var section in sections)
             {
                 if (section.IsMatch(@string))
                 {
@@ -34,95 +49,174 @@ internal class Parser424
         }
     }
 
-    private void Build()
+    private void Process()
+    {
 #if !NOPARALLEL
-    => Parallel.ForEach(meta.Info, x =>
-    {
-        var (section, info) = (x.Key, x.Value);
-
-        builds[section][info.Composition.Low] = info.Build(records[section]);
-    });
-#else
-    {
-        foreach (var (section, info) in meta.Info)
-            builds[section][info.Composition.Low] = info.Build(records[section]);
-    }
-#endif
-    private void Link(Unique unique)
-#if !NOPARALLEL
-    => Parallel.ForEach(meta.Info, x =>
-    {
-        var (section, info) = (x.Key, x.Value);
-
-        foreach (var realtions in info.Composition.Relations)
-            realtions.Link(builds[section][realtions.Type], unique, meta);
-    });
-#else
-    {
-        foreach (var (section, info) in meta.Info)
+        Parallel.ForEach(meta.Types, x =>
         {
-            foreach (var realtions in info.Composition.Relations)
-                realtions.Link(builds[section][realtions.Type], unique, meta);
-        }
-    }
-#endif
-    private void Postprocess()
-#if !NOPARALLEL
-    => Parallel.ForEach(meta.Info, x =>
-    {
-        var (section, info) = (x.Key, x.Value);
+            var (section, info) = (x.Key, x.Value);
 
-        var builds = this.builds[section];
+            var pipes = info.Pipes;
 
-        foreach (var pipeline in info.Composition.Pipelines)
-            builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
-    });
-#else
-    {
-        foreach (var (section, info) in meta.Info)
-        {
+            if (pipes is null)
+                return;
+
             var builds = this.builds[section];
 
-            foreach (var pipeline in info.Composition.Pipelines)
-                builds[pipeline.OutType] = pipeline.Process(builds[pipeline.SourceType]);
+            foreach (var pipe in pipes)
+                builds[pipe.OutType] = pipe.Process(builds[pipe.SourceType]);
+        });
+#else
+        foreach (var (section, info) in meta.Types)
+        {
+            var pipes = info.Pipes;
+
+            if (pipes is null)
+                continue;
+
+            var builds = this.builds[section];
+
+            foreach (var pipe in pipes)
+                builds[pipe.OutType] = pipe.Process(builds[pipe.SourceType]);
+        }
+#endif
+    }
+
+    private void Aggregate()
+    {
+        var records = meta.Base.Values.Where(x => x is RecordType).ToArray();
+
+        foreach (var section in records.SelectMany(x => x.Sections))
+        {
+            foreach (var (type, builds) in builds[section.Value])
+            {
+                if (!this.aggregate.TryGetValue(type, out var aggregate))
+                    this.aggregate[type] = aggregate = [];
+
+                foreach (var build in builds)
+                    aggregate.Enqueue(build);
+            }
+        }
+
+        var @base = meta.Base.Values.Except(records).ToArray();
+
+        foreach (var info in @base)
+        {
+            if (!this.aggregate.TryGetValue(info.Top, out var aggregate))
+                this.aggregate[info.Top] = aggregate = [];
+
+            foreach (var section in info.Sections)
+            {
+                foreach (var build in builds[section.Value][meta.Types[section.Value].Top])
+                    aggregate.Enqueue(build);
+            }
         }
     }
+
+    private void Build()
+    {
+#if !NOPARALLEL
+        Parallel.ForEach(meta.Types, x =>
+        {
+            var (section, info) = (x.Key, x.Value);
+
+            builds[section][info.Low] = info.Build(records[section]);
+        });
+#else
+        foreach (var (section, info) in meta.Types)
+            builds[section][info.Low] = info.Build(records[section]);
 #endif
+        Process();
+        Aggregate();
+    }
+
+    private void Link()
+    {
+        var unique = Unique.Create(aggregate, meta);
+
+        var relations = meta.Base.Values
+            .Where(x => x.Relations is not null)
+                .SelectMany(x => x.Relations!).ToArray();
+#if !NOPARALLEL
+        Parallel.ForEach(relations, x => x.Link(aggregate[x.Type], unique, meta));
+        Parallel.ForEach(relations, x => x.Aggregate(aggregate));
+#else
+        foreach (var relation in relations)
+            relation.Link(aggregate[relation.Type], unique, meta);
+
+        foreach (var relation in relations)
+            relation.Aggregate(aggregate);
+#endif
+    }
+
+    private Data424 GetData(out Invalid invalid)
+    {
+        Data424 data = new();
+
+        Dictionary<Record424, Diagnostic[]> diagnostics = [];
+
+        var method = typeof(Parser424).GetMethod("Process", BindingFlags.NonPublic | BindingFlags.Static);
+
+        foreach (var (property, section) in Data424.GetProperties())
+        {
+            var process = method!.MakeGenericMethod([property.PropertyType.GetElementType()!]);
+
+            property.SetValue(data, process.Invoke(null, [builds[section].Values.Last(), diagnostics]));
+        }
+        invalid = diagnostics.ToFrozenDictionary();
+        return data;
+    }
+
     internal Parser424(Meta424 meta)
     {
         this.meta = meta;
 
-        foreach (var (section, _) in meta.Info)
+        foreach (var (section, _) in meta.Types)
         {
             builds[section] = [];
             records[section] = [];
         }
     }
 
-    internal Data424 Parse(IEnumerable<string> strings, out Queue<string> skipped, out Queue<Build> invalid)
+    internal static TRecord[] Process<TRecord>(Queue<Build<TRecord>> builds, Dictionary<Record424, Diagnostic[]> invalid)
+        where TRecord : Record424
     {
-        skipped = [];
-        invalid = [];
+        Queue<TRecord> records = [];
 
-        Process(strings, skipped);
-        Build();
-        Postprocess();
-        Link(new Unique(meta, this));
+        Queue<Diagnostic> diagnostics = [];
 
-        var data = new Data424();
-
-        foreach (var (property, section) in Data424.GetProperties())
+        while (builds.TryDequeue(out var build))
         {
-            var list = (System.Collections.IList)property.GetValue(data)!;
+            records.Enqueue(build.Record);
 
-            foreach (var build in builds[section].Values.Last())
+            Hold(build);
+
+            if (diagnostics.Count > 0)
             {
-                if (build.Diagnostics is null)
-                    _ = list.Add(build.Record);
-                else
-                    invalid.Enqueue(build);
+                invalid.Add(build.Record, [.. diagnostics]);
+                diagnostics.Clear();
             }
         }
-        return data;
+        return [.. records];
+
+        void Hold(Build build)
+        {
+            if (build.Diagnostics is not null)
+                diagnostics.Pump(build.Diagnostics);
+
+            if (build is ISequentBuild sequent)
+            {
+                foreach (var sequence in sequent.Builds)
+                    Hold(sequence);
+            }
+        }
+    }
+
+    internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Invalid invalid)
+    {
+        skipped = Process(strings);
+        Build();
+        Link();
+        return GetData(out invalid);
     }
 }

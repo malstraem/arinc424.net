@@ -2,7 +2,8 @@ namespace Arinc424;
 
 /**<summary>
 Two letter ICAO code.
-</summary>*/
+</summary>
+<remarks>See section 5.14.</remarks>*/
 [Decode<IcaoConverter, Icao>]
 public readonly struct Icao(char first, char second)
 {

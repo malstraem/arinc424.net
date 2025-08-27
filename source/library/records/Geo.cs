@@ -1,10 +1,10 @@
-using Arinc424.Airspace;
-using Arinc424.Comms;
-using Arinc424.Navigation;
-using Arinc424.Ground;
-using Arinc424.Routing;
-
 namespace Arinc424;
+
+using Comms;
+using Ground;
+using Routing;
+using Airspace;
+using Navigation;
 
 public abstract class Geo : Record424
 {

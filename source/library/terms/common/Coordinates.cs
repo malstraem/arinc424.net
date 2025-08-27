@@ -1,5 +1,3 @@
-using Arinc424.Ground;
-
 namespace Arinc424;
 
 /**<summary>
@@ -7,7 +5,7 @@ Various latitudes and longitudes according to the specification.
 </summary>
 <remarks>See section 5.36, 5.37, 5.267, 5.268.</remarks>*/
 [Decode<CoordinatesConverter, Coordinates>]
-[Decode<HighPrecisionCoordinatesConverter, Coordinates, PathPoint>]
+[Decode<HighPrecisionCoordinatesConverter, Coordinates, Ground.PathPoint>]
 [DebuggerDisplay($"{{{nameof(Latitude)}}}, {{{nameof(Longitude)}}}")]
 public readonly struct Coordinates(double latitude, double longitude)
 {

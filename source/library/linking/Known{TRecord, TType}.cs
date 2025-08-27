@@ -2,47 +2,49 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Linking;
 
-internal abstract class Link<TRecord> where TRecord : Record424
+internal sealed class Known<TRecord, TType>(PropertyInfo property, KeyInfo info) : Link<TRecord>(property, info)
+    where TRecord : Record424
+    where TType : class
 {
-    internal abstract bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic);
-}
+    private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
 
-internal class Known<TRecord, TType>(LinkInfo info, PropertyInfo property) : Link<TRecord> where TRecord : Record424 where TType : class
-{
-    protected readonly Foreign foreign = new(info);
-
-    protected readonly PropertyInfo property = property;
-
-    protected readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+    private BadKnown Bad(LinkError error, TRecord record, Type type, string? key = null) => new()
+    {
+        Info = info,
+        Property = property,
+        Key = key,
+        Type = type,
+        Error = error,
+        Record = record
+    };
 
     internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        diagnostic = null;
-
         var type = property.PropertyType;
 
-        if (!foreign.TryGetKey(record.Source!, meta.TypeInfo[type].Primary! /* guarantee by design */, out string? key))
+        var primary = meta.Keys[type]; /* guarantee by design */
+
+        if (!info.TryGetKey(record.Source!, primary, out string? key))
+        {
+            if (nullState == NullabilityState.NotNull)
+            {
+                diagnostic = Bad(LinkError.Null, record, type);
+                return false;
+            }
+            diagnostic = null;
             return true;
-
-        if (!unique.TryGetRecords(type, out var records))
-        {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound);
-            return false;
         }
-        if (!records.TryGetValue(key, out var referenced))
+
+        if (unique.TryGetRecords(type, out var records)
+         && records.TryGetValue(key, out var referenced))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key };
-            return false;
+            set(record, Unsafe.As<TType>(referenced)); /* guarantee by design */
+            diagnostic = null;
+            return true;
         }
-        // guarantee by design
-        set(record, Unsafe.As<TType>(referenced));
-
-        meta.TypeInfo[type].Relations?.Process(referenced, record);
-
-        return true;
+        diagnostic = Bad(LinkError.KeyNotFound, record, type, key);
+        return false;
     }
 }

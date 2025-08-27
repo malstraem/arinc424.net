@@ -1,22 +1,19 @@
 namespace Arinc424.Routing;
 
-using Arinc424.Ground;
-
-using Terms;
-
 /**<summary>
 <c>Special Activity Area</c> primary record.
 </summary>
 <remarks>See section 4.1.33.1.</remarks>*/
-[Section('E', 'S'), Continuous]
+[Section('E', 'S')]
+
+[Port(16, 19), Icao(20, 21), Continuous]
 public class SpecialArea : Fix, IIdentity, INamed
 {
-    [Identifier(16, 19), Icao(20, 21)]
-    public Airport Airport { get; set; }
+    public Ground.Port Port { get; set; }
 
-    /// <inheritdoc cref="ActivityType"/>
+    /// <inheritdoc cref="Terms.ActivityType"/>
     [Character(7)]
-    public ActivityType Type { get; set; }
+    public Terms.ActivityType Type { get; set; }
 
     /**<summary>
     <c>Special Activity Area Size</c> field.
@@ -39,9 +36,9 @@ public class SpecialArea : Fix, IIdentity, INamed
     [Character(53)]
     public char Volume { get; set; }
 
-    /// <inheritdoc cref="OperatingTimes"/>
+    /// <inheritdoc cref="Terms.OperatingTimes"/>
     [Field(54, 56)]
-    public OperatingTimes Times { get; set; }
+    public Terms.OperatingTimes Times { get; set; }
 
     /// <inheritdoc cref="Arinc424.Privacy"/>
     [Character(57)]

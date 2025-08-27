@@ -1,7 +1,7 @@
-using Arinc424.Ground;
-using Arinc424.Processing;
-
 namespace Arinc424.Procedures;
+
+using Processing;
+using Ground;
 
 /**<summary>
 Multiple <c>Airport and Heliport STAR</c> primary record sequences under same identifier.
@@ -21,11 +21,11 @@ Multiple <c>Airport and Heliport Approach</c> primary record sequences under sam
 [Pipeline<IdentityWrap<Approach, ApproachSequence>>]
 public class Approach : Procedure<ApproachSequence, ApproachPoint>
 {
-    [One]
-    public GroundPoint? GroundPoint { get; set; }
+    [Many(nameof(PathPoint.Approach))]
+    public GroundPoint[]? GroundPoints { get; set; }
 
-    [One]
-    public SatellitePoint? SatellitePoint { get; set; }
+    [Many(nameof(PathPoint.Approach))]
+    public SatellitePoint[]? SatellitePoints { get; set; }
 }
 
 /**<summary>

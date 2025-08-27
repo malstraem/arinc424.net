@@ -1,22 +1,18 @@
 namespace Arinc424.Ground;
 
-using Arinc424.Procedures;
-
-using Terms;
+using Procedures;
 
 /**<summary>
 Fields of <c>GBAS Path Point</c> and <c>SBAS Path Point</c>.
 </summary>*/
-[Icao(11, 12), Port(7, 10), Continuous(27)]
+[Port(7, 10), Icao(11, 12), Id(33, 36), Continuous(27)]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public abstract class PathPoint : Fix
 {
-    [Identifier(7, 10)]
-    [Possible<Airport, Heliport>]
     public Port Port { get; set; }
 
-    [Identifier(14, 19)]
+    [Known(14, 19)]
     public Approach Approach { get; set; }
 
     [Field(20, 24), Obsolete("todo")]
@@ -38,7 +34,7 @@ public abstract class PathPoint : Fix
 
     /// <inheritdoc cref="Terms.ApproachPerformance"/>
     [Character(37)]
-    public ApproachPerformance ApproachPerformance { get; set; }
+    public Terms.ApproachPerformance ApproachPerformance { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='EllipsoidalHeight']/*"/>
     [Field(61, 66), Float(10)]

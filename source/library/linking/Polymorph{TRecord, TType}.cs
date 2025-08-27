@@ -1,78 +1,82 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
-using Arinc424.Diagnostics;
+using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-internal sealed class Polymorph<TRecord, TType>(LinkInfo info, PropertyInfo property, TypeAttribute typeAttribute)
-    : Known<TRecord, TType>(info, property)
+internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttribute typeAttribute, KeyInfo info)
+    : Link<TRecord>(property, info, true)
         where TRecord : Record424
         where TType : class
 {
     private readonly TypeAttribute typeAttribute = typeAttribute;
 
-    private bool TryGetReference(TRecord record, Meta424 meta, [NotNullWhen(true)] out (string, Type, Section)? reference, out Diagnostic? diagnostic)
+    private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+
+    private BadPolymorph Bad
+    (
+        LinkError error, TRecord record, Section section,
+        Type? type = null, string? key = null
+    )
+    => new()
     {
-        reference = null;
-        diagnostic = null;
-
-        string @string = record.Source!;
-
-        var (index, subindex) = typeAttribute;
-
-        Section section = new(@string[index], @string[subindex]);
-
-        if (section.IsWhiteSpace())
-            return false;
-
-        if (!meta.Types.TryGetValue(section, out var type))
-        {
-            diagnostic = new InvalidSection(record, property, index, subindex);
-            return false;
-        }
-        var primary = meta.TypeInfo[type].Primary;
-
-        if (primary is null)
-        {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoPrimary);
-            return false;
-        }
-
-        if (foreign.TryGetKey(@string, primary, out string? key))
-        {
-            reference = (key, type, section);
-            return true;
-        }
-        return false;
-    }
+        Info = info,
+        Property = property,
+        Error = error,
+        Record = record,
+        Section = section,
+        Indices = (typeAttribute.index, typeAttribute.subIndex),
+        Type = type,
+        Key = key
+    };
 
     internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
-        if (!TryGetReference(record, meta, out var reference, out diagnostic))
-            return diagnostic is null;
+        ReadOnlySpan<char> source = record.Source;
 
-        (string key, var type, var section) = reference.Value;
+        var section = typeAttribute.GetSection(source);
 
-        if (!unique.TryGetRecords(type, out var records))
+        if (section.IsWhiteSpace() && source[info.Id].IsWhiteSpace())
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.NoOneFound);
+            if (nullState == NullabilityState.NotNull)
+            {
+                diagnostic = Bad(LinkError.Null, record, section);
+                return false;
+            }
+            else
+            {
+                diagnostic = null;
+                return true;
+            }
+        }
+
+        if (!meta.TryType(section, out var type, out var primary))
+        {
+            diagnostic = Bad(LinkError.WrongType, record, section, type);
             return false;
         }
-        if (!records.TryGetValue(key, out var referenced))
+
+        if (!info.TryGetKey(source, primary, out string? key))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.KeyNotFound) { Key = key, Type = meta.Types[section] };
+            diagnostic = Bad(LinkError.Null, record, section, type);
             return false;
         }
-        if (referenced is not TType @ref)
+
+        if (!(unique.TryGetRecords(type, out var records)
+          && (records.TryGetValue(key, out var @ref)
+          || records.TryGetValue(info.GetKeyWithoutPort(source, primary, out key), out @ref))))
         {
-            diagnostic = new InvalidLink(record, property, foreign.Info, LinkError.WrongType) { Type = type };
+            diagnostic = Bad(LinkError.KeyNotFound, record, section, type, key);
             return false;
         }
-        set(record, @ref);
 
-        meta.TypeInfo[type].Relations?.Process(referenced, record);
-
+        if (@ref is not TType)
+        {
+            diagnostic = Bad(LinkError.WrongType, record, section, type, key);
+            return false;
+        }
+        set(record, Unsafe.As<TType>(@ref));
+        diagnostic = null;
         return true;
     }
 }

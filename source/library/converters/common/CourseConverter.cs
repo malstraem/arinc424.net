@@ -1,6 +1,6 @@
-namespace Arinc424.Converters;
-
 using static System.Globalization.NumberStyles;
+
+namespace Arinc424.Converters;
 
 internal abstract class CourseConverter : IStringConverter<Course>
 {

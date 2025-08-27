@@ -1,6 +1,6 @@
-using Arinc424.Ground.Terms;
-
 namespace Arinc424.Converters;
+
+using Ground.Terms;
 
 internal abstract class SectorConverter : IStringConverter<Sector>
 {

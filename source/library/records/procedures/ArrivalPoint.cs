@@ -1,5 +1,3 @@
-using Arinc424.Procedures.Terms;
-
 namespace Arinc424.Procedures;
 
 /**<summary>
@@ -12,7 +10,7 @@ public class ArrivalPoint : ProcedurePoint
     [Field(103, 106), Float(100)]
     public float VerticalAngle { get; set; }
 
-    /// <inheritdoc cref="ArrivalQualifiers"/>
+    /// <inheritdoc cref="Terms.ArrivalQualifiers"/>
     [Field(119, 120)]
-    public ArrivalQualifiers Qualifiers { get; set; }
+    public Terms.ArrivalQualifiers Qualifiers { get; set; }
 }

@@ -5,7 +5,7 @@ namespace Arinc424.Navigation;
 </summary>
 <remarks>See section 4.1.11.1.</remarks>*/
 [Section('P', 'I', subIndex: 13)]
-public class InstrumentLanding : LandingSystem
+public class InstrumentLanding : Landing
 {
     /**<summary>
     <c>Localizer Frequency (FREQ)</c> field.
@@ -56,8 +56,7 @@ public class InstrumentLanding : LandingSystem
     [Field(91, 95), Obsolete("todo")]
     public string Declination { get; set; }
 
-    [Type(109, 110)]
-    [Identifier(103, 106), Icao(107, 108)]
+    [Polymorph(103, 106), Icao(107, 108), Type(109, 110)]
     public Fix? SupportingFacility { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='TCH']/*"/>
@@ -65,6 +64,6 @@ public class InstrumentLanding : LandingSystem
     public int ThresholdHeight { get; set; }
 
     /// <summary>Associated ILS Markers.</summary>
-    [Many]
-    public List<InstrumentMarker>? Markers { get; set; }
+    [Many(nameof(InstrumentMarker.Landing))]
+    public InstrumentMarker[]? Markers { get; set; }
 }

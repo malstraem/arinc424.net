@@ -1,12 +1,12 @@
-using Arinc424.Processing;
-
 namespace Arinc424.Airspace;
+
+using Processing;
 
 /**<summary>
 Multiple <c>FIR/UIR</c> primary record sequences.
 </summary>
 <remarks>See section 4.1.17.1.</remarks>*/
-[Section('U', 'F'), Identifier(7, 10), Continuous(20)]
+[Section('U', 'F'), Id(7, 10), Continuous(20)]
 
 [Pipeline<IdentityWrap<FlightRegion, RegionVolume>>]
 

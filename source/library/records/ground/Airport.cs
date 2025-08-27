@@ -1,8 +1,4 @@
-using Arinc424.Navigation;
-
 namespace Arinc424.Ground;
-
-using Terms;
 
 /**<summary>
 <c>Airport</c> primary record.
@@ -19,35 +15,15 @@ public class Airport : Port
     [Field(28, 30), Integer]
     public int LongestRunwayLength { get; set; }
 
-    /// <inheritdoc cref="SurfaceType"/>
+    /// <inheritdoc cref="Terms.SurfaceType"/>
     [Character(32)]
-    public SurfaceType LongestRunwayType { get; set; }
+    public Terms.SurfaceType LongestRunwayType { get; set; }
 
     /// <summary>Associated gates.</summary>
-    [Many]
-    public List<Gate>? Gates { get; set; }
+    [Many(nameof(Gate.Port))]
+    public Gate[]? Gates { get; set; }
 
     /// <summary>Associated runways.</summary>
-    [Many]
-    public List<RunwayThreshold>? Thresholds { get; set; }
-
-    /// <summary>Associated NDBs.</summary>
-    [Many]
-    public List<TerminalBeacon>? Beacons { get; set; }
-
-    /// <summary>Associated VHF Navaids.</summary>
-    [Many]
-    public List<Omnidirectional>? Omnidirectionals { get; set; }
-
-    /// <summary>Associated Localizer Markers.</summary>
-    [Many]
-    public List<InstrumentMarker>? Markers { get; set; }
-
-    /// <summary>Associated MLS.</summary>
-    [Many]
-    public List<MicrowaveLanding>? MicrowaveLandings { get; set; }
-
-    /// <summary>Associated ILS.</summary>
-    [Many]
-    public List<InstrumentLanding>? InstrumentLandings { get; set; }
+    [Many(nameof(Threshold.Port))]
+    public Threshold[]? Thresholds { get; set; }
 }

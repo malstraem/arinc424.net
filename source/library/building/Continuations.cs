@@ -14,9 +14,9 @@ internal class Continuations
 
     private FrozenDictionary<ContinuationAttribute, PropertyInfo> properties;
 #pragma warning restore CS8618
-    internal static Continuations? Create(Composition composition, Supplement supplement)
+    internal static Continuations? Create(Type low, Type top, Supplement supplement)
     {
-        var continuous = composition.Top.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement);
+        var continuous = top.GetCustomAttributes<ContinuousAttribute>().BySupplement(supplement);
 
         if (continuous is null)
             return null;
@@ -26,7 +26,7 @@ internal class Continuations
 
         Dictionary<ContinuationAttribute, Queue<string>> continuations = [];
 
-        foreach (var property in composition.Low.GetProperties())
+        foreach (var property in low.GetProperties())
         {
             if (property.GetCustomAttribute<ContinueAttribute>() is null)
                 continue;

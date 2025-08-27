@@ -1,6 +1,3 @@
-using Arinc424.Building;
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Processing;
 
 internal abstract class Scan<TOut, TSource> : IPipeline<TOut, TSource> where TOut : Record424 where TSource : Record424

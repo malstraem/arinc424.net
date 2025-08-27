@@ -1,5 +1,3 @@
-using Arinc424.Ground.Terms;
-
 namespace Arinc424.Ground;
 
 /**<summary>
@@ -9,13 +7,13 @@ namespace Arinc424.Ground;
 [Section('P', 'P', subIndex: 13), Section('H', 'P', subIndex: 13)]
 public class SatellitePoint : PathPoint
 {
-    /// <inheritdoc cref="SatelliteOperationType"/>
+    /// <inheritdoc cref="Terms.SatelliteOperationType"/>
     [Field(25, 26)]
-    public SatelliteOperationType OperationType { get; set; }
+    public string Type { get; set; }
 
-    /// <inheritdoc cref="SatelliteService"/>
+    /// <inheritdoc cref="Terms.SatelliteService"/>
     [Field(29, 30)]
-    public SatelliteService Service { get; set; }
+    public string Service { get; set; }
 
     /**<summary>
     <c>HAL</c> field.

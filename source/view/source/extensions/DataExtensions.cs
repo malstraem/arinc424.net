@@ -1,8 +1,10 @@
-using Arinc424.ViewModels;
-
 namespace Arinc424.View;
+
+using ViewModel;
+using Model;
 
 public static class DataExtensions
 {
-    public static SubsectionViewModel GetViewModel<T>(this IEnumerable<T> records, string name) where T : Record424 => new(name, typeof(T), records);
+    public static ObjectsViewModel? GetViewModel<T>(this T[] records, string name)
+        where T : Record424 => new([.. records.Select(x => new RecordModel(x))], name);
 }

@@ -1,7 +1,5 @@
 namespace Arinc424.Airspace;
 
-using Terms;
-
 /**<summary>
 Fields of <c>Controlled Airspace</c> and <c>Restrictive Airspace</c>.
 </summary>
@@ -13,10 +11,10 @@ public class BoundaryPoint : Geo, ISequenced
     [Field(21, 24), Field<RegionPoint>(16, 19)]
     public int SeqNumber { get; set; }
 
-    /// <inheritdoc cref="BoundaryVia"/>
+    /// <inheritdoc cref="Terms.BoundaryVia"/>
     [Character(31), Character<RegionPoint>(33)]
-    public BoundaryVia Via { get; set; }
+    public Terms.BoundaryVia Via { get; set; }
 
     [Field(52, 78), Field<RegionPoint>(54, 80)]
-    public Arc? Arc { get; set; }
+    public Terms.Arc? Arc { get; set; }
 }

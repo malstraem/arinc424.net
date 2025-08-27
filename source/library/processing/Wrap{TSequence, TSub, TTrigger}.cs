@@ -1,10 +1,9 @@
 using System.Reflection;
 
-using Arinc424.Airspace;
-using Arinc424.Building;
-using Arinc424.Diagnostics;
-
 namespace Arinc424.Processing;
+
+using Building;
+using Airspace;
 
 internal abstract class Wrap<TSequence, TSub>(Supplement supplement) : Scan<TSequence, TSub>
     where TSequence : Record424<TSub>, new()
@@ -27,7 +26,7 @@ internal sealed class IdentityWrap<TSequence, TSub>(Supplement supplement) : Wra
     where TSequence : Record424<TSub>, IIdentity, new()
     where TSub : Record424
 {
-    private readonly Range range = typeof(TSequence).GetCustomAttribute<IdentifierAttribute>()!.Range;
+    private readonly Range range = typeof(TSequence).GetCustomAttributes<IdAttribute>().BySupplement(supplement)!.Range;
 
     protected override bool Trigger(TSub current, TSub next) => current.Source![range] != next.Source![range];
 }

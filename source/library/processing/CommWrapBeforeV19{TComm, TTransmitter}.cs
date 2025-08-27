@@ -1,6 +1,6 @@
-using Arinc424.Comms;
-
 namespace Arinc424.Processing;
+
+using Comms;
 
 internal sealed class CommWrapBeforeV19<TComm, TTransmitter>(Supplement supplement) : Wrap<TComm, TTransmitter>(supplement)
     where TComm : Communication<TTransmitter>, new()
