@@ -1,13 +1,13 @@
 # Overview
 
-While the **ARINC 424** specification describes entities with 132-byte fixed-length string, 
-this library creates a database object model via building entities using reflection and runtime compilation.
+While the **`ARINC 424`** specification describes entities with 132-byte fixed-length strings, this library creates
+a database object model via building entities using reflection and runtime compilation.
 
 Most terms are converted according to the specification into associated enumerations or numeric values ​​on the fly.
 
 In addition, relationships between entities are established after the building stage.
 
-In practice, this allows you to explore and manipulate the tree-like representation of **ARINC 424** database.
+In practice, this allows you to explore and manipulate the tree-like representation of **`ARINC 424`** database.
 
 See [docs](https://malstraem.github.io/arinc424.net) to know how specification is mapped.
 
@@ -20,10 +20,10 @@ and entities created based on [supplement](https://malstraem.github.io/arinc424.
 var meta = Meta424.Create(Supplement.V20);
 ```
 
-So you can try to get navigation [data](https://malstraem.github.io/arinc424.net/api/Arinc424.Data424.html) from the strings 
-leaving [builds](https://malstraem.github.io/arinc424.net/api/Arinc424.Building.Build.html) with diagnostics 
-(bad coded fields, missing links, etc) and skipped strings that don't match entity types.
+So you can get navigation [data](https://malstraem.github.io/arinc424.net/api/Arinc424.Data424.html) from the strings with
+remaining [diagnostics](https://malstraem.github.io/arinc424.net/api/Arinc424.Diagnostic.html) (bad coded fields, miss links, etc)
+and skipped strings that don't match entity types.
 
 ```csharp
-var data = Data424.Create(meta, strings, out var invalid, out var skipped);
+var data = Data424.Create(meta, strings, out var skipped, out var invalid);
 ```

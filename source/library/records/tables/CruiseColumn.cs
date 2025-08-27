@@ -4,7 +4,7 @@ namespace Arinc424.Tables;
 Fields of <c>Cruising Table</c>.
 </summary>
 <remarks>Used by <see cref="CruiseTable"/> like subsequence.</remarks>*/
-public class CruiseRow : Record424, ISequenced
+public class CruiseColumn : Record424, ISequenced
 {
     [Field(9, 9), Integer]
     public int SeqNumber { get; set; }

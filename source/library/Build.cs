@@ -4,7 +4,7 @@ namespace Arinc424;
 Proxy to hold bad coded record with diagnostics.
 </summary>*/
 [DebuggerDisplay($"{{{nameof(Record)}}}")]
-public abstract class Build(Record424 record)
+internal abstract class Build(Record424 record)
 {
     public Record424 Record { get; } = record;
 
