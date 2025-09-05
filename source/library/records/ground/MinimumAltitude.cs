@@ -4,7 +4,7 @@ namespace Arinc424.Ground;
 <c>Airport and Heliport MSA</c> primary record.
 </summary>
 <remarks>See section 4.1.20.1 and 4.2.4.</remarks>*/
-[Section('P', 'S', subIndex: 13), Section('H', 'S', subIndex: 13)]
+[Section('P', 'S', subInd: 13), Section('H', 'S', subInd: 13)]
 
 [Port(7, 10), Icao(11, 12), Continuous(39)]
 public class MinimumAltitude : Record424, IMultiple

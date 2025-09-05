@@ -3,10 +3,10 @@ namespace Arinc424.Procedures;
 using Processing;
 
 /**<summary>
-<c>Airport and Heliport SID</c> primary record sequence.
+<c>Airport</c> and <c>Heliport SID</c> primary record sequence.
 </summary>
 <remarks>Used by <see cref="Departure"/> like subsequence.</remarks>*/
-[Pipeline<Sequence<DepartureSequence, DeparturePoint>>]
+[Pipe<Sequence<DepartureSequence, DeparturePoint>>]
 public class DepartureSequence : ProcedureSequence<DeparturePoint>
 {
     /// <inheritdoc cref="Terms.DepartureType"/>

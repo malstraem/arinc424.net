@@ -5,7 +5,7 @@ namespace Arinc424.Attributes;
 using Linking;
 
 /**<summary>
-Specifies <see cref="IIdentity.Identifier"/> range for strong typed link.
+Specifies <see cref="IIdentity.Identifier"/> range for strong typed relation.
 </summary>
 <inheritdoc/>*/
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]

@@ -7,19 +7,19 @@ Specifies indexes of section and subsection code to define related entity type.
 Note that the indices are exactly the same as those defined in the specification.
 </remarks>*/
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-internal class TypeAttribute(int index, int subIndex) : SupplementAttribute
+internal class TypeAttribute(int ind, int subInd) : SupplementAttribute
 {
     /// <summary>Index of the section character.</summary>
-    internal int index = index - 1;
+    internal int ind = ind - 1;
 
     /// <summary>Index of the subsection character.</summary>
-    internal int subIndex = subIndex - 1;
+    internal int subInd = subInd - 1;
 
-    internal Section GetSection(ReadOnlySpan<char> source) => new(source[index], source[subIndex]);
+    internal Section GetSection(ReadOnlySpan<char> source) => new(source[ind], source[subInd]);
 
-    internal void Deconstruct(out int index, out int subIndex)
+    internal void Deconstruct(out int ind, out int subInd)
     {
-        index = this.index;
-        subIndex = this.subIndex;
+        ind = this.ind;
+        subInd = this.subInd;
     }
 }

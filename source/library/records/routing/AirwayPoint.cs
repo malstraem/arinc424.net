@@ -6,7 +6,7 @@ using Processing;
 Fields of <c>Enroute Airways</c> primary record.
 </summary>
 <remarks>Used by <see cref="Airway"/> like subsequence.</remarks>*/
-[Pipeline<AirwayPointSorting>]
+[Pipe<AirwayPointSorting>]
 
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
 public class AirwayPoint : Record424, ISequenced

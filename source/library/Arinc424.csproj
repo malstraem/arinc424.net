@@ -21,7 +21,7 @@
     <Product>ARINC 424 object model</Product>
 
     <PackageTags>parser;loader;arinc;arinc424;avionics;database;navigation;aeronautical;aviation-data</PackageTags>
-    <Description>An ARINC 424 model &amp; parser that allows you to explore aeronautical data in an object-oriented way.</Description>
+    <Description>ARINC 424 model &amp; parser that allows you to read aeronautical data in an object-oriented way.</Description>
 
     <RepositoryUrl>https://github.com/malstraem/arinc424.net</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>

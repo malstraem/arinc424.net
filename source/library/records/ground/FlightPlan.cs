@@ -5,7 +5,7 @@ namespace Arinc424.Ground;
 </summary>
 <remarks>See section 4.1.27.1.</remarks>*/
 [Obsolete("todo")]
-[Section('P', 'R', subIndex: 13), Continuous(70)]
+[Section('P', 'R', subInd: 13), Continuous(70)]
 public class FlightPlan : Record424
 {
     [Field(7, 10)]

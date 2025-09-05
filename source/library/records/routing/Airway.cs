@@ -8,7 +8,7 @@ using Processing;
 <remarks>See section 4.1.6.1.</remarks>*/
 [Section('E', 'R'), Id(14, 18), Continuous(39)]
 
-[Pipeline<IdentityWrap<Airway, AirwayPoint>>]
+[Pipe<IdentityWrap<Airway, AirwayPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public class Airway : Record424<AirwayPoint>, IIdentity

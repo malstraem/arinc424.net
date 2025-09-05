@@ -6,7 +6,7 @@ using Processing;
 <c>Restrictive Airspace</c> primary record sequence.
 </summary>
 <remarks>Used by <see cref="RestrictiveSpace"/> like subsequence.</remarks>*/
-[Pipeline<Sequence<RestrictiveVolume, BoundaryPoint>>]
+[Pipe<Sequence<RestrictiveVolume, BoundaryPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]
 public class RestrictiveVolume : Volume

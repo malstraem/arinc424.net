@@ -1,8 +1,8 @@
 [![NuGet](https://img.shields.io/nuget/v/arinc424.svg)](https://www.nuget.org/packages/arinc424)
 
 > [!WARNING]
-*work in progress and target on ver. 23 of the specification (with backward compatibility to 18)*  
-*if you see any issues testing the library on real world data, please report it*  
+*work in progress and target on ver. 23 of the specification (with backward compatibility to 18)*</br>
+*if you see any issues testing the library on real world data, please report it*</br></br>
 *any reviews and PRs are welcome*
 
 # Overview
@@ -12,11 +12,11 @@ This is a long-term research and proof of concept to provide a model and reader 
 While the **`ARINC 424`** specification describes entities with 132-byte fixed-length strings, this library creates
 a database object model via building entities using reflection and runtime compilation.
 
-Most terms are converted according to the specification into associated enumerations or numeric values ​​on the fly.
+- Most terms are converted according to the specification into associated enumerations or numeric values ​​on the fly.
 
-In addition, relationships between entities are established after the building stage.
+- In addition, relationships between entities are established after the building stage.
 
-In practice, this allows you to explore and manipulate the tree-like representation of **`ARINC 424`** database.
+In practice, this allows you read the tree-like representation of **`ARINC 424`** database.
 
 See [docs](https://malstraem.github.io/arinc424.net) to know how specification is mapped.
 
@@ -43,5 +43,5 @@ var data = Data424.Create(meta, strings, out var skipped, out var invalid);
 - `dotnet build`
 
 > [!NOTE]
-The project actively uses the Roslyn API to generate converters of specification terms to internal types.
+The project uses the Roslyn API to generate converters of specification terms to internal types.</br>
 Use a suitable IDE to view the generated code.

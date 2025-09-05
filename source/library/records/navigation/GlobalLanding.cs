@@ -4,7 +4,7 @@ namespace Arinc424.Navigation;
 <c>GLS</c> primary record.
 </summary>
 <remarks>See section 4.1.29.1.</remarks>*/
-[Section('P', 'T', subIndex: 13)]
+[Section('P', 'T', subInd: 13)]
 public class GlobalLanding : Landing
 {
     /// <summary><c>GLS Channel</c> field.</summary>

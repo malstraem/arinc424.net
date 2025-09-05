@@ -4,7 +4,7 @@ namespace Arinc424.Navigation;
 <c>Airport and Heliport Localizer and Glide Slope</c> primary record.
 </summary>
 <remarks>See section 4.1.11.1.</remarks>*/
-[Section('P', 'I', subIndex: 13)]
+[Section('P', 'I', subInd: 13)]
 public class InstrumentLanding : Landing
 {
     /**<summary>

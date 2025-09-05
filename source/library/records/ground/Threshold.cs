@@ -4,7 +4,7 @@ namespace Arinc424.Ground;
 <c>Runway</c> primary record.
 </summary>
 <remarks>See section 4.1.10.1.</remarks>*/
-[Section('P', 'G', subIndex: 13), Continuous]
+[Section('P', 'G', subInd: 13), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class Threshold : Touch

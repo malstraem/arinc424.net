@@ -3,8 +3,8 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Building;
 
-using Linking;
 using Processing;
+using Linking;
 
 /**<summary>
 How an entity (primary record) should be created and processed.

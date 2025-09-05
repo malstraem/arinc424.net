@@ -31,9 +31,11 @@ internal class Continuations
             if (property.GetCustomAttribute<ContinueAttribute>() is null)
                 continue;
 
-            var continuation = property.PropertyType.GetElementType()!.GetCustomAttribute<ContinuationAttribute>()!;
+            var continuation = property.PropertyType.GetElementType()!
+                .GetCustomAttribute<ContinuationAttribute>()!;
 
-            info[continuation] = ContinuationInfo.Create((properties[continuation] = property).PropertyType.GetElementType()!, supplement);
+            info[continuation] = ContinuationInfo
+                .Create((properties[continuation] = property).PropertyType.GetElementType()!, supplement);
 
             continuations[continuation] = [];
         }

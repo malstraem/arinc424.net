@@ -2,13 +2,13 @@ namespace Arinc424.Attributes;
 
 using Processing;
 
-internal abstract class PipelineAttribute : SupplementAttribute
+internal abstract class PipeAttribute : SupplementAttribute
 {
     internal abstract IPipeline GetPipeline(Supplement supplement);
 }
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-internal sealed class PipelineAttribute<TPipeline> : PipelineAttribute where TPipeline : IPipeline
+internal sealed class PipeAttribute<TPipeline> : PipeAttribute where TPipeline : IPipeline
 {
     internal override IPipeline GetPipeline(Supplement supplement)
     {

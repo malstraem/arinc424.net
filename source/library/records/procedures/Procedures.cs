@@ -4,21 +4,23 @@ using Processing;
 using Ground;
 
 /**<summary>
-Multiple <c>Airport and Heliport STAR</c> primary record sequences under same identifier.
+Multiple <c>Airport</c> and <c>Heliport STAR</c>
+primary record sequences under same identifier.
 </summary>
 <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>*/
-[Section('P', 'E', subIndex: 13), Section('H', 'E', subIndex: 13)]
+[Section('P', 'E', subInd: 13), Section('H', 'E', subInd: 13)]
 
-[Pipeline<IdentityWrap<Arrival, ArrivalSequence>>]
+[Pipe<IdentityWrap<Arrival, ArrivalSequence>>]
 public class Arrival : Procedure<ArrivalSequence, ArrivalPoint>;
 
 /**<summary>
-Multiple <c>Airport and Heliport Approach</c> primary record sequences under same identifier.
+Multiple <c>Airport</c> and <c>Heliport Approach</c>
+primary record sequences under same identifier.
 </summary>
 <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>*/
-[Section('P', 'F', subIndex: 13), Section('H', 'F', subIndex: 13)]
+[Section('P', 'F', subInd: 13), Section('H', 'F', subInd: 13)]
 
-[Pipeline<IdentityWrap<Approach, ApproachSequence>>]
+[Pipe<IdentityWrap<Approach, ApproachSequence>>]
 public class Approach : Procedure<ApproachSequence, ApproachPoint>
 {
     [Many(nameof(PathPoint.Approach))]
@@ -29,10 +31,11 @@ public class Approach : Procedure<ApproachSequence, ApproachPoint>
 }
 
 /**<summary>
-Multiple <c>Airport and Heliport SID</c> primary record sequences under same identifier.
+Multiple <c>Airport</c> and <c>Heliport SID</c>
+primary record sequences under same identifier.
 </summary>
 <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>*/
-[Section('P', 'D', subIndex: 13), Section('H', 'D', subIndex: 13)]
+[Section('P', 'D', subInd: 13), Section('H', 'D', subInd: 13)]
 
-[Pipeline<IdentityWrap<Departure, DepartureSequence>>]
+[Pipe<IdentityWrap<Departure, DepartureSequence>>]
 public class Departure : Procedure<DepartureSequence, DeparturePoint>;

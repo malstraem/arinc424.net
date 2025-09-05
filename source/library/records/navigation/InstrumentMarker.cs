@@ -4,7 +4,7 @@ namespace Arinc424.Navigation;
 <c>Airport and Heliport Localizer Marker</c> primary record.
 </summary>
 <remarks>See section 4.1.13.1.</remarks>*/
-[Section('P', 'M', subIndex: 13), Port(7, 10), Icao(11, 12), Continuous]
+[Section('P', 'M', subInd: 13), Port(7, 10), Icao(11, 12), Continuous]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {nameof(Port)} - {{{nameof(Port)}}}")]
 public class InstrumentMarker : Fix

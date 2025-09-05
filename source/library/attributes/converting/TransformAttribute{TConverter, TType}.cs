@@ -8,7 +8,8 @@ internal abstract class TransformAttribute : SupplementAttribute;
 
 /// <inheritdoc/>
 /// <typeparam name="TType">The type of value being converted from the character.</typeparam>
-internal abstract class TransformAttribute<TType> : TransformAttribute where TType : Enum
+internal abstract class TransformAttribute<TType> : TransformAttribute
+    where TType : Enum
 {
     internal abstract bool TryConvert(char @char, out TType value);
 }

@@ -4,7 +4,7 @@ namespace Arinc424.Ground;
 <c>Airport</c> primary record.
 </summary>
 <remarks>See section 4.1.7.1.</remarks>*/
-[Section('P', 'A', subIndex: 13)]
+[Section('P', 'A', subInd: 13)]
 public class Airport : Port
 {
     /**<summary>

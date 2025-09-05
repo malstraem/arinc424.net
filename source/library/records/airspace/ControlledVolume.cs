@@ -6,7 +6,7 @@ using Processing;
 <c>Controlled Airspace</c> primary record sequence.
 </summary>
 <remarks>Used by <see cref="ControlledSpace"/> like subsequence.</remarks>*/
-[Pipeline<Sequence<ControlledVolume, BoundaryPoint>>]
+[Pipe<Sequence<ControlledVolume, BoundaryPoint>>]
 
 [DebuggerDisplay($"{nameof(Class)} - {{{nameof(Class)},nq}}, {nameof(Type)} - {{{nameof(Type)}}}")]
 public class ControlledVolume : Volume

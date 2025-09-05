@@ -8,8 +8,8 @@ using Processing;
 <remarks>See section 4.1.23.1.</remarks>*/
 [Section('E', 'V'), Continuous(56)]
 
-[Pipeline<Sequence<AirwayCommunication, AirwayTransmitter>>(Start = Supplement.V19)]
-[Pipeline<CommWrapBeforeV19<AirwayCommunication, AirwayTransmitter>>(End = Supplement.V19)]
+[Pipe<Sequence<AirwayCommunication, AirwayTransmitter>>(Start = Supplement.V19)]
+[Pipe<CommWrapBeforeV19<AirwayCommunication, AirwayTransmitter>>(End = Supplement.V19)]
 public class AirwayCommunication : Communication<AirwayTransmitter>
 {
     /// <summary><c>FIR/RDO Identifier (FIR/RDO)</c> field.</summary>

@@ -8,7 +8,12 @@ using Linking;
 
 internal static class TypeExtensions
 {
-    internal static Type[] Decompose(this Type type, Supplement supplement, out Relation[]? relations, out IPipeline[]? pipes)
+    internal static Type[] Decompose
+    (
+        this Type type,
+        Supplement supplement,
+        out Relation[]? relations,
+        out IPipeline[]? pipes)
     {
         Stack<Type> types = [];
         Stack<Relation> relationStack = [];
@@ -25,7 +30,7 @@ internal static class TypeExtensions
         {
             types.Push(type);
 
-            foreach (var pipe in type.GetCustomAttributes<PipelineAttribute>())
+            foreach (var pipe in type.GetCustomAttributes<PipeAttribute>())
             {
                 if (supplement >= pipe.Start && supplement <= pipe.End)
                     pipeStack.Push(pipe.GetPipeline(supplement));
@@ -45,7 +50,11 @@ internal static class TypeExtensions
         }
     }
 
-    internal static bool TryKeyInfo(this Type type, Supplement supplement, [NotNullWhen(true)] out KeyInfo? info)
+    internal static bool TryKeyInfo
+    (
+        this Type type,
+        Supplement supplement,
+        [NotNullWhen(true)] out KeyInfo? info)
     {
         var id = type.GetCustomAttributes<IdAttribute>().BySupplement(supplement);
 

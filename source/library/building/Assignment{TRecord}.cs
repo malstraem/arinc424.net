@@ -7,7 +7,8 @@ namespace Arinc424.Building;
 /**<summary>
 Assignment operation to set <see cref="Record424"/> property.
 </summary>*/
-internal abstract class Assignment<TRecord>(PropertyInfo property) where TRecord : Record424
+internal abstract class Assignment<TRecord>(PropertyInfo property)
+    where TRecord : Record424
 {
     protected PropertyInfo property = property;
 

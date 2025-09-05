@@ -6,7 +6,7 @@ using Processing;
 Multiple <c>Controlled Airspace</c> primary record sequences.
 </summary>
 <remarks>See section 4.1.25.1.</remarks>*/
-[Section('U', 'C'), Pipeline<ControlledConcatenate>]
+[Section('U', 'C'), Pipe<ControlledConcatenate>]
 
 [DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Name)},nq}}")]
 public class ControlledSpace : Space<ControlledVolume>;
@@ -15,7 +15,7 @@ public class ControlledSpace : Space<ControlledVolume>;
 Multiple <c>Restrictive Airspace</c> primary record sequences.
 </summary>
 <remarks>See section 4.1.18.1.</remarks>*/
-[Section('U', 'R'), Pipeline<RestrictiveWrap>]
+[Section('U', 'R'), Pipe<RestrictiveWrap>]
 
 [DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Identifier)},nq}}")]
 public class RestrictiveSpace : Space<RestrictiveVolume>, IIdentity

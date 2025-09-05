@@ -4,7 +4,7 @@ namespace Arinc424.Ground;
 <c>Airport Gate</c> primary record.
 </summary>
 <remarks>See section 4.1.8.1.</remarks>*/
-[Section('P', 'B', subIndex: 13)]
+[Section('P', 'B', subInd: 13)]
 
 [Port(7, 10), Icao(11, 12), Continuous]
 

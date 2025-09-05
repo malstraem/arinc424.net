@@ -25,7 +25,7 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
         Error = error,
         Record = record,
         Section = section,
-        Indices = (typeAttribute.index, typeAttribute.subIndex),
+        Indices = (typeAttribute.ind, typeAttribute.subInd),
         Type = type,
         Key = key
     };

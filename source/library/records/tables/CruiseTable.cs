@@ -8,7 +8,7 @@ using Processing;
 <remarks>See section 4.1.16.1.</remarks>*/
 [Section('T', 'C'), Id(7, 8)]
 
-[Pipeline<IdentityWrap<CruiseTable, CruiseColumn>>]
+[Pipe<IdentityWrap<CruiseTable, CruiseColumn>>]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}")]
 public class CruiseTable : Record424<CruiseColumn>, IIdentity

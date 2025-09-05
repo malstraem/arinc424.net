@@ -13,7 +13,8 @@ Specifies the target character index for <typeparamref name="TRecord"/> within a
 </summary>
 <inheritdoc/>
 <typeparam name="TRecord">Target type of record that index is defined.</typeparam>*/
-internal sealed class CharacterAttribute<TRecord>(int index) : CharacterAttribute(index) where TRecord : Record424
+internal sealed class CharacterAttribute<TRecord>(int index) : CharacterAttribute(index)
+    where TRecord : Record424
 {
     internal override bool IsMatch<TMatch>() => typeof(TMatch).IsAssignableTo(typeof(TRecord));
 

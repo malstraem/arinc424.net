@@ -8,7 +8,8 @@ internal abstract class DecodeAttribute : SupplementAttribute;
 
 /// <inheritdoc/>
 /// <typeparam name="TType">The type of value being converted from the string.</typeparam>
-internal abstract class DecodeAttribute<TType> : DecodeAttribute where TType : notnull
+internal abstract class DecodeAttribute<TType> : DecodeAttribute
+    where TType : notnull
 {
     internal abstract Result<TType> Convert(ReadOnlySpan<char> @string);
 }

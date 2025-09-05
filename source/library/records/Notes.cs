@@ -1,7 +1,7 @@
 namespace Arinc424;
 
 /**<summary>
-Base continuation record with notes.
+Basic continuation record with notes.
 </summary>
 <remarks>See section 5.91.</remarks>*/
 public abstract class BaseContinuation : Record424

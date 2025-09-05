@@ -17,10 +17,10 @@ public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdenti
 
     /**<summary>
     <para>
-      <c>SID/STAR Route Identifier (SID/STAR IDENT)</c> field for <see cref="Departure"/> and <see cref="Arrival"/>.
+      <c>Approach Route Identifier (APPROACH IDENT)</c> field for <see cref="Approach"/>.
     </para>
     <para>
-      <c>Approach Route Identifier (APPROACH IDENT)</c> field for <see cref="Approach"/>.
+      <c>SID/STAR Route Identifier (SID/STAR IDENT)</c> field for <see cref="Departure"/> and <see cref="Arrival"/>.
     </para>
     </summary>
     <remarks>See section 5.9 or 5.10.</remarks>*/

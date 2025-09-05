@@ -1,7 +1,6 @@
 namespace Arinc424.Processing;
 
 using Routing;
-using Building;
 
 /**<summary>
 The <see cref="AirwayPoint"/> records may be split into different sequences by <see cref="Record424.Code"/> while assembly file sorting.

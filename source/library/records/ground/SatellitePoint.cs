@@ -4,7 +4,7 @@ namespace Arinc424.Ground;
 <c>SBAS Path Point</c> primary record.
 </summary>
 <remarks>See section 4.1.28.1 and 4.2.8.1.</remarks>*/
-[Section('P', 'P', subIndex: 13), Section('H', 'P', subIndex: 13)]
+[Section('P', 'P', subInd: 13), Section('H', 'P', subInd: 13)]
 public class SatellitePoint : PathPoint
 {
     /// <inheritdoc cref="Terms.SatelliteOperationType"/>

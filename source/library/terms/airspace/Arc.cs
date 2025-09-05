@@ -12,7 +12,7 @@ public class Arc(Coordinates coordinates, float? distance, float? bearing)
     /**<summary>
     <c>Arc Distance (ARC DIST) </c> field.
     </summary>
-    <value>Nautical miles and tents of mile.</value>
+    <value>Nautical miles and tenths of mile.</value>
     <remarks>See section 5.119.</remarks>*/
     public float? Distance { get; } = distance;
 
