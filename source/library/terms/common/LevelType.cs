@@ -1,10 +1,12 @@
 namespace Arinc424;
 
+using T = LevelType;
+
 /**<summary>
 <c>Level (LEVEL)</c> character.
 </summary>
 <remarks>See section 5.19.</remarks>*/
-[Char, Flags, Transform<LevelTypeConverter, LevelType>]
+[Char, Flags, Transform<LevelTypeConverter, T>]
 [Description("Level (LEVEL)")]
 public enum LevelType : byte
 {
@@ -12,13 +14,11 @@ public enum LevelType : byte
     /**<summary>
     Low Level Airways/Altitudes.
     </summary>*/
-    [Map('L')] Low = 1,
+    [Map('L')]
+    [Sum<T>(High, 'B')]
+    Low = 1,
     /**<summary>
     High Level Airways/Altitudes.
     </summary>*/
-    [Map('H')] High = 1 << 1,
-    /**<summary>
-    All Altitudes.
-    </summary>*/
-    [Map('B')] All = Low | High
+    [Map('H')] High = 1 << 1
 }

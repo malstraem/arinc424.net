@@ -21,6 +21,7 @@ within an <c>ARINC-424</c> string.
 [AttributeUsage(AttributeTargets.Field)]
 internal sealed class Offset : Attribute;
 
+#pragma warning disable CS9113
 /**<summary>
 Specifies the mapping value of an enum member. Default is blank.
 </summary>*/
@@ -28,6 +29,12 @@ Specifies the mapping value of an enum member. Default is blank.
 internal sealed class MapAttribute(string @string = "") : Attribute
 {
     internal MapAttribute(char @char) : this(@char.ToString()) { }
-
-    internal string Value { get; } = @string;
 }
+
+/**<summary>
+Specifies the mapping value has a logical sum with another.
+</summary>*/
+[AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
+internal sealed class SumAttribute<T>(T @enum, char @char) : Attribute
+    where T : Enum;
+#pragma warning restore CS9113

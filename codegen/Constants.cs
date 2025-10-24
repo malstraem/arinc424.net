@@ -6,6 +6,7 @@ internal static class Constants
     internal const string StringAttributeQualifier = "Arinc424.Attributes.StringAttribute";
 
     internal const string MapAttribute = "Map";
+    internal const string SumAttribute = "Sum<T>";
     internal const string CharAttribute = "Char";
     internal const string FlagsAttribute = "Flags";
     internal const string OffsetAttribute = "Offset";
@@ -19,4 +20,6 @@ internal static class Constants
 
     internal const string CharArg = "char @char";
     internal const string StringArg = "ReadOnlySpan<char> @string";
+
+    internal const string Unknown = "Unknown";
 }

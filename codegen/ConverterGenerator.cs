@@ -7,16 +7,13 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Arinc424.Generators;
 
-using static Constants;
-
-public abstract class ConverterGenerator : IIncrementalGenerator
+internal abstract class ConverterGenerator<T> : IIncrementalGenerator
+    where T : BaseTarget
 {
 #pragma warning disable CS8618
     protected string @base, qualifier;
 #pragma warning restore CS8618
-    private protected abstract StringBuilder WriteTarget(StringBuilder builder, BaseTarget target);
-
-    private void Process(SourceProductionContext context, ImmutableArray<BaseTarget> targets)
+    private void Process(SourceProductionContext context, ImmutableArray<T> targets)
     {
         foreach (var target in targets)
         {
@@ -26,7 +23,7 @@ public abstract class ConverterGenerator : IIncrementalGenerator
         }
     }
 
-    private (string name, string text) Generate(BaseTarget target)
+    private (string name, string text) Generate(T target)
     {
         var symbol = target.Symbol;
 
@@ -37,6 +34,8 @@ public abstract class ConverterGenerator : IIncrementalGenerator
 
             namespace Arinc424.Converters;
 
+            using static {{symbol.Name}};
+
             internal abstract class {{name}} : {{@base}}<{{symbol.Name}}>
             {
             """);
@@ -44,25 +43,13 @@ public abstract class ConverterGenerator : IIncrementalGenerator
         return ($"{name}.gen.cs", WriteTarget(builder, target).Append("\n}").ToString());
     }
 
-    private protected virtual bool IsMatch(EnumDeclarationSyntax @enum) => true;
+    protected abstract bool IsMatch(EnumDeclarationSyntax @enum);
 
-    private protected virtual BaseTarget CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _)
-    {
-        var enumSyntax = (EnumDeclarationSyntax)context.TargetNode;
+    private protected abstract T CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _);
 
-        var symbol = (INamedTypeSymbol)context.TargetSymbol;
+    private protected abstract StringBuilder WriteTarget(StringBuilder builder, T target);
 
-        List<Member> members = [];
-
-        foreach (var member in enumSyntax.Members)
-        {
-            if (member.TryAttribute(MapAttribute, out var attribute))
-                members.Add(new($"{symbol.Name}.{member.Identifier}", attribute!.ArgumentList?.Arguments.First().ToString() ?? string.Empty));
-        }
-        return new Target((INamedTypeSymbol)context.TargetSymbol, [.. members]);
-    }
-
-    private IncrementalValueProvider<ImmutableArray<BaseTarget>> CreateProvider(IncrementalGeneratorInitializationContext incrementalContext)
+    private IncrementalValueProvider<ImmutableArray<T>> CreateProvider(IncrementalGeneratorInitializationContext incrementalContext)
         => incrementalContext.SyntaxProvider
             .ForAttributeWithMetadataName(
                 qualifier,
