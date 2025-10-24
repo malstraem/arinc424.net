@@ -1,4 +1,3 @@
-using System.Numerics;
 using System.Text;
 
 using Microsoft.CodeAnalysis;
@@ -52,8 +51,6 @@ internal class CharFlagsGenerator : CharGenerator
 
     private protected override Target CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
-        //System.Diagnostics.Debugger.Launch();
-
         Queue<Operand> operands = [];
 
         var @enum = (EnumDeclarationSyntax)context.TargetNode;
