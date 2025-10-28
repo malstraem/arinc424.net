@@ -22,7 +22,7 @@ public enum ApproachTypes : uint
     </summary>*/
     [Map('L')]
     [Sum<T>(Backcourse, 'B')]
-    [Sum<T>(Directioanl, 'X')]
+    [Sum<T>(Directional, 'X')]
     Localizer = 1 << 1,
     /**<summary>
     Non-Directional Beacon (NDB) Approach.
@@ -74,7 +74,7 @@ public enum ApproachTypes : uint
     /**<summary>
     Simplified Directional Facility (SDF) Approach.
     </summary>*/
-    [Map('U')] Directioanl = 1 << 12,
+    [Map('U')] Directional = 1 << 12,
     /**<summary>
     Approach Transition with TF Based Construction of RF Turns.
     </summary>*/

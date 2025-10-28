@@ -22,7 +22,7 @@ internal class ApproachTypesBeforeV23 : ICharConverter<ApproachTypes>
             case 'B':
                 value = Localizer | Backcourse; return true;
             case 'X':
-                value = Localizer | Directioanl; return true;
+                value = Localizer | Directional; return true;
             case 'N':
                 value = Nondirect; return true;
             case 'Q':
@@ -52,7 +52,7 @@ internal class ApproachTypesBeforeV23 : ICharConverter<ApproachTypes>
             case 'H':
                 value = AreaNavigation | Performance; return true;
             case 'U':
-                value = Directioanl; return true;
+                value = Directional; return true;
             case 'W':
                 value = TypeA; return true;
             case 'Y':
