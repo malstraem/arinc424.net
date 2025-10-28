@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Arinc424.Generators;
 
-internal class BaseTarget(INamedTypeSymbol symbol)
+internal abstract class BaseTarget(INamedTypeSymbol symbol)
 {
     protected (Member[], string) GetMembersWithBlank(Member[] members)
     {
@@ -19,25 +19,25 @@ internal class BaseTarget(INamedTypeSymbol symbol)
         }
         else
         {
-            blank = Unknown;
+            blank = Constants.Unknown;
             result = members;
         }
         return (result, blank);
     }
 
     internal INamedTypeSymbol Symbol { get; } = symbol;
-
-    internal string Unknown { get; } = $"{symbol.Name}.Unknown";
 }
 
-internal class Target(INamedTypeSymbol symbol, Member[] members) : BaseTarget(symbol)
+internal class Target(INamedTypeSymbol symbol, Member[] members)
+    : BaseTarget(symbol)
 {
     private readonly Member[] members = members;
 
     internal (Member[], string) GetMembersWithBlank() => GetMembersWithBlank(members);
 }
 
-internal class FlagsTarget(INamedTypeSymbol symbol, Member[][] offsetMembers) : BaseTarget(symbol)
+internal class OffsetTarget(INamedTypeSymbol symbol, Member[][] offsetMembers)
+    : BaseTarget(symbol)
 {
     private readonly Member[][] offsetMembers = offsetMembers;
 

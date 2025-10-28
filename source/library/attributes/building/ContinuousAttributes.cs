@@ -10,7 +10,7 @@ internal sealed class ContinueAttribute : Attribute;
 Specifies the index of <c>Continuation Record Number (CONT NR)</c>
 within an <c>ARINC-424</c> string. Default is 22.
 </summary>
-</inheritdoc>*/
+<inheritdoc/>*/
 [AttributeUsage(AttributeTargets.Class)]
 internal sealed class ContinuousAttribute(int index = 22) : IndexAttribute(index);
 

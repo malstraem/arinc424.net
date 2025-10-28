@@ -8,18 +8,18 @@ namespace Arinc424.Generators;
 using static Constants;
 
 [Generator]
-public class FlagsGenerator : ConverterGenerator
+internal class StringFlagsGenerator : StringGenerator<OffsetTarget>
 {
-    private protected override StringBuilder WriteTarget(StringBuilder builder, BaseTarget target)
+    private protected override StringBuilder WriteTarget(StringBuilder builder, OffsetTarget target)
     {
         _ = builder.Append($@"
     public static Result<{target.Symbol.Name}> Convert({StringArg})
     {{
         bool valid = true;
 
-        var value = {target.Unknown};").Append("\n");
+        var value = {Unknown};").Append("\n");
 
-        var offsetMembers = ((FlagsTarget)target).GetMembersWithBlank();
+        var offsetMembers = target.GetMembersWithBlank();
 
         string[] charDeclarations = new string[offsetMembers.Length];
 
@@ -59,36 +59,29 @@ public class FlagsGenerator : ConverterGenerator
     }}");
     }
 
-    private protected override BaseTarget CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _)
+    private protected override OffsetTarget CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
-        var enumSyntax = (EnumDeclarationSyntax)context.TargetNode;
+        var @enum = (EnumDeclarationSyntax)context.TargetNode;
 
-        var symbol = (INamedTypeSymbol)context.TargetSymbol;
+        Queue<Member> members = [];
+        Queue<Member[]> offsetMembers = [];
 
-        List<Member> members = [];
-        List<Member[]> offsetMembers = [];
-
-        foreach (var member in enumSyntax.Members)
+        foreach (var member in @enum.Members)
         {
             if (member.HaveAttribute(OffsetAttribute))
             {
-                offsetMembers.Add([.. members]);
+                offsetMembers.Enqueue([.. members]);
                 members = [];
             }
 
-            if (member.TryAttribute(MapAttribute, out var attribute))
-                members.Add(new($"{symbol.Name}.{member.Identifier}", attribute!.ArgumentList?.Arguments.First().ToString() ?? string.Empty));
+            if (member.TryMap(out var map))
+                members.Enqueue(map!);
         }
-        offsetMembers.Add([.. members]);
+        offsetMembers.Enqueue([.. members]);
 
-        return new FlagsTarget((INamedTypeSymbol)context.TargetSymbol, [.. offsetMembers]);
+        return new OffsetTarget((INamedTypeSymbol)context.TargetSymbol, [.. offsetMembers]);
     }
 
-    private protected override bool IsMatch(EnumDeclarationSyntax @enum) => @enum.HaveAttribute(FlagsAttribute);
-
-    public FlagsGenerator()
-    {
-        @base = StringConverter;
-        qualifier = StringAttributeQualifier;
-    }
+    protected override bool IsMatch(EnumDeclarationSyntax @enum)
+        => @enum.HaveAttribute(StringAttribute) && @enum.HaveAttribute(FlagsAttribute);
 }

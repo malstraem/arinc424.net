@@ -1,5 +1,7 @@
 namespace Arinc424.Converters;
 
+using static Bool;
+
 internal abstract class RadarAvailabilityConverter : ICharConverter<Bool>
 {
     public static bool TryConvert(char @char, out Bool value)
@@ -7,13 +9,13 @@ internal abstract class RadarAvailabilityConverter : ICharConverter<Bool>
         switch (@char)
         {
             case 'R':
-                value = Bool.Yes; return true;
+                value = Yes; return true;
             case 'N':
-                value = Bool.No; return true;
+                value = No; return true;
             case 'U' or (char)32:
-                value = Bool.Unspecified; return true;
+                value = Unspecified; return true;
             default:
-                value = Bool.Unknown; return false;
+                value = Unknown; return false;
         }
     }
 }

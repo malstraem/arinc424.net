@@ -2,18 +2,29 @@ using System.Diagnostics;
 
 namespace Arinc424.Generators;
 
-[DebuggerDisplay($"{{{nameof(name)},nq}}, {{{nameof(argument)},nq}}")]
-internal class Member(string name, string argument)
+[DebuggerDisplay($"{{{nameof(name)},nq}}, {{{nameof(value)},nq}}")]
+internal class Member(string name, string value)
 {
-    private readonly string name = name;
+    protected internal readonly string name = name, value = value;
 
-    private readonly string argument = argument;
-
-    internal void Deconstruct(out string member, out string value)
+    internal void Deconstruct(out string name, out string value)
     {
-        member = name;
-        value = argument;
+        name = this.name;
+        value = this.value;
     }
 
-    internal readonly bool IsBlank = string.IsNullOrEmpty(argument);
+    internal Operand[]? Operands { get; set; }
+
+    internal bool IsBlank => string.IsNullOrEmpty(value);
+}
+
+internal class Operand(string name, string value)
+{
+    private readonly string name = name, value = value;
+
+    internal void Deconstruct(out string name, out string value)
+    {
+        name = this.name;
+        value = this.value;
+    }
 }

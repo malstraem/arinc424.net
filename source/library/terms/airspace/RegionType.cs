@@ -1,10 +1,12 @@
 namespace Arinc424.Airspace.Terms;
 
+using T = RegionType;
+
 /**<summary>
 <c>FIR/UIR Indicator (IND)</c> character.
 </summary>
 <remarks>See section 5.117.</remarks>*/
-[Flags, Transform<RegionTypeConverter, RegionType>]
+[Char, Flags, Transform<RegionTypeConverter, T>]
 [Description("FIR/UIR Indicator (IND)")]
 public enum RegionType : byte
 {
@@ -12,9 +14,12 @@ public enum RegionType : byte
     /**<summary>
     FIR.
     </summary>*/
+    [Map('F')]
+    [Sum<T>(Upper, 'B')]
     Flight = 1,
     /**<summary>
     UIR.
     </summary>*/
+    [Map('U')]
     Upper = 1 << 1
 }

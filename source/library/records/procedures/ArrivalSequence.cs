@@ -9,7 +9,7 @@ using Processing;
 [Pipe<Sequence<ArrivalSequence, ArrivalPoint>>]
 public class ArrivalSequence : ProcedureSequence<ArrivalPoint>
 {
-    /// <inheritdoc cref="Terms.ArrivalType"/>
+    /// <inheritdoc cref="Terms.ArrivalTypes"/>
     [Character(20)]
-    public Terms.ArrivalType Type { get; set; }
+    public Terms.ArrivalTypes Types { get; set; }
 }

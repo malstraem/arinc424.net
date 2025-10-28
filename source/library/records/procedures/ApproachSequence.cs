@@ -9,7 +9,7 @@ using Processing;
 [Pipe<Sequence<ApproachSequence, ApproachPoint>>]
 public class ApproachSequence : ProcedureSequence<ApproachPoint>
 {
-    /// <inheritdoc cref="Terms.ApproachType"/>
+    /// <inheritdoc cref="Terms.ApproachTypes"/>
     [Character(20)]
-    public Terms.ApproachType Type { get; set; }
+    public Terms.ApproachTypes Types { get; set; }
 }

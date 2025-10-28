@@ -1,64 +1,66 @@
+using Arinc424.Procedures.Terms;
+
 namespace Arinc424.Converters;
 
-using Procedures.Terms;
+using static ApproachTypes;
 
 /**<summary>
 Supplement 23 introduce breaking changes by replacing the meaning of 'Y'.
 </summary>*/
-internal class ApproachTypeBeforeV23 : ICharConverter<ApproachType>
+internal class ApproachTypesBeforeV23 : ICharConverter<ApproachTypes>
 {
-    public static bool TryConvert(char @char, out ApproachType value)
+    public static bool TryConvert(char @char, out ApproachTypes value)
     {
         switch (@char)
         {
             case (char)32:
-                value = ApproachType.Unknown; return true;
+                value = Unknown; return true;
             case 'A':
-                value = ApproachType.Transition; return true;
-            case 'B':
-                value = ApproachType.BackCourse; return true;
-            case 'D':
-                value = ApproachType.DistanceEquipment; return true;
-            case 'F':
-                value = ApproachType.FlightManagement; return true;
-            case 'G':
-                value = ApproachType.InstrumentGuidance; return true;
-            case 'H':
-                value = ApproachType.Performance; return true;
-            case 'I':
-                value = ApproachType.InstrumentLanding; return true;
-            case 'J':
-                value = ApproachType.GlobalLanding; return true;
+                value = Transition; return true;
             case 'L':
-                value = ApproachType.LocalizerOnly; return true;
-            case 'M':
-                value = ApproachType.MicrowaveLanding; return true;
-            case 'N':
-                value = ApproachType.Nondirectional; return true;
-            case 'P':
-                value = ApproachType.GlobalPositioning; return true;
-            case 'Q':
-                value = ApproachType.NondirectDistanceEquipment; return true;
-            case 'R':
-                value = ApproachType.AreaNavigation; return true;
-            case 'S':
-                value = ApproachType.DistanceEquipmentTactical; return true;
-            case 'T':
-                value = ApproachType.Tactical; return true;
-            case 'U':
-                value = ApproachType.Simplified; return true;
-            case 'V':
-                value = ApproachType.Omnidirectional; return true;
-            case 'W':
-                value = ApproachType.Alpha; return true;
+                value = Localizer; return true;
+            case 'B':
+                value = Localizer | Backcourse; return true;
             case 'X':
-                value = ApproachType.Directional; return true;
+                value = Localizer | Directioanl; return true;
+            case 'N':
+                value = Nondirect; return true;
+            case 'Q':
+                value = Nondirect | Equipment; return true;
+            case 'V':
+                value = Omnidirect; return true;
+            case 'D':
+                value = Omnidirect | Equipment; return true;
+            case 'S':
+                value = Omnidirect | Equipment | Tactical; return true;
+            case 'T':
+                value = Tactical; return true;
+            case 'F':
+                value = FlightManagement; return true;
+            case 'G':
+                value = InstrumentGuidance; return true;
+            case 'I':
+                value = InstrumentLanding; return true;
+            case 'J':
+                value = GlobalLanding; return true;
+            case 'M':
+                value = MicrowaveLanding; return true;
+            case 'P':
+                value = GlobalPosition; return true;
+            case 'R':
+                value = AreaNavigation; return true;
+            case 'H':
+                value = AreaNavigation | Performance; return true;
+            case 'U':
+                value = Directioanl; return true;
+            case 'W':
+                value = TypeA; return true;
             case 'Y':
-                value = ApproachType.BasedConstruction; return true;
+                value = TypeA | TypeB; return true;
             case 'Z':
-                value = ApproachType.Missed; return true;
+                value = Missed; return true;
             default:
-                value = ApproachType.Unknown; return false;
+                value = Unknown; return false;
         }
     }
 }
