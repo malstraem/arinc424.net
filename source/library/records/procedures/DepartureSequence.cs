@@ -9,7 +9,7 @@ using Processing;
 [Pipe<Sequence<DepartureSequence, DeparturePoint>>]
 public class DepartureSequence : ProcedureSequence<DeparturePoint>
 {
-    /// <inheritdoc cref="Terms.DepartureType"/>
+    /// <inheritdoc cref="Terms.DepartureTypes"/>
     [Character(20)]
-    public Terms.DepartureType Type { get; set; }
+    public Terms.DepartureTypes Types { get; set; }
 }

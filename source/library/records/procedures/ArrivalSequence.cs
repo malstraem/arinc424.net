@@ -11,5 +11,5 @@ public class ArrivalSequence : ProcedureSequence<ArrivalPoint>
 {
     /// <inheritdoc cref="Terms.ArrivalTypes"/>
     [Character(20)]
-    public Terms.ArrivalTypes Type { get; set; }
+    public Terms.ArrivalTypes Types { get; set; }
 }

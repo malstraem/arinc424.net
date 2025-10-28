@@ -11,5 +11,5 @@ public class ApproachSequence : ProcedureSequence<ApproachPoint>
 {
     /// <inheritdoc cref="Terms.ApproachTypes"/>
     [Character(20)]
-    public Terms.ApproachTypes Type { get; set; }
+    public Terms.ApproachTypes Types { get; set; }
 }
