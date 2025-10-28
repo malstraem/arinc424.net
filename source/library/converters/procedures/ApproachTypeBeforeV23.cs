@@ -54,7 +54,7 @@ internal class ApproachTypeBeforeV23 : ICharConverter<ApproachType>
             case 'X':
                 value = ApproachType.Directional; return true;
             case 'Y':
-                value = ApproachType.BasedConstruction; return true;
+                value = ApproachType.MicrowaveLanding; return true;
             case 'Z':
                 value = ApproachType.Missed; return true;
             default:
