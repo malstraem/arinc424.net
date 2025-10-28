@@ -51,11 +51,10 @@ internal class CharFlagsGenerator : CharGenerator
 
     private protected override Target CreateTarget(GeneratorAttributeSyntaxContext context, CancellationToken _)
     {
-        Queue<Operand> operands = [];
-
         var @enum = (EnumDeclarationSyntax)context.TargetNode;
 
         Queue<Member> members = [];
+        Queue<Operand> operands = [];
 
         foreach (var member in @enum.Members)
         {
