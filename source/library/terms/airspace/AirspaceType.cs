@@ -34,11 +34,11 @@ public enum AirspaceType : byte
     </summary>*/
     [Map('U')] RadioMandatory,
     /**<summary>
-    Radio Mandatory Zone (RMZ).
+    Transponder Mandatory Zone (TMZ).
     </summary>*/
     [Map('V')] TransponderMandatory,
     /**<summary>
     Control Zone, ICAO Designation (CTR).
-    /**</summary>*/
+    </summary>*/
     [Map('Z')] ControlZone
 }
