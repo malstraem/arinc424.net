@@ -100,7 +100,11 @@ public enum ApproachTypes : uint
     </summary>*/
     TypeA = 1 << 18,
     /**<summary>
-    Microwave Landing System (MLS), Type B and C Approach.
+    Microwave Landing System (MLS), Type B Approach.
     </summary>*/
-    TypeB = 1 << 19
+    TypeB = 1 << 19,
+    /**<summary>
+    Microwave Landing System (MLS), Type C Approach.
+    </summary>*/
+    TypeC = 1 << 20
 }

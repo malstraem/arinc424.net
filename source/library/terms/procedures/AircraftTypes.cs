@@ -2,6 +2,10 @@ namespace Arinc424.Procedures.Terms;
 
 using T = AircraftTypes;
 
+/**<summary>
+<c> Procedure Design Aircraft Category or Type</c> character.
+</summary>
+<remarks>See section 5.301.</remarks>*/
 [Char, Flags, Transform<AircraftTypesConverter, T>]
 [Description("Procedure Design Aircraft Category or Type")]
 public enum AircraftTypes : ushort
@@ -27,25 +31,25 @@ public enum AircraftTypes : ushort
     [Sum<T>(Delta | Echo, 'N')]
     Charlie = 1 << 3,
 
-    [Map('D')]
-    [Sum<T>(Echo, 'L')]
+    [Map('D'), Sum<T>(Echo, 'L')]
     Delta = 1 << 4,
 
     [Map('E')] Echo = 1 << 5,
-    [Map('H')] Helicopter = 1 << 6,
+    [Map('Y')] Piston = 1 << 6,
     [Map('W')] Jet = 1 << 7,
-    [Map('X')] NonJet = 1 << 8,
-    [Map('Y')] Piston = 1 << 9,
-    [Map('P')] Unlimited = 1 << 10,
-
-    [Map('R')]
-    [Sum<T>(Turboprop, 'Q')]
-    Turbojet = 1 << 11,
+    [Map('R')] Turbojet = 1 << 8,
+    [Map('T')] Prop = 1 << 9,
 
     [Map('S')]
+    [Sum<T>(Turbojet, 'Q')]
     [Sum<T>(Prop, 'U')]
-    Turboprop = 1 << 12,
+    Turboprop = 1 << 10,
 
-    [Map('T')] Prop = 1 << 13,
-    [Map('V')] NonTurboJet = 1 << 14
+    [Map('H')] Helicopter = 1 << 11,
+
+    [Map('P')] Unlimited = Alpha | Bravo | Charlie | Delta | Echo | Piston | Jet | Turbojet | Prop | Turboprop | Helicopter,
+
+    [Map('X')] NonJet = Piston | Turbojet | Prop | Turboprop,
+
+    [Map('V')] NonTurboJet = Piston | Jet | Prop | Turboprop
 }

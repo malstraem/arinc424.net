@@ -56,7 +56,7 @@ internal class ApproachTypesBeforeV23 : ICharConverter<ApproachTypes>
             case 'W':
                 value = TypeA; return true;
             case 'Y':
-                value = TypeA | TypeB; return true;
+                value = TypeB | TypeC; return true;
             case 'Z':
                 value = Missed; return true;
             default:
