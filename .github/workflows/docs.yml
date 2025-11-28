@@ -18,15 +18,15 @@ jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@v5
+      - uses: actions/download-artifact@v6
         with:
           name: build
           run-id: ${{ github.event.workflow_run.id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: 9.x
+          dotnet-version: 10.x
       - name: Generate Pages
         run: |
           dotnet tool install -g docfx

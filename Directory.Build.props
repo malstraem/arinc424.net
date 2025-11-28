@@ -4,12 +4,14 @@
 
     <Configurations>Debug;Release;NoParallel</Configurations>
 
-    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
 
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseArtifactsOutput>true</UseArtifactsOutput>
     <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+
+    <LangVersion>latest</LangVersion>
 
     <IsPackable>false</IsPackable>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
