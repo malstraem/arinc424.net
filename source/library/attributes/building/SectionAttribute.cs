@@ -1,7 +1,7 @@
 namespace Arinc424.Attributes;
 
 /**<summary>
-Specifies the section and subsection characters/indicesto define the entity type of the string.
+Specifies the section and subsection characters/indices to define the entity type of the string.
 </summary>
 <inheritdoc/>*/
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property, AllowMultiple = true)]

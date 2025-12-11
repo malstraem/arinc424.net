@@ -1,7 +1,7 @@
 [![NuGet](https://img.shields.io/nuget/v/arinc424.svg)](https://www.nuget.org/packages/arinc424)
 
 > [!WARNING]
-*work in progress and target on ver. 23 of the specification (with backward compatibility to 18)*</br>
+*work in progress and target on v23 of the specification (with backward compatibility to v18)*</br>
 *if you see any issues testing the library on real world data, please report it*</br></br>
 *any reviews and PRs are welcome*
 
@@ -39,7 +39,7 @@ var data = Data424.Create(meta, strings, out var skipped, out var invalid);
 
 ## Build and prerequisites
 
-- .NET 9 SDK
+- .NET 10 SDK
 - `dotnet build`
 
 > [!NOTE]
