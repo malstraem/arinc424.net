@@ -6,9 +6,10 @@ namespace Arinc424.Ground;
 <remarks>See section 4.1.20.1 and 4.2.4.</remarks>*/
 [Section('P', 'S', subInd: 13), Section('H', 'S', subInd: 13)]
 
-[Port(7, 10), Icao(11, 12), Continuous(39)]
+[Icao(11, 12), Continuous(39)]
 public class MinimumAltitude : Record424, IMultiple
 {
+    [Port(7, 10)]
     public Port Port { get; set; }
 
     [Polymorph(14, 18), Icao(19, 20), Type(21, 22)]

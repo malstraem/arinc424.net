@@ -47,6 +47,7 @@ internal sealed class Relation<TRecord>(Link<TRecord>[] links) : Relation(typeof
         {
             if (property.PropertyType == typeof(Ground.Port) || property.PropertyType.IsSubclassOf(typeof(Ground.Port)))
             {
+                port ??= property.GetCustomAttribute<PortAttribute>();
                 links.Add(port!.GetLink<TRecord>(property, supplement, icao!, null));
                 continue;
             }

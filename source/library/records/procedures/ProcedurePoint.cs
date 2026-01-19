@@ -93,16 +93,12 @@ public abstract class ProcedurePoint : Record424, ISequenced
     [Field(100, 102), Integer]
     public int SpeedLimit { get; set; }
 
-    /// <summary>
-    /// <c>Center Fix (CENTER FIX)</c> or <c>TAA Sector Identifier</c> field.
-    /// </summary>
-    /// <remarks>See section 5.144 and 5.272.</remarks>
-    /*[Type(115, 116)]
-    [ForeignExcept<Airport, Omnidirectional, Nondirectional, EnrouteWaypoint>(7, 12)]
-    [Foreign(107, 111), Foreign(113, 114)]*/
-    [Field(107, 111)]
-    [Obsolete("todo: need more analysis")]
-    public string? Center { get; set; }
+    /**<summary>
+    <c>Center Fix (CENTER FIX)</c> or <c>TAA Sector Identifier</c> field.
+    </summary>
+    <remarks>See section 5.144 or 5.272.</remarks>*/
+    [Polymorph(30, 34), Icao(35, 36), Type(37, 38)]
+    public Fix? Center { get; set; }
 
     /// <summary>
     /// <c>Multiple Code (MULTI CD)</c> or <c>Procedure Turn Indicator</c> character.

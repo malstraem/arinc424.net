@@ -8,9 +8,10 @@ using Procedures;
 <remarks>See section 4.1.31.1 and 4.2.6.1.</remarks>*/
 [Section('P', 'K', subInd: 13), Section('H', 'K', subInd: 13)]
 
-[Port(7, 10), Icao(11, 12), Continuous(30)]
+[Icao(11, 12), Continuous(30)]
 public class ArrivalAltitude : Record424
 {
+    [Port(7, 10)]
     public Port Port { get; set; }
 
     [Known(14, 19)]

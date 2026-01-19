@@ -102,8 +102,7 @@ public class Meta424
     (
         Supplement supplement,
         Dictionary<Type, KeyInfo> keyInfo,
-        Dictionary<Type, BaseType> typeInfo
-    )
+        Dictionary<Type, BaseType> typeInfo)
     {
         HashSet<Type> linkedTypes = [];
 

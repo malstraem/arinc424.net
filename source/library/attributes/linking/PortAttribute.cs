@@ -16,8 +16,7 @@ internal class PortAttribute(int left, int right) : LinkAttribute(left, right)
         PropertyInfo property,
         Supplement supplement,
         IcaoAttribute? icao,
-        PortAttribute? port
-    )
+        PortAttribute? port)
     {
         /* will never be thrown if the integrity tests pass */
         icao = property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement) ?? icao
