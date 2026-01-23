@@ -10,14 +10,14 @@ internal class Parser424
 {
     private readonly Dictionary<Section, Queue<string>> records = [];
 
-    internal readonly Meta424 meta;
+    private readonly Meta424 meta;
 
-    internal readonly Builds aggregate = [];
+    private readonly Builds aggregate = [];
 
     /**<summary>
     Storage for entity builds. Covers bare types and compositions.
     </summary>*/
-    internal readonly Dictionary<Section, Builds> builds = [];
+    private readonly Dictionary<Section, Builds> builds = [];
 
     private string[] Process(IEnumerable<string> strings)
     {
@@ -191,11 +191,11 @@ internal class Parser424
 
             Hold(build);
 
-            if (diagnostics.Count > 0)
-            {
-                invalid.Add(build.Record, [.. diagnostics]);
-                diagnostics.Clear();
-            }
+            if (diagnostics.Count <= 0)
+                continue;
+
+            invalid.Add(build.Record, [.. diagnostics]);
+            diagnostics.Clear();
         }
         return [.. records];
 
@@ -204,11 +204,11 @@ internal class Parser424
             if (build.Diagnostics is not null)
                 diagnostics.Pump(build.Diagnostics);
 
-            if (build is ISequentBuild sequent)
-            {
-                foreach (var sequence in sequent.Builds)
-                    Hold(sequence);
-            }
+            if (build is not ISequentBuild sequent)
+                return;
+
+            foreach (var sequence in sequent.Builds)
+                Hold(sequence);
         }
     }
 

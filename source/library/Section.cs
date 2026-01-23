@@ -1,7 +1,7 @@
 namespace Arinc424;
 
 /**<summary>
-Character pair that defines entity type of an <c>ARINC424</c> string.
+Character pair that defines entity type of <c>ARINC424</c> string.
 </summary>*/
 public readonly struct Section(char @char, char sub)
 {

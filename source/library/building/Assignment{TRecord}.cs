@@ -10,9 +10,9 @@ Assignment operation to set <see cref="Record424"/> property.
 internal abstract class Assignment<TRecord>(PropertyInfo property)
     where TRecord : Record424
 {
-    protected PropertyInfo property = property;
+    protected readonly PropertyInfo property = property;
 
-    protected NullabilityState? nullState { get; } = property.PropertyType.IsClass
+    protected readonly NullabilityState? nullState = property.PropertyType.IsClass
         ? new NullabilityInfoContext().Create(property).ReadState
         : NullabilityState.Unknown;
 

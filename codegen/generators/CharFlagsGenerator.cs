@@ -57,10 +57,8 @@ internal class CharFlagsGenerator : CharGenerator
         Queue<Operand> operands = [];
 
         foreach (var member in @enum.Members)
-        {
-            if (member.TryMap(operands, out var map))
-                members.Enqueue(map!);
-        }
+            member.Map(members, operands);
+
         return new Target((INamedTypeSymbol)context.TargetSymbol, [.. members]);
     }
 

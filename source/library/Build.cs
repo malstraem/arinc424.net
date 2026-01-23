@@ -12,7 +12,9 @@ internal abstract class Build(Record424 record)
 }
 
 /// <exclude />
-internal class Build<TRecord>(TRecord record) : Build(record) where TRecord : Record424
+internal class Build<TRecord>(TRecord record)
+    : Build(record)
+        where TRecord : Record424
 {
     [DebuggerBrowsable(DebuggerBrowsableState.Never)]
     internal new TRecord Record { get; } = record;
@@ -24,11 +26,10 @@ internal interface ISequentBuild
 }
 
 /// <exclude />
-internal class Build<TSequence, TSub>(TSequence sequence, Build<TSub>[] builds) : Build<TSequence>(sequence), ISequentBuild
-    where TSequence : Record424<TSub>
-    where TSub : Record424
+internal class Build<TSequence, TSub>(TSequence sequence, Build<TSub>[] builds)
+    : Build<TSequence>(sequence), ISequentBuild
+        where TSequence : Record424<TSub>
+        where TSub : Record424
 {
-    public Build<TSub>[] Builds { get; } = builds;
-
-    Build[] ISequentBuild.Builds => Builds;
+    Build[] ISequentBuild.Builds => builds;
 }

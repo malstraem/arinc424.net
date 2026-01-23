@@ -6,7 +6,7 @@ namespace Arinc424.Tests;
 public class RecordRegressionTests : BaseTests
 {
     [Test]
-    //[Skip("manual")]
+    [Skip("manual")]
     [Arguments("worldwide", Supplement.V18)]
     [Arguments("faa-07.08.25", Supplement.V18)]
     [Arguments("supplement-18", Supplement.V18)]
@@ -56,7 +56,7 @@ public class RecordRegressionTests : BaseTests
             if (!regression.Invalid.TryGetValue(record.Source!, out string[]? expected))
                 Assert.Fail($"'{file}' regression - source '{record.Source!}' is not found.");
 
-            if (diagnostics.Length != expected.Length)
+            if (diagnostics.Length != expected!.Length)
                 Assert.Fail($"'{file}' regression - diagnsotics count is not equal to previos.");
         }
     }

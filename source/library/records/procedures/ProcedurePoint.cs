@@ -74,8 +74,9 @@ public abstract class ProcedurePoint : Record424, ISequenced
     <c>ATC Indicator (ATC)</c> character.
     </summary>
     <remarks>See section 5.81.</remarks>*/
-    [Character(84), Obsolete("bool")]
-    public char AtcIndicator { get; set; }
+    [Character(84)]
+    [Transform<AtcIndicatorConverter, Bool>]
+    public Bool IsAltitudeModifiable { get; set; }
 
     /// <include file='Comments.xml' path="doc/member[@name='Altitude']/*"/>
     [Field(85, 89)]
@@ -100,13 +101,12 @@ public abstract class ProcedurePoint : Record424, ISequenced
     [Polymorph(30, 34), Icao(35, 36), Type(37, 38)]
     public Fix? Center { get; set; }
 
-    /// <summary>
-    /// <c>Multiple Code (MULTI CD)</c> or <c>Procedure Turn Indicator</c> character.
-    /// </summary>
-    /// <remarks>See section 5.130 or 5.271.</remarks>
+    /**<summary>
+    <c>Multiple Code (MULTI CD)</c> or <c>Procedure Turn Indicator</c> character.
+    </summary>
+    <remarks>See section 5.130 or 5.271.</remarks>*/
     [Character(112)]
-    [Obsolete("same")]
-    public char CodeTurnIndicator { get; set; }
+    public char MultiplierOrTurn { get; set; }
 
     /// <inheritdoc cref="Terms.Overlay"/>
     [Character(117)]

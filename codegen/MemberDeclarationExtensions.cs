@@ -10,7 +10,7 @@ internal static class MemberDeclarationExtensions
     internal static bool TryMap(this EnumMemberDeclarationSyntax syntax, out Member? member)
     {
         var attribute = syntax.AttributeLists.SelectMany(x => x.Attributes)
-                                         .FirstOrDefault(x => x.Name.ToString() == Constants.MapAttribute);
+                                .FirstOrDefault(x => x.Name.ToString() == Constants.MapAttribute);
         if (attribute is null)
         {
             member = null;
@@ -24,29 +24,47 @@ internal static class MemberDeclarationExtensions
         return true;
     }
 
-    internal static bool TryMap(this EnumMemberDeclarationSyntax syntax, Queue<Operand> operands, out Member? member)
+    internal static void Map(this EnumMemberDeclarationSyntax syntax, Queue<Member> members, Queue<Operand> operands)
     {
-        if (!TryMap(syntax, out member))
-            return false;
-
         var attributes = syntax.AttributeLists.SelectMany(x => x.Attributes)
-                                              .Where(x => x.Name.ToString() == Constants.SumAttribute);
-        foreach (var attribute in attributes)
-        {
-            var args = attribute.ArgumentList!.Arguments;
+                                .Where(x => x.Name.ToString() == Constants.SumAttribute).ToArray();
 
-            operands.Enqueue(new
-            (
-                args.First().ToString(),
-                args.Last().ToString()
-            ));
-        }
-
-        if (operands.Count > 0)
+        if (TryMap(syntax, out var member))
         {
-            member!.Operands = [.. operands];
-            operands.Clear();
+            members.Enqueue(member!);
+
+            foreach (var attribute in attributes)
+            {
+                var args = attribute.ArgumentList!.Arguments;
+
+                operands.Enqueue(new
+                (
+                    args.First().ToString(),
+                    args.Last().ToString()
+                ));
+            }
+
+            if (operands.Count > 0)
+            {
+                member!.Operands = [.. operands];
+                operands.Clear();
+            }
         }
-        return true;
+        else
+        {
+            if (attributes.Length == 0)
+                return;
+
+            foreach (var attribute in attributes)
+            {
+                var args = attribute.ArgumentList!.Arguments;
+
+                members.Enqueue(new
+                (
+                    $"{syntax.Identifier} | {args.First()}",
+                    args.Last().ToString()
+                ));
+            }
+        }
     }
 }
