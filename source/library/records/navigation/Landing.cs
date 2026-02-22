@@ -16,10 +16,12 @@ public abstract class Landing : Fix
 
     /**<summary>
     <para>
-      <c>Localizer Bearing (LOC BRG)</c> field for <see cref="InstrumentLanding"/> and <see cref="GlobalLanding"/>.
+      <c>Localizer Bearing (LOC BRG)</c> field for
+        <see cref="InstrumentLanding"/> and <see cref="GlobalLanding"/>.
     </para>
     <para>
-      <c>MLS Azimuth Bearing (MLS AZ BRG)</c> field for <see cref="MicrowaveLanding"/>.
+      <c>MLS Azimuth Bearing (MLS AZ BRG)</c> field for
+        <see cref="MicrowaveLanding"/>.
     </para>
     </summary>
     <remarks>See section 5.47 and 5.167.</remarks>*/

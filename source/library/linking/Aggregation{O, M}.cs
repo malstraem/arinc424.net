@@ -28,14 +28,15 @@ internal abstract class Aggregation(PropertyInfo property)
     internal Type Type { get; } = property.PropertyType.GetElementType()!;
 }
 
-internal sealed class Aggregation<TOne, TMany>(PropertyInfo property, PropertyInfo back) : Aggregation(property)
-    where TOne : Record424
-    where TMany : Record424
+internal sealed class Aggregation<O, M>(PropertyInfo property, PropertyInfo back)
+    : Aggregation(property)
+        where O : Record424
+        where M : Record424
 {
-    private readonly Func<TMany, TOne> get = back.GetGetMethod()!.CreateDelegate<Func<TMany, TOne>>();
+    private readonly Func<M, O> get = back.GetGetMethod()!.CreateDelegate<Func<M, O>>();
 
-    private readonly Action<TOne, TMany[]> set =
-        property.GetSetMethod()!.CreateDelegate<Action<TOne, TMany[]>>();
+    private readonly Action<O, M[]> set =
+        property.GetSetMethod()!.CreateDelegate<Action<O, M[]>>();
 
     internal override void Aggregate(Queue<Build> builds, Queue<Build> others)
     {
@@ -43,10 +44,10 @@ internal sealed class Aggregation<TOne, TMany>(PropertyInfo property, PropertyIn
             return;
 
         /* guarantee by design */
-        var one = Unsafe.As<Queue<Build<TOne>>>(builds);
-        var many = Unsafe.As<Queue<Build<TMany>>>(others);
+        var one = Unsafe.As<Queue<Build<O>>>(builds);
+        var many = Unsafe.As<Queue<Build<M>>>(others);
 
-        Dictionary<TOne, Queue<TMany>> buffer = [];
+        Dictionary<O, Queue<M>> buffer = [];
 
         foreach (var @object in many)
         {

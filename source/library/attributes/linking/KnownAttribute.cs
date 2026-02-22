@@ -11,18 +11,16 @@ Specifies <see cref="IIdentity.Identifier"/> range for strong typed relation.
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
 internal sealed class KnownAttribute(int left, int right) : LinkAttribute(left, right)
 {
-    internal override Link<TRecord> GetLink<TRecord>
-    (
+    internal override Link<R> GetLink<R>(
         PropertyInfo property,
         Supplement supplement,
         IcaoAttribute? icao,
-        PortAttribute? port
-    )
+        PortAttribute? port)
     {
         var info = GetInfo(property.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement) ?? icao, port);
 
-        var type = typeof(Known<,>).MakeGenericType(typeof(TRecord), property.PropertyType);
+        var type = typeof(Known<,>).MakeGenericType(typeof(R), property.PropertyType);
 
-        return (Link<TRecord>)Activator.CreateInstance(type, property, info)!;
+        return (Link<R>)Activator.CreateInstance(type, property, info)!;
     }
 }

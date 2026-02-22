@@ -8,9 +8,9 @@ internal abstract class RecordAttribute : Attribute
 }
 
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = true)]
-internal sealed class RecordAttribute<TRecord> : RecordAttribute
-    where TRecord : Record424, new()
+internal sealed class RecordAttribute<R> : RecordAttribute
+    where R : Record424
 {
     internal override RecordType GetType(Supplement supplement)
-        => RecordType.Create<TRecord>(supplement);
+        => RecordType.Create<R>(supplement);
 }

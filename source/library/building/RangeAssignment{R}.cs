@@ -4,23 +4,23 @@ using System.Reflection;
 namespace Arinc424.Building;
 
 [DebuggerDisplay($"{{{nameof(property)}}} - {{{nameof(range)}}}")]
-internal abstract class RangeAssignment<TRecord>(PropertyInfo property, Range range)
-    : Assignment<TRecord>(property)
-        where TRecord : Record424
+internal abstract class RangeAssignment<R>(PropertyInfo property, Range range)
+    : Assignment<R>(property)
+        where R : Record424
 {
     protected readonly Range range = range;
 }
 
-internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Range range, DecodeAttribute<TType> decode)
-    : RangeAssignment<TRecord>(property, range)
-        where TType : notnull
-        where TRecord : Record424
+internal sealed class DecodeAssignment<R, T>(PropertyInfo property, Range range, DecodeAttribute<T> decode)
+    : RangeAssignment<R>(property, range)
+        where T : notnull
+        where R : Record424
 {
-    private readonly DecodeAttribute<TType> decode = decode;
+    private readonly DecodeAttribute<T> decode = decode;
 
-    private readonly Action<TRecord, TType> set = GetCompiledSetter<TType>(property);
+    private readonly Action<R, T> set = GetCompiledSetter<T>(property);
 
-    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
+    internal override void Assign(R record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
         var @field = @string[range];
 
@@ -54,13 +54,13 @@ internal sealed class DecodeAssignment<TRecord, TType>(PropertyInfo property, Ra
     }
 }
 
-internal sealed class StringAssignment<TRecord>(PropertyInfo property, Range range)
-    : RangeAssignment<TRecord>(property, range)
-        where TRecord : Record424
+internal sealed class StringAssignment<R>(PropertyInfo property, Range range)
+    : RangeAssignment<R>(property, range)
+        where R : Record424
 {
-    private readonly Action<TRecord, string> set = GetCompiledSetter<string>(property);
+    private readonly Action<R, string> set = GetCompiledSetter<string>(property);
 
-    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
+    internal override void Assign(R record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
         var @field = @string[range].Trim();
 

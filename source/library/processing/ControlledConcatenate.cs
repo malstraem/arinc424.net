@@ -1,7 +1,7 @@
 namespace Arinc424.Processing;
 
-using Building;
 using Airspace;
+using Building;
 
 internal class ControlledConcatenate(Supplement supplement) : IPipeline<ControlledSpace, ControlledVolume>
 {

@@ -16,9 +16,14 @@ internal abstract class Link(PropertyInfo property, KeyInfo info, bool isPolymor
     internal bool IsPolymorph { get; } = isPolymorph;
 }
 
-internal abstract class Link<TRecord>(PropertyInfo property, KeyInfo info, bool isPolymorph = false)
+internal abstract class Link<R>(PropertyInfo property, KeyInfo info, bool isPolymorph = false)
     : Link(property, info, isPolymorph)
-        where TRecord : Record424
+        where R : Record424
 {
-    internal abstract bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic);
+    internal abstract bool TryLink(
+        R record,
+        Unique unique,
+        Meta424 meta,
+        [NotNullWhen(false)] out Diagnostic? diagnostic
+    );
 }

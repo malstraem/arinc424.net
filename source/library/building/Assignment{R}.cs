@@ -7,8 +7,8 @@ namespace Arinc424.Building;
 /**<summary>
 Assignment operation to set <see cref="Record424"/> property.
 </summary>*/
-internal abstract class Assignment<TRecord>(PropertyInfo property)
-    where TRecord : Record424
+internal abstract class Assignment<R>(PropertyInfo property)
+    where R : Record424
 {
     protected readonly PropertyInfo property = property;
 
@@ -16,9 +16,9 @@ internal abstract class Assignment<TRecord>(PropertyInfo property)
         ? new NullabilityInfoContext().Create(property).ReadState
         : NullabilityState.Unknown;
 
-    protected static Action<TRecord, TType> GetCompiledSetter<TType>(PropertyInfo property)
+    protected static Action<R, T> GetCompiledSetter<T>(PropertyInfo property)
     {
-        var method = new DynamicMethod(Guid.NewGuid().ToString(), null, [typeof(TRecord), typeof(TType)]);
+        var method = new DynamicMethod(Guid.NewGuid().ToString(), null, [typeof(R), typeof(T)]);
 
         var gen = method.GetILGenerator();
 
@@ -26,16 +26,16 @@ internal abstract class Assignment<TRecord>(PropertyInfo property)
         gen.Emit(OpCodes.Ldarg_1);
 
         if (Nullable.GetUnderlyingType(property.PropertyType) is not null)
-            gen.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor([typeof(TType)])!);
+            gen.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor([typeof(T)])!);
 
         gen.EmitCall(OpCodes.Callvirt, property.GetSetMethod()!, null);
 
         gen.Emit(OpCodes.Ret);
 
-        return method.CreateDelegate<Action<TRecord, TType>>();
+        return method.CreateDelegate<Action<R, T>>();
     }
 
-    internal abstract void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
+    internal abstract void Assign(R record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics);
 
     internal Regex? Regex { get; } = property.GetCustomAttribute<ValidationAttribute>()?.Regex;
 }

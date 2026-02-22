@@ -3,24 +3,24 @@ using System.Reflection;
 
 namespace Arinc424.Building;
 
-internal sealed class ArrayAssignment<TRecord, TType>
+internal sealed class ArrayAssignment<R, T>
 (
     PropertyInfo property,
     Range range,
-    DecodeAttribute<TType> decode,
+    DecodeAttribute<T> decode,
     uint count
 )
-    : RangeAssignment<TRecord>(property, range)
-        where TRecord : Record424
-        where TType : notnull
+    : RangeAssignment<R>(property, range)
+        where R : Record424
+        where T : notnull
 {
     private readonly uint count = count;
 
-    private readonly DecodeAttribute<TType> decode = decode;
+    private readonly DecodeAttribute<T> decode = decode;
 
-    private readonly Action<TRecord, TType[]> set = GetCompiledSetter<TType[]>(property);
+    private readonly Action<R, T[]> set = GetCompiledSetter<T[]>(property);
 
-    internal override void Assign(TRecord record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
+    internal override void Assign(R record, ReadOnlySpan<char> @string, Queue<Diagnostic> diagnostics)
     {
         var range = this.range;
 
@@ -36,7 +36,7 @@ internal sealed class ArrayAssignment<TRecord, TType>
         }
         range = this.range;
 
-        var values = new TType[arrayLength];
+        var values = new T[arrayLength];
 
         for (int i = 0; i < arrayLength; i++)
         {

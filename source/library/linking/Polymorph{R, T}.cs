@@ -4,18 +4,17 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttribute typeAttribute, KeyInfo info)
-    : Link<TRecord>(property, info, true)
-        where TRecord : Record424
-        where TType : class
+internal sealed class Polymorph<R, T>(PropertyInfo property, TypeAttribute typeAttribute, KeyInfo info)
+    : Link<R>(property, info, true)
+        where R : Record424
+        where T : class
 {
     private readonly TypeAttribute typeAttribute = typeAttribute;
 
-    private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+    private readonly Action<R, T> set = property.GetSetMethod()!.CreateDelegate<Action<R, T>>();
 
-    private BadPolymorph Bad
-    (
-        LinkError error, TRecord record, Section section,
+    private BadPolymorph Bad(
+        LinkError error, R record, Section section,
         Type? type = null, string? key = null
     )
     => new()
@@ -30,7 +29,11 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
         Key = key
     };
 
-    internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
+    internal override bool TryLink(
+        R record,
+        Unique unique,
+        Meta424 meta,
+        [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
         ReadOnlySpan<char> source = record.Source;
 
@@ -43,11 +46,8 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
                 diagnostic = Bad(LinkError.Null, record, section);
                 return false;
             }
-            else
-            {
-                diagnostic = null;
-                return true;
-            }
+            diagnostic = null;
+            return true;
         }
 
         if (!meta.TryType(section, out var type, out var primary))
@@ -70,12 +70,12 @@ internal sealed class Polymorph<TRecord, TType>(PropertyInfo property, TypeAttri
             return false;
         }
 
-        if (@ref is not TType)
+        if (@ref is not T)
         {
             diagnostic = Bad(LinkError.WrongType, record, section, type, key);
             return false;
         }
-        set(record, Unsafe.As<TType>(@ref));
+        set(record, Unsafe.As<T>(@ref));
         diagnostic = null;
         return true;
     }

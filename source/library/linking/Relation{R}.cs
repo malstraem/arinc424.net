@@ -27,19 +27,20 @@ internal abstract class Relation(Type type)
     internal abstract Link[] Links { get; }
 }
 
-internal sealed class Relation<TRecord>(Link<TRecord>[] links) : Relation(typeof(TRecord))
-    where TRecord : Record424
+internal sealed class Relation<R>(Link<R>[] links)
+    : Relation(typeof(R))
+        where R : Record424
 {
-    private readonly Link<TRecord>[] links = links;
+    private readonly Link<R>[] links = links;
 
     internal static Relation? Create(Supplement supplement)
     {
-        var type = typeof(TRecord);
+        var type = typeof(R);
 
         var port = type.GetCustomAttributes<PortAttribute>().BySupplement(supplement);
         var icao = type.GetCustomAttributes<IcaoAttribute>().BySupplement(supplement);
 
-        List<Link<TRecord>> links = [];
+        List<Link<R>> links = [];
 
         List<Aggregation> aggregation = [];
 
@@ -48,7 +49,7 @@ internal sealed class Relation<TRecord>(Link<TRecord>[] links) : Relation(typeof
             if (property.PropertyType == typeof(Ground.Port) || property.PropertyType.IsSubclassOf(typeof(Ground.Port)))
             {
                 port ??= property.GetCustomAttribute<PortAttribute>();
-                links.Add(port!.GetLink<TRecord>(property, supplement, icao!, null));
+                links.Add(port!.GetLink<R>(property, supplement, icao!, null));
                 continue;
             }
 
@@ -56,14 +57,14 @@ internal sealed class Relation<TRecord>(Link<TRecord>[] links) : Relation(typeof
 
             if (link is not null)
             {
-                links.Add(link.GetLink<TRecord>(property, supplement, icao, port));
+                links.Add(link.GetLink<R>(property, supplement, icao, port));
             }
             else if (property.DeclaringType == type && property.GetCustomAttribute<ManyAttribute>() is not null)
             {
                 aggregation.Add(Aggregation.Create(property));
             }
         }
-        return links.Count == 0 && aggregation.Count == 0 ? null : new Relation<TRecord>([.. links])
+        return links.Count == 0 && aggregation.Count == 0 ? null : new Relation<R>([.. links])
         {
             aggregations = [.. aggregation]
         };
@@ -73,7 +74,7 @@ internal sealed class Relation<TRecord>(Link<TRecord>[] links) : Relation(typeof
     {
         Queue<Diagnostic> diagnostics = [];
 
-        foreach (var build in Unsafe.As<Queue<Build<TRecord>>>(builds)) /* guarantee by design */
+        foreach (var build in Unsafe.As<Queue<Build<R>>>(builds)) /* guarantee by design */
         {
             foreach (var link in links)
             {

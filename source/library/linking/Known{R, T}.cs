@@ -4,13 +4,13 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Linking;
 
-internal sealed class Known<TRecord, TType>(PropertyInfo property, KeyInfo info) : Link<TRecord>(property, info)
-    where TRecord : Record424
-    where TType : class
+internal sealed class Known<R, T>(PropertyInfo property, KeyInfo info) : Link<R>(property, info)
+    where R : Record424
+    where T : class
 {
-    private readonly Action<TRecord, TType> set = property.GetSetMethod()!.CreateDelegate<Action<TRecord, TType>>();
+    private readonly Action<R, T> set = property.GetSetMethod()!.CreateDelegate<Action<R, T>>();
 
-    private BadKnown Bad(LinkError error, TRecord record, Type type, string? key = null) => new()
+    private BadKnown Bad(LinkError error, R record, Type type, string? key = null) => new()
     {
         Info = info,
         Property = property,
@@ -20,7 +20,11 @@ internal sealed class Known<TRecord, TType>(PropertyInfo property, KeyInfo info)
         Record = record
     };
 
-    internal override bool TryLink(TRecord record, Unique unique, Meta424 meta, [NotNullWhen(false)] out Diagnostic? diagnostic)
+    internal override bool TryLink(
+        R record,
+        Unique unique,
+        Meta424 meta,
+        [NotNullWhen(false)] out Diagnostic? diagnostic)
     {
         var type = property.PropertyType;
 
@@ -38,9 +42,9 @@ internal sealed class Known<TRecord, TType>(PropertyInfo property, KeyInfo info)
         }
 
         if (unique.TryGetRecords(type, out var records)
-         && records.TryGetValue(key, out var referenced))
+            && records.TryGetValue(key, out var referenced))
         {
-            set(record, Unsafe.As<TType>(referenced)); /* guarantee by design */
+            set(record, Unsafe.As<T>(referenced)); /* guarantee by design */
             diagnostic = null;
             return true;
         }

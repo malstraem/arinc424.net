@@ -11,7 +11,8 @@ internal interface IPipeline
     Type SourceType { get; }
 }
 
-internal interface IPipeline<TSource> : IPipeline where TSource : Record424
+internal interface IPipeline<TSource> : IPipeline
+    where TSource : Record424
 {
     Queue<Build> Process(Queue<Build<TSource>> builds);
 
@@ -21,7 +22,9 @@ internal interface IPipeline<TSource> : IPipeline where TSource : Record424
     Type IPipeline.SourceType => typeof(TSource);
 }
 
-internal interface IPipeline<TOut, TSource> : IPipeline<TSource> where TOut : Record424 where TSource : Record424
+internal interface IPipeline<TOut, TSource> : IPipeline<TSource>
+    where TOut : Record424
+    where TSource : Record424
 {
     new Queue<Build<TOut>> Process(Queue<Build<TSource>> builds);
 

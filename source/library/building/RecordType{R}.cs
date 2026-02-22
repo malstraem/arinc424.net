@@ -3,14 +3,13 @@ using System.Runtime.CompilerServices;
 
 namespace Arinc424.Building;
 
-using Processing;
 using Linking;
+using Processing;
 
 /**<summary>
 How an entity (primary record) should be created and processed.
 </summary>*/
-internal abstract class RecordType
-(
+internal abstract class RecordType(
     Type[] composition,
     Relation[]? relations,
     SectionAttribute[] sections,
@@ -41,16 +40,16 @@ internal abstract class RecordType
             .Invoke([supplement, composition, relations, continuations, sections, pipes]);
     }
 
-    internal static RecordType Create<TRecord>(Supplement supplement) where TRecord : Record424, new()
-        => Create(typeof(TRecord), supplement);
+    internal static RecordType Create<R>(Supplement supplement)
+        where R : Record424
+            => Create(typeof(R), supplement);
 
     internal abstract Queue<Build> Build(Queue<string> strings);
 
     internal IPipeline[]? Pipes { get; } = pipes;
 }
 
-internal sealed class RecordType<TRecord>
-(
+internal sealed class RecordType<R>(
     Supplement supplement,
     Type[] composition,
     Relation[]? relations,
@@ -59,19 +58,19 @@ internal sealed class RecordType<TRecord>
     IPipeline[]? pipes
 )
     : RecordType(composition, relations, sections, pipes)
-        where TRecord : Record424, new()
+        where R : Record424
 {
-    private readonly BuildInfo<TRecord> info = new(supplement);
+    private readonly BuildInfo<R> info = new(supplement);
 
     private readonly Continuations? continuations = continuations;
 
     internal override Queue<Build> Build(Queue<string> strings)
     {
-        Build<TRecord> build;
+        Build<R> build;
 
         Queue<Diagnostic> diagnostics = [];
 
-        Queue<Build<TRecord>> builds = new(strings.Count);
+        Queue<Build<R>> builds = new(strings.Count);
 
         if (strings.TryDequeue(out string? @string))
         {
@@ -95,7 +94,7 @@ internal sealed class RecordType<TRecord>
 
         void Build(string @string)
         {
-            build = RecordBuilder<TRecord>.Build(@string, info, ref diagnostics);
+            build = RecordBuilder<R>.Build(@string, info, ref diagnostics);
             builds.Enqueue(build);
         }
     }

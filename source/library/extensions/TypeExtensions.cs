@@ -3,13 +3,13 @@ using System.Reflection;
 
 namespace Arinc424;
 
-using Processing;
 using Linking;
+
+using Processing;
 
 internal static class TypeExtensions
 {
-    internal static Type[] Decompose
-    (
+    internal static Type[] Decompose(
         this Type type,
         Supplement supplement,
         out Relation[]? relations,
@@ -50,8 +50,7 @@ internal static class TypeExtensions
         }
     }
 
-    internal static bool TryKeyInfo
-    (
+    internal static bool TryKeyInfo(
         this Type type,
         Supplement supplement,
         [NotNullWhen(true)] out KeyInfo? info)

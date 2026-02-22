@@ -4,7 +4,9 @@ namespace Arinc424.Airspace;
 Field of <c>Controlled Airspace</c> and <c>Restrictive Airspace</c>.
 </summary>*/
 [Continuous(25)]
-public abstract class Space<TVolume> : Record424<TVolume>, IIcao, INamed where TVolume : Volume
+public abstract class Space<TVolume>
+    : Record424<TVolume>, IIcao, INamed
+        where TVolume : Volume
 {
     [Field(7, 8)]
     public Icao Icao { get; set; }

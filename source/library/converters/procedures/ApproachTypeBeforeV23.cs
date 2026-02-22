@@ -1,8 +1,9 @@
-using Arinc424.Procedures.Terms;
-
 namespace Arinc424.Converters;
 
-using static ApproachTypes;
+using static Procedures.Terms.ApproachTypes;
+
+using Procedures.Terms;
+
 
 /**<summary>
 Supplement 23 introduce breaking changes by replacing the meaning of 'Y'.

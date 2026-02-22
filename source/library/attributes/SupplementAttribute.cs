@@ -14,7 +14,7 @@ public abstract class SupplementAttribute : Attribute
     /**<summary>
     Defines that a type matches the attribute.
     </summary>
-    <typeparam name="TMatch">Type to match.</typeparam>
+    <typeparam name="M">Type to match.</typeparam>
     <remarks><see langword="false"/> is forced by default cause non target attribute will be come first.</remarks>*/
-    internal virtual bool IsMatch<TMatch>() where TMatch : Record424 => false;
+    internal virtual bool IsMatch<M>() where M : Record424 => false;
 }

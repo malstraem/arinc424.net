@@ -19,18 +19,20 @@ internal abstract class ContinuationInfo
     internal abstract Queue<Build> Build(Queue<string> strings);
 }
 
-internal class ContinuationInfo<TRecord>(Supplement supplement) : ContinuationInfo where TRecord : Record424, new()
+internal class ContinuationInfo<R>(Supplement supplement)
+    : ContinuationInfo
+        where R : Record424
 {
-    private readonly BuildInfo<TRecord> info = new(supplement);
+    private readonly BuildInfo<R> info = new(supplement);
 
     internal override Queue<Build> Build(Queue<string> strings)
     {
         Queue<Diagnostic> diagnostics = [];
 
-        Queue<Build<TRecord>> builds = new(strings.Count);
+        Queue<Build<R>> builds = new(strings.Count);
 
         while (strings.TryDequeue(out string? @string))
-            builds.Enqueue(RecordBuilder<TRecord>.Build(@string, info, ref diagnostics));
+            builds.Enqueue(RecordBuilder<R>.Build(@string, info, ref diagnostics));
 
         return Unsafe.As<Queue<Build>>(builds);
     }

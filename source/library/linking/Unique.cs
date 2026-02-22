@@ -13,7 +13,11 @@ internal class Unique
 #pragma warning disable CS8618
     private Unique() { }
 #pragma warning restore CS8618
-    private static void Process(Build build, Type type, KeyInfo primary, Dictionary<string, Record424> records)
+    private static void Process(
+        Type type,
+        Build build,
+        KeyInfo primary,
+        Dictionary<string, Record424> records)
     {
         var record = build.Record;
 
@@ -49,7 +53,7 @@ internal class Unique
                 unique[type] = records = [];
 
             foreach (var build in builds[type])
-                Process(build, type, primary, records);
+                Process(type, build, primary, records);
         }
         return new Unique()
         {

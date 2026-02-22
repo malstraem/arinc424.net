@@ -146,9 +146,8 @@ public class Meta424
 
             var composition = type.Decompose(supplement, out var relations, out _);
 
-            if (relations is null)
+            if (relations is null) /* never been thrown if integrity tests pass */
                 throw new InvalidOperationException();
-            /* never been thrown if integrity tests pass */
 
             typeInfo[type] = new BaseType(composition, [.. sections], relations);
         }

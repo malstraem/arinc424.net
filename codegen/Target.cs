@@ -6,23 +6,12 @@ internal abstract class BaseTarget(INamedTypeSymbol symbol)
 {
     protected (Member[], string) GetMembersWithBlank(Member[] members)
     {
-        string blank;
+        var blank = members.FirstOrDefault(x => x.IsBlank);
 
-        Member[] result;
+        if (blank is not null)
+            return ([.. members.Except([blank])], blank.name);
 
-        var blankMember = members.FirstOrDefault(x => x.IsBlank);
-
-        if (blankMember is not null)
-        {
-            (blank, _) = blankMember;
-            result = [.. members.Except([blankMember])];
-        }
-        else
-        {
-            blank = Constants.Unknown;
-            result = members;
-        }
-        return (result, blank);
+        return (members, Constants.Unknown);
     }
 
     internal INamedTypeSymbol Symbol { get; } = symbol;

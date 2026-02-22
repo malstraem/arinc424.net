@@ -1,27 +1,26 @@
 namespace Arinc424.Building;
 
-internal static class RecordBuilder<TRecord>
-    where TRecord : Record424, new()
+internal static class RecordBuilder<R>
+    where R : Record424
 {
-    internal static Build<TRecord> Build
+    internal static Build<R> Build
     (
         string @string,
-        BuildInfo<TRecord> info,
+        BuildInfo<R> info,
         ref Queue<Diagnostic> diagnostics)
     {
-        TRecord record = new()
-        {
-            Source = @string
-        };
-        Build<TRecord> build = new(record);
+        var record = Activator.CreateInstance<R>();
+        record.Source = @string;
+
+        Build<R> build = new(record);
         Build(build, info, ref diagnostics);
         return build;
     }
 
     internal static void Build
     (
-        Build<TRecord> build,
-        BuildInfo<TRecord> info,
+        Build<R> build,
+        BuildInfo<R> info,
         ref Queue<Diagnostic> diagnostics)
     {
         foreach (var assignment in info.Assignments)
@@ -35,25 +34,23 @@ internal static class RecordBuilder<TRecord>
     }
 }
 
-internal static class RecordBuilder<TSequence, TSub>
-    where TSequence : Record424<TSub>, new()
-    where TSub : Record424
+internal static class RecordBuilder<S, R>
+    where S : Record424<R>
+    where R : Record424
 {
-    internal static Build<TSequence, TSub> Build
+    internal static Build<S, R> Build
     (
-        Queue<Build<TSub>> subs,
-        BuildInfo<TSequence> info,
+        Queue<Build<R>> subs,
+        BuildInfo<S> info,
         ref Queue<Diagnostic> diagnostics)
     {
         var sub = subs.First();
 
-        var builds = new Build<TSub>[subs.Count];
+        var builds = new Build<R>[subs.Count];
 
-        TSequence record = new()
-        {
-            Source = sub.Record.Source!,
-            Sequence = new TSub[subs.Count]
-        };
+        var record = Activator.CreateInstance<S>();
+        record.Source = sub.Record.Source!;
+        record.Sequence = new R[subs.Count];
 
         int i = 0;
         while (subs.TryDequeue(out sub))
@@ -65,8 +62,8 @@ internal static class RecordBuilder<TSequence, TSub>
             if (sub.Diagnostics is not null)
                 diagnostics.Pump(sub.Diagnostics);
         }
-        Build<TSequence, TSub> build = new(record, builds);
-        RecordBuilder<TSequence>.Build(build, info, ref diagnostics);
+        Build<S, R> build = new(record, builds);
+        RecordBuilder<S>.Build(build, info, ref diagnostics);
         return build;
     }
 }
