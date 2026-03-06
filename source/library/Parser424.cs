@@ -12,14 +12,14 @@ internal class Parser424
 
     private readonly Meta424 meta;
 
-    private readonly Builds aggregate = [];
+    private readonly Builds aggregation = [];
 
     /**<summary>
     Storage for entity builds. Covers bare types and compositions.
     </summary>*/
     private readonly Dictionary<Section, Builds> builds = [];
 
-    private string[] Process(IEnumerable<string> strings)
+    private void Process(IEnumerable<string> strings, out string[] skip)
     {
         Queue<string> skipped = [];
 
@@ -30,7 +30,7 @@ internal class Parser424
             if (!TryEnqueue(@string))
                 skipped.Enqueue(@string);
         }
-        return [.. skipped];
+        skip = [.. skipped];
 
         bool TryEnqueue(string @string)
         {
@@ -90,8 +90,8 @@ internal class Parser424
         {
             foreach (var (type, builds) in builds[section.Value])
             {
-                if (!this.aggregate.TryGetValue(type, out var aggregate))
-                    this.aggregate[type] = aggregate = [];
+                if (!aggregation.TryGetValue(type, out var aggregate))
+                    aggregation[type] = aggregate = [];
 
                 foreach (var build in builds)
                     aggregate.Enqueue(build);
@@ -102,8 +102,8 @@ internal class Parser424
 
         foreach (var info in @base)
         {
-            if (!this.aggregate.TryGetValue(info.Top, out var aggregate))
-                this.aggregate[info.Top] = aggregate = [];
+            if (!aggregation.TryGetValue(info.Top, out var aggregate))
+                aggregation[info.Top] = aggregate = [];
 
             foreach (var section in info.Sections)
             {
@@ -118,13 +118,13 @@ internal class Parser424
 #if !NOPARALLEL
         Parallel.ForEach(meta.Types, x =>
         {
-            var (section, info) = (x.Key, x.Value);
+            var (section, type) = (x.Key, x.Value);
 
-            builds[section][info.Low] = info.Build(records[section]);
+            builds[section][type.Low] = type.Build(records[section]);
         });
 #else
-        foreach (var (section, info) in meta.Types)
-            builds[section][info.Low] = info.Build(records[section]);
+        foreach (var (section, type) in meta.Types)
+            builds[section][type.Low] = type.Build(records[section]);
 #endif
         Process();
         Aggregate();
@@ -132,14 +132,14 @@ internal class Parser424
 
     private void Link()
     {
-        var unique = Unique.Create(aggregate, meta);
+        var unique = Unique.Create(aggregation, meta);
 
         var relations = meta.Base.Values
             .Where(x => x.Relations is not null)
                 .SelectMany(x => x.Relations!).ToArray();
 #if !NOPARALLEL
-        Parallel.ForEach(relations, x => x.Link(aggregate[x.Type], unique, meta));
-        Parallel.ForEach(relations, x => x.Aggregate(aggregate));
+        Parallel.ForEach(relations, x => x.Link(aggregation[x.Type], unique, meta));
+        Parallel.ForEach(relations, x => x.Aggregate(aggregation));
 #else
         foreach (var relation in relations)
             relation.Link(aggregate[relation.Type], unique, meta);
@@ -214,9 +214,10 @@ internal class Parser424
 
     internal Data424 Parse(IEnumerable<string> strings, out string[] skipped, out Invalid invalid)
     {
-        skipped = Process(strings);
+        Process(strings, out skipped);
         Build();
         Link();
+
         return GetData(out invalid);
     }
 }
