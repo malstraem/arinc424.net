@@ -3,14 +3,15 @@ namespace Arinc424.Processing;
 using Airspace;
 using Building;
 
-internal class ControlledConcatenate(Supplement supplement) : IPipeline<ControlledSpace, ControlledVolume>
+internal class ControlledConcatenate(Supplement supplement)
+    : IPipeline<ControlledSpace, Controlled>
 {
-    /// <summary><see cref="Space{TVolume}.Name"/> range.</summary>
+    /// <summary><see cref="Space{V}.Name"/> range.</summary>
     private readonly Range range = 93..123;
 
     private readonly BuildInfo<ControlledSpace> info = new(supplement);
 
-    public Queue<Build<ControlledSpace>> Process(Queue<Build<ControlledVolume>> builds)
+    public Queue<Build<ControlledSpace>> Process(Queue<Build<Controlled>> builds)
     {
         Queue<Build<ControlledSpace>> spaces = [];
 
@@ -19,7 +20,7 @@ internal class ControlledConcatenate(Supplement supplement) : IPipeline<Controll
 
         Queue<Diagnostic> diagnostics = [];
 
-        Dictionary<string, Queue<Build<ControlledVolume>>> buffer = [];
+        Dictionary<string, Queue<Build<Controlled>>> buffer = [];
 
         foreach (var build in builds)
         {
@@ -32,7 +33,7 @@ internal class ControlledConcatenate(Supplement supplement) : IPipeline<Controll
         }
 
         foreach (var (name, volumes) in buffer)
-            spaces.Enqueue(RecordBuilder<ControlledSpace, ControlledVolume>.Build(volumes, info, ref diagnostics));
+            spaces.Enqueue(RecordBuilder<ControlledSpace, Controlled>.Build(volumes, info, ref diagnostics));
 
         return spaces;
     }

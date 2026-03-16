@@ -6,10 +6,10 @@ using Processing;
 <c>FIR/UIR</c> primary record sequence.
 </summary>
 <remarks>Used by <see cref="FlightRegion"/> like subsequence.</remarks>*/
-[Pipe<Sequence<RegionVolume, RegionPoint>>]
+[Pipe<Sequence<Region, RegionPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]
-public class RegionVolume : Record424<RegionPoint>
+public class Region : Record424<RegionPoint>
 {
     [Known(96, 97)]
     public Tables.CruiseTable? CruiseTable { get; set; }

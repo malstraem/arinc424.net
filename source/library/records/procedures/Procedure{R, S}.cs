@@ -6,9 +6,9 @@ Fields of <c>Airport</c> and <c>Heliport SID/STAR/Approach</c>.
 [Port(7, 10), Icao(11, 12), Id(14, 19), Continuous(39)]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Port)}}}")]
-public abstract class Procedure<TSequence, TSub> : Record424<TSequence>, IIdentity, IIcao
-    where TSequence : ProcedureSequence<TSub>
-    where TSub : ProcedurePoint
+public abstract class Procedure<R, S> : Record424<R>, IIdentity, IIcao
+    where R : ProcedureSequence<S>
+    where S : ProcedurePoint
 {
     public Ground.Port Port { get; set; }
 

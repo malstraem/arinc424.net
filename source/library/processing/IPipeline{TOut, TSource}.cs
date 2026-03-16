@@ -17,7 +17,8 @@ internal interface IPipeline<TSource> : IPipeline
     Queue<Build> Process(Queue<Build<TSource>> builds);
 
     /* guarantee by design */
-    Queue<Build> IPipeline.Process(Queue<Build> builds) => Process(Unsafe.As<Queue<Build<TSource>>>(builds));
+    Queue<Build> IPipeline.Process(Queue<Build> builds)
+        => Process(Unsafe.As<Queue<Build<TSource>>>(builds));
 
     Type IPipeline.SourceType => typeof(TSource);
 }
@@ -29,7 +30,8 @@ internal interface IPipeline<TOut, TSource> : IPipeline<TSource>
     new Queue<Build<TOut>> Process(Queue<Build<TSource>> builds);
 
     /* guarantee by design */
-    Queue<Build> IPipeline<TSource>.Process(Queue<Build<TSource>> builds) => Unsafe.As<Queue<Build>>(Process(builds));
+    Queue<Build> IPipeline<TSource>.Process(Queue<Build<TSource>> builds)
+        => Unsafe.As<Queue<Build>>(Process(builds));
 
     Type IPipeline.OutType => typeof(TOut);
 }

@@ -1,6 +1,8 @@
 namespace Arinc424.Processing;
 
-internal abstract class Scan<TOut, TSource> : IPipeline<TOut, TSource> where TOut : Record424 where TSource : Record424
+internal abstract class Scan<TOut, TSource> : IPipeline<TOut, TSource>
+    where TOut : Record424
+    where TSource : Record424
 {
     protected abstract bool Trigger(TSource current, TSource next);
 

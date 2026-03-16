@@ -6,10 +6,10 @@ using Processing;
 <c>Controlled Airspace</c> primary record sequence.
 </summary>
 <remarks>Used by <see cref="ControlledSpace"/> like subsequence.</remarks>*/
-[Pipe<Sequence<ControlledVolume, BoundaryPoint>>]
+[Pipe<Sequence<Controlled, BoundaryPoint>>]
 
 [DebuggerDisplay($"{nameof(Class)} - {{{nameof(Class)},nq}}, {nameof(Type)} - {{{nameof(Type)}}}")]
-public class ControlledVolume : Volume
+public class Controlled : Volume
 {
     /// <inheritdoc cref="Terms.AirspaceType"/>
     [Character(9)]
