@@ -11,7 +11,7 @@ using Processing;
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]
 public class Restricted : Volume
 {
-    /// <inheritdoc cref="Terms.RestrictiveType"/>
+    /// <inheritdoc cref="Terms.RestrictedType"/>
     [Character(9)]
-    public Terms.RestrictiveType Type { get; set; }
+    public Terms.RestrictedType Type { get; set; }
 }
