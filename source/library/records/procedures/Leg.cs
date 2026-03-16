@@ -6,7 +6,7 @@ Fields of <c>SID/STAR/Approach</c>.
 [Port(7, 10)]
 
 [DebuggerDisplay($"{nameof(Fix)} - {{{nameof(Fix)}}}")]
-public abstract class ProcedurePoint : Record424, ISequenced
+public abstract class Leg : Record424, ISequenced
 {
     [Field(27, 29), Integer]
     public int SeqNumber { get; set; }

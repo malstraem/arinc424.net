@@ -6,7 +6,7 @@ namespace Arinc424.Procedures;
 <remarks>See section 4.1.9.1 and 4.2.3.1.</remarks>*/
 [DebuggerDisplay($"{nameof(Transition)} - {{{nameof(Transition)},nq}}")]
 public abstract class ProcedureSequence<P> : Record424<P>
-    where P : ProcedurePoint
+    where P : Leg
 {
     /// <summary><c>Transition Identifier (TRANS IDENT)</c> field.</summary>
     /// <remarks>See section 5.11.</remarks>

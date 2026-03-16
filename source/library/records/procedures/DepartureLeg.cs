@@ -4,7 +4,7 @@ namespace Arinc424.Procedures;
 Fields of <c>Airport</c> and <c>Heliport SID</c>.
 </summary>
 <remarks>Used by <see cref="DepartureSequence"/> like subsequence.</remarks>*/
-public class DeparturePoint : ProcedurePoint
+public class DepartureLeg : Leg
 {
     /// <inheritdoc cref="Terms.DepartureQualifiers"/>
     [Field(119, 120)]

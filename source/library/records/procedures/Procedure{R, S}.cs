@@ -8,13 +8,12 @@ Fields of <c>Airport</c> and <c>Heliport SID/STAR/Approach</c>.
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Port)}}}")]
 public abstract class Procedure<R, S> : Record424<R>, IIdentity, IIcao
     where R : ProcedureSequence<S>
-    where S : ProcedurePoint
+    where S : Leg
 {
     public Ground.Port Port { get; set; }
 
     [Field(11, 12)]
     public Icao Icao { get; set; }
-
     /**<summary>
     <para>
       <c>Approach Route Identifier (APPROACH IDENT)</c> field for <see cref="Approach"/>.

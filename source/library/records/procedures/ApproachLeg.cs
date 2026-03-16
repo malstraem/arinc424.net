@@ -4,7 +4,7 @@ namespace Arinc424.Procedures;
 Fields of <c>Airport</c> and <c>Heliport Approach</c>.
 </summary>
 <remarks>Used by <see cref="ApproachSequence"/> like subsequence.</remarks>*/
-public class ApproachPoint : ProcedurePoint
+public class ApproachLeg : Leg
 {
     /**<summary>
     <c>Vertical Angle (VERT ANGLE)</c> field.

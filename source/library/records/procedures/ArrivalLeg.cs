@@ -4,9 +4,9 @@ namespace Arinc424.Procedures;
 Fields of <c>Airport</c> and <c>Heliport STAR</c>.
 </summary>
 <remarks>Used by <see cref="ArrivalSequence"/> like subsequence.</remarks>*/
-public class ArrivalPoint : ProcedurePoint
+public class ArrivalLeg : Leg
 {
-    /// <inheritdoc cref="ApproachPoint.VerticalAngle"/>
+    /// <inheritdoc cref="ApproachLeg.VerticalAngle"/>
     [Field(103, 106), Float(100)]
     public float VerticalAngle { get; set; }
 

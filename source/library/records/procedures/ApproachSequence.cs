@@ -6,8 +6,8 @@ using Processing;
 <c>Airport</c> and <c>Heliport Approach</c> primary record sequence.
 </summary>
 <remarks>Used by <see cref="Approach"/> like subsequence.</remarks>*/
-[Pipe<Sequence<ApproachSequence, ApproachPoint>>]
-public class ApproachSequence : ProcedureSequence<ApproachPoint>
+[Pipe<Sequence<ApproachSequence, ApproachLeg>>]
+public class ApproachSequence : ProcedureSequence<ApproachLeg>
 {
     /// <inheritdoc cref="Terms.ApproachTypes"/>
     [Character(20)]

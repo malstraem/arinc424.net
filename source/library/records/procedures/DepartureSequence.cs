@@ -6,8 +6,8 @@ using Processing;
 <c>Airport</c> and <c>Heliport SID</c> primary record sequence.
 </summary>
 <remarks>Used by <see cref="Departure"/> like subsequence.</remarks>*/
-[Pipe<Sequence<DepartureSequence, DeparturePoint>>]
-public class DepartureSequence : ProcedureSequence<DeparturePoint>
+[Pipe<Sequence<DepartureSequence, DepartureLeg>>]
+public class DepartureSequence : ProcedureSequence<DepartureLeg>
 {
     /// <inheritdoc cref="Terms.DepartureTypes"/>
     [Character(20)]
