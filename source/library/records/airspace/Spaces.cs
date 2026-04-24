@@ -18,7 +18,7 @@ Multiple <c>Restrictive Airspace</c> primary record sequences.
 [Section('U', 'R'), Pipe<RestrictedWrap>]
 
 [DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Identifier)},nq}}")]
-public class RestrictiveSpace : Space<Restricted>, IIdentity
+public class RestrictedSpace : Space<Restricted>, IIdentity
 {
     /**<summary>
     <c>Restrictive Airspace Designation</c> field.

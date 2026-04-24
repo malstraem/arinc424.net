@@ -8,7 +8,8 @@ internal abstract class PipeAttribute : SupplementAttribute
 }
 
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-internal sealed class PipeAttribute<P> : PipeAttribute where P : IPipeline
+internal sealed class PipeAttribute<P> : PipeAttribute
+    where P : IPipeline
 {
     internal override IPipeline GetPipeline(Supplement supplement)
     {

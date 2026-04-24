@@ -5,7 +5,7 @@ using Processing;
 /**<summary>
 <c>Restrictive Airspace</c> primary record sequence.
 </summary>
-<remarks>Used by <see cref="RestrictiveSpace"/> like subsequence.</remarks>*/
+<remarks>Used by <see cref="RestrictedSpace"/> like subsequence.</remarks>*/
 [Pipe<Sequence<Restricted, BoundaryPoint>>]
 
 [DebuggerDisplay($"{{{nameof(Type)},nq}}")]

@@ -14,7 +14,7 @@ using Arinc424.Routing;
 using Arinc424.Tables;
 using Arinc424.Waypoints;
 
-#region Mappping (see specification Table 5-1)
+#region Mapping (see specification Table 5-1)
 [assembly:
 Record<Offroute>,
 
@@ -78,7 +78,7 @@ Record<GeographicalReference>,
 #region Airspace
 Record<FlightRegion>,
 Record<ControlledSpace>,
-Record<RestrictiveSpace>,
+Record<RestrictedSpace>,
 #endregion
 ]
 #endregion

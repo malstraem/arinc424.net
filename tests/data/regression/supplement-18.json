@@ -49,167 +49,33 @@
     "GeographicalReferences": 0,
     "FlightRegions": 1,
     "ControlledSpaces": 0,
-    "RestrictiveSpaces": 4
+    "RestrictedSpaces": 4
   },
   "invalid": {
     "$id": "3",
-    "SUSAURK1R5704       00101LN   G N45520000W119290000                                                                        062498807": [
-      "Arinc424.BadValue",
-      "Arinc424.BadValue",
-      "Arinc424.BadValue",
-      "Arinc424.BadValue"
-    ],
-    "SUSAURK1W460A       001018 N  G N46430000W128490000                              GND   UNLTD W-460A                        064108807": [
-      "Arinc424.BadValue"
-    ],
-    "SUSAER       V107        0120CITIEK2EA0R    OL AA                     313002003130 07000     17999                         031708704": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAP KSEAK1ASEA     110000119Y N47265700W122182910E019900429250SEA K11800018000CU00Y NAS    SEATTLE-TACOMA INTL           045698808": [
-      "Arinc424.BadKnown",
-      "Arinc424.BadKnown"
-    ],
-    "SUSAEPENRT                 30EPH  K1D 02460R   10     17999                                       EPHRATA                  030118904": [
+    "SUSAEPENRT                 20OED  K1D 03370R   10     17999                                       MEDFORD                  030078904": [
       "Arinc424.Duplicate"
     ],
     "SUSAEPENRT                 50ELW  K1D 02500R   10     17999                                       ELLENBERG                030168904": [
       "Arinc424.Duplicate",
       "Arinc424.BadPolymorph"
     ],
-    "SUSAEPKSEAK1               50FINNYK1PC00230R   500150009000150                                    FINNY                    030188904": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAEPENRT                 20BTG  K1D 01490R   10     17999                                       BATTLE GROUND            030068904": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAER       C1418       0010H0M  K1D 0V    CB AA                     210013800000 UNKNN     FL450                         030348704": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAER       J3          0010OAK  K2D 0V C  OH AA                     343014200000 18000     FL450                         030868704": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAER       C1416       0010F0T  K2D 0V    CB AA                     305013300000 UNKNN     FL450                         030328704": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAP KSEAK1MISZI MM 0     RW16RN47282060W1221835101803                                   E0220                            048098613": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAH KKENK1AKAHHELO1110000NASY N47440610W122153300E019300996250SEA K11800018000CU00Y050100  KENMORE AIR TERMINAL           045328807": [
-      "Arinc424.BadKnown",
-      "Arinc424.BadKnown"
-    ],
-    "SUSAEPENRT                 20OED  K1D 03370R   10     17999                                       MEDFORD                  030078904": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAP KSEAKISSEA KID              0 2518006236003436                                                                       048138612": [
-      "Arinc424.BadKnown",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAEPENRT                 10ODESSK1EA02530R   10     17999                                       ODESS                    030048904": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAER       J110        0010OAK  K2D 0V C  OH AA                     138007000000 18000     FL450                         030468704": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAEPENRT                 20UBG  K1D 00030L   10     17999                                       NEWBERG                  030088904": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAER       V105        0220YERINK2EA0E    OL AA                     299003102990 10000     17999                         031678704": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAP KSEAK1FI16R  APAE   010PAE  K1D 1V       FC PAE K1      0000000016100131    + 02000     18000                        047128504": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAEPENRT                 21BRINYK2EA00570R   10     17999                                       BRINY                    030098904": [
+    "SUSAEPENRT                 20ALTAMK2EA01770L   100500017999160                                    ALTAM                    030058904": [
       "Arinc424.Duplicate"
     ],
     "TXYZP KSEAK1BNORTH   0          N47274200W122180600                                               WORTH APRON NOSE IN-STAND064168813": [
       "Arinc424.Duplicate"
     ],
-    "SUSAER       V108        0050STS  K2D 0V    OL AA                     118002900000 04500     17999                         031838704": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAEPENRT                 50MOD  K2D 02440L   10     17999                                       MODESTO                  030158904": [
+    "SUSAEPENRT                 40EPH  K1D 02460R   10     17999                                       EPHRATA                  030128904": [
       "Arinc424.Duplicate"
     ],
-    "SUSAP KSEAK1MISZI IM 0     RW16RN47275920W1221834601803                                   E0220                            048088613": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAP KSEAK1EELN2  1GEG   010GEG  K1D 1V       IF                                         18000                            046328508": [
-      "Arinc424.BadValue",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
+    "SUSAP KSEAK1ASEA     110000119Y N47265700W122182910E019900429250SEA K11800018000CU00Y NAS    SEATTLE-TACOMA INTL           045698808": [
+      "Arinc424.BadKnown",
+      "Arinc424.BadKnown"
     ],
     "SUSAER       C1419       0010F0T  K2D 0V    CB AA                     216013700000 UNKNN     FL450                         030369704": [
       "Arinc424.BadPolymorph",
       "Arinc424.BadPolymorph"
-    ],
-    "SUSAP KSEAK1DMOUNT12ALL   010ELN  K1D 1VE      IF                                        18000                             045968507": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAEPENRT                 20ALTAMK2EA01770L   100500017999160                                    ALTAM                    030058904": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAEPENRT                 40EPH  K1D 02460R   10     17999                                       EPHRATA                  030128904": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAEPENRT                 40UBG  K1D 00030L   10     17999                                       NEWBERG                  030148904": [
-      "Arinc424.Duplicate"
     ],
     "SUSAP KSEAK1FI16L  APAE   010PAE  K1D 1V       FC PAE K1      0000000016200123    + 02100     18000                        047448709": [
       "Arinc424.BadPolymorph",
@@ -229,26 +95,7 @@
       "Arinc424.BadPolymorph",
       "Arinc424.BadPolymorph"
     ],
-    "SUSAP KSEAK1MISZILOM 002810RW16RN47315720W1221820601803N47315720W122182060HOMW  U21 SZ    E0220                            048108802": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAEVSEA         THE DALLES               FSS0012200 V1E R A N45425000W121055900E021003220N           DLS K1D             045168810": [
-      "Arinc424.BadValue"
-    ],
-    "SUSAER       C1486       0010F0T  K2D 0V    CB AA                     285019600000 UNKNN     FL450                         030388803": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAER       J20         0210PDT  K1D 0V C  OH AA                     290008202750 18000     FL450                         030828704": [
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph",
-      "Arinc424.BadPolymorph"
-    ],
-    "SUSAEPENRT                 22BRINYK2EA02370R   10     17999                                       BRINY                    030108904": [
-      "Arinc424.Duplicate"
-    ],
-    "SUSAER       J1          0570OAK  K2D 0V C  OH AA                     343014203010 1800022000FL450                         030400000": [
-      "Arinc424.BadPolymorph",
+    "SUSAER       J110        0010OAK  K2D 0V C  OH AA                     138007000000 18000     FL450                         030468704": [
       "Arinc424.BadPolymorph",
       "Arinc424.BadPolymorph",
       "Arinc424.BadPolymorph",
@@ -258,7 +105,160 @@
       "Arinc424.BadPolymorph",
       "Arinc424.BadPolymorph"
     ],
+    "SUSAURK1R5704       00101LN   G N45520000W119290000                                                                        062498807": [
+      "Arinc424.BadValue",
+      "Arinc424.BadValue",
+      "Arinc424.BadValue",
+      "Arinc424.BadValue"
+    ],
+    "SUSAP KSEAK1MISZI IM 0     RW16RN47275920W1221834601803                                   E0220                            048088613": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAER       C1418       0010H0M  K1D 0V    CB AA                     210013800000 UNKNN     FL450                         030348704": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
     "SUSAP KSEAK1MISEALOM 002240RW34RN47215090W1221827900004N47215090W122182790HOMW  U21 SE    E0220                            048078802": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAEPENRT                 30EPH  K1D 02460R   10     17999                                       EPHRATA                  030118904": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAER       J1          0570OAK  K2D 0V C  OH AA                     343014203010 1800022000FL450                         030400000": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAEPENRT                 10ODESSK1EA02530R   10     17999                                       ODESS                    030048904": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAEVSEA         THE DALLES               FSS0012200 V1E R A N45425000W121055900E021003220N           DLS K1D             045168810": [
+      "Arinc424.BadValue"
+    ],
+    "SUSAER       V105        0220YERINK2EA0E    OL AA                     299003102990 10000     17999                         031678704": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAEPENRT                 50MOD  K2D 02440L   10     17999                                       MODESTO                  030158904": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAER       V107        0120CITIEK2EA0R    OL AA                     313002003130 07000     17999                         031708704": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAH KKENK1AKAHHELO1110000NASY N47440610W122153300E019300996250SEA K11800018000CU00Y050100  KENMORE AIR TERMINAL           045328807": [
+      "Arinc424.BadKnown",
+      "Arinc424.BadKnown"
+    ],
+    "SUSAP KSEAK1FI16R  APAE   010PAE  K1D 1V       FC PAE K1      0000000016100131    + 02000     18000                        047128504": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAEPENRT                 21BRINYK2EA00570R   10     17999                                       BRINY                    030098904": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAEPENRT                 20BTG  K1D 01490R   10     17999                                       BATTLE GROUND            030068904": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAEPENRT                 40UBG  K1D 00030L   10     17999                                       NEWBERG                  030148904": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAP KSEAK1MISZI MM 0     RW16RN47282060W1221835101803                                   E0220                            048098613": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAP KSEAK1MISZILOM 002810RW16RN47315720W1221820601803N47315720W122182060HOMW  U21 SZ    E0220                            048108802": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAER       V108        0050STS  K2D 0V    OL AA                     118002900000 04500     17999                         031838704": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAER       J3          0010OAK  K2D 0V C  OH AA                     343014200000 18000     FL450                         030868704": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAP KSEAK1DMOUNT12ALL   010ELN  K1D 1VE      IF                                        18000                             045968507": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAER       C1416       0010F0T  K2D 0V    CB AA                     305013300000 UNKNN     FL450                         030328704": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAP KSEAKISSEA KID              0 2518006236003436                                                                       048138612": [
+      "Arinc424.BadKnown",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAEPENRT                 20UBG  K1D 00030L   10     17999                                       NEWBERG                  030088904": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAP KSEAK1EELN2  1GEG   010GEG  K1D 1V       IF                                         18000                            046328508": [
+      "Arinc424.BadValue",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAER       C1486       0010F0T  K2D 0V    CB AA                     285019600000 UNKNN     FL450                         030388803": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAURK1W460A       001018 N  G N46430000W128490000                              GND   UNLTD W-460A                        064108807": [
+      "Arinc424.BadValue"
+    ],
+    "SUSAEPENRT                 22BRINYK2EA02370R   10     17999                                       BRINY                    030108904": [
+      "Arinc424.Duplicate"
+    ],
+    "SUSAER       J20         0210PDT  K1D 0V C  OH AA                     290008202750 18000     FL450                         030828704": [
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph",
+      "Arinc424.BadPolymorph"
+    ],
+    "SUSAEPKSEAK1               50FINNYK1PC00230R   500150009000150                                    FINNY                    030188904": [
       "Arinc424.Duplicate"
     ]
   }

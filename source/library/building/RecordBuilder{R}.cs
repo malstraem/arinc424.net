@@ -34,23 +34,23 @@ internal static class RecordBuilder<R>
     }
 }
 
-internal static class RecordBuilder<S, R>
-    where S : Record424<R>
-    where R : Record424
+internal static class RecordBuilder<R, S>
+    where R : Record424<S>
+    where S : Record424
 {
-    internal static Build<S, R> Build
+    internal static Build<R, S> Build
     (
-        Queue<Build<R>> subs,
-        BuildInfo<S> info,
+        Queue<Build<S>> subs,
+        BuildInfo<R> info,
         ref Queue<Diagnostic> diagnostics)
     {
         var sub = subs.First();
 
-        var builds = new Build<R>[subs.Count];
+        var builds = new Build<S>[subs.Count];
 
-        var record = Activator.CreateInstance<S>();
+        var record = Activator.CreateInstance<R>();
         record.Source = sub.Record.Source!;
-        record.Sequence = new R[subs.Count];
+        record.Sequence = new S[subs.Count];
 
         int i = 0;
         while (subs.TryDequeue(out sub))
@@ -62,8 +62,8 @@ internal static class RecordBuilder<S, R>
             if (sub.Diagnostics is not null)
                 diagnostics.Pump(sub.Diagnostics);
         }
-        Build<S, R> build = new(record, builds);
-        RecordBuilder<S>.Build(build, info, ref diagnostics);
+        Build<R, S> build = new(record, builds);
+        RecordBuilder<R>.Build(build, info, ref diagnostics);
         return build;
     }
 }

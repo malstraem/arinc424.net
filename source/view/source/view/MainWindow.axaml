@@ -6,12 +6,12 @@
 
         xmlns:views="clr-namespace:Arinc424.View"
 
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
 
-        WindowStartupLocation="CenterScreen"
-        ExtendClientAreaChromeHints="PreferSystemChrome"
-        ExtendClientAreaToDecorationsHint="True"
-        ExtendClientAreaTitleBarHeightHint="-1">
+        Title="" WindowStartupLocation="CenterScreen"
 
-  <views:MainView />
+        WindowDecorations="Full"
+        ExtendClientAreaToDecorationsHint="True">
+
+    <views:MainView Grid.Row="0" />
 </Window>

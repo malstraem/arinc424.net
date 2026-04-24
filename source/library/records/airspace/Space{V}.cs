@@ -12,7 +12,7 @@ public abstract class Space<V>
     public Icao Icao { get; set; }
 
     /**<summary>
-    <c>Restrictive Airspace Name</c> for <see cref="RestrictiveSpace"/> and
+    <c>Restrictive Airspace Name</c> for <see cref="RestrictedSpace"/> and
     <c>Controlled Airspace Name (ARSP NAME)</c> for <see cref="ControlledSpace"/> field.
     </summary>
     <remarks>See section 5.126 and 5.216.</remarks>*/

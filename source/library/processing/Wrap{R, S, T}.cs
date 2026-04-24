@@ -37,11 +37,11 @@ internal sealed class IdentityWrap<R, S>(Supplement supplement)
 }
 
 internal sealed class RestrictedWrap(Supplement supplement)
-    : Wrap<RestrictiveSpace, Restricted>(supplement)
+    : Wrap<RestrictedSpace, Restricted>(supplement)
 {
     /**<summary>
     Range including <see cref="IIcao.Icao"/>, <see cref="Restricted.Type"/>
-    and <see cref="RestrictiveSpace.Identifier"/>.
+    and <see cref="RestrictedSpace.Identifier"/>.
     </summary>*/
     private readonly Range range = 6..19;
 

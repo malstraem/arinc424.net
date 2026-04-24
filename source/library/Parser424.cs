@@ -178,10 +178,10 @@ internal class Parser424
         }
     }
 
-    internal static TRecord[] Process<TRecord>(Queue<Build<TRecord>> builds, Dictionary<Record424, Diagnostic[]> invalid)
-        where TRecord : Record424
+    internal static R[] Process<R>(Queue<Build<R>> builds, Dictionary<Record424, Diagnostic[]> invalid)
+        where R : Record424
     {
-        Queue<TRecord> records = [];
+        Queue<R> records = [];
 
         Queue<Diagnostic> diagnostics = [];
 
@@ -207,8 +207,10 @@ internal class Parser424
             if (build is not ISequentBuild sequent)
                 return;
 
-            foreach (var sequence in sequent.Builds)
-                Hold(sequence);
+            var sequence = sequent.Builds;
+
+            for (int i = 0; i < sequence.Length; i++)
+                Hold(sequence[i]);
         }
     }
 

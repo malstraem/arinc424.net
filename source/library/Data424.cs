@@ -376,6 +376,6 @@ public class Data424
     </summary>
     <remarks>Section <c>UR</c>.</remarks>*/
     [Section('U', 'R')]
-    public RestrictiveSpace[] RestrictiveSpaces { get; set; } = [];
+    public RestrictedSpace[] RestrictedSpaces { get; set; } = [];
     #endregion
 }
