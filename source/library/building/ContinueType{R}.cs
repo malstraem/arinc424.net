@@ -5,22 +5,22 @@ namespace Arinc424.Building;
 /**<summary>
 How an entity (continuation record) should be created and processed.
 </summary>*/
-internal abstract class ContinuationInfo
+internal abstract class ContinueType
 {
-    internal static ContinuationInfo Create(Type type, Supplement supplement)
+    internal static ContinueType Create(Type type, Supplement supplement)
     {
-        var constructor = typeof(ContinuationInfo<>)
+        var constructor = typeof(ContinueType<>)
             .MakeGenericType(type)
                 .GetConstructor([typeof(Supplement)])!;
 
-        return (ContinuationInfo)constructor.Invoke([supplement]);
+        return (ContinueType)constructor.Invoke([supplement]);
     }
 
     internal abstract Queue<Build> Build(Queue<string> strings);
 }
 
-internal class ContinuationInfo<R>(Supplement supplement)
-    : ContinuationInfo
+internal class ContinueType<R>(Supplement supplement)
+    : ContinueType
         where R : Record424
 {
     private readonly BuildInfo<R> info = new(supplement);

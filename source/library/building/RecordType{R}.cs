@@ -49,6 +49,7 @@ internal abstract class RecordType(
     internal IPipeline[]? Pipes { get; } = pipes;
 }
 
+/// <inheritdoc cref="RecordType"/>
 internal sealed class RecordType<R>(
     Supplement supplement,
     Type[] composition,
@@ -72,27 +73,27 @@ internal sealed class RecordType<R>(
 
         Queue<Build<R>> builds = new(strings.Count);
 
-        if (strings.TryDequeue(out string? @string))
-        {
-            Build(@string);
-        }
-        else
-        {
+        if (!strings.TryDequeue(out string? @string))
             return Unsafe.As<Queue<Build>>(builds);
-        }
+
+        Build();
 
         while (strings.TryDequeue(out @string))
         {
-            if (continuations is null || !continuations.TryHold(@string))
+            if (continuations is not null)
             {
-                Build(@string);
-                continue;
+                if (continuations.TryHold(@string))
+                    continue;
+
+                continuations.Process(build.Record);
             }
-            continuations.Process(build.Record);
+            Build();
         }
+        continuations?.Process(build.Record);
+
         return Unsafe.As<Queue<Build>>(builds);
 
-        void Build(string @string)
+        void Build()
         {
             build = RecordBuilder<R>.Build(@string, info, ref diagnostics);
             builds.Enqueue(build);

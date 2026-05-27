@@ -11,11 +11,11 @@ internal abstract class Aggregation(PropertyInfo property)
 
     internal static Aggregation Create(PropertyInfo property)
     {
-        var attr = property.GetCustomAttribute<ManyAttribute>();
+        var att = property.GetCustomAttribute<ManyAttribute>();
 
         Type one = property.DeclaringType!, many = property.PropertyType.GetElementType()!;
 
-        var back = many.GetProperty(attr!.Property);
+        var back = many.GetProperty(att!.Property);
 
         if (property.DeclaringType! != back!.PropertyType && one.IsSubclassOf(back.PropertyType))
             one = back.PropertyType!;
