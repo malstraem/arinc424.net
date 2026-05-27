@@ -1,11 +1,13 @@
 .vs/
 .idea/
 
-site/
 artifacts/
+site/
+testresults/
 
-tests/data/cases/private/
 docs/api/**.yml
 
-.manifest
+tests/data/cases/private/
+
 *.user
+.manifest

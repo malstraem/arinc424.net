@@ -9,16 +9,16 @@ Multiple <c>Controlled Airspace</c> primary record sequences.
 [Section('U', 'C'), Pipe<ControlledConcatenate>]
 
 [DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Name)},nq}}")]
-public class ControlledSpace : Space<ControlledVolume>;
+public class ControlledSpace : Space<Controlled>;
 
 /**<summary>
 Multiple <c>Restrictive Airspace</c> primary record sequences.
 </summary>
 <remarks>See section 4.1.18.1.</remarks>*/
-[Section('U', 'R'), Pipe<RestrictiveWrap>]
+[Section('U', 'R'), Pipe<RestrictedWrap>]
 
 [DebuggerDisplay($"{{{nameof(Icao)},nq}}, {{{nameof(Identifier)},nq}}")]
-public class RestrictiveSpace : Space<RestrictiveVolume>, IIdentity
+public class RestrictedSpace : Space<Restricted>, IIdentity
 {
     /**<summary>
     <c>Restrictive Airspace Designation</c> field.

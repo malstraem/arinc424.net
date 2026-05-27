@@ -8,10 +8,10 @@ Multiple <c>FIR/UIR</c> primary record sequences.
 <remarks>See section 4.1.17.1.</remarks>*/
 [Section('U', 'F'), Id(7, 10), Continuous(20)]
 
-[Pipe<IdentityWrap<FlightRegion, RegionVolume>>]
+[Pipe<IdentityWrap<FlightRegion, Region>>]
 
 [DebuggerDisplay($"{{{nameof(Identifier)},nq}}, {{{nameof(Name)},nq}}")]
-public class FlightRegion : Record424<RegionVolume>, IIdentity, INamed
+public class FlightRegion : Record424<Region>, IIdentity, INamed
 {
     /// <include file='Comments.xml' path="doc/member[@name='FIR']/*"/>
     [Field(7, 10)]

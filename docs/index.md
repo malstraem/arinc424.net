@@ -19,7 +19,7 @@ In practice, this allows you read the tree-like representation of **ARINC 424** 
 
 - [FIR/UIR](api/Arinc424.Airspace.FlightRegion.yml)
 - [Controlled](api/Arinc424.Airspace.ControlledSpace.yml)
-- [Restrictive](api/Arinc424.Airspace.RestrictiveSpace.yml)
+- [Restricted](api/Arinc424.Airspace.RestrictedSpace.yml)
 
 # [Navaid](#tab/navaid)
 

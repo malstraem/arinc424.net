@@ -11,7 +11,7 @@ primary record sequences under same identifier.
 [Section('P', 'E', subInd: 13), Section('H', 'E', subInd: 13)]
 
 [Pipe<IdentityWrap<Arrival, ArrivalSequence>>]
-public class Arrival : Procedure<ArrivalSequence, ArrivalPoint>;
+public class Arrival : Procedure<ArrivalSequence, ArrivalLeg>;
 
 /**<summary>
 Multiple <c>Airport</c> and <c>Heliport Approach</c>
@@ -21,7 +21,7 @@ primary record sequences under same identifier.
 [Section('P', 'F', subInd: 13), Section('H', 'F', subInd: 13)]
 
 [Pipe<IdentityWrap<Approach, ApproachSequence>>]
-public class Approach : Procedure<ApproachSequence, ApproachPoint>
+public class Approach : Procedure<ApproachSequence, ApproachLeg>
 {
     [Many(nameof(PathPoint.Approach))]
     public GroundPoint[]? GroundPoints { get; set; }
@@ -38,4 +38,4 @@ primary record sequences under same identifier.
 [Section('P', 'D', subInd: 13), Section('H', 'D', subInd: 13)]
 
 [Pipe<IdentityWrap<Departure, DepartureSequence>>]
-public class Departure : Procedure<DepartureSequence, DeparturePoint>;
+public class Departure : Procedure<DepartureSequence, DepartureLeg>;

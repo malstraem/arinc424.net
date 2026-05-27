@@ -10,8 +10,9 @@ public interface ISequence
 
 /**<inheritdoc cref="ISequence"/>
 <typeparam name="TSub">Type of sequence.</typeparam>*/
-public abstract class Record424<TSub> : Record424, ISequence
-    where TSub : Record424
+public abstract class Record424<TSub>
+    : Record424, ISequence
+        where TSub : Record424
 {
     /**<summary>
     A composition across different entities.

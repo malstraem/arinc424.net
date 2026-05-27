@@ -23,7 +23,7 @@ public class Airport : Port
     [Many(nameof(Gate.Port))]
     public Gate[]? Gates { get; set; }
 
-    /// <summary>Associated runways.</summary>
+    /// <summary>Associated runway thresholds.</summary>
     [Many(nameof(Threshold.Port))]
     public Threshold[]? Thresholds { get; set; }
 }

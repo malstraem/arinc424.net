@@ -3,7 +3,8 @@ namespace Arinc424.Processing;
 using Routing;
 
 /**<summary>
-The <see cref="AirwayPoint"/> records may be split into different sequences by <see cref="Record424.Code"/> while assembly file sorting.
+The <see cref="AirwayPoint"/> records may be split into different sequences
+by <see cref="Record424.Code"/> while assembly file sorting.
 So this pipeline resort all points using airway identifier.
 </summary>*/
 internal class AirwayPointSorting : IPipeline<AirwayPoint, AirwayPoint>

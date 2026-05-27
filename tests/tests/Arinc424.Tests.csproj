@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <IsTestProject>true</IsTestProject>
-    <TestingPlatformDotnetTestSupport>true</TestingPlatformDotnetTestSupport>
+
+    <TestingPlatformCommandLineArguments>$(TestingPlatformCommandLineArguments) --results-directory $(ArtifactsPath)/test-results</TestingPlatformCommandLineArguments>
   </PropertyGroup>
 
   <ItemGroup>

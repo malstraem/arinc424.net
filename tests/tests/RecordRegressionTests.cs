@@ -37,11 +37,11 @@ public class RecordRegressionTests : BaseTests
     [Arguments("supplement-18", Supplement.V18)]
     public async Task CheckRegression(string file, Supplement supplement)
     {
-        var regression = JsonSerializer.Deserialize<Regression>(File.ReadAllText($"{Regressions}{file}.json"), options)!;
-
         string[] strings = File.ReadAllLines($"{Cases}{file}");
 
         var data = Data424.Create(meta[supplement], strings, out _, out var invalid);
+
+        var regression = JsonSerializer.Deserialize<Regression>(File.ReadAllText($"{Regressions}{file}.json"), options)!;
 
         foreach (var (propertyName, expected) in regression.Counts)
         {

@@ -5,16 +5,15 @@ namespace Arinc424;
 
 internal static class MemberExtensions
 {
-    internal static bool TryAttribute<TRecord, TAttribute>
-    (
+    internal static bool TryAttribute<R, A>(
         this MemberInfo member,
         Supplement supplement,
-        [NotNullWhen(true)] out TAttribute? chosen
+        [NotNullWhen(true)] out A? chosen
     )
-        where TRecord : Record424
-        where TAttribute : SupplementAttribute
+        where R : Record424
+        where A : SupplementAttribute
     {
-        var attributes = member.GetCustomAttributes<TAttribute>();
+        var attributes = member.GetCustomAttributes<A>();
 
         if (!attributes.Any())
         {
@@ -22,11 +21,11 @@ internal static class MemberExtensions
             return false;
         }
 
-        List<TAttribute> target = [], nontarget = [];
+        List<A> target = [], nontarget = [];
 
         foreach (var attribute in attributes)
         {
-            if (attribute.IsMatch<TRecord>())
+            if (attribute.IsMatch<R>())
                 target.Add(attribute);
             else if (!attribute.IsTarget)
                 nontarget.Add(attribute);
@@ -36,11 +35,7 @@ internal static class MemberExtensions
         return chosen is not null;
     }
 
-    internal static TAttribute? BySupplement<TAttribute>
-    (
-        this IEnumerable<TAttribute> attributes,
-        Supplement supplement
-    )
-    where TAttribute : SupplementAttribute
-        => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
+    internal static A? BySupplement<A>(this IEnumerable<A> attributes, Supplement supplement)
+        where A : SupplementAttribute
+            => attributes.TakeWhile(x => x.Start <= supplement).LastOrDefault();
 }

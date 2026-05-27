@@ -4,11 +4,9 @@ namespace Arinc424;
 
 public record KeyInfo(Range Id, Range? Icao, Range? Port)
 {
-    internal bool TryGetKey
-    (
+    internal bool TryGetKey(
         ReadOnlySpan<char> @string,
-        [NotNullWhen(true)] out string? key
-    )
+        [NotNullWhen(true)] out string? key)
     {
         key = @string[Id].Trim().ToString();
 
@@ -24,12 +22,10 @@ public record KeyInfo(Range Id, Range? Icao, Range? Port)
         return true;
     }
 
-    internal bool TryGetKey
-    (
+    internal bool TryGetKey(
         ReadOnlySpan<char> @string,
         KeyInfo primary,
-        [NotNullWhen(true)] out string? key
-    )
+        [NotNullWhen(true)] out string? key)
     {
         key = @string[Id].Trim().ToString();
 
@@ -45,8 +41,7 @@ public record KeyInfo(Range Id, Range? Icao, Range? Port)
         return true;
     }
 
-    internal string GetKeyWithoutPort
-    (
+    internal string GetKeyWithoutPort(
         ReadOnlySpan<char> @string,
         KeyInfo primary,
         [NotNullWhen(true)] out string? key)

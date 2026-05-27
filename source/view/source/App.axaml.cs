@@ -9,14 +9,17 @@ using ViewModel;
 
 public partial class App : Application
 {
+    [Obsolete("hardcoded")]
     private void OnDrop(object? sender, DragEventArgs e)
     {
-        var files = e.Data.GetFiles();
+        var files = e.DataTransfer.TryGetFiles();
 
         if (files is null)
             return;
 
-        ViewModel.Load(files.Select(x => x.Path.LocalPath).ToArray());
+        ViewModel.Load(files);
+
+        e.Handled = true;
     }
 
     public override void Initialize() => AvaloniaXamlLoader.Load(this);

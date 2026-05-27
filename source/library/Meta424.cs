@@ -14,7 +14,7 @@ using Arinc424.Routing;
 using Arinc424.Tables;
 using Arinc424.Waypoints;
 
-#region Mappping (see specification Table 5-1)
+#region Mapping (see specification Table 5-1)
 [assembly:
 Record<Offroute>,
 
@@ -78,7 +78,7 @@ Record<GeographicalReference>,
 #region Airspace
 Record<FlightRegion>,
 Record<ControlledSpace>,
-Record<RestrictiveSpace>,
+Record<RestrictedSpace>,
 #endregion
 ]
 #endregion
@@ -146,9 +146,8 @@ public class Meta424
 
             var composition = type.Decompose(supplement, out var relations, out _);
 
-            if (relations is null)
+            if (relations is null) /* never been thrown if integrity tests pass */
                 throw new InvalidOperationException();
-            /* never been thrown if integrity tests pass */
 
             typeInfo[type] = new BaseType(composition, [.. sections], relations);
         }

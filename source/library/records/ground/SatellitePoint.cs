@@ -7,12 +7,20 @@ namespace Arinc424.Ground;
 [Section('P', 'P', subInd: 13), Section('H', 'P', subInd: 13)]
 public class SatellitePoint : PathPoint
 {
-    /// <inheritdoc cref="Terms.SatelliteOperationType"/>
+    /**<summary>
+    <c>Operation Type (OPS TYPE)</c> field, specific for <see cref="SatellitePoint"/>.
+    </summary>
+    <remarks>See section 5.223.</remarks>*/
     [Field(25, 26)]
+    [Description("Operation Type (OPS TYPE) - SBAS")]
     public string Type { get; set; }
 
-    /// <inheritdoc cref="Terms.SatelliteService"/>
+    /**<summary>
+    <c>SBAS Service Provider Identifier (SBAS ID)</c> field.
+    </summary>
+    <remarks>See section 5.255.</remarks>*/
     [Field(29, 30)]
+    [Description("SBAS Service Provider Identifier (SBAS ID)")]
     public string Service { get; set; }
 
     /**<summary>

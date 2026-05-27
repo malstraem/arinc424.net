@@ -2,7 +2,7 @@ namespace Arinc424.Converters;
 
 using static Bool;
 
-/// <inheritdoc cref="Procedures.ProcedurePoint.IsAltitudeModifiable"/>
+/// <inheritdoc cref="Procedures.Leg.IsAltitudeModifiable"/>
 internal abstract class AtcIndicatorConverter : ICharConverter<Bool>
 {
     public static bool TryConvert(char @char, out Bool value)

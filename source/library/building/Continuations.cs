@@ -10,7 +10,7 @@ internal class Continuations
 #pragma warning disable CS8618
     private Dictionary<ContinuationAttribute, Queue<string>> continuations;
 
-    private FrozenDictionary<ContinuationAttribute, ContinuationInfo> info;
+    private FrozenDictionary<ContinuationAttribute, ContinueType> type;
 
     private FrozenDictionary<ContinuationAttribute, PropertyInfo> properties;
 #pragma warning restore CS8618
@@ -21,7 +21,7 @@ internal class Continuations
         if (continuous is null)
             return null;
 
-        Dictionary<ContinuationAttribute, ContinuationInfo> info = [];
+        Dictionary<ContinuationAttribute, ContinueType> types = [];
         Dictionary<ContinuationAttribute, PropertyInfo> properties = [];
 
         Dictionary<ContinuationAttribute, Queue<string>> continuations = [];
@@ -34,14 +34,14 @@ internal class Continuations
             var continuation = property.PropertyType.GetElementType()!
                 .GetCustomAttribute<ContinuationAttribute>()!;
 
-            info[continuation] = ContinuationInfo
+            types[continuation] = ContinueType
                 .Create((properties[continuation] = property).PropertyType.GetElementType()!, supplement);
 
             continuations[continuation] = [];
         }
         return new Continuations()
         {
-            info = info.ToFrozenDictionary(),
+            type = types.ToFrozenDictionary(),
             properties = properties.ToFrozenDictionary(),
             continuations = continuations,
             index = continuous.Index
@@ -50,7 +50,7 @@ internal class Continuations
 
     private bool TryMatch(string @string, [NotNullWhen(true)] out ContinuationAttribute? continuation)
     {
-        foreach (var (attribute, _) in info)
+        foreach (var (attribute, _) in type)
         {
             if (attribute.IsMatch(@string))
             {
@@ -77,7 +77,7 @@ internal class Continuations
     {
         foreach (var (continuation, @strings) in continuations)
         {
-            var builds = info[continuation].Build(strings);
+            var builds = type[continuation].Build(strings);
 
             if (builds.Count == 0)
                 continue;

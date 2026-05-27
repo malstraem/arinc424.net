@@ -1,3 +1,5 @@
+using Avalonia.Platform.Storage;
+
 namespace Arinc424.ViewModel;
 
 using View;
@@ -6,16 +8,16 @@ using Model;
 public partial class DataViewModel : ObservableObject
 {
     [ObservableProperty]
-    private bool isLoading;
+    public partial bool IsLoading { get; set; }
 
     [ObservableProperty]
-    private SectionModel? selected;
+    public partial SectionModel? Selected { get; set; }
 
     [ObservableProperty]
-    private IEnumerable<SectionModel>? sections;
+    public partial IEnumerable<SectionModel>? Sections { get; set; }
 
     [ObservableProperty]
-    private bool isEmpty = true;
+    public partial bool IsEmpty { get; set; } = true;
 
     [Obsolete("todo and add i18n resources")]
     private static IEnumerable<SectionModel> GetSections(Data424 data) =>
@@ -72,20 +74,19 @@ public partial class DataViewModel : ObservableObject
         [
             data.FlightRegions.GetViewModel("FIR/UIR"),
             data.ControlledSpaces.GetViewModel("Controlled"),
-            data.RestrictiveSpaces.GetViewModel("Restrictive")
+            data.RestrictedSpaces.GetViewModel("Restrictive")
         ])
     ];
 
-    [Obsolete("hard")]
-    public async void Load(string[] paths)
+    [Obsolete("hardcoded")]
+    public async void Load(IStorageItem[] items)
     {
         IsEmpty = false;
-
         IsLoading = true;
 
         var data = await Task.Run(() =>
         {
-            string[] strings = File.ReadAllLines(paths.First());
+            string[] strings = File.ReadAllLines(Uri.UnescapeDataString(items.First().Path.AbsolutePath));
 
             return Data424.Create(Meta424.Create(Supplement.V18), strings, out var _, out var _);
         });

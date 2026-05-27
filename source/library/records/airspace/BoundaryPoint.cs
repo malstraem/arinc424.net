@@ -3,7 +3,8 @@ namespace Arinc424.Airspace;
 /**<summary>
 Fields of <c>Controlled Airspace</c> and <c>Restrictive Airspace</c>.
 </summary>
-<remarks>Used by <see cref="ControlledVolume"/> and <see cref="RestrictiveVolume"/> like subsequence.</remarks>*/
+<remarks>Used by <see cref="Controlled"/>
+and <see cref="Restricted"/> like subsequence.</remarks>*/
 [DebuggerDisplay($"{{{nameof(Via)}}} - {{{nameof(Coordinates)}}}")]
 public class BoundaryPoint : Geo, ISequenced
 {

@@ -10,5 +10,5 @@ internal sealed class PerformanceAttribute : DecodeAttribute<float>
         ? @string
         : !int.TryParse(@string[2..3], out int exp)
             ? @string
-            : exp == 0 ? value : value / MathF.Pow(10, exp);
+            : exp == 0 ? value : value / float.Pow(10, exp);
 }
